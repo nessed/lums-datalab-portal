@@ -1,0 +1,41 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local processing output (Docling runs, page renders, crops, scratch)
+work/
+
+# Source documents never go in git; they're referenced by sources/manifest.csv
+*.pdf
+*.PDF
+*.xls
+*.xlsx
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Node / site
+node_modules/
+.next/
+dist/
+.vercel/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Agent local settings
+.claude/settings.local.json

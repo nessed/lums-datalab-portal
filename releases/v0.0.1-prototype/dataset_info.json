@@ -1,7 +1,7 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T22:46:48+00:00",
+    "built_at": "2026-10-10T22:59:08+00:00",
     "located": {
       "abs-fed-2010-11": {
         "footnote_lines": [],
@@ -796,7 +796,7 @@
   },
   "cpi": {
     "dataset": "cpi",
-    "built_at": "2026-10-10T22:47:44+00:00",
+    "built_at": "2026-10-10T23:01:42+00:00",
     "located": {
       "cpi-pbs-2021-06:national": {
         "source_id": "cpi-pbs-2021-06",
@@ -972,6 +972,114 @@
           "coverage_row_band": 1.0,
           "row_band_missing_sample": [],
           "emitted_numeric_tokens": 142
+        },
+        "second_reader": {
+          "routed_by": [
+            "dropped_column",
+            "merged_rows"
+          ],
+          "reading": {
+            "usable": true,
+            "reason": null,
+            "reader": "pdfplumber",
+            "version": "0.11.10",
+            "config_sha256": "b081aede84a0f6da09de13590153f13926ffa6c06e58ba210f853651ef7b3f1a",
+            "page": 9,
+            "column_bands": [
+              [
+                0.44919,
+                0.49546
+              ],
+              [
+                0.51594,
+                0.5622
+              ],
+              [
+                0.58125,
+                0.62753
+              ],
+              [
+                0.64676,
+                0.69302
+              ],
+              [
+                0.7228,
+                0.75738
+              ],
+              [
+                0.77804,
+                0.81604
+              ],
+              [
+                0.84455,
+                0.87913
+              ],
+              [
+                0.90566,
+                0.94024
+              ]
+            ],
+            "words_in_box": 218,
+            "header_lines": 6,
+            "data_rows": 15,
+            "value_cells": 120,
+            "columns_found": 8,
+            "columns_expected": 8,
+            "label_columns": 2,
+            "anchors_matched": 6,
+            "anchors_given": 6
+          },
+          "promoted": true,
+          "table_flags": [],
+          "coverage": {
+            "page": 9,
+            "table_index": 0,
+            "printed_numeric_tokens": 142,
+            "matched": 142,
+            "coverage": 1.0,
+            "missing_tokens_sample": [],
+            "row_band_printed_numeric_tokens": 142,
+            "row_band_matched": 142,
+            "coverage_row_band": 1.0,
+            "row_band_missing_sample": [],
+            "emitted_numeric_tokens": 142
+          },
+          "column_problems": [],
+          "unmapped_labels": [],
+          "ambiguous_labels": [],
+          "cells_read": 120,
+          "cells_with_a_number": 120,
+          "cells_mapped": 77,
+          "checks": {
+            "weights_sum": {
+              "pass": 0,
+              "pass_within_rounding": 1,
+              "fail": 0,
+              "not_evaluable": 0
+            },
+            "index_aggregation": {
+              "pass": 0,
+              "pass_within_rounding": 3,
+              "fail": 0,
+              "not_evaluable": 0
+            },
+            "recompute": {
+              "pass": 0,
+              "pass_within_rounding": 26,
+              "fail": 0,
+              "not_evaluable": 0
+            }
+          },
+          "checks_run": 30,
+          "checks_passed": 30,
+          "checks_not_passed_sample": [],
+          "numbers_also_read_by_first_reader": {
+            "first_reader_numeric_tokens": 142,
+            "second_reader_numeric_tokens": 142,
+            "numeric_tokens_in_both": 142
+          },
+          "overlay": "overlay_cpi-pbs-2021-06_p009_second_reader.png",
+          "decision": "used: all 30 arithmetic checks pass on the second reading"
         }
       },
       "cpi-pbs-2021-06:rural": {
@@ -1038,6 +1146,114 @@
           "coverage_row_band": 1.0,
           "row_band_missing_sample": [],
           "emitted_numeric_tokens": 142
+        },
+        "second_reader": {
+          "routed_by": [
+            "dropped_column",
+            "merged_rows"
+          ],
+          "reading": {
+            "usable": true,
+            "reason": null,
+            "reader": "pdfplumber",
+            "version": "0.11.10",
+            "config_sha256": "b081aede84a0f6da09de13590153f13926ffa6c06e58ba210f853651ef7b3f1a",
+            "page": 10,
+            "column_bands": [
+              [
+                0.45906,
+                0.50533
+              ],
+              [
+                0.52017,
+                0.56643
+              ],
+              [
+                0.58407,
+                0.63033
+              ],
+              [
+                0.64999,
+                0.69625
+              ],
+              [
+                0.72401,
+                0.75859
+              ],
+              [
+                0.78267,
+                0.82068
+              ],
+              [
+                0.84617,
+                0.88075
+              ],
+              [
+                0.90405,
+                0.93863
+              ]
+            ],
+            "words_in_box": 219,
+            "header_lines": 7,
+            "data_rows": 15,
+            "value_cells": 120,
+            "columns_found": 8,
+            "columns_expected": 8,
+            "label_columns": 2,
+            "anchors_matched": 6,
+            "anchors_given": 6
+          },
+          "promoted": true,
+          "table_flags": [],
+          "coverage": {
+            "page": 10,
+            "table_index": 0,
+            "printed_numeric_tokens": 142,
+            "matched": 142,
+            "coverage": 1.0,
+            "missing_tokens_sample": [],
+            "row_band_printed_numeric_tokens": 142,
+            "row_band_matched": 142,
+            "coverage_row_band": 1.0,
+            "row_band_missing_sample": [],
+            "emitted_numeric_tokens": 142
+          },
+          "column_problems": [],
+          "unmapped_labels": [],
+          "ambiguous_labels": [],
+          "cells_read": 120,
+          "cells_with_a_number": 120,
+          "cells_mapped": 77,
+          "checks": {
+            "weights_sum": {
+              "pass": 1,
+              "pass_within_rounding": 0,
+              "fail": 0,
+              "not_evaluable": 0
+            },
+            "index_aggregation": {
+              "pass": 0,
+              "pass_within_rounding": 3,
+              "fail": 0,
+              "not_evaluable": 0
+            },
+            "recompute": {
+              "pass": 0,
+              "pass_within_rounding": 26,
+              "fail": 0,
+              "not_evaluable": 0
+            }
+          },
+          "checks_run": 30,
+          "checks_passed": 30,
+          "checks_not_passed_sample": [],
+          "numbers_also_read_by_first_reader": {
+            "first_reader_numeric_tokens": 142,
+            "second_reader_numeric_tokens": 142,
+            "numeric_tokens_in_both": 142
+          },
+          "overlay": "overlay_cpi-pbs-2021-06_p010_second_reader.png",
+          "decision": "used: all 30 arithmetic checks pass on the second reading"
         }
       },
       "cpi-pbs-2023-06:national": {
@@ -2594,48 +2810,48 @@
     },
     "check_pass_rates": {
       "all": {
-        "pass": 121,
-        "pass_within_rounding": 386,
+        "pass": 302,
+        "pass_within_rounding": 445,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 507,
+        "evaluable": 747,
         "pass_rate": 1.0
       },
       "arithmetic": {
-        "pass": 4,
-        "pass_within_rounding": 386,
+        "pass": 5,
+        "pass_within_rounding": 445,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 390,
+        "evaluable": 450,
         "pass_rate": 1.0
       },
       "weights_sum": {
-        "pass": 4,
-        "pass_within_rounding": 9,
+        "pass": 5,
+        "pass_within_rounding": 10,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 13,
+        "evaluable": 15,
         "pass_rate": 1.0
       },
       "index_aggregation": {
         "pass": 0,
-        "pass_within_rounding": 39,
+        "pass_within_rounding": 45,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 39,
+        "evaluable": 45,
         "pass_rate": 1.0
       },
       "recompute": {
         "pass": 0,
-        "pass_within_rounding": 338,
+        "pass_within_rounding": 390,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 338,
+        "evaluable": 390,
         "pass_rate": 1.0
       },
       "cross_edition": {
@@ -2664,7 +2880,7 @@
   },
   "lfs": {
     "dataset": "lfs",
-    "built_at": "2026-10-10T22:48:16+00:00",
+    "built_at": "2026-10-10T23:00:15+00:00",
     "located": {
       "lfs-pbs-2017-18": {
         "runs": [
@@ -4594,17 +4810,17 @@
       }
     },
     "observations_by_outcome": {
-      "published": 329,
+      "published": 328,
       "disputed": 6,
       "not_yet_verified": 36,
-      "failed_checks": 1
+      "failed_checks": 2
     },
     "tier_mix": {
-      "B": 191,
+      "B": 190,
       "A": 138,
       "none": 6,
       "C": 36,
-      "D": 1
+      "D": 2
     },
     "comparability_text_search": {
       "status": "searched",

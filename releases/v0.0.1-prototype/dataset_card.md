@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T22:50:26+00:00 from commit `bcc36a816618`. Label: **prototype**. DOI: none.
+Built 2026-10-10T23:02:14+00:00 from commit `0a5c434c7f0d`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -10,8 +10,8 @@ Built 2026-10-10T22:50:26+00:00 from commit `bcc36a816618`. Label: **prototype**
 | Data type | State | Sources | Published values | Withheld / gaps |
 |---|---|---|---|---|
 | Federal Annual Budget Statement | published | 9 | 533 | disputed: 2, not_in_source: 2 |
-| Consumer Price Index | published | 5 | 884 | not_yet_verified: 372 |
-| Labour Force Survey | published | 4 | 329 | disputed: 6, failed_checks: 1, not_yet_verified: 36 |
+| Consumer Price Index | published | 5 | 1038 | not_yet_verified: 218 |
+| Labour Force Survey | published | 4 | 328 | disputed: 6, failed_checks: 2, not_yet_verified: 36 |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
@@ -23,8 +23,8 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 | Data type | A | B | C | D |
 |---|---|---|---|---|
 | abs | 118 | 415 | 0 | 0 |
-| cpi | 117 | 767 | 0 | 0 |
-| lfs | 138 | 191 | 36 | 1 |
+| cpi | 117 | 921 | 0 | 0 |
+| lfs | 138 | 190 | 36 | 2 |
 
 ## Coverage: how much of each printed table was captured
 
@@ -87,7 +87,7 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | Data type | Passed exactly | Passed within rounding | Failed | Disputed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement | Disputed pairs |
 |---|---|---|---|---|---|---|---|---|
 | abs | 291 | 47 | 0 | 2 | 0 | 99.4% | 100.0% (112 of 112 pairs) | 2 of 114 pairs (1.8%) |
-| cpi | 121 | 386 | 0 | 0 | 0 | 100.0% | 100.0% (117 of 117 pairs) | 0 of 117 pairs (0.0%) |
+| cpi | 302 | 445 | 0 | 0 | 0 | 100.0% | 100.0% (117 of 117 pairs) | 0 of 117 pairs (0.0%) |
 | lfs | 348 | 77 | 1 | 6 | 0 | 98.4% | 100.0% (192 of 192 pairs) | 6 of 198 pairs (3.0%) |
 
 **Disputed** means two official documents print different figures for the same thing and each printing adds up in its own table (a restatement by the publisher). A disputed figure is not published as checked: the site shows both printings and no value. A differing pair that does not meet those conditions is a failure and its value is withheld.

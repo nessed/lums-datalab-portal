@@ -195,7 +195,21 @@
     "row_band_matched": 142,
     "coverage_row_band": 1.0,
     "row_band_missing_sample": [],
-    "emitted_numeric_tokens": 142
+    "emitted_numeric_tokens": 142,
+    "reader": "pdfplumber",
+    "first_reader_coverage": {
+      "page": 9,
+      "table_index": 0,
+      "printed_numeric_tokens": 142,
+      "matched": 142,
+      "coverage": 1.0,
+      "missing_tokens_sample": [],
+      "row_band_printed_numeric_tokens": 142,
+      "row_band_matched": 142,
+      "coverage_row_band": 1.0,
+      "row_band_missing_sample": [],
+      "emitted_numeric_tokens": 142
+    }
   },
   {
     "dataset": "cpi",
@@ -211,7 +225,21 @@
     "row_band_matched": 142,
     "coverage_row_band": 1.0,
     "row_band_missing_sample": [],
-    "emitted_numeric_tokens": 142
+    "emitted_numeric_tokens": 142,
+    "reader": "pdfplumber",
+    "first_reader_coverage": {
+      "page": 10,
+      "table_index": 0,
+      "printed_numeric_tokens": 142,
+      "matched": 142,
+      "coverage": 1.0,
+      "missing_tokens_sample": [],
+      "row_band_printed_numeric_tokens": 142,
+      "row_band_matched": 142,
+      "coverage_row_band": 1.0,
+      "row_band_missing_sample": [],
+      "emitted_numeric_tokens": 142
+    }
   },
   {
     "dataset": "cpi",

@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T22:50:26+00:00",
-  "git_commit": "bcc36a81661802f0d055a098ff6d4d1e1bc2b2b2",
+  "created_at": "2026-10-10T23:02:14+00:00",
+  "git_commit": "0a5c434c7f0dde8643f3760af80c83c2fb18939d",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -110,9 +110,9 @@
   },
   "counts": {
     "sources": 22,
-    "cells": 4506,
-    "cells_mapped": 2201,
-    "cells_behind_published_values": 2145,
+    "cells": 4746,
+    "cells_mapped": 2355,
+    "cells_behind_published_values": 2298,
     "series": 286,
     "observations": 2165,
     "observations_by_dataset": {
@@ -122,14 +122,14 @@
         "published": 533
       },
       "cpi": {
-        "gap:not_yet_verified": 372,
-        "published": 884
+        "gap:not_yet_verified": 218,
+        "published": 1038
       },
       "lfs": {
         "gap:disputed": 6,
-        "gap:failed_checks": 1,
+        "gap:failed_checks": 2,
         "gap:not_yet_verified": 36,
-        "published": 329
+        "published": 328
       }
     },
     "tiers_by_dataset": {
@@ -139,18 +139,18 @@
       },
       "cpi": {
         "A": 117,
-        "B": 767
+        "B": 921
       },
       "lfs": {
         "A": 138,
-        "B": 191,
+        "B": 190,
         "C": 36,
-        "D": 1
+        "D": 2
       }
     },
     "checks_by_result": {
-      "pass": 760,
-      "pass_within_rounding": 510,
+      "pass": 941,
+      "pass_within_rounding": 569,
       "disputed": 8,
       "fail": 1
     },
@@ -176,19 +176,22 @@
         "pass_within_rounding": 2
       },
       "index_aggregation": {
-        "pass_within_rounding": 39
+        "pass_within_rounding": 45
       },
       "recompute": {
-        "pass_within_rounding": 391,
+        "pass_within_rounding": 443,
         "fail": 1
+      },
+      "reference_value": {
+        "pass": 180
       },
       "row_total": {
         "pass": 54,
         "pass_within_rounding": 6
       },
       "weights_sum": {
-        "pass_within_rounding": 10,
-        "pass": 27
+        "pass_within_rounding": 11,
+        "pass": 28
       }
     },
     "page_renders": 47
@@ -239,12 +242,12 @@
     },
     "cpi": {
       "all": {
-        "pass": 121,
-        "pass_within_rounding": 386,
+        "pass": 302,
+        "pass_within_rounding": 445,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 507,
+        "evaluable": 747,
         "pass_rate": 1.0
       },
       "cross_edition": {
@@ -333,12 +336,12 @@
         "tables_below_per_table_minimum": []
       },
       "check_pass_rate": {
-        "pass": 121,
-        "pass_within_rounding": 386,
+        "pass": 302,
+        "pass_within_rounding": 445,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 507,
+        "evaluable": 747,
         "pass_rate": 1.0
       },
       "cross_edition_agreement": {

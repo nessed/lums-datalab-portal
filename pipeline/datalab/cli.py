@@ -141,6 +141,15 @@ def cmd_gold_sample(a) -> int:
     return 0
 
 
+def cmd_gold_score(a) -> int:
+    from pathlib import Path
+
+    from .gold import gold_score
+
+    gold_score([Path(f) for f in a.labels], a.version)
+    return 0
+
+
 def cmd_all(a) -> int:
     """fetch -> extract (new runs) -> validate -> build for one dataset."""
     from .extract import extract, latest_run
@@ -193,6 +202,9 @@ def main(argv: list[str] | None = None) -> int:
     sp = add("gold-sample", cmd_gold_sample, "draw the blind gold-set sample for human labelling")
     sp.add_argument("--n", type=int, default=400)
     sp.add_argument("--seed", type=int, default=20261011)
+    sp.add_argument("--version", default=config.DEFAULT_RELEASE)
+    sp = add("gold-score", cmd_gold_score, "compare finished human labels with the release (error rate)")
+    sp.add_argument("labels", nargs="+")
     sp.add_argument("--version", default=config.DEFAULT_RELEASE)
     sp = add("all", cmd_all, "fetch, extract, validate and build one dataset")
     sp.add_argument("--dataset", choices=DATASETS, required=True)

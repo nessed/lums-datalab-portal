@@ -55,13 +55,14 @@ function Row({ s, depth, label }: { s: Series; depth: number; label?: string }) 
   const latest = [...pub].sort((a, b) => b.period.localeCompare(a.period) || (a.vintage === "re" ? -1 : 1))[0];
   const hay = [s.name, s.series_id, ...(s.synonyms ?? []), datasetName(s.dataset)].join(" ").toLowerCase();
   return (
-    <div className="cat-row" data-cat-row data-search={hay} data-dataset={s.dataset} data-values={pub.length > 0 ? "1" : "0"} style={{ ["--depth" as string]: depth }}>
+    <div className={`cat-row${depth === 0 ? " is-top" : ""}`} data-cat-row data-search={hay} data-dataset={s.dataset} data-values={pub.length > 0 ? "1" : "0"} style={{ ["--depth" as string]: depth }}>
       <span className="cat-name">
         <Link href={seriesHref(s.series_id)}>{label ?? shortName(s)}</Link>
         {s.derived ? <span className="cat-tag">computed</span> : null}
       </span>
       <span className="cat-periods small">
-        {periods.length ? `${periodWords(periods[0], s.frequency)} to ${periodWords(periods[periods.length - 1], s.frequency)}` : "none"}
+        <span className="cat-unit">{unitLabel(s.unit, s.scale_factor)}</span>
+        {periods.length ? `${periodWords(periods[0], s.frequency)} to ${periodWords(periods[periods.length - 1], s.frequency)}` : "no periods"}
       </span>
       <span className="cat-count small num">
         {pub.length}/{all.length}
@@ -113,7 +114,7 @@ function HeadRow() {
   return (
     <div className="cat-row cat-head" aria-hidden="true">
       <span>Series</span>
-      <span>Periods</span>
+      <span>Unit and periods</span>
       <span className="num">Checked</span>
       <span className="num">Latest</span>
       <span>Trend</span>

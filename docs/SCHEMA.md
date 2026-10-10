@@ -98,7 +98,8 @@ release (so coverage can be audited) but never become a published value.
 | E | resolved by a human (not used yet) | | |
 
 `gap_kind`: `not_in_source` (the government did not publish it), `not_yet_verified` (we have not
-verified it), `failed_checks`. An unpublished observation never carries a value.
+verified it), `failed_checks`, `disputed` (see the additions at the end). An unpublished observation
+never carries a value.
 
 ## Check
 
@@ -129,3 +130,32 @@ A release folder holds `release.json`, `sources.json`, `series.json`, `observati
 `ERRATA.md`. `python -m datalab check-release releases/<version>` re-runs the arithmetic of
 every check from the release's own cells and confirms that every status follows from the
 evidence; it needs no PDFs and runs in CI.
+
+## Additions on 2026-10-12 (all additive: no field renamed, removed or repurposed)
+
+| Where | Addition | Meaning |
+|---|---|---|
+| `Observation.status` | value `disputed` is now used | Two official documents print different figures and each adds up (decision D25). `published` is false, `value` is null, `tier` is null. |
+| `Observation.gap_kind` | new value `disputed` | The gap kind of a disputed observation. |
+| `Observation.disputed_readings` | new list, empty by default | Every printing of a disputed figure, earliest document first: `cell_id`, `source_id`, `page`, `value_raw`, `value_parsed`. Each `cell_id` is in `cells.json`, so each printing has its own page render and box. |
+| `Check.result` | new value `disputed` | A cross-edition pair that differs and meets every D25 condition. Not a pass, not a fail. |
+| `Check.dispute_rejected` | new optional string | On a cross-edition pair that stayed `fail`: the D25 condition that was not met. |
+| `Check.check_type` | new value `reference_value` | A printed figure compared with a recorded constant (`target_value`, `target_source`). Used for CPI basket weights. Earns no status by itself; a failure withholds the row. |
+| `Cell.normalization_flags` | new value `precision_differs_from_column` | The figure has different decimals from the rest of its column (possible truncated reading). Blocking. |
+| `Cell.second_reader_of` | new optional object | Set on a cell read by the second tool: `first_reader`, `first_reader_version`, `routed_by` (the flags that routed the table), `first_cell_ids`. |
+| `Cell.extractor_name` | value `pdfplumber` | A second-reader cell. Its `run_id` is the Docling run that routed the table; `extract_config_sha256` is the hash of the second reader's configuration. |
+| `Cell.structural_flags` | new value `superseded_by_second_reader` | On the first tool's cells of a table whose second reading was promoted. Those cells stay in the record, unmapped. |
+| `Cell.second_reader` | now filled | On the first tool's cells of a promoted table: what the second tool read at that spot. Shape unchanged. |
+| `release.json` `dataset_status.<type>.disputes` | new object | `differing_pairs`, `disputed`, `kept_as_fail` (reason: count), `cross_edition_pairs`, `disputed_share`, `max_disputed_share`. |
+| `release.json` pass-rate objects | new key `disputed` | Count of disputed pairs beside `pass`, `pass_within_rounding`, `fail`, `not_evaluable`. `pass_rate` of `cross_edition_agreement` leaves them out (D26); `check_pass_rate` counts them as not passed. |
+| `observations.csv` | new column `disputed_readings` | `value (source p.N) | value (source p.N)`; blank unless disputed. `value` is blank for a disputed row. |
+| `coverage.json` rows | new optional keys `reader`, `first_reader_coverage` | Present when the row describes a second reading. |
+
+For the site: a disputed observation should show the badge "Disputed", no value, the sentence in
+`evidence_summary`, and one boxed page per entry of `disputed_readings`. Charts show no point for it.
+A value whose primary cell has `extractor_name: pdfplumber` should say it was read by a second tool;
+`evidence_summary` already begins with that sentence.
+
+Changed meaning to be aware of (no shape change): tier D now also covers a figure that another
+official document prints differently without the D25 conditions holding, and a figure in a failed
+check that no second printing confirms (before, any other passing check rescued it).

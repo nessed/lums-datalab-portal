@@ -75,8 +75,19 @@ digit for each item added passes as "within rounding"; anything larger fails. Th
 which of the two it was. Two printings of the same figure must agree within one unit of the last
 printed digit.
 
-If a sum fails and nothing independently shows which number is wrong, every number in that sum is
-withheld. We do not guess.
+If a check fails and nothing independently shows which number is wrong, every number in that check is
+withheld. We do not guess. "Independently" means one thing only: another official document prints
+the same figure. A second sum that happens to pass does not rescue a number from a failed check,
+because sums and weighted averages can pass around a wrong member.
+
+Some checks say something about one number only. The weighted average of the CPI group indices is
+evidence for the general index it reproduces, not for the twelve group indices that go into it: a
+small group could be far off and the average would hardly move. Such a check counts for its target
+alone.
+
+For the CPI, the weight printed beside each group must equal that group's basket weight (the same
+figure in every issue on a base year). This ties each row's figures to its name; without it, two
+rows with swapped labels would pass every sum.
 
 A sum on a table that the tool read badly (a lost column, two numbers merged into one cell) is
 recorded as "could not be run", never as passed.
@@ -92,7 +103,23 @@ Status is worked out by a program from the stored check results. Nobody sets it 
 | **We could not verify this figure; it is withheld** | A check failed or the reading was flagged. The value is not shown. |
 | **Not published by the government** | The document does not print this line. |
 
-The last three are gaps. They always say which kind they are.
+| **Disputed** | Two official documents print different figures for the same thing, and each printing adds up in its own table. That is a restatement by the publisher, not a reading error. We show both printings with their pages and publish neither as checked. |
+
+The last four carry no value. They always say which kind they are.
+
+A figure becomes *disputed* only when a program finds all of this: the two printings are of the
+same line, year and kind of figure; they are in two different documents; neither table was
+flagged as badly read; and each printing is part of a sum (or recomputation) that passes inside
+its own document. If any of that is missing, the difference is treated as a failed check and the
+figure is withheld as "could not verify".
+
+### When a second tool reads a table
+
+If the first tool visibly misreads a table's structure (two numbers merged into one cell, a lost
+column), a second tool (pdfplumber, which reads word positions) reads that table again. Its
+reading is used only if the table's own arithmetic then passes on it; otherwise everything from
+the table stays withheld. The receipt says when a value came from the second tool. Both tools
+read the same text layer of the PDF, so this corrects structure, not digits.
 
 ## Thresholds, fixed before any result was seen
 
@@ -100,6 +127,14 @@ The publication thresholds were written and fingerprinted before the first extra
 the fingerprint is stored in every release. A data type that falls below a threshold is not
 published at all; it is shown as "coming". Thresholds are never edited after results are seen; a
 deviation would be recorded instead.
+
+**Recorded deviation (12 October 2026).** After the first results, the way cross-edition
+agreement is counted was changed: it is now pairs that agree divided by pairs that agree or fail,
+and disputed pairs (restatements, as defined above) are counted and shown separately. The 98%
+threshold itself is unchanged and applies to that ratio. In the overall pass rate a disputed pair
+still counts as not passed. As a guard, a data type whose disputed pairs exceed 5% of its
+cross-edition pairs is not published. This change let the Labour Force Survey be published
+(192 pairs agree, 0 fail, 6 disputed); it is listed for human confirmation.
 
 ## Measured error rate: pending
 

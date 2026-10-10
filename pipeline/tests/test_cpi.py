@@ -446,3 +446,16 @@ def test_gap_observations_are_labelled_not_yet_verified():
     assert len(gaps) == 2 * (13 * 5 + 12)
     assert all(g.gap_kind == "not_yet_verified" and not g.published and g.value is None and g.gap_reason for g in gaps)
     assert not {g.obs_id for g in gaps} & {o.obs_id for o in obs}
+
+
+# ----------------------------------------------------------------------------- header-flagged data row
+
+def test_general_row_marked_as_header_is_still_read(write_doc):
+    # Docling marks the "General" row as a header row in some tables; "No" spans down from the header.
+    t = load_tables(write_doc([docling_table(ROWS, page=1, top=110.0, header_rows=2, col_x=COL_X)]))[0]
+    grid = t.grid()
+    assert all(grid[1][k].column_header for k in t.value_columns())
+    assert cpi.header_flagged_row_label(t, grid, 1, t.value_columns()) == "General"
+    spanning = next(c for c in t.cells if c.row == 0 and c.col == 0)
+    spanning.row_span = 2
+    assert cpi.header_flagged_row_label(t, t.grid(), 1, t.value_columns()) == "General"

@@ -305,6 +305,22 @@ def map_columns(table: Table, value_cols: list[int], words: list[Word], issue: s
 
 # ----------------------------------------------------------------------------- cells
 
+def header_flagged_row_label(table: Table, grid: list[list[Any]], row: int, value_cols: list[int]) -> str:
+    """Label of a data row that Docling marked as a header row: its own non-value cells, left to right.
+
+    Cells spanning down from the real header rows above (e.g. 'No', 'Group') start in an earlier
+    row and are left out.
+    """
+    parts: list[str] = []
+    for k in range(table.num_cols):
+        cell = grid[row][k]
+        if k in value_cols or cell is None or cell.row != row or cell.col != k:
+            continue
+        if cell.text.strip():
+            parts.append(cell.text.strip())
+    return clean_text(" ".join(parts))
+
+
 def build_cells(source, run, table: Table, area: str, caption: dict[str, Any], spec: dict[str, Any], labels: LabelMap,
                 not_targeted: list[str]) -> tuple[list[Cell], dict[str, Any], dict[str, dict[str, Any]]]:
     """Cells of one located table, the table's info record and per-cell meaning (`meta`)."""
@@ -332,15 +348,25 @@ def build_cells(source, run, table: Table, area: str, caption: dict[str, Any], s
     ambiguous: list[str] = []
     relabelled: list[str] = []
     skipped: list[str] = []
+    header_rows_as_data: list[str] = []
     for r in range(table.num_rows):
         row_cells = [grid[r][k] for k in value_cols if grid[r][k] is not None and grid[r][k].row == r and grid[r][k].col == k]
-        if not row_cells or all(c.column_header for c in row_cells) or not any(c.text.strip() for c in row_cells):
+        if not row_cells or not any(c.text.strip() for c in row_cells):
             continue
         if not any(parse_printed(c.text).value is not None or parse_printed(c.text).is_missing for c in row_cells if c.text.strip()):
-            continue  # a header row Docling did not mark as a header
-        label = row_label(table, grid, r, value_cols)
-        key, how = labels.lookup(label)
+            continue  # a header row (marked as one by Docling or not)
         row_flags = list(flags)
+        if all(c.column_header for c in row_cells):
+            # Docling sometimes marks the first data row ("General") as a header row. It is data
+            # only when every value column holds exactly one number in this row.
+            if len(row_cells) != len(value_cols) or any(parse_printed(c.text).value is None for c in row_cells):
+                continue
+            label = header_flagged_row_label(table, grid, r, value_cols)
+            row_flags.append("header_row_as_data")
+            header_rows_as_data.append(label)
+        else:
+            label = row_label(table, grid, r, value_cols)
+        key, how = labels.lookup(label)
         if key is None:
             alt = text_layer_row_label(table, grid, r, value_cols, words)
             alt_key, alt_how = labels.lookup(alt)
@@ -389,7 +415,7 @@ def build_cells(source, run, table: Table, area: str, caption: dict[str, Any], s
         "columns": {str(k): {"role": v["role"], "period": v["period"], "header": v["header"],
                              "month_printed": v["month_printed"]} for k, v in col_map.items()},
         "column_problems": col_problems, "unmapped_labels": unmapped, "ambiguous_labels": ambiguous,
-        "not_targeted_rows": skipped, "labels_from_text_layer": relabelled,
+        "not_targeted_rows": skipped, "header_rows_as_data": header_rows_as_data, "labels_from_text_layer": relabelled,
         "rows_mapped": sorted(k for k in counts if k not in duplicated), "coverage": coverage,
     }
     return cells, info, meta

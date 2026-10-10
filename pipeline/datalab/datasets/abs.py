@@ -18,7 +18,7 @@ from ..sources import read_manifest, source_path
 from ..status import build_observations
 from ..tables import Table, page_words
 from ..validate import BLOCKING_TABLE_FLAGS, detect_table_flags, render_overlay, table_coverage
-from . import abs_detail
+from . import abs_detail, abs_receipts
 from .common import (LabelMap, column_header_text, text_layer_row_label, fiscal_years_in, load_spec, make_cell, previous_fy, row_label,
                      save_dataset, score_table, validated_tables)
 
@@ -323,7 +323,23 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
         coverage += detail["coverage"]
         catalogue += detail["series"]
         series = {s.series_id: s for s in catalogue}
+    # Receipts side (D32): Summary of Receipts and the tax revenue statement. Off unless specs/abs_receipts.yaml says `enabled`.
+    receipts_info: dict[str, Any] = {"enabled": abs_receipts.enabled()}
+    receipts_gaps: list[Observation] = []
+    if receipts_info["enabled"]:
+        receipts = abs_receipts.build_receipts(
+            sources=sources, loaded={k: v[:2] for k, v in summary_tables.items()}, abs_spec=spec, titles=titles, order=order,
+            column_label_for=lambda c: column_label(c, titles), map_columns=map_columns)
+        receipts_info.update(receipts["info"])
+        cells = cells + receipts["cells"]
+        checks += receipts["checks"]
+        coverage += receipts["coverage"]
+        catalogue += receipts["series"]
+        series = {s.series_id: s for s in catalogue}
+        receipts_gaps = receipts["gap_observations"]
     checks = classify_disputes(checks, cells)  # D25: a differing pair that each add up is `disputed`, by code
+    if receipts_info["enabled"]:
+        receipts_info["check_pass_rates"] = abs_receipts.pass_rates(checks)
     observations = build_observations(cells, checks, series, order, titles, release)
     cells_by_id = {c.cell_id: c for c in cells}
     for o in observations:
@@ -334,6 +350,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
             o.notes = f"The {titles.get(primary.source_id, primary.source_id)} attaches a footnote to this line: {quoted}"
     observations += derive(spec, observations, series, release)
     observations += gap_observations(spec, located, not_located, observations, series)
+    observations += receipts_gaps
     used = {o.series_id for o in observations}
     catalogue = [s for s in catalogue if s.series_id in used]
 
@@ -346,6 +363,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
         },
         "comparison_arslan": arslan_comparison(observations),
         "detail_tables": detail_info,
+        "receipts": receipts_info,
     }
     save_dataset(DATASET, cells=cells, checks=checks, series=catalogue, observations=observations, coverage=coverage, info=info)
     return info

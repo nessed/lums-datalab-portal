@@ -44,9 +44,12 @@ locator:
 
 # The rebasing. Issues for months before `first_new_base_issue` are expected to
 # print base 2007-08 and one (unnamed) table; later issues base 2015-16 and three.
+# The 2007-08 base table prints no area, so its area key is `not_stated` and its
+# series ids carry no area segment (decision D27). It is never filed under
+# national or urban.
 rebase:
   first_new_base_issue: "2019-08"
-  old: {base_year: "2007-08", tag: b2007_08, areas: [national]}
+  old: {base_year: "2007-08", tag: b2007_08, areas: [not_stated]}
   new: {base_year: "2015-16", tag: b2015_16, areas: [national, urban, rural]}
 
 columns:
@@ -117,11 +120,19 @@ checks:
 #   cpi.<area>.weight.<slug>.<base tag>      weight (percent), period = the issue month
 #   cpi.<area>.yoy.general / .yoy.group.<slug>   % change over the same month last year
 #   cpi.<area>.mom.general / .mom.group.<slug>   % change over the previous month
+# The 2007-08 base table (area key `not_stated`) is named by what it prints, with
+# no area segment and the base in every id, change series included (D27):
+#   cpi.general.b2007_08, cpi.group.<slug>.b2007_08, cpi.weight.<slug>.b2007_08,
+#   cpi.yoy.general.b2007_08, cpi.yoy.group.<slug>.b2007_08, cpi.mom.(...).b2007_08
 # Definitions are plain-language drafts for a human to edit.
 areas:
-  national: {name: "National", note_old_base: "Issues on the 2007-08 base are not processed yet; how that base maps to national, urban and rural series is to be confirmed from the documents by a human."}
+  national: {name: "National"}
   urban: {name: "Urban"}
   rural: {name: "Rural"}
+  not_stated:
+    name: "(no area stated)"
+    area_as_printed: "none stated"
+    note: "The 2007-08 base CPI was compiled from urban centres only (to confirm against PBS methodology; not stated in the monthly issue)"
 
 general:
   name: "General (all groups)"

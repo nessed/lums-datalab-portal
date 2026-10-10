@@ -62,7 +62,9 @@ The scanned-page definition change from the first run stays as recorded (a devia
 10. Full-document Docling runs for LFS 2018-19, 2020-21, 2024-25 in the background, sequential, lowest priority: compare every mapped cell with the page-range run (`value_raw`, page, bbox); report agreement; if identical, switch provenance to the full-document run ids; if not, keep page-range and list the differences.
 11. Hide the LFS "Total 100.0" share series from browse and series lists (keep it in the release); clean anything else in STATUS.md's "queued follow-ups" that takes under 15 minutes.
 
-Stop rule unchanged: if time runs short, finish Must, then C9/C10 below, then push.
+**Then keep going.** This is a multi-hour run; Ali is asleep. When Must, Should and Could are done, work through the **extended backlog in section 6, in order**, until it is exhausted, or everything left needs a human, or you have been running about 9 hours. Do not stop because the numbered steps are finished. Every two hours, regardless of where you are, write an interim handoff (report entry + `STATUS.md` + push) so a dead session leaves a clean state.
+
+Stop rule for the numbered steps: if something goes badly wrong, finish Must, then C9/C10 below, then push, then continue with section 6 only if the branch is green.
 
 ---
 
@@ -88,7 +90,9 @@ Tracks (lead merges only; one worktree each; no shared `work/` subfolders, the f
 
 ## 4. Rules specific to this run
 - **No threshold edits.** Any metric definition change is a DEVIATION line and a dataset-card line.
-- **No new ABS Docling runs.** The nine validated runs hold every table; locate in their JSON.
+- **No new Docling runs for the nine ABS editions already validated.** Their runs hold every table; locate in their JSON. New editions (section 6) need their own runs.
+- **CPU discipline.** At most two Docling runs at a time (the first run measured 10–15 s/page with three in parallel). Queue background jobs (E1 runs, E4 issues, C8, E5) one after another and keep building while they run.
+- **The branch is never left red.** Every extension lands only when tests, `check-release` and `npm run build` pass; if an extension breaks something and the fix is not obvious in 20 minutes, revert that extension's commits, note it, move on.
 - **Rebuild from the pipeline, never hand-edit the release.** If a number on the site needs to change, the change is upstream (spec, code, status) and the release is regenerated.
 - **A reviewer's finding is not a bug until a failing test shows it.** Then fix it. Record rejected findings with the reason.
 - **Disputed is not a dumping ground.** If the D25 conditions do not all hold, the pair is `fail` and the values stay withheld. Count how many pairs each rule turned away.
@@ -98,7 +102,26 @@ Tracks (lead merges only; one worktree each; no shared `work/` subfolders, the f
 
 ---
 
-## 5. Morning checklist v2 (write it with real numbers at C10)
+## 6. Extended backlog (after C10; in this order; each item lands green or is reverted)
+
+Decisions these items need are listed inline as D32–D37; append them to `DECISIONS.md` when you reach the item, same provisional marking.
+
+| # | Item | Why it is worth hours | How |
+|---|---|---|---|
+| E1 | **Every ABS edition on disk: 2012-13, 2013-14, 2014-15, 2015-16, 2018-19, 2019-20, 2020-21, 2023-24** (all under `RA_SHIP_DIR/Arsalan Archive/Archive/Budget Statements/budget_docs/<FY>/`; official URLs in the pbs-corpus manifest or Wayback). | Turns the demo into a continuous federal series 2009-10 → 2026-27 with a cross-edition check on every year. Sir asked for depth in years. | Plan 1 §6.1 verification for each file; one run each, sequential; `specs/abs.yaml` layout entry per edition; same checks; `role: core`. Expect layouts to drift around 2012–2015; locate by the ten function names, never by page number. |
+| E2 | **ABS receipts side**: the "Summary of Receipts" table in every edition (tax revenue by head: income tax, sales tax, customs, federal excise; non-tax revenue; totals). **D32:** series `fed.rev.<head_slug>` with children, same vintages `be`/`re`, same checks (column totals, hierarchy sums, cross-edition). | Breadth inside documents already verified and extracted; no new sources. The old prototype lost Sales Tax in one year, so this is where errors hide. | Locator by the heads' names; label dictionary; checks; receipts. |
+| E3 | **LFS depth: provincial rows and the 19th ICLS tables.** **D33:** provincial rows (Punjab, Sindh, KP, Balochistan, already recognised and unmapped) become series with `geo: pk-<province>` and the same dims. **D34:** 2024-25 19th ICLS tables become separate series with suffix `.icls19`, their own definitions, never joined to the 13th ICLS series; the site shows both with the definition stated. | Geography depth ("national → province") at near-zero extraction cost; the 19th ICLS headline is the one PBS leads with and is currently absent. | Mapping, series catalogue, checks (provincial shares sum; male+female totals), site. |
+| E4 | **CPI monthly series, not just June.** **D35:** every Monthly Review obtainable from August 2019 (first 2015-16 base issue) to the latest, then the 2007-08 base backwards as far as obtainable. Discovery: the `Monthly-Review-<Month><Year>.pdf` pattern under `/wp-content/uploads/2020/07/`, the PBS price page data array, Wayback CDX by URL prefix. Verify each file (plan 1 §6.1), one run each in the background queue. | A complete monthly CPI is what researchers actually use; each issue prints the previous month and same-month-last-year, so consecutive issues cross-check each other on every index. | Same builder; period `YYYY-MM`; cross-edition pairs across consecutive issues; publish by the same thresholds. Report how many issues were obtainable and from where. |
+| E5 | **Full reproduction from a clean clone** (background, after E1 runs are queued): fresh clone into a scratch folder outside the repo, fresh venv from `requirements.lock`, `datalab fetch` into a fresh `SOURCES_DIR` (hash-verified), `datalab all` for every dataset, `datalab release` to a scratch path, then a semantic diff against `releases/v0.0.1-prototype` (same cells, values, checks, statuses; run ids and timestamps may differ). **D36:** reproduction runs write new run ids and never touch the repo's `work/`. | "Anyone can rebuild it" is a promise on the site; this is the first time it is tested. It also catches nondeterminism before Ahmad hits it. | Script `pipeline/scripts/reproduce.ps1` + `datalab diff-release A B`; report the diff; fix any nondeterminism found. |
+| E6 | **Sanity report for humans** (`docs/reports/sanity_<date>.md`): for every published series, year-over-year changes above 50% or sign changes, series present in some editions but not others, residuals near tolerance, cells whose `value_raw` needed many normalisation flags. **Report only; never changes a status.** | Puts the oddities in front of the humans before sir sees them. | `datalab sanity`. |
+| E7 | **Source-change check** `datalab watch --dry-run`: for every manifest row with an official URL, HEAD request (Last-Modified, Content-Length) and, when changed, a download + hash compare; prints a table and exits. **Never scheduled from a session** (CLAUDE.md); it is the building block for the ClickUp "source-change monitor" task. | Maintenance roadmap item; cheap. | Polite rate limits; Wayback save on change. |
+| E8 | **Site depth**: client-side search over series names and synonyms (prebuilt JSON index); compare up to three series on one chart; cite formats downloadable (BibTeX, RIS); `sitemap.xml`; an accessibility pass (contrast, focus order, alt text on page renders stating page and document); provincial and monthly series pages from E3/E4. | The site must carry the new depth, and researchers find series by searching. | Keep static; no client fetching beyond the prebuilt index. |
+| E9 | **Economic Survey (PES) first tables** — only after E1–E4: register and verify the 2024-25 and 2025-26 complete volumes (ra-ship; official URLs), page-range runs per D18 for the fiscal chapter and the growth chapter, extract the consolidated fiscal operations summary (revenue − expenditure = deficit identity; cross-source against ABS totals) and the GDP growth table (recompute). **D37:** new doc type `pes`, series `fed.fiscal.*` and `na.gdp.*`, vintage from the column headers (`provisional`, `revised`, `final`). | Breadth into the document type that holds most of what sir listed (GDP, trade, external). Riskier layouts, so last. | Spec, locator, checks, receipts; stop at the time box. |
+| E10 | **Hardening**: property-based tests for the normaliser (`hypothesis`), regression fixtures cut from real run JSON (small excerpts, no source files), `gold-score` written and tested on synthetic labels with inter-rater agreement, `docs/HOW_A_NUMBER_GETS_ON_THE_SITE.md` walking one real receipt from PDF to page, glossary. | What Ahmad and sir will read; what keeps the next agent honest. | — |
+
+Each E item: its own track branch if a subagent does it, lead merges, push, STATUS row updated. Keep the extended-backlog ledger in the report: started / landed / reverted / skipped, with the reason.
+
+## 5. Morning checklist v2 (write it with real numbers at C10, update it at every interim handoff)
 1. Pull, read `STATUS.md`, then `docs/reports/2026-10-12-continuation-report.md`, then PR #1.
 2. Vercel project (root directory `site`), then `siteUrl` in `site/release.config.json`.
 3. Confirm D25–D31 and the two deviations (scanned-page definition; D26 metric). These decide whether LFS and the 2007-08 CPI stay published.
@@ -106,5 +129,6 @@ Tracks (lead merges only; one worktree each; no shared `work/` subfolders, the f
 5. Spot-check 10 receipts, including one disputed and one second-reader value.
 6. Remaining follow-ups from `STATUS.md`.
 7. Updated paragraph for sir, every figure cited to a receipt path.
+8. The extended-backlog ledger: what landed, what was reverted, what is still queued.
 
-Go.
+Go, and keep going.

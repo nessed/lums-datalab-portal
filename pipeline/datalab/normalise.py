@@ -148,6 +148,9 @@ def parse_printed(text: object) -> Parsed:
     if residue == "-" and not token.startswith("-"):
         # a detached minus sign, e.g. "- 12.3"
         token = "-" + token
+        # Ambiguous: a negative figure, or a dash for "nil" from the neighbouring column glued to
+        # this number (seen in the ABS detail tables: '- 6' where the next edition prints 6).
+        flags.append("detached_minus")
 
     value = _to_decimal(token)
     if value is None:

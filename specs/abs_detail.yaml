@@ -1,0 +1,118 @@
+# Federal Annual Budget Statement (ABS): the function-wise DETAIL tables (decision D31).
+#
+# What the document prints, in every edition surveyed (docs/reports/track_abs_detail.md):
+# right after the Summary of Expenditure come about seven pages that list each
+# function (codes 01-10) with its sub-functions (3-digit codes), in four parts.
+# Each part ENDS with its total line:
+#
+#   functions + sub-functions ...   ->  "a. Current Expenditure on Revenue Account"
+#   functions + sub-functions ...   ->  "b. Current Expenditure on Capital Account"
+#   functions + sub-functions ...   ->  "c. Dev. Exp. on Revenue Account"      (older editions: "i. ... (PSDP)")
+#   functions + sub-functions ...   ->  "d. Dev. Expenditure on Capital Account" (some editions: "i. ... (PSDP)")
+#
+# What the document does NOT print: one development figure per function, or one
+# total (current + development) per function. Development spending by function
+# is printed twice, once on revenue account and once on capital account, and
+# never added up per function. So there is no `fed.exp.development.function.*`
+# and no `fed.exp.total.function.*` here: they would be constructed numbers.
+#
+# A row belongs to the part whose total line follows it. That assignment is
+# validated by arithmetic: the function lines of a part must add to its total
+# line, and every function line must equal the sum of its sub-functions.
+
+dataset: abs
+
+# Flag read by datasets/abs.py. When false the detail tables are not read at all
+# and the ABS dataset is exactly the Summary of Expenditure.
+enabled: true
+
+expected_value_columns: 3
+min_table_coverage: 0.90         # same value as thresholds/thresholds.yaml coverage.min_per_table
+
+locator:
+  # The detail tables are the run of tables that follows the Summary of
+  # Expenditure (itself located by the ten function names) in document order.
+  # A table belongs to the run when at least this many of its rows are
+  # recognised (function line, sub-function line or one of the totals below).
+  min_recognised_rows: 2
+  # An edition counts as located only if every one of these groups was closed
+  # by one of its total lines.
+  required_parts:
+    - [current_revenue]
+    - [current_capital]
+    - [development_revenue, development_revenue_psdp]
+    - [development_capital, development_capital_psdp]
+
+# Total lines that close a part. Patterns are matched against the WHOLE
+# normalised label (see specs/abs_labels.yaml for the normalisation).
+# `total_series` is the series of the total line itself; `function_prefix` is
+# where the function lines above it go.
+parts:
+  - id: current_revenue
+    closing: '(a\. ?)?current exp(\.|enditure)? on revenue account'
+    total_series: fed.exp.current.revenue_account
+    function_prefix: fed.exp.current.function            # the series already published from the summary table
+    qualifier: "current, revenue account"
+    what: "current expenditure on revenue account"
+    sort: 1000
+  - id: current_capital
+    closing: '(b\. ?)?current exp(\.|enditure)? on capital account'
+    total_series: fed.exp.current.capital_account
+    function_prefix: fed.exp.current.capital_account.function
+    qualifier: "current, capital account"
+    what: "current expenditure on capital account"
+    sort: 2000
+  - id: development_revenue_psdp
+    closing: '(i\. ?)?dev(\.|elopment)? exp(\.|enditure)? on revenue account ?\(psdp\)'
+    total_series: fed.exp.development.revenue_account.psdp
+    function_prefix: fed.exp.development.revenue_account.psdp.function
+    qualifier: "development, revenue account, PSDP"
+    what: "PSDP development expenditure on revenue account"
+    sort: 3000
+  - id: development_revenue
+    closing: '(c\. ?)?dev(\.|elopment)? exp(\.|enditure)? on revenue account'
+    total_series: fed.exp.development.revenue_account
+    function_prefix: fed.exp.development.revenue_account.function
+    qualifier: "development, revenue account"
+    what: "development expenditure on revenue account"
+    sort: 4000
+  - id: development_capital_psdp
+    closing: '(i\. ?)?dev(\.|elopment)? exp(\.|enditure)? on capital account ?\(psdp\)'
+    total_series: fed.exp.development.capital_account.psdp
+    function_prefix: fed.exp.development.capital_account.psdp.function
+    qualifier: "development, capital account, PSDP"
+    what: "PSDP development expenditure on capital account"
+    sort: 5000
+  - id: development_capital
+    closing: '(d\. ?)?dev(\.|elopment)? exp(\.|enditure)? on capital account'
+    total_series: fed.exp.development.capital_account
+    function_prefix: fed.exp.development.capital_account.function
+    qualifier: "development, capital account"
+    what: "development expenditure on capital account"
+    sort: 6000
+
+# Total lines that close nothing: they are only compared with the same line of
+# the Summary of Expenditure (cross-table check). The line "III. Total Exp.
+# (Current+Development)" is deliberately absent: some editions print the
+# operational shortfall after it, so it is not always the summary's grand total.
+totals:
+  - {pattern: '(i\. ?)?total current expenditure ?\(a\+b\)', series: fed.exp.current.total}
+  - {pattern: '(ii\. ?)?total development expenditure ?\(c\+d\)', series: fed.exp.development.total}
+  - {pattern: '(c\. ?)?dev(\.|elopment)? exp(\.|enditure)? on revenue account ?\(i\+ii\)', series: fed.exp.development.revenue_account}
+  - {pattern: '(d\. ?)?dev(\.|elopment)? exp(\.|enditure)? on capital account ?\(i\+ii\)', series: fed.exp.development.capital_account}
+  - {pattern: '(ii\. ?)?other dev(\.|elopment)? exp(\.|enditure)? on revenue account', series: fed.exp.development.revenue_account.other}
+  - {pattern: '(ii\. ?)?other dev(\.|elopment)? exp(\.|enditure)? on capital account', series: fed.exp.development.capital_account.other}
+
+rules:
+  subfunctions:
+    id: abs_detail.subfunctions_add_to_function
+    type: hierarchy_sum
+  functions:
+    id: abs_detail.functions_add_to_part_total
+    type: column_total
+  same_as_summary:
+    id: abs_detail.detail_equals_summary
+    type: cross_table
+  next_edition:
+    id: abs_detail.same_figure_in_next_edition
+    type: cross_edition

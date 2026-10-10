@@ -71,13 +71,12 @@ def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str,
         # Another official document prints a different figure and the difference is not established
         # as a restatement (the D25 conditions do not all hold): withheld, never shown as checked.
         return "D", ["another official document prints a different figure and the difference is not explained"]
-    if failed and not agreement:
-        # A failed check is not outvoted by another arithmetic check: sums and aggregations can pass
-        # around a wrong member (review finding CPI-1). Only a second official printing of the same
-        # figure shows that this reading is right and the fault lies elsewhere in the failed check.
-        return "D", [f"{len(failed)} check(s) failed and no other official printing confirms this figure"]
     if failed:
-        reasons.append(f"{len(failed)} check(s) failed but another official printing shows the same figure")
+        # A failed check is never outvoted. Another sum can pass around a wrong member (review finding
+        # CPI-1), and a figure reprinted unchanged in the next edition can still be part of a block that
+        # does not add up because of a line we do not model (ABS detail tables). Rule 10: hold back the set.
+        kinds = ", ".join(sorted({c.check_type.replace("_", " ") for c in failed}))
+        return "D", [f"{len(failed)} check(s) on this figure failed ({kinds})"]
     if arithmetic and agreement:
         return "A", reasons
     if arithmetic or agreement:
@@ -223,7 +222,15 @@ def disputed_readings(group: Iterable[Cell]) -> list[DisputedReading]:
 
 
 def disputed_sentence(readings: list[DisputedReading], source_titles: dict[str, str]) -> str:
-    parts = [f"as {r.value_raw} in the {source_titles.get(r.source_id, r.source_id)} (p.{r.page})" for r in readings]
+    # One clause per document and figure; a document that prints the figure on two pages lists both.
+    pages: dict[tuple[str, str], list[int]] = {}
+    for r in readings:
+        pages.setdefault((r.source_id, r.value_raw), []).append(r.page)
+    parts = []
+    for (source_id, raw), pp in pages.items():
+        pp = sorted(set(pp))
+        where = f"p.{pp[0]}" if len(pp) == 1 else "pp." + ", ".join(str(p) for p in pp)
+        parts.append(f"as {raw} in the {source_titles.get(source_id, source_id)} ({where})")
     return ("Printed " + " and ".join(parts) + ". Each table adds up on its own page. "
             "We do not publish either figure as checked.")
 

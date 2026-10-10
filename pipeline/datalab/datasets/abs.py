@@ -18,6 +18,7 @@ from ..sources import read_manifest, source_path
 from ..status import build_observations
 from ..tables import Table, page_words
 from ..validate import BLOCKING_TABLE_FLAGS, detect_table_flags, render_overlay, table_coverage
+from . import abs_detail
 from .common import (LabelMap, column_header_text, text_layer_row_label, fiscal_years_in, load_spec, make_cell, previous_fy, row_label,
                      save_dataset, score_table, validated_tables)
 
@@ -279,6 +280,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     not_located: dict[str, str] = {}
     coverage: list[dict[str, Any]] = []
     blocked: dict[tuple[str, int, int], str] = {}
+    summary_tables: dict[str, tuple[Any, list[Table], Table]] = {}
     for source in sources:
         got = validated_tables(source)
         if got is None:
@@ -290,6 +292,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
             not_located[source.source_id] = f"The function-wise expenditure table could not be located ({info['result']})"
             located[source.source_id] = {"locator": info}
             continue
+        summary_tables[source.source_id] = (run, tables, table)
         table_cells, tinfo = build_cells(source, run, table, spec, labels)
         tinfo["locator"] = info
         located[source.source_id] = tinfo
@@ -303,6 +306,23 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
 
     checks = evaluate_sum_rules(cells, spec["rules"], DATASET, parents, blocked, lambda c: column_label(c, titles))
     checks += cross_checks(cells, titles, order, series)
+    # Function-wise detail tables (D31). Their checks are built separately so that the sum rules
+    # above only ever see the Summary of Expenditure. Off unless specs/abs_detail.yaml says `enabled`.
+    detail_info: dict[str, Any] = {"enabled": abs_detail.enabled()}
+    if detail_info["enabled"]:
+        detail = abs_detail.build_detail(
+            sources=sources, summary_tables=summary_tables, summary_cells=cells, abs_spec=spec, existing_series=series,
+            titles=titles, order=order, column_label_for=lambda c: column_label(c, titles), map_columns=map_columns)
+        detail_info.update(editions=detail["info"], check_pass_rates={
+            "sums": pass_rate(detail["checks"], ["column_total", "hierarchy_sum"]),
+            "same_as_summary": pass_rate(detail["checks"], ["cross_table"]),
+            "cross_edition": pass_rate(detail["checks"], ["cross_edition"]),
+        })
+        cells = cells + detail["cells"]
+        checks += detail["checks"]
+        coverage += detail["coverage"]
+        catalogue += detail["series"]
+        series = {s.series_id: s for s in catalogue}
     checks = classify_disputes(checks, cells)  # D25: a differing pair that each add up is `disputed`, by code
     observations = build_observations(cells, checks, series, order, titles, release)
     cells_by_id = {c.cell_id: c for c in cells}
@@ -325,6 +345,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
             "cross_edition": pass_rate(checks, ["cross_edition"]),
         },
         "comparison_arslan": arslan_comparison(observations),
+        "detail_tables": detail_info,
     }
     save_dataset(DATASET, cells=cells, checks=checks, series=catalogue, observations=observations, coverage=coverage, info=info)
     return info

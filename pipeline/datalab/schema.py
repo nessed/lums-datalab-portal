@@ -64,7 +64,7 @@ AGREEMENT_CHECKS = frozenset({"cross_edition", "cross_source"})
 TARGET_ONLY_CHECKS = frozenset({"index_aggregation"})
 PASSING = frozenset({"pass", "pass_within_rounding"})
 BLOCKING_CELL_FLAGS = frozenset({"merged_cell_suspected", "title_text_suspected", "text_with_number",
-                                 "precision_differs_from_column"})
+                                 "precision_differs_from_column", "detached_minus"})
 # Arithmetic evidence that a reading is as printed, for the `disputed` rule (decision D25).
 DISPUTE_ARITHMETIC = frozenset({"column_total", "hierarchy_sum", "weights_sum", "index_aggregation", "recompute", "row_total"})
 

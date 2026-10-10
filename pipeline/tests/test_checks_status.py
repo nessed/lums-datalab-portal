@@ -164,13 +164,14 @@ def test_failed_sum_holds_back_the_whole_set():
     assert all(o.tier == "D" and not o.published and o.value is None and o.gap_kind == "failed_checks" for o in obs.values())
 
 
-def test_failed_sum_member_rescued_only_by_independent_agreement():
+def test_failed_sum_member_is_withheld_even_when_reprinted_unchanged():
     e1 = column("e1", {"s.a": "100", "s.b": "200", "s.c": "300", "s.total": "999"})
     e2_a = make_cell("e2", 0, 0, "100", "100", series="s.a")
     checks = run_rules(e1) + [equality_check(check_type="cross_edition", dataset="abs", rule_id="x", first=e1[0], second=e2_a,
                                              what="w", where_first="Edition 1", where_second="Edition 2")]
     obs = tiers(e1 + [e2_a], checks)
-    assert obs["s.a:2025-26:be"].tier == "B" and obs["s.a:2025-26:be"].published
+    # A failed check is never outvoted: the reprint shows the reading of s.a twice, not that the block adds up.
+    assert obs["s.a:2025-26:be"].tier == "D" and not obs["s.a:2025-26:be"].published
     assert obs["s.b:2025-26:be"].tier == "D"
 
 

@@ -17,7 +17,8 @@ See `README.md` for the full project description.
 - Two RAs, **Ali** and **Ahmad**, direct the work. **Agents write the code and build the site.** Humans decide, write specs, review output, check values against source pages, and sign off.
 - Ali works with Claude Code; Ahmad works with OpenCode. Each side's agents and humans review the other side's pull requests. Different models make different mistakes, so cross-review is deliberate.
 - Planning lives in ClickUp (DataLab list, "Citizen-facing portal"). That task description is the planning baseline. Code and review live here.
-- **When a decision is needed, ask a human.** Don't invent scope, thresholds, series definitions or check tolerances.
+- `STATUS.md` at the repo root is the map: what exists, where it is, what state it is in, what is open. Read it first; update it in every PR.
+- **When a decision is needed, ask a human.** Don't invent scope, thresholds, series definitions or check tolerances. The one exception is an authorised unattended run (section 9).
 
 ## 3. Non-negotiable rules
 
@@ -131,7 +132,20 @@ Spreadsheets and API data skip profile/extract/structure/second-reader but go th
 - [ ] No source files, secrets or absolute paths committed
 - [ ] `DECISIONS.md` / `AGENTS.md` updated if a rule or decision changed
 
-## 9. Reference material
+## 9. Autonomous mode (unattended runs authorised by a human)
+
+A human may authorise an agent to work unattended against a written plan committed under `docs/plans/`. In that mode:
+
+- Sections 3 and 4 do not bend. Ever. A value is still only ever produced by extraction tools and judged by code.
+- The agent may settle open questions **outside** sections 3 and 4 by taking the smallest reversible option consistent with the plan. Each such decision goes into `DECISIONS.md` as "provisional (unattended, <date>)" and into `STATUS.md` under "Open questions for humans". Humans confirm or overturn them afterwards.
+- Work happens only on a `proto/*` branch with a draft PR open against `main`. Never push to `main`.
+- `STATUS.md` and the run report under `docs/reports/` are kept current at every milestone, so anyone can resume without the agent's conversation.
+- Anything that needs credentials, accounts or policy is written down for a human, not worked around.
+- New traps learned go into section 7 in the same PR.
+
+Current authorised run: `docs/plans/2026-10-11-overnight-prototype.md` (authorised by Ali, 2026-10-11).
+
+## 10. Reference material
 
 The previous RAs' work and the source corpus live in the `ra-ship` archive (`RA_SHIP_DIR` in `.env`). Paths below are relative to it. Read-only.
 
@@ -150,7 +164,7 @@ The previous RAs' work and the source corpus live in the `ra-ship` archive (`RA_
 | Arslan's ABS dataset (13,248 rows, comparison only) | `Arsalan Archive/Archive/ABS Dataset/files/subcodes_long.csv` |
 | ABS PDFs | `Arsalan Archive/Archive/Budget Statements/budget_docs/<FY>/abs_fy_<FY>.pdf` |
 
-## 10. Current focus
+## 11. Current focus
 
 **First prototype:** federal ABS (2010-11, 2016-17, 2021-22, 2024-25, 2025-26), CPI and Labour Force Survey, 5 years each, end to end: schema → process → check → cite → source snippet → site.
 

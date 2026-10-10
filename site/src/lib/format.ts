@@ -186,5 +186,51 @@ export function dateOnly(iso: string | null | undefined): string {
 
 export function bytes(n: number | null | undefined): string {
   if (!n && n !== 0) return "not recorded";
+  if (n >= 1024 * 1024) return `${(n / 1024 / 1024).toFixed(1)} MB (${formatDecimalString(String(n))} bytes)`;
+  if (n >= 1024) return `${Math.round(n / 1024)} KB (${formatDecimalString(String(n))} bytes)`;
   return `${formatDecimalString(String(n))} bytes`;
 }
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+/** "2026-06" -> "June 2026" for monthly series. Fiscal years ("2025-26") and
+ * survey rounds stay as printed. "2010-11" is a fiscal year or November 2010
+ * depending on the series, so the frequency decides, never the string. */
+export function periodWords(period: string | null | undefined, frequency?: string | null): string {
+  if (!period) return "";
+  const m = /^(\d{4})-(\d{2})$/.exec(period);
+  if (frequency === "month" && m && Number(m[2]) >= 1 && Number(m[2]) <= 12) return `${MONTHS[Number(m[2]) - 1]} ${m[1]}`;
+  return period;
+}
+
+/** Short month label for axes: "Jun 2026". */
+export function periodShort(period: string, frequency?: string | null): string {
+  const w = periodWords(period, frequency);
+  return w === period ? period : `${w.slice(0, 3)} ${w.slice(-4)}`;
+}
+
+/** Full amount in words for a value in a scaled unit, for axes and summaries
+ * only (never the published figure itself): (31975, "PKR", 1e6) -> "Rs 32.0 billion". */
+export function humanAmount(value: number, unit: string | null | undefined, scale: number | null | undefined): string {
+  const full = value * (scale ?? 1);
+  if (unit !== "PKR") return `${value.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+  const abs = Math.abs(full);
+  const sign = full < 0 ? "−" : "";
+  const fmt = (n: number) => (n >= 100 ? n.toFixed(0) : n >= 10 ? n.toFixed(1) : n.toFixed(2)).replace(/\.0+$/, "");
+  if (abs >= 1e12) return `${sign}Rs ${fmt(abs / 1e12)} trillion`;
+  if (abs >= 1e9) return `${sign}Rs ${fmt(abs / 1e9)} billion`;
+  if (abs >= 1e6) return `${sign}Rs ${fmt(abs / 1e6)} million`;
+  return `${sign}Rs ${abs.toLocaleString("en-US")}`;
+}
+
+/** The figure with its unit in words: "Rs 31,975 million", "293.47 index points", "12.3 per cent". */
+export function figureWords(value: string | null | undefined, unit: string | null | undefined, scale: number | null | undefined): string {
+  const v = formatDecimalString(value);
+  const u = unitLabel(unit, scale);
+  if (unit === "PKR") return u === "Rs" ? `Rs ${v}` : `Rs ${v} ${u.replace(/^Rs /, "")}`;
+  if (unit === "percent") return `${v} per cent`;
+  return u ? `${v} ${u}` : v;
+}
+
+const DATASET_UNIT_HINT: Record<string, string> = { index: "index", percent: "%", PKR: "Rs" };
+export const unitShort = (unit: string | null | undefined) => (unit ? (DATASET_UNIT_HINT[unit] ?? unit) : "");

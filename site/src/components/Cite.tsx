@@ -1,34 +1,65 @@
-// "Cite" control. A <details> element, so it works without JavaScript.
+// Citation block: two parts (the government document, which is the authority,
+// and the portal release, which says where and how the figure was read). APA
+// is shown; BibTeX and RIS are one click away. Works without JavaScript; the
+// copy buttons are an enhancement.
 import { db, type Source } from "@/lib/data";
 import { cite } from "@/lib/cite";
+import CopyButton from "@/components/ui/CopyButton";
+import { Disclosure } from "@/components/ui/Basics";
+import { IconDownload } from "@/components/ui/Icons";
 
-export default function Cite({ path, what, source, page }: { path: string; what?: string; source?: Source | null; page?: number | null }) {
+export default function Cite({
+  path,
+  what,
+  source,
+  page,
+  open,
+  heading = true,
+}: {
+  path: string;
+  what?: string;
+  source?: Source | null;
+  page?: number | null;
+  open?: boolean;
+  heading?: boolean;
+}) {
   const release = db().release;
   const c = cite({ release, path, what, source, page });
   const ris = `data:application/x-research-info-systems;charset=utf-8,${encodeURIComponent(c.ris)}`;
-  return (
-    <details className="cite">
-      <summary>Cite this</summary>
-      <div className="cite-body">
-        <p className="small">
-          {source
-            ? "Cite both parts: the government document (the authority for the figure) and this portal release (where we read it and how it was checked)."
-            : "Cite this portal release. For a specific figure, open its receipt and cite the government document as well."}{" "}
-          This is a prototype release with {release.doi ? `DOI ${release.doi}` : "no DOI"}. The access date shown is the date this page was built;
-          replace it with the date you used it.
-        </p>
-        <h3>APA</h3>
-        <pre className="code">{c.apa}</pre>
-        <h3>BibTeX</h3>
-        <pre className="code">{c.bibtex}</pre>
-        <h3>RIS</h3>
-        <pre className="code">{c.ris}</pre>
-        <p className="small">
-          <a href={ris} download="citation.ris">
-            Download RIS file
-          </a>
-        </p>
+  const body = (
+    <>
+      <p className="small measure">
+        {source
+          ? "Cite both parts: the government document, which is the authority for the figure, and this portal release, which records where it was read and how it was checked."
+          : "Cite this portal release. For a single figure, open its receipt and cite the government document as well."}{" "}
+        {release.doi ? `DOI ${release.doi}.` : "This prototype release has no DOI and is not yet for citation in publications."} The access date is the
+        date this page was built; replace it with the date you used it.
+      </p>
+      <div className="cite-apa">
+        <pre className="code" style={{ whiteSpace: "pre-wrap" }}>
+          {c.apa}
+        </pre>
       </div>
-    </details>
+      <div className="action-row" style={{ marginTop: 0 }}>
+        <CopyButton text={c.apa} label="Copy APA" />
+        <CopyButton text={c.bibtex} label="Copy BibTeX" />
+        <a className="btn" href={ris} download="citation.ris">
+          <IconDownload />
+          <span>RIS file</span>
+        </a>
+      </div>
+      <Disclosure summary="Show BibTeX and RIS">
+        <h4>BibTeX</h4>
+        <pre className="code">{c.bibtex}</pre>
+        <h4>RIS</h4>
+        <pre className="code">{c.ris}</pre>
+      </Disclosure>
+    </>
+  );
+  if (!heading) return body;
+  return (
+    <Disclosure summary="Cite this" meta="APA · BibTeX · RIS" open={open}>
+      {body}
+    </Disclosure>
   );
 }

@@ -1,0 +1,206 @@
+# PBS Labour Force Survey annual reports: headline rates, counts and industry shares.
+#
+# What is read: the summary tables in the report BODY (not the statistical appendix).
+# Almost all of them share one layout: rows are areas (Pakistan, then Rural and Urban,
+# then the provinces with their own Rural/Urban rows) and columns are two survey rounds
+# side by side (previous round on the left, the report's own round on the right), each
+# with Total / Male / Female. Only the Pakistan / Rural / Urban rows are mapped;
+# provincial rows are out of scope and stay unmapped.
+#
+# Everything a column or row means is established by code from the printed header
+# and label text. A table whose header does not give exactly the expected rounds and
+# sexes stays unmapped and nothing from it is published.
+
+dataset: lfs
+frequency: survey_round
+vintage: na
+min_table_coverage: 0.90
+
+# The round each report prints beside its own (established from the reports' own
+# headers; a header that shows any other round leaves the table unmapped).
+previous_round:
+  "2017-18": "2014-15"
+  "2018-19": "2017-18"
+  "2020-21": "2018-19"
+  "2024-25": "2020-21"
+
+# Sources that are registered but not usable for Pakistan-level series.
+skip_sources:
+  lfs-pbs-2014-15: >-
+    The registered 2014-15 file is the Azad Jammu & Kashmir edition of the Labour Force Survey
+    (its cover and table titles say so); it does not print the Pakistan figures
+
+# The 2024-25 report prints most tables twice: once on the new 19th ICLS definitions and
+# once on the 13th ICLS definitions used by every earlier round. Only the 13th ICLS
+# tables are mapped to these series; the caption or header must say "13th ICLS".
+icls:
+  required_in_rounds: ["2024-25"]
+  required_pattern: '13 ?th ?icls'
+  forbidden_pattern: '19 ?th ?icls'
+
+sexes: [total, male, female]
+areas: [total, rural, urban]
+
+# Tolerances, fixed before any result was seen and derived from printed precision.
+tolerances:
+  shares_sum_abs: "0.1"          # thresholds.yaml: lfs_shares_sum_abs
+  # Sums of counts (male + female, rural + urban, employed + unemployed): decision D9,
+  # half a unit of the last printed digit per item added.
+  # The same figure in two reports: equal within 1 unit of the last printed digit (D9).
+  # Recomputed unemployment rate, U / L x 100 with U, L printed to a half-unit of dU, dL
+  # and the rate printed to a half-unit of dR:
+  #     bound = dR + 100 x (dU / L + U x dL / L^2)
+  # When the unemployed count is not printed and U = L - E is used:
+  #     bound = dR + 100 x (dE / L + E x dL / L^2)
+  # (first-order propagation of the rounding of each printed input; computed per check).
+
+# Table kinds. `captions` are regular expressions searched in the table's printed title
+# (lower case, single spaces, dashes unified). Exactly one kind must match.
+tables:
+  - kind: unemployment_rate
+    title: Unemployment rates by area and sex
+    layout: area_by_round_sex
+    measure: unemployment_rate
+    unit: percent
+    unit_marker: '\(%\)|percent'
+    captions:
+      - '\bunemployment rates? ?- ?by area and sex'
+      - '\bunemployment rate by province, region (&|and) sex'
+  - kind: lfpr_crude
+    title: Crude activity (participation) rates
+    layout: area_by_round_sex
+    measure: lfpr_crude
+    unit: percent
+    unit_marker: '\(%\)|percent'
+    captions:
+      - '\bcrude activity \(participation\) rates? ?- ?pakistan and provinces'
+      - '\bcrude labour force participation rate ?- ?13th icls'
+  - kind: lfpr_refined
+    title: Refined activity (participation) rates
+    layout: area_by_round_sex
+    measure: lfpr_refined
+    unit: percent
+    unit_marker: '\(%\)|percent'
+    captions:
+      - '\brefined activity \(participation\) rates? ?- ?pakistan and provinces'
+      - '\brefined labour force participation rate by province ?\(13th icls\)'
+  - kind: labour_force
+    title: Civilian labour force
+    layout: area_by_round_sex
+    measure: labour_force
+    unit: persons
+    unit_marker: '\bmillions?\b'
+    scale_factor: 1000000
+    captions:
+      - '\bcivilian labour force ?- ?pakistan and provinces'
+  - kind: employed
+    title: Employed persons
+    layout: area_by_round_sex
+    measure: employed
+    unit: persons
+    unit_marker: '\bmillions?\b'
+    scale_factor: 1000000
+    captions:
+      - '\bemployed ?- ?pakistan and provinces'
+      - '\bemployed population ?- ?pakistan and provinces'
+  - kind: unemployed
+    title: Unemployed persons
+    layout: area_by_round_sex
+    measure: unemployed
+    unit: persons
+    unit_marker: '\bmillions?\b'
+    scale_factor: 1000000
+    captions:
+      - '\bunemployed ?- ?pakistan and provinces'
+  - kind: industry
+    title: Employed persons by major industry division
+    layout: industry_by_round_sex
+    measure: employment_share.industry
+    unit: percent
+    unit_marker: '\(%\)|percent'
+    exclude: 'occupational|injur|informal|subsidiary'   # other tables that also break down by industry
+    captions:
+      - '\bemployed ?- ?distribution by major industry divisions'
+      - '\bdistribution of employed persons? by major industry divisions'
+
+measures:
+  unemployment_rate:
+    name: Unemployment rate
+    unit: percent
+    sort: 100
+    definition: >-
+      Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the
+      Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21.
+    synonyms: [unemployment, jobless rate]
+  lfpr_refined:
+    name: Labour force participation rate (refined)
+    unit: percent
+    sort: 200
+    definition: >-
+      Refined activity (participation) rate: the civilian labour force as a percentage of the population
+      aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions).
+    synonyms: [participation rate, activity rate, LFPR]
+  lfpr_crude:
+    name: Labour force participation rate (crude)
+    unit: percent
+    sort: 300
+    definition: >-
+      Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population
+      of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions).
+    synonyms: [crude participation rate, crude activity rate]
+  labour_force:
+    name: Civilian labour force
+    unit: persons
+    scale_factor: 1000000
+    sort: 400
+    definition: >-
+      Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed
+      (13th ICLS definitions).
+    synonyms: [labour force, workforce]
+  employed:
+    name: Employed persons
+    unit: persons
+    scale_factor: 1000000
+    sort: 500
+    definition: Employed persons (10 years and over), in million persons as printed (13th ICLS definitions).
+    synonyms: [employment]
+  unemployed:
+    name: Unemployed persons
+    unit: persons
+    scale_factor: 1000000
+    sort: 600
+    definition: Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions).
+    synonyms: [unemployment count]
+  employment_share.industry:
+    name: Share of employed persons
+    unit: percent
+    sort: 700
+    definition: >-
+      Percentage distribution of employed persons (10 years and over) by major industry division, as printed
+      in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole.
+    synonyms: [employment by industry, sectoral employment]
+
+sex_names: {total: both sexes, male: male, female: female}
+area_names: {total: Pakistan, rural: rural areas, urban: urban areas}
+
+breaks:
+  - at_period: "2024-25"
+    kind: check_comparability
+    note: >-
+      2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established
+
+# Recorded text search that decides whether the break above is kept (never an impression).
+comparability_search:
+  source_id: lfs-pbs-2024-25
+  mentions: '(?i)comparab'
+  # The break is dropped only if a sentence states comparability with earlier rounds
+  # in so many words and no sentence in the report says "not comparable".
+  positive: '(?i)\b(is|are|remains?) (fully |directly |strictly )?comparable (with|to) (the )?(previous|earlier|preceding|past)'
+  negative: '(?i)\bnot (be )?(fully |directly |strictly )?comparable|\bcannot be compared|\bincomparab'
+
+# Headline figures every round is expected to have; a missing one is a labelled gap.
+expected_every_round:
+  rounds: ["2014-15", "2017-18", "2018-19", "2020-21", "2024-25"]
+  measures: [unemployment_rate, lfpr_refined, lfpr_crude]
+  sexes: [total, male, female]
+  areas: [total]

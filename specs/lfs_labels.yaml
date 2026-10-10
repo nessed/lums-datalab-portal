@@ -1,0 +1,41 @@
+# Hand-written label dictionaries for the Labour Force Survey tables (decision D20).
+# Patterns are matched against the WHOLE normalised label (lower case, "&" -> "and",
+# single spaces). A label that matches nothing stays unmapped and is never published.
+
+# Area tables. `block` says which block of rows a label opens:
+#   pakistan  the national block (the only one mapped)
+#   province  a provincial block (out of scope; its Rural/Urban rows stay unmapped)
+#   same      a bare Total/Rural/Urban row: belongs to the block opened last
+# `area` is the area of Pakistan the row stands for when its block is the national one.
+area_labels:
+  - {pattern: 'pakistan( total)?', block: pakistan, area: total}
+  - {pattern: 'pakistan rural', block: pakistan, area: rural}
+  - {pattern: 'pakistan urban', block: pakistan, area: urban}
+  - {pattern: 'total', block: same, area: total}
+  - {pattern: 'rural', block: same, area: rural}
+  - {pattern: 'urban', block: same, area: urban}
+  - {pattern: '(kp|kpk|k\.p\.?|khyber pakhtunkhwa|punjab|sindh|balochistan)( total| rural| urban)?', block: province}
+
+# Industry divisions as printed in the "distribution by major industry divisions" table.
+# NOTE: the composition of "Others" is stated in a footnote and differs between reports
+# (2017-18 and 2018-19 include real estate and business services; 2020-21 does not list them).
+industries:
+  - {slug: all, name: All industry divisions}
+  - {slug: agriculture, name: 'Agriculture, forestry, hunting and fishing'}
+  - {slug: manufacturing, name: Manufacturing}
+  - {slug: construction, name: Construction}
+  - {slug: wholesale_retail_trade, name: Wholesale and retail trade}
+  - {slug: transport_storage_communication, name: 'Transport, storage and communication'}
+  - {slug: community_social_personal_services, name: 'Community, social and personal services'}
+  - {slug: others, name: 'Others (see the report footnote for what is included)'}
+
+industry_labels:
+  - {pattern: 'total', series: all}
+  - {pattern: 'agriculture ?[/,] ?forestry ?[/,] ?hunting and fishing', series: agriculture}
+  - {pattern: 'agriculture ?[/,] ?forestry and fishing', series: agriculture}
+  - {pattern: 'manufacturing', series: manufacturing}
+  - {pattern: 'construction', series: construction}
+  - {pattern: 'wholesale and retail trade', series: wholesale_retail_trade}
+  - {pattern: 'transport ?[/,] ?storage and communication', series: transport_storage_communication}
+  - {pattern: 'community ?[/,] ?social and personal services', series: community_social_personal_services}
+  - {pattern: '\* ?others', series: others}

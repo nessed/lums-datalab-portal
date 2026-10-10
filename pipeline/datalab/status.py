@@ -118,7 +118,8 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
             else:
                 other_id = chk.target_cell_id
             other = cells_by_id.get(other_id or "")
-            where = source_titles.get(other.source_id, other.source_id) if other else (chk.target_source or "another printing")
+            where = (source_titles.get(other.source_id, other.source_id) if other
+                     else source_titles.get(chk.target_source or "", chk.target_source or "another printing"))
             same_doc = other is not None and other.source_id == primary.source_id
             place = "a second place in the same document" if same_doc else f"the {where}"
             if how:

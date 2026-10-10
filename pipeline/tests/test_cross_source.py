@@ -82,6 +82,7 @@ def test_sbp_disagreement_is_a_recorded_fail_with_a_note_and_no_crash(tmp_path):
     o = obs["cpi.national.yoy.general:2025-06:na"]
     assert o.tier == "B"                                  # never lifted by a source that disagrees
     assert "SBP EasyData test gives a different figure for this (25.4)" in o.notes
+    assert "Differs from the figure given by the SBP EasyData test (25.4)." in o.evidence_summary   # named, not an id
 
 
 def test_sbp_not_compared_when_the_definition_or_the_file_cannot_be_established(tmp_path):

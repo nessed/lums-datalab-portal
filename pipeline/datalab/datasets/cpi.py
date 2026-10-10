@@ -759,6 +759,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
 
     sbp_checks, cross_source_info = sbp_cpi_checks(cells, manifest, cfg, titles)
     checks += sbp_checks
+    titles.update({s.source_id: s.title for s in manifest if s.doc_type == cfg["doc_type"]})  # named on receipts
 
     observations = build_observations(cells, checks, series, order, titles, release)
     observations += gap_observations(spec, sources, located, not_located, observations, series)

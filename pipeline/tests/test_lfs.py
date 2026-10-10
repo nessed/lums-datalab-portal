@@ -46,7 +46,7 @@ def cell(source, row, col, value, series, period, page=1):
     ("table-23 unemployed - pakistan and provinces (million)", "2017-18", "unemployed"),
     ("table-12 employed - pakistan and provinces (million)", "2017-18", "employed"),
     ("table-8 crude activity (participation) rates - pakistan and provinces (%)", "2018-19", "lfpr_crude"),
-    ("table 3.8 refined activity (participation) rates - pakistan and provinces", "2020-21", "lfpr_refined"),
+    ("table 3.8 refined activity (participation) rates - pakistan and provinces (%)", "2020-21", "lfpr_refined"),
     ("table 4.2 employed - distribution by major industry divisions (%)", "2020-21", "industry"),
     ("table 3.9 civilian labour force - pakistan and provinces (13th icls) labour force (millions)", "2024-25", "labour_force"),
     ("table 9.3 unemployment rate by province, region & sex (%) unemployment rate (13th icls)", "2024-25", "unemployment_rate"),
@@ -60,7 +60,7 @@ def test_title_names_one_kind(caption, round_, kind):
     ("", "2017-18", "no_title"),
     ("table-18 informal sector workers - distribution by major industry divisions", "2017-18", "not_a_target"),
     ("table-26 occupational injuries/diseases -distribution of employed persons by major industry divisions (%)", "2017-18", "not_a_target"),
-    ("table 3.8 civilian labour force - pakistan and provinces (19th icls)", "2024-25", "other_definition"),
+    ("table 3.8 civilian labour force - pakistan and provinces (19th icls) labour force (million)", "2024-25", "other_definition"),
     ("table 9.2 unemployment rate by province, region & sex (%)", "2024-25", "definition_not_stated"),
 ])
 def test_title_rejected(caption, round_, result):

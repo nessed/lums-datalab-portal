@@ -19,7 +19,7 @@ from __future__ import annotations
 import re
 import statistics
 from collections import defaultdict
-from decimal import Decimal
+from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal
 from typing import Any
 
 from .. import config
@@ -53,11 +53,22 @@ def validated_runs(source_id: str) -> list[RunManifest]:
     return sorted(out, key=lambda m: m.started_at, reverse=True)
 
 
-def usable_pages(run: RunManifest, page_count: int) -> set[int]:
-    """Pages a run may supply. A page-range run never supplies its first or last page (D18)."""
-    if run.run_mode == "page-range" and run.page_range:
+def usable_pages(run: RunManifest, page_count: int | None) -> set[int]:
+    """Pages a run may supply. A page-range run never supplies its first or last page (D18).
+
+    Refuses, loudly, the two cases where the pages are not known: a page-range run whose manifest
+    records no range (it would otherwise pass for a full-document run and supply its boundary
+    pages), and a full-document run of a source whose registry page count is empty (it would
+    otherwise supply no page at all and every table would be reported as "not located").
+    """
+    if run.run_mode == "page-range":
+        if not run.page_range or len(run.page_range) != 2:
+            raise ValueError(f"run {run.run_id} is a page-range run but its manifest records no page range")
         return set(range(int(run.page_range[0]) + 1, int(run.page_range[1])))
-    return set(range(1, page_count + 1))
+    if not page_count:
+        raise ValueError(f"run {run.run_id} is a full-document run but the registry holds no page count for "
+                         f"{run.source_id}; the pages it supplies are not known")
+    return set(range(1, int(page_count) + 1))
 
 
 def tables_for_source(source) -> tuple[list[tuple[RunManifest, Table]], list[dict[str, Any]]]:
@@ -66,7 +77,7 @@ def tables_for_source(source) -> tuple[list[tuple[RunManifest, Table]], list[dic
     out: list[tuple[RunManifest, Table]] = []
     runs_info: list[dict[str, Any]] = []
     for run in validated_runs(source.source_id):
-        pages = usable_pages(run, source.page_count or 0) - claimed
+        pages = usable_pages(run, source.page_count) - claimed
         tables = [t for t in load_tables(run_output_json(run.run_id)) if t.page in pages]
         out.extend((run, t) for t in tables)
         claimed |= pages
@@ -123,10 +134,16 @@ def caption_and_header(table: Table, value_cols: list[int], words: list[Word], z
 
 
 def classify(caption: str, source_round: str, spec: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
-    """Which kind of table a printed title names. Exactly one kind must match."""
+    """Which kind of table a printed title names. Exactly one kind must match.
+
+    A pattern is matched from the START of the title, straight after the table number
+    (`title_start` in the spec), so a title with a qualifier in front ("Youth unemployment
+    rate ...", "Self employed ...") is not the headline table.
+    """
     if not caption:
         return None, "no_title"
-    hits = [k for k in spec["tables"] if any(re.search(p, caption) for p in k["captions"])
+    start = spec["title_start"]
+    hits = [k for k in spec["tables"] if any(re.match(f"{start}(?:{p})", caption) for p in k["captions"])
             and not (k.get("exclude") and re.search(k["exclude"], caption))]
     if not hits:
         return None, "not_a_target"
@@ -135,8 +152,13 @@ def classify(caption: str, source_round: str, spec: dict[str, Any]) -> tuple[dic
     icls = spec.get("icls") or {}
     if re.search(icls.get("forbidden_pattern", r"$^"), caption):
         return None, "other_definition"
-    if source_round in icls.get("required_in_rounds", []) and not re.search(icls["required_pattern"], caption):
-        return None, "definition_not_stated"
+    if source_round in icls.get("required_in_rounds", []):
+        if not re.search(icls["required_pattern"], caption):
+            return None, "definition_not_stated"
+    elif source_round not in icls.get("rounds_13th_icls_throughout", []):
+        # Every series here is on the 13th ICLS definitions. A round that the spec lists neither as
+        # printing them throughout nor as having to state them is refused, never assumed.
+        return None, "definition_unknown_for_round"
     return hits[0], "found"
 
 
@@ -240,14 +262,23 @@ class AreaRows:
     def __init__(self, labels_spec: dict[str, Any]):
         self.entries = [(re.compile(e["pattern"], re.I), e["block"], e.get("area")) for e in labels_spec["area_labels"]]
         self.block: str | None = None
+        self.pending_area: str | None = None
 
-    def lookup(self, raw_label: str) -> tuple[str | None, str]:
+    def lookup(self, raw_label: str, heading: bool = False) -> tuple[str | None, str]:
+        """`heading`: the row prints a label and no amount."""
         label = normalise_label(raw_label)
         hits = {(block, area) for pattern, block, area in self.entries if pattern.fullmatch(label)}
         if len(hits) != 1:
             self.block = None  # an unknown row breaks the block: later bare rows cannot be attributed
             return None, "ambiguous" if hits else "unmapped"
         block, area = hits.pop()
+        if heading and block == "same" and self.block is None and area in ("rural", "urban"):
+            # A "Rural"/"Urban" heading with no block open: the rows below it are grouped by area
+            # first ("Rural", then Pakistan and the provinces). A "Pakistan" row under it is that
+            # area of Pakistan, not the national total.
+            self.pending_area = area
+        if self.pending_area is not None:
+            return None, "under_area_heading"   # this layout is not modelled: nothing below the heading is mapped
         if block != "same":
             self.block = block
         if self.block != "pakistan" or area is None:
@@ -289,11 +320,36 @@ def build_cells(source, run: RunManifest, table: Table, kind: dict[str, Any], ca
     cells: list[Cell] = []
     unmapped: list[str] = []
     out_of_scope = 0
+
+    def own_value_cells(r: int) -> list[Any]:
+        return [grid[r][k] for k in value_cols if grid[r][k] is not None and grid[r][k].row == r and grid[r][k].col == k]
+
+    # Docling sometimes marks the first data row as a column header (AGENTS.md section 7). A row
+    # flagged that way is data only when every value column holds exactly one number in it; a
+    # flagged row that holds some numbers but not one per column is left out AND the table says so.
+    header_rows_as_data: set[int] = set()
     for r in range(table.num_rows):
-        row_cells = [grid[r][k] for k in value_cols if grid[r][k] is not None and grid[r][k].row == r and grid[r][k].col == k]
-        if row_cells and all(c.column_header for c in row_cells):
+        row_cells = own_value_cells(r)
+        if not row_cells or not all(c.column_header for c in row_cells):
             continue
-        label = row_label(table, grid, r, value_cols)
+        numbers = [c for c in row_cells if parse_printed(c.text).value is not None]
+        if len(numbers) == len(row_cells) == len(value_cols):
+            header_rows_as_data.add(r)
+        elif numbers and "header_row_with_numbers" not in flags:
+            flags.append("header_row_with_numbers")
+    for r in range(table.num_rows):
+        row_cells = own_value_cells(r)
+        row_flags = flags
+        if r in header_rows_as_data:
+            # Its label: the row's own non-value cells (row_label leaves out header-flagged cells).
+            own = [grid[r][k] for k in range(table.num_cols) if k not in value_cols and grid[r][k] is not None
+                   and grid[r][k].row == r and grid[r][k].col == k]
+            label = clean_text(" ".join(c.text.strip() for c in own if c.text.strip()))
+            row_flags = [*flags, "header_row_as_data"]
+        elif row_cells and all(c.column_header for c in row_cells):
+            continue
+        else:
+            label = row_label(table, grid, r, value_cols)
         first = grid[r][0]
         if not label and first is not None and first.row == r and first.col_span >= table.num_cols:
             # A block heading printed across the full width ("Pakistan"); Docling sometimes marks it as a header.
@@ -302,7 +358,7 @@ def build_cells(source, run: RunManifest, table: Table, kind: dict[str, Any], ca
                    for c in row_cells):
             # A row with a label but no amounts (for example a "Pakistan" heading row) still opens a block.
             if label and kind["layout"] != "industry_by_round_sex":
-                area_rows.lookup(label)
+                area_rows.lookup(label, heading=True)
             continue
         if kind["layout"] == "industry_by_round_sex":
             key, how = industries.lookup(label)
@@ -310,6 +366,8 @@ def build_cells(source, run: RunManifest, table: Table, kind: dict[str, Any], ca
             key, how = area_rows.lookup(label)
         if key is None and how == "out_of_scope":
             out_of_scope += 1
+        elif key is None and how == "under_area_heading":
+            unmapped.append(f"{label} (under a Rural/Urban heading; not the national block)")
         elif key is None:
             unmapped.append(label or "(row with no label)")
         for tc in row_cells:
@@ -318,7 +376,7 @@ def build_cells(source, run: RunManifest, table: Table, kind: dict[str, Any], ca
             period, sex = col_map.get(tc.col, (None, None))
             header = f"{period} {sex}" if period else ""
             cell = make_cell(source=source, run=run, table=table, tcell=tc, row_label_raw=label, col_label_raw=header,
-                             table_flags=flags)
+                             table_flags=row_flags)
             cell.unit = kind["unit"]
             cell.scale_factor = int(kind.get("scale_factor", 1)) if unit_ok else None
             if key and period and unit_ok:
@@ -344,6 +402,7 @@ def build_cells(source, run: RunManifest, table: Table, kind: dict[str, Any], ca
         "columns": {str(k): {"period": v[0], "sex": v[1]} for k, v in col_map.items()},
         "column_problems": col_problems, "unit_confirmed": bool(unit_ok), "caption": caption[:160],
         "unmapped_labels": unmapped, "rows_out_of_scope": out_of_scope,
+        "header_rows_as_data": sorted(header_rows_as_data),
         "mapped_cells": sum(1 for c in cells if c.series_id), "coverage": coverage,
     }
     return cells, info
@@ -473,12 +532,29 @@ def count_sum_checks(cells: list[Cell], spec: dict[str, Any], titles: dict[str, 
     return out
 
 
+COARSE_COUNTS_REASON = "the printed counts are too coarse to confirm this rate"
+
+
+def printable_values_within(centre: Decimal, bound: Decimal, unit: Decimal) -> int:
+    """How many multiples of `unit` (values printable at that precision) lie within `bound` of `centre`."""
+    lowest = ((centre - bound) / unit).to_integral_value(rounding=ROUND_CEILING)
+    highest = ((centre + bound) / unit).to_integral_value(rounding=ROUND_FLOOR)
+    return max(0, int(highest - lowest) + 1)
+
+
 def recompute_unemployment_rate(rate: Cell, labour_force: Cell, unemployed: Cell | None, employed: Cell | None,
                                 where: str, what: str, blocked_reason: str | None = None) -> Check | None:
     """Printed unemployment rate vs unemployed / labour force x 100 from printed counts of the same report.
 
     Bound (specs/lfs.yaml): half a unit of the rate's last digit, plus the first-order effect of
     each count being rounded to half a unit of its own last digit.
+
+    The bound grows with 1 / labour force. A result inside it is evidence for the printed rate
+    only when the bound singles that rate out: exactly one value printable at the rate's precision
+    lies within the bound of the recomputed value. Otherwise the counts would equally "confirm" a
+    different printed rate and the check is `not_evaluable`. A printed rate OUTSIDE the bound still
+    fails: coarse counts cannot excuse that. A pass is evidence for the rate only, never for the
+    counts it was computed from (`credits_members=False`): they are barely constrained by it.
     """
     other = unemployed if unemployed is not None else employed
     if other is None:
@@ -487,7 +563,7 @@ def recompute_unemployment_rate(rate: Cell, labour_force: Cell, unemployed: Cell
     rule = "lfs.unemployment_rate_from_counts" if unemployed is not None else "lfs.unemployment_rate_from_employed"
     if any(c.value_parsed is None for c in (rate, *members)) or Decimal(labour_force.value_parsed or "0") <= 0:
         return value_check(check_type="recompute", dataset=DATASET, rule_id=rule, target=rate, members=members,
-                           computed=None, tolerance=Decimal(0), description_ok="", what=what,
+                           computed=None, tolerance=Decimal(0), description_ok="", what=what, credits_members=False,
                            blocked_reason=blocked_reason or "an input could not be parsed")
     lf, x = Decimal(labour_force.value_parsed), Decimal(other.value_parsed)
     half = Decimal("0.5")
@@ -502,8 +578,14 @@ def recompute_unemployment_rate(rate: Cell, labour_force: Cell, unemployed: Cell
         computed = (lf - x) / lf * 100
         how = f"(labour force {fmt(lf)} - employed {fmt(x)}) / labour force {fmt(lf)} x 100"
     computed = computed.quantize(Decimal("0.0001"))
+    unit = last_digit_unit(rate.value_parsed)
+    candidates = printable_values_within(computed, tolerance, unit)
+    if blocked_reason is None and abs(computed - Decimal(rate.value_parsed)) <= tolerance and candidates != 1:
+        blocked_reason = (f"{COARSE_COUNTS_REASON} ({candidates} rates printable to {fmt(unit)} lie within the rounding "
+                          f"bound {tolerance} of the recomputed {fmt(computed)})")
     return value_check(check_type="recompute", dataset=DATASET, rule_id=rule, target=rate, members=members,
                        computed=computed, tolerance=tolerance, what=what, blocked_reason=blocked_reason,
+                       credits_members=False,
                        description_ok=f"{what} in {where}, recomputed from the printed counts in million as {how}.")
 
 
@@ -540,20 +622,33 @@ def shares_checks(cells: list[Cell], spec: dict[str, Any], labels_spec: dict[str
     for (source_id, period), by in sorted(_index(cells).items()):
         for sex in spec["sexes"]:
             target = by.get(industry_series_id("all", sex))
+            if target is None or target.is_missing:
+                continue
+            absent = [s for s in slugs if industry_series_id(s, sex) not in by]
             members = [by[industry_series_id(s, sex)] for s in slugs if industry_series_id(s, sex) in by]
             members = [m for m in members if not m.is_missing]
-            if target is None or target.is_missing or not members:
+            if not members and not absent:
                 continue
+            # An industry with no mapped cell is not "nil": the sum cannot be tested without it.
+            reason = _blocked([target, *members], blocked)
+            if absent:
+                reason = reason or f"the table does not carry a mapped row for: {', '.join(absent)}"
             out.append(sum_check(
                 check_type="weights_sum", dataset=DATASET, rule_id="lfs.industry_shares_add_to_total", target=target,
                 members=[(m, 1) for m in members], what_members=f"the industry shares ({spec['sex_names'][sex]})",
                 what_target="Total", column_label=_where(period, source_id, titles),
-                blocked_reason=_blocked([target, *members], blocked), abs_tolerance=tolerance))
+                blocked_reason=reason, abs_tolerance=tolerance))
     return out
 
 
-def cross_checks(cells: list[Cell], titles: dict[str, str], order: dict[str, str], series: dict[str, Series]) -> list[Check]:
-    """The same round's figure printed again: in the next report (cross_edition) or twice in one report (cross_table)."""
+def cross_checks(cells: list[Cell], titles: dict[str, str], order: dict[str, str], series: dict[str, Series],
+                 blocked: dict[tuple[str, int, int], str] | None = None) -> list[Check]:
+    """The same round's figure printed again: in the next report (cross_edition) or twice in one report (cross_table).
+
+    Two registered files of the same round are the same edition (a re-issue, a mirror): they agree
+    by construction, so no check is recorded between them. A pair with either cell in a blocked
+    table is `not_evaluable`, like every other check.
+    """
     groups: dict[tuple[str, str], list[Cell]] = defaultdict(list)
     for c in cells:
         if c.series_id and c.period and not c.is_missing:
@@ -567,7 +662,10 @@ def cross_checks(cells: list[Cell], titles: dict[str, str], order: dict[str, str
         what = f"{series[sid].name if sid in series else sid}, {period}"
         for other in group[1:]:
             same = other.source_id == first.source_id
+            if not same and order.get(other.source_id) is not None and order.get(other.source_id) == order.get(first.source_id):
+                continue        # two files of one edition are not a second printing
             out.append(equality_check(
+                blocked_reason=_blocked([first, other], blocked or {}),
                 check_type="cross_table" if same else "cross_edition", dataset=DATASET,
                 rule_id="lfs.restated_in_same_report" if same else "lfs.same_figure_in_next_report",
                 first=first, second=other, what=what,
@@ -662,6 +760,12 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     blocked: dict[tuple[str, int, int], str] = {}
     gap_reasons: dict[str, str] = {}
     kinds = [k["kind"] for k in spec["tables"]]
+    by_round: dict[str, list[str]] = defaultdict(list)
+    for source in sources:
+        if source.source_id not in (spec.get("skip_sources") or {}):
+            by_round[source.period].append(source.source_id)
+    # The same round registered twice is one edition in two files: reported, never cross-edition evidence.
+    rounds_registered_twice = {period: ids for period, ids in sorted(by_round.items()) if len(ids) > 1}
     for source in sources:
         if source.source_id in (spec.get("skip_sources") or {}):
             not_located[source.source_id] = clean_text(spec["skip_sources"][source.source_id])
@@ -696,7 +800,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     checks = count_sum_checks(cells, spec, titles, blocked)
     checks += recompute_checks(cells, spec, titles, blocked)
     checks += shares_checks(cells, spec, labels_spec, titles, blocked)
-    checks += cross_checks(cells, titles, order, series)
+    checks += cross_checks(cells, titles, order, series, blocked)
     # Economic Survey labour chapter: cross-source evidence only; its cells carry no series id.
     from .cross_source import pes_labour_checks
 
@@ -722,6 +826,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
         tiers[o.tier or "none"] += 1
     info = {
         "dataset": DATASET, "built_at": config.now_iso(), "located": located, "not_located": not_located,
+        "rounds_registered_twice": rounds_registered_twice,
         "coverage_overall": {"printed_numeric_tokens": printed, "matched": matched,
                              "coverage": round(matched / printed, 4) if printed else None,
                              "tables": len(coverage),

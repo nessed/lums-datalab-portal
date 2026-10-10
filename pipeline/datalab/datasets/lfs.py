@@ -294,6 +294,10 @@ def build_cells(source, run: RunManifest, table: Table, kind: dict[str, Any], ca
         if row_cells and all(c.column_header for c in row_cells):
             continue
         label = row_label(table, grid, r, value_cols)
+        first = grid[r][0]
+        if not label and first is not None and first.row == r and first.col_span >= table.num_cols:
+            # A block heading printed across the full width ("Pakistan"); Docling sometimes marks it as a header.
+            label = clean_text(first.text)
         if not any(parse_printed(c.text).value is not None or parse_printed(c.text).is_missing and c.text.strip()
                    for c in row_cells):
             # A row with a label but no amounts (for example a "Pakistan" heading row) still opens a block.

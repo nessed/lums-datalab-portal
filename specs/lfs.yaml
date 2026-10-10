@@ -35,8 +35,8 @@ skip_sources:
 # tables are mapped to these series; the caption or header must say "13th ICLS".
 icls:
   required_in_rounds: ["2024-25"]
-  required_pattern: '13th ?icls'
-  forbidden_pattern: '19th ?icls'
+  required_pattern: '13 ?th ?icls'
+  forbidden_pattern: '19 ?th ?icls'
 
 sexes: [total, male, female]
 areas: [total, rural, urban]

@@ -1,0 +1,74 @@
+{
+  "source_id": "sbp-easydata-cpi-national-yoy",
+  "registered_at": "2026-10-10T22:43:47+00:00",
+  "file_url": "https://easydata.sbp.org.pk/apex/wwv_flow.accept",
+  "landing_url": "https://easydata.sbp.org.pk",
+  "retrieved_at": "2026-10-10T20:25:49Z",
+  "retrieved_via": "official",
+  "sha256": "6afbf22e8c88170b47d02da4ff019ba0be73feda450595ace18cf709324ab447",
+  "size_bytes": 16278,
+  "response": {
+    "headers": {
+      "Last-Modified": null,
+      "Content-Length": "16278",
+      "Content-Type": "application/excel; charset=utf-8",
+      "ETag": null
+    },
+    "http_status": 200
+  },
+  "attempts": [
+    {
+      "note": "collected by the first run's sources track; full request log in work/track_a/attempts.jsonl (not in git)"
+    }
+  ],
+  "local_path": "sbp_easydata/2026-10-10/data_series.csv",
+  "request": {
+    "method": "POST",
+    "url": "https://easydata.sbp.org.pk/apex/wwv_flow.accept",
+    "p_request": "DOWNLOAD",
+    "form_page_url": "https://easydata.sbp.org.pk/apex/f?p=10:222:3993964339093::NO::P222_DATASET_TYPE_CODE,P222_SERIES_KEY,P222_SERIES_MIN_DATE,P222_SERIES_MAX_DATE,P222_PAGE_ID:TS_GP_PT_CPI_M,TS_GP_PT_CPI_M.P00011516,31-Jul-2016,30-Sep-2026,120&cs=1064C623D4B7504386B9342D1E6296AC9",
+    "series_page_url": "https://easydata.sbp.org.pk/apex/f?p=10:120:3993964339093::NO:RP:P120_SERIES_KEY,P120_ACTION,P120_PAGE_ID:TS_GP_PT_CPI_M.P00011516,New,100&cs=19B1F6AB22546BD04D5FCE70779BA769A",
+    "items": {
+      "P222_DATASET_TYPE_CODE": "TS_GP_PT_CPI_M",
+      "P222_DATASET_NAME": "Inflation Snapshot (New Base: 2015-16)",
+      "P222_SERIES_KEY": "TS_GP_PT_CPI_M.P00011516",
+      "P222_SERIES_NAME": "National CPI, an Inflation Measure (Year-on-Year basis)",
+      "P222_FROM_DATE": "31-JUL-2016",
+      "P222_TO_DATE": "30-SEP-2026"
+    },
+    "recorded_in": "data_series.csv.request.json, written beside the file by the download step"
+  },
+  "terms_note": "The EasyData pages carry \"Copyright (c) 2026, All Rights Reserved. State Bank of Pakistan\" and link a Disclaimer page; no open-data licence is stated on the pages that were saved. The file is used only to compare with PBS figures (the SBP figure appears in a check record, not as a published series). A human must read the Disclaimer and confirm that this use, and showing the SBP figure on a receipt, is allowed.",
+  "credentials_note": "Downloaded without an account from the public series page. The documented API needs an API key (HTTP 401 without one). If the project wants a repeatable API pull, a human must register for a key and put it in .env; nothing was done to get around that.",
+  "reproducible_by_url": false,
+  "inspection": {
+    "columns": [
+      "Dataset",
+      "Series Key",
+      "Series",
+      "Observation Date",
+      "Observation Value",
+      "Unit",
+      "Observation Status",
+      "Observation Status Comment"
+    ],
+    "rows": 123,
+    "problems": [],
+    "descriptive_values": {
+      "Dataset": [
+        "Inflation Snapshot (New Base: 2015-16)"
+      ],
+      "Series Key": [
+        "TS_GP_PT_CPI_M.P00011516"
+      ],
+      "Series": [
+        "CPI National -YoY"
+      ],
+      "Unit": [
+        "Percent"
+      ]
+    },
+    "markers_ok": true
+  },
+  "verification_status": "official_only"
+}

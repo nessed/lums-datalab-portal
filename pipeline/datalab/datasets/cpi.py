@@ -755,14 +755,10 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
 
     checks = run_checks(cells, meta, spec, titles, order, series, blocked)
     cfg = spec["checks"]["cross_source_sbp"]
-    sbp_sources = [s for s in manifest if s.doc_type == cfg["doc_type"] and s.verification_status != "failed"]
-    if sbp_sources:
-        sbp_src = sorted(sbp_sources, key=lambda s: s.period)[-1]
-        sbp_checks = cross_source_checks(cells, read_sbp_yoy(source_path(sbp_src), cfg), sbp_src.source_id, cfg, titles)
-        checks += sbp_checks
-        cross_source_info: dict[str, Any] = {"status": "compared", "source_id": sbp_src.source_id, "checks": len(sbp_checks)}
-    else:
-        cross_source_info = {"status": "skipped", "reason": "no sbp_easydata source is registered in sources/manifest.csv"}
+    from .cross_source import sbp_cpi_checks  # definition gate + provenance of the SBP rows
+
+    sbp_checks, cross_source_info = sbp_cpi_checks(cells, manifest, cfg, titles)
+    checks += sbp_checks
 
     observations = build_observations(cells, checks, series, order, titles, release)
     observations += gap_observations(spec, sources, located, not_located, observations, series)

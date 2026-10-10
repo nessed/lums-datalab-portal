@@ -149,9 +149,17 @@ def disagreement_note(primary: Cell, checks_by_cell: dict[str, list[Check]], cel
     for chk in checks_by_cell.get(primary.cell_id, []):
         if not chk.official or chk.result != "fail" or chk.check_type not in AGREEMENT_CHECKS:
             continue
-        other_id = chk.member_cell_ids[0] if chk.target_cell_id == primary.cell_id else chk.target_cell_id
+        if chk.target_cell_id == primary.cell_id:
+            other_id = chk.member_cell_ids[0] if chk.member_cell_ids else None
+        else:
+            other_id = chk.target_cell_id
         other = cells_by_id.get(other_id or "")
         if other is None:
+            # A cross-source check against a data file has no second cell, only `target_source`.
+            if chk.target_source and chk.target_value is not None:
+                notes.append(f"{source_titles.get(chk.target_source, chk.target_source)} gives a different figure for this "
+                             f"({fmt(chk.target_value)}). The value shown is the one printed in the "
+                             f"{source_titles.get(primary.source_id, primary.source_id)}.")
             continue
         other_ok = any(c.official and c.result in PASSING and c.check_type in ARITHMETIC_CHECKS
                        for c in checks_by_cell.get(other.cell_id, []))

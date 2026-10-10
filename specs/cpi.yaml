@@ -107,6 +107,10 @@ checks:
     doc_type: sbp_easydata
     series_key: "TS_GP_PT_CPI_M.P00011516"
     series_name_pattern: '(?i)cpi national\s*-?\s*yoy'
+    # The file's own descriptive columns must establish the base year and the unit in every row of
+    # the series; otherwise nothing is compared (datasets/cross_source.py).
+    dataset_pattern: 'New Base: 2015-16'
+    unit_pattern: '(?i)^percent$'
     applies_to_series: cpi.national.yoy.general
     first_period: "2019-08"   # the SBP series is on the 2015-16 base; never compared with old-base issues
     rule: "|PBS YoY - SBP YoY| <= 0.5 u_SBP + 0.5 u_PBS"

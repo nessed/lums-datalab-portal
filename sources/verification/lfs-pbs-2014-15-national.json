@@ -1,0 +1,105 @@
+{
+  "source_id": "lfs-pbs-2014-15-national",
+  "registered_at": "2026-10-10T22:40:51+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+  "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+  "retrieved_at": "2026-10-10T22:40:56+00:00",
+  "retrieved_via": "official",
+  "sha256": "0d7e7e145f8f8dd12e5840387e8806713315b98c6a2af623bdaa0b5ea6df7251",
+  "size_bytes": 1111773,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+    "headers": {
+      "Last-Modified": "Mon, 01 Apr 2024 08:44:23 GMT",
+      "Content-Length": "1111773",
+      "Content-Type": "application/pdf",
+      "ETag": "\"660a73e7-10f6dd\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+      "time": "2026-10-10T22:40:51+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+      "time": "2026-10-10T22:40:58+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+      "time": "2026-10-10T22:41:02+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "lfs_annual_report/2014-15/Annual_Report_of_LFS_2014-15-1.pdf",
+  "inspection": {
+    "page_count": 55,
+    "pdf_metadata": {
+      "Title": "Draft Report",
+      "Producer": "Microsoft® Word 2013",
+      "Creator": "Microsoft® Word 2013",
+      "CreationDate": "D:20160112124351+05'00'"
+    },
+    "pages_with_text_layer": 54,
+    "blank_pages": [
+      51
+    ],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 0.9978,
+    "markers": {
+      "all": {
+        "labour force survey": true,
+        "government of pakistan": true
+      },
+      "any": {},
+      "period": {
+        "2014-15": true,
+        "2014-2015": false,
+        "2014 - 15": false,
+        "2014–15": false,
+        "2014—15": false,
+        "2014 – 15": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "body_markers": {
+    "all": {
+      "pakistan and provinces": [
+        5,
+        6,
+        7,
+        25,
+        30,
+        32,
+        34,
+        35,
+        46
+      ]
+    },
+    "none": {
+      "azad jammu": []
+    }
+  },
+  "verification_status": "official_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260314052958/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+    "wayback_timestamp": "20260314052958",
+    "snapshots_seen": 3,
+    "snapshot_digest": "Q3WARSH4HVHROVR7BFIAOLKPIKW6TRRY",
+    "digest_matches_file": true
+  }
+}

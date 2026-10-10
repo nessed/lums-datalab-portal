@@ -3610,5 +3610,3317 @@
     "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
     "structural_flags": [],
     "second_reader": null
+  },
+  {
+    "cell_id": "c_89f93ffc0492",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.55297,
+      0.27005,
+      0.63037,
+      0.28114
+    ],
+    "row_index": 2,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "17,203,391",
+    "value_parsed": "17203391",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_64c01f971190",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.65564,
+      0.27005,
+      0.73304,
+      0.28114
+    ],
+    "row_index": 2,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "16,390,174",
+    "value_parsed": "16390174",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_872c502c1fab",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.75976,
+      0.27005,
+      0.83716,
+      0.28114
+    ],
+    "row_index": 2,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "16,286,045",
+    "value_parsed": "16286045",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e6c19139de93",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.55298,
+      0.29244,
+      0.63038,
+      0.30318
+    ],
+    "row_index": 3,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "13,640,239",
+    "value_parsed": "13640239",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_26e2471f5f90",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.65565,
+      0.29244,
+      0.73305,
+      0.30318
+    ],
+    "row_index": 3,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "12,719,051",
+    "value_parsed": "12719051",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_919605435576",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.75975,
+      0.29244,
+      0.83715,
+      0.30318
+    ],
+    "row_index": 3,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "12,210,851",
+    "value_parsed": "12210851",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_94eb4fd64aa1",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.56158,
+      0.30904,
+      0.63038,
+      0.31978
+    ],
+    "row_index": 4,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "2,128,781",
+    "value_parsed": "2128781",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f075938a1383",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.66425,
+      0.30904,
+      0.73305,
+      0.31978
+    ],
+    "row_index": 4,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "2,189,913",
+    "value_parsed": "2189913",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_5071d0e60550",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.76835,
+      0.30904,
+      0.83715,
+      0.31978
+    ],
+    "row_index": 4,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "2,557,950",
+    "value_parsed": "2557950",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fe1597788b5d",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.57449,
+      0.32564,
+      0.63038,
+      0.33638
+    ],
+    "row_index": 5,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "283,051",
+    "value_parsed": "283051",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_351b19b6c083",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67716,
+      0.32564,
+      0.73305,
+      0.33638
+    ],
+    "row_index": 5,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "307,683",
+    "value_parsed": "307683",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_d4dad4f913e8",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78126,
+      0.32564,
+      0.83715,
+      0.33638
+    ],
+    "row_index": 5,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "351,679",
+    "value_parsed": "351679",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_259b4b0de780",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.57449,
+      0.34224,
+      0.63038,
+      0.35298
+    ],
+    "row_index": 6,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "357,735",
+    "value_parsed": "357735",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c6d92f4cda93",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67716,
+      0.34224,
+      0.73305,
+      0.35298
+    ],
+    "row_index": 6,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "364,866",
+    "value_parsed": "364866",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_dc119f400d19",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78126,
+      0.34224,
+      0.83715,
+      0.35298
+    ],
+    "row_index": 6,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "242,144",
+    "value_parsed": "242144",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_91884ac20906",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.59171,
+      0.35884,
+      0.63038,
+      0.36958
+    ],
+    "row_index": 7,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "7,252",
+    "value_parsed": "7252",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bfe357775aa3",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.35884,
+      0.73305,
+      0.36958
+    ],
+    "row_index": 7,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "7,257",
+    "value_parsed": "7257",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b94348eafdd9",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.79848,
+      0.35884,
+      0.83715,
+      0.36958
+    ],
+    "row_index": 7,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "3,168",
+    "value_parsed": "3168",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_39d406348861",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.58311,
+      0.38123,
+      0.63038,
+      0.39196
+    ],
+    "row_index": 8,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "27,917",
+    "value_parsed": "27917",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2beb19eaadf5",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.38123,
+      0.73305,
+      0.39196
+    ],
+    "row_index": 8,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "8,590",
+    "value_parsed": "8590",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_754d391626d1",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78989,
+      0.38123,
+      0.83717,
+      0.39196
+    ],
+    "row_index": 8,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "19,249",
+    "value_parsed": "19249",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2db6acc9dca6",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.5831,
+      0.40362,
+      0.63038,
+      0.41435
+    ],
+    "row_index": 9,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "28,171",
+    "value_parsed": "28171",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_284681c1373d",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.68577,
+      0.40362,
+      0.73305,
+      0.41435
+    ],
+    "row_index": 9,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "52,130",
+    "value_parsed": "52130",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c9425296c01f",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78987,
+      0.40362,
+      0.83715,
+      0.41435
+    ],
+    "row_index": 9,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "31,975",
+    "value_parsed": "31975",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_309f182b79bf",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.5831,
+      0.42022,
+      0.63038,
+      0.43095
+    ],
+    "row_index": 10,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "18,466",
+    "value_parsed": "18466",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e5d2be18c354",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.68577,
+      0.42022,
+      0.73305,
+      0.43095
+    ],
+    "row_index": 10,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "21,387",
+    "value_parsed": "21387",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_6d282ef867ac",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78987,
+      0.42022,
+      0.83715,
+      0.43095
+    ],
+    "row_index": 10,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "22,158",
+    "value_parsed": "22158",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_afbd8d69036b",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.57449,
+      0.43682,
+      0.63038,
+      0.44755
+    ],
+    "row_index": 11,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "103,781",
+    "value_parsed": "103781",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3de901655cc2",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67716,
+      0.43682,
+      0.73305,
+      0.44755
+    ],
+    "row_index": 11,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "111,080",
+    "value_parsed": "111080",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e232b6b3f7a9",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78126,
+      0.43682,
+      0.83715,
+      0.44755
+    ],
+    "row_index": 11,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "112,683",
+    "value_parsed": "112683",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7fc4c5f4d850",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.57449,
+      0.45342,
+      0.63038,
+      0.46415
+    ],
+    "row_index": 12,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "607,997",
+    "value_parsed": "607997",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f34cfc82b789",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67716,
+      0.45342,
+      0.73305,
+      0.46415
+    ],
+    "row_index": 12,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "608,216",
+    "value_parsed": "608216",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3f0db159fe19",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78126,
+      0.45342,
+      0.83715,
+      0.46415
+    ],
+    "row_index": 12,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "734,187",
+    "value_parsed": "734187",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fa3c1fd1d593",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.56158,
+      0.47656,
+      0.63037,
+      0.48765
+    ],
+    "row_index": 13,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "5,168,439",
+    "value_parsed": "5168439",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_91c45c38064a",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.66425,
+      0.47656,
+      0.73304,
+      0.48765
+    ],
+    "row_index": 13,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "3,398,098",
+    "value_parsed": "3398098",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2c955d5b0481",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.76835,
+      0.47656,
+      0.83714,
+      0.48765
+    ],
+    "row_index": 13,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "5,787,114",
+    "value_parsed": "5787114",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_21a27177f31c",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.56158,
+      0.49971,
+      0.63037,
+      0.51045
+    ],
+    "row_index": 14,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Foreign Loans Repayment",
+    "row_label_path": [
+      "011 Foreign Loans Repayment"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "4,989,963",
+    "value_parsed": "4989963",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_01e0322df206",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.66425,
+      0.49971,
+      0.73304,
+      0.51045
+    ],
+    "row_index": 14,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Foreign Loans Repayment",
+    "row_label_path": [
+      "011 Foreign Loans Repayment"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "3,219,963",
+    "value_parsed": "3219963",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_72a63b8b950b",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.76835,
+      0.49971,
+      0.83714,
+      0.51045
+    ],
+    "row_index": 14,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Foreign Loans Repayment",
+    "row_label_path": [
+      "011 Foreign Loans Repayment"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "5,472,222",
+    "value_parsed": "5472222",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_0ad7f5451c6d",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.5831,
+      0.5221,
+      0.63037,
+      0.53283
+    ],
+    "row_index": 15,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Repayment of Short Term Foreign Credits",
+    "row_label_path": [
+      "011 Repayment of Short Term Foreign Credits"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "29,500",
+    "value_parsed": "29500",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3528acf70ea8",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.68577,
+      0.5221,
+      0.73304,
+      0.53283
+    ],
+    "row_index": 15,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Repayment of Short Term Foreign Credits",
+    "row_label_path": [
+      "011 Repayment of Short Term Foreign Credits"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "29,500",
+    "value_parsed": "29500",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b53ff7abf445",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78126,
+      0.5221,
+      0.83714,
+      0.53283
+    ],
+    "row_index": 15,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Repayment of Short Term Foreign Credits",
+    "row_label_path": [
+      "011 Repayment of Short Term Foreign Credits"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "199,810",
+    "value_parsed": "199810",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f5e2f966ab04",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.57449,
+      0.54449,
+      0.63037,
+      0.55522
+    ],
+    "row_index": 16,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "014 Transfers",
+    "row_label_path": [
+      "014 Transfers"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "148,976",
+    "value_parsed": "148976",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b2cc41a5eb8e",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67716,
+      0.54449,
+      0.73304,
+      0.55522
+    ],
+    "row_index": 16,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "014 Transfers",
+    "row_label_path": [
+      "014 Transfers"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "148,635",
+    "value_parsed": "148635",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_42b397914b87",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78126,
+      0.54449,
+      0.83714,
+      0.55522
+    ],
+    "row_index": 16,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "014 Transfers",
+    "row_label_path": [
+      "014 Transfers"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "115,082",
+    "value_parsed": "115082",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_cf305739b688",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.55297,
+      0.56687,
+      0.63037,
+      0.57796
+    ],
+    "row_index": 17,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "22,371,830",
+    "value_parsed": "22371830",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4314830ebf47",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.65564,
+      0.56687,
+      0.73304,
+      0.57796
+    ],
+    "row_index": 17,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "19,788,272",
+    "value_parsed": "19788272",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_84515d34e5fa",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.75976,
+      0.56687,
+      0.83716,
+      0.57796
+    ],
+    "row_index": 17,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "22,073,159",
+    "value_parsed": "22073159",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_eed8e9ebf03e",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.57449,
+      0.615,
+      0.63037,
+      0.62609
+    ],
+    "row_index": 18,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Development Expenditure c. Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "Development Expenditure c. Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "952,558",
+    "value_parsed": "952558",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4fcf10cb1acc",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67716,
+      0.615,
+      0.73304,
+      0.62609
+    ],
+    "row_index": 18,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Development Expenditure c. Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "Development Expenditure c. Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "773,387",
+    "value_parsed": "773387",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_91c0a59a9688",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.78127,
+      0.615,
+      0.83716,
+      0.62609
+    ],
+    "row_index": 18,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Development Expenditure c. Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "Development Expenditure c. Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "590,774",
+    "value_parsed": "590774",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_d8d587d4ff10",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.56159,
+      0.64318,
+      0.63039,
+      0.65427
+    ],
+    "row_index": 19,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Exp. on Capital Account",
+    "row_label_path": [
+      "d. Dev. Exp. on Capital Account"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "1,064,442",
+    "value_parsed": "1064442",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_219e8e50dce8",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.67717,
+      0.64318,
+      0.73306,
+      0.65427
+    ],
+    "row_index": 19,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Exp. on Capital Account",
+    "row_label_path": [
+      "d. Dev. Exp. on Capital Account"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "941,270",
+    "value_parsed": "941270",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3f6b9fe96a37",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.76838,
+      0.64318,
+      0.83717,
+      0.65427
+    ],
+    "row_index": 19,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Exp. on Capital Account",
+    "row_label_path": [
+      "d. Dev. Exp. on Capital Account"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "1,184,179",
+    "value_parsed": "1184179",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_aca2979565bb",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.56158,
+      0.67135,
+      0.63037,
+      0.68244
+    ],
+    "row_index": 20,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c+d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c+d)"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "2,017,000",
+    "value_parsed": "2017000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fc1cb907ceda",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.66425,
+      0.67135,
+      0.73304,
+      0.68244
+    ],
+    "row_index": 20,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c+d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c+d)"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "1,714,656",
+    "value_parsed": "1714656",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_32c127343ee7",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.76836,
+      0.67135,
+      0.83716,
+      0.68244
+    ],
+    "row_index": 20,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c+d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c+d)"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "1,774,953",
+    "value_parsed": "1774953",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bb016e2ef415",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.55299,
+      0.69541,
+      0.63039,
+      0.7065
+    ],
+    "row_index": 21,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Grand Total - Expenditure (1+2)",
+    "row_label_path": [
+      "Grand Total - Expenditure (1+2)"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "24,388,830",
+    "value_parsed": "24388830",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e14a8d7ccc02",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.65566,
+      0.69541,
+      0.73306,
+      0.7065
+    ],
+    "row_index": 21,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Grand Total - Expenditure (1+2)",
+    "row_label_path": [
+      "Grand Total - Expenditure (1+2)"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "21,502,928",
+    "value_parsed": "21502928",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_61b098d941e3",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.75977,
+      0.69541,
+      0.83717,
+      0.7065
+    ],
+    "row_index": 21,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Grand Total - Expenditure (1+2)",
+    "row_label_path": [
+      "Grand Total - Expenditure (1+2)"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "23,848,112",
+    "value_parsed": "23848112",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f0ca6f693b39",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.55297,
+      0.73364,
+      0.63037,
+      0.74473
+    ],
+    "row_index": 22,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "3 Break-up of Expenditure Revenue Account (a+c)",
+    "row_label_path": [
+      "3 Break-up of Expenditure Revenue Account (a+c)"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "18,155,949",
+    "value_parsed": "18155949",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_33af7c004c89",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.65564,
+      0.73364,
+      0.73304,
+      0.74473
+    ],
+    "row_index": 22,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "3 Break-up of Expenditure Revenue Account (a+c)",
+    "row_label_path": [
+      "3 Break-up of Expenditure Revenue Account (a+c)"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "17,163,560",
+    "value_parsed": "17163560",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_8b6578bcd391",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.75974,
+      0.73364,
+      0.83714,
+      0.74473
+    ],
+    "row_index": 22,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "3 Break-up of Expenditure Revenue Account (a+c)",
+    "row_label_path": [
+      "3 Break-up of Expenditure Revenue Account (a+c)"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "16,876,819",
+    "value_parsed": "16876819",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4b13fb429933",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.56158,
+      0.74993,
+      0.63037,
+      0.76102
+    ],
+    "row_index": 23,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "6,232,881",
+    "value_parsed": "6232881",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_a7f360cf034b",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.66425,
+      0.74993,
+      0.73304,
+      0.76102
+    ],
+    "row_index": 23,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "4,339,368",
+    "value_parsed": "4339368",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_20ba44d743d1",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.76835,
+      0.74993,
+      0.83714,
+      0.76102
+    ],
+    "row_index": 23,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "6,971,293",
+    "value_parsed": "6971293",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_712e71823684",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.55298,
+      0.76775,
+      0.63038,
+      0.77884
+    ],
+    "row_index": 24,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total Expenditure:",
+    "row_label_path": [
+      "Total Expenditure:"
+    ],
+    "col_label_raw": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25",
+    "col_label_path": [
+      "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+    ],
+    "value_raw": "24,388,830",
+    "value_parsed": "24388830",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2024-25",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_807b47ecd186",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.65565,
+      0.76775,
+      0.73305,
+      0.77884
+    ],
+    "row_index": 24,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total Expenditure:",
+    "row_label_path": [
+      "Total Expenditure:"
+    ],
+    "col_label_raw": "and capital capital accounts) Revised Estimates 2024-25",
+    "col_label_path": [
+      "and capital capital accounts) Revised Estimates 2024-25"
+    ],
+    "value_raw": "21,502,928",
+    "value_parsed": "21502928",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2024-25",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ae08041d04cd",
+    "source_id": "abs-fed-2025-26",
+    "page": 17,
+    "page_render_sha256": "16ecd37bfca5d3eb8324a0aaec8e43aad91719228aa5a68d66f5dc50dca41ec4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.16627,
+      0.18704,
+      0.84796,
+      0.7837
+    ],
+    "cell_bbox_norm": [
+      0.75976,
+      0.76775,
+      0.83716,
+      0.77884
+    ],
+    "row_index": 24,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total Expenditure:",
+    "row_label_path": [
+      "Total Expenditure:"
+    ],
+    "col_label_raw": "account) and have been in million) Budget Estimates 2025-26",
+    "col_label_path": [
+      "account) and have been in million) Budget Estimates 2025-26"
+    ],
+    "value_raw": "23,848,112",
+    "value_parsed": "23848112",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2025-26",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2025-26__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
   }
 ]

@@ -588,8 +588,12 @@
     "verification_status": "official_differs_from_archive",
     "verification_record": "sources/verification/abs-fed-2025-26.json",
     "notes": "reissued_or_differs: official download differs from the archive copy.",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      17
+    ],
+    "run_ids": [
+      "ABS_2025-26__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:29:18+00:00",

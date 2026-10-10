@@ -448,6 +448,90 @@
     "notes": ""
   },
   {
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "name": "Foreign loans repayment",
+    "parent_id": "fed.exp.current.capital_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Repayment of foreign loans, part of current expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 51,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "name": "Repayment of short-term foreign credits",
+    "parent_id": "fed.exp.current.capital_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Repayment of short-term foreign credits, part of current expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 52,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "name": "Transfers (current expenditure on capital account)",
+    "parent_id": "fed.exp.current.capital_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Transfers recorded under current expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 53,
+    "notes": ""
+  },
+  {
     "series_id": "fed.exp.development.total",
     "name": "Total development expenditure",
     "parent_id": "fed.exp.total",

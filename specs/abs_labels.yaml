@@ -8,7 +8,9 @@
 #
 # "(account )?" at the start of some patterns: in a few editions the heading
 # "a. Current Exp. on Revenue / Account" wraps onto a second line and Docling
-# attaches the word "Account" to the next row's label.
+# attaches the word "Account" to the next row's label. In the same way a section
+# heading ("Development Expenditure", "3 Break-up of Expenditure") is sometimes
+# glued in front of the first row under it; those prefixes are optional below.
 
 labels:
   # the ten functions (current expenditure on revenue account)
@@ -27,7 +29,7 @@ labels:
   - {pattern: 'current exp(\.|enditure)? on revenue( account)?', series: fed.exp.current.revenue_account}
   - {pattern: 'current exp(\.|enditure)? on capital( account)?', series: fed.exp.current.capital_account}
   - {pattern: 'total current expenditure ?\(a\+b\)', series: fed.exp.current.total}
-  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on revenue( account)?( ?\(i\+ii\))?', series: fed.exp.development.revenue_account}
+  - {pattern: '(development expenditure c\. )?dev(\.|elopment)? exp(\.|enditure)? on revenue( account)?( ?\(i\+ii\))?', series: fed.exp.development.revenue_account}
   - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on revenue account ?\(psdp\)', series: fed.exp.development.revenue_account.psdp}
   - {pattern: 'other dev(\.|elopment)? exp(\.|enditure)? on revenue account', series: fed.exp.development.revenue_account.other}
   - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account', series: fed.exp.development.capital_account}
@@ -35,7 +37,7 @@ labels:
   - {pattern: 'estimated operational shortfall in psdp', series: fed.exp.operational_shortfall}
   - {pattern: '(grand )?total ?- ?expenditure ?\(1\+2(\+3)?\)', series: fed.exp.total}
   - {pattern: 'total expenditure', series: fed.exp.total}
-  - {pattern: 'revenue account ?\(a\+c\)', series: fed.exp.account.revenue}
+  - {pattern: '(break-up of expenditure )?revenue account ?\(a\+c\)', series: fed.exp.account.revenue}
   - {pattern: 'capital account ?\(b\+d\)', series: fed.exp.account.capital}
 
   # items under current expenditure on capital account (newer editions)

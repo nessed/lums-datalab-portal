@@ -531,6 +531,537 @@
     "rule_id": "abs.account_capital"
   },
   {
+    "check_id": "chk_b8546385486b",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_e6c19139de93",
+      "c_94eb4fd64aa1",
+      "c_fe1597788b5d",
+      "c_259b4b0de780",
+      "c_91884ac20906",
+      "c_39d406348861",
+      "c_2db6acc9dca6",
+      "c_309f182b79bf",
+      "c_afbd8d69036b",
+      "c_7fc4c5f4d850"
+    ],
+    "target_cell_id": "c_89f93ffc0492",
+    "target_value": null,
+    "target_source": null,
+    "expected": "17203391",
+    "observed": "17203390",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, the ten function amounts (10 amounts) add to 17,203,390; the printed Current expenditure on revenue account is 17,203,391. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_ce5a6b368441",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_21a27177f31c",
+      "c_0ad7f5451c6d",
+      "c_f5e2f966ab04"
+    ],
+    "target_cell_id": "c_fa3c1fd1d593",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5168439",
+    "observed": "5168439",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, the items listed under current expenditure on capital account (3 amounts) add to 5,168,439; the printed Current expenditure on capital account is 5,168,439. They add exactly.",
+    "official": true,
+    "rule_id": "abs.capital_items_add_to_current_capital"
+  },
+  {
+    "check_id": "chk_c92abdc00462",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_89f93ffc0492",
+      "c_fa3c1fd1d593"
+    ],
+    "target_cell_id": "c_cf305739b688",
+    "target_value": null,
+    "target_source": null,
+    "expected": "22371830",
+    "observed": "22371830",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, current expenditure on revenue account and on capital account (2 amounts) add to 22,371,830; the printed Total current expenditure is 22,371,830. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_17d4d57628bf",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_eed8e9ebf03e",
+      "c_d8d587d4ff10"
+    ],
+    "target_cell_id": "c_aca2979565bb",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2017000",
+    "observed": "2017000",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, development expenditure on revenue account and on capital account (2 amounts) add to 2,017,000; the printed Total development expenditure is 2,017,000. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_d5c69b630fa2",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_cf305739b688",
+      "c_aca2979565bb"
+    ],
+    "target_cell_id": "c_bb016e2ef415",
+    "target_value": null,
+    "target_source": null,
+    "expected": "24388830",
+    "observed": "24388830",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, total current and total development expenditure (and any other printed item) (2 amounts) add to 24,388,830; the printed Total expenditure is 24,388,830. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_4c93d23264ae",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_89f93ffc0492",
+      "c_eed8e9ebf03e"
+    ],
+    "target_cell_id": "c_f0ca6f693b39",
+    "target_value": null,
+    "target_source": null,
+    "expected": "18155949",
+    "observed": "18155949",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, current and development expenditure on revenue account (2 amounts) add to 18,155,949; the printed Revenue account (a+c) is 18,155,949. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_adc406201f91",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_fa3c1fd1d593",
+      "c_d8d587d4ff10"
+    ],
+    "target_cell_id": "c_4b13fb429933",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6232881",
+    "observed": "6232881",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2025-26, current and development expenditure on capital account (2 amounts) add to 6,232,881; the printed Capital account (b+d) is 6,232,881. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_c431df24fcfb",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_26e2471f5f90",
+      "c_f075938a1383",
+      "c_351b19b6c083",
+      "c_c6d92f4cda93",
+      "c_bfe357775aa3",
+      "c_2beb19eaadf5",
+      "c_284681c1373d",
+      "c_e5d2be18c354",
+      "c_3de901655cc2",
+      "c_f34cfc82b789"
+    ],
+    "target_cell_id": "c_64c01f971190",
+    "target_value": null,
+    "target_source": null,
+    "expected": "16390174",
+    "observed": "16390173",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, the ten function amounts (10 amounts) add to 16,390,173; the printed Current expenditure on revenue account is 16,390,174. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_8226af55561e",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_01e0322df206",
+      "c_3528acf70ea8",
+      "c_b2cc41a5eb8e"
+    ],
+    "target_cell_id": "c_91c45c38064a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3398098",
+    "observed": "3398098",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, the items listed under current expenditure on capital account (3 amounts) add to 3,398,098; the printed Current expenditure on capital account is 3,398,098. They add exactly.",
+    "official": true,
+    "rule_id": "abs.capital_items_add_to_current_capital"
+  },
+  {
+    "check_id": "chk_daaba70e4bfe",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_64c01f971190",
+      "c_91c45c38064a"
+    ],
+    "target_cell_id": "c_4314830ebf47",
+    "target_value": null,
+    "target_source": null,
+    "expected": "19788272",
+    "observed": "19788272",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, current expenditure on revenue account and on capital account (2 amounts) add to 19,788,272; the printed Total current expenditure is 19,788,272. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_00525efda617",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_4fcf10cb1acc",
+      "c_219e8e50dce8"
+    ],
+    "target_cell_id": "c_fc1cb907ceda",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1714656",
+    "observed": "1714657",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, development expenditure on revenue account and on capital account (2 amounts) add to 1,714,657; the printed Total development expenditure is 1,714,656. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_2d6c18175f27",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_4314830ebf47",
+      "c_fc1cb907ceda"
+    ],
+    "target_cell_id": "c_e14a8d7ccc02",
+    "target_value": null,
+    "target_source": null,
+    "expected": "21502928",
+    "observed": "21502928",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, total current and total development expenditure (and any other printed item) (2 amounts) add to 21,502,928; the printed Total expenditure is 21,502,928. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_9cf1007b3c2d",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_64c01f971190",
+      "c_4fcf10cb1acc"
+    ],
+    "target_cell_id": "c_33af7c004c89",
+    "target_value": null,
+    "target_source": null,
+    "expected": "17163560",
+    "observed": "17163561",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, current and development expenditure on revenue account (2 amounts) add to 17,163,561; the printed Revenue account (a+c) is 17,163,560. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_c0884f39b9bd",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_91c45c38064a",
+      "c_219e8e50dce8"
+    ],
+    "target_cell_id": "c_a7f360cf034b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4339368",
+    "observed": "4339368",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2024-25' column of the Annual Budget Statement 2025-26, current and development expenditure on capital account (2 amounts) add to 4,339,368; the printed Capital account (b+d) is 4,339,368. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_27204268ceaa",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_919605435576",
+      "c_5071d0e60550",
+      "c_d4dad4f913e8",
+      "c_dc119f400d19",
+      "c_b94348eafdd9",
+      "c_754d391626d1",
+      "c_c9425296c01f",
+      "c_6d282ef867ac",
+      "c_e232b6b3f7a9",
+      "c_3f0db159fe19"
+    ],
+    "target_cell_id": "c_872c502c1fab",
+    "target_value": null,
+    "target_source": null,
+    "expected": "16286045",
+    "observed": "16286044",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, the ten function amounts (10 amounts) add to 16,286,044; the printed Current expenditure on revenue account is 16,286,045. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_e566dd0b2cf4",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_72a63b8b950b",
+      "c_b53ff7abf445",
+      "c_42b397914b87"
+    ],
+    "target_cell_id": "c_2c955d5b0481",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5787114",
+    "observed": "5787114",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, the items listed under current expenditure on capital account (3 amounts) add to 5,787,114; the printed Current expenditure on capital account is 5,787,114. They add exactly.",
+    "official": true,
+    "rule_id": "abs.capital_items_add_to_current_capital"
+  },
+  {
+    "check_id": "chk_8887d86f06f4",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_872c502c1fab",
+      "c_2c955d5b0481"
+    ],
+    "target_cell_id": "c_84515d34e5fa",
+    "target_value": null,
+    "target_source": null,
+    "expected": "22073159",
+    "observed": "22073159",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, current expenditure on revenue account and on capital account (2 amounts) add to 22,073,159; the printed Total current expenditure is 22,073,159. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_a10e50c0da14",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_91c0a59a9688",
+      "c_3f6b9fe96a37"
+    ],
+    "target_cell_id": "c_32c127343ee7",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1774953",
+    "observed": "1774953",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, development expenditure on revenue account and on capital account (2 amounts) add to 1,774,953; the printed Total development expenditure is 1,774,953. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_f8b1dc0552b9",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_84515d34e5fa",
+      "c_32c127343ee7"
+    ],
+    "target_cell_id": "c_61b098d941e3",
+    "target_value": null,
+    "target_source": null,
+    "expected": "23848112",
+    "observed": "23848112",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, total current and total development expenditure (and any other printed item) (2 amounts) add to 23,848,112; the printed Total expenditure is 23,848,112. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_31b1a03c02fe",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_872c502c1fab",
+      "c_91c0a59a9688"
+    ],
+    "target_cell_id": "c_8b6578bcd391",
+    "target_value": null,
+    "target_source": null,
+    "expected": "16876819",
+    "observed": "16876819",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, current and development expenditure on revenue account (2 amounts) add to 16,876,819; the printed Revenue account (a+c) is 16,876,819. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_61336b7483b1",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_2c955d5b0481",
+      "c_3f6b9fe96a37"
+    ],
+    "target_cell_id": "c_20ba44d743d1",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6971293",
+    "observed": "6971293",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2025-26' column of the Annual Budget Statement 2025-26, current and development expenditure on capital account (2 amounts) add to 6,971,293; the printed Capital account (b+d) is 6,971,293. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
     "check_id": "chk_57afd1c3ff58",
     "check_type": "cross_table",
     "dataset": "abs",
@@ -665,6 +1196,75 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Total federal expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'Total - Expenditure (1+2+3)') prints 2,477,472; the Annual Budget Statement 2010-11 (row 'Total Expenditure') prints 2,477,472. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_ae19545189c3",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_712e71823684"
+    ],
+    "target_cell_id": "c_bb016e2ef415",
+    "target_value": null,
+    "target_source": null,
+    "expected": "24388830",
+    "observed": "24388830",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2025-26 (row 'Grand Total - Expenditure (1+2)') prints 24,388,830; the Annual Budget Statement 2025-26 (row 'Total Expenditure:') prints 24,388,830. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_2d90f58d53bf",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_807b47ecd186"
+    ],
+    "target_cell_id": "c_e14a8d7ccc02",
+    "target_value": null,
+    "target_source": null,
+    "expected": "21502928",
+    "observed": "21502928",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Revised Estimates 2024-25: the Annual Budget Statement 2025-26 (row 'Grand Total - Expenditure (1+2)') prints 21,502,928; the Annual Budget Statement 2025-26 (row 'Total Expenditure:') prints 21,502,928. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_90655c8ced74",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_ae08041d04cd"
+    ],
+    "target_cell_id": "c_61b098d941e3",
+    "target_value": null,
+    "target_source": null,
+    "expected": "23848112",
+    "observed": "23848112",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2025-26: the Annual Budget Statement 2025-26 (row 'Grand Total - Expenditure (1+2)') prints 23,848,112; the Annual Budget Statement 2025-26 (row 'Total Expenditure:') prints 23,848,112. They are equal.",
     "official": true,
     "rule_id": "abs.restated_on_same_page"
   }

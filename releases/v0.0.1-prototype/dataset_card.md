@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T23:26:08+00:00 from commit `839584b0e7c1`. Label: **prototype**. DOI: none.
+Built 2026-10-10T23:32:36+00:00 from commit `4b9ad00b262e`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -11,7 +11,7 @@ Built 2026-10-10T23:26:08+00:00 from commit `839584b0e7c1`. Label: **prototype**
 |---|---|---|---|---|
 | Federal Annual Budget Statement | published | 9 | 2111 | disputed: 3, failed_checks: 216, not_in_source: 78, not_yet_verified: 200 |
 | Consumer Price Index | published | 8 | 1254 | disputed: 2 |
-| Labour Force Survey | published | 5 | 406 | disputed: 6, failed_checks: 3, not_yet_verified: 35 |
+| Labour Force Survey | published | 5 | 387 | disputed: 6, failed_checks: 3, not_yet_verified: 54 |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
@@ -24,7 +24,7 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 |---|---|---|---|---|
 | abs | 436 | 1675 | 200 | 216 |
 | cpi | 132 | 1122 | 0 | 0 |
-| lfs | 216 | 190 | 35 | 3 |
+| lfs | 204 | 183 | 54 | 3 |
 
 ## Coverage: how much of each printed table was captured
 
@@ -161,7 +161,7 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 |---|---|---|---|---|---|---|---|---|
 | abs | 1365 | 217 | 19 | 3 | 123 | 98.6% | 99.6% (460 of 462 pairs) | 3 of 465 pairs (0.7%) |
 | cpi | 348 | 540 | 1 | 2 | 0 | 99.7% | 100.0% (128 of 128 pairs) | 2 of 130 pairs (1.5%) |
-| lfs | 599 | 108 | 1 | 6 | 0 | 99.0% | 100.0% (270 of 270 pairs) | 6 of 276 pairs (2.2%) |
+| lfs | 599 | 68 | 1 | 6 | 40 | 99.0% | 100.0% (270 of 270 pairs) | 6 of 276 pairs (2.2%) |
 
 **Disputed** means two official documents print different figures for the same thing and each printing adds up in its own table (a restatement by the publisher). A disputed figure is not published as checked: the site shows both printings and no value. A differing pair that does not meet those conditions is a failure and its value is withheld.
 

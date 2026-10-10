@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T23:26:08+00:00",
-  "git_commit": "839584b0e7c176be143273c52962fd30d6efb75e",
+  "created_at": "2026-10-10T23:32:36+00:00",
+  "git_commit": "4b9ad00b262e0b36859ee23d6e2ab381636eabff",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -130,7 +130,7 @@
     "sources": 26,
     "cells": 9708,
     "cells_mapped": 5610,
-    "cells_behind_published_values": 5030,
+    "cells_behind_published_values": 5011,
     "series": 491,
     "observations": 4314,
     "observations_by_dataset": {
@@ -148,8 +148,8 @@
       "lfs": {
         "gap:disputed": 6,
         "gap:failed_checks": 3,
-        "gap:not_yet_verified": 35,
-        "published": 406
+        "gap:not_yet_verified": 54,
+        "published": 387
       }
     },
     "tiers_by_dataset": {
@@ -164,18 +164,18 @@
         "B": 1122
       },
       "lfs": {
-        "A": 216,
-        "B": 190,
-        "C": 35,
+        "A": 204,
+        "B": 183,
+        "C": 54,
         "D": 3
       }
     },
     "checks_by_result": {
       "pass": 2312,
-      "pass_within_rounding": 865,
+      "pass_within_rounding": 825,
       "disputed": 11,
       "fail": 21,
-      "not_evaluable": 123
+      "not_evaluable": 163
     },
     "checks_by_type": {
       "accounting_identity": {
@@ -212,8 +212,9 @@
         "pass_within_rounding": 54
       },
       "recompute": {
-        "pass_within_rounding": 538,
+        "pass_within_rounding": 498,
         "pass": 1,
+        "not_evaluable": 40,
         "fail": 1
       },
       "reference_value": {
@@ -300,12 +301,12 @@
     "lfs": {
       "all": {
         "pass": 599,
-        "pass_within_rounding": 108,
+        "pass_within_rounding": 68,
         "fail": 1,
-        "not_evaluable": 0,
+        "not_evaluable": 40,
         "disputed": 6,
-        "evaluable": 714,
-        "pass_rate": 0.9902
+        "evaluable": 674,
+        "pass_rate": 0.9896
       },
       "cross_edition": {
         "pass": 267,
@@ -420,12 +421,12 @@
       },
       "check_pass_rate": {
         "pass": 599,
-        "pass_within_rounding": 108,
+        "pass_within_rounding": 68,
         "fail": 1,
-        "not_evaluable": 0,
+        "not_evaluable": 40,
         "disputed": 6,
-        "evaluable": 714,
-        "pass_rate": 0.9902
+        "evaluable": 674,
+        "pass_rate": 0.9896
       },
       "cross_edition_agreement": {
         "pass": 267,

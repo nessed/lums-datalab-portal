@@ -319,3 +319,35 @@ def test_gap_observations_for_missing_headline_figures():
     assert all(g.gap_kind == "not_yet_verified" and not g.published and g.value is None and g.vintage == "na" for g in gaps)
     first = next(g for g in gaps if g.period == "2014-15")
     assert "AJK" in (first.gap_reason or "")
+
+
+# ---------------------------------------------------------------- national 2014-15 report (added 2026-10-12)
+
+@pytest.mark.parametrize("caption,kind", [
+    ("table-8 crude activity (participation) rates - pakistan and provinces (%)", "lfpr_crude"),
+    ("table-11 civilian labour force - pakistan and provinces (million)", "labour_force"),
+    ("table-13 employed - distribution by major industry divisions (%)", "industry"),
+    ("table-21 unemployment rates - by area and sex (%)", "unemployment_rate"),
+    ("table-23 unemployed - pakistan and provinces (million)", "unemployed"),
+])
+def test_2014_15_titles_name_one_kind(caption, kind):
+    got, result = lfs.classify(caption, "2014-15", SPEC)
+    assert result == "found" and got["kind"] == kind
+
+
+def test_2014_15_columns_need_the_2013_14_round_beside_it():
+    centres = {k + 1: 0.30 + 0.10 * k for k in range(6)}
+    xs = list(centres.values())
+    sexes = ["Total", "Male", "Female"] * 2
+    mapping, problems = lfs.map_columns(centres, header(["2013-14", "2014-15"], sexes, xs), "2014-15", SPEC)
+    assert problems == [] and mapping[1] == ("2013-14", "total") and mapping[6] == ("2014-15", "female")
+    # any other round beside it (for example the AJK edition's, or a misread header) maps nothing
+    mapping, problems = lfs.map_columns(centres, header(["2012-13", "2014-15"], sexes, xs), "2014-15", SPEC)
+    assert mapping == {} and problems
+
+
+def test_a_skipped_file_explains_gaps_only_when_no_other_report_of_the_round_was_read():
+    reasons = {"2014-15": "The first file is the AJK edition."}
+    assert lfs.unread_gap_reasons(reasons, {"2017-18"}) == reasons
+    assert lfs.unread_gap_reasons(reasons, {"2014-15", "2017-18"}) == {}
+

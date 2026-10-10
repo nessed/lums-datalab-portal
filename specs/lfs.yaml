@@ -19,15 +19,18 @@ min_table_coverage: 0.90
 # The round each report prints beside its own (established from the reports' own
 # headers; a header that shows any other round leaves the table unmapped).
 previous_round:
+  "2014-15": "2013-14"
   "2017-18": "2014-15"
   "2018-19": "2017-18"
   "2020-21": "2018-19"
   "2024-25": "2020-21"
 
 # Sources that are registered but not usable for Pakistan-level series.
+# The national 2014-15 report is a separate source (lfs-pbs-2014-15-national, added 2026-10-12);
+# its layout is the 2017-18 one (same table numbers and titles), so it needs no entry of its own.
 skip_sources:
   lfs-pbs-2014-15: >-
-    The registered 2014-15 file is the Azad Jammu & Kashmir edition of the Labour Force Survey
+    The file first registered for 2014-15 is the Azad Jammu & Kashmir edition of the Labour Force Survey
     (its cover and table titles say so); it does not print the Pakistan figures
 
 # The 2024-25 report prints most tables twice: once on the new 19th ICLS definitions and

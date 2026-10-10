@@ -608,6 +608,14 @@ def comparability_search(spec: dict[str, Any], sources: dict[str, Any]) -> dict[
             "negative_statements": negative[:10], "break_kept": kept}
 
 
+def unread_gap_reasons(gap_reasons: dict[str, str], periods_read: set[str]) -> dict[str, str]:
+    """A skipped file explains a round's gaps only when no other registered report of that round was read.
+
+    (Two files are registered for 2014-15: the Azad Jammu & Kashmir edition, skipped, and the national report.)
+    """
+    return {period: reason for period, reason in gap_reasons.items() if period not in periods_read}
+
+
 def gap_observations(spec: dict[str, Any], observations: list[Observation], series: dict[str, Series],
                      reasons: dict[str, str]) -> list[Observation]:
     """Expected headline figures with no cell: a labelled gap, never a blank (decision D7).
@@ -682,6 +690,8 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
         got = {t["kind"] for t in tables_info}
         located[source.source_id] = {"runs": runs_info, "tables": tables_info, "rejected": rejected,
                                      "kinds_not_located": [k for k in kinds if k not in got]}
+
+    gap_reasons = unread_gap_reasons(gap_reasons, {s.period for s in sources if s.source_id in located})
 
     checks = count_sum_checks(cells, spec, titles, blocked)
     checks += recompute_checks(cells, spec, titles, blocked)

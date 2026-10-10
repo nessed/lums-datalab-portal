@@ -119,7 +119,7 @@ checks:
 #   cpi.<area>.mom.general / .mom.group.<slug>   % change over the previous month
 # Definitions are plain-language drafts for a human to edit.
 areas:
-  national: {name: "National", note_old_base: "On the 2007-08 base PBS printed one CPI (collected in urban centres only); it is filed here as the national series for that base."}
+  national: {name: "National", note_old_base: "Issues on the 2007-08 base are not processed yet; how that base maps to national, urban and rural series is to be confirmed from the documents by a human."}
   urban: {name: "Urban"}
   rural: {name: "Rural"}
 

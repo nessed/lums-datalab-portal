@@ -52,15 +52,17 @@ Because it carries the LUMS name, reliability comes before speed and before cove
 
 Data model: **Source → Series → Observation → Check → Release.**
 
-## First prototype
+## First prototype (release `v0.0.1-prototype`, 2026-10-11)
 
-| Type | Years | What | Checks |
+| Type | What is in the release | State | Checks |
 |---|---|---|---|
-| Federal budget (Annual Budget Statement) | 2010-11, 2016-17, 2021-22, 2024-25, 2025-26 | Expenditure by function (defence, health, education, interest…), budget / revised / actual | Lines sum to the printed total; adjacent editions agree; compared with an existing hand-built ABS dataset |
-| Consumer Price Index (PBS) | June of 5 years, spanning the 2019 rebasing | National index, 12 groups, weights | Weights sum to 100; inflation recomputes from the index; compared with SBP |
-| Labour Force Survey (PBS) | 5 most recent rounds | Participation, unemployment, employment by sector; by sex and urban/rural | Shares sum to 100%; rates recompute; compared with the Economic Survey |
+| Federal budget (Annual Budget Statement) | 9 editions (2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27): the Summary of Expenditure. Ten function lines (current expenditure on revenue account), current and development totals, grand total. Budget and revised estimates; the ABS prints no actuals | **Published**: 535 checked values, 2 labelled gaps | Lines sum to printed totals; accounting identities; the same figure in the next edition agrees |
+| Consumer Price Index (PBS Monthly Review) | June issues 2023, 2024, 2025, 2026 (base 2015-16): general index, 12 groups and weights; national, urban and rural; month-on-month and year-on-year change | **Published**: 807 checked values. Issues before the 2019 rebasing are labelled gaps (154) | Weights sum to 100; the general index recomputes from groups and weights; % changes recompute; consecutive issues agree |
+| Labour Force Survey (PBS annual reports) | 4 reports (2017-18, 2018-19, 2020-21, 2024-25): participation and unemployment rates, labour force and employment counts, employment by industry; by sex and urban/rural | **Coming**: processed and checked, but below the frozen cross-edition threshold, so nothing is published | Shares sum to 100; parts add to totals; rates recompute from counts; the next report's previous-round column agrees |
 
-The demo question: *How has real health spending changed since 2010, and what happened to jobs over the same period?*
+Numbers above are from `releases/v0.0.1-prototype/release.json`. The error rate is not measured yet (the gold set is unlabelled).
+
+The demo question: *How has federal health spending changed since 2010, and what happened to prices and jobs over the same period?* The demo page answers the part the checked data supports and labels the rest as gaps.
 
 ## Roadmap
 
@@ -96,7 +98,8 @@ Windows PowerShell, Python 3.12, Node 24.
 
 ```powershell
 py -3.12 -m venv pipeline\.venv
-pipeline\.venv\Scripts\python -m pip install -r pipelineequirements.lock
+pipeline\.venv\Scripts\python -m pip install -r pipeline
+equirements.lock
 pipeline\.venv\Scripts\python -m pip install -e pipeline --no-deps
 copy .env.example .env                                   # set SOURCES_DIR to a folder outside the repo
 pipeline\.venv\Scripts\python -m datalab fetch          # download every source in the manifest, verify hashes

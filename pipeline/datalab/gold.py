@@ -60,14 +60,10 @@ def gold_sample(version: str = config.DEFAULT_RELEASE, n: int = 400, seed: int =
     chosen = chosen[:n] if len(chosen) > n else chosen
 
     GOLD_DIR.mkdir(exist_ok=True)
-    renders = GOLD_DIR / "renders"
     rows = []
     for i, (key, c) in enumerate(chosen, start=1):
-        rel = f"renders/{c['source_id']}/p{c['page']:03d}.png"
-        dest = GOLD_DIR / rel
-        if not dest.exists():
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(release_dir / "pages" / c["source_id"] / f"p{c['page']:03d}.png", dest)
+        # The labelling page shows the release's own page renders; nothing is copied.
+        rel = f"../releases/{version}/pages/{c['source_id']}/p{c['page']:03d}.png"
         x0, y0, x1, y1 = c["cell_bbox_norm"]
         rows.append({"sample_id": f"g{i:04d}", "cell_id": c["cell_id"], "source_id": c["source_id"],
                      "source_title": sources[c["source_id"]]["title"], "page": c["page"], "render": rel,

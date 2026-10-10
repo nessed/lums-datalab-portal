@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T21:53:20+00:00 from commit `e6a27fcf47be`. Label: **prototype**. DOI: none.
+Built 2026-10-10T22:00:53+00:00 from commit `9676c269218a`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -10,12 +10,11 @@ Built 2026-10-10T21:53:20+00:00 from commit `e6a27fcf47be`. Label: **prototype**
 | Data type | State | Sources | Published values | Withheld / gaps |
 |---|---|---|---|---|
 | Federal Annual Budget Statement | published | 9 | 535 | not_in_source: 2 |
-| Consumer Price Index | coming | 0 | 0 | none |
+| Consumer Price Index | published | 4 | 807 | not_yet_verified: 154 |
 | Labour Force Survey | coming | 4 | 0 | failed_checks: 1, not_yet_verified: 371 |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
-- Consumer Price Index: not processed yet
 - Labour Force Survey: cross-edition agreement 0.9697 is below 0.98
 
 ## Status mix (internal tiers)
@@ -25,7 +24,7 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 | Data type | A | B | C | D |
 |---|---|---|---|---|
 | abs | 118 | 417 | 0 | 0 |
-| cpi | 0 | 0 | 0 | 0 |
+| cpi | 117 | 690 | 0 | 0 |
 | lfs | 138 | 197 | 36 | 1 |
 
 ## Coverage: how much of each printed table was captured
@@ -43,6 +42,18 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | abs-fed-2024-25 | 17 | 87 | 85 | 97.7% | 97.7% |
 | abs-fed-2025-26 | 17 | 87 | 87 | 100.0% | 100.0% |
 | abs-fed-2026-27 | 17 | 87 | 84 | 96.5% | 96.5% |
+| cpi-pbs-2023-06 | 8 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2023-06 | 9 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2023-06 | 10 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2024-06 | 8 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2024-06 | 9 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2024-06 | 10 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2025-06 | 8 | 142 | 142 | 100.0% | 100.0% |
+| cpi-pbs-2025-06 | 9 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2025-06 | 10 | 142 | 142 | 100.0% | 100.0% |
+| cpi-pbs-2026-06 | 8 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2026-06 | 9 | 141 | 141 | 100.0% | 100.0% |
+| cpi-pbs-2026-06 | 10 | 142 | 142 | 100.0% | 100.0% |
 | lfs-pbs-2017-18 | 30 | 150 | 150 | 100.0% | 100.0% |
 | lfs-pbs-2017-18 | 32 | 150 | 150 | 100.0% | 100.0% |
 | lfs-pbs-2017-18 | 34 | 90 | 90 | 100.0% | 100.0% |
@@ -74,6 +85,7 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | Data type | Passed exactly | Passed within rounding | Failed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement |
 |---|---|---|---|---|---|---|
 | abs | 291 | 47 | 2 | 0 | 99.4% | 98.2% (114 pairs) |
+| cpi | 121 | 356 | 0 | 0 | 100.0% | 100.0% (117 pairs) |
 | lfs | 348 | 77 | 7 | 0 | 98.4% | 97.0% (198 pairs) |
 
 **Measured error rate: pending gold-set labelling.** The gold-set kit is in `gold/`; until two humans have labelled it, no absolute error rate is claimed.

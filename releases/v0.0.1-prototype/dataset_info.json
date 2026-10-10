@@ -791,6 +791,1580 @@
       "note": "Column layout recorded; a like-for-like comparison is a queued follow-up."
     }
   },
+  "cpi": {
+    "dataset": "cpi",
+    "built_at": "2026-10-10T21:55:49+00:00",
+    "located": {
+      "cpi-pbs-2023-06:national": {
+        "source_id": "cpi-pbs-2023-06",
+        "area": "national",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+        "page": 8,
+        "table_index": 0,
+        "run_id": "CPI_2023-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2023-06",
+            "header": "Index for of the (National) Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2023-06",
+            "header": "June 2023 last year by Jun 23",
+            "month_printed": "Jun 23"
+          },
+          "4": {
+            "role": "index",
+            "period": "2023-05",
+            "header": "is decreased i.e. June of Indices May 23",
+            "month_printed": "May 23"
+          },
+          "5": {
+            "role": "index",
+            "period": "2022-06",
+            "header": "to 2022. Commodities Jun 22",
+            "month_printed": "Jun 22"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2023-06",
+            "header": "0.26% over and % Jun May 23",
+            "month_printed": "May 23"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2023-06",
+            "header": "May 2023 Services Change 2023 Jun 22",
+            "month_printed": "Jun 22"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2023-06",
+            "header": "and (Base (In % Jun May 23",
+            "month_printed": "May 23"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2023-06",
+            "header": "increased 2015-16) points) Over Jun 22",
+            "month_printed": "Jun 22"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 8,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2023-06:urban": {
+        "source_id": "cpi-pbs-2023-06",
+        "area": "urban",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+        "page": 9,
+        "table_index": 0,
+        "run_id": "CPI_2023-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2023-06",
+            "header": "Price for June of the last (Urban) by Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2023-06",
+            "header": "2023 is year i.e. Group Jun 23",
+            "month_printed": "Jun 23"
+          },
+          "4": {
+            "role": "index",
+            "period": "2023-05",
+            "header": "increased June of Indices May 23",
+            "month_printed": "May 23"
+          },
+          "5": {
+            "role": "index",
+            "period": "2022-06",
+            "header": "to 0.10% Commodities Jun 22",
+            "month_printed": "Jun 22"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2023-06",
+            "header": "over and % Jun May 23",
+            "month_printed": "May 23"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2023-06",
+            "header": "May 2023 Services Change 2023 Over Jun 22",
+            "month_printed": "Jun 22"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2023-06",
+            "header": "and (Base (In % Jun May 23",
+            "month_printed": "May 23"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2023-06",
+            "header": "increased 2015-16) points) Over Jun 22",
+            "month_printed": "Jun 22"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 9,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2023-06:rural": {
+        "source_id": "cpi-pbs-2023-06",
+        "area": "rural",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+        "page": 10,
+        "table_index": 0,
+        "run_id": "CPI_2023-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2023-06",
+            "header": "Index for month by Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2023-06",
+            "header": "June of the last Group of Jun 23",
+            "month_printed": "Jun 23"
+          },
+          "4": {
+            "role": "index",
+            "period": "2023-05",
+            "header": "is year i.e. Commodities Indices May 23",
+            "month_printed": "May 23"
+          },
+          "5": {
+            "role": "index",
+            "period": "2022-06",
+            "header": "decreased June 2022. Jun 22",
+            "month_printed": "Jun 22"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2023-06",
+            "header": "0.76% % Jun May 23",
+            "month_printed": "May 23"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2023-06",
+            "header": "over May Services Change 2023 Over Jun 22",
+            "month_printed": "Jun 22"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2023-06",
+            "header": "2023 (Base (In % Jun May 23",
+            "month_printed": "May 23"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2023-06",
+            "header": "and 2015-16) points) Over Jun 22",
+            "month_printed": "Jun 22"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 10,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2024-06:national": {
+        "source_id": "cpi-pbs-2024-06",
+        "area": "national",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+        "page": 8,
+        "table_index": 0,
+        "run_id": "CPI_2024-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2024-06",
+            "header": "Index for month of the (National) Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2024-06",
+            "header": "June 2024 last year by June 24",
+            "month_printed": "June 24"
+          },
+          "4": {
+            "role": "index",
+            "period": "2024-05",
+            "header": "is increased i.e. June Group of Indices May 24",
+            "month_printed": "May 24"
+          },
+          "5": {
+            "role": "index",
+            "period": "2023-06",
+            "header": "to 2023. Commodities June 23",
+            "month_printed": "June 23"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2024-06",
+            "header": "0.46% over and % June May 24",
+            "month_printed": "May 24"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2024-06",
+            "header": "May 2024 Services Change 2024 June 23",
+            "month_printed": "June 23"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2024-06",
+            "header": "and (Base (In % June May 24",
+            "month_printed": "May 24"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2024-06",
+            "header": "increased 2015-16) points) Over June 23",
+            "month_printed": "June 23"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 8,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2024-06:urban": {
+        "source_id": "cpi-pbs-2024-06",
+        "area": "urban",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+        "page": 9,
+        "table_index": 0,
+        "run_id": "CPI_2024-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2024-06",
+            "header": "Price for June of the (Urban) by Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2024-06",
+            "header": "Index 2024 is year i.e. Group June 24",
+            "month_printed": "June 24"
+          },
+          "4": {
+            "role": "index",
+            "period": "2024-05",
+            "header": "(UCPI) increased June of Indices May 24",
+            "month_printed": "May 24"
+          },
+          "5": {
+            "role": "index",
+            "period": "2023-06",
+            "header": "to 0.58% 2023. Commodities June 23",
+            "month_printed": "June 23"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2024-06",
+            "header": "over and % June May 24",
+            "month_printed": "May 24"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2024-06",
+            "header": "2024 Services Change 2024 June 23",
+            "month_printed": "June 23"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2024-06",
+            "header": "and (Base (In % June May 24",
+            "month_printed": "May 24"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2024-06",
+            "header": "2015-16) points) Over June 23",
+            "month_printed": "June 23"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 9,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2024-06:rural": {
+        "source_id": "cpi-pbs-2024-06",
+        "area": "rural",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+        "page": 10,
+        "table_index": 0,
+        "run_id": "CPI_2024-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2024-06",
+            "header": "Index for month of by Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2024-06",
+            "header": "June the last Group of June 24",
+            "month_printed": "June 24"
+          },
+          "4": {
+            "role": "index",
+            "period": "2024-05",
+            "header": "2024 is year i.e. Commodities Indices May 24",
+            "month_printed": "May 24"
+          },
+          "5": {
+            "role": "index",
+            "period": "2023-06",
+            "header": "increased June 2023. June 23",
+            "month_printed": "June 23"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2024-06",
+            "header": "0.28% and % June May 24",
+            "month_printed": "May 24"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2024-06",
+            "header": "over Services Change 2024 June 23",
+            "month_printed": "June 23"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2024-06",
+            "header": "2024 (Base (In % June May 24",
+            "month_printed": "May 24"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2024-06",
+            "header": "and 2015-16) points) Over June 23",
+            "month_printed": "June 23"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 10,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2025-06:national": {
+        "source_id": "cpi-pbs-2025-06",
+        "area": "national",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+        "page": 8,
+        "table_index": 0,
+        "run_id": "CPI_2025-06__docling__full-document__run-01",
+        "rows": 18,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2025-06",
+            "header": "Index for of the (National) Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2025-06",
+            "header": "June 2025 last year by June 25",
+            "month_printed": "June 25"
+          },
+          "4": {
+            "role": "index",
+            "period": "2025-05",
+            "header": "is increased i.e. June Group of Indices May 25",
+            "month_printed": "May 25"
+          },
+          "5": {
+            "role": "index",
+            "period": "2024-06",
+            "header": "by 2024. Commodities June 24",
+            "month_printed": "June 24"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2025-06",
+            "header": "0.23% over and % June May 25",
+            "month_printed": "May 25"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2025-06",
+            "header": "May 2025 Services Change 2025 June 24",
+            "month_printed": "June 24"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2025-06",
+            "header": "and (Base (In June May 25",
+            "month_printed": "May 25"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2025-06",
+            "header": "increased 2015-16) points) Over June 24",
+            "month_printed": "June 24"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 8,
+          "table_index": 0,
+          "printed_numeric_tokens": 142,
+          "matched": 142,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 142,
+          "row_band_matched": 142,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 142
+        }
+      },
+      "cpi-pbs-2025-06:urban": {
+        "source_id": "cpi-pbs-2025-06",
+        "area": "urban",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+        "page": 9,
+        "table_index": 0,
+        "run_id": "CPI_2025-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2025-06",
+            "header": "Price for June of the last (Urban) Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2025-06",
+            "header": "Index 2025 is year i.e. Group June 25",
+            "month_printed": "June 25"
+          },
+          "4": {
+            "role": "index",
+            "period": "2025-05",
+            "header": "(UCPI) increased June of Indices May 25",
+            "month_printed": "May 25"
+          },
+          "5": {
+            "role": "index",
+            "period": "2024-06",
+            "header": "by 0.08% June 24",
+            "month_printed": "June 24"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2025-06",
+            "header": "over Services % June May 25",
+            "month_printed": "May 25"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2025-06",
+            "header": "2025 (Base Change 2025 June 24",
+            "month_printed": "June 24"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2025-06",
+            "header": "and 2015-16) (In June May 25",
+            "month_printed": "May 25"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2025-06",
+            "header": "points) Over June 24",
+            "month_printed": "June 24"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 9,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2025-06:rural": {
+        "source_id": "cpi-pbs-2025-06",
+        "area": "rural",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+        "page": 10,
+        "table_index": 0,
+        "run_id": "CPI_2025-06__docling__full-document__run-01",
+        "rows": 18,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2025-06",
+            "header": "Index for month (Rural) by Group Weight (%) 100.00",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2025-06",
+            "header": "June the last Group of June 25 269.02",
+            "month_printed": "June 25"
+          },
+          "4": {
+            "role": "index",
+            "period": "2025-05",
+            "header": "2025 is year i.e. Commodities Indices May 25 267.77",
+            "month_printed": "May 25"
+          },
+          "5": {
+            "role": "index",
+            "period": "2024-06",
+            "header": "increased June 2024. and June 24 259.72",
+            "month_printed": "June 24"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2025-06",
+            "header": "0.47% Services % June May 25 0.47",
+            "month_printed": "May 25"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2025-06",
+            "header": "over (Base Change 2025 June 24 3.58",
+            "month_printed": "June 24"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2025-06",
+            "header": "2025 2015-16) (In % June May 25 0.47",
+            "month_printed": "May 25"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2025-06",
+            "header": "and points) Over June 24 3.58",
+            "month_printed": "June 24"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [
+          "General"
+        ],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 10,
+          "table_index": 0,
+          "printed_numeric_tokens": 142,
+          "matched": 142,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 142,
+          "row_band_matched": 142,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 142
+        }
+      },
+      "cpi-pbs-2026-06:national": {
+        "source_id": "cpi-pbs-2026-06",
+        "area": "national",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+        "page": 8,
+        "table_index": 0,
+        "run_id": "CPI_2026-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2026-06",
+            "header": "Index for month of the (National) Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2026-06",
+            "header": "June 2026 last year by June 26",
+            "month_printed": "June 26"
+          },
+          "4": {
+            "role": "index",
+            "period": "2026-05",
+            "header": "is decreased i.e. June Group of Indices May 26",
+            "month_printed": "May 26"
+          },
+          "5": {
+            "role": "index",
+            "period": "2025-06",
+            "header": "by 2025. Commodities June 25",
+            "month_printed": "June 25"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2026-06",
+            "header": "0.30% over and % June May 26",
+            "month_printed": "May 26"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2026-06",
+            "header": "May Services Change 2026 June 25",
+            "month_printed": "June 25"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2026-06",
+            "header": "and (Base (In June May 26",
+            "month_printed": "May 26"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2026-06",
+            "header": "increased 2015-16) points) Over June 25",
+            "month_printed": "June 25"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 8,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2026-06:urban": {
+        "source_id": "cpi-pbs-2026-06",
+        "area": "urban",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+        "page": 9,
+        "table_index": 0,
+        "run_id": "CPI_2026-06__docling__full-document__run-01",
+        "rows": 17,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2026-06",
+            "header": "Price Index for of the (Urban) Group Weight (%)",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2026-06",
+            "header": "Index 2026 last year by Group June 26",
+            "month_printed": "June 26"
+          },
+          "4": {
+            "role": "index",
+            "period": "2026-05",
+            "header": "(UCPI) decreased i.e. June of Indices May 26",
+            "month_printed": "May 26"
+          },
+          "5": {
+            "role": "index",
+            "period": "2025-06",
+            "header": "by 0.47% 2025. Commodities June 25",
+            "month_printed": "June 25"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2026-06",
+            "header": "over and Services % June May 26",
+            "month_printed": "May 26"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2026-06",
+            "header": "2026 (Base Change 2026 June 25",
+            "month_printed": "June 25"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2026-06",
+            "header": "and 2015-16) (In June May 26",
+            "month_printed": "May 26"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2026-06",
+            "header": "points) Over June 25",
+            "month_printed": "June 25"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 9,
+          "table_index": 0,
+          "printed_numeric_tokens": 141,
+          "matched": 141,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 141,
+          "row_band_matched": 141,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 141
+        }
+      },
+      "cpi-pbs-2026-06:rural": {
+        "source_id": "cpi-pbs-2026-06",
+        "area": "rural",
+        "base_year": "2015-16",
+        "base_confirmed": true,
+        "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+        "page": 10,
+        "table_index": 0,
+        "run_id": "CPI_2026-06__docling__full-document__run-01",
+        "rows": 18,
+        "cols": 10,
+        "value_columns": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "role": "weight",
+            "period": "2026-06",
+            "header": "Index for month (Rural) by Group Weight (%) 100.00",
+            "month_printed": null
+          },
+          "3": {
+            "role": "index",
+            "period": "2026-06",
+            "header": "June of the last Group of June 26 298.41",
+            "month_printed": "June 26"
+          },
+          "4": {
+            "role": "index",
+            "period": "2026-05",
+            "header": "is year i.e. Commodities Indices May 26 298.51",
+            "month_printed": "May 26"
+          },
+          "5": {
+            "role": "index",
+            "period": "2025-06",
+            "header": "decreased June and June 25 269.02",
+            "month_printed": "June 25"
+          },
+          "6": {
+            "role": "mom",
+            "period": "2026-06",
+            "header": "0.03% 2025. Services % June May 26 -0.03",
+            "month_printed": "May 26"
+          },
+          "7": {
+            "role": "yoy",
+            "period": "2026-06",
+            "header": "over Change 2026 June 25 10.92",
+            "month_printed": "June 25"
+          },
+          "8": {
+            "role": "impact_mom",
+            "period": "2026-06",
+            "header": "2026 (In % June May 26 -0.03",
+            "month_printed": "May 26"
+          },
+          "9": {
+            "role": "impact_yoy",
+            "period": "2026-06",
+            "header": "and points) Over June 25 10.92",
+            "month_printed": "June 25"
+          }
+        },
+        "column_problems": [],
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "not_targeted_rows": [
+          "Non-perishable Food Items",
+          "Perishable Food Items"
+        ],
+        "header_rows_as_data": [
+          "General"
+        ],
+        "labels_from_text_layer": [],
+        "rows_mapped": [
+          "alcohol_tobacco",
+          "clothing_footwear",
+          "communication",
+          "education",
+          "food",
+          "furnishing_household",
+          "general",
+          "health",
+          "housing_utilities",
+          "miscellaneous",
+          "recreation_culture",
+          "restaurants_hotels",
+          "transport"
+        ],
+        "coverage": {
+          "page": 10,
+          "table_index": 0,
+          "printed_numeric_tokens": 142,
+          "matched": 142,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 142,
+          "row_band_matched": 142,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 142
+        }
+      }
+    },
+    "not_located": {
+      "cpi-pbs-2016-06:national": "No validated extraction run exists",
+      "cpi-pbs-2019-06:national": "No validated extraction run exists"
+    },
+    "locator": {
+      "cpi-pbs-2023-06": [
+        {
+          "area": "national",
+          "page": 8,
+          "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "urban",
+          "page": 9,
+          "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "rural",
+          "page": 10,
+          "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        }
+      ],
+      "cpi-pbs-2024-06": [
+        {
+          "area": "national",
+          "page": 8,
+          "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "urban",
+          "page": 9,
+          "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "rural",
+          "page": 10,
+          "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        }
+      ],
+      "cpi-pbs-2025-06": [
+        {
+          "area": "national",
+          "page": 8,
+          "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 18,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "urban",
+          "page": 9,
+          "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "rural",
+          "page": 10,
+          "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 18,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        }
+      ],
+      "cpi-pbs-2026-06": [
+        {
+          "area": "national",
+          "page": 8,
+          "caption": "Table 1: Consumer Price Index (National) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "urban",
+          "page": 9,
+          "caption": "Table 2: Consumer Price Index (Urban) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 17,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        },
+        {
+          "area": "rural",
+          "page": 10,
+          "caption": "Table 3: Consumer Price Index (Rural) by Group of Commodities and Services (Base 2015-16)",
+          "candidates": [
+            {
+              "table_index": 0,
+              "score": 13,
+              "rows": 18,
+              "cols": 10
+            }
+          ],
+          "result": "found"
+        }
+      ]
+    },
+    "check_pass_rates": {
+      "all": {
+        "pass": 121,
+        "pass_within_rounding": 356,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 477,
+        "pass_rate": 1.0
+      },
+      "arithmetic": {
+        "pass": 4,
+        "pass_within_rounding": 356,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 360,
+        "pass_rate": 1.0
+      },
+      "weights_sum": {
+        "pass": 4,
+        "pass_within_rounding": 8,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 12,
+        "pass_rate": 1.0
+      },
+      "index_aggregation": {
+        "pass": 0,
+        "pass_within_rounding": 36,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 36,
+        "pass_rate": 1.0
+      },
+      "recompute": {
+        "pass": 0,
+        "pass_within_rounding": 312,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 312,
+        "pass_rate": 1.0
+      },
+      "cross_edition": {
+        "pass": 117,
+        "pass_within_rounding": 0,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 117,
+        "pass_rate": 1.0
+      },
+      "cross_source": {
+        "pass": 0,
+        "pass_within_rounding": 0,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 0,
+        "pass_rate": null
+      }
+    },
+    "cross_source_sbp": {
+      "status": "skipped",
+      "reason": "no sbp_easydata source is registered in sources/manifest.csv"
+    }
+  },
   "lfs": {
     "dataset": "lfs",
     "built_at": "2026-10-10T21:53:14+00:00",

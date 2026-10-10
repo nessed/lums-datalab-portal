@@ -34,11 +34,9 @@ const DEMO: Record<"health" | "healthShare" | "cpi" | "unemployment" | "particip
   },
   cpi: {
     dataset: "cpi",
-    include: ["general"],
-    exclude: ["weight", ".share"],
-    prefer: ["national"],
-    heading: "Consumer prices: general index",
-    lead: "The general Consumer Price Index as printed by the Pakistan Bureau of Statistics.",
+    include: ["cpi.national.general.b2015_16"],
+    heading: "Consumer prices: national general index (base 2015-16)",
+    lead: "The national general Consumer Price Index for June and May of each issue, as printed in the Pakistan Bureau of Statistics Monthly Review of Price Indices. Only issues on the 2015-16 base are in this release.",
   },
   unemployment: {
     dataset: "lfs",

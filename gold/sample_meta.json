@@ -2,116 +2,244 @@
   "release": "v0.0.1-prototype",
   "seed": 20261011,
   "requested": 400,
-  "drawn": 398,
-  "eligible_cells": 630,
+  "drawn": 399,
+  "eligible_cells": 4176,
   "strata": {
     "abs/abs-fed-2010-11/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2010-11/other": {
       "cells": 18,
-      "drawn": 11
+      "drawn": 2
     },
     "abs/abs-fed-2010-11/total": {
       "cells": 27,
-      "drawn": 17
+      "drawn": 3
     },
     "abs/abs-fed-2011-12/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2011-12/other": {
       "cells": 18,
-      "drawn": 11
+      "drawn": 2
     },
     "abs/abs-fed-2011-12/total": {
       "cells": 27,
-      "drawn": 17
+      "drawn": 3
     },
     "abs/abs-fed-2016-17/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2016-17/other": {
       "cells": 18,
-      "drawn": 11
+      "drawn": 2
     },
     "abs/abs-fed-2016-17/total": {
       "cells": 27,
-      "drawn": 17
+      "drawn": 3
     },
     "abs/abs-fed-2017-18/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2017-18/other": {
       "cells": 18,
-      "drawn": 11
+      "drawn": 2
     },
     "abs/abs-fed-2017-18/total": {
       "cells": 24,
-      "drawn": 15
+      "drawn": 2
     },
     "abs/abs-fed-2021-22/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2021-22/other": {
       "cells": 6,
-      "drawn": 4
+      "drawn": 1
     },
     "abs/abs-fed-2021-22/total": {
       "cells": 24,
-      "drawn": 15
+      "drawn": 2
     },
     "abs/abs-fed-2022-23/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2022-23/other": {
       "cells": 15,
-      "drawn": 10
+      "drawn": 1
     },
     "abs/abs-fed-2022-23/total": {
       "cells": 21,
-      "drawn": 13
+      "drawn": 2
     },
     "abs/abs-fed-2024-25/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2024-25/other": {
       "cells": 15,
-      "drawn": 10
+      "drawn": 1
     },
     "abs/abs-fed-2024-25/total": {
       "cells": 24,
-      "drawn": 15
+      "drawn": 2
     },
     "abs/abs-fed-2025-26/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2025-26/other": {
       "cells": 15,
-      "drawn": 10
+      "drawn": 1
     },
     "abs/abs-fed-2025-26/total": {
       "cells": 24,
-      "drawn": 15
+      "drawn": 2
     },
     "abs/abs-fed-2026-27/breakdown": {
       "cells": 30,
-      "drawn": 19
+      "drawn": 3
     },
     "abs/abs-fed-2026-27/other": {
       "cells": 15,
-      "drawn": 10
+      "drawn": 1
     },
     "abs/abs-fed-2026-27/total": {
       "cells": 24,
-      "drawn": 15
+      "drawn": 2
+    },
+    "cpi/cpi-pbs-2023-06/breakdown": {
+      "cells": 180,
+      "drawn": 17
+    },
+    "cpi/cpi-pbs-2023-06/other": {
+      "cells": 36,
+      "drawn": 3
+    },
+    "cpi/cpi-pbs-2023-06/total": {
+      "cells": 15,
+      "drawn": 1
+    },
+    "cpi/cpi-pbs-2024-06/breakdown": {
+      "cells": 180,
+      "drawn": 17
+    },
+    "cpi/cpi-pbs-2024-06/other": {
+      "cells": 36,
+      "drawn": 3
+    },
+    "cpi/cpi-pbs-2024-06/total": {
+      "cells": 15,
+      "drawn": 1
+    },
+    "cpi/cpi-pbs-2025-06/breakdown": {
+      "cells": 180,
+      "drawn": 17
+    },
+    "cpi/cpi-pbs-2025-06/other": {
+      "cells": 36,
+      "drawn": 3
+    },
+    "cpi/cpi-pbs-2025-06/total": {
+      "cells": 15,
+      "drawn": 1
+    },
+    "cpi/cpi-pbs-2026-06/breakdown": {
+      "cells": 180,
+      "drawn": 17
+    },
+    "cpi/cpi-pbs-2026-06/other": {
+      "cells": 36,
+      "drawn": 3
+    },
+    "cpi/cpi-pbs-2026-06/total": {
+      "cells": 15,
+      "drawn": 1
+    },
+    "cpi_monthly_review/cpi-pbs-2023-06/unmapped": {
+      "cells": 129,
+      "drawn": 12
+    },
+    "cpi_monthly_review/cpi-pbs-2024-06/unmapped": {
+      "cells": 129,
+      "drawn": 12
+    },
+    "cpi_monthly_review/cpi-pbs-2025-06/unmapped": {
+      "cells": 129,
+      "drawn": 12
+    },
+    "cpi_monthly_review/cpi-pbs-2026-06/unmapped": {
+      "cells": 129,
+      "drawn": 12
+    },
+    "lfs/lfs-pbs-2017-18/breakdown": {
+      "cells": 48,
+      "drawn": 5
+    },
+    "lfs/lfs-pbs-2017-18/other": {
+      "cells": 48,
+      "drawn": 5
+    },
+    "lfs/lfs-pbs-2017-18/total": {
+      "cells": 60,
+      "drawn": 6
+    },
+    "lfs/lfs-pbs-2018-19/breakdown": {
+      "cells": 48,
+      "drawn": 5
+    },
+    "lfs/lfs-pbs-2018-19/other": {
+      "cells": 48,
+      "drawn": 5
+    },
+    "lfs/lfs-pbs-2018-19/total": {
+      "cells": 60,
+      "drawn": 6
+    },
+    "lfs/lfs-pbs-2020-21/breakdown": {
+      "cells": 48,
+      "drawn": 5
+    },
+    "lfs/lfs-pbs-2020-21/other": {
+      "cells": 32,
+      "drawn": 3
+    },
+    "lfs/lfs-pbs-2020-21/total": {
+      "cells": 40,
+      "drawn": 4
+    },
+    "lfs/lfs-pbs-2024-25/breakdown": {
+      "cells": 48,
+      "drawn": 5
+    },
+    "lfs/lfs-pbs-2024-25/other": {
+      "cells": 40,
+      "drawn": 4
+    },
+    "lfs/lfs-pbs-2024-25/total": {
+      "cells": 50,
+      "drawn": 5
+    },
+    "lfs_annual_report/lfs-pbs-2017-18/unmapped": {
+      "cells": 480,
+      "drawn": 46
+    },
+    "lfs_annual_report/lfs-pbs-2018-19/unmapped": {
+      "cells": 480,
+      "drawn": 46
+    },
+    "lfs_annual_report/lfs-pbs-2020-21/unmapped": {
+      "cells": 288,
+      "drawn": 28
+    },
+    "lfs_annual_report/lfs-pbs-2024-25/unmapped": {
+      "cells": 288,
+      "drawn": 28
     }
   },
   "blind": "The extracted value is deliberately absent from sample.csv and sample.js.",

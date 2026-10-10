@@ -112,6 +112,15 @@ Spreadsheets and API data skip profile/extract/structure/second-reader but go th
 - **ABS covers:** 2010-11 has no cover page in the file and 2017-18's cover is an image, so the title cannot be read from the text layer. Pages 2, 4, 6 of newer editions are blank. See the verification records.
 - **Wayback:** the availability API (`archive.org/wayback/available`) returns nothing for most of these PDFs; the CDX index (`web.archive.org/cdx/search/cdx`) works and carries a SHA-1 digest that can be compared with the local file.
 - **Git Bash heredocs** choke on some multi-byte characters; write long text files with a file tool or Python, not `cat <<EOF`.
+- **"No text layer" is not "scanned".** PBS monthly reviews carry three chart-image pages; in a 12-page issue that is 25% and trips the 20% scanned-track rule, so the June 2016 and June 2019 CPI issues were refused although their tables are born-digital. Left for a human decision; don't bend the rule.
+- **Docling marks a first data row as a header row** (CPI Rural "General" row; LFS full-width block heading "Pakistan"). Never let row meaning depend on the header flag alone; `datasets/cpi.py` accepts such a row only when every value column holds exactly one number, and the checks then validate it.
+- **Header cells span down into data rows** (CPI "No"/"Group"); build a row label only from cells that start in that row.
+- **CPI column headers:** the month is printed three ways ("June 25", "Jun 23", "June" above "2016"), and a % change column's header month is the comparison month, not the observation month.
+- **The file PBS serves as "LFS 2014-15" is the Azad Jammu & Kashmir edition.** Verification now fails it by a content marker (`markers_none` in `sources/plan.yaml`). Check cover text, never a file name.
+- **LFS 2024-25 prints nearly every table twice (13th and 19th ICLS definitions)**, sometimes on one page. Only 13th ICLS tables are mapped, to stay on one definition across rounds.
+- **LFS title matching needs word boundaries:** "Unemployed - Pakistan and Provinces" contains "employed - Pakistan and Provinces"; bare "Rural"/"Urban" row labels repeat for every province and mean something only inside their block.
+- **Docling page-range runs keep the original page numbers**, so receipts need no offset. A page-range run never supplies its first or last page.
+- **Shared work folder:** tracks that share `work/` must not share log file names, and `datalab release` picks up every dataset found in `work/datasets/`; use `--dataset` to limit it.
 - **Series breaks:** 18th Amendment / 7th NFC (FY2010-11), CPI rebased to 2015-16 (2019), GDP rebased to 2015-16 (2022). Mark them; never smooth across them.
 
 ## 8. Working conventions
@@ -173,10 +182,12 @@ The previous RAs' work and the source corpus live in the `ra-ship` archive (`RA_
 
 ## 11. Current focus
 
-**First prototype:** federal ABS (2010-11, 2016-17, 2021-22, 2024-25, 2025-26), CPI and Labour Force Survey, 5 years each, end to end: schema → process → check → cite → source snippet → site.
+**First prototype (built 2026-10-11, branch `proto/v0`, release `v0.0.1-prototype`).** Read `STATUS.md` for the exact state.
 
-- ABS PDFs are all born-digital (text layer present). Page counts: 29, 33, 50, 59, 54. The function-wise expenditure table sits on a different page each year; locate it per edition.
-- CPI and LFS source files are being collected; they'll appear in the manifest.
-- Open decisions (ask before assuming): function level only or one level down; how to display a line present in some years but not others.
+- **ABS:** 9 editions (2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27), the Summary of Expenditure table, published. The function lines are current expenditure on revenue account.
+- **CPI:** June issues 2023 to 2026 (base 2015-16), national, urban and rural group tables, published. The two pre-2019 issues are blocked by the scanned-track rule; June 2018 and 2021 were not obtained.
+- **LFS:** 4 reports processed (2017-18, 2018-19, 2020-21, 2024-25, the long ones as page-range runs), **not published**: cross-edition agreement is below the frozen threshold. The site shows it as "coming".
+- A new data type is a spec (`specs/<type>.yaml`, `specs/<type>_labels.yaml`) plus a builder in `pipeline/datalab/datasets/` that ends in `common.save_dataset`; `datasets/abs.py` is the model. Status, release and the site need no change.
+- Next: human review of the provisional decisions, gold-set labelling, then the decisions listed under "Open questions" in `STATUS.md`.
 
-Order matters: **schema → process → check → cite → site.** Don't build site features ahead of checked data; use sample data in the schema format if the UI needs something to render.
+Order matters: **schema, process, check, cite, site.** Don't build site features ahead of checked data.

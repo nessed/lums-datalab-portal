@@ -10,10 +10,9 @@ No language model may label, pre-fill or "help with" the gold set (AGENTS.md sec
 
 | File | What it is |
 |---|---|
-| `sample.csv` | The sample: one row per cell, with the page image, the box, and the row and column labels. **The extracted value is deliberately not included**, so labelling is blind. |
+| `sample.csv` | The sample: one row per cell, with the page image (the release's own page render under `releases/<version>/pages/`), the box, and the row and column labels. **The extracted value is deliberately not included**, so labelling is blind. |
 | `sample.js` | The same rows as a script, so `label.html` works when opened straight from disk. |
 | `sample_meta.json` | Release, random seed, strata and how many cells were drawn from each. |
-| `renders/` | The page images the sample refers to (copies of the release's page renders). |
 | `label.html` | The labelling page. Open it in a browser; no server needed. |
 
 The sample is drawn by `python -m datalab gold-sample --n 400 --seed 20261011` from the cells of

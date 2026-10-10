@@ -1043,8 +1043,14 @@
     "verification_status": "official_only",
     "verification_record": "sources/verification/cpi-pbs-2023-06.json",
     "notes": "Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      8,
+      9,
+      10
+    ],
+    "run_ids": [
+      "CPI_2023-06__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:18:24Z",
@@ -1127,8 +1133,14 @@
     "verification_status": "official_only",
     "verification_record": "sources/verification/cpi-pbs-2024-06.json",
     "notes": "Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit). Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      8,
+      9,
+      10
+    ],
+    "run_ids": [
+      "CPI_2024-06__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:19:59Z",
@@ -1211,8 +1223,14 @@
     "verification_status": "official_only",
     "verification_record": "sources/verification/cpi-pbs-2025-06.json",
     "notes": "Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      8,
+      9,
+      10
+    ],
+    "run_ids": [
+      "CPI_2025-06__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:18:22Z",
@@ -1295,8 +1313,14 @@
     "verification_status": "official_only",
     "verification_record": "sources/verification/cpi-pbs-2026-06.json",
     "notes": "Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit). Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      8,
+      9,
+      10
+    ],
+    "run_ids": [
+      "CPI_2026-06__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:20:00Z",

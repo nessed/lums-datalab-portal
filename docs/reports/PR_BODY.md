@@ -14,21 +14,25 @@ This PR started life as "Add overnight prototype plan and autonomous-mode rules"
 
 | Area | State |
 |---|---|
-| Federal Annual Budget Statement (9 editions: 2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27) | **Published in the release**: 535 checked values, 2 labelled gaps |
-| CPI (PBS Monthly Review, June issues) | see changelog |
-| Labour Force Survey (PBS annual reports) | see changelog |
-| Site (`site/`) | builds statically from the release; receipts, series, sources, methods, releases, demo |
-| Gold set | kit only (400-cell blind sample, labelling page); **unlabelled, so no error rate is claimed** |
+| Federal Annual Budget Statement (9 editions: 2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27) | **Published**: 535 checked values, 2 labelled gaps |
+| CPI (PBS Monthly Review, June 2023, 2024, 2025, 2026; base 2015-16; national, urban, rural) | **Published**: 807 checked values; 154 labelled gaps for the pre-2019 base |
+| Labour Force Survey (4 PBS annual reports) | Processed and checked, **not published**: cross-edition agreement 96.97% is under the frozen 98% threshold. Shown as "coming" |
+| Site (`site/`) | builds statically from the release (1,735 pages): receipts, series, sources, methods, releases, demo |
+| Gold set | kit only (399-cell blind sample, labelling page, scorer); **unlabelled, so no error rate is claimed** |
 
-ABS numbers, kept separate on purpose:
+Kept separate on purpose:
 
-- **Coverage** (how much of each printed table was captured): 773 of 781 printed numbers, 98.98%; no table under 96.6%.
-- **Checks** (is what was captured consistent): 338 of 340 pass (99.4%). Cross-edition agreement 112 of 114 (98.2%); the two disagreements are a restatement by the Finance Division and are shown on the receipts.
-- **Measured error rate:** pending human gold-set labelling.
+| | Coverage (how much of each printed table was captured) | Checks passed (evaluable) | Cross-edition agreement |
+|---|---|---|---|
+| ABS | 773 of 781 printed numbers, 98.98% | 338 of 340 | 112 of 114 |
+| CPI | 1,695 of 1,695, 100% | 477 of 477 | 117 of 117 |
+| LFS | 2,108 of 2,108, 100% | 425 of 432 | 192 of 198 |
+
+**Measured error rate:** pending human gold-set labelling.
 
 ## Ready when (AGENTS.md section 8)
 
-- [x] Tests pass and CI checks pass (107 tests; CI runs tests, the release self-check and the site build)
+- [x] Tests pass and CI checks pass (199 tests; CI runs tests, the release self-check and the site build)
 - [x] No published value was produced or altered by an LLM (values come from Docling output through `normalise.parse_printed`; status comes from `status.py`; `check-release` recomputes both in CI)
 - [x] Provenance fields are filled for every new value (source, page, box, printed text, run id, tool version, config hash)
 - [x] Coverage and accuracy are reported separately where relevant
@@ -58,7 +62,10 @@ Good places to start reading: `pipeline/datalab/status.py` (how a value earns "c
 - **M2 (01:50)** Schema, normaliser, tests, CI green.
 - **M3-M5 (02:40)** 9 fresh Docling runs validated; Summary of Expenditure located in all 9; 630 cells mapped; 340 checks; release `v0.0.1-prototype` with 535 published values.
 - **M6 (02:40)** Site merged from `proto/v0-site` and built against the release; screenshots in `docs/reports/qa/`.
-- Sources: 6 CPI June issues and 5 LFS reports registered and content-inspected (June 2018 and June 2021 CPI could not be downloaded).
+- **Sources (02:10)** 6 CPI June issues and 5 LFS reports registered and content-inspected. June 2018 and June 2021 CPI could not be downloaded. The file PBS serves as "LFS 2014-15" turned out to be the Azad Jammu and Kashmir edition and now fails verification.
+- **M7 CPI (02:57)** merged from `proto/v0-cpi`: 4 issues, 12 tables, 477 checks, 807 published values. The two pre-2019 issues are refused by the scanned-track rule (chart pages) and left as gaps.
+- **M8 LFS (02:50)** merged from `proto/v0-lfs`: 4 reports (3 as page-range runs), 25 tables, 432 checks. Below the cross-edition threshold, so unpublished.
+- **M9-M10 (03:10)** demo page with health, share of total and CPI; gold sample across all data types; spot-check sheet; final report with the morning checklist.
 
 ## What is provisional
 
@@ -68,7 +75,11 @@ Every decision dated 2026-10-11 in `DECISIONS.md`. The ones most worth a human l
 2. ABS 2017-18 is used under a recorded deviation from the 95% text-layer inspection level (its covers are images).
 3. A figure restated in a later edition is published from the first edition, with the disagreement stated.
 4. The ABS function lines are current expenditure on revenue account only, and are labelled that way.
-5. The release is a prototype: no DOI, draft series definitions, PDFs not hosted by us.
+5. CPI issues before 2019 are blocked because chart pages count as scanned; nothing on the 2007-08 base is published.
+6. LFS is withheld by the cross-edition threshold; whether a restatement by the publisher should count against it is a human call.
+7. The release is a prototype: no DOI, draft series definitions, PDFs not hosted by us.
+
+The CPI and LFS builders were written by subagents and merged after the tests, the release self-check and a read of the headline series. They have had less review than ABS.
 
 ## What is left
 

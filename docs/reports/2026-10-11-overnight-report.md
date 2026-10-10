@@ -193,3 +193,195 @@ table per document.
   and RIS); `siteUrl` in `site/release.config.json` is empty until the Vercel URL is known.
 - ClickUp: no ClickUp tools are available in this session, so no comment was posted. The text
   to post is at the end of this report.
+
+## M7 CPI (track A sources 01:22 to 02:09; track C pipeline 02:10 to 02:55; merged 02:57)
+
+**Sources.** Planned Junes: 2016, 2018, 2021, 2023, 2025. Obtained: 2016 and 2019 (Wayback, base
+2007-08), 2023, 2024, 2025, 2026 (official PBS site, base 2015-16). **June 2018 and June 2021 were
+not obtained:** they exist only in the Wayback Machine and every download returned HTTP 429 (rate
+limit). June 2019 and June 2024 stand in; June 2026 is a spare. The PBS price page lists reviews
+only from July 2022 onward. All six files passed content inspection (title words and "June
+<year>" in the first pages).
+
+**Extraction.** Four issues validated. **June 2016 and June 2019 were refused by the scanned-track
+rule:** each has three chart pages that are images, which is 25% and 23% of a 12 or 13 page file,
+over the frozen 20% limit. Their table pages are born-digital. The rule was not bent. So
+**nothing on the 2007-08 base is published**; those 154 expected figures are labelled gaps ("not
+yet verified by us"). This needs a human decision.
+
+**Located:** national (p. 8), urban (p. 9) and rural (p. 10) group tables in each of the four
+issues: 12 tables. **Coverage: 1,695 of 1,695 printed numbers, 100% on every table.**
+
+**Checks: 477, all evaluable, 0 failed.** Tolerances were committed before any result existed.
+
+| Check | Passed |
+|---|---|
+| 12 group weights sum to 100 | 12 of 12 |
+| General index recomputes from group indices and weights | 36 of 36 (largest difference 0.031 against a bound of about 0.17) |
+| Year-on-year and month-on-month % recompute from the printed indices | 312 of 312 |
+| Same index in the next June issue ("same month last year" column) | 117 of 117 |
+
+**Published: 807 values (117 tier A, 690 tier B) in 178 series.** Sanity read of the headline
+series by code output: national general index June 2022 175.71, June 2023 227.37, June 2024
+255.94, June 2025 264.22, June 2026 293.47; printed year-on-year change 29.40, 12.57, 3.23, 11.07
+per cent. Overlay viewed for 2025-06 p. 8: boxes sit on the numbers.
+
+Not done for CPI: cross-source against SBP EasyData (the CSV was downloaded without login and is
+in the sources folder, but it is not registered, so no comparison was run); food sub-rows and
+"impact" columns are not mapped; the printed column label shown on CPI receipts is untidy
+(for example "June 2025 last year by June 25") because it is collected from header words by
+position; the values and their meaning are right, the label text needs cleaning.
+
+A claim that the 2007-08 CPI was "urban only" had been drafted into the spec from general
+knowledge. It was removed before release: nothing in the documents processed supports it yet.
+
+## M8 LFS (track D 02:10 to 02:52; merged 02:50)
+
+**Sources.** Five files downloaded from the official PBS site. **The file PBS serves as "LFS
+2014-15" is the Azad Jammu and Kashmir edition, not the national report** (found by the LFS track
+from the cover text). It now fails verification by a content marker and is not used. Four reports
+remain: 2017-18 (54 pages), 2018-19 (408), 2020-21 (230), 2024-25 (205).
+
+**Extraction.** 2017-18 full document. The three long reports as page-range runs under decision
+D18: 2018-19 pp. 35-58; 2020-21 pp. 26-45 and 65-73; 2024-25 pp. 48-79 and 140-150. All six runs
+validated. Page-range runs keep the original page numbers. No table on the first or last page of
+a range is used.
+
+**Located: 25 tables** (crude and refined participation rates, labour force, employed, industry
+shares in all four reports; unemployment rates in three). **Coverage: 2,108 of 2,108, 100%.**
+
+**Checks: 432 evaluable, 425 passed (98.4%).**
+
+| Check | Passed | Failed |
+|---|---|---|
+| Male + female = total (counts) | 60 | 0 |
+| Rural + urban = total (counts) | 60 | 0 |
+| Accounting identities | 36 | 0 |
+| Industry shares sum to 100 | 24 | 0 |
+| Rate recomputes from counts | 53 | 1 |
+| Same figure in the next report's previous-round column | 192 | **6** |
+
+**LFS is NOT published.** Cross-edition agreement is 192 of 198 = 96.97%, under the frozen 98%.
+All six disagreements are 2018-19 industry shares that the 2020-21 report prints differently
+(PBS appears to have regrouped industries; a human question). The one recompute failure is the
+2018-19 urban unemployment rate, 0.08 away from the value recomputed from the printed counts
+against a bound of 0.0736; the bound was fixed first, so the failure stands. By evidence alone
+335 LFS values would be tier A or B; because the data type is below a threshold, **all 372 LFS
+observations are gaps in the release and the site shows LFS as "coming".**
+
+Also worth knowing: LFS 2024-25 prints most tables twice (13th and 19th ICLS definitions); only
+the 13th ICLS tables are mapped so that series stay on one definition, which means PBS's own
+headline (19th ICLS) is not in the data. Every LFS series carries a "check comparability" break
+at 2024-25: a recorded text search found no statement that the round is comparable with earlier
+ones. Cross-source against the Economic Survey labour chapter was not attempted.
+
+Details: `docs/reports/track_c_cpi_findings.md`, `docs/reports/track_d_lfs_findings.md`.
+
+## M9 Demo and derived series (done 03:00)
+
+- Derived by code from published values only: health and education (current, revenue account)
+  as a share of total federal expenditure, 22 values each, formula on every receipt.
+- `/demo/health-and-jobs`: health budget and revised estimates, the share of total, and the
+  national CPI general index (base 2015-16). LFS shows as "coming". Every chart point and every
+  number in the paragraph links to its receipt. The devolution break is drawn at 2011-12 and
+  lines stop there and at missing years.
+- Real-terms (deflated) series: not built. It needs a splice across the 2019 rebasing, which is
+  a methodological choice for humans, and the pre-2019 CPI issues are not processed.
+
+## M10 Handoff (03:00)
+
+**Final release `v0.0.1-prototype`:** 1,870 observations: **1,342 published** (ABS 535, CPI 807),
+528 labelled gaps (ABS 2 not printed by the government; CPI 154 not yet verified; LFS 372 not yet
+verified or failed). 44 page renders, 23 MB. 199 tests pass. CI green. Site: 1,735 static pages.
+
+**Gold kit:** `gold/` holds a blind sample of 399 cells drawn across all three data types
+(seed 20261011) and a labelling page that runs from disk. **Unlabelled.** `datalab gold-score`
+is written and scores two labellers' files.
+
+**Cut or not done, in one list:**
+- CPI June 2018 and June 2021 (Wayback rate limit); CPI on the 2007-08 base (scanned-track rule).
+- LFS publication (below threshold); LFS 2014-15 national report (PBS link serves the AJK edition).
+- Cross-source checks: SBP EasyData for CPI, Economic Survey chapters for CPI and LFS, Arslan's
+  dataset for ABS (it is at sub-function level from other tables, so not like-for-like).
+- Full-document Docling runs for the three long LFS reports.
+- pdfplumber second reader (no table was flagged, so nothing was routed to it).
+- Real-terms toggle, oEmbed share card, copy-to-clipboard on cite.
+- Wayback save for ABS 2026-27 (the save request returned HTTP 520); the other 8 ABS files have
+  a snapshot whose content digest equals our file.
+- ClickUp comment (no ClickUp tools in this session). Text to paste is below.
+
+## Morning checklist for Ali
+
+1. **Pull and read.** `git pull` on `proto/v0`; read `STATUS.md`, then this report; open PR #1
+   (https://github.com/nessed/lums-datalab-portal/pull/1). CI should be green.
+2. **See it locally (2 minutes).** `cd site; npm ci; npm run build; npm run start`, then open
+   `/o/fed.exp.current.function.health~2025-26~be` (the receipt), `/series/fed.exp.current.function.health`,
+   `/demo/health-and-jobs`, `/sources`, `/methods`.
+3. **Create the Vercel project.** Import `nessed/lums-datalab-portal`; Root Directory `site`;
+   framework Next.js; build command `npm run build`; Node 24; no environment variables;
+   production branch `main`, so `proto/v0` deploys as a preview. The build reads `../releases/`
+   from the repository. Local build: about 1 minute, 1,735 static pages. Afterwards put the URL
+   in `site/release.config.json` (`siteUrl`) so citations point at the site.
+4. **Confirm or overturn the provisional decisions** in `DECISIONS.md` (everything dated
+   2026-10-11). The ones that change what is published:
+   - ABS function lines are labelled "current, revenue account". Is that the series you want to lead with?
+   - Restated figures are published from the first edition with a note (2 cases in ABS).
+   - ABS 2010-11 and 2017-18 are identified without a readable cover; 2017-18 is used under a
+     recorded deviation from the 95% text-layer level.
+   - CPI pre-2019 issues are blocked because chart pages count as scanned. Change how that is
+     measured (for example, only pages that carry tables), or record a deviation, or leave them out.
+   - LFS is unpublished because 6 of 198 cross-edition pairs disagree. Decide whether a
+     restatement by the publisher should count against the 98% threshold, or whether those six
+     shares should be `disputed`.
+5. **Label the gold set with Ahmad** (`gold/README.md`; open `gold/label.html`; about an hour for
+   399 cells between two people), then
+   `python -m datalab gold-score gold/labels_ali.csv gold/labels_ahmad.csv`. That gives the first
+   measured error rate.
+6. **Spot-check 10 receipts against the PDFs.** A list of 30 random published values with their
+   receipt paths is in `docs/reports/spot_check.md`.
+7. **Queued follow-ups** (`STATUS.md`): CPI June 2018 and 2021; register the national LFS
+   2014-15 report; full-document LFS runs; SBP and Economic Survey cross-source checks; DOI;
+   hosting our own copies of the PDFs; moving the repo to an organisation; branch protection with
+   required CI; public repo or a form for error reports; LUMS name and logo sign-off.
+8. **What to tell sir** (every figure is in the release; receipt paths in brackets):
+
+   > We have a working first prototype of the DataLab portal. It reads official PDFs, checks
+   > every number by arithmetic, and shows each number boxed on the government page it came
+   > from. So far it publishes 1,342 checked values: 535 from nine federal Annual Budget
+   > Statements and 807 from four PBS Monthly Reviews of Price Indices. As an example, the
+   > 2025-26 budget estimate for federal current spending on health is Rs 31,975 million
+   > [`/o/fed.exp.current.function.health~2025-26~be`], which is 0.13 per cent of total federal
+   > expenditure of Rs 23,848,112 million [`/o/fed.exp.current.function.health.share_of_total~2025-26~be`,
+   > `/o/fed.exp.total~2025-26~be`]; the national CPI stood at 264.22 in June 2025
+   > [`/o/cpi.national.general.b2015_16~2025-06~na`]. The Labour Force Survey has been processed
+   > but is held back because six figures disagree between two PBS reports, which is the system
+   > working as intended. The error rate is not measured yet: that needs Ali and Ahmad to
+   > hand-label about 400 cells. It is a prototype, not yet for citation.
+
+## For Ahmad (reviewing with a different agent)
+
+- Start with `pipeline/datalab/status.py` (60 lines decide what "checked" means), then
+  `checks.py`, `specs/abs.yaml`, `datasets/abs.py`, and `release.py::check_release`.
+- `python -m datalab check-release releases/v0.0.1-prototype` recomputes every sum and every
+  status from the release's own files; it and the 199 tests run without Docling or PDFs
+  (`pipeline/requirements-ci.lock`).
+- To reproduce from the official sources on your machine: `releases/v0.0.1-prototype/HOW_TO_REPRODUCE.md`.
+  `datalab fetch` needs only `SOURCES_DIR`; `RA_SHIP_DIR` is optional. One known gap: the two
+  Wayback-only CPI files may be rate-limited when fetched.
+- Things I would look at hardest: the label dictionaries (`specs/*_labels.yaml`), the
+  text-layer fallbacks for column headers and row labels (`datasets/common.py`), the CPI
+  aggregation tolerance in `specs/cpi.yaml`, and the LFS locator's handling of 13th vs 19th ICLS
+  tables.
+- The CPI and LFS builders were written by subagents and merged by the lead after the tests,
+  the release self-check and a read of the headline series; they have had less review than ABS.
+
+## Text for the ClickUp task (not posted: no ClickUp tools in this session)
+
+> Status as of 2026-10-12: first prototype built on branch `proto/v0`, draft PR
+> https://github.com/nessed/lums-datalab-portal/pull/1.
+> Published in release v0.0.1-prototype: ABS (9 editions, 535 checked values), CPI (June 2023 to
+> 2026, 807 checked values). LFS processed but not published (cross-edition agreement 96.97%,
+> threshold 98%). Coverage: ABS 98.98%, CPI 100%, LFS 100%. Checks passed: ABS 338/340, CPI
+> 477/477, LFS 425/432. Error rate not measured: gold set of 399 cells is ready to label.
+> Site builds statically (1,735 pages); Vercel project still to create (root directory `site`).
+> Decisions to confirm are listed in DECISIONS.md; report in docs/reports/.

@@ -133,8 +133,6 @@ def _named_table(page: int) -> Table:
                  page_size=(600.0, 800.0))
 
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-5: locate() pairs a caption with 'the table on the same page' without "
-                                       "looking at positions, so one table can be handed to two areas")
 def test_review_cpi_5_one_table_is_never_located_for_two_areas():
     # The Urban caption is printed at the foot of the page that carries the National table
     # (its own table starts on the next page). Both areas are 'found' in the single table of page 8.
@@ -227,8 +225,6 @@ def test_review_cpi_10_sbp_row_with_unreadable_date_is_not_swallowed(tmp_path):
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-11
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-11: a caption without an area is silently taken as 'national', also on the "
-                                       "2015-16 base where every CPI table names its area")
 def test_review_cpi_11_new_base_caption_without_area_is_not_assumed_national():
     caps = cpi.find_captions({11: "Table 4: Consumer Price Index by Group of Commodities and Services (Base 2015-16)"}, SPEC)
     assert all(c["area"] != "national" for c in caps), "area defaulted to national; the page does not say so"

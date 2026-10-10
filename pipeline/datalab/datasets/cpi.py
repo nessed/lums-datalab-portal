@@ -207,6 +207,18 @@ def locate(tables: list[Table], captions: list[dict[str, Any]], expected: dict[s
             found[area] = (good[0][1], cap)
             entry["result"] = "found"
         log.append(entry)
+    # One printed table is one area's table. If two captions landed on the same extracted table
+    # (a caption printed at the foot of the previous table's page), neither claim is trusted.
+    claims: dict[int, list[str]] = defaultdict(list)
+    for area, (table, _) in found.items():
+        claims[id(table)].append(area)
+    for areas in claims.values():
+        if len(areas) > 1:
+            for area in areas:
+                table, cap = found.pop(area)
+                problems[area] = (f"The table on page {cap['page']} was matched by the captions of {len(areas)} areas "
+                                  f"({', '.join(areas)}); a table is used for one area only, so none is mapped")
+                log.append({"area": area, "result": "table_claimed_by_several_areas", "page": cap["page"], "areas": areas})
     return found, problems, log
 
 

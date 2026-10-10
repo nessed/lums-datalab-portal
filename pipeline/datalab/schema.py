@@ -266,6 +266,9 @@ class Check(Model):
     rule_id: Optional[str] = None
     dispute_rejected: Optional[str] = Field(
         default=None, description="For a failed cross-edition pair: which D25 condition kept it from being `disputed`.")
+    credits_members: bool = Field(
+        default=True, description="False when a pass is evidence for the target cell only, not for the member cells "
+                                  "it was computed from (a rate recomputed from counts barely constrains the counts).")
 
 
 class RunManifest(Model):

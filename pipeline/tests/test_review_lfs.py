@@ -1,10 +1,9 @@
 """Adversarial review of the LFS builder (docs/reports/review_lfs.md).
 
-Every test here documents a defect: it FAILS on the current code and is marked
-`xfail(strict=True)` so the suite stays green. When a defect is fixed its test
-starts passing, strict xfail turns that into a suite failure, and the marker
-must then be removed. Inputs are synthetic (small cells, a generated Docling
-document); no source file is read.
+Every test here documents a defect found by the review. All eight findings are fixed
+(docs/reports/fix_lfs.md), so the tests now pass and carry no xfail marker; they stay as
+regression tests. Inputs are synthetic (small cells, a generated Docling document); no
+source file is read.
 """
 from __future__ import annotations
 
@@ -43,8 +42,6 @@ def rate_cells(*, rate: str, labour_force: str, unemployed: str | None = None, e
 
 # ---------------------------------------------------------------- REVIEW-LFS-1
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-1: the recompute bound grows with 1/labour force; for a small base it is "
-                                       "several units of the rate's last digit, so different printed rates all 'pass'")
 @pytest.mark.parametrize("counts,printed_rates", [
     # labour force 2.90, employed 2.43 -> 16.2069; bound 0.3669: 15.9 ... 16.5 all pass
     ({"labour_force": "2.90", "employed": "2.43"}, ("16.0", "16.5")),
@@ -62,16 +59,35 @@ def test_recompute_cannot_confirm_two_different_printed_rates(counts, printed_ra
     assert sum(r in PASSING for r in results) <= 1, results
 
 
+def test_coarse_counts_do_not_excuse_a_rate_outside_the_bound():
+    """Too coarse to confirm is not too coarse to contradict: a printed rate outside the wide bound still fails."""
+    counts = {"labour_force": "2.90", "employed": "2.43"}          # recomputed 16.2069, bound 0.3669
+    inside = lfs.recompute_checks(rate_cells(rate="16.2", sex="female", area="urban", **counts), SPEC, TITLES, {})[0]
+    assert inside.result == "not_evaluable" and inside.not_evaluable_reason.startswith(lfs.COARSE_COUNTS_REASON)
+    outside = lfs.recompute_checks(rate_cells(rate="17.0", sex="female", area="urban", **counts), SPEC, TITLES, {})[0]
+    assert outside.result == "fail"
+
+
+def test_printable_values_within_the_bound_are_counted_exactly():
+    from decimal import Decimal as D
+    assert lfs.printable_values_within(D("5.7863"), D("0.0581"), D("0.1")) == 1      # 5.8 only
+    assert lfs.printable_values_within(D("5.8488"), D("0.0582"), D("0.1")) == 2      # 5.8 and 5.9
+    assert lfs.printable_values_within(D("16.2069"), D("0.3669"), D("0.1")) == 7     # 15.9 ... 16.5
+    assert lfs.printable_values_within(D("5.85"), D("0.05"), D("0.1")) == 2          # a value ON the bound counts
+
+
 # ---------------------------------------------------------------- REVIEW-LFS-2
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-2: a passing recompute check is credited to its input counts, which it "
-                                       "barely constrains; a labour-force count 0.7 million off is published as checked")
-@pytest.mark.parametrize("labour_force", ["64.80", "65.90"])
+@pytest.mark.parametrize("labour_force", ["64.90", "65.80"])
 def test_recompute_does_not_make_an_input_count_checked(labour_force):
-    """Rate 5.8 with unemployed 3.79 passes for any labour force from about 64.7 to 66.0 million.
+    """Rate 5.8 with unemployed 3.79 is singled out for any labour force from about 64.9 to 65.8 million.
 
     No sum, identity or second printing covers the labour-force cell here; the only check that
-    touches it is the rate's recomputation, which cannot tell 64.80 from 65.90.
+    touches it is the rate's recomputation, which cannot tell 64.90 from 65.80.
+
+    (The review used 64.80 and 65.90. With the REVIEW-LFS-1 rule those two no longer pass at all:
+    the bound 0.058 around the recomputed 5.849 / 5.751 holds two printable rates, so the check is
+    not evaluable. The values were moved inside the range where the rate is still confirmed.)
     """
     series = {s.series_id: s for s in lfs.series_catalogue(SPEC, LABELS, [])}
     cells = rate_cells(rate="5.8", labour_force=labour_force, unemployed="3.79")
@@ -80,12 +96,23 @@ def test_recompute_does_not_make_an_input_count_checked(labour_force):
     obs = {o.series_id: o for o in build_observations(cells, checks, series, ORDER, TITLES, "v0-test")}
     count = obs["lfs.labour_force.total.total"]
     assert not count.published and count.status != "checked"
+    assert obs["lfs.unemployment_rate.total.total"].published      # the target still earns its tier
+    assert checks[0].credits_members is False
+
+
+@pytest.mark.parametrize("labour_force", ["64.80", "65.90"])
+def test_recompute_at_the_edge_of_the_bound_confirms_nothing(labour_force):
+    """The review's own values: two printable rates lie within the bound, so neither rate nor count is checked."""
+    series = {s.series_id: s for s in lfs.series_catalogue(SPEC, LABELS, [])}
+    cells = rate_cells(rate="5.8", labour_force=labour_force, unemployed="3.79")
+    checks = lfs.recompute_checks(cells, SPEC, TITLES, {})
+    assert [c.result for c in checks] == ["not_evaluable"]
+    assert lfs.COARSE_COUNTS_REASON in checks[0].not_evaluable_reason
+    assert not any(o.published for o in build_observations(cells, checks, series, ORDER, TITLES, "v0-test"))
 
 
 # ---------------------------------------------------------------- REVIEW-LFS-3
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-3: title patterns are searched anywhere in the title, so a table about a "
-                                       "sub-population is accepted as the headline table")
 @pytest.mark.parametrize("caption,round_", [
     ("table 8.9 youth (15-24 years) unemployment rate by province, region & sex (%) unemployment rate (13th icls) "
      "2020-21 2024-25 province/region total male female total male female", "2024-25"),
@@ -107,8 +134,6 @@ def test_title_with_a_qualifier_is_not_the_headline_table(caption, round_):
 
 # ---------------------------------------------------------------- REVIEW-LFS-4
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-4: only the round listed in icls.required_in_rounds must state its "
-                                       "definition; any later round silently defaults to '13th ICLS'")
 @pytest.mark.parametrize("round_", ["2025-26", "2026-27"])
 def test_round_with_unknown_definition_is_not_assumed_13th_icls(round_):
     """A report newer than 2024-25 whose title does not say which definition it uses must not be mapped.
@@ -125,6 +150,12 @@ def test_round_with_unknown_definition_is_not_assumed_13th_icls(round_):
     assert kind is None, f"classified as {kind['kind']} ({result}) with no definition stated"
 
 
+def test_refused_round_records_its_reason():
+    caption = "table 3.6 civilian labour force - pakistan and provinces (million) labour force 2025-26"
+    assert lfs.classify(caption, "2025-26", SPEC) == (None, "definition_unknown_for_round")
+    assert lfs.classify(caption, "2020-21", SPEC)[1] == "found"      # a round listed as 13th ICLS throughout
+
+
 # ---------------------------------------------------------------- REVIEW-LFS-5
 
 def manifest(run_id: str, mode: str, pages) -> RunManifest:
@@ -133,8 +164,6 @@ def manifest(run_id: str, mode: str, pages) -> RunManifest:
                        validated=True)
 
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-5: a page-range run whose manifest lacks the range is treated as a "
-                                       "full-document run (boundary pages included, every page claimed)")
 def test_page_range_run_without_a_recorded_range_supplies_nothing():
     try:
         pages = lfs.usable_pages(manifest("r1", "page-range", None), 400)
@@ -143,8 +172,6 @@ def test_page_range_run_without_a_recorded_range_supplies_nothing():
     assert pages == set()
 
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-5: a full-document run of a source with an empty page count "
-                                       "(a known registry trap) silently supplies no table at all")
 def test_full_document_run_is_not_silently_emptied_by_a_missing_page_count(tmp_path, monkeypatch):
     monkeypatch.setenv("WORK_DIR", str(tmp_path / "work"))
     run = manifest("LFS_TEST__docling__full-document__run-01", "full-document", None)
@@ -229,8 +256,6 @@ def test_fixture_baseline_maps_the_national_block_only(tmp_path, monkeypatch):
 
 # ---------------------------------------------------------------- REVIEW-LFS-6
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-6: a 'Pakistan' row is mapped as the national total whatever heading "
-                                       "it sits under; under a 'Rural' heading it is rural Pakistan")
 def test_pakistan_row_under_a_rural_heading_is_not_the_national_total(tmp_path, monkeypatch):
     """Rows grouped by area first (heading "Rural", then Pakistan and the provinces).
 
@@ -242,12 +267,11 @@ def test_pakistan_row_under_a_rural_heading_is_not_the_national_total(tmp_path, 
     cells, info = build_one_table(tmp_path, monkeypatch, body)
     wrong = sorted({c.series_id for c in cells if c.series_id and c.series_id.endswith(".total")})
     assert wrong == [], f"rural figures mapped to {wrong}"
+    assert info["mapped_cells"] == 0 and any("Pakistan" in label for label in info["unmapped_labels"])
 
 
 # ---------------------------------------------------------------- REVIEW-LFS-7
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-7: a data row that Docling flags as a column header is skipped on the "
-                                       "flag alone; the national row and its block vanish with no flag (AGENTS.md 7)")
 def test_national_row_flagged_as_header_does_not_vanish_silently(tmp_path, monkeypatch):
     """Docling marks the first data row ("Pakistan" with six amounts) as a header row.
 
@@ -260,12 +284,21 @@ def test_national_row_flagged_as_header_does_not_vanish_silently(tmp_path, monke
             ["KP"] + amounts(7), ["Rural"] + amounts(5), ["Urban"] + amounts(1)]
     cells, info = build_one_table(tmp_path, monkeypatch, body, header_rows=3)
     assert info["mapped_cells"] == 18 or info["table_flags"], "national block lost and nothing says so"
+    assert info["mapped_cells"] == 18 and info["header_rows_as_data"] == [2]
+    national = [c for c in cells if c.series_id == "lfs.labour_force.total.total"]
+    assert all("header_row_as_data" in c.structural_flags and c.row_label_raw == "Pakistan" for c in national)
+
+
+def test_header_flagged_row_with_some_numbers_flags_the_table(tmp_path, monkeypatch):
+    """A flagged row that holds numbers but not one per value column is not data, and the table says so."""
+    body = [["Pakistan", "61.00", "62.00", None, "64.00", "65.00", "66.00"], ["Rural"] + amounts(41),
+            ["Urban"] + amounts(19)]
+    cells, info = build_one_table(tmp_path, monkeypatch, body, header_rows=3)
+    assert "header_row_with_numbers" in info["table_flags"] and info["mapped_cells"] == 0
 
 
 # ---------------------------------------------------------------- REVIEW-LFS-8
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-LFS-8: two registered files of the SAME edition count as two editions; "
-                                       "their agreement is recorded as cross_edition and publishes the figure")
 def test_two_files_of_one_edition_are_not_cross_edition_agreement():
     """A second copy of one report (a re-issue, a mirror, a 'final' PDF) agrees with itself by construction.
 
@@ -283,3 +316,50 @@ def test_two_files_of_one_edition_are_not_cross_edition_agreement():
     assert not [c for c in checks if c.check_type == "cross_edition" and c.result in PASSING]
     obs = build_observations(cells, checks, series, order, titles, "v0-test")
     assert not obs[0].published
+
+
+def test_a_real_second_edition_still_agrees_beside_a_duplicate_file():
+    series = {s.series_id: s for s in lfs.series_catalogue(SPEC, LABELS, [])}
+    order = {"lfs-a": "2017-18", "lfs-a-copy": "2017-18", "lfs-b": "2018-19"}
+    sid = "lfs.lfpr_refined.total.total"
+    cells = [make_cell(source, 1, 4, "44.3", "44.3", series=sid, period="2017-18", vintage="na", page=32)
+             for source in order]
+    checks = lfs.cross_checks(cells, {}, order, series)
+    assert [(c.check_type, c.source_ids, c.result) for c in checks] == [("cross_edition", ["lfs-a", "lfs-b"], "pass")]
+
+
+# ---------------------------------------------------------------- unproven 5 and 6 (cheap, conservative)
+
+def test_cross_check_with_a_cell_in_a_blocked_table_is_not_evaluable():
+    """An agreeing second printing must not rescue a figure when either table is blocked."""
+    series = {s.series_id: s for s in lfs.series_catalogue(SPEC, LABELS, [])}
+    order = {"lfs-a": "2017-18", "lfs-b": "2018-19"}
+    sid = "lfs.lfpr_refined.total.total"
+    a = make_cell("lfs-a", 1, 4, "44.3", "44.3", series=sid, period="2017-18", vintage="na", page=32)
+    b = make_cell("lfs-b", 1, 1, "44.3", "44.3", series=sid, period="2017-18", vintage="na", page=40)
+    assert [c.result for c in lfs.cross_checks([a, b], {}, order, series, {})] == ["pass"]
+    for cell_ in (a, b):
+        blocked = {(cell_.source_id, cell_.page, cell_.table_index): "the table is flagged merged_rows"}
+        checks = lfs.cross_checks([a, b], {}, order, series, blocked)
+        assert [(c.check_type, c.result) for c in checks] == [("cross_edition", "not_evaluable")]
+        assert "merged_rows" in checks[0].not_evaluable_reason
+        assert not build_observations([a, b], checks, series, order, {}, "v0-test")[0].published
+
+
+def test_shares_sum_with_an_absent_industry_is_not_evaluable():
+    """A lost row is not a nil row: the remaining shares must not be summed as if it were not there."""
+    shares = {"all": "100.0", "agriculture": "38.5", "manufacturing": "16.1", "construction": "7.6",
+              "wholesale_retail_trade": "14.9", "transport_storage_communication": "6.2",
+              "community_social_personal_services": "14.9", "others": "1.8"}
+
+    def cells_for(values):
+        return [make_cell("lfs-a", r, 1, v, v, series=f"lfs.employment_share.industry.{slug}.total.total", period=PERIOD,
+                          vintage="na", page=35) for r, (slug, v) in enumerate(values.items())]
+
+    assert [c.result for c in lfs.shares_checks(cells_for(shares), SPEC, LABELS, TITLES, {})] == ["pass"]
+    # "others" printed as 0.1 and lost: the seven remaining rows are within the 0.1 tolerance of 100.0
+    near = {**shares, "others": "0.1", "agriculture": "40.2"}
+    assert [c.result for c in lfs.shares_checks(cells_for(near), SPEC, LABELS, TITLES, {})] == ["pass"]
+    lost = {k: v for k, v in near.items() if k != "others"}
+    checks = lfs.shares_checks(cells_for(lost), SPEC, LABELS, TITLES, {})
+    assert [c.result for c in checks] == ["not_evaluable"] and "others" in checks[0].not_evaluable_reason

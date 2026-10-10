@@ -33,7 +33,11 @@ skip_sources:
 # The 2024-25 report prints most tables twice: once on the new 19th ICLS definitions and
 # once on the 13th ICLS definitions used by every earlier round. Only the 13th ICLS
 # tables are mapped to these series; the caption or header must say "13th ICLS".
+# A round in neither list is refused (nothing mapped, reason `definition_unknown_for_round`):
+# the definition of a later round is never assumed. Add a round to one list only after
+# reading which definition its report prints.
 icls:
+  rounds_13th_icls_throughout: ["2014-15", "2017-18", "2018-19", "2020-21"]
   required_in_rounds: ["2024-25"]
   required_pattern: '13 ?th ?icls'
   forbidden_pattern: '19 ?th ?icls'
@@ -54,8 +58,12 @@ tolerances:
   #     bound = dR + 100 x (dE / L + E x dL / L^2)
   # (first-order propagation of the rounding of each printed input; computed per check).
 
-# Table kinds. `captions` are regular expressions searched in the table's printed title
+# Table kinds. `captions` are regular expressions matched against the table's printed title
 # (lower case, single spaces, dashes unified). Exactly one kind must match.
+# Each pattern is anchored at both ends: it must follow the table number directly
+# (`title_start`), so "Youth unemployment rate ..." or "Self employed - ..." is not the
+# headline table, and it runs to the end of the title, which is the printed unit.
+title_start: '^table[ -]*\d+(\.\d+)? ?:? ?'
 tables:
   - kind: unemployment_rate
     title: Unemployment rates by area and sex
@@ -64,8 +72,8 @@ tables:
     unit: percent
     unit_marker: '\(%\)|percent'
     captions:
-      - '\bunemployment rates? ?- ?by area and sex'
-      - '\bunemployment rate by province, region (&|and) sex'
+      - '\bunemployment rates? ?- ?by area and sex ?\(%\)'
+      - '\bunemployment rate by province, region (&|and) sex ?\(%\)'
   - kind: lfpr_crude
     title: Crude activity (participation) rates
     layout: area_by_round_sex
@@ -73,8 +81,8 @@ tables:
     unit: percent
     unit_marker: '\(%\)|percent'
     captions:
-      - '\bcrude activity \(participation\) rates? ?- ?pakistan and provinces'
-      - '\bcrude labour force participation rate ?- ?13th icls'
+      - '\bcrude activity \(participation\) rates? ?- ?pakistan and provinces ?\(%\)'
+      - '\bcrude labour force participation rate ?- ?13th icls ?\(%\)'
   - kind: lfpr_refined
     title: Refined activity (participation) rates
     layout: area_by_round_sex
@@ -82,8 +90,8 @@ tables:
     unit: percent
     unit_marker: '\(%\)|percent'
     captions:
-      - '\brefined activity \(participation\) rates? ?- ?pakistan and provinces'
-      - '\brefined labour force participation rate by province ?\(13th icls\)'
+      - '\brefined activity \(participation\) rates? ?- ?pakistan and provinces ?\(%\)'
+      - '\brefined labour force participation rate by province ?\(13th icls\) ?\(%\)'
   - kind: labour_force
     title: Civilian labour force
     layout: area_by_round_sex
@@ -92,7 +100,8 @@ tables:
     unit_marker: '\bmillions?\b'
     scale_factor: 1000000
     captions:
-      - '\bcivilian labour force ?- ?pakistan and provinces'
+      - '\bcivilian labour force ?- ?pakistan and provinces ?\(million\)'
+      - '\bcivilian labour force ?- ?pakistan and provinces ?\(1[39] ?th icls\) labour force ?\(millions?\)'
   - kind: employed
     title: Employed persons
     layout: area_by_round_sex
@@ -101,8 +110,8 @@ tables:
     unit_marker: '\bmillions?\b'
     scale_factor: 1000000
     captions:
-      - '\bemployed ?- ?pakistan and provinces'
-      - '\bemployed population ?- ?pakistan and provinces'
+      - '\bemployed ?- ?pakistan and provinces ?\(million\)'
+      - '\bemployed population ?- ?pakistan and provinces 1[39] ?th icls employed population ?\(million\)'
   - kind: unemployed
     title: Unemployed persons
     layout: area_by_round_sex
@@ -111,7 +120,7 @@ tables:
     unit_marker: '\bmillions?\b'
     scale_factor: 1000000
     captions:
-      - '\bunemployed ?- ?pakistan and provinces'
+      - '\bunemployed ?- ?pakistan and provinces ?\(million\)'
   - kind: industry
     title: Employed persons by major industry division
     layout: industry_by_round_sex
@@ -120,8 +129,8 @@ tables:
     unit_marker: '\(%\)|percent'
     exclude: 'occupational|injur|informal|subsidiary'   # other tables that also break down by industry
     captions:
-      - '\bemployed ?- ?distribution by major industry divisions'
-      - '\bdistribution of employed persons? by major industry divisions'
+      - '\bemployed ?- ?distribution by major industry divisions ?\(%\)'
+      - '\bdistribution of employed persons? by major industry divisions ?- ?1[39] ?th icls ?\(%\)'
 
 measures:
   unemployment_rate:

@@ -22,6 +22,12 @@
       "title": "Check Type",
       "type": "string"
     },
+    "credits_members": {
+      "default": true,
+      "description": "False when a pass is evidence for the target cell only, not for the member cells it was computed from (a rate recomputed from counts barely constrains the counts).",
+      "title": "Credits Members",
+      "type": "boolean"
+    },
     "dataset": {
       "enum": [
         "abs",

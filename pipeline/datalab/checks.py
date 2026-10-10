@@ -108,14 +108,18 @@ def equality_check(*, check_type: str, dataset: str, rule_id: str, first: Cell, 
 
 def value_check(*, check_type: str, dataset: str, rule_id: str, target: Cell, members: Sequence[Cell],
                 computed: Decimal | None, tolerance: Decimal, description_ok: str, what: str,
-                blocked_reason: str | None = None) -> Check:
-    """A printed figure must equal a value recomputed from other printed figures (rates, index aggregation)."""
+                blocked_reason: str | None = None, credits_members: bool = True) -> Check:
+    """A printed figure must equal a value recomputed from other printed figures (rates, index aggregation).
+
+    `credits_members=False`: a pass is evidence for the target only, not for the figures it was computed from.
+    """
     cid = check_id_for(check_type, rule_id, target.cell_id, *sorted(c.cell_id for c in members))
     base: dict[str, Any] = dict(
         check_id=cid, check_type=check_type, dataset=dataset, rule_id=rule_id,
         source_ids=sorted({target.source_id, *(c.source_id for c in members)}),
         member_cell_ids=[c.cell_id for c in members], target_cell_id=target.cell_id,
         tolerance_rule=f"Recomputed value must be within {tolerance} of the printed value.",
+        credits_members=credits_members,
     )
     if blocked_reason or computed is None or target.value_parsed is None:
         reason = blocked_reason or "an input could not be parsed"
@@ -226,8 +230,8 @@ def dispute_test(chk: Check, cells_by_id: dict[str, Cell], checks_by_cell: dict[
                if c.official and c.check_type in DISPUTE_ARITHMETIC and c.source_ids == [cell.source_id]]
         if any(c.result == "fail" for c in own):
             return "an arithmetic check on one reading failed"
-        if not any(c.result in PASSING and (c.check_type not in TARGET_ONLY_CHECKS or c.target_cell_id == cell.cell_id)
-                   for c in own):
+        if not any(c.result in PASSING and ((c.check_type not in TARGET_ONLY_CHECKS and c.credits_members)
+                                            or c.target_cell_id == cell.cell_id) for c in own):
             return "a reading has no passed arithmetic check in its own table"
     return None
 

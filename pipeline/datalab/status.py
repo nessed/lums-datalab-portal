@@ -42,8 +42,11 @@ def _agree(a: Cell, b: Cell) -> bool:
 
 
 def credits(chk: Check, cell_id: str) -> bool:
-    """Does a passed check count as evidence for this cell? Target-only checks credit their target alone."""
-    return chk.check_type not in TARGET_ONLY_CHECKS or chk.target_cell_id == cell_id
+    """Does a passed check count as evidence for this cell? Target-only checks credit their target alone.
+
+    A check is target-only by its type (TARGET_ONLY_CHECKS) or because it says so itself (`credits_members` False).
+    """
+    return (chk.check_type not in TARGET_ONLY_CHECKS and chk.credits_members) or chk.target_cell_id == cell_id
 
 
 def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str, list[Check]]) -> tuple[str, list[str]]:

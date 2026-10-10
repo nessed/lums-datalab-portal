@@ -1,0 +1,34 @@
+# Publication thresholds for the LUMS DataLab Portal.
+# FROZEN before any extraction run (decision D10, 2026-10-11). Never edit after
+# results exist; record a deviation in DECISIONS.md and the release notes instead.
+# The SHA-256 of this file is recorded in thresholds/FROZEN.md and in release.json.
+version: 1
+frozen_on: "2026-10-11"
+
+structure:
+  pages_accounted_for: 1.0          # every page 1..N present exactly once in a run
+  min_text_layer_page_fraction: 0.95  # source verification: pages with a text layer
+  max_scanned_page_fraction: 0.20   # above this the file goes to the scanned track
+
+coverage:                            # how much of the printed table we captured (never mixed with accuracy)
+  min_per_data_type: 0.95           # share of printed numeric values captured, across target tables
+  min_per_table: 0.90               # no single target table below this
+
+checks:                              # how much of what we captured is right
+  min_evaluable_pass_rate_per_data_type: 0.95
+  min_cross_edition_agreement: 0.98
+
+gold_set:
+  max_error_rate: 0.02              # pending human labelling; null until measured
+  target_cells: 400
+
+tolerances:                          # decision D9
+  sum:
+    exact: "residual == 0 -> pass"
+    rounding_units_per_member: 0.5  # 0 < |residual| <= 0.5 * members * unit of last printed digit -> pass_within_rounding
+  cross_edition_units_of_last_digit: 1
+  cpi_weights_sum_abs: 0.05
+  lfs_shares_sum_abs: 0.1
+
+publication:
+  rule: "A data type below any threshold above is not published; the site marks it 'coming'."

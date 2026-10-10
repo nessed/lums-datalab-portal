@@ -71,6 +71,14 @@ def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str,
         # Another official document prints a different figure and the difference is not established
         # as a restatement (the D25 conditions do not all hold): withheld, never shown as checked.
         return "D", ["another official document prints a different figure and the difference is not explained"]
+    other_publisher = [c for c in failed if c.check_type == "cross_source"]
+    failed = [c for c in failed if c.check_type != "cross_source"]
+    if other_publisher and not failed and arithmetic:
+        # A different publisher gives a different figure. That is said on the receipt (disagreement_note),
+        # not hidden; it does not withhold a figure whose own document's arithmetic confirms the reading.
+        reasons.append(f"{len(other_publisher)} other official source(s) give a different figure")
+    elif other_publisher:
+        failed = failed + other_publisher
     if failed:
         # A failed check is never outvoted. Another sum can pass around a wrong member (review finding
         # CPI-1), and a figure reprinted unchanged in the next edition can still be part of a block that
@@ -149,7 +157,8 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
             else:
                 other_id = chk.target_cell_id
             other = cells_by_id.get(other_id or "")
-            where = source_titles.get(other.source_id, other.source_id) if other else (chk.target_source or "another printing")
+            where = (source_titles.get(other.source_id, other.source_id) if other
+                     else source_titles.get(chk.target_source or "", chk.target_source or "another printing"))
             same_doc = other is not None and other.source_id == primary.source_id
             place = "a second place in the same document" if same_doc else f"the {where}"
             if how:
@@ -191,9 +200,17 @@ def disagreement_note(primary: Cell, checks_by_cell: dict[str, list[Check]], cel
             continue
         if not chk.official or chk.result != "fail" or chk.check_type not in AGREEMENT_CHECKS:
             continue
-        other_id = chk.member_cell_ids[0] if chk.target_cell_id == primary.cell_id else chk.target_cell_id
+        if chk.target_cell_id == primary.cell_id:
+            other_id = chk.member_cell_ids[0] if chk.member_cell_ids else None
+        else:
+            other_id = chk.target_cell_id
         other = cells_by_id.get(other_id or "")
         if other is None:
+            # A cross-source check against a data file has no second cell, only `target_source`.
+            if chk.target_source and chk.target_value is not None:
+                notes.append(f"{source_titles.get(chk.target_source, chk.target_source)} gives a different figure for this "
+                             f"({fmt(chk.target_value)}). The value shown is the one printed in the "
+                             f"{source_titles.get(primary.source_id, primary.source_id)}.")
             continue
         other_ok = any(c.official and c.result in PASSING and c.check_type in ARITHMETIC_CHECKS
                        for c in checks_by_cell.get(other.cell_id, []))

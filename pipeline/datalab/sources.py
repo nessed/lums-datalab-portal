@@ -181,6 +181,103 @@ def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], peri
     return out
 
 
+def body_marker_pages(path: Path, markers: list[str]) -> dict[str, list[int]]:
+    """Pages (1-based) of the WHOLE document whose text contains each marker.
+
+    The cover check reads only the first pages; a regional edition can share a national cover
+    wording, so table titles in the body are tested too (`body_markers_all` / `body_markers_none`).
+    """
+    import pymupdf
+
+    out: dict[str, list[int]] = {m: [] for m in markers}
+    with pymupdf.open(path) as doc:
+        for number, page in enumerate(doc, start=1):
+            text = re.sub(r"\s+", " ", page.get_text()).lower()
+            for m in markers:
+                if m.lower() in text:
+                    out[m].append(number)
+    return out
+
+
+def body_marker_problems(found_all: dict[str, list[int]], found_none: dict[str, list[int]]) -> list[str]:
+    """Why the body of a document is not what the plan describes; empty when it is."""
+    problems = [f"'{m}' is printed on no page" for m, pages in found_all.items() if not pages]
+    problems += [f"'{m}' is printed on page(s) {pages[:10]}" for m, pages in found_none.items() if pages]
+    return problems
+
+
+def inspect_data_file(path: Path, columns_all: list[str], column_patterns: dict[str, str]) -> dict[str, Any]:
+    """Content inspection of a CSV obtained from an official data service (no pages, no text layer).
+
+    The file must carry every expected column, and in every row each column named in
+    `column_patterns` must match its pattern (dataset name with its base year, series key, unit).
+    Only those descriptive columns are read here; observation values are never looked at.
+    """
+    out: dict[str, Any] = {"columns": [], "rows": 0, "problems": []}
+    try:
+        with path.open(encoding="utf-8-sig", newline="") as fh:
+            reader = csv.DictReader(fh)
+            out["columns"] = list(reader.fieldnames or [])
+            rows = list(reader)
+    except (UnicodeDecodeError, csv.Error) as exc:
+        out["problems"].append(f"not readable as UTF-8 CSV: {type(exc).__name__}")
+        out["markers_ok"] = False
+        return out
+    out["rows"] = len(rows)
+    missing = [c for c in columns_all if c not in out["columns"]]
+    if missing:
+        out["problems"].append(f"columns missing: {missing}")
+    if not rows:
+        out["problems"].append("the file has no data rows")
+    distinct: dict[str, list[str]] = {}
+    for column, pattern in column_patterns.items():
+        values = sorted({(row.get(column) or "").strip() for row in rows})
+        distinct[column] = values[:20]
+        bad = [v for v in values if not re.search(pattern, v)]
+        if column not in out["columns"]:
+            continue  # already reported as missing
+        if bad:
+            out["problems"].append(f"column '{column}' has value(s) {bad[:5]} that do not match {pattern!r}")
+    out["descriptive_values"] = distinct
+    out["markers_ok"] = not out["problems"]
+    return out
+
+
+def register_data_file(entry: dict[str, Any], dest: Path, rel: str, retrieved_via: str, response: dict[str, Any] | None,
+                       attempts: list[dict[str, Any]], record: dict[str, Any]) -> Source:
+    """Record a non-PDF source (an official data-service download). Same record, different inspection."""
+    sid = entry["source_id"]
+    sha = config.sha256_file(dest)
+    pre = entry.get("prefetched") or {}
+    record.update({"retrieved_via": retrieved_via, "sha256": sha, "size_bytes": dest.stat().st_size, "response": response,
+                   "attempts": attempts, "local_path": rel, "request": pre.get("request"),
+                   "terms_note": entry.get("terms_note"), "credentials_note": entry.get("credentials_note"),
+                   "reproducible_by_url": bool(entry.get("reproducible_by_url", False))})
+    if pre.get("sha256") and pre["sha256"] != sha:
+        record["prefetched_hash_mismatch"] = True
+    inspection = inspect_data_file(dest, list(entry.get("csv_columns_all") or []), dict(entry.get("csv_column_patterns") or {}))
+    record["inspection"] = inspection
+    if record.get("prefetched_hash_mismatch"):
+        status = "failed"
+        record["reason"] = "the file's hash is not the one recorded when it was downloaded"
+    elif not inspection["markers_ok"]:
+        status = "failed"
+        record["reason"] = "the file does not describe the series the plan expects: " + "; ".join(inspection["problems"])
+    else:
+        status = "official_only" if retrieved_via == "official" else "wayback_only" if retrieved_via == "wayback" \
+            else "archive_copy_content_inspected"
+    record["verification_status"] = status
+    config.write_json(config.VERIFICATION_DIR / f"{sid}.json", record)
+    return Source(
+        source_id=sid, doc_type=entry["doc_type"], publisher=entry["publisher"], jurisdiction=entry["jurisdiction"],
+        title=entry["title"], period=entry["period"], role=entry["role"], landing_url=entry.get("landing_url"),
+        file_url=entry.get("file_url"), retrieved_at=record.get("retrieved_at"), retrieved_via=retrieved_via, sha256=sha,
+        size_bytes=dest.stat().st_size, format=dest.suffix.lstrip(".").lower(), page_count=None, is_born_digital=None,
+        language=entry.get("language", "en"), local_path=rel, verification_status=status,
+        verification_record=f"sources/verification/{sid}.json", notes=entry.get("notes", ""),
+    )
+
+
 def period_marker_variants(period: str) -> list[str]:
     """`2010-11` may be printed as 2010-11, 2010-2011 or 2010–11."""
     m = re.fullmatch(r"(\d{4})-(\d{2})", period)
@@ -268,7 +365,7 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
             snapshot = {"wayback_url": entry["prefetched"]["wayback_url"],
                         "wayback_timestamp": entry["prefetched"].get("wayback_timestamp") or ""}
         record["retrieved_at"] = entry["prefetched"].get("retrieved_at")
-    elif file_url:
+    elif file_url and filename.lower().endswith(".pdf"):
         response = download(file_url, dest, attempts)
         if response:
             retrieved_via = "official"
@@ -293,6 +390,9 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
         record.update({"verification_status": "failed", "reason": "no copy obtainable", "attempts": attempts})
         config.write_json(config.VERIFICATION_DIR / f"{sid}.json", record)
         return None
+
+    if dest.suffix.lower() != ".pdf":
+        return register_data_file(entry, dest, rel, retrieved_via, response, attempts, record)
 
     sha = config.sha256_file(dest)
     record.update({"retrieved_via": retrieved_via, "sha256": sha, "size_bytes": dest.stat().st_size,
@@ -335,9 +435,18 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
     excluded = [m for m in (entry.get("markers_none") or [])
                 if inspect_pdf(dest, [m], [], [], marker_pages=int(entry.get("marker_pages", 3)))["markers_ok"]]
     record["excluded_markers_found"] = excluded
+    body_problems: list[str] = []
+    if entry.get("body_markers_all") or entry.get("body_markers_none"):
+        found_all = body_marker_pages(dest, list(entry.get("body_markers_all") or []))
+        found_none = body_marker_pages(dest, list(entry.get("body_markers_none") or []))
+        record["body_markers"] = {"all": found_all, "none": found_none}
+        body_problems = body_marker_problems(found_all, found_none)
     if excluded:
         status = "failed"
         record["reason"] = f"the first pages contain {excluded}: this is not the document the plan describes"
+    elif body_problems:
+        status = "failed"
+        record["reason"] = "the body of the document is not what the plan describes: " + "; ".join(body_problems)
     elif not identity_ok:
         status = "failed"
         record["reason"] = "expected text markers not found in the first pages"
@@ -454,6 +563,14 @@ def fetch() -> int:
         attempts: list[dict[str, Any]] = []
         got = False
         urls = []
+        if s.format != "pdf":
+            # A data-service download (a form submission bound to a browser session) cannot be repeated by
+            # URL, and a later download would hold more months. Never write a guess into SOURCES_DIR.
+            print(f"[fetch] {s.source_id}: NOT FETCHABLE BY URL - obtain it as described in {s.verification_record}; "
+                  "checks that need it are skipped until then")
+            if s.role != "cross_source":
+                problems += 1
+            continue
         if s.file_url:
             urls.append(s.file_url)
         if s.wayback_timestamp and s.file_url:

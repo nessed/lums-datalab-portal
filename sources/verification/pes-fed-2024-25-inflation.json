@@ -1,0 +1,89 @@
+{
+  "source_id": "pes-fed-2024-25-inflation",
+  "registered_at": "2026-10-10T22:44:36+00:00",
+  "file_url": "https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+  "landing_url": "https://www.finance.gov.pk/survey_2025.html",
+  "retrieved_at": "2026-10-10T22:44:40+00:00",
+  "retrieved_via": "official",
+  "sha256": "420ba088b018ea06c9810d58e6feb9c4f3f38811c732401d2208aff24b5c24c5",
+  "size_bytes": 1420442,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+    "headers": {
+      "Last-Modified": "Mon, 09 Jun 2025 09:18:31 GMT",
+      "Content-Length": "1420442",
+      "Content-Type": "application/pdf",
+      "ETag": "\"e2740781fd9db1:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+      "time": "2026-10-10T22:44:36+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/survey_2025.html",
+      "time": "2026-10-10T22:44:41+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+      "time": "2026-10-10T22:44:43+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "pes_chapter/2024-25/7_Inflation.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_inflation.pdf",
+    "sha256": "420ba088b018ea06c9810d58e6feb9c4f3f38811c732401d2208aff24b5c24c5",
+    "size_bytes": 1420442,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 28,
+    "pdf_metadata": {
+      "Producer": "iLovePDF",
+      "CreationDate": "D:20250608104028+05'00'"
+    },
+    "pages_with_text_layer": 28,
+    "blank_pages": [],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 0.9998,
+    "markers": {
+      "all": {
+        "pakistan economic survey": true,
+        "inflation": true
+      },
+      "any": {},
+      "period": {
+        "2024-25": true,
+        "2024-2025": false,
+        "2024 - 25": false,
+        "2024–25": false,
+        "2024—25": false,
+        "2024 – 25": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_match_archive",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260316032644/https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+    "wayback_timestamp": "20260316032644",
+    "snapshots_seen": 4,
+    "snapshot_digest": "2IVVPBV2UXVM3NTKFOM4WTVKB2OTQFDU",
+    "digest_matches_file": true
+  }
+}

@@ -40,6 +40,17 @@ defaults:
     marker_period: true
     marker_pages: 4
 
+  # Pakistan Economic Survey chapters, used only to cross-check figures we already hold.
+  pes:
+    doc_type: pes_chapter
+    publisher: "Finance Division, Government of Pakistan"
+    jurisdiction: federal
+    language: en
+    markers_all: ["pakistan economic survey"]
+    markers_any: []
+    marker_period: true
+    marker_pages: 3
+
 sources:
   - source_id: abs-fed-2010-11
     period: "2010-11"
@@ -217,6 +228,20 @@ sources:
       attempts:
       - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
       sha256: 56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c
+  # Added 2026-10-12 (D30). The PBS labour-force page lists a second link for 2014-15; this one is the
+  # national report. The failed row above (the Azad Jammu & Kashmir edition) is kept as the record of
+  # what the first link serves. Accepted only if the cover says Government of Pakistan, no page of the
+  # whole document says "Azad Jammu", and the table titles say "Pakistan and Provinces".
+  - source_id: lfs-pbs-2014-15-national
+    family: lfs
+    period: 2014-15
+    role: core
+    title: Labour Force Survey 2014-15 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf
+    markers_all: ["labour force survey", "government of pakistan"]
+    body_markers_all: ["pakistan and provinces"]
+    body_markers_none: ["azad jammu"]
   - source_id: cpi-pbs-2025-06
     family: cpi
     period: 2025-06
@@ -407,3 +432,92 @@ sources:
     landing_url: https://www.pbs.gov.pk/?page_id=7291
     file_url: http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf
     markers_period: [june 2018, 'june, 2018', 'june,2018', june2018, june-2018]
+
+  # Added 2026-10-12 (C6). SBP EasyData, used ONLY to cross-check a figure we already hold; never a
+  # source of a published value. The file was downloaded on 2026-10-10 by the first run's sources track
+  # from the public "Download Series" form of the series page (no login, no API key), and its request was
+  # recorded next to it at download time; it had not been registered. The EasyData API
+  # (https://easydata.sbp.org.pk/api/v1/series) answers 401 without a key: not used, not worked around.
+  - source_id: sbp-easydata-cpi-national-yoy
+    family: sbp
+    doc_type: sbp_easydata
+    publisher: "State Bank of Pakistan"
+    jurisdiction: sbp
+    language: en
+    period: "2026-10-10"         # the day of the download (the series itself runs monthly, see the record)
+    role: cross_source
+    title: "SBP EasyData: National CPI, year-on-year change (series TS_GP_PT_CPI_M.P00011516)"
+    landing_url: https://easydata.sbp.org.pk
+    file_url: https://easydata.sbp.org.pk/apex/wwv_flow.accept
+    filename: data_series.csv
+    reproducible_by_url: false
+    csv_columns_all: ["Dataset", "Series Key", "Series", "Observation Date", "Observation Value", "Unit"]
+    # The series definition is taken from the file's own descriptive columns, in every row.
+    csv_column_patterns:
+      "Dataset": '^Inflation Snapshot \(New Base: 2015-16\)$'
+      "Series Key": '^TS_GP_PT_CPI_M\.P00011516$'
+      "Series": '(?i)^cpi national\s*-?\s*yoy$'
+      "Unit": '^Percent$'
+    terms_note: >-
+      The EasyData pages carry "Copyright (c) 2026, All Rights Reserved. State Bank of Pakistan" and link a
+      Disclaimer page; no open-data licence is stated on the pages that were saved. The file is used only to
+      compare with PBS figures (the SBP figure appears in a check record, not as a published series). A human
+      must read the Disclaimer and confirm that this use, and showing the SBP figure on a receipt, is allowed.
+    credentials_note: >-
+      Downloaded without an account from the public series page. The documented API needs an API key
+      (HTTP 401 without one). If the project wants a repeatable API pull, a human must register for a key
+      and put it in .env; nothing was done to get around that.
+    notes: >-
+      Cross-check only. Downloaded by submitting the public "Download Series" form (a POST bound to a browser
+      session), so it cannot be re-downloaded by URL and a later download would also hold later months.
+      Reuse terms not confirmed (see the verification record).
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:25:49Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: null
+        Content-Length: '16278'
+        Content-Type: application/excel; charset=utf-8
+        ETag: null
+      sha256: 6afbf22e8c88170b47d02da4ff019ba0be73feda450595ace18cf709324ab447
+      request:
+        method: POST
+        url: https://easydata.sbp.org.pk/apex/wwv_flow.accept
+        p_request: DOWNLOAD
+        form_page_url: "https://easydata.sbp.org.pk/apex/f?p=10:222:3993964339093::NO::P222_DATASET_TYPE_CODE,P222_SERIES_KEY,P222_SERIES_MIN_DATE,P222_SERIES_MAX_DATE,P222_PAGE_ID:TS_GP_PT_CPI_M,TS_GP_PT_CPI_M.P00011516,31-Jul-2016,30-Sep-2026,120&cs=1064C623D4B7504386B9342D1E6296AC9"
+        series_page_url: "https://easydata.sbp.org.pk/apex/f?p=10:120:3993964339093::NO:RP:P120_SERIES_KEY,P120_ACTION,P120_PAGE_ID:TS_GP_PT_CPI_M.P00011516,New,100&cs=19B1F6AB22546BD04D5FCE70779BA769A"
+        items:
+          P222_DATASET_TYPE_CODE: TS_GP_PT_CPI_M
+          P222_DATASET_NAME: "Inflation Snapshot (New Base: 2015-16)"
+          P222_SERIES_KEY: TS_GP_PT_CPI_M.P00011516
+          P222_SERIES_NAME: "National CPI, an Inflation Measure (Year-on-Year basis)"
+          P222_FROM_DATE: 31-JUL-2016
+          P222_TO_DATE: 30-SEP-2026
+        recorded_in: "data_series.csv.request.json, written beside the file by the download step"
+      attempts:
+      - note: collected by the first run's sources track; full request log in work/track_a/attempts.jsonl (not in git)
+
+  # Added 2026-10-12 (C6). File URLs are the ones recorded in the ra-ship registry
+  # (pbs-corpus/manifest.csv); the landing page was fetched and links both files.
+  - source_id: pes-fed-2024-25-inflation
+    family: pes
+    period: 2024-25
+    role: cross_source
+    title: "Pakistan Economic Survey 2024-25, Chapter 7: Inflation"
+    landing_url: https://www.finance.gov.pk/survey_2025.html
+    file_url: https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf
+    archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_inflation.pdf"
+    markers_all: ["pakistan economic survey", "inflation"]
+  - source_id: pes-fed-2024-25-labour
+    family: pes
+    period: 2024-25
+    role: cross_source
+    title: "Pakistan Economic Survey 2024-25, Chapter 12: Population, Labour Force and Employment"
+    landing_url: https://www.finance.gov.pk/survey_2025.html
+    file_url: https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf
+    archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_population_labor_force_and_employment.pdf"
+    markers_all: ["pakistan economic survey", "labour force"]
+    # The chapter title is printed as the running head of odd pages, first on page 4 (page 1 is an
+    # infographic, pages 2-3 carry the survey's name); the first try with 3 pages failed on this marker.
+    marker_pages: 4

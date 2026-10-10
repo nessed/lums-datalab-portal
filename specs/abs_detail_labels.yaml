@@ -1,0 +1,115 @@
+# Printed row label -> function / sub-function, for the ABS function-wise detail tables (D31).
+#
+# Written by hand from the labels the nine surveyed editions print. A row is
+# recognised only when BOTH hold:
+#   1. its printed code is the entry's code, and
+#   2. the rest of the label, normalised (lowercase, "&" spelled "and",
+#      trailing punctuation stripped), matches the entry's pattern as a WHOLE.
+# Anything else stays unmapped and is never published; an unrecognised coded row
+# also makes the sum of its function "not evaluable" instead of letting it pass.
+#
+# One code can carry different printed names in different editions (021 is
+# "Military Defence", "Defence Services" or "Defence Division"). The code is the
+# identity in the government's chart of accounts; the name variants are listed.
+# The mapping is validated by arithmetic: sub-functions must add to their
+# function line, and function lines to the total of their part.
+#
+# Labels wrapped over two lines often reach us cut or scrambled ("011 Executive
+# Financial & &"). Those do not match and stay unmapped: a gap, not a guess.
+
+functions:
+  # slugs are the ones already used by specs/abs.yaml (fed.exp.current.function.<slug>)
+  - {code: '01', slug: general_public_services, name: "General public services", pattern: 'general public services?'}
+  - {code: '02', slug: defence_affairs_and_services, name: "Defence affairs and services", pattern: 'defence affairs (and )?services'}
+  - {code: '03', slug: public_order_and_safety_affairs, name: "Public order and safety affairs", pattern: 'public order (and )?safety affairs'}
+  - {code: '04', slug: economic_affairs, name: "Economic affairs", pattern: 'economic affairs'}
+  - {code: '05', slug: environment_protection, name: "Environment protection", pattern: 'environment protection'}
+  - {code: '06', slug: housing_and_community_amenities, name: "Housing and community amenities", pattern: 'housing (and )?community amenities'}
+  - {code: '07', slug: health, name: "Health", pattern: 'health( affairs (and )?services)?'}
+  - {code: '08', slug: recreation_culture_and_religion, name: "Recreation, culture and religion", pattern: 'recreation,? culture,? (and )?religion'}
+  - {code: '09', slug: education_affairs_and_services, name: "Education affairs and services", pattern: 'education affairs,? (and )?services'}
+  - {code: '10', slug: social_protection, name: "Social protection", pattern: 'social protection'}
+
+subfunctions:
+  # 01 General public services
+  - {code: '011', slug: executive_legislative_financial_fiscal_external_affairs, name: "Executive and legislative organs, financial and fiscal affairs, external affairs",
+     pattern: 'executive and legislative organs,? financial and fiscal affairs,? external( affairs)?'}
+  # code 011 is also printed for two repayment lines under current expenditure on capital account
+  - {code: '011', slug: foreign_loans_repayment, name: "Foreign loans repayment", pattern: 'foreign loans? repayments?'}
+  - {code: '011', slug: short_term_foreign_credits_repayment, name: "Repayment of short-term foreign credits", pattern: 'repayment of short term foreign credits'}
+  - {code: '012', slug: foreign_economic_aid, name: "Foreign economic aid", pattern: 'foreign economic aid'}
+  - {code: '014', slug: transfers, name: "Transfers", pattern: 'transfers'}
+  - {code: '015', slug: general_services, name: "General services", pattern: 'general services'}
+  - {code: '016', slug: basic_research, name: "Basic research", pattern: 'basic research'}
+  - {code: '017', slug: research_and_development_general_public_services, name: "Research and development, general public services",
+     pattern: 'research and dev(\.|elopment)? general public services?'}
+  - {code: '018', slug: administration_of_general_public_services, name: "Administration of general public services", pattern: 'admn\.? of general public services?'}
+  # Some editions print a line "19 Gen. Public Services not elsewhere defined" (two digits) under current
+  # expenditure on capital account. Reading it as sub-function 019 was tried and the sum check
+  # contradicted it (the function line equals the other sub-functions without it), so it is NOT mapped.
+  - {code: '019', slug: general_public_services_not_elsewhere_defined, name: "General public services not elsewhere defined",
+     pattern: 'gen(\.|eral) public services not elsewhere define?d'}
+  # 02 Defence affairs and services
+  - {code: '021', slug: military_defence, name: "Military defence (also printed as Defence Services, Defence Division)",
+     pattern: 'military defence|defence services|defence division'}
+  - {code: '024', slug: research_and_development_defence, name: "Research and development, defence", pattern: 'r ?and ?d defence'}
+  - {code: '025', slug: defence_administration, name: "Defence administration (also printed as Defence Services Division)",
+     pattern: 'defence administration|defence services division'}
+  # 03 Public order and safety affairs
+  - {code: '031', slug: law_courts, name: "Law courts", pattern: 'law courts'}
+  - {code: '032', slug: police, name: "Police (and civil armed forces)", pattern: 'police( and civil armed forces)?'}
+  - {code: '033', slug: fire_protection, name: "Fire protection", pattern: 'fire protection'}
+  - {code: '034', slug: prison_administration_and_operation, name: "Prison administration and operation", pattern: 'prison administration and operation'}
+  - {code: '035', slug: research_and_development_public_order_and_safety, name: "Research and development, public order and safety", pattern: 'r ?and ?d public order and safety'}
+  - {code: '036', slug: administration_of_public_order, name: "Administration of public order", pattern: 'administration of public order'}
+  # 04 Economic affairs
+  - {code: '041', slug: general_economic_commercial_and_labour_affairs, name: "General economic, commercial and labour affairs",
+     pattern: 'gen\. eco\.,? commercial and labour affairs'}
+  - {code: '042', slug: agriculture_food_irrigation_forestry_and_fishing, name: "Agriculture, food, irrigation, forestry and fishing",
+     pattern: 'agri\.?, ?,? ?food, irrigation, forestry and (fisheries|fishing)'}
+  - {code: '043', slug: fuel_and_energy, name: "Fuel and energy", pattern: 'fuel and energy'}
+  - {code: '044', slug: mining_and_manufacturing, name: "Mining and manufacturing", pattern: 'mining and manufacturing'}
+  - {code: '045', slug: construction_and_transport, name: "Construction and transport", pattern: 'construction and transport'}
+  - {code: '046', slug: communications, name: "Communications", pattern: 'communications'}
+  - {code: '047', slug: other_industries, name: "Other industries", pattern: 'other industries'}
+  - {code: '048', slug: research_and_development_economic_affairs, name: "Research and development, economic affairs", pattern: 'research and development economic affairs'}
+  # 05 Environment protection
+  - {code: '052', slug: waste_water_management, name: "Waste water management", pattern: 'waste water management'}
+  - {code: '053', slug: pollution_abatement, name: "Pollution abatement", pattern: 'pollution abatement'}
+  - {code: '054', slug: research_and_development_environment_protection, name: "Research and development, environment protection",
+     pattern: 'research and development environment( protection)?'}
+  - {code: '055', slug: administration_of_environment_protection, name: "Administration of environment protection", pattern: 'administration of environment protection'}
+  # 06 Housing and community amenities
+  - {code: '061', slug: housing_development, name: "Housing development", pattern: 'housing development'}
+  - {code: '062', slug: community_development, name: "Community development", pattern: 'community development'}
+  - {code: '063', slug: water_supply, name: "Water supply", pattern: 'water supply'}
+  # 07 Health
+  - {code: '071', slug: medical_products_appliances_and_equipment, name: "Medical products, appliances and equipment", pattern: 'medical products, appliances and equipments?'}
+  - {code: '072', slug: out_patient_services, name: "Out-patient services", pattern: 'out patient services'}
+  - {code: '073', slug: hospital_services, name: "Hospital services", pattern: 'hospital services'}
+  - {code: '074', slug: public_health_services, name: "Public health services", pattern: 'public health services'}
+  - {code: '075', slug: research_and_development_health, name: "Research and development, health", pattern: '(r ?and ?d|research and development) health'}
+  - {code: '076', slug: health_administration, name: "Health administration", pattern: 'health administration'}
+  # 08 Recreation, culture and religion
+  - {code: '081', slug: recreational_and_sporting_services, name: "Recreational and sporting services", pattern: 'recreation(al)? and sporting services'}
+  - {code: '082', slug: cultural_services, name: "Cultural services", pattern: 'cultural services'}
+  # "83 Broadcasting and Publishing" (two digits, 2021-22) is likewise not mapped: nothing confirms what it is.
+  - {code: '083', slug: broadcasting_and_publishing, name: "Broadcasting and publishing", pattern: 'broadcasting and publishing'}
+  - {code: '084', slug: religious_affairs, name: "Religious affairs", pattern: 'religious affairs'}
+  - {code: '086', slug: administration_of_information_recreation_and_culture, name: "Administration of information, recreation and culture",
+     pattern: 'admn\.? of information, recreation and culture'}
+  # 09 Education affairs and services
+  - {code: '091', slug: pre_primary_and_primary_education, name: "Pre-primary and primary education affairs and services",
+     pattern: 'pre(-primary)? and primary edu(\.|cation) affairs? and services'}
+  - {code: '092', slug: secondary_education, name: "Secondary education affairs and services", pattern: 'secondary edu(\.|cation) affairs and services'}
+  - {code: '093', slug: tertiary_education, name: "Tertiary education affairs and services", pattern: 'tertiary edu(\.|cation) affairs and services'}
+  - {code: '094', slug: education_services_not_definable_by_level, name: "Education services not definable by level", pattern: 'education services not definable by level'}
+  - {code: '095', slug: subsidiary_services_to_education, name: "Subsidiary services to education", pattern: 'subsidiary services to education'}
+  - {code: '096', slug: education_administration, name: "Administration (education)", pattern: 'administration'}
+  - {code: '097', slug: education_not_elsewhere_classified, name: "Education affairs and services not elsewhere classified",
+     pattern: 'education affairs and services not elsewhere classified'}
+  # 10 Social protection
+  - {code: '107', slug: social_protection_administration, name: "Administration (social protection)", pattern: 'administration'}
+  - {code: '108', slug: social_protection_others, name: "Others (social protection)", pattern: 'others'}
+  - {code: '109', slug: social_protection_not_elsewhere_classified, name: "Social protection not elsewhere classified",
+     pattern: 'social protection ?\(not elsewhere classified\)'}

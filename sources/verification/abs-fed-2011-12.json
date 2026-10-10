@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2011-12",
-  "registered_at": "2026-10-10T20:52:22+00:00",
+  "registered_at": "2026-10-10T21:45:00+00:00",
   "file_url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2011_12.html",
-  "retrieved_at": "2026-10-10T20:52:25+00:00",
+  "retrieved_at": "2026-10-10T21:45:03+00:00",
   "retrieved_via": "official",
   "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
   "size_bytes": 112873,
@@ -20,23 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
-      "time": "2026-10-10T20:52:22+00:00",
+      "time": "2026-10-10T21:45:00+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
       "url": "https://www.finance.gov.pk/fb_2011_12.html",
-      "time": "2026-10-10T20:52:26+00:00",
+      "time": "2026-10-10T21:45:05+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
       "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/abs_11_12.pdf",
-      "time": "2026-10-10T20:52:27+00:00",
+      "time": "2026-10-10T21:45:07+00:00",
       "purpose": "wayback_cdx_lookup",
-      "outcome": "no_snapshot"
+      "outcome": "snapshot_found"
     }
   ],
   "local_path": "abs/2011-12/abs_11_12.pdf",
@@ -81,5 +81,11 @@
   "landing_page_links_file": true,
   "identity_route": "cover_markers",
   "verification_status": "official_match_archive",
-  "wayback": null
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250619205125/https://finance.gov.pk/budget/abs_11_12.pdf",
+    "wayback_timestamp": "20250619205125",
+    "snapshots_seen": 26,
+    "snapshot_digest": "YWH3XQFS3B4RVFLQVDLGPKD2KVJ4L37X",
+    "digest_matches_file": true
+  }
 }

@@ -197,7 +197,7 @@ def arslan_comparison(observations: list[Observation]) -> dict[str, Any]:
     with path.open(encoding="utf-8-sig", newline="") as fh:
         reader = csv.DictReader(fh)
         return {"status": "not_compared", "columns": reader.fieldnames,
-                "note": "Column layout recorded; a like-for-like comparison is a queued follow-up."}
+                "note": "Not like-for-like: that dataset is at sub-function level (3-digit codes) from the detail tables, while this release reads the function-level Summary of Expenditure. Comparison is a queued follow-up for when the detail tables are processed."}
 
 
 def derive(spec: dict[str, Any], observations: list[Observation], series: dict[str, Series], release: str) -> list[Observation]:

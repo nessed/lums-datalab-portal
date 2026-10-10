@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2024-25",
-  "registered_at": "2026-10-10T20:55:21+00:00",
+  "registered_at": "2026-10-10T21:45:41+00:00",
   "file_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2024_25.html",
-  "retrieved_at": "2026-10-10T20:55:24+00:00",
+  "retrieved_at": "2026-10-10T21:45:45+00:00",
   "retrieved_via": "official",
   "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
   "size_bytes": 3111490,
@@ -20,23 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
-      "time": "2026-10-10T20:55:21+00:00",
+      "time": "2026-10-10T21:45:41+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
       "url": "https://www.finance.gov.pk/fb_2024_25.html",
-      "time": "2026-10-10T20:55:25+00:00",
+      "time": "2026-10-10T21:45:45+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
       "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
-      "time": "2026-10-10T20:55:27+00:00",
+      "time": "2026-10-10T21:45:47+00:00",
       "purpose": "wayback_cdx_lookup",
-      "outcome": "error:ReadTimeout"
+      "outcome": "snapshot_found"
     }
   ],
   "local_path": "abs/2024-25/Annual_Budget_Statement.pdf",
@@ -86,5 +86,11 @@
   "landing_page_links_file": true,
   "identity_route": "cover_markers",
   "verification_status": "official_match_archive",
-  "wayback": null
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250708200914/https://finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+    "wayback_timestamp": "20250708200914",
+    "snapshots_seen": 11,
+    "snapshot_digest": "FM5OZMDK4T6WWDORAMMNNFMCJ7FJLPZF",
+    "digest_matches_file": true
+  }
 }

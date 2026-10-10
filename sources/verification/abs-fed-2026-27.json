@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2026-27",
-  "registered_at": "2026-10-10T20:56:49+00:00",
+  "registered_at": "2026-10-10T21:45:55+00:00",
   "file_url": "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2026_27.html",
-  "retrieved_at": "2026-10-10T20:56:52+00:00",
+  "retrieved_at": "2026-10-10T21:45:59+00:00",
   "retrieved_via": "official",
   "sha256": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
   "size_bytes": 2380926,
@@ -20,23 +20,29 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
-      "time": "2026-10-10T20:56:49+00:00",
+      "time": "2026-10-10T21:45:55+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
       "url": "https://www.finance.gov.pk/fb_2026_27.html",
-      "time": "2026-10-10T20:56:53+00:00",
+      "time": "2026-10-10T21:46:00+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
       "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
-      "time": "2026-10-10T20:56:55+00:00",
+      "time": "2026-10-10T21:46:02+00:00",
       "purpose": "wayback_cdx_lookup",
-      "outcome": "error:ReadTimeout"
+      "outcome": "no_snapshot"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
+      "time": "2026-10-10T21:46:30+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "no_snapshot"
     }
   ],
   "local_path": "abs/2026-27/Annual_Budget_Statement.pdf",
@@ -85,5 +91,11 @@
   "landing_page_links_file": true,
   "identity_route": "cover_markers",
   "verification_status": "official_match_archive",
+  "wayback_save": {
+    "requested_at": "2026-10-10T21:46:22+00:00",
+    "url": "https://web.archive.org/save/https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
+    "http_status": 520,
+    "content_location": "https://web.archive.org/save/https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf"
+  },
   "wayback": null
 }

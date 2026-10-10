@@ -27,7 +27,7 @@ from ..status import build_observations
 from ..tables import Table, page_words
 from ..validate import BLOCKING_TABLE_FLAGS, detect_table_flags, render_overlay, table_coverage
 from .common import (LabelMap, column_header_text, load_spec, make_cell, row_label, save_dataset, score_table,
-                     text_layer_row_label, validated_tables)
+                     text_layer_row_label, try_second_reader, validated_tables)
 
 DATASET = "cpi"
 DOC_TYPE = "cpi_monthly_review"
@@ -743,12 +743,28 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
         for area, (table, caption) in found.items():
             table_cells, tinfo, tmeta = build_cells(source, run, table, area, caption, spec, labels, not_targeted)
             located[f"{source.source_id}:{area}"] = tinfo
+            # D28: a table with merged rows or a lost column goes to the second reader; its reading
+            # replaces the first only if this table's arithmetic checks pass on it.
+            second = try_second_reader(
+                source=source, table=table, table_flags=tinfo["table_flags"], first_cells=table_cells,
+                expected_value_columns=spec["expected_value_columns"],
+                build=lambda t2, a=area, c=caption: build_cells(source, run, t2, a, c, spec, labels, not_targeted),
+                checks=lambda c2, m2: run_checks(c2, m2, spec, titles, order, series, {}),
+                required_checks=("weights_sum", "index_aggregation", "recompute"))
+            promoted = second is not None and second["promoted"]
+            table_cov = dict(tinfo["coverage"])
+            if second is not None:
+                tinfo["second_reader"] = second["record"]
+            if promoted:
+                table_cells, tmeta = table_cells + second["cells"], second["meta"]
+                table_cov = {**second["coverage"], "reader": second["record"]["reading"]["reader"],
+                             "first_reader_coverage": tinfo["coverage"]}
             cells.extend(table_cells)
             meta.update(tmeta)
             coverage.append({"dataset": DATASET, "source_id": source.source_id,
-                             "table": f"CPI by group ({area}, base {caption['base_year']})", **tinfo["coverage"]})
+                             "table": f"CPI by group ({area}, base {caption['base_year']})", **table_cov})
             bad = sorted(set(tinfo["table_flags"]) & BLOCKING_TABLE_FLAGS)
-            if bad:
+            if bad and not promoted:
                 blocked[(source.source_id, table.page, table.table_index)] = f"the table is flagged {', '.join(bad)}"
             overlay = config.work_dir() / "qa" / f"overlay_{source.source_id}_p{table.page:03d}.png"
             render_overlay(pdf, table, overlay)

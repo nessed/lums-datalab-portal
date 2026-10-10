@@ -67,6 +67,20 @@ def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str,
     return "C", reasons
 
 
+_ROUTING_WORDS = {"merged_rows": "merged rows", "dropped_column": "lost a column"}
+
+
+def second_reader_sentence(cell: Cell) -> str:
+    """Say plainly that a figure was read by the second tool and why. Built from stored fields only."""
+    link = cell.second_reader_of
+    if link is None:
+        return ""
+    why = [_ROUTING_WORDS[f] for f in link.routed_by if f in _ROUTING_WORDS]
+    because = f" because the first tool ({link.first_reader}) {' and '.join(why)} in this table" if why else ""
+    return (f"Read by a second tool ({cell.extractor_name}){because}; the second reading is used only because "
+            "the table's own arithmetic checks pass on it.")
+
+
 def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[Check]], cells_by_id: dict[str, Cell],
                       source_titles: dict[str, str]) -> str:
     """One plain-language sentence per piece of evidence, generated from the check records."""
@@ -134,7 +148,8 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
     # stable order, no duplicates
     seen: set[str] = set()
     unique = [p for p in parts if not (p in seen or seen.add(p))]
-    return " ".join(unique)
+    prefix = second_reader_sentence(primary)
+    return " ".join(([prefix] if prefix else []) + unique)
 
 
 def disagreement_note(primary: Cell, checks_by_cell: dict[str, list[Check]], cells_by_id: dict[str, Cell],

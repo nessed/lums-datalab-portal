@@ -23,7 +23,7 @@ from decimal import Decimal
 from typing import Any
 
 from .. import config
-from ..checks import equality_check, fmt, pass_rate, sum_check, value_check
+from ..checks import classify_disputes, equality_check, fmt, pass_rate, sum_check, value_check
 from ..extract import run_output_json, runs_dir
 from ..normalise import clean_text, last_digit_unit, normalise_label, parse_printed
 from ..schema import Cell, Check, Observation, RunManifest, Series, SeriesBreak, obs_id_for
@@ -687,6 +687,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     checks += recompute_checks(cells, spec, titles, blocked)
     checks += shares_checks(cells, spec, labels_spec, titles, blocked)
     checks += cross_checks(cells, titles, order, series)
+    checks = classify_disputes(checks, cells)  # D25: a differing pair that each add up is `disputed`, by code
     observations = build_observations(cells, checks, series, order, titles, release)
     observations += gap_observations(spec, observations, series, gap_reasons)
     used = {o.series_id for o in observations}

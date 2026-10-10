@@ -46,15 +46,30 @@ def write_release_docs(out: Path, release: Release, sources: list[dict[str, Any]
         lines.append(f"| {c['source_id']} | {c['page']} | {c['printed_numeric_tokens']} | {c['matched']} | "
                      f"{_pct(c['coverage'])} | {_pct(c.get('coverage_row_band'))} |")
     lines += ["", "## Accuracy evidence: deterministic checks", "",
-              "| Data type | Passed exactly | Passed within rounding | Failed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement |",
-              "|---|---|---|---|---|---|---|"]
+              "| Data type | Passed exactly | Passed within rounding | Failed | Disputed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement | Disputed pairs |",
+              "|---|---|---|---|---|---|---|---|---|"]
     for ds, gate in release.dataset_status.items():
         r = gate.get("check_pass_rate")
         if not r:
             continue
         x = gate.get("cross_edition_agreement") or {}
-        lines.append(f"| {ds} | {r['pass']} | {r['pass_within_rounding']} | {r['fail']} | {r['not_evaluable']} | "
-                     f"{_pct(r['pass_rate'])} | {_pct(x.get('pass_rate'))} ({x.get('evaluable', 0)} pairs) |")
+        dsp = gate.get("disputes") or {}
+        lines.append(f"| {ds} | {r['pass']} | {r['pass_within_rounding']} | {r['fail']} | {r.get('disputed', 0)} | {r['not_evaluable']} | "
+                     f"{_pct(r['pass_rate'])} | {_pct(x.get('pass_rate'))} ({x.get('pass', 0) + x.get('pass_within_rounding', 0)} of "
+                     f"{x.get('evaluable', 0)} pairs) | {dsp.get('disputed', 0)} of {dsp.get('cross_edition_pairs', 0)} pairs "
+                     f"({_pct(dsp.get('disputed_share'))}) |")
+    lines += ["",
+              "**Disputed** means two official documents print different figures for the same thing and each printing adds up "
+              "in its own table (a restatement by the publisher). A disputed figure is not published as checked: the site shows "
+              "both printings and no value. A differing pair that does not meet those conditions is a failure and its value is withheld.", "",
+              "**Deviation (decision D26, definition changed after results existed):** cross-edition agreement is "
+              "agree / (agree + fail), with disputed pairs counted separately in the last column; the frozen 98% applies to that "
+              "ratio. In the pass rate of evaluable checks a disputed pair counts as not passed. A data type whose disputed pairs "
+              "exceed 5% of its cross-edition pairs is not published. The thresholds file is unchanged."]
+    for ds, gate in release.dataset_status.items():
+        away = (gate.get("disputes") or {}).get("kept_as_fail") or {}
+        if away:
+            lines.append(f"- {ds}: differing pairs kept as failures: " + "; ".join(f"{k}: {n}" for k, n in away.items()) + ".")
     lines += ["", "**Measured error rate: pending gold-set labelling.** The gold-set kit is in `gold/`; until two humans "
               "have labelled it, no absolute error rate is claimed.", "",
               "## Known limitations", "",
@@ -99,7 +114,9 @@ def write_release_docs(out: Path, release: Release, sources: list[dict[str, Any]
     published = sum(1 for o in observations if o.published)
     gaps = Counter(o.gap_kind for o in observations if not o.published)
     changelog = ["# Changelog", "", f"## {v} ({release.created_at[:10]})", "",
-                 "First prototype release. Nothing was published before this, so there are no changes to earlier values.", "",
+                 "First prototype release. Nothing was published before this, so there are no changes to earlier values.",
+                 "This folder is rebuilt in place until the first public deployment or DOI (decision D29); from then on every "
+                 "change is a new version.", "",
                  f"- {published} published values across: {', '.join(release.scope['datasets']) or 'none'}.",
                  f"- {sum(gaps.values())} labelled gaps: " + ", ".join(f"{k}: {n}" for k, n in sorted(gaps.items(), key=lambda kv: str(kv[0]))) + ".",
                  "- Prototype label, no DOI.", ""]

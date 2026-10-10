@@ -1,7 +1,8 @@
 from decimal import Decimal
 
 from conftest import make_cell
-from datalab.checks import classify_sum, equality_check, evaluate_sum_rules, fmt, pass_rate, sum_check, value_check
+from datalab.checks import (classify_disputes, classify_sum, dispute_summary, equality_check, evaluate_sum_rules, fmt,
+                            pass_rate, sum_check, value_check)
 from datalab.schema import Series
 from datalab.status import build_observations, decide_tier
 
@@ -199,16 +200,59 @@ def test_status_is_deterministic():
     assert a == b
 
 
-def test_disagreeing_second_printing_is_said_in_words_not_hidden():
+def _two_editions(e2_values, struct2=None):
     e1 = column("e1", {"s.a": "100", "s.b": "200", "s.c": "300", "s.total": "600"})
-    e2 = column("e2", {"s.a": "150", "s.b": "150", "s.c": "300", "s.total": "600"}, col=0)   # restated between a and b
+    e2 = column("e2", e2_values, col=0, struct=struct2)
     checks = run_rules(e1 + e2)
     for a, b in zip(e1, e2):
         checks.append(equality_check(check_type="cross_edition", dataset="abs", rule_id="x", first=a, second=b, what="w",
                                      where_first="Edition 1", where_second="Edition 2"))
+    return e1, e2, classify_disputes(checks, e1 + e2)
+
+
+def test_restated_figure_that_adds_up_in_both_editions_is_disputed_d25():
+    # 50 moved from b to a in the later edition; both columns still add to 600.
+    e1, e2, checks = _two_editions({"s.a": "150", "s.b": "150", "s.c": "300", "s.total": "600"})
+    assert dispute_summary(checks) == {"differing_pairs": 2, "disputed": 2, "kept_as_fail": {}}
     obs = tiers(e1 + e2, checks)
     o = obs["s.a:2025-26:be"]
-    assert o.published and o.tier == "B" and o.value == "100"          # the primary printing, checked by its own sum
-    assert "prints a different figure for this (150)" in o.notes and "restated" in o.notes
-    assert "Differs from the figure printed in" in o.evidence_summary
-    assert obs["s.c:2025-26:be"].tier == "A" and obs["s.c:2025-26:be"].notes == ""
+    assert o.status == "disputed" and not o.published and o.value is None and o.tier is None and o.gap_kind == "disputed"
+    assert [(r.source_id, r.value_parsed) for r in o.disputed_readings] == [("e1", "100"), ("e2", "150")]
+    assert o.evidence_summary.startswith("Printed as 100 in the Edition 1 (p.1) and as 150 in the Edition 2 (p.1).")
+    assert "We do not publish either figure as checked." in o.evidence_summary
+    # an undisputed line in the same tables is unaffected
+    assert obs["s.c:2025-26:be"].tier == "A" and obs["s.c:2025-26:be"].status == "checked"
+    # D26: disputed pairs are left out of cross-edition agreement but never count as a pass overall
+    cross = pass_rate(checks, ["cross_edition"])
+    assert (cross["pass"], cross["fail"], cross["disputed"], cross["pass_rate"]) == (2, 0, 2, 1.0)
+    overall = pass_rate(checks, disputed_as_failed=True)
+    assert overall["evaluable"] == 6 and overall["pass_rate"] == round(4 / 6, 4)
+
+
+def test_differing_pair_stays_fail_and_is_withheld_when_one_table_does_not_add_up():
+    # the later edition's column does not add up: that is an extraction problem, not a restatement
+    e1, e2, checks = _two_editions({"s.a": "150", "s.b": "200", "s.c": "300", "s.total": "600"})
+    summary = dispute_summary(checks)
+    assert summary["disputed"] == 0 and summary["kept_as_fail"] == {"an arithmetic check on one reading failed": 1}
+    o = tiers(e1 + e2, checks)["s.a:2025-26:be"]
+    assert o.status == "unchecked" and not o.published and o.tier == "D" and o.disputed_readings == []
+
+
+def test_differing_pair_stays_fail_when_a_table_is_flagged():
+    e1, e2, checks = _two_editions({"s.a": "150", "s.b": "150", "s.c": "300", "s.total": "600"}, struct2=["merged_rows"])
+    assert dispute_summary(checks)["disputed"] == 0
+    assert set(dispute_summary(checks)["kept_as_fail"]) == {"a table or row carries a structural flag"}
+    o = tiers(e1 + e2, checks)["s.a:2025-26:be"]
+    assert not o.published and o.status == "unchecked" and o.tier == "D"
+
+
+def test_differing_pair_stays_fail_without_arithmetic_evidence_on_both_sides():
+    e1 = column("e1", {"s.a": "100", "s.b": "200", "s.c": "300", "s.total": "600"})
+    e2 = column("e2", {"s.a": "150"}, col=0)          # the later edition prints the line alone: no sum covers it
+    checks = run_rules(e1 + e2)
+    checks.append(equality_check(check_type="cross_edition", dataset="abs", rule_id="x", first=e1[0], second=e2[0], what="w",
+                                 where_first="Edition 1", where_second="Edition 2"))
+    checks = classify_disputes(checks, e1 + e2)
+    assert dispute_summary(checks)["kept_as_fail"] == {"a reading has no passed arithmetic check in its own table": 1}
+    o = tiers(e1 + e2, checks)["s.a:2025-26:be"]
+    assert not o.published and o.tier == "D"          # withheld although its own sum passed

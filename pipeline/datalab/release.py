@@ -16,13 +16,16 @@ from typing import Any
 import yaml
 
 from . import config
-from .checks import classify_sum, pass_rate
+from .checks import classify_sum, dispute_summary, dispute_test, pass_rate
 from .normalise import last_digit_unit
 from .schema import (AGREEMENT_CHECKS, PASSING, Cell, Check, Observation, Release, RunManifest, Series, Source)
-from .status import decide_tier
+from .status import decide_tier, disputed_readings, is_disputed
 
 SUM_TYPES = frozenset({"column_total", "hierarchy_sum", "row_total", "accounting_identity"})
 EQUAL_TYPES = frozenset({"cross_edition", "cross_table"})
+# Decision D26 (a recorded deviation, not a frozen threshold): a data type whose disputed pairs are
+# more than this share of all evaluable cross-edition pairs is not published.
+MAX_DISPUTED_SHARE = Decimal("0.05")
 DATASET_NAMES = {"abs": "Federal Annual Budget Statement", "cpi": "Consumer Price Index", "lfs": "Labour Force Survey"}
 
 
@@ -51,8 +54,12 @@ def gate_dataset(dataset: str, coverage: list[dict[str, Any]], checks: list[Chec
     cov = round(matched / printed, 4) if printed else None
     tables_below = [f"{c['source_id']} p.{c['page']}" for c in coverage
                     if c.get("coverage") is not None and c["coverage"] < th["coverage"]["min_per_table"]]
-    all_rate = pass_rate(checks)
+    # Overall rate: a disputed pair never counts as a pass. Cross-edition agreement (D26):
+    # agree / (agree + fail); disputed pairs are counted and shown separately.
+    all_rate = pass_rate(checks, disputed_as_failed=True)
     cross = pass_rate(checks, AGREEMENT_CHECKS & {"cross_edition"})
+    pairs = cross["evaluable"] + cross["disputed"]
+    disputed_share = round(cross["disputed"] / pairs, 4) if pairs else None
     reasons = []
     if cov is None:
         reasons.append("no coverage measurement")
@@ -64,12 +71,16 @@ def gate_dataset(dataset: str, coverage: list[dict[str, Any]], checks: list[Chec
         reasons.append(f"check pass rate {all_rate['pass_rate']} is below {th['checks']['min_evaluable_pass_rate_per_data_type']}")
     if cross["pass_rate"] is not None and cross["pass_rate"] < th["checks"]["min_cross_edition_agreement"]:
         reasons.append(f"cross-edition agreement {cross['pass_rate']} is below {th['checks']['min_cross_edition_agreement']}")
+    if disputed_share is not None and Decimal(str(disputed_share)) > MAX_DISPUTED_SHARE:
+        reasons.append(f"disputed cross-edition pairs are {disputed_share} of all pairs, above {MAX_DISPUTED_SHARE} (decision D26)")
     return {
         "dataset": dataset, "name": DATASET_NAMES.get(dataset, dataset), "meets_thresholds": not reasons,
         "state": "published" if not reasons else "coming", "reasons": reasons,
         "coverage": {"printed_numeric_tokens": printed, "matched": matched, "coverage": cov, "tables": len(coverage),
                      "tables_below_per_table_minimum": tables_below},
         "check_pass_rate": all_rate, "cross_edition_agreement": cross,
+        "disputes": {**dispute_summary(checks), "cross_edition_pairs": pairs, "disputed_share": disputed_share,
+                     "max_disputed_share": str(MAX_DISPUTED_SHARE)},
     }
 
 
@@ -97,7 +108,7 @@ def render_pages(cells: list[Cell], sources: dict[str, Source], out_dir: Path, d
 
 OBS_CSV_FIELDS = ["obs_id", "series_id", "series_name", "dataset", "period", "vintage", "value", "unit", "scale_factor",
                   "status", "tier", "published", "gap_kind", "gap_reason", "source_id", "source_title", "source_file_url",
-                  "source_sha256", "page", "cell_id", "value_as_printed", "evidence_summary", "release"]
+                  "source_sha256", "page", "cell_id", "value_as_printed", "disputed_readings", "evidence_summary", "release"]
 
 
 def _obs_rows(observations: list[Observation], series: dict[str, Series], cells: dict[str, Cell],
@@ -115,6 +126,7 @@ def _obs_rows(observations: list[Observation], series: dict[str, Series], cells:
             "source_file_url": (src.file_url or "") if src else "", "source_sha256": src.sha256 if src else "",
             "page": cell.page if cell else "", "cell_id": cell.cell_id if cell else "",
             "value_as_printed": cell.value_raw.strip() if (cell and o.published) else "",
+            "disputed_readings": " | ".join(f"{r.value_raw} ({r.source_id} p.{r.page})" for r in o.disputed_readings),
             "evidence_summary": o.evidence_summary, "release": version,
         })
     return rows
@@ -160,7 +172,8 @@ def build_release(version: str = config.DEFAULT_RELEASE, only: list[str] | None 
         if not gate["meets_thresholds"]:
             # A data type below a frozen threshold is not published at all (D10).
             reason = "This data type is below a frozen publication threshold: " + "; ".join(gate["reasons"]) + "."
-            obs = [o.model_copy(update={"value": None, "published": False, "status": "unchecked",
+            obs = [o.model_copy(update={"value": None, "published": False,
+                                        "status": "disputed" if o.status == "disputed" else "unchecked",
                                         "gap_kind": o.gap_kind or "not_yet_verified",
                                         "gap_reason": o.gap_reason if o.gap_kind else reason,
                                         "first_published_release": None, "last_changed_release": None}) for o in obs]
@@ -268,7 +281,7 @@ def build_release(version: str = config.DEFAULT_RELEASE, only: list[str] | None 
         check_pass_rates={ds: {"all": g.get("check_pass_rate"), "cross_edition": g.get("cross_edition_agreement")}
                           for ds, g in dataset_status.items()},
         dataset_status=dataset_status,
-        notes=("Prototype release built unattended on 2026-10-11. No DOI. Not for citation in publications yet. "
+        notes=("Prototype release, built unattended and rebuilt before first deployment (D29). No DOI. Not for citation in publications yet. "
                "Measured error rate is pending human gold-set labelling."),
     )
     config.write_json(out / "release.json", release.model_dump())
@@ -354,6 +367,11 @@ def check_release(path: Path | str) -> list[str]:
         if o.published and o.tier not in ("A", "B"):
             problems.append(f"observation {o.obs_id}: published with tier {o.tier}")
 
+    checks_by_cell: dict[str, list[Check]] = defaultdict(list)
+    for chk in checks:
+        for cid in {chk.target_cell_id, *chk.member_cell_ids} - {None}:
+            checks_by_cell[cid].append(chk)
+
     # re-run the arithmetic of every check from the cells
     for chk in checks:
         if chk.result == "not_evaluable":
@@ -376,6 +394,9 @@ def check_release(path: Path | str) -> list[str]:
                 unit = max(last_digit_unit(cells[chk.target_cell_id].value_parsed),
                            last_digit_unit(cells[chk.member_cell_ids[0]].value_parsed))
                 result = "pass" if a == b else ("pass_within_rounding" if abs(a - b) <= unit else "fail")
+                if result == "fail" and chk.check_type == "cross_edition" and chk.official:
+                    # D25: `disputed` only when every condition holds; recomputed here from the release itself.
+                    result = "fail" if dispute_test(chk, cells, checks_by_cell) else "disputed"
                 if result != chk.result:
                     problems.append(f"check {chk.check_id}: stored result {chk.result} != recomputed {result}")
             if chk.expected is not None and chk.observed is not None and chk.residual is not None:
@@ -385,10 +406,6 @@ def check_release(path: Path | str) -> list[str]:
             problems.append(f"check {chk.check_id}: could not be recomputed ({type(exc).__name__})")
 
     # status must be reproducible from the evidence in the release
-    checks_by_cell: dict[str, list[Check]] = defaultdict(list)
-    for chk in checks:
-        for cid in {chk.target_cell_id, *chk.member_cell_ids} - {None}:
-            checks_by_cell[cid].append(chk)
     by_obs = {o.obs_id: o for o in observations}
     gated = {ds for ds, g in release.dataset_status.items() if not g.get("meets_thresholds")}
     for o in observations:
@@ -411,6 +428,18 @@ def check_release(path: Path | str) -> list[str]:
         if primary.is_missing:
             continue
         supporting = [cells[c] for c in o.supporting_cell_ids if c in cells]
+        if is_disputed([primary, *supporting], checks_by_cell) != (o.status == "disputed"):
+            problems.append(f"observation {o.obs_id}: status {o.status} does not follow from its cross-edition checks")
+        if o.status == "disputed":
+            if o.published or o.value is not None or o.tier is not None or o.gap_kind != "disputed":
+                problems.append(f"observation {o.obs_id}: disputed but carries a value, a tier or the wrong gap kind")
+            if [r.model_dump() for r in o.disputed_readings] != [r.model_dump() for r in disputed_readings([primary, *supporting])]:
+                problems.append(f"observation {o.obs_id}: disputed readings differ from its cells")
+            if len({r.value_parsed for r in o.disputed_readings}) < 2:
+                problems.append(f"observation {o.obs_id}: disputed without two different readings")
+            continue
+        if o.disputed_readings:
+            problems.append(f"observation {o.obs_id}: lists disputed readings but is not disputed")
         tier, _ = decide_tier(primary, supporting, checks_by_cell)
         if tier != o.tier:
             problems.append(f"observation {o.obs_id}: stored tier {o.tier} != tier from evidence {tier}")

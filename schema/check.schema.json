@@ -35,6 +35,19 @@
       "title": "Description",
       "type": "string"
     },
+    "dispute_rejected": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "For a failed cross-edition pair: which D25 condition kept it from being `disputed`.",
+      "title": "Dispute Rejected"
+    },
     "expected": {
       "anyOf": [
         {
@@ -101,7 +114,8 @@
         "pass",
         "pass_within_rounding",
         "fail",
-        "not_evaluable"
+        "not_evaluable",
+        "disputed"
       ],
       "title": "Result",
       "type": "string"

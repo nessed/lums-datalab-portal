@@ -37,7 +37,7 @@ Unit = Literal["PKR", "index", "percent", "persons"]
 Vintage = Literal["be", "re", "actual", "provisional", "final", "rebased", "na"]
 Tier = Literal["A", "B", "C", "D", "E"]
 Status = Literal["checked", "unchecked", "disputed"]
-GapKind = Literal["not_in_source", "not_yet_verified", "failed_checks"]
+GapKind = Literal["not_in_source", "not_yet_verified", "failed_checks", "disputed"]
 CheckType = Literal[
     "column_total",
     "row_total",
@@ -50,7 +50,7 @@ CheckType = Literal[
     "weights_sum",
     "index_aggregation",
 ]
-CheckResult = Literal["pass", "pass_within_rounding", "fail", "not_evaluable"]
+CheckResult = Literal["pass", "pass_within_rounding", "fail", "not_evaluable", "disputed"]
 
 ARITHMETIC_CHECKS = frozenset(
     {"column_total", "hierarchy_sum", "row_total", "accounting_identity", "weights_sum",
@@ -58,6 +58,9 @@ ARITHMETIC_CHECKS = frozenset(
 )
 AGREEMENT_CHECKS = frozenset({"cross_edition", "cross_source"})
 PASSING = frozenset({"pass", "pass_within_rounding"})
+BLOCKING_CELL_FLAGS = frozenset({"merged_cell_suspected", "title_text_suspected", "text_with_number"})
+# Arithmetic evidence that a reading is as printed, for the `disputed` rule (decision D25).
+DISPUTE_ARITHMETIC = frozenset({"column_total", "hierarchy_sum", "weights_sum", "index_aggregation", "recompute", "row_total"})
 
 
 def _check_decimal(value: Optional[str]) -> Optional[str]:
@@ -185,6 +188,16 @@ class Cell(Model):
         return v
 
 
+class DisputedReading(Model):
+    """One official printing of a figure that another official printing contradicts (decision D25)."""
+
+    cell_id: str
+    source_id: str
+    page: int
+    value_raw: str
+    value_parsed: DecimalStr
+
+
 class Observation(Model):
     """The fact that one or more cells support."""
 
@@ -206,6 +219,8 @@ class Observation(Model):
     evidence_summary: str = ""
     notes: str = Field(default="", description="Caveats the reader must see, e.g. a footnote the document attaches to the line.")
     derived_from: list[str] = Field(default_factory=list)
+    disputed_readings: list[DisputedReading] = Field(
+        default_factory=list, description="Every printing of a disputed figure. A disputed observation carries no value.")
     first_published_release: Optional[str] = None
     last_changed_release: Optional[str] = None
 
@@ -230,6 +245,8 @@ class Check(Model):
     description: str = ""
     official: bool = Field(default=True, description="False for comparison-only sources that never feed status.")
     rule_id: Optional[str] = None
+    dispute_rejected: Optional[str] = Field(
+        default=None, description="For a failed cross-edition pair: which D25 condition kept it from being `disputed`.")
 
 
 class RunManifest(Model):

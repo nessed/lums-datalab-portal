@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T22:13:40+00:00 from commit `84ec3a09da70`. Label: **prototype**. DOI: none.
+Built 2026-10-10T22:50:26+00:00 from commit `bcc36a816618`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -9,13 +9,12 @@ Built 2026-10-10T22:13:40+00:00 from commit `84ec3a09da70`. Label: **prototype**
 
 | Data type | State | Sources | Published values | Withheld / gaps |
 |---|---|---|---|---|
-| Federal Annual Budget Statement | published | 9 | 535 | not_in_source: 2 |
+| Federal Annual Budget Statement | published | 9 | 533 | disputed: 2, not_in_source: 2 |
 | Consumer Price Index | published | 5 | 884 | not_yet_verified: 372 |
-| Labour Force Survey | coming | 4 | 0 | failed_checks: 1, not_yet_verified: 371 |
+| Labour Force Survey | published | 4 | 329 | disputed: 6, failed_checks: 1, not_yet_verified: 36 |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
-- Labour Force Survey: cross-edition agreement 0.9697 is below 0.98
 
 ## Status mix (internal tiers)
 
@@ -23,9 +22,9 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 
 | Data type | A | B | C | D |
 |---|---|---|---|---|
-| abs | 118 | 417 | 0 | 0 |
+| abs | 118 | 415 | 0 | 0 |
 | cpi | 117 | 767 | 0 | 0 |
-| lfs | 138 | 197 | 36 | 1 |
+| lfs | 138 | 191 | 36 | 1 |
 
 ## Coverage: how much of each printed table was captured
 
@@ -85,11 +84,15 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 
 ## Accuracy evidence: deterministic checks
 
-| Data type | Passed exactly | Passed within rounding | Failed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement |
-|---|---|---|---|---|---|---|
-| abs | 291 | 47 | 2 | 0 | 99.4% | 98.2% (114 pairs) |
-| cpi | 121 | 386 | 0 | 0 | 100.0% | 100.0% (117 pairs) |
-| lfs | 348 | 77 | 7 | 0 | 98.4% | 97.0% (198 pairs) |
+| Data type | Passed exactly | Passed within rounding | Failed | Disputed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement | Disputed pairs |
+|---|---|---|---|---|---|---|---|---|
+| abs | 291 | 47 | 0 | 2 | 0 | 99.4% | 100.0% (112 of 112 pairs) | 2 of 114 pairs (1.8%) |
+| cpi | 121 | 386 | 0 | 0 | 0 | 100.0% | 100.0% (117 of 117 pairs) | 0 of 117 pairs (0.0%) |
+| lfs | 348 | 77 | 1 | 6 | 0 | 98.4% | 100.0% (192 of 192 pairs) | 6 of 198 pairs (3.0%) |
+
+**Disputed** means two official documents print different figures for the same thing and each printing adds up in its own table (a restatement by the publisher). A disputed figure is not published as checked: the site shows both printings and no value. A differing pair that does not meet those conditions is a failure and its value is withheld.
+
+**Deviation (decision D26, definition changed after results existed):** cross-edition agreement is agree / (agree + fail), with disputed pairs counted separately in the last column; the frozen 98% applies to that ratio. In the pass rate of evaluable checks a disputed pair counts as not passed. A data type whose disputed pairs exceed 5% of its cross-edition pairs is not published. The thresholds file is unchanged.
 
 **Measured error rate: pending gold-set labelling.** The gold-set kit is in `gold/`; until two humans have labelled it, no absolute error rate is claimed.
 

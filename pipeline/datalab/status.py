@@ -13,6 +13,12 @@ Tiers
 
 Public: A, B -> checked, published. C -> unchecked, withheld (gap: not yet verified).
 D -> withheld (gap: failed checks).
+
+Disputed (decision D25): two official documents print different figures for the same observation
+and each printing adds up in its own table. `checks.classify_disputes` decides that; here the
+observation then gets status `disputed`, no value and no tier, and lists every printing.
+A cross-edition pair that differs without meeting those conditions stays `fail`, and the
+observation is withheld (tier D) whatever else passed.
 """
 from __future__ import annotations
 
@@ -22,9 +28,9 @@ from typing import Iterable
 
 from .checks import fmt
 from .normalise import last_digit_unit
-from .schema import AGREEMENT_CHECKS, ARITHMETIC_CHECKS, PASSING, Cell, Check, Observation, Series, obs_id_for
+from .schema import (AGREEMENT_CHECKS, ARITHMETIC_CHECKS, BLOCKING_CELL_FLAGS, PASSING, Cell, Check, DisputedReading,
+                     Observation, Series, obs_id_for)
 
-BLOCKING_CELL_FLAGS = frozenset({"merged_cell_suspected", "title_text_suspected", "text_with_number"})
 BLOCKING_STRUCT_FLAGS = frozenset({"dropped_column", "merged_rows", "possible_dropped_column", "low_coverage", "column_unmapped"})
 
 
@@ -58,6 +64,10 @@ def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str,
                            and c.check_type in ARITHMETIC_CHECKS]
     if failed and not passed:
         return "D", [f"{len(failed)} check(s) failed and no independent check passed"]
+    if any(c.check_type == "cross_edition" for c in failed):
+        # Another official document prints a different figure and the difference is not established
+        # as a restatement (the D25 conditions do not all hold): withheld, never shown as checked.
+        return "D", ["another official document prints a different figure and the difference is not explained"]
     if failed:
         reasons.append(f"{len(failed)} check(s) failed but an independent check passed")
     if arithmetic and agreement:
@@ -166,6 +176,25 @@ def disagreement_note(primary: Cell, checks_by_cell: dict[str, list[Check]], cel
     return " ".join(sorted(set(notes)))
 
 
+def is_disputed(group: Iterable[Cell], checks_by_cell: dict[str, list[Check]]) -> bool:
+    """True when a cross-edition pair among these printings was classified `disputed` (D25)."""
+    return any(chk.official and chk.result == "disputed" and chk.check_type == "cross_edition"
+               for c in group for chk in checks_by_cell.get(c.cell_id, []))
+
+
+def disputed_readings(group: Iterable[Cell]) -> list[DisputedReading]:
+    """Every printing of the figure, in the order given (earliest document first)."""
+    return [DisputedReading(cell_id=c.cell_id, source_id=c.source_id, page=c.page, value_raw=c.value_raw.strip(),
+                            value_parsed=c.value_parsed)
+            for c in group if c.value_parsed is not None and not c.is_missing]
+
+
+def disputed_sentence(readings: list[DisputedReading], source_titles: dict[str, str]) -> str:
+    parts = [f"as {r.value_raw} in the {source_titles.get(r.source_id, r.source_id)} (p.{r.page})" for r in readings]
+    return ("Printed " + " and ".join(parts) + ". Each table adds up on its own page. "
+            "We do not publish either figure as checked.")
+
+
 def build_observations(cells: Iterable[Cell], checks: Iterable[Check], series: dict[str, Series],
                        source_order: dict[str, str], source_titles: dict[str, str], release: str) -> list[Observation]:
     """Group mapped cells into observations and assign tier/status from evidence."""
@@ -195,6 +224,13 @@ def build_observations(cells: Iterable[Cell], checks: Iterable[Check], series: d
             out.append(Observation(**base, tier=None, status="unchecked", published=False, gap_kind="not_in_source",
                                    gap_reason=f"The document prints '{primary.missing_marker}' instead of a figure.",
                                    evidence_summary="The source prints no figure here."))
+            continue
+        if is_disputed(group, checks_by_cell):
+            readings = disputed_readings(group)
+            sentence = disputed_sentence(readings, source_titles)
+            out.append(Observation(**base, tier=None, status="disputed", published=False, gap_kind="disputed",
+                                   gap_reason="Two official documents print different figures for this.",
+                                   evidence_summary=sentence, disputed_readings=readings))
             continue
         tier, reasons = decide_tier(primary, supporting, checks_by_cell)
         sentence = evidence_sentence(primary, tier, checks_by_cell, cells_by_id, source_titles)

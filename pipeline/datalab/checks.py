@@ -12,7 +12,7 @@ from decimal import Decimal
 from typing import Any, Iterable, Sequence
 
 from .normalise import decimal_to_str, last_digit_unit
-from .schema import Cell, Check, check_id_for
+from .schema import BLOCKING_CELL_FLAGS, DISPUTE_ARITHMETIC, PASSING, Cell, Check, check_id_for
 
 SUM_RULE_TEXT = ("Exact match passes. A difference of at most half a unit of the last printed digit per "
                  "item added passes as 'within rounding'. Anything larger fails.")
@@ -198,10 +198,77 @@ def evaluate_sum_rules(cells: list[Cell], rules: list[dict[str, Any]], dataset: 
     return out
 
 
-def pass_rate(checks: Iterable[Check], kinds: Iterable[str] | None = None, official_only: bool = True) -> dict[str, Any]:
-    """Share of evaluable checks that passed. Not-evaluable checks are counted separately."""
+def dispute_test(chk: Check, cells_by_id: dict[str, Cell], checks_by_cell: dict[str, list[Check]]) -> str | None:
+    """Why a differing cross-edition pair is NOT a dispute, or None when every D25 condition holds.
+
+    (a) each reading is part of a passed arithmetic check inside its own document, and of no failed one;
+    (b) neither table (nor cell) carries an extraction flag; (c) both readings are of the same observation.
+    """
+    first = cells_by_id.get(chk.target_cell_id or "")
+    second = cells_by_id.get(chk.member_cell_ids[0]) if len(chk.member_cell_ids) == 1 else None
+    if first is None or second is None:
+        return "a reading is not in the record"
+    key = (first.series_id, first.period, first.vintage)
+    if not all(key) or key != (second.series_id, second.period, second.vintage):
+        return "the two readings are not of the same observation"
+    if first.source_id == second.source_id:
+        return "both readings are in the same document"
+    if first.value_parsed is None or second.value_parsed is None:
+        return "a reading could not be parsed"
+    if first.structural_flags or second.structural_flags:
+        return "a table or row carries a structural flag"
+    if (set(first.normalization_flags) | set(second.normalization_flags)) & BLOCKING_CELL_FLAGS:
+        return "a table or cell carries an extraction flag"
+    for cell in (first, second):
+        own = [c for c in checks_by_cell.get(cell.cell_id, [])
+               if c.official and c.check_type in DISPUTE_ARITHMETIC and c.source_ids == [cell.source_id]]
+        if any(c.result == "fail" for c in own):
+            return "an arithmetic check on one reading failed"
+        if not any(c.result in PASSING for c in own):
+            return "a reading has no passed arithmetic check in its own table"
+    return None
+
+
+def classify_disputes(checks: list[Check], cells: Iterable[Cell]) -> list[Check]:
+    """Turn a differing cross-edition pair into `disputed` when every D25 condition holds. Pure function.
+
+    A pair that stays `fail` records which condition turned it away.
+    """
+    cells_by_id = {c.cell_id: c for c in cells}
+    checks_by_cell: dict[str, list[Check]] = defaultdict(list)
+    for chk in checks:
+        for cid in {chk.target_cell_id, *chk.member_cell_ids} - {None}:
+            checks_by_cell[cid].append(chk)
+    out: list[Check] = []
+    for chk in checks:
+        if chk.check_type == "cross_edition" and chk.official and chk.result in ("fail", "disputed"):
+            why_not = dispute_test(chk, cells_by_id, checks_by_cell)
+            chk = chk.model_copy(update={"result": "fail" if why_not else "disputed", "dispute_rejected": why_not})
+        out.append(chk)
+    return out
+
+
+def dispute_summary(checks: Iterable[Check]) -> dict[str, Any]:
+    """Cross-edition pairs that differ: how many are disputes, and what turned the others away."""
+    differing = [c for c in checks if c.check_type == "cross_edition" and c.official and c.result in ("fail", "disputed")]
+    turned_away: dict[str, int] = defaultdict(int)
+    for c in differing:
+        if c.result == "fail":
+            turned_away[c.dispute_rejected or "not tested"] += 1
+    return {"differing_pairs": len(differing), "disputed": sum(1 for c in differing if c.result == "disputed"),
+            "kept_as_fail": dict(sorted(turned_away.items()))}
+
+
+def pass_rate(checks: Iterable[Check], kinds: Iterable[str] | None = None, official_only: bool = True,
+              disputed_as_failed: bool = False) -> dict[str, Any]:
+    """Share of evaluable checks that passed. Not-evaluable checks are counted separately.
+
+    Disputed pairs (two official printings that each add up but differ, D25) are counted on their
+    own. For cross-edition agreement they are left out of the ratio (D26: agree / (agree + fail));
+    for the overall rate pass `disputed_as_failed=True` so that a dispute never counts as a pass.
+    """
     kinds_set = set(kinds) if kinds else None
-    counts = {"pass": 0, "pass_within_rounding": 0, "fail": 0, "not_evaluable": 0}
+    counts = {"pass": 0, "pass_within_rounding": 0, "fail": 0, "not_evaluable": 0, "disputed": 0}
     for c in checks:
         if official_only and not c.official:
             continue
@@ -209,5 +276,7 @@ def pass_rate(checks: Iterable[Check], kinds: Iterable[str] | None = None, offic
             continue
         counts[c.result] += 1
     evaluable = counts["pass"] + counts["pass_within_rounding"] + counts["fail"]
+    if disputed_as_failed:
+        evaluable += counts["disputed"]
     rate = round((counts["pass"] + counts["pass_within_rounding"]) / evaluable, 4) if evaluable else None
     return {**counts, "evaluable": evaluable, "pass_rate": rate}

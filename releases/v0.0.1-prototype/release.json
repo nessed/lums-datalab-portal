@@ -1,17 +1,16 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T22:13:40+00:00",
-  "git_commit": "84ec3a09da70fa177367df102fc7b902948f5351",
+  "created_at": "2026-10-10T22:50:26+00:00",
+  "git_commit": "bcc36a81661802f0d055a098ff6d4d1e1bc2b2b2",
   "label": "prototype",
   "doi": null,
   "scope": {
     "datasets": [
       "abs",
-      "cpi"
-    ],
-    "datasets_coming": [
+      "cpi",
       "lfs"
     ],
+    "datasets_coming": [],
     "sources": [
       "abs-fed-2010-11",
       "abs-fed-2011-12",
@@ -62,7 +61,13 @@
         "2026-05",
         "2026-06"
       ],
-      "lfs": []
+      "lfs": [
+        "2014-15",
+        "2017-18",
+        "2018-19",
+        "2020-21",
+        "2024-25"
+      ]
     }
   },
   "thresholds_sha256": "85689c5c066fef50c825db8aab5a38595bf1c4d22d4515b7be22bdc5dd13e48b",
@@ -107,27 +112,30 @@
     "sources": 22,
     "cells": 4506,
     "cells_mapped": 2201,
-    "cells_behind_published_values": 1628,
+    "cells_behind_published_values": 2145,
     "series": 286,
     "observations": 2165,
     "observations_by_dataset": {
       "abs": {
+        "gap:disputed": 2,
         "gap:not_in_source": 2,
-        "published": 535
+        "published": 533
       },
       "cpi": {
         "gap:not_yet_verified": 372,
         "published": 884
       },
       "lfs": {
+        "gap:disputed": 6,
         "gap:failed_checks": 1,
-        "gap:not_yet_verified": 371
+        "gap:not_yet_verified": 36,
+        "published": 329
       }
     },
     "tiers_by_dataset": {
       "abs": {
         "A": 118,
-        "B": 417
+        "B": 415
       },
       "cpi": {
         "A": 117,
@@ -135,7 +143,7 @@
       },
       "lfs": {
         "A": 138,
-        "B": 197,
+        "B": 191,
         "C": 36,
         "D": 1
       }
@@ -143,7 +151,8 @@
     "checks_by_result": {
       "pass": 760,
       "pass_within_rounding": 510,
-      "fail": 9
+      "disputed": 8,
+      "fail": 1
     },
     "checks_by_type": {
       "accounting_identity": {
@@ -156,7 +165,7 @@
       },
       "cross_edition": {
         "pass": 417,
-        "fail": 8,
+        "disputed": 8,
         "pass_within_rounding": 4
       },
       "cross_table": {
@@ -212,18 +221,20 @@
       "all": {
         "pass": 291,
         "pass_within_rounding": 47,
-        "fail": 2,
+        "fail": 0,
         "not_evaluable": 0,
+        "disputed": 2,
         "evaluable": 340,
         "pass_rate": 0.9941
       },
       "cross_edition": {
         "pass": 111,
         "pass_within_rounding": 1,
-        "fail": 2,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 114,
-        "pass_rate": 0.9825
+        "disputed": 2,
+        "evaluable": 112,
+        "pass_rate": 1.0
       }
     },
     "cpi": {
@@ -232,6 +243,7 @@
         "pass_within_rounding": 386,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 507,
         "pass_rate": 1.0
       },
@@ -240,6 +252,7 @@
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 117,
         "pass_rate": 1.0
       }
@@ -248,18 +261,20 @@
       "all": {
         "pass": 348,
         "pass_within_rounding": 77,
-        "fail": 7,
+        "fail": 1,
         "not_evaluable": 0,
+        "disputed": 6,
         "evaluable": 432,
         "pass_rate": 0.9838
       },
       "cross_edition": {
         "pass": 189,
         "pass_within_rounding": 3,
-        "fail": 6,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 198,
-        "pass_rate": 0.9697
+        "disputed": 6,
+        "evaluable": 192,
+        "pass_rate": 1.0
       }
     }
   },
@@ -280,18 +295,28 @@
       "check_pass_rate": {
         "pass": 291,
         "pass_within_rounding": 47,
-        "fail": 2,
+        "fail": 0,
         "not_evaluable": 0,
+        "disputed": 2,
         "evaluable": 340,
         "pass_rate": 0.9941
       },
       "cross_edition_agreement": {
         "pass": 111,
         "pass_within_rounding": 1,
-        "fail": 2,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 114,
-        "pass_rate": 0.9825
+        "disputed": 2,
+        "evaluable": 112,
+        "pass_rate": 1.0
+      },
+      "disputes": {
+        "differing_pairs": 2,
+        "disputed": 2,
+        "kept_as_fail": {},
+        "cross_edition_pairs": 114,
+        "disputed_share": 0.0175,
+        "max_disputed_share": "0.05"
       }
     },
     "cpi": {
@@ -312,6 +337,7 @@
         "pass_within_rounding": 386,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 507,
         "pass_rate": 1.0
       },
@@ -320,18 +346,25 @@
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 117,
         "pass_rate": 1.0
+      },
+      "disputes": {
+        "differing_pairs": 0,
+        "disputed": 0,
+        "kept_as_fail": {},
+        "cross_edition_pairs": 117,
+        "disputed_share": 0.0,
+        "max_disputed_share": "0.05"
       }
     },
     "lfs": {
       "dataset": "lfs",
       "name": "Labour Force Survey",
-      "meets_thresholds": false,
-      "state": "coming",
-      "reasons": [
-        "cross-edition agreement 0.9697 is below 0.98"
-      ],
+      "meets_thresholds": true,
+      "state": "published",
+      "reasons": [],
       "coverage": {
         "printed_numeric_tokens": 2108,
         "matched": 2108,
@@ -342,18 +375,28 @@
       "check_pass_rate": {
         "pass": 348,
         "pass_within_rounding": 77,
-        "fail": 7,
+        "fail": 1,
         "not_evaluable": 0,
+        "disputed": 6,
         "evaluable": 432,
         "pass_rate": 0.9838
       },
       "cross_edition_agreement": {
         "pass": 189,
         "pass_within_rounding": 3,
-        "fail": 6,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 198,
-        "pass_rate": 0.9697
+        "disputed": 6,
+        "evaluable": 192,
+        "pass_rate": 1.0
+      },
+      "disputes": {
+        "differing_pairs": 6,
+        "disputed": 6,
+        "kept_as_fail": {},
+        "cross_edition_pairs": 198,
+        "disputed_share": 0.0303,
+        "max_disputed_share": "0.05"
       }
     }
   },
@@ -361,5 +404,5 @@
     "status": "pending_human_labelling"
   },
   "measured_error_rate": null,
-  "notes": "Prototype release built unattended on 2026-10-11. No DOI. Not for citation in publications yet. Measured error rate is pending human gold-set labelling."
+  "notes": "Prototype release, built unattended and rebuilt before first deployment (D29). No DOI. Not for citation in publications yet. Measured error rate is pending human gold-set labelling."
 }

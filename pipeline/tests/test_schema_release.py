@@ -99,4 +99,5 @@ def test_release_is_self_consistent(path):
 def test_release_holds_no_value_for_unpublished_observations(path):
     for o in json.loads((path / "observations.json").read_text(encoding="utf-8")):
         assert o["published"] or o["value"] is None
-        assert o["published"] or o["gap_kind"] in ("not_in_source", "not_yet_verified", "failed_checks")
+        assert o["published"] or o["gap_kind"] in ("not_in_source", "not_yet_verified", "failed_checks", "disputed")
+        assert (o["status"] == "disputed") == bool(o["disputed_readings"])

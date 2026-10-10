@@ -1,4 +1,41 @@
 {
+  "$defs": {
+    "DisputedReading": {
+      "additionalProperties": false,
+      "description": "One official printing of a figure that another official printing contradicts (decision D25).",
+      "properties": {
+        "cell_id": {
+          "title": "Cell Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "value_parsed": {
+          "title": "Value Parsed",
+          "type": "string"
+        },
+        "value_raw": {
+          "title": "Value Raw",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cell_id",
+        "source_id",
+        "page",
+        "value_raw",
+        "value_parsed"
+      ],
+      "title": "DisputedReading",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
   "description": "The fact that one or more cells support.",
   "properties": {
@@ -14,6 +51,14 @@
         "type": "string"
       },
       "title": "Derived From",
+      "type": "array"
+    },
+    "disputed_readings": {
+      "description": "Every printing of a disputed figure. A disputed observation carries no value.",
+      "items": {
+        "$ref": "#/$defs/DisputedReading"
+      },
+      "title": "Disputed Readings",
       "type": "array"
     },
     "evidence_summary": {
@@ -39,7 +84,8 @@
           "enum": [
             "not_in_source",
             "not_yet_verified",
-            "failed_checks"
+            "failed_checks",
+            "disputed"
           ],
           "type": "string"
         },

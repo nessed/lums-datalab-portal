@@ -11,7 +11,7 @@ from decimal import ROUND_HALF_EVEN, Decimal
 from typing import Any
 
 from .. import config
-from ..checks import equality_check, evaluate_sum_rules, pass_rate
+from ..checks import classify_disputes, equality_check, evaluate_sum_rules, pass_rate
 from ..normalise import clean_text, decimal_to_str, detect_scale, normalise_label
 from ..schema import Cell, Check, Derivation, Observation, Series, SeriesBreak, check_id_for, obs_id_for
 from ..sources import read_manifest, source_path
@@ -303,6 +303,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
 
     checks = evaluate_sum_rules(cells, spec["rules"], DATASET, parents, blocked, lambda c: column_label(c, titles))
     checks += cross_checks(cells, titles, order, series)
+    checks = classify_disputes(checks, cells)  # D25: a differing pair that each add up is `disputed`, by code
     observations = build_observations(cells, checks, series, order, titles, release)
     cells_by_id = {c.cell_id: c for c in cells}
     for o in observations:

@@ -1,7 +1,7 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T21:40:28+00:00",
+    "built_at": "2026-10-10T22:46:48+00:00",
     "located": {
       "abs-fed-2010-11": {
         "footnote_lines": [],
@@ -746,26 +746,29 @@
       "all": {
         "pass": 291,
         "pass_within_rounding": 47,
-        "fail": 2,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 340,
-        "pass_rate": 0.9941
+        "disputed": 2,
+        "evaluable": 338,
+        "pass_rate": 1.0
       },
       "arithmetic": {
         "pass": 180,
         "pass_within_rounding": 46,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 226,
         "pass_rate": 1.0
       },
       "cross_edition": {
         "pass": 111,
         "pass_within_rounding": 1,
-        "fail": 2,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 114,
-        "pass_rate": 0.9825
+        "disputed": 2,
+        "evaluable": 112,
+        "pass_rate": 1.0
       }
     },
     "comparison_arslan": {
@@ -788,12 +791,12 @@
         "unit",
         "source_pdf_url"
       ],
-      "note": "Column layout recorded; a like-for-like comparison is a queued follow-up."
+      "note": "Not like-for-like: that dataset is at sub-function level (3-digit codes) from the detail tables, while this release reads the function-level Summary of Expenditure. Comparison is a queued follow-up for when the detail tables are processed."
     }
   },
   "cpi": {
     "dataset": "cpi",
-    "built_at": "2026-10-10T22:13:18+00:00",
+    "built_at": "2026-10-10T22:47:44+00:00",
     "located": {
       "cpi-pbs-2021-06:national": {
         "source_id": "cpi-pbs-2021-06",
@@ -2595,6 +2598,7 @@
         "pass_within_rounding": 386,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 507,
         "pass_rate": 1.0
       },
@@ -2603,6 +2607,7 @@
         "pass_within_rounding": 386,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 390,
         "pass_rate": 1.0
       },
@@ -2611,6 +2616,7 @@
         "pass_within_rounding": 9,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 13,
         "pass_rate": 1.0
       },
@@ -2619,6 +2625,7 @@
         "pass_within_rounding": 39,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 39,
         "pass_rate": 1.0
       },
@@ -2627,6 +2634,7 @@
         "pass_within_rounding": 338,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 338,
         "pass_rate": 1.0
       },
@@ -2635,6 +2643,7 @@
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 117,
         "pass_rate": 1.0
       },
@@ -2643,6 +2652,7 @@
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 0,
         "pass_rate": null
       }
@@ -2654,7 +2664,7 @@
   },
   "lfs": {
     "dataset": "lfs",
-    "built_at": "2026-10-10T21:53:14+00:00",
+    "built_at": "2026-10-10T22:48:16+00:00",
     "located": {
       "lfs-pbs-2017-18": {
         "runs": [
@@ -4504,32 +4514,36 @@
       "all": {
         "pass": 348,
         "pass_within_rounding": 77,
-        "fail": 7,
+        "fail": 1,
         "not_evaluable": 0,
-        "evaluable": 432,
-        "pass_rate": 0.9838
+        "disputed": 6,
+        "evaluable": 426,
+        "pass_rate": 0.9977
       },
       "arithmetic": {
         "pass": 159,
         "pass_within_rounding": 74,
         "fail": 1,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 234,
         "pass_rate": 0.9957
       },
       "cross_edition": {
         "pass": 189,
         "pass_within_rounding": 3,
-        "fail": 6,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 198,
-        "pass_rate": 0.9697
+        "disputed": 6,
+        "evaluable": 192,
+        "pass_rate": 1.0
       },
       "type:accounting_identity": {
         "pass": 24,
         "pass_within_rounding": 12,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 36,
         "pass_rate": 1.0
       },
@@ -4538,22 +4552,25 @@
         "pass_within_rounding": 2,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 60,
         "pass_rate": 1.0
       },
       "type:cross_edition": {
         "pass": 189,
         "pass_within_rounding": 3,
-        "fail": 6,
+        "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 198,
-        "pass_rate": 0.9697
+        "disputed": 6,
+        "evaluable": 192,
+        "pass_rate": 1.0
       },
       "type:recompute": {
         "pass": 0,
         "pass_within_rounding": 53,
         "fail": 1,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 54,
         "pass_rate": 0.9815
       },
@@ -4562,6 +4579,7 @@
         "pass_within_rounding": 6,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 60,
         "pass_rate": 1.0
       },
@@ -4570,18 +4588,21 @@
         "pass_within_rounding": 1,
         "fail": 0,
         "not_evaluable": 0,
+        "disputed": 0,
         "evaluable": 24,
         "pass_rate": 1.0
       }
     },
     "observations_by_outcome": {
-      "published": 335,
+      "published": 329,
+      "disputed": 6,
       "not_yet_verified": 36,
       "failed_checks": 1
     },
     "tier_mix": {
-      "B": 197,
+      "B": 191,
       "A": 138,
+      "none": 6,
       "C": 36,
       "D": 1
     },

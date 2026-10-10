@@ -19,7 +19,7 @@ from decimal import ROUND_CEILING, Decimal
 from typing import Any
 
 from .. import config
-from ..checks import equality_check, fmt, pass_rate, sum_check, value_check
+from ..checks import classify_disputes, equality_check, fmt, pass_rate, sum_check, value_check
 from ..normalise import clean_text, decimal_to_str, last_digit_unit, normalise_label, parse_printed
 from ..schema import Cell, Check, Observation, Series, SeriesBreak, check_id_for, obs_id_for
 from ..sources import read_manifest, source_path
@@ -764,6 +764,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     else:
         cross_source_info = {"status": "skipped", "reason": "no sbp_easydata source is registered in sources/manifest.csv"}
 
+    checks = classify_disputes(checks, cells)  # D25: a differing pair that each add up is `disputed`, by code
     observations = build_observations(cells, checks, series, order, titles, release)
     observations += gap_observations(spec, sources, located, not_located, observations, series)
     used = {o.series_id for o in observations}

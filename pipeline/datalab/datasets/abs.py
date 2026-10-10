@@ -50,7 +50,9 @@ def map_columns(table: Table, value_cols: list[int], words, edition: str, spec: 
         years = sorted(set(fiscal_years_in(header)))
         vintages = [v for v, pattern in spec["columns"]["vintage_words"].items() if re.search(pattern, header)]
         if len(years) == 1 and len(vintages) == 1:
-            mapping[col] = (years[0], vintages[0], header)
+            # Keep only the header itself for display; stray words printed above the column are dropped.
+            m = re.search(r"(?i)(budget|revised)\s+estimates?\s+(?:19|20)\d{2}\s*-\s*\d{2,4}", header)
+            mapping[col] = (years[0], vintages[0], m.group(0) if m else header)
         else:
             problems.append(f"column {col}: header {header!r} does not give one year and one of Budget/Revised")
     expected = {(previous_fy(edition), "be"), (previous_fy(edition), "re"), (edition, "be")}

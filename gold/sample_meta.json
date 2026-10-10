@@ -1,0 +1,119 @@
+{
+  "release": "v0.0.1-prototype",
+  "seed": 20261011,
+  "requested": 400,
+  "drawn": 398,
+  "eligible_cells": 630,
+  "strata": {
+    "abs/abs-fed-2010-11/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2010-11/other": {
+      "cells": 18,
+      "drawn": 11
+    },
+    "abs/abs-fed-2010-11/total": {
+      "cells": 27,
+      "drawn": 17
+    },
+    "abs/abs-fed-2011-12/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2011-12/other": {
+      "cells": 18,
+      "drawn": 11
+    },
+    "abs/abs-fed-2011-12/total": {
+      "cells": 27,
+      "drawn": 17
+    },
+    "abs/abs-fed-2016-17/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2016-17/other": {
+      "cells": 18,
+      "drawn": 11
+    },
+    "abs/abs-fed-2016-17/total": {
+      "cells": 27,
+      "drawn": 17
+    },
+    "abs/abs-fed-2017-18/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2017-18/other": {
+      "cells": 18,
+      "drawn": 11
+    },
+    "abs/abs-fed-2017-18/total": {
+      "cells": 24,
+      "drawn": 15
+    },
+    "abs/abs-fed-2021-22/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2021-22/other": {
+      "cells": 6,
+      "drawn": 4
+    },
+    "abs/abs-fed-2021-22/total": {
+      "cells": 24,
+      "drawn": 15
+    },
+    "abs/abs-fed-2022-23/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2022-23/other": {
+      "cells": 15,
+      "drawn": 10
+    },
+    "abs/abs-fed-2022-23/total": {
+      "cells": 21,
+      "drawn": 13
+    },
+    "abs/abs-fed-2024-25/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2024-25/other": {
+      "cells": 15,
+      "drawn": 10
+    },
+    "abs/abs-fed-2024-25/total": {
+      "cells": 24,
+      "drawn": 15
+    },
+    "abs/abs-fed-2025-26/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2025-26/other": {
+      "cells": 15,
+      "drawn": 10
+    },
+    "abs/abs-fed-2025-26/total": {
+      "cells": 24,
+      "drawn": 15
+    },
+    "abs/abs-fed-2026-27/breakdown": {
+      "cells": 30,
+      "drawn": 19
+    },
+    "abs/abs-fed-2026-27/other": {
+      "cells": 15,
+      "drawn": 10
+    },
+    "abs/abs-fed-2026-27/total": {
+      "cells": 24,
+      "drawn": 15
+    }
+  },
+  "blind": "The extracted value is deliberately absent from sample.csv and sample.js.",
+  "status": "unlabelled"
+}

@@ -1,7 +1,7 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T21:36:25+00:00",
+    "built_at": "2026-10-10T21:40:28+00:00",
     "located": {
       "abs-fed-2010-11": {
         "footnote_lines": [],
@@ -21,17 +21,17 @@
           "2": {
             "period": "2009-10",
             "vintage": "be",
-            "header": "SUMMARY Budget Estimates 2009-10"
+            "header": "Budget Estimates 2009-10"
           },
           "3": {
             "period": "2009-10",
             "vintage": "re",
-            "header": "(Rs Revised Estimates 2009-10"
+            "header": "Revised Estimates 2009-10"
           },
           "4": {
             "period": "2010-11",
             "vintage": "be",
-            "header": "in million) Budget Estimates 2010-11"
+            "header": "Budget Estimates 2010-11"
           }
         },
         "column_problems": [],
@@ -99,17 +99,17 @@
           "2": {
             "period": "2010-11",
             "vintage": "be",
-            "header": "SUMMARY Budget Estimates 2010-11"
+            "header": "Budget Estimates 2010-11"
           },
           "3": {
             "period": "2010-11",
             "vintage": "re",
-            "header": "(Rs Revised Estimates 2010-11"
+            "header": "Revised Estimates 2010-11"
           },
           "4": {
             "period": "2011-12",
             "vintage": "be",
-            "header": "in million) Budget Estimates 2011-12"
+            "header": "Budget Estimates 2011-12"
           }
         },
         "column_problems": [],
@@ -180,17 +180,17 @@
           "2": {
             "period": "2015-16",
             "vintage": "be",
-            "header": "SUMMARY Budget Estimates 2015-16"
+            "header": "Budget Estimates 2015-16"
           },
           "3": {
             "period": "2015-16",
             "vintage": "re",
-            "header": "(Rs Revised Estimates 2015-16"
+            "header": "Revised Estimates 2015-16"
           },
           "4": {
             "period": "2016-17",
             "vintage": "be",
-            "header": "in million) Budget Estimates 2016-17"
+            "header": "Budget Estimates 2016-17"
           }
         },
         "column_problems": [],
@@ -260,17 +260,17 @@
           "2": {
             "period": "2016-17",
             "vintage": "be",
-            "header": "SUMMARY Budget Estimates 2016-17"
+            "header": "Budget Estimates 2016-17"
           },
           "3": {
             "period": "2016-17",
             "vintage": "re",
-            "header": "(Rs Revised Estimates 2016-17"
+            "header": "Revised Estimates 2016-17"
           },
           "4": {
             "period": "2017-18",
             "vintage": "be",
-            "header": "in million) Budget Estimates 2017-18"
+            "header": "Budget Estimates 2017-18"
           }
         },
         "column_problems": [],
@@ -350,17 +350,17 @@
           "2": {
             "period": "2020-21",
             "vintage": "be",
-            "header": "(Current revenue and accounts) Budget Estimates 2020-21"
+            "header": "Budget Estimates 2020-21"
           },
           "3": {
             "period": "2020-21",
             "vintage": "re",
-            "header": "& Dev) capital account) have been (Rs Revised Estimates 2020-21"
+            "header": "Revised Estimates 2020-21"
           },
           "4": {
             "period": "2021-22",
             "vintage": "be",
-            "header": "and Budget mentioned as per in million) Budget Estimates 2021-22"
+            "header": "Budget Estimates 2021-22"
           }
         },
         "column_problems": [],
@@ -430,17 +430,17 @@
           "2": {
             "period": "2021-22",
             "vintage": "be",
-            "header": "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+            "header": "Budget Estimates 2021-22"
           },
           "3": {
             "period": "2021-22",
             "vintage": "re",
-            "header": "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+            "header": "Revised Estimates 2021-22"
           },
           "4": {
             "period": "2022-23",
             "vintage": "be",
-            "header": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+            "header": "Budget Estimates 2022-23"
           }
         },
         "column_problems": [],
@@ -508,17 +508,17 @@
           "2": {
             "period": "2023-24",
             "vintage": "be",
-            "header": "EXPENDITURE (on revenue and accounts) have Budget Estimates 2023-24"
+            "header": "Budget Estimates 2023-24"
           },
           "3": {
             "period": "2023-24",
             "vintage": "re",
-            "header": "capital account) been mentioned Revised Estimates 2023-24"
+            "header": "Revised Estimates 2023-24"
           },
           "4": {
             "period": "2024-25",
             "vintage": "be",
-            "header": "and Budget as per Article in million) Budget Estimates 2024-25"
+            "header": "Budget Estimates 2024-25"
           }
         },
         "column_problems": [],
@@ -592,17 +592,17 @@
           "2": {
             "period": "2024-25",
             "vintage": "be",
-            "header": "Development) (on revenue revenue and Pakistan. Budget Estimates 2024-25"
+            "header": "Budget Estimates 2024-25"
           },
           "3": {
             "period": "2024-25",
             "vintage": "re",
-            "header": "and capital capital accounts) Revised Estimates 2024-25"
+            "header": "Revised Estimates 2024-25"
           },
           "4": {
             "period": "2025-26",
             "vintage": "be",
-            "header": "account) and have been in million) Budget Estimates 2025-26"
+            "header": "Budget Estimates 2025-26"
           }
         },
         "column_problems": [],
@@ -670,17 +670,17 @@
           "2": {
             "period": "2025-26",
             "vintage": "be",
-            "header": "EXPENDITURE Development) (on revenue revenue and Pakistan. Budget Estimates 2025-26"
+            "header": "Budget Estimates 2025-26"
           },
           "3": {
             "period": "2025-26",
             "vintage": "re",
-            "header": "and capital capital accounts) Revised Estimates 2025-26"
+            "header": "Revised Estimates 2025-26"
           },
           "4": {
             "period": "2026-27",
             "vintage": "be",
-            "header": "account) and have been in million) Budget Estimates 2026-27"
+            "header": "Budget Estimates 2026-27"
           }
         },
         "column_problems": [],

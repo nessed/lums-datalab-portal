@@ -160,7 +160,7 @@ A human may authorise an agent to work unattended against a written plan committ
 - Anything that needs credentials, accounts or policy is written down for a human, not worked around.
 - New traps learned go into section 7 in the same PR.
 
-Current authorised run: `docs/plans/2026-10-11-overnight-prototype.md` (authorised by Ali, 2026-10-11).
+Current authorised run: `docs/plans/2026-10-12-continuation.md` (authorised by Ali; continues `docs/plans/2026-10-11-overnight-prototype.md`, whose sections 0 and 11 still apply).
 
 ## 10. Reference material
 

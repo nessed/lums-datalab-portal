@@ -20,6 +20,24 @@ defaults:
     # page markers, accepted only together with a verified link from the official landing page.
     alt_markers_all: ["contents", "receipts", "federal consolidated fund"]
 
+  cpi:
+    doc_type: cpi_monthly_review
+    publisher: "Pakistan Bureau of Statistics"
+    jurisdiction: pbs
+    language: en
+    markers_all: []
+    markers_any: ["monthly review", "price indices", "consumer price index"]
+    marker_pages: 4
+  lfs:
+    doc_type: lfs_annual_report
+    publisher: "Pakistan Bureau of Statistics"
+    jurisdiction: pbs
+    language: en
+    markers_all: ["labour force survey"]
+    markers_any: []
+    marker_period: true
+    marker_pages: 4
+
 sources:
   - source_id: abs-fed-2010-11
     period: "2010-11"
@@ -84,3 +102,287 @@ sources:
     landing_url: "https://www.finance.gov.pk/fb_2026_27.html"
     file_url: "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf"
     archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2026-27/ABS.pdf"
+
+  # CPI June issues and LFS annual reports, collected by the sources track on 2026-10-11
+  # (`prefetched`: how each file was obtained, as recorded at download time).
+  - source_id: lfs-pbs-2024-25
+    family: lfs
+    period: 2024-25
+    role: core
+    title: Labour Force Survey 2024-25 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf
+    filename: LFS-2024-25-Annual-Report.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:16:50Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Thu, 26 Mar 2026 16:47:10 GMT
+        Content-Length: '9425530'
+        Content-Type: application/pdf
+        ETag: '"69c5630e-8fd27a"'
+      wayback_url: https://web.archive.org/web/20260926050408id_/https://pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf
+      wayback_timestamp: '20260926050408'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48
+  - source_id: lfs-pbs-2020-21
+    family: lfs
+    period: 2020-21
+    role: core
+    title: Labour Force Survey 2020-21 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf
+    filename: LFS_2020-21_Report-3.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:16:58Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:20:37 GMT
+        Content-Length: '15154629'
+        Content-Type: application/pdf
+        ETag: '"65e18fd5-e73dc5"'
+      wayback_url: https://web.archive.org/web/20251028080642id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf
+      wayback_timestamp: '20251028080642'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9
+  - source_id: lfs-pbs-2018-19
+    family: lfs
+    period: 2018-19
+    role: core
+    title: Labour Force Survey 2018-19 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf
+    filename: lfs_2018_19_final_report-1.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:17:04Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:21:49 GMT
+        Content-Length: '8176939'
+        Content-Type: application/pdf
+        ETag: '"65e1901d-7cc52b"'
+      wayback_url: https://web.archive.org/web/20251029190518id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf
+      wayback_timestamp: '20251029190518'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127
+  - source_id: lfs-pbs-2017-18
+    family: lfs
+    period: 2017-18
+    role: core
+    title: Labour Force Survey 2017-18 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf
+    filename: Annual-Report-of-LFS-2017-18.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:17:09Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:26:34 GMT
+        Content-Length: '1615654'
+        Content-Type: application/pdf
+        ETag: '"65e1913a-18a726"'
+      wayback_url: https://web.archive.org/web/20260314063715id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf
+      wayback_timestamp: '20260314063715'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904
+  - source_id: lfs-pbs-2014-15
+    family: lfs
+    period: 2014-15
+    role: core
+    title: Labour Force Survey 2014-15 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf
+    filename: Annual_Report_of_LFS_2014-15.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:17:10Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:27:25 GMT
+        Content-Length: '874842'
+        Content-Type: application/pdf
+        ETag: '"65e1916d-d595a"'
+      wayback_url: https://web.archive.org/web/20260208164841id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf
+      wayback_timestamp: '20260208164841'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c
+  - source_id: cpi-pbs-2025-06
+    family: cpi
+    period: 2025-06
+    role: core
+    title: Monthly Review of Price Indices, June 2025
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf
+    filename: Monthly-Review-June-2025.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:18:22Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Wed, 09 Jul 2025 08:20:35 GMT
+        Content-Length: '954049'
+        Content-Type: application/pdf
+        ETag: '"686e2653-e8ec1"'
+      wayback_url: https://web.archive.org/web/20260811064726id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf
+      wayback_timestamp: '20260811064726'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92
+    markers_period:
+    - june 2025
+    - june, 2025
+    - june,2025
+    - june2025
+    - june-2025
+  - source_id: cpi-pbs-2023-06
+    family: cpi
+    period: 2023-06
+    role: core
+    title: Monthly Review of Price Indices, June 2023
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf
+    filename: CPI_Review_June_2023.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:18:24Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Wed, 24 Jan 2024 06:28:00 GMT
+        Content-Length: '1342112'
+        Content-Type: application/pdf
+        ETag: '"65b0adf0-147aa0"'
+      wayback_url: https://web.archive.org/web/20260430173837id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf
+      wayback_timestamp: '20260430173837'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35
+    markers_period:
+    - june 2023
+    - june, 2023
+    - june,2023
+    - june2023
+    - june-2023
+  - source_id: cpi-pbs-2019-06
+    family: cpi
+    period: 2019-06
+    role: core
+    title: Monthly Review of Price Indices, June 2019
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf
+    filename: cpi_review_june_2019.pdf
+    prefetched:
+      retrieved_via: wayback
+      retrieved_at: '2026-10-10T20:19:57Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: null
+        Content-Length: '1270182'
+        Content-Type: application/pdf
+        ETag: null
+      wayback_url: https://web.archive.org/web/20190710192504id_/http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf
+      wayback_timestamp: '20190710192504'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75
+    markers_period:
+    - june 2019
+    - june, 2019
+    - june,2019
+    - june2019
+    - june-2019
+    notes: 'Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit).'
+  - source_id: cpi-pbs-2024-06
+    family: cpi
+    period: 2024-06
+    role: core
+    title: Monthly Review of Price Indices, June 2024
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf
+    filename: CPI_Review_June_2024.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:19:59Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 18 Oct 2024 08:42:12 GMT
+        Content-Length: '1014978'
+        Content-Type: application/pdf
+        ETag: '"67121f64-f7cc2"'
+      wayback_url: https://web.archive.org/web/20260430173822id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf
+      wayback_timestamp: '20260430173822'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022
+    markers_period:
+    - june 2024
+    - june, 2024
+    - june,2024
+    - june2024
+    - june-2024
+    notes: 'Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit).'
+  - source_id: cpi-pbs-2026-06
+    family: cpi
+    period: 2026-06
+    role: core
+    title: Monthly Review of Price Indices, June 2026
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf
+    filename: Monthly-Review-June-2026.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:20:00Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Wed, 01 Jul 2026 08:59:35 GMT
+        Content-Length: '1627486'
+        Content-Type: application/pdf
+        ETag: '"6a44d6f7-18d55e"'
+      wayback_url: https://web.archive.org/web/20260811064643id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf
+      wayback_timestamp: '20260811064643'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 1b0605b116d7c4e79031f709ea032870f764cf8deac62bb6a72e6ddb1c881a87
+    markers_period:
+    - june 2026
+    - june, 2026
+    - june,2026
+    - june2026
+    - june-2026
+    notes: 'Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit).'
+  - source_id: cpi-pbs-2016-06
+    family: cpi
+    period: 2016-06
+    role: core
+    title: Monthly Review of Price Indices, June 2016
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf
+    filename: Monthly Review June,  2016_0.pdf
+    prefetched:
+      retrieved_via: wayback
+      retrieved_at: '2026-10-10T20:38:34Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: null
+        Content-Length: '575248'
+        Content-Type: application/pdf
+        ETag: null
+      wayback_url: https://web.archive.org/web/20160805174617id_/http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf
+      wayback_timestamp: '20160805174617'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0
+    markers_period:
+    - june 2016
+    - june, 2016
+    - june,2016
+    - june2016
+    - june-2016

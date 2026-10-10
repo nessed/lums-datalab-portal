@@ -132,7 +132,8 @@ def wayback_raw_url(snapshot: dict[str, str], url: str) -> str:
     return f"https://web.archive.org/web/{snapshot['wayback_timestamp']}id_/{url}"
 
 
-def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], period_markers: list[str]) -> dict[str, Any]:
+def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], period_markers: list[str],
+                marker_pages: int = 3) -> dict[str, Any]:
     """Content inspection by code: page count, metadata, text layer, expected markers."""
     import pymupdf
     from pypdf import PdfReader
@@ -163,7 +164,7 @@ def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], peri
     out["pages_without_text_layer"] = image_only
     # Blank pages have nothing that could carry a text layer, so they are left out of the fraction.
     out["text_layer_fraction"] = round(with_text / max(printed_pages, 1), 4)
-    first = " ".join(doc[i].get_text() for i in range(min(3, len(doc))))
+    first = " ".join(doc[i].get_text() for i in range(min(marker_pages, len(doc))))
     first_norm = re.sub(r"\s+", " ", first).lower()
     ascii_chars = sum(1 for ch in first if ord(ch) < 128)
     out["ascii_ratio_first_pages"] = round(ascii_chars / max(len(first), 1), 4)
@@ -308,7 +309,10 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
                  "identical": config.sha256_file(p) == sha})
 
     period_markers = period_marker_variants(entry["period"]) if entry.get("marker_period") else list(entry.get("markers_period") or [])
-    inspection = inspect_pdf(dest, list(entry.get("markers_all") or []), list(entry.get("markers_any") or []), period_markers)
+    inspection = inspect_pdf(dest, list(entry.get("markers_all") or []), list(entry.get("markers_any") or []), period_markers,
+                             marker_pages=int(entry.get("marker_pages", 3)))
+    if entry.get("prefetched", {}).get("sha256") and entry["prefetched"]["sha256"] != sha:
+        record["prefetched_hash_mismatch"] = True
     record["inspection"] = inspection
     thresholds = yaml.safe_load(config.THRESHOLDS_YAML.read_text(encoding="utf-8"))
     min_text = thresholds["structure"]["min_text_layer_page_fraction"]
@@ -329,7 +333,7 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
             record["identity_route"] = "contents_markers_plus_official_landing_link"
     if not identity_ok:
         status = "failed"
-        record["reason"] = "expected text markers not found in the first three pages"
+        record["reason"] = "expected text markers not found in the first pages"
     elif retrieved_via == "official":
         if archive_file is None:
             status = "official_only"
@@ -358,7 +362,7 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
     if not record["text_layer_ok"]:
         notes = (notes + f" Text layer on {inspection['pages_with_text_layer']} of "
                  f"{inspection['page_count'] - len(inspection['blank_pages'])} printed pages, below the 95% inspection level: "
-                 f"page(s) {', '.join(str(n) for n in inspection['pages_without_text_layer'])} are images (covers). "
+                 f"page(s) {', '.join(str(n) for n in inspection['pages_without_text_layer'])} have no text layer (images). "
                  "Used under a recorded deviation; every page that values are taken from has a text layer.").strip()
     if status == "official_differs_from_archive":
         notes = (notes + " reissued_or_differs: official download differs from the archive copy.").strip()

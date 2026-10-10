@@ -1,0 +1,73 @@
+{
+  "source_id": "lfs-pbs-2018-19",
+  "registered_at": "2026-10-10T21:07:26+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf",
+  "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+  "retrieved_at": "2026-10-10T20:17:04Z",
+  "retrieved_via": "official",
+  "sha256": "a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127",
+  "size_bytes": 8176939,
+  "response": {
+    "headers": {
+      "Last-Modified": "Fri, 01 Mar 2024 08:21:49 GMT",
+      "Content-Length": "8176939",
+      "Content-Type": "application/pdf",
+      "ETag": "\"65e1901d-7cc52b\""
+    },
+    "http_status": 200
+  },
+  "attempts": [
+    {
+      "note": "collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+      "time": "2026-10-10T21:07:29+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf",
+      "time": "2026-10-10T21:07:32+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "lfs_annual_report/2018-19/lfs_2018_19_final_report-1.pdf",
+  "inspection": {
+    "page_count": 408,
+    "pdf_metadata": {},
+    "pages_with_text_layer": 408,
+    "blank_pages": [],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 0.9962,
+    "markers": {
+      "all": {
+        "labour force survey": true
+      },
+      "any": {},
+      "period": {
+        "2018-19": true,
+        "2018-2019": false,
+        "2018 - 19": false,
+        "2018–19": false,
+        "2018—19": false,
+        "2018 – 19": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "verification_status": "official_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20251029190518/https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf",
+    "wayback_timestamp": "20251029190518",
+    "snapshots_seen": 3,
+    "snapshot_digest": "4UDSS2S7G7LDXQIBPKVOLNUFZTM5KVJG",
+    "digest_matches_file": true
+  }
+}

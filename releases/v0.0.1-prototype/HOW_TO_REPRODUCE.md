@@ -48,10 +48,14 @@ gets a new run id (runs are never overwritten), so `cells.json` differs only in 
 | cpi-pbs-2025-06 | 18 | 954049 | `b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf |
 | cpi-pbs-2026-06 | 18 | 1627486 | `1b0605b116d7c4e79031f709ea032870f764cf8deac62bb6a72e6ddb1c881a87` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf |
 | lfs-pbs-2014-15 | 30 | 874842 | `56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf |
+| lfs-pbs-2014-15-national | 55 | 1111773 | `0d7e7e145f8f8dd12e5840387e8806713315b98c6a2af623bdaa0b5ea6df7251` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf |
 | lfs-pbs-2017-18 | 54 | 1615654 | `f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf |
 | lfs-pbs-2018-19 | 408 | 8176939 | `a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf |
 | lfs-pbs-2020-21 | 230 | 15154629 | `ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf |
 | lfs-pbs-2024-25 | 205 | 9425530 | `79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf |
+| pes-fed-2024-25-inflation | 28 | 1420442 | `420ba088b018ea06c9810d58e6feb9c4f3f38811c732401d2208aff24b5c24c5` | https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf |
+| pes-fed-2024-25-labour | 29 | 1411414 | `8cce28da939cd80232173ec1c76e327b878a5a33bdd4b35e013cbc4d36b3147e` | https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf |
+| sbp-easydata-cpi-national-yoy | None | 16278 | `6afbf22e8c88170b47d02da4ff019ba0be73feda450595ace18cf709324ab447` | https://easydata.sbp.org.pk/apex/wwv_flow.accept |
 
 ## Extraction configuration
 

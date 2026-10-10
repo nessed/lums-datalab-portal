@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T23:14:50+00:00 from commit `c85ae0a0a630`. Label: **prototype**. DOI: none.
+Built 2026-10-10T23:26:08+00:00 from commit `839584b0e7c1`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -11,7 +11,7 @@ Built 2026-10-10T23:14:50+00:00 from commit `c85ae0a0a630`. Label: **prototype**
 |---|---|---|---|---|
 | Federal Annual Budget Statement | published | 9 | 2111 | disputed: 3, failed_checks: 216, not_in_source: 78, not_yet_verified: 200 |
 | Consumer Price Index | published | 8 | 1254 | disputed: 2 |
-| Labour Force Survey | published | 4 | 327 | disputed: 6, failed_checks: 3, not_yet_verified: 36 |
+| Labour Force Survey | published | 5 | 406 | disputed: 6, failed_checks: 3, not_yet_verified: 35 |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
@@ -23,8 +23,8 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 | Data type | A | B | C | D |
 |---|---|---|---|---|
 | abs | 436 | 1675 | 200 | 216 |
-| cpi | 128 | 1126 | 0 | 0 |
-| lfs | 137 | 190 | 36 | 3 |
+| cpi | 132 | 1122 | 0 | 0 |
+| lfs | 216 | 190 | 35 | 3 |
 
 ## Coverage: how much of each printed table was captured
 
@@ -122,6 +122,13 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | cpi-pbs-2026-06 | 8 | 141 | 141 | 100.0% | 100.0% |
 | cpi-pbs-2026-06 | 9 | 141 | 141 | 100.0% | 100.0% |
 | cpi-pbs-2026-06 | 10 | 142 | 142 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 30 | 150 | 150 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 32 | 150 | 150 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 34 | 90 | 90 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 35 | 90 | 90 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 35 | 48 | 48 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 44 | 18 | 18 | 100.0% | 100.0% |
+| lfs-pbs-2014-15-national | 46 | 90 | 90 | 100.0% | 100.0% |
 | lfs-pbs-2017-18 | 30 | 150 | 150 | 100.0% | 100.0% |
 | lfs-pbs-2017-18 | 32 | 150 | 150 | 100.0% | 100.0% |
 | lfs-pbs-2017-18 | 34 | 90 | 90 | 100.0% | 100.0% |
@@ -153,8 +160,8 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | Data type | Passed exactly | Passed within rounding | Failed | Disputed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement | Disputed pairs |
 |---|---|---|---|---|---|---|---|---|
 | abs | 1365 | 217 | 19 | 3 | 123 | 98.6% | 99.6% (460 of 462 pairs) | 3 of 465 pairs (0.7%) |
-| cpi | 347 | 537 | 0 | 2 | 0 | 99.8% | 100.0% (128 of 128 pairs) | 2 of 130 pairs (1.5%) |
-| lfs | 348 | 77 | 1 | 6 | 0 | 98.4% | 100.0% (192 of 192 pairs) | 6 of 198 pairs (3.0%) |
+| cpi | 348 | 540 | 1 | 2 | 0 | 99.7% | 100.0% (128 of 128 pairs) | 2 of 130 pairs (1.5%) |
+| lfs | 599 | 108 | 1 | 6 | 0 | 99.0% | 100.0% (270 of 270 pairs) | 6 of 276 pairs (2.2%) |
 
 **Disputed** means two official documents print different figures for the same thing and each printing adds up in its own table (a restatement by the publisher). A disputed figure is not published as checked: the site shows both printings and no value. A differing pair that does not meet those conditions is a failure and its value is withheld.
 

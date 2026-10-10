@@ -186,8 +186,6 @@ def test_review_cpi_8_two_copies_of_one_issue_are_not_cross_edition_evidence():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-9
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-9: the SBP rounding unit is inferred from the CSV text; '25' (25.0 with the "
-                                       "trailing zero dropped) is taken as a whole-number figure and the tolerance becomes 0.505")
 def test_review_cpi_9_sbp_value_without_trailing_zero_keeps_one_decimal_tolerance():
     cells, _ = make_table(general=("200.00", "198.00", "160.51", "1.01", "24.60"))     # PBS YoY 24.60
     checks = cpi.cross_source_checks(cells, {"2025-06": "25"}, "sbp-easydata-cpi", SBP_CFG, TITLES)
@@ -201,8 +199,6 @@ SBP_HEAD = '"Dataset","Series Key","Series","Observation Date","Observation Valu
 SBP_ROW = '"Inflation Snapshot","TS_GP_PT_CPI_M.P00011516","CPI National -YoY","{date}","{value}","Percent"\n'
 
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-10: read_sbp_yoy keeps the first of two different values for one month and "
-                                       "says nothing (setdefault)")
 def test_review_cpi_10_sbp_csv_with_two_values_for_one_month_is_not_silently_resolved(tmp_path):
     path = tmp_path / "sbp.csv"
     path.write_text(SBP_HEAD + SBP_ROW.format(date="30-Jun-2025", value="3.2") + SBP_ROW.format(date="30-Jun-2025", value="4.1"),
@@ -214,8 +210,6 @@ def test_review_cpi_10_sbp_csv_with_two_values_for_one_month_is_not_silently_res
     assert "2025-06" not in sbp, f"one of two conflicting SBP figures was picked without a trace: {sbp}"
 
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-10: read_sbp_yoy swallows an unreadable date of the target series "
-                                       "(`except ValueError: continue`) and carries on")
 def test_review_cpi_10_sbp_row_with_unreadable_date_is_not_swallowed(tmp_path):
     path = tmp_path / "sbp.csv"
     path.write_text(SBP_HEAD + SBP_ROW.format(date="2025-06-30", value="3.2"), encoding="utf-8")

@@ -115,6 +115,7 @@ checks:
     dataset_pattern: 'New Base: 2015-16'
     unit_pattern: '(?i)^percent$'
     applies_to_series: cpi.national.yoy.general
+    value_unit_at_most: "0.1"   # SBP gives this series to at least one decimal; a value without decimals keeps that tolerance
     first_period: "2019-08"   # the SBP series is on the 2015-16 base; never compared with old-base issues
     rule: "|PBS YoY - SBP YoY| <= 0.5 u_SBP + 0.5 u_PBS"
 

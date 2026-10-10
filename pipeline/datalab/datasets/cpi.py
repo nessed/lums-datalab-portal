@@ -650,9 +650,11 @@ def read_sbp_yoy(path, cfg: dict[str, Any]) -> dict[str, str]:
                 continue
             try:
                 period = datetime.strptime(row["Observation Date"].strip(), "%d-%b-%Y").strftime("%Y-%m")
-            except ValueError:
-                continue
-            out.setdefault(period, row["Observation Value"].strip())
+            except ValueError as exc:
+                raise ValueError(f"SBP file: unreadable observation date {row.get('Observation Date')!r}") from exc
+            value = row["Observation Value"].strip()
+            if out.setdefault(period, value) != value:
+                raise ValueError(f"SBP file: {period} is given twice with different figures ({out[period]} and {value})")
     return out
 
 
@@ -676,7 +678,10 @@ def cross_source_checks(cells: list[Cell], sbp: dict[str, str], sbp_source_id: s
                              description=f"Could not compare {where} with SBP EasyData."))
             continue
         ours = Decimal(c.value_parsed)
-        tol = Decimal("0.5") * last_digit_unit(theirs.value_str) + Decimal("0.5") * last_digit_unit(c.value_parsed)
+        # The other source's rounding unit is never taken to be coarser than the spec says it prints
+        # ('25' is 25.0 with the zero dropped, not a whole-number figure): review finding CPI-9.
+        their_unit = min(last_digit_unit(theirs.value_str), Decimal(str(cfg.get("value_unit_at_most", "1"))))
+        tol = Decimal("0.5") * their_unit + Decimal("0.5") * last_digit_unit(c.value_parsed)
         residual = theirs.value - ours
         if residual == 0:
             result, verdict = "pass", "They are equal."

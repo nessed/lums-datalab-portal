@@ -1696,6 +1696,99 @@
     }
   },
   {
+    "source_id": "lfs-pbs-2014-15-national",
+    "doc_type": "lfs_annual_report",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Labour Force Survey 2014-15 Annual Report",
+    "period": "2014-15",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+    "wayback_url": "https://web.archive.org/web/20260314052958/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+    "wayback_timestamp": "20260314052958",
+    "retrieved_at": "2026-10-10T22:40:56+00:00",
+    "retrieved_via": "official",
+    "sha256": "0d7e7e145f8f8dd12e5840387e8806713315b98c6a2af623bdaa0b5ea6df7251",
+    "size_bytes": 1111773,
+    "format": "pdf",
+    "page_count": 55,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "lfs_annual_report/2014-15/Annual_Report_of_LFS_2014-15-1.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/lfs-pbs-2014-15-national.json",
+    "notes": "",
+    "pages_used": [
+      30,
+      32,
+      34,
+      35,
+      44,
+      46
+    ],
+    "run_ids": [
+      "LFS_2014-15__docling__full-document__run-01"
+    ],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T22:40:56+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 55,
+        "pdf_metadata": {
+          "Title": "Draft Report",
+          "Producer": "Microsoft® Word 2013",
+          "Creator": "Microsoft® Word 2013",
+          "CreationDate": "D:20160112124351+05'00'"
+        },
+        "pages_with_text_layer": 54,
+        "blank_pages": [
+          51
+        ],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9978,
+        "markers": {
+          "all": {
+            "labour force survey": true,
+            "government of pakistan": true
+          },
+          "any": {},
+          "period": {
+            "2014-15": true,
+            "2014-2015": false,
+            "2014 - 15": false,
+            "2014–15": false,
+            "2014—15": false,
+            "2014 – 15": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+        "headers": {
+          "Last-Modified": "Mon, 01 Apr 2024 08:44:23 GMT",
+          "Content-Length": "1111773",
+          "Content-Type": "application/pdf",
+          "ETag": "\"660a73e7-10f6dd\""
+        }
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260314052958/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf",
+        "wayback_timestamp": "20260314052958",
+        "snapshots_seen": 3,
+        "snapshot_digest": "Q3WARSH4HVHROVR7BFIAOLKPIKW6TRRY",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
     "source_id": "lfs-pbs-2017-18",
     "doc_type": "lfs_annual_report",
     "publisher": "Pakistan Bureau of Statistics",
@@ -2054,6 +2147,255 @@
         "wayback_timestamp": "20260926050408"
       },
       "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "pes-fed-2024-25-inflation",
+    "doc_type": "pes_chapter",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Pakistan Economic Survey 2024-25, Chapter 7: Inflation",
+    "period": "2024-25",
+    "role": "cross_source",
+    "landing_url": "https://www.finance.gov.pk/survey_2025.html",
+    "file_url": "https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+    "wayback_url": "https://web.archive.org/web/20260316032644/https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+    "wayback_timestamp": "20260316032644",
+    "retrieved_at": "2026-10-10T22:44:40+00:00",
+    "retrieved_via": "official",
+    "sha256": "420ba088b018ea06c9810d58e6feb9c4f3f38811c732401d2208aff24b5c24c5",
+    "size_bytes": 1420442,
+    "format": "pdf",
+    "page_count": 28,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "pes_chapter/2024-25/7_Inflation.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/pes-fed-2024-25-inflation.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T22:44:40+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": {
+        "path_in_ra_ship": "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_inflation.pdf",
+        "sha256": "420ba088b018ea06c9810d58e6feb9c4f3f38811c732401d2208aff24b5c24c5",
+        "size_bytes": 1420442,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 28,
+        "pdf_metadata": {
+          "Producer": "iLovePDF",
+          "CreationDate": "D:20250608104028+05'00'"
+        },
+        "pages_with_text_layer": 28,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9998,
+        "markers": {
+          "all": {
+            "pakistan economic survey": true,
+            "inflation": true
+          },
+          "any": {},
+          "period": {
+            "2024-25": true,
+            "2024-2025": false,
+            "2024 - 25": false,
+            "2024–25": false,
+            "2024—25": false,
+            "2024 – 25": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+        "headers": {
+          "Last-Modified": "Mon, 09 Jun 2025 09:18:31 GMT",
+          "Content-Length": "1420442",
+          "Content-Type": "application/pdf",
+          "ETag": "\"e2740781fd9db1:0\""
+        }
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260316032644/https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf",
+        "wayback_timestamp": "20260316032644",
+        "snapshots_seen": 4,
+        "snapshot_digest": "2IVVPBV2UXVM3NTKFOM4WTVKB2OTQFDU",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "pes-fed-2024-25-labour",
+    "doc_type": "pes_chapter",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Pakistan Economic Survey 2024-25, Chapter 12: Population, Labour Force and Employment",
+    "period": "2024-25",
+    "role": "cross_source",
+    "landing_url": "https://www.finance.gov.pk/survey_2025.html",
+    "file_url": "https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf",
+    "wayback_url": "https://web.archive.org/web/20260207173405/https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf",
+    "wayback_timestamp": "20260207173405",
+    "retrieved_at": "2026-10-10T22:45:38+00:00",
+    "retrieved_via": "official",
+    "sha256": "8cce28da939cd80232173ec1c76e327b878a5a33bdd4b35e013cbc4d36b3147e",
+    "size_bytes": 1411414,
+    "format": "pdf",
+    "page_count": 29,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "pes_chapter/2024-25/12_Population.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/pes-fed-2024-25-labour.json",
+    "notes": "",
+    "pages_used": [
+      24,
+      25
+    ],
+    "run_ids": [
+      "PES_2024-25__docling__full-document__run-01"
+    ],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T22:45:38+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": {
+        "path_in_ra_ship": "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_population_labor_force_and_employment.pdf",
+        "sha256": "8cce28da939cd80232173ec1c76e327b878a5a33bdd4b35e013cbc4d36b3147e",
+        "size_bytes": 1411414,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 29,
+        "pdf_metadata": {
+          "Producer": "iLovePDF",
+          "CreationDate": "D:20250608105108+05'00'"
+        },
+        "pages_with_text_layer": 29,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9987,
+        "markers": {
+          "all": {
+            "pakistan economic survey": true,
+            "labour force": true
+          },
+          "any": {},
+          "period": {
+            "2024-25": true,
+            "2024-2025": false,
+            "2024 - 25": false,
+            "2024–25": false,
+            "2024—25": false,
+            "2024 – 25": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf",
+        "headers": {
+          "Last-Modified": "Mon, 09 Jun 2025 09:18:08 GMT",
+          "Content-Length": "1411414",
+          "Content-Type": "application/pdf",
+          "ETag": "\"aac93a6a1fd9db1:0\""
+        }
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260207173405/https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf",
+        "wayback_timestamp": "20260207173405",
+        "snapshots_seen": 4,
+        "snapshot_digest": "Y4UW7RPMZJDJDL7S4X46VKPTHC25ULP5",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "sbp-easydata-cpi-national-yoy",
+    "doc_type": "sbp_easydata",
+    "publisher": "State Bank of Pakistan",
+    "jurisdiction": "sbp",
+    "title": "SBP EasyData: National CPI, year-on-year change (series TS_GP_PT_CPI_M.P00011516)",
+    "period": "2026-10-10",
+    "role": "cross_source",
+    "landing_url": "https://easydata.sbp.org.pk",
+    "file_url": "https://easydata.sbp.org.pk/apex/wwv_flow.accept",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:25:49Z",
+    "retrieved_via": "official",
+    "sha256": "6afbf22e8c88170b47d02da4ff019ba0be73feda450595ace18cf709324ab447",
+    "size_bytes": 16278,
+    "format": "csv",
+    "page_count": null,
+    "is_born_digital": null,
+    "language": "en",
+    "local_path": "sbp_easydata/2026-10-10/data_series.csv",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/sbp-easydata-cpi-national-yoy.json",
+    "notes": "Cross-check only. Downloaded by submitting the public \"Download Series\" form (a POST bound to a browser session), so it cannot be re-downloaded by URL and a later download would also hold later months. Reuse terms not confirmed (see the verification record).",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:25:49Z",
+      "identity_route": null,
+      "landing_page_links_file": null,
+      "archive_copy": null,
+      "inspection": {
+        "columns": [
+          "Dataset",
+          "Series Key",
+          "Series",
+          "Observation Date",
+          "Observation Value",
+          "Unit",
+          "Observation Status",
+          "Observation Status Comment"
+        ],
+        "rows": 123,
+        "problems": [],
+        "descriptive_values": {
+          "Dataset": [
+            "Inflation Snapshot (New Base: 2015-16)"
+          ],
+          "Series Key": [
+            "TS_GP_PT_CPI_M.P00011516"
+          ],
+          "Series": [
+            "CPI National -YoY"
+          ],
+          "Unit": [
+            "Percent"
+          ]
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": null,
+          "Content-Length": "16278",
+          "Content-Type": "application/excel; charset=utf-8",
+          "ETag": null
+        },
+        "http_status": 200
+      },
+      "wayback": null,
+      "text_layer_ok": null
     }
   }
 ]

@@ -112,3 +112,90 @@ The reviewer's ten unproven suspicions are listed in `docs/reports/review_cpi.md
 
 1,899 published values in 2,165 observations. Tests pass, `check-release` passes, the site builds (2,482 pages).
 The LFS builder's adversarial review had not reported when LFS first became published; see the C1 LFS entry below.
+
+## C7 ABS detail tables (D31) (merged 04:10)
+
+Track note: `docs/reports/track_abs_detail.md`. From the nine validated runs; no new Docling run.
+
+- **What the documents print.** After the Summary of Expenditure every edition lists each function with its 3-digit
+  sub-functions in four parts: (a) current on revenue account, (b) current on capital account, (c) development on revenue
+  account, (d) development on capital account. In 2010-11, 2011-12, 2016-17 and 2017-18 the function lines of part (c)
+  are the PSDP part only. **No edition prints one development figure per function or a current + development total per
+  function**, so those series were not constructed and there is no per-function identity to test.
+- **Go rule:** tables located in 9 of 9 editions; every table at or above 90% coverage in 7 of 9 (2017-18 p.12 at 89.1%
+  and 2022-23 p.16 at 88.5% are flagged and publish nothing). On.
+- **Coverage:** 63 tables, 4,762 of 4,812 printed numbers (98.96%).
+- **Checks (detail only):** sub-functions add to function 450 of 467 (17 fail, 93 could not be run); functions add to
+  part total 68 of 68 (30 could not be run); detail line equals summary line 378 of 378; same figure in next edition
+  348 of 351.
+- **The failures are real and stay failures:** blocks with a "Less Recoveries" line that is not modelled (2010-11,
+  2011-12 Economic Affairs; 2016-17 and 2017-18 Health PSDP); a sub-function whose label could not be read (2016-17
+  General Public Service); Education 2022-23 part (c) for a cause not established; one cell read as "- 6".
+- **The 2021-22 restatement is now located at sub-function level:** Rs 1,042 million moved from 047 Other Industries
+  (1,426 -> 384) to 081 Recreational and Sporting Services (0.3 -> 1,042). The code made the 081 pair disputed and kept
+  the 047 pair as a failure (its row carries a structural flag), so 047 is withheld.
+- **Health:** no total-health figure exists in the document. Development expenditure on health on revenue account is
+  published for 2020-21 to 2026-27 (12 of 12 columns) and, PSDP only, for 2009-10 to 2017-18 (7 of 10; three withheld
+  because of the Less Recoveries line). The demo therefore keeps the current-only figure with its label.
+- **Lead's change at merge:** the track added a rule after status was assigned (a failed check withholds a detail
+  figure whatever else passed). `check-release` could not have reproduced that, so the rule was moved into
+  `status.decide_tier` and now holds for every data type.
+- ABS totals: 2,111 published (436 A, 1,675 B), 3 disputed, 216 withheld for failed checks, 200 without a check,
+  78 not printed.
+
+## C3 CPI on the 2007-08 base (D27) (merged 04:13)
+
+Track note: `docs/reports/track_cpi_old_base.md`.
+
+- **Runs:** the old run-01 folders for 2016-06 and 2019-06 were refused before Docling ran, so there was nothing to
+  re-validate. New runs: `CPI_2016-06 run-02`, `CPI_2018-06 run-01`, `CPI_2019-06 run-02`, all validated.
+- **Naming (D27):** `cpi.general.b2007_08`, `cpi.group.<slug>.b2007_08`, `cpi.weight.<slug>.b2007_08`, and change
+  series with the base tag. No area in the id; `dims.area_as_printed: "none stated"`. The `cpi.national.*.b2007_08`
+  ids (gaps only in the first release) are gone.
+- **June 2016 and June 2018:** one table each on page 5, all 8 value columns boxed (overlays viewed by the track),
+  coverage 142 of 142, weights add to 99.99 against a printed 100.00 (within the 0.05 tolerance), weighted average and
+  recomputations all pass.
+- **June 2019:** Docling merged the two % change columns. After the second reader was merged, the lead's build routed
+  the table to it; its arithmetic passes and its weights equal the basket weights taken from the 2016 and 2018 issues,
+  so it is published from the second reading.
+- **Cross-issue pairs now exist (June 2018 as printed in 2018 and in 2019): 13 pairs, 8 equal, 3 one unit apart, 2
+  further apart.** PBS reprinted June 2018 indices with small revisions (for example Food 236.58 then 236.56). The two
+  larger ones are disputed and carry no value; the three one-unit ones are published with a sentence saying so.
+- CPI totals: 18 tables, 1,254 published (128 A, 1,126 B), 2 disputed, no gaps left for the issues in hand.
+- Review findings 5 and 11 were closed at this merge (a table claimed by two areas' captions is used for neither; a
+  caption without an area is no longer assumed national).
+
+## C1 Review of the LFS builder (reported 04:08; fixes in progress)
+
+Note: `docs/reports/review_lfs.md`; tests: `pipeline/tests/test_review_lfs.py`.
+
+- **No wrong value, round, sex, area or definition was found in the LFS data.** The reviewer checked by script that for
+  all 570 mapped LFS cells the PDF text at the stored page and box equals the stored text.
+- Eight code defects, each with a failing test. One weakens evidence in the release today: the unemployment-rate
+  recomputation has a rounding bound so wide for small bases (female urban: 0.24 to 0.37 points on a rate printed to
+  0.1) that several different printed rates would pass; it is the only evidence for 20 observations. The other seven
+  affect no released value (qualified titles accepted as the headline table; a later round assumed to be 13th ICLS;
+  two silent defaults; a row under a Rural heading mapped as national; a header-flagged row skipped; two files of one
+  edition counted as two editions; recompute crediting its input counts).
+- A fresh subagent is fixing all eight on `proto/v0-fix-lfs`. Until that merges, LFS in the release still carries the
+  weak evidence; the count of published LFS values is expected to fall.
+
+## Interim handoff 1 (04:25)
+
+State: `proto/v0` pushed, tests green, `check-release` green, site builds (4,758 pages).
+
+| Step | State |
+|---|---|
+| C0 | done |
+| C1 review CPI | done: 13 findings; 10 fixed, 1 rejected as a code change (frozen tolerance), 2 wait for the SBP source |
+| C1 review LFS | reviewed: 8 findings; fixes in progress on `proto/v0-fix-lfs` |
+| C2 disputed status | done; LFS published under D26 |
+| C3 CPI 2007-08 base | done: 3 issues published |
+| C4 second reader | done: 3 CPI tables recovered (308 values) |
+| C5 LFS 2014-15, C6 cross-source | subagent still running (`proto/v0-sources`) |
+| C7 ABS detail | done: on |
+| C8 full-document LFS runs | running in the background, one after another, in `work/tracks/c8` |
+| C9, C10 | not started |
+| Extended backlog | not started; E8 skipped (reassigned to the UI agent) |
+
+Release now: 4,236 observations, 3,692 published (ABS 2,111, CPI 1,254, LFS 327), 11 disputed.

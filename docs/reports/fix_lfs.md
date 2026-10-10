@@ -32,6 +32,7 @@ Docling runs (no new extraction run). Every number below was produced by a scrip
 ## Before and after
 
 Before = branch point `c85ae0a` (proto/v0 when this branch was cut), after = this branch, same work folder, same runs.
+proto/v0 as of `a8036c3` was merged into the branch afterwards (release, STATUS, decisions; no pipeline or spec file), so the numbers hold for it too. Suite after the merge: 298 passed, 3 xfailed (the 3 are REVIEW-CPI-9 and 10 in test_review_cpi.py).
 
 ### Extraction (unchanged)
 

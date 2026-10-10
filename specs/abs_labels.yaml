@@ -32,7 +32,10 @@ labels:
   - {pattern: '(development expenditure c\. )?dev(\.|elopment)? exp(\.|enditure)? on revenue( account)?( ?\(i\+ii\))?', series: fed.exp.development.revenue_account}
   - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on revenue account ?\(psdp\)', series: fed.exp.development.revenue_account.psdp}
   - {pattern: 'other dev(\.|elopment)? exp(\.|enditure)? on revenue account', series: fed.exp.development.revenue_account.other}
-  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account', series: fed.exp.development.capital_account}
+  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account( ?\(i\+ii\))?', series: fed.exp.development.capital_account}
+  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account ?\(psdp\)', series: fed.exp.development.capital_account.psdp}
+  - {pattern: 'other dev(\.|elopment)? exp(\.|enditure)? on capital account', series: fed.exp.development.capital_account.other}
+  - {pattern: '\(?total public sector dev(\.|elopment)? program(me)?\)? ?\(ci\+di\)', series: fed.exp.development.psdp_total}
   - {pattern: 'total development expenditure ?\(c\+d\)', series: fed.exp.development.total}
   - {pattern: '\(total public sector dev(\.|elopment)? program(me)?\) ?\(i\+d\)', series: fed.exp.development.psdp_total}
   - {pattern: 'estimated operational shortfall in psdp', series: fed.exp.operational_shortfall}
@@ -47,8 +50,12 @@ labels:
   - {pattern: 'transfers', series: fed.exp.current.capital_account.transfers}
 
 extra_series:
+  - {id: fed.exp.development.capital_account.psdp, name: "Development expenditure on capital account (PSDP)", parent: fed.exp.development.capital_account, sort: 66,
+     definition: "The Public Sector Development Programme part of development expenditure on capital account (printed in some editions)."}
+  - {id: fed.exp.development.capital_account.other, name: "Other development expenditure on capital account", parent: fed.exp.development.capital_account, sort: 67,
+     definition: "Development expenditure on capital account outside the PSDP (printed in some editions)."}
   - {id: fed.exp.development.psdp_total, name: "Total Public Sector Development Programme (i+d)", parent: null, sort: 65,
-     definition: "PSDP total as printed in older editions: development expenditure on revenue account (PSDP) plus development expenditure on capital account."}
+     definition: "PSDP total as printed in older editions: the PSDP part of development expenditure on revenue account plus the PSDP part (or, where no split is printed, all) of development expenditure on capital account."}
   - {id: fed.exp.development.revenue_account.psdp, name: "Development expenditure on revenue account (PSDP)", parent: fed.exp.development.revenue_account, sort: 63,
      definition: "The Public Sector Development Programme part of development expenditure on revenue account (printed in older editions)."}
   - {id: fed.exp.development.revenue_account.other, name: "Other development expenditure on revenue account", parent: fed.exp.development.revenue_account, sort: 64,

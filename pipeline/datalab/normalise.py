@@ -197,6 +197,6 @@ def normalise_label(text: object) -> str:
     t = clean_text(text).lower().replace("&", " and ")
     t = re.sub(r"\s+", " ", t).strip()
     t = re.sub(r"^(?:\(?(?:[ivx]{1,4}|[a-d]|\d{1,3})[\.\)]\s+|\d{1,3}\s+(?=[a-z])|\((?:[ivx]{1,4}|[a-d]|\d{1,3})\)\s*)", "", t)
-    t = re.sub(r"[\s:\.\-,;]+$", "", t)
+    t = re.sub(r"[\s:\.\-,;\*†]+$", "", t)   # trailing punctuation and footnote marks ("Health*")
     t = re.sub(r"\s*([\(\)\+])\s*", r"\1", t)
     return t

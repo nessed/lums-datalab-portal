@@ -33,6 +33,62 @@
   },
   {
     "dataset": "abs",
+    "source_id": "abs-fed-2016-17",
+    "table": "Summary of Expenditure",
+    "page": 12,
+    "table_index": 0,
+    "printed_numeric_tokens": 90,
+    "matched": 90,
+    "coverage": 1.0,
+    "missing_tokens_sample": [],
+    "row_band_printed_numeric_tokens": 90,
+    "row_band_matched": 90,
+    "coverage_row_band": 1.0,
+    "row_band_missing_sample": [],
+    "emitted_numeric_tokens": 90
+  },
+  {
+    "dataset": "abs",
+    "source_id": "abs-fed-2017-18",
+    "table": "Summary of Expenditure",
+    "page": 11,
+    "table_index": 0,
+    "printed_numeric_tokens": 89,
+    "matched": 86,
+    "coverage": 0.9663,
+    "missing_tokens_sample": [
+      "5081788",
+      "4985920",
+      "5191826"
+    ],
+    "row_band_printed_numeric_tokens": 89,
+    "row_band_matched": 86,
+    "coverage_row_band": 0.9663,
+    "row_band_missing_sample": [
+      "5081788",
+      "4985920",
+      "5191826"
+    ],
+    "emitted_numeric_tokens": 86
+  },
+  {
+    "dataset": "abs",
+    "source_id": "abs-fed-2021-22",
+    "table": "Summary of Expenditure",
+    "page": 17,
+    "table_index": 0,
+    "printed_numeric_tokens": 75,
+    "matched": 75,
+    "coverage": 1.0,
+    "missing_tokens_sample": [],
+    "row_band_printed_numeric_tokens": 75,
+    "row_band_matched": 75,
+    "coverage_row_band": 1.0,
+    "row_band_missing_sample": [],
+    "emitted_numeric_tokens": 75
+  },
+  {
+    "dataset": "abs",
     "source_id": "abs-fed-2024-25",
     "table": "Summary of Expenditure",
     "page": 17,

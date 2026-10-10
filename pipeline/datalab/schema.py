@@ -204,6 +204,7 @@ class Observation(Model):
     gap_kind: Optional[GapKind] = None
     gap_reason: Optional[str] = None
     evidence_summary: str = ""
+    notes: str = Field(default="", description="Caveats the reader must see, e.g. a footnote the document attaches to the line.")
     derived_from: list[str] = Field(default_factory=list)
     first_published_release: Optional[str] = None
     last_changed_release: Optional[str] = None

@@ -143,6 +143,7 @@ def test_detect_scale(text, scale):
         ("Total Expenditure:", "total expenditure"),
         ("(i) Something", "something"),
         ("  Health  ", "health"),
+        ("07 Health*", "health"),
     ],
 )
 def test_normalise_label(raw, expected):

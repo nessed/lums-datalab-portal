@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T21:00:05+00:00",
-  "git_commit": "18c458f2feb081a498d7fab204aa4590aadf6110",
+  "created_at": "2026-10-10T21:15:03+00:00",
+  "git_commit": "6bf5529e6c9e57f48973d0a428fe4b0eba942ad0",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -15,6 +15,9 @@
     "sources": [
       "abs-fed-2010-11",
       "abs-fed-2011-12",
+      "abs-fed-2016-17",
+      "abs-fed-2017-18",
+      "abs-fed-2021-22",
       "abs-fed-2024-25",
       "abs-fed-2025-26"
     ],
@@ -23,6 +26,11 @@
         "2009-10",
         "2010-11",
         "2011-12",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2020-21",
+        "2021-22",
         "2023-24",
         "2024-25",
         "2025-26"
@@ -54,64 +62,75 @@
     "abs-fed-2022-23": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
     "abs-fed-2024-25": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
     "abs-fed-2025-26": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
-    "abs-fed-2026-27": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0"
+    "abs-fed-2026-27": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
+    "cpi-pbs-2016-06": "af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0",
+    "cpi-pbs-2019-06": "c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75",
+    "cpi-pbs-2023-06": "458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35",
+    "cpi-pbs-2024-06": "faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022",
+    "cpi-pbs-2025-06": "b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92",
+    "cpi-pbs-2026-06": "1b0605b116d7c4e79031f709ea032870f764cf8deac62bb6a72e6ddb1c881a87",
+    "lfs-pbs-2014-15": "56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c",
+    "lfs-pbs-2017-18": "f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904",
+    "lfs-pbs-2018-19": "a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127",
+    "lfs-pbs-2020-21": "ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9",
+    "lfs-pbs-2024-25": "79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48"
   },
   "counts": {
-    "sources": 9,
-    "cells": 288,
-    "cells_mapped": 288,
-    "cells_behind_published_values": 286,
-    "series": 28,
-    "observations": 425,
+    "sources": 20,
+    "cells": 495,
+    "cells_mapped": 495,
+    "cells_behind_published_values": 492,
+    "series": 30,
+    "observations": 498,
     "observations_by_dataset": {
       "abs": {
-        "gap:not_in_source": 1,
-        "gap:not_yet_verified": 180,
-        "published": 244
+        "gap:not_in_source": 2,
+        "gap:not_yet_verified": 60,
+        "published": 436
       },
       "cpi": {},
       "lfs": {}
     },
     "tiers_by_dataset": {
       "abs": {
-        "A": 49,
-        "B": 195
+        "A": 75,
+        "B": 361
       },
       "cpi": {},
       "lfs": {}
     },
     "checks_by_result": {
-      "pass": 133,
-      "pass_within_rounding": 19
+      "pass": 220,
+      "pass_within_rounding": 34
     },
     "checks_by_type": {
       "accounting_identity": {
-        "pass": 55,
-        "pass_within_rounding": 11
+        "pass": 99,
+        "pass_within_rounding": 18
       },
       "column_total": {
-        "pass": 5,
-        "pass_within_rounding": 7
+        "pass": 6,
+        "pass_within_rounding": 15
       },
       "cross_edition": {
-        "pass": 48
+        "pass": 72
       },
       "cross_table": {
-        "pass": 14
+        "pass": 20
       },
       "hierarchy_sum": {
-        "pass": 11,
+        "pass": 23,
         "pass_within_rounding": 1
       }
     },
-    "page_renders": 4
+    "page_renders": 7
   },
   "coverage_summary": {
     "abs": {
-      "printed_numeric_tokens": 356,
-      "matched": 354,
-      "coverage": 0.9944,
-      "tables": 4,
+      "printed_numeric_tokens": 610,
+      "matched": 605,
+      "coverage": 0.9918,
+      "tables": 7,
       "tables_below_per_table_minimum": []
     },
     "cpi": null,
@@ -120,19 +139,19 @@
   "check_pass_rates": {
     "abs": {
       "all": {
-        "pass": 133,
-        "pass_within_rounding": 19,
+        "pass": 220,
+        "pass_within_rounding": 34,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 152,
+        "evaluable": 254,
         "pass_rate": 1.0
       },
       "cross_edition": {
-        "pass": 48,
+        "pass": 72,
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 48,
+        "evaluable": 72,
         "pass_rate": 1.0
       }
     },
@@ -153,26 +172,26 @@
       "state": "published",
       "reasons": [],
       "coverage": {
-        "printed_numeric_tokens": 356,
-        "matched": 354,
-        "coverage": 0.9944,
-        "tables": 4,
+        "printed_numeric_tokens": 610,
+        "matched": 605,
+        "coverage": 0.9918,
+        "tables": 7,
         "tables_below_per_table_minimum": []
       },
       "check_pass_rate": {
-        "pass": 133,
-        "pass_within_rounding": 19,
+        "pass": 220,
+        "pass_within_rounding": 34,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 152,
+        "evaluable": 254,
         "pass_rate": 1.0
       },
       "cross_edition_agreement": {
-        "pass": 48,
+        "pass": 72,
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 48,
+        "evaluable": 72,
         "pass_rate": 1.0
       }
     },

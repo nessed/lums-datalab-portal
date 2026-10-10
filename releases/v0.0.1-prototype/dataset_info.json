@@ -1,9 +1,10 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T20:59:49+00:00",
+    "built_at": "2026-10-10T21:14:40+00:00",
     "located": {
       "abs-fed-2010-11": {
+        "footnote_lines": [],
         "source_id": "abs-fed-2010-11",
         "page": 9,
         "table_index": 0,
@@ -39,6 +40,7 @@
         "unmapped_labels": [],
         "ambiguous_labels": [],
         "labels_from_text_layer": [],
+        "labels_with_footnote_mark": [],
         "coverage": {
           "page": 9,
           "table_index": 0,
@@ -80,6 +82,7 @@
         }
       },
       "abs-fed-2011-12": {
+        "footnote_lines": [],
         "source_id": "abs-fed-2011-12",
         "page": 11,
         "table_index": 0,
@@ -118,6 +121,7 @@
           "(Total Public Sector Dev. Program) (i+d)",
           "2 Total Development Expenditure (c + d)"
         ],
+        "labels_with_footnote_mark": [],
         "coverage": {
           "page": 11,
           "table_index": 0,
@@ -158,7 +162,258 @@
           "result": "found"
         }
       },
+      "abs-fed-2016-17": {
+        "footnote_lines": [],
+        "source_id": "abs-fed-2016-17",
+        "page": 12,
+        "table_index": 0,
+        "run_id": "ABS_2016-17__docling__full-document__run-01",
+        "rows": 27,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2015-16",
+            "vintage": "be",
+            "header": "SUMMARY Budget Estimates 2015-16"
+          },
+          "3": {
+            "period": "2015-16",
+            "vintage": "re",
+            "header": "(Rs Revised Estimates 2015-16"
+          },
+          "4": {
+            "period": "2016-17",
+            "vintage": "be",
+            "header": "in million) Budget Estimates 2016-17"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "labels_from_text_layer": [
+          "Revenue Account (a+c)"
+        ],
+        "labels_with_footnote_mark": [],
+        "coverage": {
+          "page": 12,
+          "table_index": 0,
+          "printed_numeric_tokens": 90,
+          "matched": 90,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 90,
+          "row_band_matched": 90,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 90
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 12,
+              "table_index": 0,
+              "score": 10,
+              "rows": 27,
+              "cols": 5
+            },
+            {
+              "page": 17,
+              "table_index": 0,
+              "score": 6,
+              "rows": 28,
+              "cols": 5
+            },
+            {
+              "page": 14,
+              "table_index": 0,
+              "score": 4,
+              "rows": 19,
+              "cols": 5
+            }
+          ],
+          "result": "found"
+        }
+      },
+      "abs-fed-2017-18": {
+        "footnote_lines": [],
+        "source_id": "abs-fed-2017-18",
+        "page": 11,
+        "table_index": 0,
+        "run_id": "ABS_2017-18__docling__full-document__run-01",
+        "rows": 26,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2016-17",
+            "vintage": "be",
+            "header": "SUMMARY Budget Estimates 2016-17"
+          },
+          "3": {
+            "period": "2016-17",
+            "vintage": "re",
+            "header": "(Rs Revised Estimates 2016-17"
+          },
+          "4": {
+            "period": "2017-18",
+            "vintage": "be",
+            "header": "in million) Budget Estimates 2017-18"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "labels_from_text_layer": [
+          "Revenue Account (a+c)"
+        ],
+        "labels_with_footnote_mark": [],
+        "coverage": {
+          "page": 11,
+          "table_index": 0,
+          "printed_numeric_tokens": 89,
+          "matched": 86,
+          "coverage": 0.9663,
+          "missing_tokens_sample": [
+            "5081788",
+            "4985920",
+            "5191826"
+          ],
+          "row_band_printed_numeric_tokens": 89,
+          "row_band_matched": 86,
+          "coverage_row_band": 0.9663,
+          "row_band_missing_sample": [
+            "5081788",
+            "4985920",
+            "5191826"
+          ],
+          "emitted_numeric_tokens": 86
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 11,
+              "table_index": 0,
+              "score": 10,
+              "rows": 26,
+              "cols": 5
+            },
+            {
+              "page": 16,
+              "table_index": 0,
+              "score": 6,
+              "rows": 29,
+              "cols": 5
+            },
+            {
+              "page": 13,
+              "table_index": 0,
+              "score": 4,
+              "rows": 19,
+              "cols": 5
+            }
+          ],
+          "result": "found"
+        }
+      },
+      "abs-fed-2021-22": {
+        "footnote_lines": [
+          "*An amount of Rs 100 billion has been allocated for COVID related expenditure"
+        ],
+        "source_id": "abs-fed-2021-22",
+        "page": 17,
+        "table_index": 0,
+        "run_id": "ABS_2021-22__docling__full-document__run-01",
+        "rows": 23,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2020-21",
+            "vintage": "be",
+            "header": "(Current revenue and accounts) Budget Estimates 2020-21"
+          },
+          "3": {
+            "period": "2020-21",
+            "vintage": "re",
+            "header": "& Dev) capital account) have been (Rs Revised Estimates 2020-21"
+          },
+          "4": {
+            "period": "2021-22",
+            "vintage": "be",
+            "header": "and Budget mentioned as per in million) Budget Estimates 2021-22"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "labels_from_text_layer": [],
+        "labels_with_footnote_mark": [
+          "07 Health*"
+        ],
+        "coverage": {
+          "page": 17,
+          "table_index": 0,
+          "printed_numeric_tokens": 75,
+          "matched": 75,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 75,
+          "row_band_matched": 75,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 75
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 17,
+              "table_index": 0,
+              "score": 10,
+              "rows": 23,
+              "cols": 5
+            },
+            {
+              "page": 22,
+              "table_index": 0,
+              "score": 6,
+              "rows": 27,
+              "cols": 5
+            },
+            {
+              "page": 19,
+              "table_index": 0,
+              "score": 4,
+              "rows": 20,
+              "cols": 6
+            }
+          ],
+          "result": "found"
+        }
+      },
       "abs-fed-2024-25": {
+        "footnote_lines": [],
         "source_id": "abs-fed-2024-25",
         "page": 17,
         "table_index": 0,
@@ -194,6 +449,7 @@
         "unmapped_labels": [],
         "ambiguous_labels": [],
         "labels_from_text_layer": [],
+        "labels_with_footnote_mark": [],
         "coverage": {
           "page": 17,
           "table_index": 0,
@@ -241,6 +497,7 @@
         }
       },
       "abs-fed-2025-26": {
+        "footnote_lines": [],
         "source_id": "abs-fed-2025-26",
         "page": 17,
         "table_index": 0,
@@ -276,6 +533,7 @@
         "unmapped_labels": [],
         "ambiguous_labels": [],
         "labels_from_text_layer": [],
+        "labels_with_footnote_mark": [],
         "coverage": {
           "page": 17,
           "table_index": 0,
@@ -318,35 +576,32 @@
       }
     },
     "not_located": {
-      "abs-fed-2016-17": "No validated extraction run exists",
-      "abs-fed-2017-18": "No validated extraction run exists",
-      "abs-fed-2021-22": "No validated extraction run exists",
       "abs-fed-2022-23": "No validated extraction run exists",
       "abs-fed-2026-27": "No validated extraction run exists"
     },
     "check_pass_rates": {
       "all": {
-        "pass": 133,
-        "pass_within_rounding": 19,
+        "pass": 220,
+        "pass_within_rounding": 34,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 152,
+        "evaluable": 254,
         "pass_rate": 1.0
       },
       "arithmetic": {
-        "pass": 85,
-        "pass_within_rounding": 19,
+        "pass": 148,
+        "pass_within_rounding": 34,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 104,
+        "evaluable": 182,
         "pass_rate": 1.0
       },
       "cross_edition": {
-        "pass": 48,
+        "pass": 72,
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 48,
+        "evaluable": 72,
         "pass_rate": 1.0
       }
     },

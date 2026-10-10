@@ -4,6 +4,6 @@
 
 First prototype release. Nothing was published before this, so there are no changes to earlier values.
 
-- 244 published values across: abs.
-- 181 labelled gaps: not_in_source: 1, not_yet_verified: 180.
+- 436 published values across: abs.
+- 62 labelled gaps: not_in_source: 2, not_yet_verified: 60.
 - Prototype label, no DOI.

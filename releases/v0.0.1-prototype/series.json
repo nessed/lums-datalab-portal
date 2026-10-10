@@ -681,7 +681,7 @@
     "frequency": "fiscal_year",
     "unit": "PKR",
     "scale_factor": 1000000,
-    "definition": "PSDP total as printed in older editions: development expenditure on revenue account (PSDP) plus development expenditure on capital account.",
+    "definition": "PSDP total as printed in older editions: the PSDP part of development expenditure on revenue account plus the PSDP part (or, where no split is printed, all) of development expenditure on capital account.",
     "definition_status": "draft",
     "synonyms": [],
     "breaks": [
@@ -697,6 +697,62 @@
     "derived": false,
     "derivation": null,
     "sort_key": 65,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.capital_account.psdp",
+    "name": "Development expenditure on capital account (PSDP)",
+    "parent_id": "fed.exp.development.capital_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "The Public Sector Development Programme part of development expenditure on capital account (printed in some editions).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 66,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.capital_account.other",
+    "name": "Other development expenditure on capital account",
+    "parent_id": "fed.exp.development.capital_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Development expenditure on capital account outside the PSDP (printed in some editions).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 67,
     "notes": ""
   },
   {

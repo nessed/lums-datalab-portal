@@ -201,8 +201,12 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2016-17.json",
     "notes": "",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      12
+    ],
+    "run_ids": [
+      "ABS_2016-17__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:53:15+00:00",
@@ -285,8 +289,12 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2017-18.json",
     "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year. Text layer on 31 of 33 printed pages, below the 95% inspection level: page(s) 1, 33 are images (covers). Used under a recorded deviation; every page that values are taken from has a text layer.",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      11
+    ],
+    "run_ids": [
+      "ABS_2017-18__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:54:20+00:00",
@@ -376,8 +384,12 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2021-22.json",
     "notes": "",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      17
+    ],
+    "run_ids": [
+      "ABS_2021-22__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:55:00+00:00",
@@ -809,6 +821,917 @@
       },
       "wayback": null,
       "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2016-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2016",
+    "period": "2016-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf",
+    "wayback_url": "https://web.archive.org/web/20250609120620/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf",
+    "wayback_timestamp": "20250609120620",
+    "retrieved_at": "2026-10-10T20:38:34Z",
+    "retrieved_via": "wayback",
+    "sha256": "af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0",
+    "size_bytes": 575248,
+    "format": "pdf",
+    "page_count": 12,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2016-06/Monthly Review June,  2016_0.pdf",
+    "verification_status": "wayback_only",
+    "verification_record": "sources/verification/cpi-pbs-2016-06.json",
+    "notes": "Text layer on 9 of 11 printed pages, below the 95% inspection level: page(s) 4, 8 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "wayback",
+      "retrieved_at": "2026-10-10T20:38:34Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 12,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2013",
+          "Creator": "Microsoft® Word 2013",
+          "CreationDate": "D:20160701130252+05'00'"
+        },
+        "pages_with_text_layer": 9,
+        "blank_pages": [
+          2
+        ],
+        "pages_without_text_layer": [
+          4,
+          8
+        ],
+        "text_layer_fraction": 0.8182,
+        "ascii_ratio_first_pages": 0.9989,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2016": true,
+            "june, 2016": true,
+            "june,2016": false,
+            "june2016": false,
+            "june-2016": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": null,
+          "Content-Length": "575248",
+          "Content-Type": "application/pdf",
+          "ETag": null
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250609120620/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf",
+        "wayback_timestamp": "20250609120620",
+        "snapshots_seen": 10,
+        "snapshot_digest": "2E4IDIHV7DWMIEQYTXRBUEYBF4Q67MG5",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2019-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2019",
+    "period": "2019-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf",
+    "wayback_url": "https://web.archive.org/web/20250609115853/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf",
+    "wayback_timestamp": "20250609115853",
+    "retrieved_at": "2026-10-10T20:19:57Z",
+    "retrieved_via": "wayback",
+    "sha256": "c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75",
+    "size_bytes": 1270182,
+    "format": "pdf",
+    "page_count": 13,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2019-06/cpi_review_june_2019.pdf",
+    "verification_status": "wayback_only",
+    "verification_record": "sources/verification/cpi-pbs-2019-06.json",
+    "notes": "Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit). Text layer on 10 of 12 printed pages, below the 95% inspection level: page(s) 4, 8 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "wayback",
+      "retrieved_at": "2026-10-10T20:19:57Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 13,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2016",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20190702143901+05'00'"
+        },
+        "pages_with_text_layer": 10,
+        "blank_pages": [
+          2
+        ],
+        "pages_without_text_layer": [
+          4,
+          8
+        ],
+        "text_layer_fraction": 0.8333,
+        "ascii_ratio_first_pages": 0.999,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2019": true,
+            "june, 2019": true,
+            "june,2019": false,
+            "june2019": false,
+            "june-2019": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": null,
+          "Content-Length": "1270182",
+          "Content-Type": "application/pdf",
+          "ETag": null
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250609115853/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf",
+        "wayback_timestamp": "20250609115853",
+        "snapshots_seen": 14,
+        "snapshot_digest": "SYVCKSCVAENEYC6CNTQPMTEW6IANJFCL",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2023-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2023",
+    "period": "2023-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf",
+    "wayback_url": "https://web.archive.org/web/20260430173837/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf",
+    "wayback_timestamp": "20260430173837",
+    "retrieved_at": "2026-10-10T20:18:24Z",
+    "retrieved_via": "official",
+    "sha256": "458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35",
+    "size_bytes": 1342112,
+    "format": "pdf",
+    "page_count": 18,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2023-06/CPI_Review_June_2023.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/cpi-pbs-2023-06.json",
+    "notes": "Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:18:24Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 18,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word LTSC",
+          "Creator": "Microsoft® Word LTSC",
+          "CreationDate": "D:20230627154446+05'00'"
+        },
+        "pages_with_text_layer": 15,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          5,
+          6,
+          7
+        ],
+        "text_layer_fraction": 0.8333,
+        "ascii_ratio_first_pages": 0.9995,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2023": true,
+            "june, 2023": true,
+            "june,2023": false,
+            "june2023": false,
+            "june-2023": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Wed, 24 Jan 2024 06:28:00 GMT",
+          "Content-Length": "1342112",
+          "Content-Type": "application/pdf",
+          "ETag": "\"65b0adf0-147aa0\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260430173837/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf",
+        "wayback_timestamp": "20260430173837",
+        "snapshots_seen": 3,
+        "snapshot_digest": "ISAWQHJMEGFUHAXUDA2B2I4H6QJGXLAC",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2024-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2024",
+    "period": "2024-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf",
+    "wayback_url": "https://web.archive.org/web/20260430173822/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf",
+    "wayback_timestamp": "20260430173822",
+    "retrieved_at": "2026-10-10T20:19:59Z",
+    "retrieved_via": "official",
+    "sha256": "faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022",
+    "size_bytes": 1014978,
+    "format": "pdf",
+    "page_count": 18,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2024-06/CPI_Review_June_2024.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/cpi-pbs-2024-06.json",
+    "notes": "Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit). Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:19:59Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 18,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2016",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20240701155927+05'00'"
+        },
+        "pages_with_text_layer": 15,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          5,
+          6,
+          7
+        ],
+        "text_layer_fraction": 0.8333,
+        "ascii_ratio_first_pages": 0.9995,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2024": true,
+            "june, 2024": false,
+            "june,2024": false,
+            "june2024": false,
+            "june-2024": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Fri, 18 Oct 2024 08:42:12 GMT",
+          "Content-Length": "1014978",
+          "Content-Type": "application/pdf",
+          "ETag": "\"67121f64-f7cc2\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260430173822/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf",
+        "wayback_timestamp": "20260430173822",
+        "snapshots_seen": 3,
+        "snapshot_digest": "N6PNK4EAKB7LCOLVHIQ6R2MEIBU74BAG",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2025-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2025",
+    "period": "2025-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf",
+    "wayback_url": "https://web.archive.org/web/20260811064726/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf",
+    "wayback_timestamp": "20260811064726",
+    "retrieved_at": "2026-10-10T20:18:22Z",
+    "retrieved_via": "official",
+    "sha256": "b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92",
+    "size_bytes": 954049,
+    "format": "pdf",
+    "page_count": 18,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2025-06/Monthly-Review-June-2025.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/cpi-pbs-2025-06.json",
+    "notes": "Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:18:22Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 18,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2016",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20250701130453+05'00'"
+        },
+        "pages_with_text_layer": 15,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          5,
+          6,
+          7
+        ],
+        "text_layer_fraction": 0.8333,
+        "ascii_ratio_first_pages": 0.9995,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2025": true,
+            "june, 2025": true,
+            "june,2025": false,
+            "june2025": false,
+            "june-2025": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Wed, 09 Jul 2025 08:20:35 GMT",
+          "Content-Length": "954049",
+          "Content-Type": "application/pdf",
+          "ETag": "\"686e2653-e8ec1\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260811064726/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf",
+        "wayback_timestamp": "20260811064726",
+        "snapshots_seen": 6,
+        "snapshot_digest": "QBSQI6BTIHZPS2X5ZNTTRQLCO6MQ7AVB",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2026-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2026",
+    "period": "2026-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf",
+    "wayback_url": "https://web.archive.org/web/20260811064643/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf",
+    "wayback_timestamp": "20260811064643",
+    "retrieved_at": "2026-10-10T20:20:00Z",
+    "retrieved_via": "official",
+    "sha256": "1b0605b116d7c4e79031f709ea032870f764cf8deac62bb6a72e6ddb1c881a87",
+    "size_bytes": 1627486,
+    "format": "pdf",
+    "page_count": 18,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2026-06/Monthly-Review-June-2026.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/cpi-pbs-2026-06.json",
+    "notes": "Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit). Text layer on 15 of 18 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:20:00Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 18,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2016",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20260701111233+05'00'"
+        },
+        "pages_with_text_layer": 15,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          5,
+          6,
+          7
+        ],
+        "text_layer_fraction": 0.8333,
+        "ascii_ratio_first_pages": 0.9995,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2026": true,
+            "june, 2026": false,
+            "june,2026": false,
+            "june2026": false,
+            "june-2026": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Wed, 01 Jul 2026 08:59:35 GMT",
+          "Content-Length": "1627486",
+          "Content-Type": "application/pdf",
+          "ETag": "\"6a44d6f7-18d55e\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260811064643/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf",
+        "wayback_timestamp": "20260811064643",
+        "snapshots_seen": 1,
+        "snapshot_digest": "GKZTCEBLKIOCEBOW3GKACWPCMKRORC5W",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "lfs-pbs-2014-15",
+    "doc_type": "lfs_annual_report",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Labour Force Survey 2014-15 Annual Report",
+    "period": "2014-15",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf",
+    "wayback_url": "https://web.archive.org/web/20260208164841/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf",
+    "wayback_timestamp": "20260208164841",
+    "retrieved_at": "2026-10-10T20:17:10Z",
+    "retrieved_via": "official",
+    "sha256": "56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c",
+    "size_bytes": 874842,
+    "format": "pdf",
+    "page_count": 30,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "lfs_annual_report/2014-15/Annual_Report_of_LFS_2014-15.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/lfs-pbs-2014-15.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:17:10Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 30,
+        "pdf_metadata": {
+          "Title": "Draft Report",
+          "Producer": "Microsoft® Word 2013",
+          "Creator": "Microsoft® Word 2013",
+          "CreationDate": "D:20170509102328+05'00'"
+        },
+        "pages_with_text_layer": 30,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9975,
+        "markers": {
+          "all": {
+            "labour force survey": true
+          },
+          "any": {},
+          "period": {
+            "2014-15": true,
+            "2014-2015": false,
+            "2014 - 15": false,
+            "2014–15": false,
+            "2014—15": false,
+            "2014 – 15": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Fri, 01 Mar 2024 08:27:25 GMT",
+          "Content-Length": "874842",
+          "Content-Type": "application/pdf",
+          "ETag": "\"65e1916d-d595a\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260208164841/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf",
+        "wayback_timestamp": "20260208164841",
+        "snapshots_seen": 3,
+        "snapshot_digest": "OKB7UKQZ4U7F3OEEBKS4XQ4W22RFJKBM",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "lfs-pbs-2017-18",
+    "doc_type": "lfs_annual_report",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Labour Force Survey 2017-18 Annual Report",
+    "period": "2017-18",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
+    "wayback_url": "https://web.archive.org/web/20260314063715/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
+    "wayback_timestamp": "20260314063715",
+    "retrieved_at": "2026-10-10T20:17:09Z",
+    "retrieved_via": "official",
+    "sha256": "f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904",
+    "size_bytes": 1615654,
+    "format": "pdf",
+    "page_count": 54,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "lfs_annual_report/2017-18/Annual-Report-of-LFS-2017-18.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/lfs-pbs-2017-18.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:17:09Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 54,
+        "pdf_metadata": {
+          "Title": "Draft Report",
+          "Producer": "Microsoft® Word 2013",
+          "Creator": "Microsoft® Word 2013",
+          "CreationDate": "D:20190124120403+05'00'"
+        },
+        "pages_with_text_layer": 54,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9975,
+        "markers": {
+          "all": {
+            "labour force survey": true
+          },
+          "any": {},
+          "period": {
+            "2017-18": true,
+            "2017-2018": false,
+            "2017 - 18": false,
+            "2017–18": false,
+            "2017—18": false,
+            "2017 – 18": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Fri, 01 Mar 2024 08:26:34 GMT",
+          "Content-Length": "1615654",
+          "Content-Type": "application/pdf",
+          "ETag": "\"65e1913a-18a726\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260314063715/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
+        "wayback_timestamp": "20260314063715",
+        "snapshots_seen": 3,
+        "snapshot_digest": "24AOMEOQRBULBA5VRL35Y3STLI3HJD3E",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "lfs-pbs-2018-19",
+    "doc_type": "lfs_annual_report",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Labour Force Survey 2018-19 Annual Report",
+    "period": "2018-19",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf",
+    "wayback_url": "https://web.archive.org/web/20251029190518/https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf",
+    "wayback_timestamp": "20251029190518",
+    "retrieved_at": "2026-10-10T20:17:04Z",
+    "retrieved_via": "official",
+    "sha256": "a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127",
+    "size_bytes": 8176939,
+    "format": "pdf",
+    "page_count": 408,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "lfs_annual_report/2018-19/lfs_2018_19_final_report-1.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/lfs-pbs-2018-19.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:17:04Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 408,
+        "pdf_metadata": {},
+        "pages_with_text_layer": 408,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9962,
+        "markers": {
+          "all": {
+            "labour force survey": true
+          },
+          "any": {},
+          "period": {
+            "2018-19": true,
+            "2018-2019": false,
+            "2018 - 19": false,
+            "2018–19": false,
+            "2018—19": false,
+            "2018 – 19": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Fri, 01 Mar 2024 08:21:49 GMT",
+          "Content-Length": "8176939",
+          "Content-Type": "application/pdf",
+          "ETag": "\"65e1901d-7cc52b\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20251029190518/https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf",
+        "wayback_timestamp": "20251029190518",
+        "snapshots_seen": 3,
+        "snapshot_digest": "4UDSS2S7G7LDXQIBPKVOLNUFZTM5KVJG",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "lfs-pbs-2020-21",
+    "doc_type": "lfs_annual_report",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Labour Force Survey 2020-21 Annual Report",
+    "period": "2020-21",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf",
+    "wayback_url": "https://web.archive.org/web/20251028080642/https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf",
+    "wayback_timestamp": "20251028080642",
+    "retrieved_at": "2026-10-10T20:16:58Z",
+    "retrieved_via": "official",
+    "sha256": "ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9",
+    "size_bytes": 15154629,
+    "format": "pdf",
+    "page_count": 230,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "lfs_annual_report/2020-21/LFS_2020-21_Report-3.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/lfs-pbs-2020-21.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:16:58Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 230,
+        "pdf_metadata": {
+          "Title": "PAKISTAN LABOUR FORCE SURVEY 2020-21",
+          "Producer": "www.ilovepdf.com",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20220502081338+00'00'"
+        },
+        "pages_with_text_layer": 230,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 1.0,
+        "markers": {
+          "all": {
+            "labour force survey": true
+          },
+          "any": {},
+          "period": {
+            "2020-21": true,
+            "2020-2021": false,
+            "2020 - 21": false,
+            "2020–21": false,
+            "2020—21": false,
+            "2020 – 21": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Fri, 01 Mar 2024 08:20:37 GMT",
+          "Content-Length": "15154629",
+          "Content-Type": "application/pdf",
+          "ETag": "\"65e18fd5-e73dc5\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20251028080642/https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf",
+        "wayback_timestamp": "20251028080642",
+        "snapshots_seen": 3,
+        "snapshot_digest": "AFQLV5XDJLJIRMLDIXYY2ZEPF2AYPAAP",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "lfs-pbs-2024-25",
+    "doc_type": "lfs_annual_report",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Labour Force Survey 2024-25 Annual Report",
+    "period": "2024-25",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+    "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf",
+    "wayback_url": "https://web.archive.org/web/20260926050408id_/https://pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf",
+    "wayback_timestamp": "20260926050408",
+    "retrieved_at": "2026-10-10T20:16:50Z",
+    "retrieved_via": "official",
+    "sha256": "79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48",
+    "size_bytes": 9425530,
+    "format": "pdf",
+    "page_count": 205,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "lfs_annual_report/2024-25/LFS-2024-25-Annual-Report.pdf",
+    "verification_status": "official_only",
+    "verification_record": "sources/verification/lfs-pbs-2024-25.json",
+    "notes": "Text layer on 193 of 205 printed pages, below the 95% inspection level: page(s) 31, 38, 44, 68, 104, 116, 123, 130, 141, 158, 166, 178 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:16:50Z",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 205,
+        "pdf_metadata": {
+          "Title": "PAKISTAN LABOUR FORCE SURVEY 2020-21",
+          "Producer": "Microsoft® Word 2016",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20260326085134+05'00'"
+        },
+        "pages_with_text_layer": 193,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          31,
+          38,
+          44,
+          68,
+          104,
+          116,
+          123,
+          130,
+          141,
+          158,
+          166,
+          178
+        ],
+        "text_layer_fraction": 0.9415,
+        "ascii_ratio_first_pages": 1.0,
+        "markers": {
+          "all": {
+            "labour force survey": true
+          },
+          "any": {},
+          "period": {
+            "2024-25": true,
+            "2024-2025": false,
+            "2024 - 25": false,
+            "2024–25": false,
+            "2024—25": false,
+            "2024 – 25": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "headers": {
+          "Last-Modified": "Thu, 26 Mar 2026 16:47:10 GMT",
+          "Content-Length": "9425530",
+          "Content-Type": "application/pdf",
+          "ETag": "\"69c5630e-8fd27a\""
+        },
+        "http_status": 200
+      },
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260926050408id_/https://pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf",
+        "wayback_timestamp": "20260926050408"
+      },
+      "text_layer_ok": false
     }
   }
 ]

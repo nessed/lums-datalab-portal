@@ -74,6 +74,12 @@
       "default": null,
       "title": "Last Changed Release"
     },
+    "notes": {
+      "default": "",
+      "description": "Caveats the reader must see, e.g. a footnote the document attaches to the line.",
+      "title": "Notes",
+      "type": "string"
+    },
     "obs_id": {
       "title": "Obs Id",
       "type": "string"

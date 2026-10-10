@@ -84,6 +84,7 @@ def build_cells(source, run, table: Table, spec: dict[str, Any], labels: LabelMa
     unmapped: list[str] = []
     ambiguous: list[str] = []
     relabelled: list[str] = []
+    footnoted: list[str] = []
     for r in range(table.num_rows):
         row_cells = [grid[r][k] for k in value_cols if grid[r][k] is not None and grid[r][k].row == r and grid[r][k].col == k]
         if not row_cells or all(c.column_header for c in row_cells) or not any(c.text.strip() for c in row_cells):
@@ -102,6 +103,10 @@ def build_cells(source, run, table: Table, spec: dict[str, Any], labels: LabelMa
                 relabelled.append(alt)
         if series_id is None:
             (ambiguous if how == "ambiguous" else unmapped).append(label or "(row with no label)")
+        if re.search(r"[\*†]\s*$", label):
+            # The document attaches a footnote to this line; receipts must show that it exists.
+            row_flags.append("row_label_has_footnote_mark")
+            footnoted.append(label)
         for tc in row_cells:
             if not tc.text.strip():
                 continue
@@ -113,13 +118,20 @@ def build_cells(source, run, table: Table, spec: dict[str, Any], labels: LabelMa
             if series_id and period and not col_problems and scale_ok:
                 cell.series_id, cell.period, cell.vintage, cell.mapping_method = series_id, period, vintage, "dictionary"
             cells.append(cell)
+    # Footnote text printed on the page (lines that start with the mark), read from the text layer.
+    import pymupdf
+
+    with pymupdf.open(pdf) as doc:
+        footnote_lines = [clean_text(line) for line in doc[table.page - 1].get_text().splitlines()
+                          if re.match(r"\s*[\*†]+\s*\S", line) and len(line.strip()) > 12]
     info = {
+        "footnote_lines": footnote_lines,
         "source_id": source.source_id, "page": table.page, "table_index": table.table_index, "run_id": run.run_id,
         "rows": table.num_rows, "cols": table.num_cols, "value_columns": value_cols, "table_flags": flags,
         "columns": {str(k): {"period": v[0], "vintage": v[1], "header": v[2]} for k, v in col_map.items()},
         "column_problems": col_problems, "scale_factor_detected": scale, "scale_confirmed": bool(scale_ok),
         "unmapped_labels": unmapped, "ambiguous_labels": ambiguous,
-        "labels_from_text_layer": relabelled, "coverage": coverage,
+        "labels_from_text_layer": relabelled, "labels_with_footnote_mark": footnoted, "coverage": coverage,
     }
     return cells, info
 
@@ -236,6 +248,10 @@ def gap_observations(spec: dict[str, Any], located: dict[str, dict[str, Any]], n
                     # We cannot claim the government did not print it while a row of the table is unmatched.
                     kind, reason = "not_yet_verified", (f"A row of the table in the {src.title} could not be matched to a line "
                                                         "with certainty, so this figure is not shown.")
+                elif (located.get(sid, {}).get("coverage", {}).get("coverage") or 0) < 1:
+                    # Some printed numbers in the table were not captured, so absence proves nothing.
+                    kind, reason = "not_yet_verified", (f"Not every printed number in the table of the {src.title} was captured, "
+                                                        "so we cannot say whether this line is printed.")
                 else:
                     kind, reason = "not_in_source", f"The Summary of Expenditure in the {src.title} does not print this line."
                 s = series[series_id]
@@ -286,6 +302,13 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     checks = evaluate_sum_rules(cells, spec["rules"], DATASET, parents, blocked, lambda c: column_label(c, titles))
     checks += cross_checks(cells, titles, order, series)
     observations = build_observations(cells, checks, series, order, titles, release)
+    cells_by_id = {c.cell_id: c for c in cells}
+    for o in observations:
+        primary = cells_by_id.get(o.primary_cell_id or "")
+        if primary is not None and "row_label_has_footnote_mark" in primary.structural_flags:
+            lines = located.get(primary.source_id, {}).get("footnote_lines") or []
+            quoted = " ".join(f'"{line}"' for line in lines) or "(the footnote text could not be read from the page)"
+            o.notes = f"The {titles.get(primary.source_id, primary.source_id)} attaches a footnote to this line: {quoted}"
     observations += derive(spec, observations, series, release)
     observations += gap_observations(spec, located, not_located, observations, series)
     used = {o.series_id for o in observations}

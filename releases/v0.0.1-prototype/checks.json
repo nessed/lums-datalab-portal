@@ -1205,6 +1205,1805 @@
     "rule_id": "abs.account_capital"
   },
   {
+    "check_id": "chk_be5f35df1a57",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_0fc22ec07d73",
+      "c_351762e64f30",
+      "c_a4cf0d05dfd8",
+      "c_48be0d585086",
+      "c_0ce50ff2e7c2",
+      "c_18fb39a329f8",
+      "c_30658e2db588",
+      "c_ae4b38109688",
+      "c_55031687c7f1",
+      "c_ee2077b9f6ba"
+    ],
+    "target_cell_id": "c_432853b38c6a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3482239",
+    "observed": "3482238",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, the ten function amounts (10 amounts) add to 3,482,238; the printed Current expenditure on revenue account is 3,482,239. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_76523cbc81a3",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_432853b38c6a",
+      "c_d7dfb0f90ddc"
+    ],
+    "target_cell_id": "c_08a05e5cb98d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3615274",
+    "observed": "3615274",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, current expenditure on revenue account and on capital account (2 amounts) add to 3,615,274; the printed Total current expenditure is 3,615,274. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_3f3d181c029b",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_8c707e6e1be9",
+      "c_c99714acd29c"
+    ],
+    "target_cell_id": "c_821cc57eb80c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "505976",
+    "observed": "505976",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, the parts of development expenditure on revenue account (2 amounts) add to 505,976; the printed Development expenditure on revenue account is 505,976. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_ea19057b0f9e",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_8c707e6e1be9",
+      "c_e65a7551317f"
+    ],
+    "target_cell_id": "c_9366672a5c4b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "804639",
+    "observed": "804639",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, the PSDP parts of development expenditure on revenue account and on capital account (2 amounts) add to 804,639; the printed Total Public Sector Development Programme (ci+di) is 804,639. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total_split"
+  },
+  {
+    "check_id": "chk_d50a63773f7f",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_e65a7551317f",
+      "c_451a1b7c7954"
+    ],
+    "target_cell_id": "c_04094854e68a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "463063",
+    "observed": "463063",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, the parts of development expenditure on capital account (2 amounts) add to 463,063; the printed Development expenditure on capital account is 463,063. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_capital_parts"
+  },
+  {
+    "check_id": "chk_1dd0d8dd1d7c",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_821cc57eb80c",
+      "c_04094854e68a"
+    ],
+    "target_cell_id": "c_c2abdf904bce",
+    "target_value": null,
+    "target_source": null,
+    "expected": "969039",
+    "observed": "969039",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, development expenditure on revenue account and on capital account (2 amounts) add to 969,039; the printed Total development expenditure is 969,039. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_e8e9016eaf8b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_08a05e5cb98d",
+      "c_c2abdf904bce"
+    ],
+    "target_cell_id": "c_1e6396dd8b42",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4584313",
+    "observed": "4584313",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, total current and total development expenditure (and any other printed item) (2 amounts) add to 4,584,313; the printed Total expenditure is 4,584,313. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_695a2aaed5d2",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_432853b38c6a",
+      "c_821cc57eb80c"
+    ],
+    "target_cell_id": "c_65c2ee7e3cda",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3988215",
+    "observed": "3988215",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, current and development expenditure on revenue account (2 amounts) add to 3,988,215; the printed Revenue account (a+c) is 3,988,215. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_61faf3a7a867",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_d7dfb0f90ddc",
+      "c_04094854e68a"
+    ],
+    "target_cell_id": "c_359e8ca7b267",
+    "target_value": null,
+    "target_source": null,
+    "expected": "596098",
+    "observed": "596098",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2015-16' column of the Annual Budget Statement 2016-17, current and development expenditure on capital account (2 amounts) add to 596,098; the printed Capital account (b+d) is 596,098. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_288a73ac3f44",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_5ed880807195",
+      "c_6a5c857bb909",
+      "c_f22072443670",
+      "c_7ea8acc1334b",
+      "c_9129a043b67d",
+      "c_db9d3493b807",
+      "c_b013302704b9",
+      "c_b21ae7fa181e",
+      "c_3c3405e82bde",
+      "c_c304d043ba9d"
+    ],
+    "target_cell_id": "c_744e88a2d692",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3599859",
+    "observed": "3599858",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, the ten function amounts (10 amounts) add to 3,599,858; the printed Current expenditure on revenue account is 3,599,859. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_636ccf506387",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_744e88a2d692",
+      "c_47bd0b8c85f5"
+    ],
+    "target_cell_id": "c_072c5c3c5e12",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3713916",
+    "observed": "3713917",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, current expenditure on revenue account and on capital account (2 amounts) add to 3,713,917; the printed Total current expenditure is 3,713,916. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_81aeb33703ec",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_1dfe6f75cd18",
+      "c_2e61dfbe2b26"
+    ],
+    "target_cell_id": "c_f636fe37aaf8",
+    "target_value": null,
+    "target_source": null,
+    "expected": "399566",
+    "observed": "399566",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, the parts of development expenditure on revenue account (2 amounts) add to 399,566; the printed Development expenditure on revenue account is 399,566. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_5aa2c4adb45b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_1dfe6f75cd18",
+      "c_afa79f9031b1"
+    ],
+    "target_cell_id": "c_c3b73e9a542a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "751118",
+    "observed": "751118",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, the PSDP parts of development expenditure on revenue account and on capital account (2 amounts) add to 751,118; the printed Total Public Sector Development Programme (ci+di) is 751,118. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total_split"
+  },
+  {
+    "check_id": "chk_de381531c6fb",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_afa79f9031b1",
+      "c_66dd7fafa2af"
+    ],
+    "target_cell_id": "c_3f97d5b4f8e2",
+    "target_value": null,
+    "target_source": null,
+    "expected": "479111",
+    "observed": "479111",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, the parts of development expenditure on capital account (2 amounts) add to 479,111; the printed Development expenditure on capital account is 479,111. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_capital_parts"
+  },
+  {
+    "check_id": "chk_14e798ae7bd3",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_f636fe37aaf8",
+      "c_3f97d5b4f8e2"
+    ],
+    "target_cell_id": "c_41d218ed8659",
+    "target_value": null,
+    "target_source": null,
+    "expected": "878677",
+    "observed": "878677",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, development expenditure on revenue account and on capital account (2 amounts) add to 878,677; the printed Total development expenditure is 878,677. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_7ea5b4467417",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_072c5c3c5e12",
+      "c_41d218ed8659"
+    ],
+    "target_cell_id": "c_ea0954bf1455",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4592594",
+    "observed": "4592593",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, total current and total development expenditure (and any other printed item) (2 amounts) add to 4,592,593; the printed Total expenditure is 4,592,594. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_8ed65e785fee",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_744e88a2d692",
+      "c_f636fe37aaf8"
+    ],
+    "target_cell_id": "c_2875b1e8aad6",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3999425",
+    "observed": "3999425",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, current and development expenditure on revenue account (2 amounts) add to 3,999,425; the printed Revenue account (a+c) is 3,999,425. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_487a214385dd",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_47bd0b8c85f5",
+      "c_3f97d5b4f8e2"
+    ],
+    "target_cell_id": "c_65caa5f4a747",
+    "target_value": null,
+    "target_source": null,
+    "expected": "593169",
+    "observed": "593169",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2015-16' column of the Annual Budget Statement 2016-17, current and development expenditure on capital account (2 amounts) add to 593,169; the printed Capital account (b+d) is 593,169. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_49ead7185cde",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_e45e0d962896",
+      "c_4775a236f731",
+      "c_3fec5013f339",
+      "c_892f60bd693d",
+      "c_f2b785974d6b",
+      "c_ddd3f124c3a6",
+      "c_53a8adc43b93",
+      "c_8dcfe246f659",
+      "c_200a94babe6b",
+      "c_ec38b7ef5f40"
+    ],
+    "target_cell_id": "c_15c5641ff552",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3843986",
+    "observed": "3843988",
+    "residual": "2",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, the ten function amounts (10 amounts) add to 3,843,988; the printed Current expenditure on revenue account is 3,843,986. They differ by 2, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_f6c79f607421",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_15c5641ff552",
+      "c_f5a5bfba8b28"
+    ],
+    "target_cell_id": "c_c4df7d9e3266",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4030895",
+    "observed": "4030895",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, current expenditure on revenue account and on capital account (2 amounts) add to 4,030,895; the printed Total current expenditure is 4,030,895. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_eed41f071d3b",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_9626d702bae6",
+      "c_e345be59903c"
+    ],
+    "target_cell_id": "c_99b2e209d55e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "546124",
+    "observed": "546124",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, the parts of development expenditure on revenue account (2 amounts) add to 546,124; the printed Development expenditure on revenue account is 546,124. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_bf97cbfdc1a9",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_9626d702bae6",
+      "c_e4f78b326303"
+    ],
+    "target_cell_id": "c_4bd941df639f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "894309",
+    "observed": "894309",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, the PSDP parts of development expenditure on revenue account and on capital account (2 amounts) add to 894,309; the printed Total Public Sector Development Programme (ci+di) is 894,309. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total_split"
+  },
+  {
+    "check_id": "chk_56c97d103b45",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_e4f78b326303",
+      "c_f87bc6e67941"
+    ],
+    "target_cell_id": "c_25a5d5f1b3ac",
+    "target_value": null,
+    "target_source": null,
+    "expected": "504769",
+    "observed": "504769",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, the parts of development expenditure on capital account (2 amounts) add to 504,769; the printed Development expenditure on capital account is 504,769. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_capital_parts"
+  },
+  {
+    "check_id": "chk_e8842a8258ca",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_99b2e209d55e",
+      "c_25a5d5f1b3ac"
+    ],
+    "target_cell_id": "c_ef14942e14c1",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1050893",
+    "observed": "1050893",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, development expenditure on revenue account and on capital account (2 amounts) add to 1,050,893; the printed Total development expenditure is 1,050,893. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_ee865c6e8dbf",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_c4df7d9e3266",
+      "c_ef14942e14c1"
+    ],
+    "target_cell_id": "c_ae6f0d4b6443",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5081788",
+    "observed": "5081788",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, total current and total development expenditure (and any other printed item) (2 amounts) add to 5,081,788; the printed Total expenditure is 5,081,788. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_33fcbecfb3db",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_15c5641ff552",
+      "c_99b2e209d55e"
+    ],
+    "target_cell_id": "c_125003bbdfa4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4390110",
+    "observed": "4390110",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, current and development expenditure on revenue account (2 amounts) add to 4,390,110; the printed Revenue account (a+c) is 4,390,110. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_0292aa2737bd",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_f5a5bfba8b28",
+      "c_25a5d5f1b3ac"
+    ],
+    "target_cell_id": "c_cf4ed68d145e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "691678",
+    "observed": "691678",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2016-17, current and development expenditure on capital account (2 amounts) add to 691,678; the printed Capital account (b+d) is 691,678. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_05b9208fe682",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_3d7af2eb1b65",
+      "c_98d8c5e1d925",
+      "c_a5242b316ab8",
+      "c_90d50527e551",
+      "c_ef359d5ceb57",
+      "c_03ccf0bae990",
+      "c_896f280e78f2",
+      "c_4d73e8eafdb4",
+      "c_8cdc0cd62e74",
+      "c_9a52cbc30391"
+    ],
+    "target_cell_id": "c_73b67b66e53e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3843986",
+    "observed": "3843988",
+    "residual": "2",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, the ten function amounts (10 amounts) add to 3,843,988; the printed Current expenditure on revenue account is 3,843,986. They differ by 2, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_c1b3c78e3967",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_73b67b66e53e",
+      "c_e51b1e7d21d2"
+    ],
+    "target_cell_id": "c_52a3e4293cce",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4030895",
+    "observed": "4030895",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, current expenditure on revenue account and on capital account (2 amounts) add to 4,030,895; the printed Total current expenditure is 4,030,895. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_81ed793d5753",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_4914b4abd835",
+      "c_393daa6ab7a1"
+    ],
+    "target_cell_id": "c_2c86c7ce7504",
+    "target_value": null,
+    "target_source": null,
+    "expected": "546124",
+    "observed": "546124",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, the parts of development expenditure on revenue account (2 amounts) add to 546,124; the printed Development expenditure on revenue account is 546,124. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_de5ef2ec4956",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_4914b4abd835",
+      "c_c71722bd1d99"
+    ],
+    "target_cell_id": "c_b836c3333a40",
+    "target_value": null,
+    "target_source": null,
+    "expected": "894309",
+    "observed": "894309",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, the PSDP parts of development expenditure on revenue account and on capital account (2 amounts) add to 894,309; the printed Total Public Sector Development Programme (ci+di) is 894,309. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total_split"
+  },
+  {
+    "check_id": "chk_565358c25235",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_c71722bd1d99",
+      "c_d4f0b0fc1089"
+    ],
+    "target_cell_id": "c_8036ab418b8e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "504769",
+    "observed": "504769",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, the parts of development expenditure on capital account (2 amounts) add to 504,769; the printed Development expenditure on capital account is 504,769. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_capital_parts"
+  },
+  {
+    "check_id": "chk_a8905c13c920",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_2c86c7ce7504",
+      "c_8036ab418b8e"
+    ],
+    "target_cell_id": "c_fde40cc18316",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1050893",
+    "observed": "1050893",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, development expenditure on revenue account and on capital account (2 amounts) add to 1,050,893; the printed Total development expenditure is 1,050,893. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_77cf230c1df2",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_52a3e4293cce",
+      "c_fde40cc18316"
+    ],
+    "target_cell_id": "c_38a4244d1e71",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5081788",
+    "observed": "5081788",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, total current and total development expenditure (and any other printed item) (2 amounts) add to 5,081,788; the printed Total expenditure is 5,081,788. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_de46f2956f74",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_73b67b66e53e",
+      "c_2c86c7ce7504"
+    ],
+    "target_cell_id": "c_7e9ce3577fb1",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4390110",
+    "observed": "4390110",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, current and development expenditure on revenue account (2 amounts) add to 4,390,110; the printed Revenue account (a+c) is 4,390,110. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_a3c4e6eed531",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_e51b1e7d21d2",
+      "c_8036ab418b8e"
+    ],
+    "target_cell_id": "c_f1d5375531de",
+    "target_value": null,
+    "target_source": null,
+    "expected": "691678",
+    "observed": "691678",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2016-17' column of the Annual Budget Statement 2017-18, current and development expenditure on capital account (2 amounts) add to 691,678; the printed Capital account (b+d) is 691,678. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_8c1e3c0b6394",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_dccd4f01e823",
+      "c_cebb6b603180",
+      "c_0fe586176c56",
+      "c_962421850b24",
+      "c_11aa9cc85f7e",
+      "c_c7ffcebd73ff",
+      "c_8cd846123bda",
+      "c_4768fbc88303",
+      "c_da095675aa68",
+      "c_1818af87a6a0"
+    ],
+    "target_cell_id": "c_139472a1c393",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3904753",
+    "observed": "3904752",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, the ten function amounts (10 amounts) add to 3,904,752; the printed Current expenditure on revenue account is 3,904,753. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_51a3c4822350",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_139472a1c393",
+      "c_ca467857edcd"
+    ],
+    "target_cell_id": "c_8dd2f7103a9b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4049477",
+    "observed": "4049477",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, current expenditure on revenue account and on capital account (2 amounts) add to 4,049,477; the printed Total current expenditure is 4,049,477. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_cf182986315c",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_00387f9cdcd1",
+      "c_c99345e94418"
+    ],
+    "target_cell_id": "c_1315b9db5f97",
+    "target_value": null,
+    "target_source": null,
+    "expected": "378670",
+    "observed": "378670",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, the parts of development expenditure on revenue account (2 amounts) add to 378,670; the printed Development expenditure on revenue account is 378,670. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_cbdf91731486",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_00387f9cdcd1",
+      "c_5fad447cc71c"
+    ],
+    "target_cell_id": "c_7af621cd4ce3",
+    "target_value": null,
+    "target_source": null,
+    "expected": "808889",
+    "observed": "808889",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, the PSDP parts of development expenditure on revenue account and on capital account (2 amounts) add to 808,889; the printed Total Public Sector Development Programme (ci+di) is 808,889. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total_split"
+  },
+  {
+    "check_id": "chk_0ece4de66c63",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_5fad447cc71c",
+      "c_0186d7c00a08"
+    ],
+    "target_cell_id": "c_a084a5d9b36e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "557774",
+    "observed": "557774",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, the parts of development expenditure on capital account (2 amounts) add to 557,774; the printed Development expenditure on capital account is 557,774. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_capital_parts"
+  },
+  {
+    "check_id": "chk_a1f5e57bca2c",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_1315b9db5f97",
+      "c_a084a5d9b36e"
+    ],
+    "target_cell_id": "c_40c0226f5724",
+    "target_value": null,
+    "target_source": null,
+    "expected": "936443",
+    "observed": "936444",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, development expenditure on revenue account and on capital account (2 amounts) add to 936,444; the printed Total development expenditure is 936,443. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_70ce513aff49",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_8dd2f7103a9b",
+      "c_40c0226f5724"
+    ],
+    "target_cell_id": "c_a2558af9c9c0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4985920",
+    "observed": "4985920",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, total current and total development expenditure (and any other printed item) (2 amounts) add to 4,985,920; the printed Total expenditure is 4,985,920. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_e446f1ea645b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_139472a1c393",
+      "c_1315b9db5f97"
+    ],
+    "target_cell_id": "c_5e6de5d40e96",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4283422",
+    "observed": "4283423",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, current and development expenditure on revenue account (2 amounts) add to 4,283,423; the printed Revenue account (a+c) is 4,283,422. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_9f41da8767d0",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_ca467857edcd",
+      "c_a084a5d9b36e"
+    ],
+    "target_cell_id": "c_d6ce3cfea511",
+    "target_value": null,
+    "target_source": null,
+    "expected": "702498",
+    "observed": "702498",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2016-17' column of the Annual Budget Statement 2017-18, current and development expenditure on capital account (2 amounts) add to 702,498; the printed Capital account (b+d) is 702,498. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_2dd5c25a3514",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_b0fc2effab03",
+      "c_fe4336ac21ff",
+      "c_fceaf40a890c",
+      "c_102ec7f50c86",
+      "c_1c426aa1fe52",
+      "c_a388cd9a46d4",
+      "c_2e709033680e",
+      "c_e362518a1f3f",
+      "c_5edcc90f5fed",
+      "c_1714ebd647f4"
+    ],
+    "target_cell_id": "c_e3abc6e6c220",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3763709",
+    "observed": "3763710",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, the ten function amounts (10 amounts) add to 3,763,710; the printed Current expenditure on revenue account is 3,763,709. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_de2cf2dad676",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_e3abc6e6c220",
+      "c_c1202d394cf4"
+    ],
+    "target_cell_id": "c_739abf3be54f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3851755",
+    "observed": "3851755",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, current expenditure on revenue account and on capital account (2 amounts) add to 3,851,755; the printed Total current expenditure is 3,851,755. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_0432135fd6c4",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_5abb6c762c26",
+      "c_9a62a1929054"
+    ],
+    "target_cell_id": "c_db1abcf9a14e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "659354",
+    "observed": "659354",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, the parts of development expenditure on revenue account (2 amounts) add to 659,354; the printed Development expenditure on revenue account is 659,354. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_0925df733871",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_5abb6c762c26",
+      "c_9d40d88a5993"
+    ],
+    "target_cell_id": "c_aa8e5095a933",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1187870",
+    "observed": "1187870",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, the PSDP parts of development expenditure on revenue account and on capital account (2 amounts) add to 1,187,870; the printed Total Public Sector Development Programme (ci+di) is 1,187,870. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total_split"
+  },
+  {
+    "check_id": "chk_d47863132e7b",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_9d40d88a5993"
+    ],
+    "target_cell_id": "c_5a2fd09507a5",
+    "target_value": null,
+    "target_source": null,
+    "expected": "680716",
+    "observed": "680716",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, the parts of development expenditure on capital account (1 amounts) add to 680,716; the printed Development expenditure on capital account is 680,716. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_capital_parts"
+  },
+  {
+    "check_id": "chk_64f793ac5828",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_db1abcf9a14e",
+      "c_5a2fd09507a5"
+    ],
+    "target_cell_id": "c_8c7c826576a4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1340070",
+    "observed": "1340070",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, development expenditure on revenue account and on capital account (2 amounts) add to 1,340,070; the printed Total development expenditure is 1,340,070. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_dcf1ccb874c4",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_739abf3be54f",
+      "c_8c7c826576a4"
+    ],
+    "target_cell_id": "c_44c5be955902",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5191826",
+    "observed": "5191825",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, total current and total development expenditure (and any other printed item) (2 amounts) add to 5,191,825; the printed Total expenditure is 5,191,826. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_58ee3f09d731",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_e3abc6e6c220",
+      "c_db1abcf9a14e"
+    ],
+    "target_cell_id": "c_c67cae2a394f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4423063",
+    "observed": "4423063",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, current and development expenditure on revenue account (2 amounts) add to 4,423,063; the printed Revenue account (a+c) is 4,423,063. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_b5b855a3922e",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_c1202d394cf4",
+      "c_5a2fd09507a5"
+    ],
+    "target_cell_id": "c_31e7856f4e07",
+    "target_value": null,
+    "target_source": null,
+    "expected": "768762",
+    "observed": "768762",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2017-18' column of the Annual Budget Statement 2017-18, current and development expenditure on capital account (2 amounts) add to 768,762; the printed Capital account (b+d) is 768,762. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_511269fd3f6f",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_f5d2375d6297",
+      "c_aeae9f0bf55b",
+      "c_bae58153ffaf",
+      "c_5abee774fff0",
+      "c_102ed46604c7",
+      "c_5072df84678e",
+      "c_12f0afe8f0a4",
+      "c_abbe61153d6a",
+      "c_cae2dd1ddf00",
+      "c_449849df3124"
+    ],
+    "target_cell_id": "c_72ce0619bfdb",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6349311",
+    "observed": "6349312",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2020-21' column of the Annual Budget Statement 2021-22, the ten function amounts (10 amounts) add to 6,349,312; the printed Current expenditure on revenue account is 6,349,311. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_daa735277564",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_72ce0619bfdb",
+      "c_430f26b2ac87"
+    ],
+    "target_cell_id": "c_697fbfb97a43",
+    "target_value": null,
+    "target_source": null,
+    "expected": "7840375",
+    "observed": "7840376",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2020-21' column of the Annual Budget Statement 2021-22, current expenditure on revenue account and on capital account (2 amounts) add to 7,840,376; the printed Total current expenditure is 7,840,375. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_71286d0bec97",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_3f4c32072c26",
+      "c_d9a66752a2d3"
+    ],
+    "target_cell_id": "c_661ca84db997",
+    "target_value": null,
+    "target_source": null,
+    "expected": "949738",
+    "observed": "949738",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2020-21' column of the Annual Budget Statement 2021-22, development expenditure on revenue account and on capital account (2 amounts) add to 949,738; the printed Total development expenditure is 949,738. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_3db892d00745",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_697fbfb97a43",
+      "c_661ca84db997"
+    ],
+    "target_cell_id": "c_25558d9bdb8f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8790114",
+    "observed": "8790113",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2020-21' column of the Annual Budget Statement 2021-22, total current and total development expenditure (and any other printed item) (2 amounts) add to 8,790,113; the printed Total expenditure is 8,790,114. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_e03014968e8b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_72ce0619bfdb",
+      "c_3f4c32072c26"
+    ],
+    "target_cell_id": "c_3edd06095030",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6809432",
+    "observed": "6809432",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2020-21' column of the Annual Budget Statement 2021-22, current and development expenditure on revenue account (2 amounts) add to 6,809,432; the printed Revenue account (a+c) is 6,809,432. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_26108a3b0d46",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_430f26b2ac87",
+      "c_d9a66752a2d3"
+    ],
+    "target_cell_id": "c_8e3c4ad58743",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1980682",
+    "observed": "1980682",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2020-21' column of the Annual Budget Statement 2021-22, current and development expenditure on capital account (2 amounts) add to 1,980,682; the printed Capital account (b+d) is 1,980,682. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_d31da9c2849e",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_95143861f41e",
+      "c_5ec9d87f5044",
+      "c_16a0f713afaf",
+      "c_97249188fe57",
+      "c_b01d0b0c6e51",
+      "c_7ed5b9258487",
+      "c_30990f8dc02d",
+      "c_de2be2e26db1",
+      "c_7c9041a8099b",
+      "c_d585262770df"
+    ],
+    "target_cell_id": "c_3badc2e3bec1",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6561000",
+    "observed": "6561002",
+    "residual": "2",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2020-21' column of the Annual Budget Statement 2021-22, the ten function amounts (10 amounts) add to 6,561,002; the printed Current expenditure on revenue account is 6,561,000. They differ by 2, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_38d44d86e71e",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_3badc2e3bec1",
+      "c_91c1a95b4c6f"
+    ],
+    "target_cell_id": "c_70472dca9051",
+    "target_value": null,
+    "target_source": null,
+    "expected": "7625924",
+    "observed": "7625924",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2020-21' column of the Annual Budget Statement 2021-22, current expenditure on revenue account and on capital account (2 amounts) add to 7,625,924; the printed Total current expenditure is 7,625,924. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_68c1d37683c7",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_83f3ce5d7fa6",
+      "c_c44390195c12"
+    ],
+    "target_cell_id": "c_78971c8e822c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "863335",
+    "observed": "863335",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2020-21' column of the Annual Budget Statement 2021-22, development expenditure on revenue account and on capital account (2 amounts) add to 863,335; the printed Total development expenditure is 863,335. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_e54edeb35653",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_70472dca9051",
+      "c_78971c8e822c"
+    ],
+    "target_cell_id": "c_bee595e2e98d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8489259",
+    "observed": "8489259",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2020-21' column of the Annual Budget Statement 2021-22, total current and total development expenditure (and any other printed item) (2 amounts) add to 8,489,259; the printed Total expenditure is 8,489,259. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_cdb787639322",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_3badc2e3bec1",
+      "c_83f3ce5d7fa6"
+    ],
+    "target_cell_id": "c_f5bd49fdad8b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6931884",
+    "observed": "6931884",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2020-21' column of the Annual Budget Statement 2021-22, current and development expenditure on revenue account (2 amounts) add to 6,931,884; the printed Revenue account (a+c) is 6,931,884. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_c6b6dafd9d8a",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_91c1a95b4c6f",
+      "c_c44390195c12"
+    ],
+    "target_cell_id": "c_6e6b6b4be5fd",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1557375",
+    "observed": "1557375",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2020-21' column of the Annual Budget Statement 2021-22, current and development expenditure on capital account (2 amounts) add to 1,557,375; the printed Capital account (b+d) is 1,557,375. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_02f4048ef415",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_3ec801c22363",
+      "c_ceeceab71e9f",
+      "c_6103222d5e40",
+      "c_8c46ef89ef82",
+      "c_bddc0b8a8228",
+      "c_5b0bc77177d0",
+      "c_077520385f24",
+      "c_5f6a86a97a75",
+      "c_308f04cb57ba",
+      "c_33b4320558bf"
+    ],
+    "target_cell_id": "c_9a39f39993ab",
+    "target_value": null,
+    "target_source": null,
+    "expected": "7523248",
+    "observed": "7523248",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2021-22' column of the Annual Budget Statement 2021-22, the ten function amounts (10 amounts) add to 7,523,248; the printed Current expenditure on revenue account is 7,523,248. They add exactly.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_b32080ee87f5",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_9a39f39993ab",
+      "c_cdc59933de0d"
+    ],
+    "target_cell_id": "c_54612f668392",
+    "target_value": null,
+    "target_source": null,
+    "expected": "9124459",
+    "observed": "9124459",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2021-22' column of the Annual Budget Statement 2021-22, current expenditure on revenue account and on capital account (2 amounts) add to 9,124,459; the printed Total current expenditure is 9,124,459. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_eff45d73e5b4",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_339f961383d0",
+      "c_9f77055e76f0"
+    ],
+    "target_cell_id": "c_086eb7db70e0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1137850",
+    "observed": "1137850",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2021-22' column of the Annual Budget Statement 2021-22, development expenditure on revenue account and on capital account (2 amounts) add to 1,137,850; the printed Total development expenditure is 1,137,850. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_5e15d6291bb9",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_54612f668392",
+      "c_086eb7db70e0"
+    ],
+    "target_cell_id": "c_a1cb33dbe126",
+    "target_value": null,
+    "target_source": null,
+    "expected": "10262309",
+    "observed": "10262309",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2021-22' column of the Annual Budget Statement 2021-22, total current and total development expenditure (and any other printed item) (2 amounts) add to 10,262,309; the printed Total expenditure is 10,262,309. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_518afa751989",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_9a39f39993ab",
+      "c_339f961383d0"
+    ],
+    "target_cell_id": "c_eb8cbf92a292",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8122328",
+    "observed": "8122328",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2021-22' column of the Annual Budget Statement 2021-22, current and development expenditure on revenue account (2 amounts) add to 8,122,328; the printed Revenue account (a+c) is 8,122,328. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_10a35844cde1",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_cdc59933de0d",
+      "c_9f77055e76f0"
+    ],
+    "target_cell_id": "c_c549c4b4c1e4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2139981",
+    "observed": "2139981",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2021-22' column of the Annual Budget Statement 2021-22, current and development expenditure on capital account (2 amounts) add to 2,139,981; the printed Capital account (b+d) is 2,139,981. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
     "check_id": "chk_983890abc420",
     "check_type": "column_total",
     "dataset": "abs",
@@ -2291,6 +4090,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_ca6f87329ba5",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_f1d5375531de"
+    ],
+    "target_cell_id": "c_cf4ed68d145e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "691678",
+    "observed": "691678",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Expenditure on capital account (current + development), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'Capital Account (b+d)') prints 691,678; the Annual Budget Statement 2017-18 (row 'Capital Account (b+d)') prints 691,678. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_a3de763a2d8f",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2339,6 +4162,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_d6522e5594e2",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_7e9ce3577fb1"
+    ],
+    "target_cell_id": "c_125003bbdfa4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4390110",
+    "observed": "4390110",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Expenditure on revenue account (current + development), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'Revenue Account (a+c)') prints 4,390,110; the Annual Budget Statement 2017-18 (row 'Revenue Account (a+c)') prints 4,390,110. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_50ae3eca047c",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2383,6 +4230,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Current expenditure on capital account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'b. Current Exp. on Capital Account') prints 54,650; the Annual Budget Statement 2011-12 (row 'b. Current Exp. on Capital Account') prints 54,650. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_8831bff11867",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_e51b1e7d21d2"
+    ],
+    "target_cell_id": "c_f5a5bfba8b28",
+    "target_value": null,
+    "target_source": null,
+    "expected": "186909",
+    "observed": "186909",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Current expenditure on capital account, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'b. Current Exp. on Capital Account') prints 186,909; the Annual Budget Statement 2017-18 (row 'b. Current Exp. on Capital Account') prints 186,909. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -2507,6 +4378,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_b19e3f494e61",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_98d8c5e1d925"
+    ],
+    "target_cell_id": "c_4775a236f731",
+    "target_value": null,
+    "target_source": null,
+    "expected": "860169",
+    "observed": "860169",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Defence affairs and services (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '02 Defence Affairs and Services') prints 860,169; the Annual Budget Statement 2017-18 (row '02 Defence Affairs and Services') prints 860,169. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_905faef134f3",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2551,6 +4446,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Economic affairs (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '04 Economic Affairs') prints 66,897; the Annual Budget Statement 2011-12 (row '04 Economic Affairs') prints 66,897. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_ea0c55f0a2b5",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_90d50527e551"
+    ],
+    "target_cell_id": "c_892f60bd693d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "63540",
+    "observed": "63540",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Economic affairs (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '04 Economic Affairs') prints 63,540; the Annual Budget Statement 2017-18 (row '04 Economic Affairs') prints 63,540. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -2603,6 +4522,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_25cbfb2b9282",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_8cdc0cd62e74"
+    ],
+    "target_cell_id": "c_200a94babe6b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "84195",
+    "observed": "84195",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Education affairs and services (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '09 Education Affairs and Services') prints 84,195; the Annual Budget Statement 2017-18 (row '09 Education Affairs and Services') prints 84,195. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_ec1429f36581",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2647,6 +4590,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Environment protection (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '05 Environment Protection') prints 448; the Annual Budget Statement 2011-12 (row '05 Environment Protection') prints 448. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_de08f185e8a5",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_ef359d5ceb57"
+    ],
+    "target_cell_id": "c_f2b785974d6b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1068",
+    "observed": "1068",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Environment protection (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '05 Environment Protection') prints 1,068; the Annual Budget Statement 2017-18 (row '05 Environment Protection') prints 1,068. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -2699,6 +4666,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_d07d38635bc7",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_3d7af2eb1b65"
+    ],
+    "target_cell_id": "c_e45e0d962896",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2707213",
+    "observed": "2707213",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "General public services (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '01 General Public Services') prints 2,707,213; the Annual Budget Statement 2017-18 (row '01 General Public Services') prints 2,707,213. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_a81b31bfb347",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2743,6 +4734,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Health (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '07 Health') prints 7,283; the Annual Budget Statement 2011-12 (row '07 Health') prints 7,283. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_baf4f9c4eb73",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_896f280e78f2"
+    ],
+    "target_cell_id": "c_53a8adc43b93",
+    "target_value": null,
+    "target_source": null,
+    "expected": "12108",
+    "observed": "12108",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Health (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '07 Health') prints 12,108; the Annual Budget Statement 2017-18 (row '07 Health') prints 12,108. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -2795,6 +4810,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_53dbb98d6361",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_03ccf0bae990"
+    ],
+    "target_cell_id": "c_ddd3f124c3a6",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2260",
+    "observed": "2260",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Housing and community amenities (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '06 Housing and Community Amenities') prints 2,260; the Annual Budget Statement 2017-18 (row '06 Housing and Community Amenities') prints 2,260. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_10021ec7be23",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2839,6 +4878,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Public order and safety affairs (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '03 Public Order and Safety Affairs') prints 51,263; the Annual Budget Statement 2011-12 (row '03 Public Order and Safety Affairs') prints 51,263. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_f5908641aa7f",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_a5242b316ab8"
+    ],
+    "target_cell_id": "c_3fec5013f339",
+    "target_value": null,
+    "target_source": null,
+    "expected": "103459",
+    "observed": "103459",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Public order and safety affairs (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '03 Public Order and Safety Affairs') prints 103,459; the Annual Budget Statement 2017-18 (row '03 Public Order and Safety Affairs') prints 103,459. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -2891,6 +4954,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_689bcb320ee2",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_4d73e8eafdb4"
+    ],
+    "target_cell_id": "c_8dcfe246f659",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8001",
+    "observed": "8001",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Recreation, culture and religion (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '08 Recreation, Culture and Religion') prints 8,001; the Annual Budget Statement 2017-18 (row '08 Recreation, Culture and Religion') prints 8,001. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_e06caef1dd36",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -2935,6 +5022,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Social protection (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '10 Social Protection') prints 1,463; the Annual Budget Statement 2011-12 (row '10 Social Protection') prints 1,463. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_ec4554fd84d8",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_9a52cbc30391"
+    ],
+    "target_cell_id": "c_ec38b7ef5f40",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1975",
+    "observed": "1975",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Social protection (current, revenue account), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '10 Social Protection') prints 1,975; the Annual Budget Statement 2017-18 (row '10 Social Protection') prints 1,975. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -2987,6 +5098,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_90dae3a32a01",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_73b67b66e53e"
+    ],
+    "target_cell_id": "c_15c5641ff552",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3843986",
+    "observed": "3843986",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Current expenditure on revenue account, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'a. Current Exp. on Revenue Account') prints 3,843,986; the Annual Budget Statement 2017-18 (row 'a. Current Exp. on Revenue Account') prints 3,843,986. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_53dd3c08359c",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -3031,6 +5166,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Total current expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '1 Total Current Expenditure (a + b)') prints 2,052,542; the Annual Budget Statement 2011-12 (row '1 Total Current Expenditure (a + b)') prints 2,052,542. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_971443ffe1b4",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_52a3e4293cce"
+    ],
+    "target_cell_id": "c_c4df7d9e3266",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4030895",
+    "observed": "4030895",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total current expenditure, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '1 Total Current Expenditure (a + b)') prints 4,030,895; the Annual Budget Statement 2017-18 (row '1 Total Current Expenditure (a + b)') prints 4,030,895. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -3083,6 +5242,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_fbbcd134ea72",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_8036ab418b8e"
+    ],
+    "target_cell_id": "c_25a5d5f1b3ac",
+    "target_value": null,
+    "target_source": null,
+    "expected": "504769",
+    "observed": "504769",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on capital account, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'd. Dev. Exp. on Capital Account (i+ii)') prints 504,769; the Annual Budget Statement 2017-18 (row 'd. Dev. Exp. on Capital Account (i+ii)') prints 504,769. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_22c61d040336",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -3103,6 +5286,54 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Development expenditure on capital account, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'd. Dev. Exp. on Capital Account') prints 1,064,442; the Annual Budget Statement 2025-26 (row 'd. Dev. Exp. on Capital Account') prints 1,064,442. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_326bcb8bd047",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_d4f0b0fc1089"
+    ],
+    "target_cell_id": "c_f87bc6e67941",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1584",
+    "observed": "1584",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Other development expenditure on capital account, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'ii. Other Dev. Exp. on Capital Account') prints 1,584; the Annual Budget Statement 2017-18 (row 'ii. Other Dev. Exp. on Capital Account') prints 1,584. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_7368a787cf07",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_c71722bd1d99"
+    ],
+    "target_cell_id": "c_e4f78b326303",
+    "target_value": null,
+    "target_source": null,
+    "expected": "503185",
+    "observed": "503185",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on capital account (PSDP), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'i. Dev. Exp. on Capital Account (PSDP)') prints 503,185; the Annual Budget Statement 2017-18 (row 'i. Dev. Exp. on Capital Account (PSDP)') prints 503,185. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -3131,6 +5362,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_9c56401f3228",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_b836c3333a40"
+    ],
+    "target_cell_id": "c_4bd941df639f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "894309",
+    "observed": "894309",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total Public Sector Development Programme (i+d), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'Total Public Sector Dev. Program (ci+di)') prints 894,309; the Annual Budget Statement 2017-18 (row 'Total Public Sector Dev. Program (ci+di)') prints 894,309. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_cccdeb9a1051",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -3151,6 +5406,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Development expenditure on revenue account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'c. Dev. Exp. on Revenue Account (i+ii)') prints 311,885; the Annual Budget Statement 2011-12 (row 'c. Dev. Exp. on Revenue Account (i+ii)') prints 311,885. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_1a65cb7ad019",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_2c86c7ce7504"
+    ],
+    "target_cell_id": "c_99b2e209d55e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "546124",
+    "observed": "546124",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on revenue account, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'c. Dev. Exp. on Revenue Account (i+ii)') prints 546,124; the Annual Budget Statement 2017-18 (row 'c. Dev. Exp. on Revenue Account (i+ii)') prints 546,124. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -3203,6 +5482,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_a24c21695b7d",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_393daa6ab7a1"
+    ],
+    "target_cell_id": "c_e345be59903c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "155000",
+    "observed": "155000",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Other development expenditure on revenue account, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'ii. Other Dev. Exp. on Revenue Account') prints 155,000; the Annual Budget Statement 2017-18 (row 'ii. Other Dev. Exp. on Revenue Account') prints 155,000. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_ee68112caf98",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -3227,6 +5530,30 @@
     "rule_id": "abs.same_figure_in_next_edition"
   },
   {
+    "check_id": "chk_34738ad60099",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_4914b4abd835"
+    ],
+    "target_cell_id": "c_9626d702bae6",
+    "target_value": null,
+    "target_source": null,
+    "expected": "391124",
+    "observed": "391124",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on revenue account (PSDP), Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'i. Dev. Exp. on Revenue Account (PSDP)') prints 391,124; the Annual Budget Statement 2017-18 (row 'i. Dev. Exp. on Revenue Account (PSDP)') prints 391,124. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_6fce10069ee9",
     "check_type": "cross_edition",
     "dataset": "abs",
@@ -3247,6 +5574,30 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Total development expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '2 Total Development Expenditure (c + d)') prints 444,930; the Annual Budget Statement 2011-12 (row '2 Total Development Expenditure (c + d)') prints 444,930. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_3091b9b1fce9",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_fde40cc18316"
+    ],
+    "target_cell_id": "c_ef14942e14c1",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1050893",
+    "observed": "1050893",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total development expenditure, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row '2 Total Development Expenditure (c+d)') prints 1,050,893; the Annual Budget Statement 2017-18 (row '2 Total Development Expenditure (c+d)') prints 1,050,893. They are equal.",
     "official": true,
     "rule_id": "abs.same_figure_in_next_edition"
   },
@@ -3574,6 +5925,168 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Total federal expenditure, Budget Estimates 2011-12: the Annual Budget Statement 2011-12 (row 'Total - Expenditure (1+2+3)') prints 2,835,373; the Annual Budget Statement 2011-12 (row 'Total Expenditure') prints 2,835,373. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_d8e3a4861021",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_fac19ac4585d"
+    ],
+    "target_cell_id": "c_1e6396dd8b42",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4584313",
+    "observed": "4584313",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2015-16: the Annual Budget Statement 2016-17 (row 'Total - Expenditure (1+2)') prints 4,584,313; the Annual Budget Statement 2016-17 (row 'Total Expenditure:') prints 4,584,313. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_8072ca6975f1",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_6a0758d2b905"
+    ],
+    "target_cell_id": "c_ea0954bf1455",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4592594",
+    "observed": "4592594",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Revised Estimates 2015-16: the Annual Budget Statement 2016-17 (row 'Total - Expenditure (1+2)') prints 4,592,594; the Annual Budget Statement 2016-17 (row 'Total Expenditure:') prints 4,592,594. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_eaa33335ffef",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17"
+    ],
+    "member_cell_ids": [
+      "c_e98878fee6ff"
+    ],
+    "target_cell_id": "c_ae6f0d4b6443",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5081788",
+    "observed": "5081788",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'Total - Expenditure (1+2)') prints 5,081,788; the Annual Budget Statement 2016-17 (row 'Total Expenditure:') prints 5,081,788. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_a1194292a428",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2016-17",
+      "abs-fed-2017-18"
+    ],
+    "member_cell_ids": [
+      "c_38a4244d1e71"
+    ],
+    "target_cell_id": "c_ae6f0d4b6443",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5081788",
+    "observed": "5081788",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2016-17: the Annual Budget Statement 2016-17 (row 'Total - Expenditure (1+2)') prints 5,081,788; the Annual Budget Statement 2017-18 (row 'Total - Expenditure (1+2)') prints 5,081,788. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_d832f9b7725c",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_c5cbad089080"
+    ],
+    "target_cell_id": "c_25558d9bdb8f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8790114",
+    "observed": "8790114",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2020-21: the Annual Budget Statement 2021-22 (row 'Total - Expenditure (1+2)') prints 8,790,114; the Annual Budget Statement 2021-22 (row 'Total Expenditure:') prints 8,790,114. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_21947c895740",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_a27c64fc4a1d"
+    ],
+    "target_cell_id": "c_bee595e2e98d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8489259",
+    "observed": "8489259",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Revised Estimates 2020-21: the Annual Budget Statement 2021-22 (row 'Total - Expenditure (1+2)') prints 8,489,259; the Annual Budget Statement 2021-22 (row 'Total Expenditure:') prints 8,489,259. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_52029b46193b",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2021-22"
+    ],
+    "member_cell_ids": [
+      "c_39d3876fa44a"
+    ],
+    "target_cell_id": "c_a1cb33dbe126",
+    "target_value": null,
+    "target_source": null,
+    "expected": "10262309",
+    "observed": "10262309",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2021-22: the Annual Budget Statement 2021-22 (row 'Total - Expenditure (1+2)') prints 10,262,309; the Annual Budget Statement 2021-22 (row 'Total Expenditure:') prints 10,262,309. They are equal.",
     "official": true,
     "rule_id": "abs.restated_on_same_page"
   },

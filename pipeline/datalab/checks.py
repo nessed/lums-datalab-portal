@@ -153,6 +153,11 @@ def evaluate_sum_rules(cells: list[Cell], rules: list[dict[str, Any]], dataset: 
             target = by_series.get(rule["target"])
             if target is None:
                 continue
+            # Some identities exist in two printed forms; a rule can be tied to the form the edition prints.
+            if rule.get("if_present") and rule["if_present"] not in by_series:
+                continue
+            if rule.get("unless_present") and rule["unless_present"] in by_series:
+                continue
             members: list[tuple[Cell, int]] = []
             missing: list[str] = []
             if rule.get("children_of_target"):

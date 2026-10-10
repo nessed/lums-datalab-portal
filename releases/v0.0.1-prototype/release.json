@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T22:00:53+00:00",
-  "git_commit": "9676c269218ae32ceb8cdef9a64a57691eff1c4a",
+  "created_at": "2026-10-10T22:13:40+00:00",
+  "git_commit": "84ec3a09da70fa177367df102fc7b902948f5351",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -22,6 +22,7 @@
       "abs-fed-2024-25",
       "abs-fed-2025-26",
       "abs-fed-2026-27",
+      "cpi-pbs-2021-06",
       "cpi-pbs-2023-06",
       "cpi-pbs-2024-06",
       "cpi-pbs-2025-06",
@@ -48,6 +49,9 @@
         "2026-27"
       ],
       "cpi": [
+        "2020-06",
+        "2021-05",
+        "2021-06",
         "2022-06",
         "2023-05",
         "2023-06",
@@ -86,7 +90,9 @@
     "abs-fed-2025-26": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
     "abs-fed-2026-27": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
     "cpi-pbs-2016-06": "af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0",
+    "cpi-pbs-2018-06": "0b32a33cd371b61601db3a95ffdb7246835598de387e73f0bd90a0211060c555",
     "cpi-pbs-2019-06": "c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75",
+    "cpi-pbs-2021-06": "8ea0578d8df4da7b16d70cdc6d7fb46a51ba6cc8b5a59f662dc9f6003b54c6e1",
     "cpi-pbs-2023-06": "458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35",
     "cpi-pbs-2024-06": "faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022",
     "cpi-pbs-2025-06": "b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92",
@@ -98,20 +104,20 @@
     "lfs-pbs-2024-25": "79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48"
   },
   "counts": {
-    "sources": 20,
-    "cells": 4176,
-    "cells_mapped": 2124,
-    "cells_behind_published_values": 1551,
+    "sources": 22,
+    "cells": 4506,
+    "cells_mapped": 2201,
+    "cells_behind_published_values": 1628,
     "series": 286,
-    "observations": 1870,
+    "observations": 2165,
     "observations_by_dataset": {
       "abs": {
         "gap:not_in_source": 2,
         "published": 535
       },
       "cpi": {
-        "gap:not_yet_verified": 154,
-        "published": 807
+        "gap:not_yet_verified": 372,
+        "published": 884
       },
       "lfs": {
         "gap:failed_checks": 1,
@@ -125,7 +131,7 @@
       },
       "cpi": {
         "A": 117,
-        "B": 690
+        "B": 767
       },
       "lfs": {
         "A": 138,
@@ -136,7 +142,7 @@
     },
     "checks_by_result": {
       "pass": 760,
-      "pass_within_rounding": 480,
+      "pass_within_rounding": 510,
       "fail": 9
     },
     "checks_by_type": {
@@ -161,10 +167,10 @@
         "pass_within_rounding": 2
       },
       "index_aggregation": {
-        "pass_within_rounding": 36
+        "pass_within_rounding": 39
       },
       "recompute": {
-        "pass_within_rounding": 365,
+        "pass_within_rounding": 391,
         "fail": 1
       },
       "row_total": {
@@ -172,11 +178,11 @@
         "pass_within_rounding": 6
       },
       "weights_sum": {
-        "pass_within_rounding": 9,
+        "pass_within_rounding": 10,
         "pass": 27
       }
     },
-    "page_renders": 44
+    "page_renders": 47
   },
   "coverage_summary": {
     "abs": {
@@ -187,10 +193,10 @@
       "tables_below_per_table_minimum": []
     },
     "cpi": {
-      "printed_numeric_tokens": 1695,
-      "matched": 1695,
+      "printed_numeric_tokens": 2121,
+      "matched": 2121,
       "coverage": 1.0,
-      "tables": 12,
+      "tables": 15,
       "tables_below_per_table_minimum": []
     },
     "lfs": {
@@ -223,10 +229,10 @@
     "cpi": {
       "all": {
         "pass": 121,
-        "pass_within_rounding": 356,
+        "pass_within_rounding": 386,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 477,
+        "evaluable": 507,
         "pass_rate": 1.0
       },
       "cross_edition": {
@@ -295,18 +301,18 @@
       "state": "published",
       "reasons": [],
       "coverage": {
-        "printed_numeric_tokens": 1695,
-        "matched": 1695,
+        "printed_numeric_tokens": 2121,
+        "matched": 2121,
         "coverage": 1.0,
-        "tables": 12,
+        "tables": 15,
         "tables_below_per_table_minimum": []
       },
       "check_pass_rate": {
         "pass": 121,
-        "pass_within_rounding": 356,
+        "pass_within_rounding": 386,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 477,
+        "evaluable": 507,
         "pass_rate": 1.0
       },
       "cross_edition_agreement": {

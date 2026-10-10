@@ -40,7 +40,9 @@ gets a new run id (runs are never overwritten), so `cells.json` differs only in 
 | abs-fed-2025-26 | 54 | 2645541 | `7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01` | https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf |
 | abs-fed-2026-27 | 57 | 2380926 | `4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0` | https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf |
 | cpi-pbs-2016-06 | 12 | 575248 | `af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0` | http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf |
+| cpi-pbs-2018-06 | 12 | 1217333 | `0b32a33cd371b61601db3a95ffdb7246835598de387e73f0bd90a0211060c555` | http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf |
 | cpi-pbs-2019-06 | 13 | 1270182 | `c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75` | http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf |
+| cpi-pbs-2021-06 | 18 | 741266 | `8ea0578d8df4da7b16d70cdc6d7fb46a51ba6cc8b5a59f662dc9f6003b54c6e1` | http://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_june_2021.pdf |
 | cpi-pbs-2023-06 | 18 | 1342112 | `458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf |
 | cpi-pbs-2024-06 | 18 | 1014978 | `faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf |
 | cpi-pbs-2025-06 | 18 | 954049 | `b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92` | https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf |

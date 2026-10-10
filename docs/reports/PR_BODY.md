@@ -15,17 +15,17 @@ This PR started life as "Add overnight prototype plan and autonomous-mode rules"
 | Area | State |
 |---|---|
 | Federal Annual Budget Statement (9 editions: 2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27) | **Published**: 535 checked values, 2 labelled gaps |
-| CPI (PBS Monthly Review, June 2023, 2024, 2025, 2026; base 2015-16; national, urban, rural) | **Published**: 807 checked values; 154 labelled gaps for the pre-2019 base |
+| CPI (PBS Monthly Review, June 2021, 2023, 2024, 2025, 2026; base 2015-16; national, urban, rural) | **Published**: 884 checked values; 372 labelled gaps (the 2007-08 base, and two 2021 tables that Docling read badly and the detectors withheld) |
 | Labour Force Survey (4 PBS annual reports) | Processed and checked, **not published**: cross-edition agreement 96.97% is under the frozen 98% threshold. Shown as "coming" |
-| Site (`site/`) | builds statically from the release (1,735 pages): receipts, series, sources, methods, releases, demo |
-| Gold set | kit only (399-cell blind sample, labelling page, scorer); **unlabelled, so no error rate is claimed** |
+| Site (`site/`) | builds statically from the release (2,032 pages): receipts, series, sources, methods, releases, demo |
+| Gold set | kit only (398-cell blind sample, labelling page, scorer); **unlabelled, so no error rate is claimed** |
 
 Kept separate on purpose:
 
 | | Coverage (how much of each printed table was captured) | Checks passed (evaluable) | Cross-edition agreement |
 |---|---|---|---|
 | ABS | 773 of 781 printed numbers, 98.98% | 338 of 340 | 112 of 114 |
-| CPI | 1,695 of 1,695, 100% | 477 of 477 | 117 of 117 |
+| CPI | 2,121 of 2,121, 100% | 507 of 507 | 117 of 117 |
 | LFS | 2,108 of 2,108, 100% | 425 of 432 | 192 of 198 |
 
 **Measured error rate:** pending human gold-set labelling.
@@ -65,6 +65,7 @@ Good places to start reading: `pipeline/datalab/status.py` (how a value earns "c
 - **Sources (02:10)** 6 CPI June issues and 5 LFS reports registered and content-inspected. June 2018 and June 2021 CPI could not be downloaded. The file PBS serves as "LFS 2014-15" turned out to be the Azad Jammu and Kashmir edition and now fails verification.
 - **M7 CPI (02:57)** merged from `proto/v0-cpi`: 4 issues, 12 tables, 477 checks, 807 published values. The two pre-2019 issues are refused by the scanned-track rule (chart pages) and left as gaps.
 - **M8 LFS (02:50)** merged from `proto/v0-lfs`: 4 reports (3 as page-range runs), 25 tables, 432 checks. Below the cross-edition threshold, so unpublished.
+- **Addendum (03:45)** June 2021 CPI issue obtained from the Wayback Machine and added (77 more values; its urban and rural tables were flagged for merged rows and a lost column and are withheld). The scanned-page measure now leaves out blank pages; this was changed after seeing its effect and is listed for confirmation.
 - **M9-M10 (03:10)** demo page with health, share of total and CPI; gold sample across all data types; spot-check sheet; final report with the morning checklist.
 
 ## What is provisional
@@ -75,7 +76,7 @@ Every decision dated 2026-10-11 in `DECISIONS.md`. The ones most worth a human l
 2. ABS 2017-18 is used under a recorded deviation from the 95% text-layer inspection level (its covers are images).
 3. A figure restated in a later edition is published from the first edition, with the disagreement stated.
 4. The ABS function lines are current expenditure on revenue account only, and are labelled that way.
-5. CPI issues before 2019 are blocked because chart pages count as scanned; nothing on the 2007-08 base is published.
+5. The scanned-page fraction is measured over printed pages (blank pages left out); changed after it had refused the June 2021 CPI issue. CPI on the 2007-08 base is verified but not processed.
 6. LFS is withheld by the cross-edition threshold; whether a restatement by the publisher should count against it is a human call.
 7. The release is a prototype: no DOI, draft series definitions, PDFs not hosted by us.
 

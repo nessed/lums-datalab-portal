@@ -112,7 +112,8 @@ Spreadsheets and API data skip profile/extract/structure/second-reader but go th
 - **ABS covers:** 2010-11 has no cover page in the file and 2017-18's cover is an image, so the title cannot be read from the text layer. Pages 2, 4, 6 of newer editions are blank. See the verification records.
 - **Wayback:** the availability API (`archive.org/wayback/available`) returns nothing for most of these PDFs; the CDX index (`web.archive.org/cdx/search/cdx`) works and carries a SHA-1 digest that can be compared with the local file.
 - **Git Bash heredocs** choke on some multi-byte characters; write long text files with a file tool or Python, not `cat <<EOF`.
-- **"No text layer" is not "scanned".** PBS monthly reviews carry three chart-image pages; in a 12-page issue that is 25% and trips the 20% scanned-track rule, so the June 2016 and June 2019 CPI issues were refused although their tables are born-digital. Left for a human decision; don't bend the rule.
+- **"No text layer" is not "scanned", and a blank page is neither.** PBS monthly reviews carry chart pages that are images and a blank page. The scanned fraction is measured over printed pages and counts image pages only (`extract.profile_pdf`, same definition as `sources.inspect_pdf`). Counting the blank page had refused the June 2021 CPI issue.
+- **Docling merged rows and lost a column in the June 2021 CPI urban and rural tables** (7 value columns instead of 8). The detectors flagged both and everything from them is withheld. This is the failure mode at the top of this section, seen for real.
 - **Docling marks a first data row as a header row** (CPI Rural "General" row; LFS full-width block heading "Pakistan"). Never let row meaning depend on the header flag alone; `datasets/cpi.py` accepts such a row only when every value column holds exactly one number, and the checks then validate it.
 - **Header cells span down into data rows** (CPI "No"/"Group"); build a row label only from cells that start in that row.
 - **CPI column headers:** the month is printed three ways ("June 25", "Jun 23", "June" above "2016"), and a % change column's header month is the comparison month, not the observation month.
@@ -185,7 +186,7 @@ The previous RAs' work and the source corpus live in the `ra-ship` archive (`RA_
 **First prototype (built 2026-10-11, branch `proto/v0`, release `v0.0.1-prototype`).** Read `STATUS.md` for the exact state.
 
 - **ABS:** 9 editions (2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27), the Summary of Expenditure table, published. The function lines are current expenditure on revenue account.
-- **CPI:** June issues 2023 to 2026 (base 2015-16), national, urban and rural group tables, published. The two pre-2019 issues are blocked by the scanned-track rule; June 2018 and 2021 were not obtained.
+- **CPI:** June issues 2021 and 2023 to 2026 (base 2015-16), national, urban and rural group tables, published (two 2021 tables flagged and withheld). June 2016, 2018 and 2019 (base 2007-08) are verified but not processed.
 - **LFS:** 4 reports processed (2017-18, 2018-19, 2020-21, 2024-25, the long ones as page-range runs), **not published**: cross-edition agreement is below the frozen threshold. The site shows it as "coming".
 - A new data type is a spec (`specs/<type>.yaml`, `specs/<type>_labels.yaml`) plus a builder in `pipeline/datalab/datasets/` that ends in `common.save_dataset`; `datasets/abs.py` is the model. Status, release and the site need no change.
 - Next: human review of the provisional decisions, gold-set labelling, then the decisions listed under "Open questions" in `STATUS.md`.

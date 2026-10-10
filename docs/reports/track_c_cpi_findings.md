@@ -1,5 +1,7 @@
 # Track C: CPI pipeline findings (2026-10-11, unattended)
 
+> Snapshot written by the CPI track at 02:55. Later the same night the June 2021 issue was added and the scanned-page measure was aligned; see the addendum in `2026-10-11-overnight-report.md` for current totals.
+
 Branch `proto/v0-cpi`. Every number below was produced by `python -m datalab build --dataset cpi`
 and read from `work/datasets/cpi/{info,coverage,checks,observations}.json`. No value was written,
 corrected or judged by an LLM. Coverage and accuracy are reported separately.

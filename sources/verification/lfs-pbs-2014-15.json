@@ -1,6 +1,6 @@
 {
   "source_id": "lfs-pbs-2014-15",
-  "registered_at": "2026-10-10T21:52:28+00:00",
+  "registered_at": "2026-10-10T22:04:19+00:00",
   "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf",
   "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
   "retrieved_at": "2026-10-10T20:17:10Z",
@@ -22,14 +22,14 @@
     },
     {
       "url": "https://www.pbs.gov.pk/content/labour-force-statistics",
-      "time": "2026-10-10T21:52:29+00:00",
+      "time": "2026-10-10T22:04:20+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
       "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf",
-      "time": "2026-10-10T21:52:31+00:00",
+      "time": "2026-10-10T22:04:23+00:00",
       "purpose": "wayback_cdx_lookup",
       "outcome": "snapshot_found"
     }

@@ -388,3 +388,22 @@ sources:
     - june,2016
     - june2016
     - june-2016
+
+  # Added 03:20: the two planned June issues that the Wayback Machine refused earlier in the night.
+  # The old PBS addresses are dead; `register` falls back to the Wayback snapshot and records it.
+  - source_id: cpi-pbs-2021-06
+    family: cpi
+    period: 2021-06
+    role: core
+    title: Monthly Review of Price Indices, June 2021
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_june_2021.pdf
+    markers_period: [june 2021, 'june, 2021', 'june,2021', june2021, june-2021]
+  - source_id: cpi-pbs-2018-06
+    family: cpi
+    period: 2018-06
+    role: core
+    title: Monthly Review of Price Indices, June 2018
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf
+    markers_period: [june 2018, 'june, 2018', 'june,2018', june2018, june-2018]

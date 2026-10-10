@@ -8370,6 +8370,802 @@
     "rule_id": "abs.restated_on_same_page"
   },
   {
+    "check_id": "chk_a9970f691a29",
+    "check_type": "weights_sum",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_8e7b79dcceb6",
+      "c_0c05ae6e7296",
+      "c_abd777985508",
+      "c_d945c4cd10c4",
+      "c_b56fdd496688",
+      "c_b583942de428",
+      "c_c4cf3a51ebce",
+      "c_353f258cfb3a",
+      "c_3a09490f22fc",
+      "c_70d382c4b685",
+      "c_e8567d216f4f",
+      "c_44b23df01d92"
+    ],
+    "target_cell_id": "c_a090c9d79fa3",
+    "target_value": null,
+    "target_source": null,
+    "expected": "100.00",
+    "observed": "100.01",
+    "residual": "0.01",
+    "tolerance_rule": "Absolute tolerance 0.05.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the weight column of the national CPI table of the Monthly Review of Price Indices, June 2021, the group weights (12 amounts) add to 100.01; the printed general weight is 100.00. They differ by 0.01, which is within rounding for 12 printed amounts.",
+    "official": true,
+    "rule_id": "cpi.weights_add_to_100"
+  },
+  {
+    "check_id": "chk_67aa2e262d8f",
+    "check_type": "index_aggregation",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_36e339fdf562",
+      "c_d80dcccc33c0",
+      "c_eedc29318674",
+      "c_b1f42c511f83",
+      "c_8a91de690378",
+      "c_eb4e63fed655",
+      "c_38f21f6cafaa",
+      "c_4822cb346836",
+      "c_9613af639710",
+      "c_66ee09d8e210",
+      "c_9e21dfe0f46e",
+      "c_d45b6bc2f81f",
+      "c_8e7b79dcceb6",
+      "c_0c05ae6e7296",
+      "c_abd777985508",
+      "c_d945c4cd10c4",
+      "c_b56fdd496688",
+      "c_b583942de428",
+      "c_c4cf3a51ebce",
+      "c_353f258cfb3a",
+      "c_3a09490f22fc",
+      "c_70d382c4b685",
+      "c_e8567d216f4f",
+      "c_44b23df01d92"
+    ],
+    "target_cell_id": "c_eb8675f1ec30",
+    "target_value": null,
+    "target_source": null,
+    "expected": "132.08",
+    "observed": "132.086219",
+    "residual": "0.006219",
+    "tolerance_rule": "Recomputed value must be within 0.088463 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, the 12 group indices for June 2020 weighted by the printed group weights should give the printed general index. Recomputed: 132.086219; printed: 132.08. They differ by 0.006219, within rounding.",
+    "official": true,
+    "rule_id": "cpi.general_is_weighted_mean_of_groups"
+  },
+  {
+    "check_id": "chk_82aa51d15691",
+    "check_type": "index_aggregation",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_a20a3134127b",
+      "c_6696e3ca1de3",
+      "c_3a4d4407e73c",
+      "c_44f50565e3ff",
+      "c_e6014419530b",
+      "c_955d1d8613bd",
+      "c_fc935eb93bf8",
+      "c_00cf8c467170",
+      "c_7badc3cce32e",
+      "c_92623adb9470",
+      "c_c2a1857343f0",
+      "c_cb52fb534619",
+      "c_8e7b79dcceb6",
+      "c_0c05ae6e7296",
+      "c_abd777985508",
+      "c_d945c4cd10c4",
+      "c_b56fdd496688",
+      "c_b583942de428",
+      "c_c4cf3a51ebce",
+      "c_353f258cfb3a",
+      "c_3a09490f22fc",
+      "c_70d382c4b685",
+      "c_e8567d216f4f",
+      "c_44b23df01d92"
+    ],
+    "target_cell_id": "c_cf2f9448b5a2",
+    "target_value": null,
+    "target_source": null,
+    "expected": "145.24",
+    "observed": "145.258284",
+    "residual": "0.018284",
+    "tolerance_rule": "Recomputed value must be within 0.094676 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, the 12 group indices for May 2021 weighted by the printed group weights should give the printed general index. Recomputed: 145.258284; printed: 145.24. They differ by 0.018284, within rounding.",
+    "official": true,
+    "rule_id": "cpi.general_is_weighted_mean_of_groups"
+  },
+  {
+    "check_id": "chk_ce74781c2912",
+    "check_type": "index_aggregation",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_557942b9846c",
+      "c_1374ef4dd21b",
+      "c_5b39d83bebb4",
+      "c_fbb0092dc5ce",
+      "c_dff8897546bc",
+      "c_90737dee5249",
+      "c_08157f25e0a5",
+      "c_b83c6b7dcbef",
+      "c_14cac86ee959",
+      "c_ca872d400e3e",
+      "c_5d14ba2e7e28",
+      "c_627f890b813a",
+      "c_8e7b79dcceb6",
+      "c_0c05ae6e7296",
+      "c_abd777985508",
+      "c_d945c4cd10c4",
+      "c_b56fdd496688",
+      "c_b583942de428",
+      "c_c4cf3a51ebce",
+      "c_353f258cfb3a",
+      "c_3a09490f22fc",
+      "c_70d382c4b685",
+      "c_e8567d216f4f",
+      "c_44b23df01d92"
+    ],
+    "target_cell_id": "c_1a3e560cc44c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "144.82",
+    "observed": "144.838920",
+    "residual": "0.018920",
+    "tolerance_rule": "Recomputed value must be within 0.094997 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, the 12 group indices for June 2021 weighted by the printed group weights should give the printed general index. Recomputed: 144.838920; printed: 144.82. They differ by 0.018920, within rounding.",
+    "official": true,
+    "rule_id": "cpi.general_is_weighted_mean_of_groups"
+  },
+  {
+    "check_id": "chk_20218303d162",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_1374ef4dd21b",
+      "c_d80dcccc33c0"
+    ],
+    "target_cell_id": "c_933f3f1d7384",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4.99",
+    "observed": "4.996374",
+    "residual": "0.006374",
+    "tolerance_rule": "Recomputed value must be within 0.012433 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '2. Alcoholic Bev. & Tobacco': the index for June 2021 (144.79) against June 2020 (137.90) should give the printed % change over the same month last year. Recomputed: 4.996374; printed: 4.99. They differ by 0.006374, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_00a7adbc6b9f",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_1374ef4dd21b",
+      "c_6696e3ca1de3"
+    ],
+    "target_cell_id": "c_6ad24311d59a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.20",
+    "observed": "0.200692",
+    "residual": "0.000692",
+    "tolerance_rule": "Recomputed value must be within 0.011928 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '2. Alcoholic Bev. & Tobacco': the index for June 2021 (144.79) against May 2021 (144.50) should give the printed % change over the previous month. Recomputed: 0.200692; printed: 0.20. They differ by 0.000692, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_3a2a32e76bb1",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_5b39d83bebb4",
+      "c_eedc29318674"
+    ],
+    "target_cell_id": "c_4b8a4d5d3f5d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "9.96",
+    "observed": "9.952816",
+    "residual": "-0.007184",
+    "tolerance_rule": "Recomputed value must be within 0.012740 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '3. Clothing & Footwear': the index for June 2021 (149.14) against June 2020 (135.64) should give the printed % change over the same month last year. Recomputed: 9.952816; printed: 9.96. They differ by 0.007184, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_99a46349aea0",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_5b39d83bebb4",
+      "c_3a4d4407e73c"
+    ],
+    "target_cell_id": "c_d80e6110d642",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.16",
+    "observed": "0.154456",
+    "residual": "-0.005544",
+    "tolerance_rule": "Recomputed value must be within 0.011721 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '3. Clothing & Footwear': the index for June 2021 (149.14) against May 2021 (148.91) should give the printed % change over the previous month. Recomputed: 0.154456; printed: 0.16. They differ by 0.005544, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_1411ef6954af",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_b83c6b7dcbef",
+      "c_4822cb346836"
+    ],
+    "target_cell_id": "c_37da9a58e222",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1.58",
+    "observed": "1.580030",
+    "residual": "0.000030",
+    "tolerance_rule": "Recomputed value must be within 0.014424 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '8. Communication': the index for June 2021 (108.65) against June 2020 (106.96) should give the printed % change over the same month last year. Recomputed: 1.580030; printed: 1.58. They differ by 0.000030, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_b6fa4eb65e3c",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_b83c6b7dcbef",
+      "c_00cf8c467170"
+    ],
+    "target_cell_id": "c_c734b869fc55",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.03",
+    "observed": "0.036829",
+    "residual": "0.006829",
+    "tolerance_rule": "Recomputed value must be within 0.014209 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '8. Communication': the index for June 2021 (108.65) against May 2021 (108.61) should give the printed % change over the previous month. Recomputed: 0.036829; printed: 0.03. They differ by 0.006829, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_f7f753da05c2",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_ca872d400e3e",
+      "c_66ee09d8e210"
+    ],
+    "target_cell_id": "c_4832426a1800",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1.80",
+    "observed": "1.790730",
+    "residual": "-0.009270",
+    "tolerance_rule": "Recomputed value must be within 0.012086 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '10. Education': the index for June 2021 (144.95) against June 2020 (142.40) should give the printed % change over the same month last year. Recomputed: 1.790730; printed: 1.80. They differ by 0.009270, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_a63970b84e07",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_ca872d400e3e",
+      "c_92623adb9470"
+    ],
+    "target_cell_id": "c_39c4563a4c61",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.24",
+    "observed": "0.235115",
+    "residual": "-0.004885",
+    "tolerance_rule": "Recomputed value must be within 0.011924 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '10. Education': the index for June 2021 (144.95) against May 2021 (144.61) should give the printed % change over the previous month. Recomputed: 0.235115; printed: 0.24. They differ by 0.004885, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_ea516fe3e115",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_557942b9846c",
+      "c_36e339fdf562"
+    ],
+    "target_cell_id": "c_d1155e2d9332",
+    "target_value": null,
+    "target_source": null,
+    "expected": "10.48",
+    "observed": "10.481838",
+    "residual": "0.001838",
+    "tolerance_rule": "Recomputed value must be within 0.012802 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '1. Food & Non-alcoholic Bev.': the index for June 2021 (149.04) against June 2020 (134.90) should give the printed % change over the same month last year. Recomputed: 10.481838; printed: 10.48. They differ by 0.001838, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_bbf64321bf21",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_557942b9846c",
+      "c_a20a3134127b"
+    ],
+    "target_cell_id": "c_a08ca4e85541",
+    "target_value": null,
+    "target_source": null,
+    "expected": "-1.77",
+    "observed": "-1.766412",
+    "residual": "0.003588",
+    "tolerance_rule": "Recomputed value must be within 0.011533 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '1. Food & Non-alcoholic Bev.': the index for June 2021 (149.04) against May 2021 (151.72) should give the printed % change over the previous month. Recomputed: -1.766412; printed: -1.77. They differ by 0.003588, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_093bedce5625",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_dff8897546bc",
+      "c_8a91de690378"
+    ],
+    "target_cell_id": "c_6fc80aeeb380",
+    "target_value": null,
+    "target_source": null,
+    "expected": "9.77",
+    "observed": "9.773448",
+    "residual": "0.003448",
+    "tolerance_rule": "Recomputed value must be within 0.013111 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '5. Furnishing & Household Equipment Maintenance': the index for June 2021 (141.97) against June 2020 (129.33) should give the printed % change over the same month last year. Recomputed: 9.773448; printed: 9.77. They differ by 0.003448, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_72117c599cb0",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_dff8897546bc",
+      "c_e6014419530b"
+    ],
+    "target_cell_id": "c_f9e4da33e768",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.59",
+    "observed": "0.595196",
+    "residual": "0.005196",
+    "tolerance_rule": "Recomputed value must be within 0.012107 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '5. Furnishing & Household Equipment Maintenance': the index for June 2021 (141.97) against May 2021 (141.13) should give the printed % change over the previous month. Recomputed: 0.595196; printed: 0.59. They differ by 0.005196, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_99adc7a76665",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_1a3e560cc44c",
+      "c_eb8675f1ec30"
+    ],
+    "target_cell_id": "c_8e177f50ed43",
+    "target_value": null,
+    "target_source": null,
+    "expected": "9.65",
+    "observed": "9.645669",
+    "residual": "-0.004331",
+    "tolerance_rule": "Recomputed value must be within 0.012937 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row 'General': the index for June 2021 (144.82) against June 2020 (132.08) should give the printed % change over the same month last year. Recomputed: 9.645669; printed: 9.65. They differ by 0.004331, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_9d09d7b98f70",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_1a3e560cc44c",
+      "c_cf2f9448b5a2"
+    ],
+    "target_cell_id": "c_731131f3e16a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "-0.29",
+    "observed": "-0.289177",
+    "residual": "0.000823",
+    "tolerance_rule": "Recomputed value must be within 0.011876 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row 'General': the index for June 2021 (144.82) against May 2021 (145.24) should give the printed % change over the previous month. Recomputed: -0.289177; printed: -0.29. They differ by 0.000823, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_ce612113c9df",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_90737dee5249",
+      "c_eb4e63fed655"
+    ],
+    "target_cell_id": "c_3a26cc854fd8",
+    "target_value": null,
+    "target_source": null,
+    "expected": "9.42",
+    "observed": "9.426317",
+    "residual": "0.006317",
+    "tolerance_rule": "Recomputed value must be within 0.012444 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '6. Health': the index for June 2021 (153.93) against June 2020 (140.67) should give the printed % change over the same month last year. Recomputed: 9.426317; printed: 9.42. They differ by 0.006317, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_c46491e49c41",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_90737dee5249",
+      "c_955d1d8613bd"
+    ],
+    "target_cell_id": "c_b9d57a416e33",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.58",
+    "observed": "0.588120",
+    "residual": "0.008120",
+    "tolerance_rule": "Recomputed value must be within 0.011554 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '6. Health': the index for June 2021 (153.93) against May 2021 (153.03) should give the printed % change over the previous month. Recomputed: 0.588120; printed: 0.58. They differ by 0.008120, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_2f94f8a2c06e",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_fbb0092dc5ce",
+      "c_b1f42c511f83"
+    ],
+    "target_cell_id": "c_f5ea2fde4cbc",
+    "target_value": null,
+    "target_source": null,
+    "expected": "9.10",
+    "observed": "9.094448",
+    "residual": "-0.005552",
+    "tolerance_rule": "Recomputed value must be within 0.013141 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '4. Housing, Water, Electricity, Gas & Fuels': the index for June 2021 (140.11) against June 2020 (128.43) should give the printed % change over the same month last year. Recomputed: 9.094448; printed: 9.10. They differ by 0.005552, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_d19440a0e0e9",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_fbb0092dc5ce",
+      "c_44f50565e3ff"
+    ],
+    "target_cell_id": "c_676b945cc61a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.45",
+    "observed": "0.444476",
+    "residual": "-0.005524",
+    "tolerance_rule": "Recomputed value must be within 0.012185 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '4. Housing, Water, Electricity, Gas & Fuels': the index for June 2021 (140.11) against May 2021 (139.49) should give the printed % change over the previous month. Recomputed: 0.444476; printed: 0.45. They differ by 0.005524, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_743547e2c9ad",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_627f890b813a",
+      "c_d45b6bc2f81f"
+    ],
+    "target_cell_id": "c_bc00f81088a8",
+    "target_value": null,
+    "target_source": null,
+    "expected": "10.99",
+    "observed": "10.990600",
+    "residual": "0.000600",
+    "tolerance_rule": "Recomputed value must be within 0.012629 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '12. Miscellaneous': the index for June 2021 (153.50) against June 2020 (138.30) should give the printed % change over the same month last year. Recomputed: 10.990600; printed: 10.99. They differ by 0.000600, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_38d9be1955f3",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_627f890b813a",
+      "c_cb52fb534619"
+    ],
+    "target_cell_id": "c_9508676d3329",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1.09",
+    "observed": "1.086599",
+    "residual": "-0.003401",
+    "tolerance_rule": "Recomputed value must be within 0.011622 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '12. Miscellaneous': the index for June 2021 (153.50) against May 2021 (151.85) should give the printed % change over the previous month. Recomputed: 1.086599; printed: 1.09. They differ by 0.003401, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_9f34f0671a22",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_14cac86ee959",
+      "c_9613af639710"
+    ],
+    "target_cell_id": "c_43f2a01bc43d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6.15",
+    "observed": "6.160387",
+    "residual": "0.010387",
+    "tolerance_rule": "Recomputed value must be within 0.013593 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '9. Recreation & Culture': the index for June 2021 (127.35) against June 2020 (119.96) should give the printed % change over the same month last year. Recomputed: 6.160387; printed: 6.15. They differ by 0.010387, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_b3e0dc38fe39",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_14cac86ee959",
+      "c_7badc3cce32e"
+    ],
+    "target_cell_id": "c_cda026b75d3d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1.34",
+    "observed": "1.336835",
+    "residual": "-0.003165",
+    "tolerance_rule": "Recomputed value must be within 0.013011 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '9. Recreation & Culture': the index for June 2021 (127.35) against May 2021 (125.67) should give the printed % change over the previous month. Recomputed: 1.336835; printed: 1.34. They differ by 0.003165, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_33690eb1036f",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_5d14ba2e7e28",
+      "c_9e21dfe0f46e"
+    ],
+    "target_cell_id": "c_e32733715708",
+    "target_value": null,
+    "target_source": null,
+    "expected": "8.76",
+    "observed": "8.762613",
+    "residual": "0.002613",
+    "tolerance_rule": "Recomputed value must be within 0.012920 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '11. Restaurants & Hotels': the index for June 2021 (143.36) against June 2020 (131.81) should give the printed % change over the same month last year. Recomputed: 8.762613; printed: 8.76. They differ by 0.002613, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_b70ec7b58892",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_5d14ba2e7e28",
+      "c_c2a1857343f0"
+    ],
+    "target_cell_id": "c_71eeb03bfc2d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "0.69",
+    "observed": "0.695371",
+    "residual": "0.005371",
+    "tolerance_rule": "Recomputed value must be within 0.012049 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '11. Restaurants & Hotels': the index for June 2021 (143.36) against May 2021 (142.37) should give the printed % change over the previous month. Recomputed: 0.695371; printed: 0.69. They differ by 0.005371, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_503344efd162",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_08157f25e0a5",
+      "c_38f21f6cafaa"
+    ],
+    "target_cell_id": "c_f0a775d128f0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "16.42",
+    "observed": "16.413176",
+    "residual": "-0.006824",
+    "tolerance_rule": "Recomputed value must be within 0.013801 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '7. Transport': the index for June 2021 (143.13) against June 2020 (122.95) should give the printed % change over the same month last year. Recomputed: 16.413176; printed: 16.42. They differ by 0.006824, within rounding.",
+    "official": true,
+    "rule_id": "cpi.yoy_recomputes_from_indices"
+  },
+  {
+    "check_id": "chk_8b4f25679400",
+    "check_type": "recompute",
+    "dataset": "cpi",
+    "source_ids": [
+      "cpi-pbs-2021-06"
+    ],
+    "member_cell_ids": [
+      "c_08157f25e0a5",
+      "c_fc935eb93bf8"
+    ],
+    "target_cell_id": "c_548fda01fdbd",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1.07",
+    "observed": "1.066234",
+    "residual": "-0.003766",
+    "tolerance_rule": "Recomputed value must be within 0.012099 of the printed value.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the national CPI table of the Monthly Review of Price Indices, June 2021, row '7. Transport': the index for June 2021 (143.13) against May 2021 (141.62) should give the printed % change over the previous month. Recomputed: 1.066234; printed: 1.07. They differ by 0.003766, within rounding.",
+    "official": true,
+    "rule_id": "cpi.mom_recomputes_from_indices"
+  },
+  {
     "check_id": "chk_0dd6ba180f79",
     "check_type": "weights_sum",
     "dataset": "cpi",
@@ -17941,7 +18737,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: General (all groups), index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 227.37; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 227.37. They are equal.",
+    "description": "CPI National: General (all groups), index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 227.37; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 227.37. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -17965,7 +18761,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: General (all groups), index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 255.94; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 255.94. They are equal.",
+    "description": "CPI National: General (all groups), index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 255.94; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 255.94. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -17989,7 +18785,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: General (all groups), index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 264.22; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 264.22. They are equal.",
+    "description": "CPI National: General (all groups), index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 264.22; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 264.22. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18013,7 +18809,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Alcoholic beverages and tobacco, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 356.77; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 356.77. They are equal.",
+    "description": "CPI National: Alcoholic beverages and tobacco, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 356.77; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 356.77. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18037,7 +18833,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Alcoholic beverages and tobacco, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 377.47; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 377.47. They are equal.",
+    "description": "CPI National: Alcoholic beverages and tobacco, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 377.47; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 377.47. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18061,7 +18857,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Alcoholic beverages and tobacco, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 396.72; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 396.72. They are equal.",
+    "description": "CPI National: Alcoholic beverages and tobacco, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 396.72; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 396.72. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18085,7 +18881,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Clothing and footwear, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 205.16; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 205.16. They are equal.",
+    "description": "CPI National: Clothing and footwear, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 205.16; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 205.16. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18109,7 +18905,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Clothing and footwear, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 241.68; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 241.68. They are equal.",
+    "description": "CPI National: Clothing and footwear, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 241.68; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 241.68. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18133,7 +18929,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Clothing and footwear, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 263.31; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 263.31. They are equal.",
+    "description": "CPI National: Clothing and footwear, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 263.31; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 263.31. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18157,7 +18953,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Communication, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 118.33; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 118.33. They are equal.",
+    "description": "CPI National: Communication, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 118.33; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 118.33. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18181,7 +18977,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Communication, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 134.52; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 134.52. They are equal.",
+    "description": "CPI National: Communication, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 134.52; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 134.52. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18205,7 +19001,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Communication, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 135.17; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 135.17. They are equal.",
+    "description": "CPI National: Communication, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 135.17; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 135.17. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18229,7 +19025,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Education, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 172.26; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 172.26. They are equal.",
+    "description": "CPI National: Education, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 172.26; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 172.26. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18253,7 +19049,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Education, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 199.58; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 199.58. They are equal.",
+    "description": "CPI National: Education, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 199.58; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 199.58. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18277,7 +19073,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Education, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 219.68; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 219.68. They are equal.",
+    "description": "CPI National: Education, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 219.68; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 219.68. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18301,7 +19097,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Food and non-alcoholic beverages, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 261.78; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 261.78. They are equal.",
+    "description": "CPI National: Food and non-alcoholic beverages, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 261.78; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 261.78. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18325,7 +19121,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Food and non-alcoholic beverages, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 264.33; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 264.33. They are equal.",
+    "description": "CPI National: Food and non-alcoholic beverages, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 264.33; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 264.33. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18349,7 +19145,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Food and non-alcoholic beverages, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 271.10; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 271.10. They are equal.",
+    "description": "CPI National: Food and non-alcoholic beverages, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 271.10; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 271.10. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18373,7 +19169,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Furnishing and household equipment maintenance, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 238.81; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 238.81. They are equal.",
+    "description": "CPI National: Furnishing and household equipment maintenance, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 238.81; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 238.81. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18397,7 +19193,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Furnishing and household equipment maintenance, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 268.30; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 268.30. They are equal.",
+    "description": "CPI National: Furnishing and household equipment maintenance, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 268.30; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 268.30. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18421,7 +19217,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Furnishing and household equipment maintenance, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 278.22; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 278.22. They are equal.",
+    "description": "CPI National: Furnishing and household equipment maintenance, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 278.22; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 278.22. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18445,7 +19241,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Health, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 204.10; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 204.10. They are equal.",
+    "description": "CPI National: Health, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 204.10; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 204.10. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18469,7 +19265,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Health, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 244.56; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 244.56. They are equal.",
+    "description": "CPI National: Health, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 244.56; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 244.56. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18493,7 +19289,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Health, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 274.28; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 274.28. They are equal.",
+    "description": "CPI National: Health, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 274.28; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 274.28. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18517,7 +19313,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 177.51; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 177.51. They are equal.",
+    "description": "CPI National: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 177.51; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 177.51. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18541,7 +19337,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 240.15; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 240.15. They are equal.",
+    "description": "CPI National: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 240.15; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 240.15. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18565,7 +19361,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 232.28; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 232.28. They are equal.",
+    "description": "CPI National: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 232.28; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 232.28. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18589,7 +19385,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Miscellaneous goods and services, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 249.12; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 249.12. They are equal.",
+    "description": "CPI National: Miscellaneous goods and services, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 249.12; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 249.12. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18613,7 +19409,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Miscellaneous goods and services, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 284.93; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 284.93. They are equal.",
+    "description": "CPI National: Miscellaneous goods and services, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 284.93; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 284.93. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18637,7 +19433,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Miscellaneous goods and services, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 328.43; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 328.43. They are equal.",
+    "description": "CPI National: Miscellaneous goods and services, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 328.43; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 328.43. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18661,7 +19457,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Recreation and culture, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 244.60; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 244.60. They are equal.",
+    "description": "CPI National: Recreation and culture, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 244.60; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 244.60. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18685,7 +19481,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Recreation and culture, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 269.00; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 269.00. They are equal.",
+    "description": "CPI National: Recreation and culture, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 269.00; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 269.00. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18709,7 +19505,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Recreation and culture, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 266.19; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 266.19. They are equal.",
+    "description": "CPI National: Recreation and culture, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 266.19; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 266.19. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18733,7 +19529,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Restaurants and hotels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 238.22; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 238.22. They are equal.",
+    "description": "CPI National: Restaurants and hotels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 238.22; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 238.22. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18757,7 +19553,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Restaurants and hotels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 266.53; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 266.53. They are equal.",
+    "description": "CPI National: Restaurants and hotels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 266.53; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 266.53. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18781,7 +19577,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Restaurants and hotels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 288.86; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 288.86. They are equal.",
+    "description": "CPI National: Restaurants and hotels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 288.86; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 288.86. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18805,7 +19601,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Transport, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June 2023 last year by Jun 23') prints 279.24; the Monthly Review of Price Indices, June 2024 (column 'to 2023. Commodities June 23') prints 279.24. They are equal.",
+    "description": "CPI National: Transport, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 279.24; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 279.24. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18829,7 +19625,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Transport, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June 2024 last year by June 24') prints 308.23; the Monthly Review of Price Indices, June 2025 (column 'by 2024. Commodities June 24') prints 308.23. They are equal.",
+    "description": "CPI National: Transport, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 308.23; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 308.23. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18853,7 +19649,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI National: Transport, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June 2025 last year by June 25') prints 310.10; the Monthly Review of Price Indices, June 2026 (column 'by 2025. Commodities June 25') prints 310.10. They are equal.",
+    "description": "CPI National: Transport, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 310.10; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 310.10. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18877,7 +19673,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: General (all groups), index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 237.61; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 237.61. They are equal.",
+    "description": "CPI Rural: General (all groups), index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 237.61; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 237.61. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18901,7 +19697,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: General (all groups), index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 259.72; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 259.72. They are equal.",
+    "description": "CPI Rural: General (all groups), index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 259.72; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 259.72. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18925,7 +19721,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: General (all groups), index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 269.02; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 269.02. They are equal.",
+    "description": "CPI Rural: General (all groups), index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 269.02; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 269.02. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18949,7 +19745,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Alcoholic beverages and tobacco, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 335.47; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 335.47. They are equal.",
+    "description": "CPI Rural: Alcoholic beverages and tobacco, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 335.47; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 335.47. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18973,7 +19769,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Alcoholic beverages and tobacco, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 352.81; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 352.81. They are equal.",
+    "description": "CPI Rural: Alcoholic beverages and tobacco, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 352.81; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 352.81. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -18997,7 +19793,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Alcoholic beverages and tobacco, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 374.43; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 374.43. They are equal.",
+    "description": "CPI Rural: Alcoholic beverages and tobacco, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 374.43; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 374.43. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19021,7 +19817,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Clothing and footwear, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 212.80; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 212.80. They are equal.",
+    "description": "CPI Rural: Clothing and footwear, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 212.80; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 212.80. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19045,7 +19841,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Clothing and footwear, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 252.06; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 252.06. They are equal.",
+    "description": "CPI Rural: Clothing and footwear, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 252.06; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 252.06. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19069,7 +19865,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Clothing and footwear, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 274.36; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 274.36. They are equal.",
+    "description": "CPI Rural: Clothing and footwear, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 274.36; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 274.36. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19093,7 +19889,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Communication, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 109.88; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 109.88. They are equal.",
+    "description": "CPI Rural: Communication, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 109.88; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 109.88. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19117,7 +19913,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Communication, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 127.84; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 127.84. They are equal.",
+    "description": "CPI Rural: Communication, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 127.84; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 127.84. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19141,7 +19937,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Communication, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 129.06; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 129.06. They are equal.",
+    "description": "CPI Rural: Communication, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 129.06; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 129.06. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19165,7 +19961,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Education, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 174.37; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 174.37. They are equal.",
+    "description": "CPI Rural: Education, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 174.37; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 174.37. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19189,7 +19985,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Education, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 216.95; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 216.95. They are equal.",
+    "description": "CPI Rural: Education, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 216.95; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 216.95. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19213,7 +20009,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Education, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 244.66; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 244.66. They are equal.",
+    "description": "CPI Rural: Education, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 244.66; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 244.66. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19237,7 +20033,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Food and non-alcoholic beverages, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 266.42; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 266.42. They are equal.",
+    "description": "CPI Rural: Food and non-alcoholic beverages, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 266.42; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 266.42. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19261,7 +20057,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Food and non-alcoholic beverages, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 266.75; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 266.75. They are equal.",
+    "description": "CPI Rural: Food and non-alcoholic beverages, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 266.75; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 266.75. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19285,7 +20081,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Food and non-alcoholic beverages, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 270.88; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 270.88. They are equal.",
+    "description": "CPI Rural: Food and non-alcoholic beverages, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 270.88; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 270.88. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19309,7 +20105,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Furnishing and household equipment maintenance, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 247.55; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 247.55. They are equal.",
+    "description": "CPI Rural: Furnishing and household equipment maintenance, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 247.55; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 247.55. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19333,7 +20129,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Furnishing and household equipment maintenance, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 283.21; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 283.21. They are equal.",
+    "description": "CPI Rural: Furnishing and household equipment maintenance, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 283.21; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 283.21. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19357,7 +20153,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Furnishing and household equipment maintenance, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 294.24; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 294.24. They are equal.",
+    "description": "CPI Rural: Furnishing and household equipment maintenance, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 294.24; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 294.24. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19381,7 +20177,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Health, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 204.97; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 204.97. They are equal.",
+    "description": "CPI Rural: Health, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 204.97; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 204.97. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19405,7 +20201,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Health, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 241.78; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 241.78. They are equal.",
+    "description": "CPI Rural: Health, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 241.78; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 241.78. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19429,7 +20225,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Health, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 272.32; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 272.32. They are equal.",
+    "description": "CPI Rural: Health, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 272.32; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 272.32. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19453,7 +20249,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 187.58; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 187.58. They are equal.",
+    "description": "CPI Rural: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 187.58; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 187.58. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19477,7 +20273,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 225.54; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 225.54. They are equal.",
+    "description": "CPI Rural: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 225.54; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 225.54. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19501,7 +20297,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 219.20; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 219.20. They are equal.",
+    "description": "CPI Rural: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 219.20; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 219.20. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19525,7 +20321,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Miscellaneous goods and services, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 252.93; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 252.93. They are equal.",
+    "description": "CPI Rural: Miscellaneous goods and services, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 252.93; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 252.93. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19549,7 +20345,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Miscellaneous goods and services, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 295.45; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 295.45. They are equal.",
+    "description": "CPI Rural: Miscellaneous goods and services, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 295.45; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 295.45. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19573,7 +20369,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Miscellaneous goods and services, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 344.07; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 344.07. They are equal.",
+    "description": "CPI Rural: Miscellaneous goods and services, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 344.07; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 344.07. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19597,7 +20393,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Recreation and culture, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 261.73; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 261.73. They are equal.",
+    "description": "CPI Rural: Recreation and culture, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 261.73; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 261.73. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19621,7 +20417,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Recreation and culture, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 295.53; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 295.53. They are equal.",
+    "description": "CPI Rural: Recreation and culture, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 295.53; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 295.53. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19645,7 +20441,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Recreation and culture, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 296.23; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 296.23. They are equal.",
+    "description": "CPI Rural: Recreation and culture, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 296.23; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 296.23. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19669,7 +20465,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Restaurants and hotels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 234.81; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 234.81. They are equal.",
+    "description": "CPI Rural: Restaurants and hotels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 234.81; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 234.81. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19693,7 +20489,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Restaurants and hotels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 271.58; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 271.58. They are equal.",
+    "description": "CPI Rural: Restaurants and hotels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 271.58; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 271.58. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19717,7 +20513,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Restaurants and hotels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 298.42; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 298.42. They are equal.",
+    "description": "CPI Rural: Restaurants and hotels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 298.42; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 298.42. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19741,7 +20537,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Transport, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'June of the last Group of Jun 23') prints 278.77; the Monthly Review of Price Indices, June 2024 (column 'increased June 2023. June 23') prints 278.77. They are equal.",
+    "description": "CPI Rural: Transport, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 278.77; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 278.77. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19765,7 +20561,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Transport, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'June the last Group of June 24') prints 316.71; the Monthly Review of Price Indices, June 2025 (column 'increased June 2024. and June 24 259.72') prints 316.71. They are equal.",
+    "description": "CPI Rural: Transport, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 316.71; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 316.71. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19789,7 +20585,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Rural: Transport, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'June the last Group of June 25 269.02') prints 319.40; the Monthly Review of Price Indices, June 2026 (column 'decreased June and June 25 269.02') prints 319.40. They are equal.",
+    "description": "CPI Rural: Transport, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 319.40; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 319.40. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19813,7 +20609,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: General (all groups), index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 220.59; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 220.59. They are equal.",
+    "description": "CPI Urban: General (all groups), index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 220.59; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 220.59. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19837,7 +20633,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: General (all groups), index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 253.44; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 253.44. They are equal.",
+    "description": "CPI Urban: General (all groups), index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 253.44; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 253.44. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19861,7 +20657,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: General (all groups), index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 261.04; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 261.04. They are equal.",
+    "description": "CPI Urban: General (all groups), index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 261.04; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 261.04. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19885,7 +20681,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Alcoholic beverages and tobacco, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 377.89; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 377.89. They are equal.",
+    "description": "CPI Urban: Alcoholic beverages and tobacco, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 377.89; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 377.89. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19909,7 +20705,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Alcoholic beverages and tobacco, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 401.92; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 401.92. They are equal.",
+    "description": "CPI Urban: Alcoholic beverages and tobacco, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 401.92; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 401.92. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19933,7 +20729,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Alcoholic beverages and tobacco, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 418.82; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 418.82. They are equal.",
+    "description": "CPI Urban: Alcoholic beverages and tobacco, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 418.82; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 418.82. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19957,7 +20753,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Clothing and footwear, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 199.16; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 199.16. They are equal.",
+    "description": "CPI Urban: Clothing and footwear, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 199.16; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 199.16. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -19981,7 +20777,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Clothing and footwear, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 233.53; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 233.53. They are equal.",
+    "description": "CPI Urban: Clothing and footwear, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 233.53; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 233.53. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20005,7 +20801,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Clothing and footwear, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 254.64; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 254.64. They are equal.",
+    "description": "CPI Urban: Clothing and footwear, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 254.64; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 254.64. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20029,7 +20825,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Communication, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 123.07; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 123.07. They are equal.",
+    "description": "CPI Urban: Communication, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 123.07; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 123.07. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20053,7 +20849,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Communication, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 138.28; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 138.28. They are equal.",
+    "description": "CPI Urban: Communication, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 138.28; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 138.28. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20077,7 +20873,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Communication, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 138.60; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 138.60. They are equal.",
+    "description": "CPI Urban: Communication, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 138.60; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 138.60. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20101,7 +20897,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Education, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 171.65; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 171.65. They are equal.",
+    "description": "CPI Urban: Education, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 171.65; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 171.65. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20125,7 +20921,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Education, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 194.55; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 194.55. They are equal.",
+    "description": "CPI Urban: Education, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 194.55; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 194.55. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20149,7 +20945,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Education, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 212.44; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 212.44. They are equal.",
+    "description": "CPI Urban: Education, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 212.44; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 212.44. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20173,7 +20969,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Food and non-alcoholic beverages, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 257.65; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 257.65. They are equal.",
+    "description": "CPI Urban: Food and non-alcoholic beverages, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 257.65; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 257.65. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20197,7 +20993,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Food and non-alcoholic beverages, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 262.18; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 262.18. They are equal.",
+    "description": "CPI Urban: Food and non-alcoholic beverages, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 262.18; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 262.18. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20221,7 +21017,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Food and non-alcoholic beverages, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 271.30; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 271.30. They are equal.",
+    "description": "CPI Urban: Food and non-alcoholic beverages, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 271.30; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 271.30. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20245,7 +21041,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Furnishing and household equipment maintenance, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 233.01; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 233.01. They are equal.",
+    "description": "CPI Urban: Furnishing and household equipment maintenance, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 233.01; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 233.01. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20269,7 +21065,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Furnishing and household equipment maintenance, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 258.39; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 258.39. They are equal.",
+    "description": "CPI Urban: Furnishing and household equipment maintenance, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 258.39; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 258.39. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20293,7 +21089,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Furnishing and household equipment maintenance, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 267.58; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 267.58. They are equal.",
+    "description": "CPI Urban: Furnishing and household equipment maintenance, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 267.58; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 267.58. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20317,7 +21113,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Health, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 203.22; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 203.22. They are equal.",
+    "description": "CPI Urban: Health, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 203.22; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 203.22. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20341,7 +21137,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Health, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 247.37; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 247.37. They are equal.",
+    "description": "CPI Urban: Health, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 247.37; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 247.37. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20365,7 +21161,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Health, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 276.26; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 276.26. They are equal.",
+    "description": "CPI Urban: Health, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 276.26; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 276.26. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20389,7 +21185,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 172.95; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 172.95. They are equal.",
+    "description": "CPI Urban: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 172.95; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 172.95. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20413,7 +21209,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 246.77; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 246.77. They are equal.",
+    "description": "CPI Urban: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 246.77; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 246.77. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20437,7 +21233,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 238.20; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 238.20. They are equal.",
+    "description": "CPI Urban: Housing, water, electricity, gas and fuels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 238.20; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 238.20. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20461,7 +21257,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Miscellaneous goods and services, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 246.46; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 246.46. They are equal.",
+    "description": "CPI Urban: Miscellaneous goods and services, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 246.46; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 246.46. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20485,7 +21281,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Miscellaneous goods and services, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 277.61; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 277.61. They are equal.",
+    "description": "CPI Urban: Miscellaneous goods and services, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 277.61; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 277.61. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20509,7 +21305,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Miscellaneous goods and services, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 317.53; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 317.53. They are equal.",
+    "description": "CPI Urban: Miscellaneous goods and services, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 317.53; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 317.53. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20533,7 +21329,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Recreation and culture, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 235.57; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 235.57. They are equal.",
+    "description": "CPI Urban: Recreation and culture, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 235.57; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 235.57. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20557,7 +21353,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Recreation and culture, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 255.02; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 255.02. They are equal.",
+    "description": "CPI Urban: Recreation and culture, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 255.02; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 255.02. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20581,7 +21377,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Recreation and culture, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 250.36; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 250.36. They are equal.",
+    "description": "CPI Urban: Recreation and culture, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 250.36; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 250.36. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20605,7 +21401,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Restaurants and hotels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 240.11; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 240.11. They are equal.",
+    "description": "CPI Urban: Restaurants and hotels, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 240.11; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 240.11. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20629,7 +21425,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Restaurants and hotels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 263.73; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 263.73. They are equal.",
+    "description": "CPI Urban: Restaurants and hotels, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 263.73; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 263.73. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20653,7 +21449,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Restaurants and hotels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 283.57; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 283.57. They are equal.",
+    "description": "CPI Urban: Restaurants and hotels, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 283.57; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 283.57. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20677,7 +21473,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Transport, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column '2023 is year i.e. Group Jun 23') prints 279.52; the Monthly Review of Price Indices, June 2024 (column 'to 0.58% 2023. Commodities June 23') prints 279.52. They are equal.",
+    "description": "CPI Urban: Transport, index (base 2015-16), June 2023: the Monthly Review of Price Indices, June 2023 (column 'Indices: Jun 23') prints 279.52; the Monthly Review of Price Indices, June 2024 (column 'Indices: June 23') prints 279.52. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20701,7 +21497,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Transport, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Index 2024 is year i.e. Group June 24') prints 303.14; the Monthly Review of Price Indices, June 2025 (column 'by 0.08% June 24') prints 303.14. They are equal.",
+    "description": "CPI Urban: Transport, index (base 2015-16), June 2024: the Monthly Review of Price Indices, June 2024 (column 'Indices: June 24') prints 303.14; the Monthly Review of Price Indices, June 2025 (column 'Indices: June 24') prints 303.14. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },
@@ -20725,7 +21521,7 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "CPI Urban: Transport, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Index 2025 is year i.e. Group June 25') prints 304.52; the Monthly Review of Price Indices, June 2026 (column 'by 0.47% 2025. Commodities June 25') prints 304.52. They are equal.",
+    "description": "CPI Urban: Transport, index (base 2015-16), June 2025: the Monthly Review of Price Indices, June 2025 (column 'Indices: June 25') prints 304.52; the Monthly Review of Price Indices, June 2026 (column 'Indices: June 25') prints 304.52. They are equal.",
     "official": true,
     "rule_id": "cpi.same_index_in_later_issue"
   },

@@ -2,8 +2,8 @@
   "release": "v0.0.1-prototype",
   "seed": 20261011,
   "requested": 400,
-  "drawn": 399,
-  "eligible_cells": 4176,
+  "drawn": 398,
+  "eligible_cells": 4506,
   "strata": {
     "abs/abs-fed-2010-11/breakdown": {
       "cells": 30,
@@ -15,7 +15,7 @@
     },
     "abs/abs-fed-2010-11/total": {
       "cells": 27,
-      "drawn": 3
+      "drawn": 2
     },
     "abs/abs-fed-2011-12/breakdown": {
       "cells": 30,
@@ -27,7 +27,7 @@
     },
     "abs/abs-fed-2011-12/total": {
       "cells": 27,
-      "drawn": 3
+      "drawn": 2
     },
     "abs/abs-fed-2016-17/breakdown": {
       "cells": 30,
@@ -39,7 +39,7 @@
     },
     "abs/abs-fed-2016-17/total": {
       "cells": 27,
-      "drawn": 3
+      "drawn": 2
     },
     "abs/abs-fed-2017-18/breakdown": {
       "cells": 30,
@@ -113,9 +113,21 @@
       "cells": 24,
       "drawn": 2
     },
+    "cpi/cpi-pbs-2021-06/breakdown": {
+      "cells": 60,
+      "drawn": 5
+    },
+    "cpi/cpi-pbs-2021-06/other": {
+      "cells": 12,
+      "drawn": 1
+    },
+    "cpi/cpi-pbs-2021-06/total": {
+      "cells": 5,
+      "drawn": 1
+    },
     "cpi/cpi-pbs-2023-06/breakdown": {
       "cells": 180,
-      "drawn": 17
+      "drawn": 16
     },
     "cpi/cpi-pbs-2023-06/other": {
       "cells": 36,
@@ -127,7 +139,7 @@
     },
     "cpi/cpi-pbs-2024-06/breakdown": {
       "cells": 180,
-      "drawn": 17
+      "drawn": 16
     },
     "cpi/cpi-pbs-2024-06/other": {
       "cells": 36,
@@ -139,7 +151,7 @@
     },
     "cpi/cpi-pbs-2025-06/breakdown": {
       "cells": 180,
-      "drawn": 17
+      "drawn": 16
     },
     "cpi/cpi-pbs-2025-06/other": {
       "cells": 36,
@@ -151,7 +163,7 @@
     },
     "cpi/cpi-pbs-2026-06/breakdown": {
       "cells": 180,
-      "drawn": 17
+      "drawn": 16
     },
     "cpi/cpi-pbs-2026-06/other": {
       "cells": 36,
@@ -161,49 +173,53 @@
       "cells": 15,
       "drawn": 1
     },
+    "cpi_monthly_review/cpi-pbs-2021-06/unmapped": {
+      "cells": 253,
+      "drawn": 22
+    },
     "cpi_monthly_review/cpi-pbs-2023-06/unmapped": {
       "cells": 129,
-      "drawn": 12
+      "drawn": 11
     },
     "cpi_monthly_review/cpi-pbs-2024-06/unmapped": {
       "cells": 129,
-      "drawn": 12
+      "drawn": 11
     },
     "cpi_monthly_review/cpi-pbs-2025-06/unmapped": {
       "cells": 129,
-      "drawn": 12
+      "drawn": 11
     },
     "cpi_monthly_review/cpi-pbs-2026-06/unmapped": {
       "cells": 129,
-      "drawn": 12
+      "drawn": 11
     },
     "lfs/lfs-pbs-2017-18/breakdown": {
       "cells": 48,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs/lfs-pbs-2017-18/other": {
       "cells": 48,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs/lfs-pbs-2017-18/total": {
       "cells": 60,
-      "drawn": 6
+      "drawn": 5
     },
     "lfs/lfs-pbs-2018-19/breakdown": {
       "cells": 48,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs/lfs-pbs-2018-19/other": {
       "cells": 48,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs/lfs-pbs-2018-19/total": {
       "cells": 60,
-      "drawn": 6
+      "drawn": 5
     },
     "lfs/lfs-pbs-2020-21/breakdown": {
       "cells": 48,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs/lfs-pbs-2020-21/other": {
       "cells": 32,
@@ -215,7 +231,7 @@
     },
     "lfs/lfs-pbs-2024-25/breakdown": {
       "cells": 48,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs/lfs-pbs-2024-25/other": {
       "cells": 40,
@@ -223,23 +239,23 @@
     },
     "lfs/lfs-pbs-2024-25/total": {
       "cells": 50,
-      "drawn": 5
+      "drawn": 4
     },
     "lfs_annual_report/lfs-pbs-2017-18/unmapped": {
       "cells": 480,
-      "drawn": 46
+      "drawn": 43
     },
     "lfs_annual_report/lfs-pbs-2018-19/unmapped": {
       "cells": 480,
-      "drawn": 46
+      "drawn": 43
     },
     "lfs_annual_report/lfs-pbs-2020-21/unmapped": {
       "cells": 288,
-      "drawn": 28
+      "drawn": 26
     },
     "lfs_annual_report/lfs-pbs-2024-25/unmapped": {
       "cells": 288,
-      "drawn": 28
+      "drawn": 26
     }
   },
   "blind": "The extracted value is deliberately absent from sample.csv and sample.js.",

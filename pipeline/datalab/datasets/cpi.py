@@ -44,6 +44,9 @@ _MONTH_YEAR_ONE_WORD = re.compile(r"(?i)^(jan|feb|mar|apr|may|jun|jul|aug|sep|oc
 
 # ----------------------------------------------------------------------------- periods
 
+HEADER_GROUP_NAMES = {"weight": "Group Weight (%)", "indices": "Indices", "change": "% Change over", "impact": "Impact (in % points) over"}
+
+
 def month_add(period: str, k: int) -> str:
     """'2025-06' + (-12) -> '2024-06'."""
     y, m = int(period[:4]), int(period[5:7])
@@ -283,8 +286,13 @@ def map_columns(table: Table, value_cols: list[int], words: list[Word], issue: s
                 problems.append(f"column {col}: header says {tok['text']}, expected {month_label(period)}")
         # An index belongs to the month its header names; a weight, a % change or an impact
         # belongs to the issue month (the header month is only what it is compared with).
-        mapping[col] = {"role": want["role"], "period": period if want["role"] == "index" else issue, "header": header,
-                        "month_printed": tok["text"] if on_line else None}
+        # Label shown on receipts: the spanning header word (checked below to sit above these columns)
+        # and the month printed on the bottom header line. The raw words collected by position are kept.
+        month_printed = tok["text"] if on_line else None
+        group_name = HEADER_GROUP_NAMES.get(want["group"], want["group"])
+        label = group_name if want["month"] == "none" else f"{group_name}: {month_printed}" if month_printed else header
+        mapping[col] = {"role": want["role"], "period": period if want["role"] == "index" else issue, "header": label,
+                        "header_words_by_position": header, "month_printed": month_printed}
 
     # Spanning header words must sit above their columns.
     for group, pattern in cfg["group_words"].items():

@@ -1,0 +1,114 @@
+{
+  "source_id": "cpi-pbs-2018-06",
+  "registered_at": "2026-10-10T22:05:06+00:00",
+  "file_url": "http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-10T22:05:41+00:00",
+  "retrieved_via": "wayback",
+  "sha256": "0b32a33cd371b61601db3a95ffdb7246835598de387e73f0bd90a0211060c555",
+  "size_bytes": 1217333,
+  "response": null,
+  "attempts": [
+    {
+      "url": "http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:06+00:00",
+      "attempt": 1,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:09+00:00",
+      "attempt": 2,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:15+00:00",
+      "attempt": 3,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:22+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    },
+    {
+      "url": "https://web.archive.org/web/20250609120139id_/http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:28+00:00",
+      "attempt": 1,
+      "http_status": 429,
+      "outcome": "http_429"
+    },
+    {
+      "url": "https://web.archive.org/web/20250609120139id_/http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:32+00:00",
+      "attempt": 2,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-10T22:05:41+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+      "time": "2026-10-10T22:05:43+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2018-06/cpi_review_june_2018.pdf",
+  "inspection": {
+    "page_count": 12,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2016",
+      "Creator": "Microsoft® Word 2016",
+      "CreationDate": "D:20180704152607+05'00'"
+    },
+    "pages_with_text_layer": 9,
+    "blank_pages": [
+      2
+    ],
+    "pages_without_text_layer": [
+      4,
+      8
+    ],
+    "text_layer_fraction": 0.8182,
+    "ascii_ratio_first_pages": 0.999,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "june 2018": true,
+        "june, 2018": true,
+        "june,2018": false,
+        "june2018": false,
+        "june-2018": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "wayback_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250609120139/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+    "wayback_timestamp": "20250609120139",
+    "snapshots_seen": 12,
+    "snapshot_digest": "OJDYSQQWHQLEWNFIH64INMXUO7325LOA",
+    "digest_matches_file": true
+  }
+}

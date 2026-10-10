@@ -114,18 +114,29 @@ def _converter(cfg: dict[str, Any]):
 
 
 def profile_pdf(path: Path) -> dict[str, Any]:
-    """Plan 6.2: born-digital vs scanned, ruled vs borderless, language."""
+    """Plan 6.2: born-digital vs scanned, ruled vs borderless, language.
+
+    A page with no text is either blank (nothing printed on it) or an image. Only image pages
+    count as scanned, and the fraction is taken over printed pages: the same definition the
+    source inspection uses (`sources.inspect_pdf`, DECISIONS.md 2026-10-11).
+    """
     import pymupdf
 
     with pymupdf.open(path) as doc:
         n = len(doc)
         with_text = 0
+        blank = 0
         ruled_pages = 0
         ascii_chars = total_chars = 0
         for page in doc:
             text = page.get_text()
             if len(text.strip()) >= 20:
                 with_text += 1
+            else:
+                samples = page.get_pixmap(dpi=36, colorspace=pymupdf.csGRAY).samples
+                white = sum(1 for value in samples if value > 245) / max(len(samples), 1)
+                if white > 0.995 and not page.get_images():
+                    blank += 1
             total_chars += len(text)
             ascii_chars += sum(1 for ch in text if ord(ch) < 128)
             lines = 0
@@ -135,10 +146,13 @@ def profile_pdf(path: Path) -> dict[str, Any]:
                         lines += 1
             if lines >= 8:
                 ruled_pages += 1
-    scanned_fraction = round(1 - with_text / max(n, 1), 4)
+    printed = max(n - blank, 1)
+    scanned_fraction = round((printed - with_text) / printed, 4) if n else 1.0
     return {
         "page_count": n,
-        "text_layer_page_fraction": round(with_text / max(n, 1), 4),
+        "blank_pages": blank,
+        "image_only_pages": n - blank - with_text,
+        "text_layer_page_fraction": round(with_text / printed, 4),
         "scanned_page_fraction": scanned_fraction,
         "track": "scanned" if scanned_fraction > 0.20 else "born_digital",
         "ruled_page_fraction": round(ruled_pages / max(n, 1), 4),

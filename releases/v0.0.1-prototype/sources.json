@@ -935,6 +935,83 @@
     }
   },
   {
+    "source_id": "cpi-pbs-2018-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2018",
+    "period": "2018-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+    "wayback_url": "https://web.archive.org/web/20250609120139/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+    "wayback_timestamp": "20250609120139",
+    "retrieved_at": "2026-10-10T22:05:41+00:00",
+    "retrieved_via": "wayback",
+    "sha256": "0b32a33cd371b61601db3a95ffdb7246835598de387e73f0bd90a0211060c555",
+    "size_bytes": 1217333,
+    "format": "pdf",
+    "page_count": 12,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2018-06/cpi_review_june_2018.pdf",
+    "verification_status": "wayback_only",
+    "verification_record": "sources/verification/cpi-pbs-2018-06.json",
+    "notes": "Text layer on 9 of 11 printed pages, below the 95% inspection level: page(s) 4, 8 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "wayback",
+      "retrieved_at": "2026-10-10T22:05:41+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 12,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2016",
+          "Creator": "Microsoft® Word 2016",
+          "CreationDate": "D:20180704152607+05'00'"
+        },
+        "pages_with_text_layer": 9,
+        "blank_pages": [
+          2
+        ],
+        "pages_without_text_layer": [
+          4,
+          8
+        ],
+        "text_layer_fraction": 0.8182,
+        "ascii_ratio_first_pages": 0.999,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2018": true,
+            "june, 2018": true,
+            "june,2018": false,
+            "june2018": false,
+            "june-2018": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": null,
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250609120139/https://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf",
+        "wayback_timestamp": "20250609120139",
+        "snapshots_seen": 12,
+        "snapshot_digest": "OJDYSQQWHQLEWNFIH64INMXUO7325LOA",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
     "source_id": "cpi-pbs-2019-06",
     "doc_type": "cpi_monthly_review",
     "publisher": "Pakistan Bureau of Statistics",
@@ -1014,6 +1091,90 @@
         "wayback_timestamp": "20250609115853",
         "snapshots_seen": 14,
         "snapshot_digest": "SYVCKSCVAENEYC6CNTQPMTEW6IANJFCL",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "cpi-pbs-2021-06",
+    "doc_type": "cpi_monthly_review",
+    "publisher": "Pakistan Bureau of Statistics",
+    "jurisdiction": "pbs",
+    "title": "Monthly Review of Price Indices, June 2021",
+    "period": "2021-06",
+    "role": "core",
+    "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+    "file_url": "http://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_june_2021.pdf",
+    "wayback_url": "https://web.archive.org/web/20250617110149/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_june_2021.pdf",
+    "wayback_timestamp": "20250617110149",
+    "retrieved_at": "2026-10-10T22:07:22+00:00",
+    "retrieved_via": "wayback",
+    "sha256": "8ea0578d8df4da7b16d70cdc6d7fb46a51ba6cc8b5a59f662dc9f6003b54c6e1",
+    "size_bytes": 741266,
+    "format": "pdf",
+    "page_count": 18,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "cpi_monthly_review/2021-06/cpi_review_june_2021.pdf",
+    "verification_status": "wayback_only",
+    "verification_record": "sources/verification/cpi-pbs-2021-06.json",
+    "notes": "Text layer on 14 of 17 printed pages, below the 95% inspection level: page(s) 5, 6, 7 have no text layer (images). Used under a recorded deviation; every page that values are taken from has a text layer.",
+    "pages_used": [
+      8,
+      9,
+      10
+    ],
+    "run_ids": [
+      "CPI_2021-06__docling__full-document__run-02"
+    ],
+    "verification": {
+      "retrieved_via": "wayback",
+      "retrieved_at": "2026-10-10T22:07:22+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": false,
+      "archive_copy": null,
+      "inspection": {
+        "page_count": 18,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Word 2010",
+          "Creator": "Microsoft® Word 2010",
+          "CreationDate": "D:20210802102400+05'00'"
+        },
+        "pages_with_text_layer": 14,
+        "blank_pages": [
+          2
+        ],
+        "pages_without_text_layer": [
+          5,
+          6,
+          7
+        ],
+        "text_layer_fraction": 0.8235,
+        "ascii_ratio_first_pages": 0.9995,
+        "markers": {
+          "all": {},
+          "any": {
+            "monthly review": true,
+            "price indices": true,
+            "consumer price index": false
+          },
+          "period": {
+            "june 2021": true,
+            "june, 2021": true,
+            "june,2021": false,
+            "june2021": false,
+            "june-2021": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": null,
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250617110149/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_june_2021.pdf",
+        "wayback_timestamp": "20250617110149",
+        "snapshots_seen": 4,
+        "snapshot_digest": "FQF6C2HXZMZWIV7ZZZJLXRLSKUGGT73O",
         "digest_matches_file": true
       },
       "text_layer_ok": false

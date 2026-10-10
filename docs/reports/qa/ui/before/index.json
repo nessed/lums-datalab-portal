@@ -1,0 +1,359 @@
+[
+  {
+    "name": "home",
+    "url": "/",
+    "width": 390,
+    "status": 200,
+    "file": "home-390.png"
+  },
+  {
+    "name": "home",
+    "url": "/",
+    "width": 820,
+    "status": 200,
+    "file": "home-820.png"
+  },
+  {
+    "name": "home",
+    "url": "/",
+    "width": 1280,
+    "status": 200,
+    "file": "home-1280.png"
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 390,
+    "status": 200,
+    "file": "browse-390.png"
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 820,
+    "status": 200,
+    "file": "browse-820.png"
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 1280,
+    "status": 200,
+    "file": "browse-1280.png"
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 390,
+    "status": 200,
+    "file": "series-break-390.png"
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 820,
+    "status": 200,
+    "file": "series-break-820.png"
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 1280,
+    "status": 200,
+    "file": "series-break-1280.png"
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/cpi.national.general.b2007_08",
+    "width": 390,
+    "status": 200,
+    "file": "series-gaps-390.png"
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/cpi.national.general.b2007_08",
+    "width": 820,
+    "status": 200,
+    "file": "series-gaps-820.png"
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/cpi.national.general.b2007_08",
+    "width": 1280,
+    "status": 200,
+    "file": "series-gaps-1280.png"
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 390,
+    "status": 200,
+    "file": "series-monthly-390.png"
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 820,
+    "status": 200,
+    "file": "series-monthly-820.png"
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 1280,
+    "status": 200,
+    "file": "series-monthly-1280.png"
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-tierA-390.png"
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-tierA-820.png"
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-tierA-1280.png"
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-cpi-390.png"
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-cpi-820.png"
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-cpi-1280.png"
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-gap-390.png"
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-gap-820.png"
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-gap-1280.png"
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 390,
+    "status": 200,
+    "file": "sources-390.png"
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 820,
+    "status": 200,
+    "file": "sources-820.png"
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 1280,
+    "status": 200,
+    "file": "sources-1280.png"
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 390,
+    "status": 200,
+    "file": "source-390.png"
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 820,
+    "status": 200,
+    "file": "source-820.png"
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 1280,
+    "status": 200,
+    "file": "source-1280.png"
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 390,
+    "status": 200,
+    "file": "methods-390.png"
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 820,
+    "status": 200,
+    "file": "methods-820.png"
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 1280,
+    "status": 200,
+    "file": "methods-1280.png"
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 390,
+    "status": 200,
+    "file": "releases-390.png"
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 820,
+    "status": 200,
+    "file": "releases-820.png"
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 1280,
+    "status": 200,
+    "file": "releases-1280.png"
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 390,
+    "status": 200,
+    "file": "demo-390.png"
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 820,
+    "status": 200,
+    "file": "demo-820.png"
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 1280,
+    "status": 200,
+    "file": "demo-1280.png"
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 390,
+    "status": 404,
+    "file": "compare-390.png"
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 820,
+    "status": 404,
+    "file": "compare-820.png"
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 1280,
+    "status": 404,
+    "file": "compare-1280.png"
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 390,
+    "status": 404,
+    "file": "data-390.png"
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 820,
+    "status": 404,
+    "file": "data-820.png"
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 1280,
+    "status": 404,
+    "file": "data-1280.png"
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 390,
+    "status": 200,
+    "file": "about-390.png"
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 820,
+    "status": 200,
+    "file": "about-820.png"
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 1280,
+    "status": 200,
+    "file": "about-1280.png"
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 390,
+    "status": 404,
+    "file": "404-390.png"
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 820,
+    "status": 404,
+    "file": "404-820.png"
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 1280,
+    "status": 404,
+    "file": "404-1280.png"
+  }
+]

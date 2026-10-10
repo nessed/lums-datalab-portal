@@ -13,6 +13,7 @@ dependencies = [
   "pydantic>=2",
   "pyyaml",
   "pymupdf",
+  "pdfplumber",   # second reader (D28); also needed by the tests
   "pypdf",
   "requests",
   "pandas",

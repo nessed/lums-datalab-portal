@@ -148,6 +148,18 @@ class SecondReader(Model):
     agreement: bool
 
 
+class SecondReaderOf(Model):
+    """Set on a cell that was read by the second reader (decision D28).
+
+    The first reader's cells of the same table stay in the record, unmapped, with their flags.
+    """
+
+    first_reader: str
+    first_reader_version: str
+    routed_by: list[str] = Field(description="Structural flags on the first reader's table that sent it to the second reader.")
+    first_cell_ids: list[str] = Field(default_factory=list, description="First-reader cell(s) covering this spot on the page.")
+
+
 class Cell(Model):
     """One printed number in one file."""
 
@@ -183,6 +195,7 @@ class Cell(Model):
     extract_config_sha256: str
     structural_flags: list[str] = Field(default_factory=list)
     second_reader: Optional[SecondReader] = None
+    second_reader_of: Optional[SecondReaderOf] = None
 
     _v = field_validator("value_parsed")(_check_decimal)
 
@@ -306,8 +319,9 @@ MODELS: dict[str, type[Model]] = {
 }
 
 
-def cell_id_for(source_id: str, page: int, table_index: int, row_index: int, col_index: int) -> str:
-    key = f"{source_id}|{page}|{table_index}|{row_index}|{col_index}"
+def cell_id_for(source_id: str, page: int, table_index: int, row_index: int, col_index: int, reader: str = "") -> str:
+    """`reader` is given only for a second reader's cell, so first-reader ids never change."""
+    key = f"{source_id}|{page}|{table_index}|{row_index}|{col_index}" + (f"|{reader}" if reader else "")
     return "c_" + hashlib.sha256(key.encode("utf-8")).hexdigest()[:12]
 
 

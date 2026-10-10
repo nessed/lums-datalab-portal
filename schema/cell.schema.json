@@ -28,6 +28,43 @@
       ],
       "title": "SecondReader",
       "type": "object"
+    },
+    "SecondReaderOf": {
+      "additionalProperties": false,
+      "description": "Set on a cell that was read by the second reader (decision D28).\n\nThe first reader's cells of the same table stay in the record, unmapped, with their flags.",
+      "properties": {
+        "first_cell_ids": {
+          "description": "First-reader cell(s) covering this spot on the page.",
+          "items": {
+            "type": "string"
+          },
+          "title": "First Cell Ids",
+          "type": "array"
+        },
+        "first_reader": {
+          "title": "First Reader",
+          "type": "string"
+        },
+        "first_reader_version": {
+          "title": "First Reader Version",
+          "type": "string"
+        },
+        "routed_by": {
+          "description": "Structural flags on the first reader's table that sent it to the second reader.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Routed By",
+          "type": "array"
+        }
+      },
+      "required": [
+        "first_reader",
+        "first_reader_version",
+        "routed_by"
+      ],
+      "title": "SecondReaderOf",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -179,6 +216,17 @@
       "anyOf": [
         {
           "$ref": "#/$defs/SecondReader"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "second_reader_of": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SecondReaderOf"
         },
         {
           "type": "null"

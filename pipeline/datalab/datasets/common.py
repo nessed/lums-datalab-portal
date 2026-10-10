@@ -3,14 +3,15 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Iterable
 
 import yaml
 
 from .. import config
 from ..extract import latest_run, run_output_json
 from ..normalise import FISCAL_YEAR, clean_text, normalise_label, parse_printed
-from ..schema import Cell, Check, Observation, RunManifest, Series, Source, cell_id_for
+from ..schema import (ARITHMETIC_CHECKS, PASSING, Cell, Check, Observation, RunManifest, SecondReader, SecondReaderOf, Series,
+                      Source, cell_id_for)
 from ..tables import Table, load_tables, page_words
 
 EXTRACTOR_NAME = "docling"
@@ -172,3 +173,119 @@ class LabelMap:
         if len(hits) == 1:
             return hits.pop(), "dictionary"
         return None, "ambiguous" if hits else "unmapped"
+
+
+# ----------------------------------------------------------------------------- second reader (decision D28)
+
+SECOND_READER_ROUTING_FLAGS = frozenset({"merged_rows", "dropped_column"})
+# Flags on the SECOND reading's own table that stop it from being used.
+SECOND_READING_BLOCKING_FLAGS = frozenset({"dropped_column", "merged_rows", "possible_dropped_column", "low_coverage",
+                                           "column_unmapped", "title_text_as_data"})
+
+
+def try_second_reader(*, source: Source, table: Table, table_flags: list[str], first_cells: list[Cell],
+                      expected_value_columns: int,
+                      build: Callable[[Table], tuple[list[Cell], dict[str, Any], dict[str, Any]]],
+                      checks: Callable[[list[Cell], dict[str, Any]], list[Check]],
+                      required_checks: Iterable[str]) -> dict[str, Any] | None:
+    """Route a structurally flagged table to the second reader and let the checks decide.
+
+    Returns None when the table does not carry `merged_rows` or `dropped_column`. Otherwise
+    {"promoted": bool, "record": ..., "cells": [...], "meta": {...}, "coverage": {...}}.
+
+    `build(table)` is the dataset's own cell builder (returns cells, a table info dict with
+    `table_flags` and `coverage`, and per-cell meaning keyed by cell id); `checks(cells, meta)`
+    its arithmetic checks. The second reading is promoted only when ALL of these hold:
+      - the reader says the structure is unambiguous;
+      - the second reading's own table carries no blocking flag (detectors, coverage against
+        the PDF text layer and column headers are re-run on it by `build`);
+      - every arithmetic check on the table passes, none fails and none is not evaluable;
+      - each check type in `required_checks` ran at least once.
+    When promoted, `cells` are the second reader's cells (own ids, own flags, reader recorded)
+    and the first reader's cells are kept, unmapped, with what the second reader read at the
+    same spot under `second_reader`. When not promoted nothing changes: `cells` is empty.
+    """
+    from .. import second_reader as sr
+    from ..normalise import numeric_tokens
+    from ..sources import source_path
+    from ..validate import render_overlay
+
+    routed_by = sorted(set(table_flags) & SECOND_READER_ROUTING_FLAGS)
+    if not routed_by:
+        return None
+    pdf = source_path(source)
+    reading = sr.read_docling_table(pdf, table, expected_value_columns)
+    record: dict[str, Any] = {"routed_by": routed_by, "reading": reading.summary(), "promoted": False}
+    out: dict[str, Any] = {"promoted": False, "record": record, "cells": [], "meta": {}, "coverage": None}
+    if not reading.usable or reading.table is None:
+        record["decision"] = f"not used: {reading.reason}"
+        return out
+    overlay = config.work_dir() / "qa" / f"overlay_{source.source_id}_p{table.page:03d}_second_reader.png"
+    render_overlay(pdf, reading.table, overlay)
+
+    cells, info, meta = build(reading.table)
+    first_reader = first_cells[0].extractor_name if first_cells else EXTRACTOR_NAME
+    first_version = first_cells[0].extractor_version if first_cells else "unknown"
+
+    def covering(cell: Cell) -> list[Cell]:
+        cx = (cell.cell_bbox_norm[0] + cell.cell_bbox_norm[2]) / 2
+        cy = (cell.cell_bbox_norm[1] + cell.cell_bbox_norm[3]) / 2
+        return [f for f in first_cells if f.cell_bbox_norm[0] <= cx <= f.cell_bbox_norm[2]
+                and f.cell_bbox_norm[1] <= cy <= f.cell_bbox_norm[3]]
+
+    new_meta: dict[str, Any] = {}
+    read_at: dict[str, list[Cell]] = {}
+    for c in cells:
+        old_id = c.cell_id
+        over = covering(c)
+        c.cell_id = cell_id_for(c.source_id, c.page, c.table_index, c.row_index, c.col_index, reader=reading.reader)
+        c.extractor_name, c.extractor_version = reading.reader, reading.version
+        c.extract_config_sha256 = reading.config_sha256
+        c.second_reader_of = SecondReaderOf(first_reader=first_reader, first_reader_version=first_version,
+                                            routed_by=routed_by, first_cell_ids=[f.cell_id for f in over])
+        for f in over:
+            read_at.setdefault(f.cell_id, []).append(c)
+        if old_id in meta:
+            new_meta[c.cell_id] = meta[old_id]
+
+    arithmetic = [k for k in checks(cells, new_meta) if k.check_type in ARITHMETIC_CHECKS]
+    counts: dict[str, dict[str, int]] = {}
+    for k in arithmetic:
+        counts.setdefault(k.check_type, {"pass": 0, "pass_within_rounding": 0, "fail": 0, "not_evaluable": 0})[k.result] += 1
+    blocking = sorted(set(info.get("table_flags", [])) & SECOND_READING_BLOCKING_FLAGS)
+    missing = sorted(set(required_checks) - set(counts))
+    not_passed = [k for k in arithmetic if k.result not in PASSING]
+    record.update({
+        "table_flags": info.get("table_flags", []), "coverage": info.get("coverage"),
+        "column_problems": info.get("column_problems", []), "unmapped_labels": info.get("unmapped_labels", []),
+        "ambiguous_labels": info.get("ambiguous_labels", []),
+        "cells_read": len(cells), "cells_with_a_number": sum(1 for c in cells if c.value_parsed is not None),
+        "cells_mapped": sum(1 for c in cells if c.series_id), "checks": counts, "checks_run": len(arithmetic),
+        "checks_passed": len(arithmetic) - len(not_passed),
+        "checks_not_passed_sample": [k.description for k in not_passed[:10]],
+        "numbers_also_read_by_first_reader": sr.token_agreement(table, reading.table),
+        "overlay": overlay.name,
+    })
+    if blocking:
+        record["decision"] = f"not used: the second reading is itself flagged {', '.join(blocking)}"
+    elif missing:
+        record["decision"] = f"not used: these checks could not be run on the second reading: {', '.join(missing)}"
+    elif not_passed:
+        record["decision"] = (f"not used: {len(not_passed)} of {len(arithmetic)} arithmetic checks did not pass "
+                              "on the second reading")
+    else:
+        record["decision"] = f"used: all {len(arithmetic)} arithmetic checks pass on the second reading"
+        record["promoted"] = out["promoted"] = True
+        out.update(cells=cells, meta=new_meta, coverage=info.get("coverage"))
+        for f in first_cells:
+            got = sorted(read_at.get(f.cell_id, []), key=lambda c: (c.row_index, c.col_index))
+            if got:
+                raw = " ".join(c.value_raw for c in got)
+                f.second_reader = SecondReader(name=reading.reader, version=reading.version, value_raw=raw,
+                                               agreement=sorted(numeric_tokens(f.value_raw)) == sorted(numeric_tokens(raw)))
+            if f.series_id:   # the second reading is now the primary one; the first stays as a record only
+                f.series_id = f.period = f.vintage = None
+                f.mapping_method = "unmapped"
+            if "superseded_by_second_reader" not in f.structural_flags:
+                f.structural_flags.append("superseded_by_second_reader")
+    return out

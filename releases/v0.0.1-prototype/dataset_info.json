@@ -1,7 +1,7 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T21:27:38+00:00",
+    "built_at": "2026-10-10T21:36:25+00:00",
     "located": {
       "abs-fed-2010-11": {
         "footnote_lines": [],
@@ -651,35 +651,121 @@
           ],
           "result": "found"
         }
+      },
+      "abs-fed-2026-27": {
+        "footnote_lines": [],
+        "source_id": "abs-fed-2026-27",
+        "page": 17,
+        "table_index": 0,
+        "run_id": "ABS_2026-27__docling__full-document__run-01",
+        "rows": 24,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2025-26",
+            "vintage": "be",
+            "header": "EXPENDITURE Development) (on revenue revenue and Pakistan. Budget Estimates 2025-26"
+          },
+          "3": {
+            "period": "2025-26",
+            "vintage": "re",
+            "header": "and capital capital accounts) Revised Estimates 2025-26"
+          },
+          "4": {
+            "period": "2026-27",
+            "vintage": "be",
+            "header": "account) and have been in million) Budget Estimates 2026-27"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "labels_from_text_layer": [
+          "a. Current Exp. on Revenue"
+        ],
+        "labels_with_footnote_mark": [],
+        "coverage": {
+          "page": 17,
+          "table_index": 0,
+          "printed_numeric_tokens": 87,
+          "matched": 84,
+          "coverage": 0.9655,
+          "missing_tokens_sample": [
+            "1",
+            "2",
+            "3"
+          ],
+          "row_band_printed_numeric_tokens": 87,
+          "row_band_matched": 84,
+          "coverage_row_band": 0.9655,
+          "row_band_missing_sample": [
+            "1",
+            "2",
+            "3"
+          ],
+          "emitted_numeric_tokens": 84
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 17,
+              "table_index": 0,
+              "score": 10,
+              "rows": 24,
+              "cols": 5
+            },
+            {
+              "page": 22,
+              "table_index": 0,
+              "score": 6,
+              "rows": 29,
+              "cols": 5
+            },
+            {
+              "page": 19,
+              "table_index": 0,
+              "score": 4,
+              "rows": 21,
+              "cols": 5
+            }
+          ],
+          "result": "found"
+        }
       }
     },
-    "not_located": {
-      "abs-fed-2026-27": "No validated extraction run exists"
-    },
+    "not_located": {},
     "check_pass_rates": {
       "all": {
-        "pass": 252,
-        "pass_within_rounding": 40,
+        "pass": 291,
+        "pass_within_rounding": 47,
         "fail": 2,
         "not_evaluable": 0,
-        "evaluable": 294,
-        "pass_rate": 0.9932
+        "evaluable": 340,
+        "pass_rate": 0.9941
       },
       "arithmetic": {
-        "pass": 164,
-        "pass_within_rounding": 39,
+        "pass": 180,
+        "pass_within_rounding": 46,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 203,
+        "evaluable": 226,
         "pass_rate": 1.0
       },
       "cross_edition": {
-        "pass": 88,
+        "pass": 111,
         "pass_within_rounding": 1,
         "fail": 2,
         "not_evaluable": 0,
-        "evaluable": 91,
-        "pass_rate": 0.978
+        "evaluable": 114,
+        "pass_rate": 0.9825
       }
     },
     "comparison_arslan": {

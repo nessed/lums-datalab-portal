@@ -765,8 +765,12 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2026-27.json",
     "notes": "",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      17
+    ],
+    "run_ids": [
+      "ABS_2026-27__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:56:52+00:00",

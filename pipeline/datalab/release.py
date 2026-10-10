@@ -127,13 +127,18 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], fields: list[str]) -> Non
         w.writerows(rows)
 
 
-def build_release(version: str = config.DEFAULT_RELEASE) -> Path:
+def build_release(version: str = config.DEFAULT_RELEASE, only: list[str] | None = None) -> Path:
     from .datasets.common import load_dataset
     from .extract import runs_dir, tool_versions
     from .sources import read_manifest
 
     out = config.RELEASES_DIR / version
     out.mkdir(parents=True, exist_ok=True)
+    # A release is rebuilt whole: page renders and run manifests of a previous build are removed first.
+    import shutil
+
+    for sub in ("pages", "runs"):
+        shutil.rmtree(out / sub, ignore_errors=True)
     sources = {s.source_id: s for s in read_manifest()}
     all_cells: list[Cell] = []
     all_checks: list[Check] = []
@@ -143,7 +148,7 @@ def build_release(version: str = config.DEFAULT_RELEASE) -> Path:
     dataset_status: dict[str, Any] = {}
     dataset_info: dict[str, Any] = {}
     for dataset in ("abs", "cpi", "lfs"):
-        d = load_dataset(dataset)
+        d = load_dataset(dataset) if (not only or dataset in only) else None
         if d is None:
             dataset_status[dataset] = {"dataset": dataset, "name": DATASET_NAMES[dataset], "meets_thresholds": False,
                                        "state": "coming", "reasons": ["not processed yet"]}

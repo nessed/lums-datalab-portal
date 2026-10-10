@@ -46,7 +46,7 @@ labels:
 
   # items under current expenditure on capital account (newer editions)
   - {pattern: 'foreign loans? repayments?', series: fed.exp.current.capital_account.foreign_loans_repayment}
-  - {pattern: 'repayment of short term foreign credits', series: fed.exp.current.capital_account.short_term_foreign_credits_repayment}
+  - {pattern: 'repayment of short term foreign( credits)?', series: fed.exp.current.capital_account.short_term_foreign_credits_repayment}
   - {pattern: 'transfers', series: fed.exp.current.capital_account.transfers}
 
 extra_series:

@@ -112,7 +112,7 @@ def cmd_build(a) -> int:
 def cmd_release(a) -> int:
     from .release import build_release
 
-    build_release(a.version)
+    build_release(a.version, only=a.dataset or None)
     return 0
 
 
@@ -196,6 +196,7 @@ def main(argv: list[str] | None = None) -> int:
     for name in ("release", "render"):
         sp = add(name, cmd_release, "write the frozen release folder (includes page renders)")
         sp.add_argument("--version", default=config.DEFAULT_RELEASE)
+        sp.add_argument("--dataset", action="append", choices=DATASETS, help="limit the release to these data types (repeatable)")
     sp = add("check-release", cmd_check_release, "re-run checks over a release and test self-consistency (no PDFs needed)")
     sp.add_argument("path")
     add("export-schema", cmd_export_schema, "write JSON Schema files to schema/")

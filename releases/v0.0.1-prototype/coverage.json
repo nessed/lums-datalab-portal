@@ -140,5 +140,29 @@
     "coverage_row_band": 1.0,
     "row_band_missing_sample": [],
     "emitted_numeric_tokens": 87
+  },
+  {
+    "dataset": "abs",
+    "source_id": "abs-fed-2026-27",
+    "table": "Summary of Expenditure",
+    "page": 17,
+    "table_index": 0,
+    "printed_numeric_tokens": 87,
+    "matched": 84,
+    "coverage": 0.9655,
+    "missing_tokens_sample": [
+      "1",
+      "2",
+      "3"
+    ],
+    "row_band_printed_numeric_tokens": 87,
+    "row_band_matched": 84,
+    "coverage_row_band": 0.9655,
+    "row_band_missing_sample": [
+      "1",
+      "2",
+      "3"
+    ],
+    "emitted_numeric_tokens": 84
   }
 ]

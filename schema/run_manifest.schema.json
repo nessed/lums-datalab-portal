@@ -1,0 +1,147 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "config": {
+      "additionalProperties": true,
+      "title": "Config",
+      "type": "object"
+    },
+    "config_sha256": {
+      "title": "Config Sha256",
+      "type": "string"
+    },
+    "duration_s": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duration S"
+    },
+    "errors": {
+      "additionalProperties": true,
+      "title": "Errors",
+      "type": "object"
+    },
+    "finished_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Finished At"
+    },
+    "page_range": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page Range"
+    },
+    "pages_emitted": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pages Emitted"
+    },
+    "profile": {
+      "additionalProperties": true,
+      "title": "Profile",
+      "type": "object"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "run_mode": {
+      "enum": [
+        "full-document",
+        "page-range"
+      ],
+      "title": "Run Mode",
+      "type": "string"
+    },
+    "sha256_at_run": {
+      "title": "Sha256 At Run",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "tables_emitted": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tables Emitted"
+    },
+    "tool_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Tool Versions",
+      "type": "object"
+    },
+    "validated": {
+      "default": false,
+      "title": "Validated",
+      "type": "boolean"
+    },
+    "validator_report": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Validator Report"
+    }
+  },
+  "required": [
+    "run_id",
+    "source_id",
+    "sha256_at_run",
+    "run_mode",
+    "tool_versions",
+    "config",
+    "config_sha256",
+    "started_at"
+  ],
+  "title": "RunManifest",
+  "type": "object"
+}

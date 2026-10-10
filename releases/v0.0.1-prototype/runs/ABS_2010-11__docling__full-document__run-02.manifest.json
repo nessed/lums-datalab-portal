@@ -1,0 +1,54 @@
+{
+  "run_id": "ABS_2010-11__docling__full-document__run-02",
+  "source_id": "abs-fed-2010-11",
+  "sha256_at_run": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
+  "run_mode": "full-document",
+  "page_range": null,
+  "tool_versions": {
+    "python": "3.12.10",
+    "docling": "2.119.0",
+    "docling-core": "2.101.1",
+    "docling-parse": "7.22.2",
+    "docling-ibm-models": "3.15.0",
+    "pymupdf": "1.28.2",
+    "pdfplumber": "0.11.10",
+    "pypdf": "6.20.0"
+  },
+  "config": {
+    "extractor": "docling",
+    "pipeline": "standard_pdf",
+    "pdf_backend": "docling_parse",
+    "do_ocr": false,
+    "do_table_structure": true,
+    "table_mode": "accurate",
+    "table_cell_matching": true,
+    "device": "cpu",
+    "num_threads": 8,
+    "generate_page_images": false,
+    "generate_picture_images": false,
+    "torch_dynamo_disabled": true,
+    "pdf_backend_class": "DoclingParseDocumentBackend"
+  },
+  "config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+  "started_at": "2026-10-10T20:36:35+00:00",
+  "finished_at": "2026-10-10T20:40:37+00:00",
+  "duration_s": 242.1,
+  "pages_emitted": 29,
+  "tables_emitted": 28,
+  "errors": {
+    "count": 0,
+    "path": "errors.log"
+  },
+  "profile": {
+    "page_count": 29,
+    "text_layer_page_fraction": 1.0,
+    "scanned_page_fraction": 0.0,
+    "track": "born_digital",
+    "ruled_page_fraction": 0.931,
+    "table_style_hint": "ruled",
+    "ascii_ratio": 0.9954,
+    "language_hint": "en"
+  },
+  "validated": true,
+  "validator_report": "validator_report.json"
+}

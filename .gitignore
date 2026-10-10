@@ -39,3 +39,6 @@ desktop.ini
 
 # Agent local settings
 .claude/settings.local.json
+
+# Site: page renders copied from the release at build time
+site/public/data/

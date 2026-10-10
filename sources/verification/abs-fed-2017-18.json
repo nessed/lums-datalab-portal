@@ -1,0 +1,98 @@
+{
+  "source_id": "abs-fed-2017-18",
+  "registered_at": "2026-10-10T20:29:09+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2017_18.html",
+  "retrieved_at": "2026-10-10T20:29:11+00:00",
+  "retrieved_via": "official",
+  "sha256": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
+  "size_bytes": 1087862,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/Annual%20Budget%20Statement%202017-18.pdf",
+    "headers": {
+      "Last-Modified": "Mon, 29 May 2017 06:40:01 GMT",
+      "Content-Length": "1087862",
+      "Content-Type": "application/pdf",
+      "ETag": "\"77c4ff6546d8d21:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf",
+      "time": "2026-10-10T20:29:09+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2017_18.html",
+      "time": "2026-10-10T20:29:12+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf",
+      "time": "2026-10-10T20:29:14+00:00",
+      "outcome": "error:JSONDecodeError"
+    }
+  ],
+  "local_path": "abs/2017-18/Annual Budget Statement 2017-18.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2017-18/abs_fy_2017-18.pdf",
+    "sha256": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
+    "size_bytes": 1087862,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 33,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Excel® 2013",
+      "Creator": "Microsoft® Excel® 2013",
+      "CreationDate": "D:20170526214737+05'00'"
+    },
+    "pages_with_text_layer": 31,
+    "text_layer_fraction": 0.9394,
+    "ascii_ratio_first_pages": 0.9191,
+    "markers": {
+      "all": {
+        "annual budget statement": false
+      },
+      "any": {
+        "government of pakistan": false,
+        "finance division": false
+      },
+      "period": {
+        "2017-18": true,
+        "2017-2018": false,
+        "2017 - 18": false,
+        "2017–18": false,
+        "2017—18": false,
+        "2017 – 18": false
+      }
+    },
+    "markers_ok": false
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": true,
+  "identity_route": "contents_markers_plus_official_landing_link",
+  "alt_inspection_markers": {
+    "all": {
+      "contents": true,
+      "receipts": true,
+      "federal consolidated fund": true
+    },
+    "any": {},
+    "period": {
+      "2017-18": true,
+      "2017-2018": false,
+      "2017 - 18": false,
+      "2017–18": false,
+      "2017—18": false,
+      "2017 – 18": false
+    }
+  },
+  "verification_status": "official_match_archive",
+  "wayback": null
+}

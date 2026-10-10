@@ -1,0 +1,18 @@
+[
+  {
+    "dataset": "abs",
+    "source_id": "abs-fed-2010-11",
+    "table": "Summary of Expenditure",
+    "page": 9,
+    "table_index": 0,
+    "printed_numeric_tokens": 92,
+    "matched": 92,
+    "coverage": 1.0,
+    "missing_tokens_sample": [],
+    "row_band_printed_numeric_tokens": 92,
+    "row_band_matched": 92,
+    "coverage_row_band": 1.0,
+    "row_band_missing_sample": [],
+    "emitted_numeric_tokens": 92
+  }
+]

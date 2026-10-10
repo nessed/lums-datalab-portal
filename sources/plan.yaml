@@ -1,0 +1,86 @@
+# Input to `python -m datalab register`: the files we intend to use and where
+# they are officially published. `sources/manifest.csv` and
+# `sources/verification/*.json` are the OUTPUT of registering these.
+#
+# Every file_url below was either read from the official landing page tonight
+# or taken from the ra-ship registry; none is guessed. `archive_path` is
+# relative to RA_SHIP_DIR and is used only to compare hashes (and as a last
+# resort copy, recorded as such).
+
+defaults:
+  abs:
+    doc_type: abs
+    publisher: "Finance Division, Government of Pakistan"
+    jurisdiction: federal
+    language: en
+    markers_all: ["annual budget statement"]
+    markers_any: ["government of pakistan", "finance division"]
+    marker_period: true          # the fiscal year must appear in the first pages
+    # Fallback for editions whose cover page has no text layer (2010-11, 2017-18): the contents
+    # page markers, accepted only together with a verified link from the official landing page.
+    alt_markers_all: ["contents", "receipts", "federal consolidated fund"]
+
+sources:
+  - source_id: abs-fed-2010-11
+    period: "2010-11"
+    role: core
+    title: "Annual Budget Statement 2010-11"
+    landing_url: "https://www.finance.gov.pk/fb_2010_11.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_10_11.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2010-11/abs_fy_2010-11.pdf"
+  - source_id: abs-fed-2011-12
+    period: "2011-12"
+    role: corroboration
+    title: "Annual Budget Statement 2011-12"
+    landing_url: "https://www.finance.gov.pk/fb_2011_12.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_11_12.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2011-12/abs_fy_2011-12.pdf"
+  - source_id: abs-fed-2016-17
+    period: "2016-17"
+    role: core
+    title: "Annual Budget Statement 2016-17"
+    landing_url: "https://www.finance.gov.pk/fb_2016_17.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_2016_17.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2016-17/abs_fy_2016-17.pdf"
+  - source_id: abs-fed-2017-18
+    period: "2017-18"
+    role: corroboration
+    title: "Annual Budget Statement 2017-18"
+    landing_url: "https://www.finance.gov.pk/fb_2017_18.html"
+    file_url: "https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2017-18/abs_fy_2017-18.pdf"
+  - source_id: abs-fed-2021-22
+    period: "2021-22"
+    role: core
+    title: "Annual Budget Statement 2021-22"
+    landing_url: "https://www.finance.gov.pk/fb_2021_22.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2021-22/abs_fy_2021-22.pdf"
+  - source_id: abs-fed-2022-23
+    period: "2022-23"
+    role: corroboration
+    title: "Annual Budget Statement 2022-23"
+    landing_url: "https://www.finance.gov.pk/fb_2022_23.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2022-23/abs_fy_2022-23.pdf"
+  - source_id: abs-fed-2024-25
+    period: "2024-25"
+    role: core
+    title: "Annual Budget Statement 2024-25"
+    landing_url: "https://www.finance.gov.pk/fb_2024_25.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2024-25/abs_fy_2024-25.pdf"
+  - source_id: abs-fed-2025-26
+    period: "2025-26"
+    role: core
+    title: "Annual Budget Statement 2025-26"
+    landing_url: "https://www.finance.gov.pk/fb_2025_26.html"
+    file_url: "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2025-26/abs_fy_2025-26.pdf"
+  - source_id: abs-fed-2026-27
+    period: "2026-27"
+    role: corroboration
+    title: "Annual Budget Statement 2026-27"
+    landing_url: "https://www.finance.gov.pk/fb_2026_27.html"
+    file_url: "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf"
+    archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2026-27/ABS.pdf"

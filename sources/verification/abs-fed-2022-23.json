@@ -1,0 +1,73 @@
+{
+  "source_id": "abs-fed-2022-23",
+  "registered_at": "2026-10-10T20:27:40+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2022_23.html",
+  "retrieved_at": "2026-10-10T20:27:45+00:00",
+  "retrieved_via": "official",
+  "sha256": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
+  "size_bytes": 4313224,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+    "headers": {
+      "Last-Modified": "Thu, 30 Jun 2022 17:59:14 GMT",
+      "Content-Length": "4313224",
+      "Content-Type": "application/pdf",
+      "ETag": "\"085bb1bab8cd81:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+      "time": "2026-10-10T20:27:40+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+      "time": "2026-10-10T20:27:46+00:00",
+      "outcome": "error:JSONDecodeError"
+    }
+  ],
+  "local_path": "abs/2022-23/Annual_Budget_Statement_English.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2022-23/abs_fy_2022-23.pdf",
+    "sha256": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
+    "size_bytes": 4313224,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 54,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Office Excel® 2007",
+      "Creator": "Microsoft® Office Excel® 2007",
+      "CreationDate": "D:20220625120740Z"
+    },
+    "pages_with_text_layer": 49,
+    "text_layer_fraction": 0.9074,
+    "ascii_ratio_first_pages": 1.0,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2022-23": true,
+        "2022-2023": false,
+        "2022 - 23": false,
+        "2022–23": false,
+        "2022—23": false,
+        "2022 – 23": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "verification_status": "official_match_archive",
+  "wayback": null
+}

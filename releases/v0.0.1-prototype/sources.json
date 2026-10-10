@@ -1,0 +1,727 @@
+[
+  {
+    "source_id": "abs-fed-2010-11",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2010-11",
+    "period": "2010-11",
+    "role": "core",
+    "landing_url": "https://www.finance.gov.pk/fb_2010_11.html",
+    "file_url": "https://www.finance.gov.pk/budget/abs_10_11.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:28:59+00:00",
+    "retrieved_via": "official",
+    "sha256": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
+    "size_bytes": 66238,
+    "format": "pdf",
+    "page_count": 29,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2010-11/abs_10_11.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2010-11.json",
+    "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year.",
+    "pages_used": [
+      9
+    ],
+    "run_ids": [
+      "ABS_2010-11__docling__full-document__run-02"
+    ],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:28:59+00:00",
+      "identity_route": "contents_markers_plus_official_landing_link",
+      "landing_page_links_file": true,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2010-11/abs_fy_2010-11.pdf",
+        "sha256": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
+        "size_bytes": 66238,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 29,
+        "pdf_metadata": {
+          "Title": "untitled",
+          "Producer": "Acrobat Distiller 7.0 (Windows)",
+          "CreationDate": "D:20100708161614+05'00'"
+        },
+        "pages_with_text_layer": 29,
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9535,
+        "markers": {
+          "all": {
+            "annual budget statement": false
+          },
+          "any": {
+            "government of pakistan": false,
+            "finance division": false
+          },
+          "period": {
+            "2010-11": true,
+            "2010-2011": true,
+            "2010 - 11": false,
+            "2010–11": false,
+            "2010—11": false,
+            "2010 – 11": false
+          }
+        },
+        "markers_ok": false
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/abs_10_11.pdf",
+        "headers": {
+          "Last-Modified": "Mon, 08 Jun 2015 07:22:16 GMT",
+          "Content-Length": "66238",
+          "Content-Type": "application/pdf",
+          "ETag": "\"fcd7cdd8bba1d01:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "abs-fed-2011-12",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2011-12",
+    "period": "2011-12",
+    "role": "corroboration",
+    "landing_url": "https://www.finance.gov.pk/fb_2011_12.html",
+    "file_url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:27:20+00:00",
+    "retrieved_via": "official",
+    "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
+    "size_bytes": 112873,
+    "format": "pdf",
+    "page_count": 31,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2011-12/abs_11_12.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2011-12.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:27:20+00:00",
+      "identity_route": null,
+      "landing_page_links_file": null,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2011-12/abs_fy_2011-12.pdf",
+        "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
+        "size_bytes": 112873,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 31,
+        "pdf_metadata": {
+          "Title": "untitled",
+          "Producer": "Acrobat Distiller 7.0 (Windows)",
+          "CreationDate": "D:20110604115651+05'00'"
+        },
+        "pages_with_text_layer": 31,
+        "text_layer_fraction": 1.0,
+        "ascii_ratio_first_pages": 0.9256,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2011-12": true,
+            "2011-2012": true,
+            "2011 - 12": false,
+            "2011–12": false,
+            "2011—12": false,
+            "2011 – 12": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
+        "headers": {
+          "Last-Modified": "Sat, 04 Jun 2011 07:17:37 GMT",
+          "Content-Length": "112873",
+          "Content-Type": "application/pdf",
+          "ETag": "\"5eb8507b8722cc1:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "abs-fed-2016-17",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2016-17",
+    "period": "2016-17",
+    "role": "core",
+    "landing_url": "https://www.finance.gov.pk/fb_2016_17.html",
+    "file_url": "https://www.finance.gov.pk/budget/abs_2016_17.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:29:05+00:00",
+    "retrieved_via": "official",
+    "sha256": "a663de0aebf8e5ae8f6bb0b415803ace13ceb73bc00e079f2547ed5c4581da0d",
+    "size_bytes": 1032138,
+    "format": "pdf",
+    "page_count": 33,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2016-17/abs_2016_17.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2016-17.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:29:05+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2016-17/abs_fy_2016-17.pdf",
+        "sha256": "a663de0aebf8e5ae8f6bb0b415803ace13ceb73bc00e079f2547ed5c4581da0d",
+        "size_bytes": 1032138,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 33,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Excel® 2013",
+          "Creator": "Microsoft® Excel® 2013",
+          "CreationDate": "D:20160603193800+05'00'"
+        },
+        "pages_with_text_layer": 32,
+        "text_layer_fraction": 0.9697,
+        "ascii_ratio_first_pages": 0.8935,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2016-17": true,
+            "2016-2017": false,
+            "2016 - 17": false,
+            "2016–17": false,
+            "2016—17": false,
+            "2016 – 17": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/abs_2016_17.pdf",
+        "headers": {
+          "Last-Modified": "Fri, 03 Jun 2016 17:25:25 GMT",
+          "Content-Length": "1032138",
+          "Content-Type": "application/pdf",
+          "ETag": "\"1e2052eabcbdd11:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": true
+    }
+  },
+  {
+    "source_id": "abs-fed-2017-18",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2017-18",
+    "period": "2017-18",
+    "role": "corroboration",
+    "landing_url": "https://www.finance.gov.pk/fb_2017_18.html",
+    "file_url": "https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:29:11+00:00",
+    "retrieved_via": "official",
+    "sha256": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
+    "size_bytes": 1087862,
+    "format": "pdf",
+    "page_count": 33,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2017-18/Annual Budget Statement 2017-18.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2017-18.json",
+    "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:29:11+00:00",
+      "identity_route": "contents_markers_plus_official_landing_link",
+      "landing_page_links_file": true,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2017-18/abs_fy_2017-18.pdf",
+        "sha256": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
+        "size_bytes": 1087862,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 33,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Excel® 2013",
+          "Creator": "Microsoft® Excel® 2013",
+          "CreationDate": "D:20170526214737+05'00'"
+        },
+        "pages_with_text_layer": 31,
+        "text_layer_fraction": 0.9394,
+        "ascii_ratio_first_pages": 0.9191,
+        "markers": {
+          "all": {
+            "annual budget statement": false
+          },
+          "any": {
+            "government of pakistan": false,
+            "finance division": false
+          },
+          "period": {
+            "2017-18": true,
+            "2017-2018": false,
+            "2017 - 18": false,
+            "2017–18": false,
+            "2017—18": false,
+            "2017 – 18": false
+          }
+        },
+        "markers_ok": false
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/Annual%20Budget%20Statement%202017-18.pdf",
+        "headers": {
+          "Last-Modified": "Mon, 29 May 2017 06:40:01 GMT",
+          "Content-Length": "1087862",
+          "Content-Type": "application/pdf",
+          "ETag": "\"77c4ff6546d8d21:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "abs-fed-2021-22",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2021-22",
+    "period": "2021-22",
+    "role": "core",
+    "landing_url": "https://www.finance.gov.pk/fb_2021_22.html",
+    "file_url": "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:27:38+00:00",
+    "retrieved_via": "official",
+    "sha256": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
+    "size_bytes": 724184,
+    "format": "pdf",
+    "page_count": 50,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2021-22/1_ABS-English_2021_22.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2021-22.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:27:38+00:00",
+      "identity_route": null,
+      "landing_page_links_file": null,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2021-22/abs_fy_2021-22.pdf",
+        "sha256": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
+        "size_bytes": 724184,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 50,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Office Word 2007",
+          "Creator": "Microsoft® Office Word 2007",
+          "CreationDate": "D:20210610075844+05'00'"
+        },
+        "pages_with_text_layer": 47,
+        "text_layer_fraction": 0.94,
+        "ascii_ratio_first_pages": 1.0,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2021-22": true,
+            "2021-2022": false,
+            "2021 - 22": false,
+            "2021–22": false,
+            "2021—22": false,
+            "2021 – 22": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
+        "headers": {
+          "Last-Modified": "Fri, 11 Jun 2021 14:54:48 GMT",
+          "Content-Length": "724184",
+          "Content-Type": "application/pdf",
+          "ETag": "\"44d5b9d15ed71:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "abs-fed-2022-23",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2022-23",
+    "period": "2022-23",
+    "role": "corroboration",
+    "landing_url": "https://www.finance.gov.pk/fb_2022_23.html",
+    "file_url": "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:27:45+00:00",
+    "retrieved_via": "official",
+    "sha256": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
+    "size_bytes": 4313224,
+    "format": "pdf",
+    "page_count": 54,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2022-23/Annual_Budget_Statement_English.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2022-23.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:27:45+00:00",
+      "identity_route": null,
+      "landing_page_links_file": null,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2022-23/abs_fy_2022-23.pdf",
+        "sha256": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
+        "size_bytes": 4313224,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 54,
+        "pdf_metadata": {
+          "Producer": "Microsoft® Office Excel® 2007",
+          "Creator": "Microsoft® Office Excel® 2007",
+          "CreationDate": "D:20220625120740Z"
+        },
+        "pages_with_text_layer": 49,
+        "text_layer_fraction": 0.9074,
+        "ascii_ratio_first_pages": 1.0,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2022-23": true,
+            "2022-2023": false,
+            "2022 - 23": false,
+            "2022–23": false,
+            "2022—23": false,
+            "2022 – 23": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+        "headers": {
+          "Last-Modified": "Thu, 30 Jun 2022 17:59:14 GMT",
+          "Content-Length": "4313224",
+          "Content-Type": "application/pdf",
+          "ETag": "\"085bb1bab8cd81:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "abs-fed-2024-25",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2024-25",
+    "period": "2024-25",
+    "role": "core",
+    "landing_url": "https://www.finance.gov.pk/fb_2024_25.html",
+    "file_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:27:53+00:00",
+    "retrieved_via": "official",
+    "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
+    "size_bytes": 3111490,
+    "format": "pdf",
+    "page_count": 59,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2024-25/Annual_Budget_Statement.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2024-25.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:27:53+00:00",
+      "identity_route": null,
+      "landing_page_links_file": null,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2024-25/abs_fy_2024-25.pdf",
+        "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
+        "size_bytes": 3111490,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 59,
+        "pdf_metadata": {
+          "Title": "B 23-24 Inner.cdr",
+          "Producer": "Corel PDF Engine Version 20.0.0.633",
+          "Creator": "CorelDRAW 2018",
+          "CreationDate": "D:20240612063606+05'00'"
+        },
+        "pages_with_text_layer": 56,
+        "text_layer_fraction": 0.9492,
+        "ascii_ratio_first_pages": 1.0,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2024-25": true,
+            "2024-2025": false,
+            "2024 - 25": false,
+            "2024–25": false,
+            "2024—25": false,
+            "2024 – 25": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+        "headers": {
+          "Last-Modified": "Tue, 25 Jun 2024 06:39:57 GMT",
+          "Content-Length": "3111490",
+          "Content-Type": "application/pdf",
+          "ETag": "\"694dce7ecac6da1:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "abs-fed-2025-26",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2025-26",
+    "period": "2025-26",
+    "role": "core",
+    "landing_url": "https://www.finance.gov.pk/fb_2025_26.html",
+    "file_url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:29:18+00:00",
+    "retrieved_via": "official",
+    "sha256": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
+    "size_bytes": 2645541,
+    "format": "pdf",
+    "page_count": 54,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2025-26/abs_eng_10062025.pdf",
+    "verification_status": "official_differs_from_archive",
+    "verification_record": "sources/verification/abs-fed-2025-26.json",
+    "notes": "reissued_or_differs: official download differs from the archive copy.",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:29:18+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
+      "archive_copy": {
+        "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2025-26/abs_fy_2025-26.pdf",
+        "sha256": "f4d5c87bfda2e2bf6525f86df77fbeb8fcdb1b80f6f3ad7171b6eb6c972a43e4",
+        "size_bytes": 2665102,
+        "identical": false
+      },
+      "inspection": {
+        "page_count": 54,
+        "pdf_metadata": {
+          "Producer": "Adobe PDF Library 23.3.233",
+          "Creator": "Acrobat PDFMaker 23 for Excel",
+          "CreationDate": "D:20250608230629+05'00'"
+        },
+        "pages_with_text_layer": 51,
+        "text_layer_fraction": 0.9444,
+        "ascii_ratio_first_pages": 1.0,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2025-26": true,
+            "2025-2026": false,
+            "2025 - 26": false,
+            "2025–26": false,
+            "2025—26": false,
+            "2025 – 26": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+        "headers": {
+          "Last-Modified": "Tue, 10 Jun 2025 16:05:51 GMT",
+          "Content-Length": "2645541",
+          "Content-Type": "application/pdf",
+          "ETag": "\"c827948921dadb1:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": false
+    }
+  },
+  {
+    "source_id": "abs-fed-2026-27",
+    "doc_type": "abs",
+    "publisher": "Finance Division, Government of Pakistan",
+    "jurisdiction": "federal",
+    "title": "Annual Budget Statement 2026-27",
+    "period": "2026-27",
+    "role": "corroboration",
+    "landing_url": "https://www.finance.gov.pk/fb_2026_27.html",
+    "file_url": "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
+    "wayback_url": null,
+    "wayback_timestamp": null,
+    "retrieved_at": "2026-10-10T20:28:05+00:00",
+    "retrieved_via": "official",
+    "sha256": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
+    "size_bytes": 2380926,
+    "format": "pdf",
+    "page_count": 57,
+    "is_born_digital": true,
+    "language": "en",
+    "local_path": "abs/2026-27/Annual_Budget_Statement.pdf",
+    "verification_status": "official_match_archive",
+    "verification_record": "sources/verification/abs-fed-2026-27.json",
+    "notes": "",
+    "pages_used": [],
+    "run_ids": [],
+    "verification": {
+      "retrieved_via": "official",
+      "retrieved_at": "2026-10-10T20:28:05+00:00",
+      "identity_route": null,
+      "landing_page_links_file": null,
+      "archive_copy": {
+        "path_in_ra_ship": "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2026-27/ABS.pdf",
+        "sha256": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
+        "size_bytes": 2380926,
+        "identical": true
+      },
+      "inspection": {
+        "page_count": 57,
+        "pdf_metadata": {
+          "Producer": "Adobe PDF Library 23.3.233",
+          "Creator": "Acrobat PDFMaker 23 for Excel",
+          "CreationDate": "D:20260611073313+05'00'"
+        },
+        "pages_with_text_layer": 54,
+        "text_layer_fraction": 0.9474,
+        "ascii_ratio_first_pages": 0.997,
+        "markers": {
+          "all": {
+            "annual budget statement": true
+          },
+          "any": {
+            "government of pakistan": true,
+            "finance division": true
+          },
+          "period": {
+            "2026-27": true,
+            "2026-2027": false,
+            "2026 - 27": false,
+            "2026–27": false,
+            "2026—27": false,
+            "2026 – 27": false
+          }
+        },
+        "markers_ok": true
+      },
+      "response": {
+        "http_status": 200,
+        "final_url": "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
+        "headers": {
+          "Last-Modified": "Fri, 12 Jun 2026 16:24:16 GMT",
+          "Content-Length": "2380926",
+          "Content-Type": "application/pdf",
+          "ETag": "\"a8adfee987fadc1:0\""
+        }
+      },
+      "wayback": null,
+      "text_layer_ok": false
+    }
+  }
+]

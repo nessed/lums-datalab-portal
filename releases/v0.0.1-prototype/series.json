@@ -1,0 +1,742 @@
+[
+  {
+    "series_id": "fed.exp.total",
+    "name": "Total federal expenditure",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Grand total of federal expenditure in the Annual Budget Statement's Summary of Expenditure: total current plus total development expenditure (plus any other item the edition prints, such as the estimated operational shortfall in the PSDP).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 10,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.total",
+    "name": "Total current expenditure",
+    "parent_id": "fed.exp.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal current expenditure on revenue account plus current expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 20,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.revenue_account",
+    "name": "Current expenditure on revenue account",
+    "parent_id": "fed.exp.current.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal current expenditure met from revenue. In the ABS it is the sum of the ten function lines.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 30,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.general_public_services",
+    "name": "General public services (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "General Public Services"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 01. Federal current expenditure on revenue account for general public services, which includes debt servicing and transfers.",
+    "definition_status": "draft",
+    "synonyms": [
+      "general public service",
+      "debt servicing"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 31,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "name": "Defence affairs and services (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Defence Affairs and Services"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 02. Federal current expenditure on revenue account for defence affairs and services.",
+    "definition_status": "draft",
+    "synonyms": [
+      "defence",
+      "defense",
+      "military"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 32,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "name": "Public order and safety affairs (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Public Order and Safety Affairs"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 03. Federal current expenditure on revenue account for public order and safety.",
+    "definition_status": "draft",
+    "synonyms": [
+      "police",
+      "law and order",
+      "courts"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 33,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "name": "Economic affairs (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Economic Affairs"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 04. Federal current expenditure on revenue account for economic affairs.",
+    "definition_status": "draft",
+    "synonyms": [
+      "subsidies",
+      "agriculture",
+      "energy"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 34,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.environment_protection",
+    "name": "Environment protection (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Environment Protection"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 05. Federal current expenditure on revenue account for environment protection.",
+    "definition_status": "draft",
+    "synonyms": [
+      "environment",
+      "climate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 35,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "name": "Housing and community amenities (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Housing and Community Amenities"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 06. Federal current expenditure on revenue account for housing and community amenities.",
+    "definition_status": "draft",
+    "synonyms": [
+      "housing"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 36,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.health",
+    "name": "Health (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Health"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 07. Federal current expenditure on revenue account for health. It excludes development spending on health and all provincial health spending.",
+    "definition_status": "draft",
+    "synonyms": [
+      "health",
+      "hospitals",
+      "health affairs and services"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 37,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "name": "Recreation, culture and religion (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Recreation, Culture and Religion"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 08. Federal current expenditure on revenue account for recreation, culture and religion.",
+    "definition_status": "draft",
+    "synonyms": [
+      "culture",
+      "religion"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 38,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "name": "Education affairs and services (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Education Affairs and Services"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 09. Federal current expenditure on revenue account for education. It excludes development spending on education and all provincial education spending.",
+    "definition_status": "draft",
+    "synonyms": [
+      "education",
+      "schools",
+      "universities",
+      "HEC"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 39,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.social_protection",
+    "name": "Social protection (current, revenue account)",
+    "parent_id": "fed.exp.current.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "function": "Social Protection"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Function 10. Federal current expenditure on revenue account for social protection.",
+    "definition_status": "draft",
+    "synonyms": [
+      "BISP",
+      "social safety net",
+      "pensions"
+    ],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 40,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.capital_account",
+    "name": "Current expenditure on capital account",
+    "parent_id": "fed.exp.current.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal current expenditure on capital account, mainly repayment of foreign loans.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 50,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.total",
+    "name": "Total development expenditure",
+    "parent_id": "fed.exp.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal development expenditure on revenue account plus development expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 60,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.revenue_account",
+    "name": "Development expenditure on revenue account",
+    "parent_id": "fed.exp.development.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal development expenditure met from revenue.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 61,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.capital_account",
+    "name": "Development expenditure on capital account",
+    "parent_id": "fed.exp.development.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal development expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 62,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.revenue_account.psdp",
+    "name": "Development expenditure on revenue account (PSDP)",
+    "parent_id": "fed.exp.development.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "The Public Sector Development Programme part of development expenditure on revenue account (printed in older editions).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 63,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.development.revenue_account.other",
+    "name": "Other development expenditure on revenue account",
+    "parent_id": "fed.exp.development.revenue_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Development expenditure on revenue account outside the PSDP (printed in older editions).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 64,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.operational_shortfall",
+    "name": "Estimated operational shortfall in PSDP",
+    "parent_id": "fed.exp.total",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "A negative adjustment some editions print for the expected under-spending of the Public Sector Development Programme.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 70,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.account.revenue",
+    "name": "Expenditure on revenue account (current + development)",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Break-up of total expenditure: the revenue-account part (a+c).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 80,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.account.capital",
+    "name": "Expenditure on capital account (current + development)",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Break-up of total expenditure: the capital-account part (b+d).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 81,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.education_affairs_and_services.share_of_total",
+    "name": "Education (current, revenue account) as a share of total federal expenditure",
+    "parent_id": "fed.exp.current.function.education_affairs_and_services",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Federal current expenditure on education (revenue account) as a percentage of total federal expenditure in the same Annual Budget Statement column. Computed by code from two checked values.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": true,
+    "derivation": {
+      "formula": "fed.exp.current.function.education_affairs_and_services / fed.exp.total x 100, rounded half-even to 2 decimals; same period and vintage; both inputs must be published",
+      "inputs": [
+        "fed.exp.current.function.education_affairs_and_services",
+        "fed.exp.total"
+      ]
+    },
+    "sort_key": 900,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.exp.current.function.health.share_of_total",
+    "name": "Health (current, revenue account) as a share of total federal expenditure",
+    "parent_id": "fed.exp.current.function.health",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Federal current expenditure on health (revenue account) as a percentage of total federal expenditure in the same Annual Budget Statement column. Computed by code from two checked values.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": true,
+    "derivation": {
+      "formula": "fed.exp.current.function.health / fed.exp.total x 100, rounded half-even to 2 decimals; same period and vintage; both inputs must be published",
+      "inputs": [
+        "fed.exp.current.function.health",
+        "fed.exp.total"
+      ]
+    },
+    "sort_key": 900,
+    "notes": ""
+  }
+]

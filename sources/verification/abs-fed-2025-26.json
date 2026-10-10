@@ -1,0 +1,82 @@
+{
+  "source_id": "abs-fed-2025-26",
+  "registered_at": "2026-10-10T20:29:15+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2025_26.html",
+  "retrieved_at": "2026-10-10T20:29:18+00:00",
+  "retrieved_via": "official",
+  "sha256": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
+  "size_bytes": 2645541,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+    "headers": {
+      "Last-Modified": "Tue, 10 Jun 2025 16:05:51 GMT",
+      "Content-Length": "2645541",
+      "Content-Type": "application/pdf",
+      "ETag": "\"c827948921dadb1:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+      "time": "2026-10-10T20:29:15+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2025_26.html",
+      "time": "2026-10-10T20:29:19+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+      "time": "2026-10-10T20:29:21+00:00",
+      "outcome": "error:JSONDecodeError"
+    }
+  ],
+  "local_path": "abs/2025-26/abs_eng_10062025.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2025-26/abs_fy_2025-26.pdf",
+    "sha256": "f4d5c87bfda2e2bf6525f86df77fbeb8fcdb1b80f6f3ad7171b6eb6c972a43e4",
+    "size_bytes": 2665102,
+    "identical": false
+  },
+  "inspection": {
+    "page_count": 54,
+    "pdf_metadata": {
+      "Producer": "Adobe PDF Library 23.3.233",
+      "Creator": "Acrobat PDFMaker 23 for Excel",
+      "CreationDate": "D:20250608230629+05'00'"
+    },
+    "pages_with_text_layer": 51,
+    "text_layer_fraction": 0.9444,
+    "ascii_ratio_first_pages": 1.0,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2025-26": true,
+        "2025-2026": false,
+        "2025 - 26": false,
+        "2025–26": false,
+        "2025—26": false,
+        "2025 – 26": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "verification_status": "official_differs_from_archive",
+  "wayback": null
+}

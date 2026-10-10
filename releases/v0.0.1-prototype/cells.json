@@ -1,0 +1,3614 @@
+[
+  {
+    "cell_id": "c_29ad17b13c9c",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.59233,
+      0.16517,
+      0.66384,
+      0.17617
+    ],
+    "row_index": 2,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "1,189,082",
+    "value_parsed": "1189082",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_816b62f682cd",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6906,
+      0.16517,
+      0.76211,
+      0.17617
+    ],
+    "row_index": 2,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "1,471,743",
+    "value_parsed": "1471743",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_31f4f7e5f5c6",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.78883,
+      0.16517,
+      0.86035,
+      0.17617
+    ],
+    "row_index": 2,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "1,387,664",
+    "value_parsed": "1387664",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1e77b056afe0",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60586,
+      0.18138,
+      0.66397,
+      0.19238
+    ],
+    "row_index": 3,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "342,913",
+    "value_parsed": "342913",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ecefe680f3d5",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.18138,
+      0.76224,
+      0.19238
+    ],
+    "row_index": 3,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "378,135",
+    "value_parsed": "378135",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bdecda5880b9",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.18138,
+      0.86048,
+      0.19238
+    ],
+    "row_index": 3,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "442,173",
+    "value_parsed": "442173",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_8a8d93c31cdc",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.61489,
+      0.1976,
+      0.66406,
+      0.2086
+    ],
+    "row_index": 4,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "34,641",
+    "value_parsed": "34641",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_0455e9f8b409",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.71316,
+      0.1976,
+      0.76233,
+      0.2086
+    ],
+    "row_index": 4,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "37,385",
+    "value_parsed": "37385",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7172115fc9d3",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.8114,
+      0.1976,
+      0.86056,
+      0.2086
+    ],
+    "row_index": 4,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "51,263",
+    "value_parsed": "51263",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2b593e2334c8",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.61489,
+      0.21381,
+      0.66406,
+      0.22481
+    ],
+    "row_index": 5,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "84,926",
+    "value_parsed": "84926",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_9eef3bc6eaa6",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.71316,
+      0.21381,
+      0.76233,
+      0.22481
+    ],
+    "row_index": 5,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "80,608",
+    "value_parsed": "80608",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_000b42e7486a",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.8114,
+      0.21381,
+      0.86056,
+      0.22481
+    ],
+    "row_index": 5,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "66,897",
+    "value_parsed": "66897",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b2bb12e4dcf4",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.63743,
+      0.23002,
+      0.66425,
+      0.24102
+    ],
+    "row_index": 6,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "415",
+    "value_parsed": "415",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f8f53dc34742",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.73572,
+      0.23002,
+      0.76254,
+      0.24102
+    ],
+    "row_index": 6,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "415",
+    "value_parsed": "415",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_85f9b339f11a",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.83396,
+      0.23002,
+      0.86078,
+      0.24102
+    ],
+    "row_index": 6,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "448",
+    "value_parsed": "448",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c97b17a3d22e",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.62388,
+      0.24623,
+      0.66411,
+      0.25723
+    ],
+    "row_index": 7,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "1,522",
+    "value_parsed": "1522",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_9284409ca382",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.72218,
+      0.24623,
+      0.76241,
+      0.25723
+    ],
+    "row_index": 7,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "1,801",
+    "value_parsed": "1801",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_aa06621c6a18",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.82042,
+      0.24623,
+      0.86065,
+      0.25723
+    ],
+    "row_index": 7,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "1,842",
+    "value_parsed": "1842",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3f63fcd2ac0e",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.62391,
+      0.26244,
+      0.66414,
+      0.27345
+    ],
+    "row_index": 8,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "6,484",
+    "value_parsed": "6484",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b8977b678805",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.72218,
+      0.26244,
+      0.76241,
+      0.27345
+    ],
+    "row_index": 8,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "6,743",
+    "value_parsed": "6743",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_29a53cd7bd37",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.82042,
+      0.26244,
+      0.86065,
+      0.27345
+    ],
+    "row_index": 8,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "7,283",
+    "value_parsed": "7283",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f5b2c407ca76",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.62388,
+      0.27866,
+      0.6641,
+      0.28966
+    ],
+    "row_index": 9,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "3,697",
+    "value_parsed": "3697",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_850165048a48",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.72218,
+      0.27866,
+      0.76241,
+      0.28966
+    ],
+    "row_index": 9,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "4,506",
+    "value_parsed": "4506",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_95252a2403b8",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.82042,
+      0.27866,
+      0.86065,
+      0.28966
+    ],
+    "row_index": 9,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "4,359",
+    "value_parsed": "4359",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e72dfff68b40",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.61488,
+      0.29487,
+      0.66405,
+      0.30587
+    ],
+    "row_index": 10,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "31,569",
+    "value_parsed": "31569",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1e7e06ddc8d9",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.71316,
+      0.29487,
+      0.76233,
+      0.30587
+    ],
+    "row_index": 10,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "31,535",
+    "value_parsed": "31535",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f818f2408427",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.8114,
+      0.29487,
+      0.86056,
+      0.30587
+    ],
+    "row_index": 10,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "34,500",
+    "value_parsed": "34500",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2935b7cd4ad1",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6239,
+      0.31108,
+      0.66413,
+      0.32208
+    ],
+    "row_index": 11,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "3,944",
+    "value_parsed": "3944",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_03a8dee4f2d3",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.72218,
+      0.31108,
+      0.76241,
+      0.32208
+    ],
+    "row_index": 11,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "4,384",
+    "value_parsed": "4384",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bf447485af63",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.82042,
+      0.31108,
+      0.86065,
+      0.32208
+    ],
+    "row_index": 11,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "1,463",
+    "value_parsed": "1463",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_a034d2a5cecb",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.59236,
+      0.33426,
+      0.66388,
+      0.34526
+    ],
+    "row_index": 12,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "1,699,193",
+    "value_parsed": "1699193",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_6e6333e539ec",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6906,
+      0.33426,
+      0.76212,
+      0.34526
+    ],
+    "row_index": 12,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "2,017,255",
+    "value_parsed": "2017255",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b9777fc5ce0c",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.78883,
+      0.33426,
+      0.86035,
+      0.34526
+    ],
+    "row_index": 12,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "1,997,892",
+    "value_parsed": "1997892",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_419cd1515720",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.61493,
+      0.35245,
+      0.66409,
+      0.36345
+    ],
+    "row_index": 13,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "94,234",
+    "value_parsed": "94234",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_a95805de1f68",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70414,
+      0.35245,
+      0.76225,
+      0.36345
+    ],
+    "row_index": 13,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "115,420",
+    "value_parsed": "115420",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_84084b56e0ca",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.81139,
+      0.35245,
+      0.86056,
+      0.36345
+    ],
+    "row_index": 13,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "54,650",
+    "value_parsed": "54650",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_d2877f05b772",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.59237,
+      0.37578,
+      0.66389,
+      0.38678
+    ],
+    "row_index": 14,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "1,793,427",
+    "value_parsed": "1793427",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_75dc3144a421",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6906,
+      0.37578,
+      0.76212,
+      0.38678
+    ],
+    "row_index": 14,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "2,132,675",
+    "value_parsed": "2132675",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bd633c2b2807",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.78884,
+      0.37578,
+      0.86035,
+      0.38678
+    ],
+    "row_index": 14,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "2,052,542",
+    "value_parsed": "2052542",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_a8deed3ccf31",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60591,
+      0.39881,
+      0.66401,
+      0.40981
+    ],
+    "row_index": 15,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "c. Dev. Exp. on Revenue Account (i+ii)",
+    "row_label_path": [
+      "c. Dev. Exp. on Revenue Account (i+ii)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "467,193",
+    "value_parsed": "467193",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c2d0873575cd",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.39881,
+      0.76224,
+      0.40981
+    ],
+    "row_index": 15,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "c. Dev. Exp. on Revenue Account (i+ii)",
+    "row_label_path": [
+      "c. Dev. Exp. on Revenue Account (i+ii)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "316,446",
+    "value_parsed": "316446",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_45858d849e73",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.39881,
+      0.86048,
+      0.40981
+    ],
+    "row_index": 15,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "c. Dev. Exp. on Revenue Account (i+ii)",
+    "row_label_path": [
+      "c. Dev. Exp. on Revenue Account (i+ii)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "311,885",
+    "value_parsed": "311885",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1c52776723ae",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6059,
+      0.41502,
+      0.66401,
+      0.42602
+    ],
+    "row_index": 16,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "i. Dev. Exp. on Revenue Account (PSDP)",
+    "row_label_path": [
+      "i. Dev. Exp. on Revenue Account (PSDP)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "310,076",
+    "value_parsed": "310076",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account.psdp",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_5298e368ad53",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.41502,
+      0.76224,
+      0.42602
+    ],
+    "row_index": 16,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "i. Dev. Exp. on Revenue Account (PSDP)",
+    "row_label_path": [
+      "i. Dev. Exp. on Revenue Account (PSDP)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "198,143",
+    "value_parsed": "198143",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account.psdp",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_91b5e330feaa",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.41502,
+      0.86048,
+      0.42602
+    ],
+    "row_index": 16,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "i. Dev. Exp. on Revenue Account (PSDP)",
+    "row_label_path": [
+      "i. Dev. Exp. on Revenue Account (PSDP)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "188,340",
+    "value_parsed": "188340",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account.psdp",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2177cf6b5ab1",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60591,
+      0.43123,
+      0.66401,
+      0.44223
+    ],
+    "row_index": 17,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "ii. Other Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "ii. Other Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "157,117",
+    "value_parsed": "157117",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account.other",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_84395f67e2cb",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.43123,
+      0.76224,
+      0.44223
+    ],
+    "row_index": 17,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "ii. Other Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "ii. Other Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "118,302",
+    "value_parsed": "118302",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account.other",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1d37568b331d",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.43123,
+      0.86048,
+      0.44223
+    ],
+    "row_index": 17,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "ii. Other Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "ii. Other Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "123,545",
+    "value_parsed": "123545",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account.other",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7b14e1cf187a",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60591,
+      0.44745,
+      0.66402,
+      0.45845
+    ],
+    "row_index": 18,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Expenditure on Capital Account",
+    "row_label_path": [
+      "d. Dev. Expenditure on Capital Account"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "162,937",
+    "value_parsed": "162937",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f6ce006669da",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.44745,
+      0.76224,
+      0.45845
+    ],
+    "row_index": 18,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Expenditure on Capital Account",
+    "row_label_path": [
+      "d. Dev. Expenditure on Capital Account"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "127,899",
+    "value_parsed": "127899",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_eea3d5dea9da",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.44745,
+      0.86048,
+      0.45845
+    ],
+    "row_index": 18,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Expenditure on Capital Account",
+    "row_label_path": [
+      "d. Dev. Expenditure on Capital Account"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "133,045",
+    "value_parsed": "133045",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_192813d5aa34",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60591,
+      0.46366,
+      0.66401,
+      0.47466
+    ],
+    "row_index": 19,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "(Total Public Sector Dev. Program) (i+d)",
+    "row_label_path": [
+      "(Total Public Sector Dev. Program) (i+d)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "473,013",
+    "value_parsed": "473013",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": null,
+    "period": null,
+    "vintage": null,
+    "mapping_method": "unmapped",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c4ad4d82bc24",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.46366,
+      0.76224,
+      0.47466
+    ],
+    "row_index": 19,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "(Total Public Sector Dev. Program) (i+d)",
+    "row_label_path": [
+      "(Total Public Sector Dev. Program) (i+d)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "326,042",
+    "value_parsed": "326042",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": null,
+    "period": null,
+    "vintage": null,
+    "mapping_method": "unmapped",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_10f54a0c1c71",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.46366,
+      0.86048,
+      0.47466
+    ],
+    "row_index": 19,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "(Total Public Sector Dev. Program) (i+d)",
+    "row_label_path": [
+      "(Total Public Sector Dev. Program) (i+d)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "321,385",
+    "value_parsed": "321385",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": null,
+    "period": null,
+    "vintage": null,
+    "mapping_method": "unmapped",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_be895d4293a1",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6059,
+      0.48669,
+      0.66401,
+      0.49769
+    ],
+    "row_index": 20,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c + d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c + d)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "630,130",
+    "value_parsed": "630130",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3fcb5aff3da9",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.48669,
+      0.76224,
+      0.49769
+    ],
+    "row_index": 20,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c + d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c + d)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "444,344",
+    "value_parsed": "444344",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1c314446acbc",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.48669,
+      0.86048,
+      0.49769
+    ],
+    "row_index": 20,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c + d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c + d)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "444,930",
+    "value_parsed": "444930",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_dabfa212637f",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60963,
+      0.5029,
+      0.66951,
+      0.5139
+    ],
+    "row_index": 21,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "3 Estimated Operational Shortfall in PSDP",
+    "row_label_path": [
+      "3 Estimated Operational Shortfall in PSDP"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "(40,000)",
+    "value_parsed": "-40000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [
+      "bracket_negative"
+    ],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.operational_shortfall",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_9ecdad966517",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70786,
+      0.5029,
+      0.76774,
+      0.5139
+    ],
+    "row_index": 21,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "3 Estimated Operational Shortfall in PSDP",
+    "row_label_path": [
+      "3 Estimated Operational Shortfall in PSDP"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "(60,000)",
+    "value_parsed": "-60000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [
+      "bracket_negative"
+    ],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.operational_shortfall",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_777a86f6d512",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.8061,
+      0.5029,
+      0.86598,
+      0.5139
+    ],
+    "row_index": 21,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "3 Estimated Operational Shortfall in PSDP",
+    "row_label_path": [
+      "3 Estimated Operational Shortfall in PSDP"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "(20,000)",
+    "value_parsed": "-20000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [
+      "bracket_negative"
+    ],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.operational_shortfall",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_827d735abdf4",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.59237,
+      0.52775,
+      0.66389,
+      0.53875
+    ],
+    "row_index": 22,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total - Expenditure (1+2+3)",
+    "row_label_path": [
+      "Total - Expenditure (1+2+3)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "2,383,557",
+    "value_parsed": "2383557",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1a96f907777e",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6906,
+      0.52775,
+      0.76212,
+      0.53875
+    ],
+    "row_index": 22,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total - Expenditure (1+2+3)",
+    "row_label_path": [
+      "Total - Expenditure (1+2+3)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "2,517,020",
+    "value_parsed": "2517020",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_44834367e350",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.78883,
+      0.52775,
+      0.86035,
+      0.53875
+    ],
+    "row_index": 22,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total - Expenditure (1+2+3)",
+    "row_label_path": [
+      "Total - Expenditure (1+2+3)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "2,477,472",
+    "value_parsed": "2477472",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4ae18c2d81e5",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.59235,
+      0.5673,
+      0.66387,
+      0.5783
+    ],
+    "row_index": 24,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Revenue Account (a+c)",
+    "row_label_path": [
+      "Revenue Account (a+c)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "2,166,386",
+    "value_parsed": "2166386",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ef90dfaff61b",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6906,
+      0.5673,
+      0.76211,
+      0.5783
+    ],
+    "row_index": 24,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Revenue Account (a+c)",
+    "row_label_path": [
+      "Revenue Account (a+c)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "2,333,701",
+    "value_parsed": "2333701",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_764639079f15",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.78883,
+      0.5673,
+      0.86035,
+      0.5783
+    ],
+    "row_index": 24,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Revenue Account (a+c)",
+    "row_label_path": [
+      "Revenue Account (a+c)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "2,309,777",
+    "value_parsed": "2309777",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e89b6e4cee5e",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.6059,
+      0.58608,
+      0.66401,
+      0.59708
+    ],
+    "row_index": 25,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "257,172",
+    "value_parsed": "257172",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4bfabb71907b",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70413,
+      0.58608,
+      0.76224,
+      0.59708
+    ],
+    "row_index": 25,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "243,319",
+    "value_parsed": "243319",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2a922e6926cb",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80237,
+      0.58608,
+      0.86048,
+      0.59708
+    ],
+    "row_index": 25,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "187,695",
+    "value_parsed": "187695",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_25b897d095b7",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.60961,
+      0.60502,
+      0.66949,
+      0.61602
+    ],
+    "row_index": 26,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Estimated Operational Shortfall in PSDP",
+    "row_label_path": [
+      "Estimated Operational Shortfall in PSDP"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "(40,000)",
+    "value_parsed": "-40000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [
+      "bracket_negative"
+    ],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.operational_shortfall",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f39f5296b27b",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.70787,
+      0.60502,
+      0.76774,
+      0.61602
+    ],
+    "row_index": 26,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Estimated Operational Shortfall in PSDP",
+    "row_label_path": [
+      "Estimated Operational Shortfall in PSDP"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "(60,000)",
+    "value_parsed": "-60000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [
+      "bracket_negative"
+    ],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.operational_shortfall",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_cc05e5874b5b",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.80609,
+      0.60502,
+      0.86597,
+      0.61602
+    ],
+    "row_index": 26,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Estimated Operational Shortfall in PSDP",
+    "row_label_path": [
+      "Estimated Operational Shortfall in PSDP"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "(20,000)",
+    "value_parsed": "-20000",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [
+      "bracket_negative"
+    ],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.operational_shortfall",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7ec81fdfa123",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.59236,
+      0.63335,
+      0.66388,
+      0.64435
+    ],
+    "row_index": 27,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total Expenditure",
+    "row_label_path": [
+      "Total Expenditure"
+    ],
+    "col_label_raw": "SUMMARY Budget Estimates 2009-10",
+    "col_label_path": [
+      "SUMMARY Budget Estimates 2009-10"
+    ],
+    "value_raw": "2,383,557",
+    "value_parsed": "2383557",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2009-10",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_629f392eae20",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.69059,
+      0.63335,
+      0.76211,
+      0.64435
+    ],
+    "row_index": 27,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total Expenditure",
+    "row_label_path": [
+      "Total Expenditure"
+    ],
+    "col_label_raw": "(Rs Revised Estimates 2009-10",
+    "col_label_path": [
+      "(Rs Revised Estimates 2009-10"
+    ],
+    "value_raw": "2,517,020",
+    "value_parsed": "2517020",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2009-10",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b0fe315e18d5",
+    "source_id": "abs-fed-2010-11",
+    "page": 9,
+    "page_render_sha256": "56873b291cb47ddbfaa0136f29321a9cc11cf6429e8deed404d33d5b8161dcb4",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.1248,
+      0.08389,
+      0.87206,
+      0.66384
+    ],
+    "cell_bbox_norm": [
+      0.78883,
+      0.63335,
+      0.86034,
+      0.64435
+    ],
+    "row_index": 27,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Total Expenditure",
+    "row_label_path": [
+      "Total Expenditure"
+    ],
+    "col_label_raw": "in million) Budget Estimates 2010-11",
+    "col_label_path": [
+      "in million) Budget Estimates 2010-11"
+    ],
+    "value_raw": "2,477,472",
+    "value_parsed": "2477472",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2010-11",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2010-11__docling__full-document__run-02",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  }
+]

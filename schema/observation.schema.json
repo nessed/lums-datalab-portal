@@ -1,0 +1,192 @@
+{
+  "additionalProperties": false,
+  "description": "The fact that one or more cells support.",
+  "properties": {
+    "check_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Check Ids",
+      "type": "array"
+    },
+    "derived_from": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Derived From",
+      "type": "array"
+    },
+    "evidence_summary": {
+      "default": "",
+      "title": "Evidence Summary",
+      "type": "string"
+    },
+    "first_published_release": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Published Release"
+    },
+    "gap_kind": {
+      "anyOf": [
+        {
+          "enum": [
+            "not_in_source",
+            "not_yet_verified",
+            "failed_checks"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gap Kind"
+    },
+    "gap_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gap Reason"
+    },
+    "last_changed_release": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Changed Release"
+    },
+    "obs_id": {
+      "title": "Obs Id",
+      "type": "string"
+    },
+    "period": {
+      "title": "Period",
+      "type": "string"
+    },
+    "primary_cell_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Primary Cell Id"
+    },
+    "published": {
+      "default": false,
+      "title": "Published",
+      "type": "boolean"
+    },
+    "scale_factor": {
+      "default": 1,
+      "title": "Scale Factor",
+      "type": "integer"
+    },
+    "series_id": {
+      "title": "Series Id",
+      "type": "string"
+    },
+    "status": {
+      "default": "unchecked",
+      "enum": [
+        "checked",
+        "unchecked",
+        "disputed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "supporting_cell_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Supporting Cell Ids",
+      "type": "array"
+    },
+    "tier": {
+      "anyOf": [
+        {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tier"
+    },
+    "unit": {
+      "enum": [
+        "PKR",
+        "index",
+        "percent",
+        "persons"
+      ],
+      "title": "Unit",
+      "type": "string"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value"
+    },
+    "vintage": {
+      "enum": [
+        "be",
+        "re",
+        "actual",
+        "provisional",
+        "final",
+        "rebased",
+        "na"
+      ],
+      "title": "Vintage",
+      "type": "string"
+    }
+  },
+  "required": [
+    "obs_id",
+    "series_id",
+    "period",
+    "vintage",
+    "unit"
+  ],
+  "title": "Observation",
+  "type": "object"
+}

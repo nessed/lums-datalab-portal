@@ -1,0 +1,296 @@
+{
+  "$defs": {
+    "SecondReader": {
+      "additionalProperties": false,
+      "properties": {
+        "agreement": {
+          "title": "Agreement",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "value_raw": {
+          "title": "Value Raw",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "value_raw",
+        "agreement"
+      ],
+      "title": "SecondReader",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One printed number in one file.",
+  "properties": {
+    "cell_bbox_norm": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Cell Bbox Norm",
+      "type": "array"
+    },
+    "cell_id": {
+      "title": "Cell Id",
+      "type": "string"
+    },
+    "col_index": {
+      "title": "Col Index",
+      "type": "integer"
+    },
+    "col_label_path": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Col Label Path",
+      "type": "array"
+    },
+    "col_label_raw": {
+      "default": "",
+      "title": "Col Label Raw",
+      "type": "string"
+    },
+    "col_span": {
+      "default": 1,
+      "title": "Col Span",
+      "type": "integer"
+    },
+    "extract_config_sha256": {
+      "title": "Extract Config Sha256",
+      "type": "string"
+    },
+    "extractor_name": {
+      "title": "Extractor Name",
+      "type": "string"
+    },
+    "extractor_version": {
+      "title": "Extractor Version",
+      "type": "string"
+    },
+    "is_missing": {
+      "default": false,
+      "title": "Is Missing",
+      "type": "boolean"
+    },
+    "mapping_method": {
+      "default": "unmapped",
+      "enum": [
+        "dictionary",
+        "unmapped"
+      ],
+      "title": "Mapping Method",
+      "type": "string"
+    },
+    "missing_marker": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Missing Marker"
+    },
+    "normalization_flags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Normalization Flags",
+      "type": "array"
+    },
+    "page": {
+      "title": "Page",
+      "type": "integer"
+    },
+    "page_render_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page Render Sha256"
+    },
+    "period": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Period"
+    },
+    "row_index": {
+      "title": "Row Index",
+      "type": "integer"
+    },
+    "row_label_path": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Row Label Path",
+      "type": "array"
+    },
+    "row_label_raw": {
+      "default": "",
+      "title": "Row Label Raw",
+      "type": "string"
+    },
+    "row_span": {
+      "default": 1,
+      "title": "Row Span",
+      "type": "integer"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scale_factor": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Factor"
+    },
+    "second_reader": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SecondReader"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "series_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Series Id"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "structural_flags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Structural Flags",
+      "type": "array"
+    },
+    "table_bbox_norm": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Table Bbox Norm",
+      "type": "array"
+    },
+    "table_index": {
+      "title": "Table Index",
+      "type": "integer"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "enum": [
+            "PKR",
+            "index",
+            "percent",
+            "persons"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit"
+    },
+    "value_parsed": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Parsed"
+    },
+    "value_raw": {
+      "title": "Value Raw",
+      "type": "string"
+    },
+    "vintage": {
+      "anyOf": [
+        {
+          "enum": [
+            "be",
+            "re",
+            "actual",
+            "provisional",
+            "final",
+            "rebased",
+            "na"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vintage"
+    }
+  },
+  "required": [
+    "cell_id",
+    "source_id",
+    "page",
+    "table_index",
+    "table_bbox_norm",
+    "cell_bbox_norm",
+    "row_index",
+    "col_index",
+    "value_raw",
+    "extractor_name",
+    "extractor_version",
+    "run_id",
+    "extract_config_sha256"
+  ],
+  "title": "Cell",
+  "type": "object"
+}

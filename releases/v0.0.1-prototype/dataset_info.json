@@ -1,0 +1,143 @@
+{
+  "abs": {
+    "dataset": "abs",
+    "built_at": "2026-10-10T20:43:33+00:00",
+    "located": {
+      "abs-fed-2010-11": {
+        "source_id": "abs-fed-2010-11",
+        "page": 9,
+        "table_index": 0,
+        "run_id": "ABS_2010-11__docling__full-document__run-02",
+        "rows": 28,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2009-10",
+            "vintage": "be",
+            "header": "SUMMARY Budget Estimates 2009-10"
+          },
+          "3": {
+            "period": "2009-10",
+            "vintage": "re",
+            "header": "(Rs Revised Estimates 2009-10"
+          },
+          "4": {
+            "period": "2010-11",
+            "vintage": "be",
+            "header": "in million) Budget Estimates 2010-11"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [
+          "(Total Public Sector Dev. Program) (i+d)"
+        ],
+        "ambiguous_labels": [],
+        "coverage": {
+          "page": 9,
+          "table_index": 0,
+          "printed_numeric_tokens": 92,
+          "matched": 92,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 92,
+          "row_band_matched": 92,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 92
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 9,
+              "table_index": 0,
+              "score": 10,
+              "rows": 28,
+              "cols": 5
+            },
+            {
+              "page": 14,
+              "table_index": 0,
+              "score": 5,
+              "rows": 27,
+              "cols": 5
+            },
+            {
+              "page": 11,
+              "table_index": 0,
+              "score": 4,
+              "rows": 20,
+              "cols": 5
+            }
+          ],
+          "result": "found"
+        }
+      }
+    },
+    "not_located": {
+      "abs-fed-2011-12": "No validated extraction run exists",
+      "abs-fed-2016-17": "No validated extraction run exists",
+      "abs-fed-2017-18": "No validated extraction run exists",
+      "abs-fed-2021-22": "No validated extraction run exists",
+      "abs-fed-2022-23": "No validated extraction run exists",
+      "abs-fed-2024-25": "No validated extraction run exists",
+      "abs-fed-2025-26": "No validated extraction run exists",
+      "abs-fed-2026-27": "No validated extraction run exists"
+    },
+    "check_pass_rates": {
+      "all": {
+        "pass": 23,
+        "pass_within_rounding": 4,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 27,
+        "pass_rate": 1.0
+      },
+      "arithmetic": {
+        "pass": 23,
+        "pass_within_rounding": 4,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 27,
+        "pass_rate": 1.0
+      },
+      "cross_edition": {
+        "pass": 0,
+        "pass_within_rounding": 0,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 0,
+        "pass_rate": null
+      }
+    },
+    "comparison_arslan": {
+      "status": "not_compared",
+      "columns": [
+        "function_code",
+        "parent_function_code",
+        "hierarchy_level",
+        "function_name",
+        "classification_system",
+        "appears_in_account_types",
+        "first_year_in_data",
+        "last_year_in_data",
+        "abs_edition_fy",
+        "refers_to_fy",
+        "expenditure_nature",
+        "account_type",
+        "estimate_type",
+        "value_PKR_mn",
+        "unit",
+        "source_pdf_url"
+      ],
+      "note": "Column layout recorded; a like-for-like comparison is a queued follow-up."
+    }
+  }
+}

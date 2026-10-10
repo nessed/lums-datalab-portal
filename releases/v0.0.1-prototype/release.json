@@ -1,0 +1,190 @@
+{
+  "version": "v0.0.1-prototype",
+  "created_at": "2026-10-10T20:43:37+00:00",
+  "git_commit": "9b8079180c0105b188f708582be6c83b161c93ea",
+  "label": "prototype",
+  "doi": null,
+  "scope": {
+    "datasets": [
+      "abs"
+    ],
+    "datasets_coming": [
+      "cpi",
+      "lfs"
+    ],
+    "sources": [
+      "abs-fed-2010-11"
+    ],
+    "periods": {
+      "abs": [
+        "2009-10",
+        "2010-11"
+      ],
+      "cpi": [],
+      "lfs": []
+    }
+  },
+  "thresholds_sha256": "85689c5c066fef50c825db8aab5a38595bf1c4d22d4515b7be22bdc5dd13e48b",
+  "tool_versions": {
+    "python": "3.12.10",
+    "docling": "2.119.0",
+    "docling-core": "2.101.1",
+    "docling-parse": "7.22.2",
+    "docling-ibm-models": "3.15.0",
+    "pymupdf": "1.28.2",
+    "pdfplumber": "0.11.10",
+    "pypdf": "6.20.0"
+  },
+  "extract_config_sha256s": [
+    "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf"
+  ],
+  "source_sha256s": {
+    "abs-fed-2010-11": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
+    "abs-fed-2011-12": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
+    "abs-fed-2016-17": "a663de0aebf8e5ae8f6bb0b415803ace13ceb73bc00e079f2547ed5c4581da0d",
+    "abs-fed-2017-18": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
+    "abs-fed-2021-22": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
+    "abs-fed-2022-23": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
+    "abs-fed-2024-25": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
+    "abs-fed-2025-26": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
+    "abs-fed-2026-27": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0"
+  },
+  "counts": {
+    "sources": 9,
+    "cells": 75,
+    "cells_mapped": 72,
+    "cells_behind_published_values": 72,
+    "series": 24,
+    "observations": 357,
+    "observations_by_dataset": {
+      "abs": {
+        "gap:not_yet_verified": 285,
+        "published": 72
+      },
+      "cpi": {},
+      "lfs": {}
+    },
+    "tiers_by_dataset": {
+      "abs": {
+        "B": 72
+      },
+      "cpi": {},
+      "lfs": {}
+    },
+    "checks_by_result": {
+      "pass": 23,
+      "pass_within_rounding": 4
+    },
+    "checks_by_type": {
+      "accounting_identity": {
+        "pass": 12,
+        "pass_within_rounding": 3
+      },
+      "column_total": {
+        "pass": 3
+      },
+      "cross_table": {
+        "pass": 6
+      },
+      "hierarchy_sum": {
+        "pass": 2,
+        "pass_within_rounding": 1
+      }
+    },
+    "page_renders": 1
+  },
+  "coverage_summary": {
+    "abs": {
+      "printed_numeric_tokens": 92,
+      "matched": 92,
+      "coverage": 1.0,
+      "tables": 1,
+      "tables_below_per_table_minimum": []
+    },
+    "cpi": null,
+    "lfs": null
+  },
+  "check_pass_rates": {
+    "abs": {
+      "all": {
+        "pass": 23,
+        "pass_within_rounding": 4,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 27,
+        "pass_rate": 1.0
+      },
+      "cross_edition": {
+        "pass": 0,
+        "pass_within_rounding": 0,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 0,
+        "pass_rate": null
+      }
+    },
+    "cpi": {
+      "all": null,
+      "cross_edition": null
+    },
+    "lfs": {
+      "all": null,
+      "cross_edition": null
+    }
+  },
+  "dataset_status": {
+    "abs": {
+      "dataset": "abs",
+      "name": "Federal Annual Budget Statement",
+      "meets_thresholds": true,
+      "state": "published",
+      "reasons": [],
+      "coverage": {
+        "printed_numeric_tokens": 92,
+        "matched": 92,
+        "coverage": 1.0,
+        "tables": 1,
+        "tables_below_per_table_minimum": []
+      },
+      "check_pass_rate": {
+        "pass": 23,
+        "pass_within_rounding": 4,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 27,
+        "pass_rate": 1.0
+      },
+      "cross_edition_agreement": {
+        "pass": 0,
+        "pass_within_rounding": 0,
+        "fail": 0,
+        "not_evaluable": 0,
+        "evaluable": 0,
+        "pass_rate": null
+      }
+    },
+    "cpi": {
+      "dataset": "cpi",
+      "name": "Consumer Price Index",
+      "meets_thresholds": false,
+      "state": "coming",
+      "reasons": [
+        "not processed yet"
+      ]
+    },
+    "lfs": {
+      "dataset": "lfs",
+      "name": "Labour Force Survey",
+      "meets_thresholds": false,
+      "state": "coming",
+      "reasons": [
+        "not processed yet"
+      ]
+    }
+  },
+  "gold_set": {
+    "status": "pending_human_labelling"
+  },
+  "measured_error_rate": null,
+  "notes": "Prototype release built unattended on 2026-10-11. No DOI. Not for citation in publications yet. Measured error rate is pending human gold-set labelling."
+}

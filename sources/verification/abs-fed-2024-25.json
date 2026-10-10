@@ -1,0 +1,74 @@
+{
+  "source_id": "abs-fed-2024-25",
+  "registered_at": "2026-10-10T20:27:48+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2024_25.html",
+  "retrieved_at": "2026-10-10T20:27:53+00:00",
+  "retrieved_via": "official",
+  "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
+  "size_bytes": 3111490,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+    "headers": {
+      "Last-Modified": "Tue, 25 Jun 2024 06:39:57 GMT",
+      "Content-Length": "3111490",
+      "Content-Type": "application/pdf",
+      "ETag": "\"694dce7ecac6da1:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+      "time": "2026-10-10T20:27:48+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+      "time": "2026-10-10T20:27:54+00:00",
+      "outcome": "error:JSONDecodeError"
+    }
+  ],
+  "local_path": "abs/2024-25/Annual_Budget_Statement.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2024-25/abs_fy_2024-25.pdf",
+    "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
+    "size_bytes": 3111490,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 59,
+    "pdf_metadata": {
+      "Title": "B 23-24 Inner.cdr",
+      "Producer": "Corel PDF Engine Version 20.0.0.633",
+      "Creator": "CorelDRAW 2018",
+      "CreationDate": "D:20240612063606+05'00'"
+    },
+    "pages_with_text_layer": 56,
+    "text_layer_fraction": 0.9492,
+    "ascii_ratio_first_pages": 1.0,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2024-25": true,
+        "2024-2025": false,
+        "2024 - 25": false,
+        "2024–25": false,
+        "2024—25": false,
+        "2024 – 25": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "verification_status": "official_match_archive",
+  "wayback": null
+}

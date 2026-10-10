@@ -1,0 +1,73 @@
+{
+  "source_id": "abs-fed-2011-12",
+  "registered_at": "2026-10-10T20:27:16+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2011_12.html",
+  "retrieved_at": "2026-10-10T20:27:20+00:00",
+  "retrieved_via": "official",
+  "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
+  "size_bytes": 112873,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
+    "headers": {
+      "Last-Modified": "Sat, 04 Jun 2011 07:17:37 GMT",
+      "Content-Length": "112873",
+      "Content-Type": "application/pdf",
+      "ETag": "\"5eb8507b8722cc1:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
+      "time": "2026-10-10T20:27:16+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/abs_11_12.pdf",
+      "time": "2026-10-10T20:27:20+00:00",
+      "outcome": "error:JSONDecodeError"
+    }
+  ],
+  "local_path": "abs/2011-12/abs_11_12.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2011-12/abs_fy_2011-12.pdf",
+    "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
+    "size_bytes": 112873,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 31,
+    "pdf_metadata": {
+      "Title": "untitled",
+      "Producer": "Acrobat Distiller 7.0 (Windows)",
+      "CreationDate": "D:20110604115651+05'00'"
+    },
+    "pages_with_text_layer": 31,
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 0.9256,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2011-12": true,
+        "2011-2012": true,
+        "2011 - 12": false,
+        "2011–12": false,
+        "2011—12": false,
+        "2011 – 12": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "verification_status": "official_match_archive",
+  "wayback": null
+}

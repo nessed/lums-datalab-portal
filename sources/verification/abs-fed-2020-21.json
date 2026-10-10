@@ -1,0 +1,93 @@
+{
+  "source_id": "abs-fed-2020-21",
+  "registered_at": "2026-10-10T23:37:07+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/Annual_budget_Statement_English_202021.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2020_21.html",
+  "retrieved_at": "2026-10-10T23:37:11+00:00",
+  "retrieved_via": "official",
+  "sha256": "062b07db63dd74ae3c0b6b4db1a177dd6ce5aafef65511265aa0af8f58683f65",
+  "size_bytes": 1900775,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/Annual_budget_Statement_English_202021.pdf",
+    "headers": {
+      "Last-Modified": "Thu, 16 Jul 2020 06:34:49 GMT",
+      "Content-Length": "1900775",
+      "Content-Type": "application/pdf",
+      "ETag": "\"1b3a6b343b5bd61:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/Annual_budget_Statement_English_202021.pdf",
+      "time": "2026-10-10T23:37:07+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2020_21.html",
+      "time": "2026-10-10T23:37:12+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/Annual_budget_Statement_English_202021.pdf",
+      "time": "2026-10-10T23:37:14+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "abs/2020-21/Annual_budget_Statement_English_202021.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2020-21/abs_fy_2020-21.pdf",
+    "sha256": "062b07db63dd74ae3c0b6b4db1a177dd6ce5aafef65511265aa0af8f58683f65",
+    "size_bytes": 1900775,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 44,
+    "pdf_metadata": {
+      "Title": "SECTION NO",
+      "Producer": "Adobe Acrobat Pro Extended 9.5.5",
+      "Creator": "Adobe Acrobat Pro Extended 9.5.5",
+      "CreationDate": "D:20200716105518+05'00'"
+    },
+    "pages_with_text_layer": 44,
+    "blank_pages": [],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 0.856,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2020-21": true,
+        "2020-2021": false,
+        "2020 - 21": false,
+        "2020–21": false,
+        "2020—21": false,
+        "2020 – 21": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_match_archive",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250527102900/https://www.finance.gov.pk/budget/Annual_budget_Statement_English_202021.pdf",
+    "wayback_timestamp": "20250527102900",
+    "snapshots_seen": 27,
+    "snapshot_digest": "VAVBOTJ7PX2J4NI3XPTWXPY6JD3CHQJY",
+    "digest_matches_file": true
+  }
+}

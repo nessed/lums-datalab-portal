@@ -1,0 +1,94 @@
+{
+  "source_id": "abs-fed-2012-13",
+  "registered_at": "2026-10-10T23:32:38+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/abs_2012_13.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2012_13.html",
+  "retrieved_at": "2026-10-10T23:32:43+00:00",
+  "retrieved_via": "official",
+  "sha256": "d61350d541b739c851ca629c145f4a4f73a5985bd0c311eddc2d0074ce4826ca",
+  "size_bytes": 260648,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/abs_2012_13.pdf",
+    "headers": {
+      "Last-Modified": "Sat, 02 Jun 2012 07:04:43 GMT",
+      "Content-Length": "260648",
+      "Content-Type": "application/pdf",
+      "ETag": "\"107d4cfc8d40cd1:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/abs_2012_13.pdf",
+      "time": "2026-10-10T23:32:38+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2012_13.html",
+      "time": "2026-10-10T23:32:44+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/abs_2012_13.pdf",
+      "time": "2026-10-10T23:32:46+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "abs/2012-13/abs_2012_13.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2012-13/abs_fy_2012-13.pdf",
+    "sha256": "d61350d541b739c851ca629c145f4a4f73a5985bd0c311eddc2d0074ce4826ca",
+    "size_bytes": 260648,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 33,
+    "pdf_metadata": {
+      "Producer": "Adobe Acrobat 7.0 Paper Capture Plug-in",
+      "Creator": "Adobe Acrobat 7.0",
+      "CreationDate": "D:20120602110519+05'00'"
+    },
+    "pages_with_text_layer": 32,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      1
+    ],
+    "text_layer_fraction": 0.9697,
+    "ascii_ratio_first_pages": 0.8935,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2012-13": true,
+        "2012-2013": true,
+        "2012 - 13": false,
+        "2012–13": false,
+        "2012—13": false,
+        "2012 – 13": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_match_archive",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260215180009/https://finance.gov.pk/budget/abs_2012_13.pdf",
+    "wayback_timestamp": "20260215180009",
+    "snapshots_seen": 30,
+    "snapshot_digest": "37OIQLLKQ3U33G5VJ6MHRST6GCKUMDHK",
+    "digest_matches_file": true
+  }
+}

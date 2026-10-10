@@ -1,0 +1,97 @@
+{
+  "source_id": "abs-fed-2023-24",
+  "registered_at": "2026-10-10T23:37:19+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/Budget_2023_24/Annual_Budget_Statement.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2023_24.html",
+  "retrieved_at": "2026-10-10T23:37:23+00:00",
+  "retrieved_via": "official",
+  "sha256": "5cf36e2082927b171646c4274c985c9d9ecae8e876d07803dfcebe4c34033df9",
+  "size_bytes": 3060134,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/Budget_2023_24/Annual_Budget_Statement.pdf",
+    "headers": {
+      "Last-Modified": "Tue, 27 Jun 2023 14:19:10 GMT",
+      "Content-Length": "3060134",
+      "Content-Type": "application/pdf",
+      "ETag": "\"08312572a9d91:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/Budget_2023_24/Annual_Budget_Statement.pdf",
+      "time": "2026-10-10T23:37:19+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2023_24.html",
+      "time": "2026-10-10T23:37:25+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/Budget_2023_24/Annual_Budget_Statement.pdf",
+      "time": "2026-10-10T23:37:27+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "abs/2023-24/Annual_Budget_Statement.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2023-24/abs_fy_2023-24.pdf",
+    "sha256": "5cf36e2082927b171646c4274c985c9d9ecae8e876d07803dfcebe4c34033df9",
+    "size_bytes": 3060134,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 55,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Office Excel® 2007",
+      "Creator": "Microsoft® Office Excel® 2007",
+      "CreationDate": "D:20230608161814Z"
+    },
+    "pages_with_text_layer": 51,
+    "blank_pages": [
+      2,
+      4,
+      6,
+      34
+    ],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 1.0,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2023-24": true,
+        "2023-2024": false,
+        "2023 - 24": false,
+        "2023–24": false,
+        "2023—24": false,
+        "2023 – 24": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_match_archive",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260305191909/https://www.finance.gov.pk/budget/Budget_2023_24/Annual_Budget_Statement.pdf",
+    "wayback_timestamp": "20260305191909",
+    "snapshots_seen": 17,
+    "snapshot_digest": "K5LEVV4PYQSJEYHTJMF4ZX55RPBJBL4P",
+    "digest_matches_file": true
+  }
+}

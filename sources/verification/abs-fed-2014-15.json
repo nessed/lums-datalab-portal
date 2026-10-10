@@ -1,0 +1,95 @@
+{
+  "source_id": "abs-fed-2014-15",
+  "registered_at": "2026-10-10T23:34:35+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/abs_2014_15.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2014_15.html",
+  "retrieved_at": "2026-10-10T23:34:45+00:00",
+  "retrieved_via": "official",
+  "sha256": "3147dc9a3ca052b127fb1ee986eb2e53d12eb8a0d2ecaddca719fafcb4b35d5b",
+  "size_bytes": 378769,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/abs_2014_15.pdf",
+    "headers": {
+      "Last-Modified": "Tue, 03 Jun 2014 16:12:09 GMT",
+      "Content-Length": "378769",
+      "Content-Type": "application/pdf",
+      "ETag": "\"7057f92467fcf1:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/abs_2014_15.pdf",
+      "time": "2026-10-10T23:34:39+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2014_15.html",
+      "time": "2026-10-10T23:34:54+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/abs_2014_15.pdf",
+      "time": "2026-10-10T23:34:57+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "abs/2014-15/abs_2014_15.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2014-15/abs_fy_2014-15.pdf",
+    "sha256": "3147dc9a3ca052b127fb1ee986eb2e53d12eb8a0d2ecaddca719fafcb4b35d5b",
+    "size_bytes": 378769,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 33,
+    "pdf_metadata": {
+      "Title": "Microsoft Word - Preface",
+      "Producer": "Acrobat Distiller 8.1.0 (Windows)",
+      "Creator": "PScript5.dll Version 5.2.2",
+      "CreationDate": "D:20140603184127+05'00'"
+    },
+    "pages_with_text_layer": 32,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      1
+    ],
+    "text_layer_fraction": 0.9697,
+    "ascii_ratio_first_pages": 0.8935,
+    "markers": {
+      "all": {
+        "annual budget statement": true
+      },
+      "any": {
+        "government of pakistan": true,
+        "finance division": true
+      },
+      "period": {
+        "2014-15": true,
+        "2014-2015": false,
+        "2014 - 15": false,
+        "2014–15": false,
+        "2014—15": false,
+        "2014 – 15": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_match_archive",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250619204536/https://finance.gov.pk/budget/abs_2014_15.pdf",
+    "wayback_timestamp": "20250619204536",
+    "snapshots_seen": 23,
+    "snapshot_digest": "O62VQJLTOEI73RCXMMOGIPI6TIRZHYKR",
+    "digest_matches_file": true
+  }
+}

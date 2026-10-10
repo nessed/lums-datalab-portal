@@ -1,0 +1,111 @@
+{
+  "source_id": "abs-fed-2015-16",
+  "registered_at": "2026-10-10T23:35:24+00:00",
+  "file_url": "https://www.finance.gov.pk/budget/abs_2015_16.pdf",
+  "landing_url": "https://www.finance.gov.pk/fb_2015_16.html",
+  "retrieved_at": "2026-10-10T23:35:37+00:00",
+  "retrieved_via": "official",
+  "sha256": "b106312a48f51f00f0bf12eacdb2468bdc55af56f0840fbe180eb2d12147ef30",
+  "size_bytes": 1227233,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.finance.gov.pk/budget/abs_2015_16.pdf",
+    "headers": {
+      "Last-Modified": "Sat, 06 Jun 2015 09:38:45 GMT",
+      "Content-Length": "1227233",
+      "Content-Type": "application/pdf",
+      "ETag": "\"b5bf59953ca0d01:0\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.finance.gov.pk/budget/abs_2015_16.pdf",
+      "time": "2026-10-10T23:35:29+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.finance.gov.pk/fb_2015_16.html",
+      "time": "2026-10-10T23:35:52+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/abs_2015_16.pdf",
+      "time": "2026-10-10T23:35:58+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "abs/2015-16/abs_2015_16.pdf",
+  "archive_copy": {
+    "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2015-16/abs_fy_2015-16.pdf",
+    "sha256": "b106312a48f51f00f0bf12eacdb2468bdc55af56f0840fbe180eb2d12147ef30",
+    "size_bytes": 1227233,
+    "identical": true
+  },
+  "inspection": {
+    "page_count": 33,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Excel® 2013",
+      "Creator": "Microsoft® Excel® 2013",
+      "CreationDate": "D:20150606133452+05'00'"
+    },
+    "pages_with_text_layer": 31,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      1,
+      2
+    ],
+    "text_layer_fraction": 0.9394,
+    "ascii_ratio_first_pages": 0.7779,
+    "markers": {
+      "all": {
+        "annual budget statement": false
+      },
+      "any": {
+        "government of pakistan": false,
+        "finance division": false
+      },
+      "period": {
+        "2015-16": true,
+        "2015-2016": false,
+        "2015 - 16": false,
+        "2015–16": false,
+        "2015—16": false,
+        "2015 – 16": false
+      }
+    },
+    "markers_ok": false
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": true,
+  "identity_route": "contents_markers_plus_official_landing_link",
+  "alt_inspection_markers": {
+    "all": {
+      "contents": true,
+      "receipts": true,
+      "federal consolidated fund": true
+    },
+    "any": {},
+    "period": {
+      "2015-16": true,
+      "2015-2016": false,
+      "2015 - 16": false,
+      "2015–16": false,
+      "2015—16": false,
+      "2015 – 16": false
+    }
+  },
+  "excluded_markers_found": [],
+  "verification_status": "official_match_archive",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260310144303/https://finance.gov.pk/budget/abs_2015_16.pdf",
+    "wayback_timestamp": "20260310144303",
+    "snapshots_seen": 30,
+    "snapshot_digest": "2YH4XAT2R3E2TUQZMFUHBJAP5HAB3OJW",
+    "digest_matches_file": true
+  }
+}

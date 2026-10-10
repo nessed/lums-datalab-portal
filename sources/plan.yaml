@@ -116,6 +116,66 @@ sources:
     file_url: "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf"
     archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2026-27/ABS.pdf"
 
+  # Added 2026-10-12 (E1): the remaining federal editions on disk. Each file_url is the link printed on the
+  # official Finance Division budget page for that year (landing_url), read by code on 2026-10-11; the
+  # 2018-19, 2019-20, 2020-21 and 2023-24 addresses are also the ones in the ra-ship registry.
+  - source_id: abs-fed-2012-13
+    period: "2012-13"
+    role: core
+    title: "Annual Budget Statement 2012-13"
+    landing_url: "https://www.finance.gov.pk/fb_2012_13.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_2012_13.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2012-13/abs_fy_2012-13.pdf"
+  - source_id: abs-fed-2013-14
+    period: "2013-14"
+    role: core
+    title: "Annual Budget Statement 2013-14"
+    landing_url: "https://www.finance.gov.pk/fb_2013_14.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_2013_14.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2013-14/abs_fy_2013-14.pdf"
+  - source_id: abs-fed-2014-15
+    period: "2014-15"
+    role: core
+    title: "Annual Budget Statement 2014-15"
+    landing_url: "https://www.finance.gov.pk/fb_2014_15.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_2014_15.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2014-15/abs_fy_2014-15.pdf"
+  - source_id: abs-fed-2015-16
+    period: "2015-16"
+    role: core
+    title: "Annual Budget Statement 2015-16"
+    landing_url: "https://www.finance.gov.pk/fb_2015_16.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_2015_16.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2015-16/abs_fy_2015-16.pdf"
+  - source_id: abs-fed-2018-19
+    period: "2018-19"
+    role: core
+    title: "Annual Budget Statement 2018-19"
+    landing_url: "https://www.finance.gov.pk/fb_2018_19.html"
+    file_url: "https://www.finance.gov.pk/budget/Annual_Budget_Statement_2018_19.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2018-19/abs_fy_2018-19.pdf"
+  - source_id: abs-fed-2019-20
+    period: "2019-20"
+    role: core
+    title: "Annual Budget Statement 2019-20"
+    landing_url: "https://www.finance.gov.pk/fb_2019_20.html"
+    file_url: "https://www.finance.gov.pk/budget/Annual_Budget_Statement_2019_20.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2019-20/abs_fy_2019-20.pdf"
+  - source_id: abs-fed-2020-21
+    period: "2020-21"
+    role: core
+    title: "Annual Budget Statement 2020-21"
+    landing_url: "https://www.finance.gov.pk/fb_2020_21.html"
+    file_url: "https://www.finance.gov.pk/budget/Annual_budget_Statement_English_202021.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2020-21/abs_fy_2020-21.pdf"
+  - source_id: abs-fed-2023-24
+    period: "2023-24"
+    role: core
+    title: "Annual Budget Statement 2023-24"
+    landing_url: "https://www.finance.gov.pk/fb_2023_24.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2023_24/Annual_Budget_Statement.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2023-24/abs_fy_2023-24.pdf"
+
   # CPI June issues and LFS annual reports, collected by the sources track on 2026-10-11
   # (`prefetched`: how each file was obtained, as recorded at download time).
   - source_id: lfs-pbs-2024-25

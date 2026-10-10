@@ -49,6 +49,7 @@ CheckType = Literal[
     "recompute",
     "weights_sum",
     "index_aggregation",
+    "reference_value",
 ]
 CheckResult = Literal["pass", "pass_within_rounding", "fail", "not_evaluable", "disputed"]
 
@@ -57,8 +58,13 @@ ARITHMETIC_CHECKS = frozenset(
      "index_aggregation", "recompute", "cross_table"}
 )
 AGREEMENT_CHECKS = frozenset({"cross_edition", "cross_source"})
+# Checks that test only their target. An index aggregation moves by w x e / 100 when a group index is
+# wrong by e, far inside its tolerance for a low-weight group, so it says nothing about its members
+# (review finding CPI-2). Such a check is evidence for the target cell alone.
+TARGET_ONLY_CHECKS = frozenset({"index_aggregation"})
 PASSING = frozenset({"pass", "pass_within_rounding"})
-BLOCKING_CELL_FLAGS = frozenset({"merged_cell_suspected", "title_text_suspected", "text_with_number"})
+BLOCKING_CELL_FLAGS = frozenset({"merged_cell_suspected", "title_text_suspected", "text_with_number",
+                                 "precision_differs_from_column"})
 # Arithmetic evidence that a reading is as printed, for the `disputed` rule (decision D25).
 DISPUTE_ARITHMETIC = frozenset({"column_total", "hierarchy_sum", "weights_sum", "index_aggregation", "recompute", "row_total"})
 

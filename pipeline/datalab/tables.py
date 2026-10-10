@@ -19,7 +19,8 @@ from .normalise import parse_printed
 
 def norm_bbox(bbox: dict[str, Any], page_w: float, page_h: float) -> list[float]:
     """Convert a Docling bbox dict to normalised top-left [x0, y0, x1, y1]."""
-    origin = str(bbox.get("coord_origin", "TOPLEFT")).upper()
+    # No default: Docling table boxes are BOTTOMLEFT and cell boxes TOPLEFT, so a guess is a wrong box.
+    origin = str(bbox["coord_origin"]).upper()
     left, right = float(bbox["l"]), float(bbox["r"])
     t, b = float(bbox["t"]), float(bbox["b"])
     if origin.endswith("BOTTOMLEFT"):

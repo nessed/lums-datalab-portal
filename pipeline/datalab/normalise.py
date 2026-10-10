@@ -25,7 +25,7 @@ MISSING_MARKERS = frozenset(
 FISCAL_YEAR = re.compile(r"\b((?:19|20)\d{2})\s*-\s*(\d{4}|\d{2})\b")
 _LONE_YEAR = re.compile(r"^(?:19|20)\d{2}$")
 
-_NUMBER = re.compile(r"-?\d[\d,]*(?:\.\d+)?\.?")
+_NUMBER = re.compile(r"-?(?:\d[\d,]*(?:\.\d+)?\.?|\.\d+)")
 _BRACKETED = re.compile(r"^\(\s*(-?\d[\d,]*(?:\.\d+)?)\s*\)$")
 # Rule 5: footnote marks that may trail (or lead) a printed number.
 _FOOTNOTE_TAIL = re.compile(r"(?:\s*(?:\*+|\u2020|\u2021|[\u00b9\u00b2\u00b3\u2070-\u2079]+|\([a-z]\)|@|#))+$", re.I)

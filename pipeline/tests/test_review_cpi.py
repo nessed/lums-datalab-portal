@@ -51,8 +51,6 @@ def distinct_table():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-1
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-1: a failed recompute check is overridden by the passing "
-                                       "index_aggregation check, which cannot see an error in a low-weight group")
 def test_review_cpi_1_misread_index_with_failed_recompute_is_not_published():
     # Alcoholic Bev. & Tobacco (weight 1.02): the previous-month index is read 5 points too low (198 -> 193).
     # The MoM recomputation fails ((200/193 - 1) x 100 = 3.63, printed 1.01). The aggregation check for that
@@ -68,8 +66,6 @@ def test_review_cpi_1_misread_index_with_failed_recompute_is_not_published():
     assert not o.published, f"193.00 published as tier {o.tier} although the only check able to see it failed"
 
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-1: a misread general index (2 <-> 3 in the first decimal) fails both "
-                                       "recomputations and is still published because index_aggregation passes")
 def test_review_cpi_1_misread_general_index_is_not_published():
     cells, meta = make_table(general=("200.10", "198.00", "160.00", "1.01", "25.00"))    # printed 200.00
     checks, series, order = run(cells, meta)
@@ -79,8 +75,6 @@ def test_review_cpi_1_misread_general_index_is_not_published():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-2
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-2: index_aggregation credits every member; for a low-weight group it is "
-                                       "the only 'evidence' and passes for an index that is 8 points off")
 def test_review_cpi_2_aggregation_alone_does_not_check_a_low_weight_group_index():
     # The YoY cell of the row is printed as "n.a.", so no recompute check covers the same-month-last-year
     # index. It is read as 152.00 (printed 160.00). 1.02 x 8 / 100 = 0.082 < tolerance 0.106: 'pass'.
@@ -95,8 +89,6 @@ def test_review_cpi_2_aggregation_alone_does_not_check_a_low_weight_group_index(
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-3
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-3: tolerances are taken from the precision of the value as READ, so a "
-                                       "truncated read ('271' for 271.10) widens every tolerance it takes part in and passes")
 def test_review_cpi_3_truncated_index_is_not_published():
     printed = ("271.10", "272.12", "264.33", "-0.37", "2.56")
     rows = [printed] * 12
@@ -110,8 +102,6 @@ def test_review_cpi_3_truncated_index_is_not_published():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-4
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-4: weights_sum, index_aggregation and recompute are all unchanged when two "
-                                       "group rows swap labels, so no check validates the label -> series mapping")
 def test_review_cpi_4_two_rows_with_swapped_labels_are_noticed():
     general, rows = distinct_table()
     cells, meta = make_table(general=general, group_rows=rows)
@@ -126,7 +116,8 @@ def test_review_cpi_4_two_rows_with_swapped_labels_are_noticed():
     checks, series, order = run(cells, meta)
     obs = observations(cells, checks, series, order)
     health = obs["cpi.national.group.health.b2015_16:2025-06:na"]
-    assert health.value == rows[t][0]                                                  # Transport's index under "Health"
+    by_id = {c.cell_id: c for c in cells}
+    assert by_id[health.primary_cell_id].value_raw == rows[t][0]                       # Transport's index under "Health"
     assert any(c.result not in PASSING for c in checks) or not health.published, (
         "every check passes and Transport's figures are published as Health (weight 5.91 instead of 2.79)")
 
@@ -158,8 +149,6 @@ def test_review_cpi_5_one_table_is_never_located_for_two_areas():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-6
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-6: two issues that print different figures (1 unit of the last digit apart) "
-                                       "count as cross-edition AGREEMENT and lift the earlier figure to tier A, no note")
 def test_review_cpi_6_two_printings_that_differ_are_not_agreement():
     a_cells, a_meta = make_table("cpi-a", "2025-06")                                   # June 2025 = 200.00
     b_row = ("230.00", "228.00", "200.01", "0.88", "14.99")                            # June 2025 = 200.01 a year later
@@ -172,8 +161,6 @@ def test_review_cpi_6_two_printings_that_differ_are_not_agreement():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-7
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-7: cross_edition_checks ignores the blocked-table list, so cells of a table "
-                                       "flagged merged_rows / dropped_column / low_coverage still earn a passing check")
 def test_review_cpi_7_cells_of_a_blocked_table_earn_no_passing_check():
     a_cells, a_meta = make_table("cpi-a", "2025-06")
     for c in a_cells:
@@ -189,8 +176,6 @@ def test_review_cpi_7_cells_of_a_blocked_table_earn_no_passing_check():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-8
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-8: two manifest entries for the SAME issue (a re-download, a mirror copy) are "
-                                       "paired as 'cross-edition' and every index in them becomes tier A")
 def test_review_cpi_8_two_copies_of_one_issue_are_not_cross_edition_evidence():
     a_cells, a_meta = make_table("cpi-a", "2025-06")
     b_cells, b_meta = make_table("cpi-b", "2025-06")                                   # same issue, second copy
@@ -251,7 +236,6 @@ def test_review_cpi_11_new_base_caption_without_area_is_not_assumed_national():
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-12
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-12: parse_printed reads '.37' as 37 and '-.37' as +37 (leading-dot decimals)")
 @pytest.mark.parametrize("text,expected", [(".37", Decimal("0.37")), ("-.37", Decimal("-0.37"))])
 def test_review_cpi_12_leading_dot_decimal_is_not_read_as_a_whole_number(text, expected):
     value = parse_printed(text).value
@@ -260,8 +244,6 @@ def test_review_cpi_12_leading_dot_decimal_is_not_read_as_a_whole_number(text, e
 
 # ----------------------------------------------------------------------------- REVIEW-CPI-13
 
-@pytest.mark.xfail(strict=True, reason="REVIEW-CPI-13: norm_bbox assumes TOPLEFT when a box carries no coord_origin, although "
-                                       "Docling table boxes are BOTTOMLEFT (the coordinate trap), instead of refusing")
 def test_review_cpi_13_bbox_without_origin_is_refused():
     with pytest.raises((KeyError, ValueError)):
         norm_bbox({"l": 60.0, "t": 700.0, "r": 540.0, "b": 300.0}, 600.0, 800.0)

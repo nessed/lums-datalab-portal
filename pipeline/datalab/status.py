@@ -28,8 +28,8 @@ from typing import Iterable
 
 from .checks import fmt
 from .normalise import last_digit_unit
-from .schema import (AGREEMENT_CHECKS, ARITHMETIC_CHECKS, BLOCKING_CELL_FLAGS, PASSING, Cell, Check, DisputedReading,
-                     Observation, Series, obs_id_for)
+from .schema import (AGREEMENT_CHECKS, ARITHMETIC_CHECKS, BLOCKING_CELL_FLAGS, PASSING, TARGET_ONLY_CHECKS, Cell, Check,
+                     DisputedReading, Observation, Series, obs_id_for)
 
 BLOCKING_STRUCT_FLAGS = frozenset({"dropped_column", "merged_rows", "possible_dropped_column", "low_coverage", "column_unmapped"})
 
@@ -39,6 +39,11 @@ def _agree(a: Cell, b: Cell) -> bool:
         return False
     unit = max(last_digit_unit(a.value_parsed), last_digit_unit(b.value_parsed))
     return abs(Decimal(a.value_parsed) - Decimal(b.value_parsed)) <= unit
+
+
+def credits(chk: Check, cell_id: str) -> bool:
+    """Does a passed check count as evidence for this cell? Target-only checks credit their target alone."""
+    return chk.check_type not in TARGET_ONLY_CHECKS or chk.target_cell_id == cell_id
 
 
 def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str, list[Check]]) -> tuple[str, list[str]]:
@@ -54,22 +59,25 @@ def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str,
 
     own = [c for c in checks_by_cell.get(primary.cell_id, []) if c.official]
     failed = [c for c in own if c.result == "fail"]
-    passed = [c for c in own if c.result in PASSING]
+    passed = [c for c in own if c.result in PASSING and credits(c, primary.cell_id)]
     arithmetic = [c for c in passed if c.check_type in ARITHMETIC_CHECKS]
     agreement = [c for c in passed if c.check_type in AGREEMENT_CHECKS]
     # Arithmetic evidence on a second printing counts only if that printing shows the same figure.
     if not arithmetic:
         for s in agreeing:
             arithmetic += [c for c in checks_by_cell.get(s.cell_id, []) if c.official and c.result in PASSING
-                           and c.check_type in ARITHMETIC_CHECKS]
-    if failed and not passed:
-        return "D", [f"{len(failed)} check(s) failed and no independent check passed"]
+                           and c.check_type in ARITHMETIC_CHECKS and credits(c, s.cell_id)]
     if any(c.check_type == "cross_edition" for c in failed):
         # Another official document prints a different figure and the difference is not established
         # as a restatement (the D25 conditions do not all hold): withheld, never shown as checked.
         return "D", ["another official document prints a different figure and the difference is not explained"]
+    if failed and not agreement:
+        # A failed check is not outvoted by another arithmetic check: sums and aggregations can pass
+        # around a wrong member (review finding CPI-1). Only a second official printing of the same
+        # figure shows that this reading is right and the fault lies elsewhere in the failed check.
+        return "D", [f"{len(failed)} check(s) failed and no other official printing confirms this figure"]
     if failed:
-        reasons.append(f"{len(failed)} check(s) failed but an independent check passed")
+        reasons.append(f"{len(failed)} check(s) failed but another official printing shows the same figure")
     if arithmetic and agreement:
         return "A", reasons
     if arithmetic or agreement:
@@ -157,6 +165,16 @@ def disagreement_note(primary: Cell, checks_by_cell: dict[str, list[Check]], cel
     """
     notes: list[str] = []
     for chk in checks_by_cell.get(primary.cell_id, []):
+        if chk.official and chk.result == "pass_within_rounding" and chk.check_type == "cross_edition":
+            other_id = chk.member_cell_ids[0] if chk.target_cell_id == primary.cell_id else chk.target_cell_id
+            other = cells_by_id.get(other_id or "")
+            if other is not None and other.value_parsed is not None and primary.value_parsed is not None \
+                    and Decimal(other.value_parsed) != Decimal(primary.value_parsed):
+                notes.append(f"The {source_titles.get(other.source_id, other.source_id)} prints this figure as "
+                             f"{fmt(other.value_parsed)}, one unit of the last printed digit away; that counts as agreement "
+                             f"within rounding. The value shown is the one printed in the "
+                             f"{source_titles.get(primary.source_id, primary.source_id)}.")
+            continue
         if not chk.official or chk.result != "fail" or chk.check_type not in AGREEMENT_CHECKS:
             continue
         other_id = chk.member_cell_ids[0] if chk.target_cell_id == primary.cell_id else chk.target_cell_id

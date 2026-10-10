@@ -289,7 +289,8 @@ def test_consistent_table_passes_every_check():
     assert yoy.value == "25.00" and "recomputation" in yoy.evidence_summary
 
 
-def test_weights_sum_fails_beyond_tolerance_and_passes_within():
+def test_weights_sum_fails_beyond_tolerance_and_passes_within(monkeypatch):
+    monkeypatch.setattr(cpi, "_BASKET", {})      # no recorded basket: the sum check stands alone (as for a new base year)
     weights = ["34.58", "1.02", "8.60", "23.63", "4.10", "2.79", "5.91", "2.21", "1.59", "3.79", "6.92", "4.86"]
     near = list(weights); near[0] = "34.62"       # sum 100.04: within 0.05
     far = list(weights); far[0] = "34.68"         # sum 100.10: fails

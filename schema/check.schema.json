@@ -16,7 +16,8 @@
         "cross_source",
         "recompute",
         "weights_sum",
-        "index_aggregation"
+        "index_aggregation",
+        "reference_value"
       ],
       "title": "Check Type",
       "type": "string"

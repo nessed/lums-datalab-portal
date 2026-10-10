@@ -12,7 +12,7 @@ from decimal import Decimal
 from typing import Any, Iterable, Sequence
 
 from .normalise import decimal_to_str, last_digit_unit
-from .schema import BLOCKING_CELL_FLAGS, DISPUTE_ARITHMETIC, PASSING, Cell, Check, check_id_for
+from .schema import BLOCKING_CELL_FLAGS, DISPUTE_ARITHMETIC, PASSING, TARGET_ONLY_CHECKS, Cell, Check, check_id_for
 
 SUM_RULE_TEXT = ("Exact match passes. A difference of at most half a unit of the last printed digit per "
                  "item added passes as 'within rounding'. Anything larger fails.")
@@ -79,7 +79,8 @@ def sum_check(*, check_type: str, dataset: str, rule_id: str, target: Cell, memb
 
 
 def equality_check(*, check_type: str, dataset: str, rule_id: str, first: Cell, second: Cell, what: str,
-                   where_first: str, where_second: str, units: int = 1, official: bool = True) -> Check:
+                   where_first: str, where_second: str, units: int = 1, official: bool = True,
+                   blocked_reason: str | None = None) -> Check:
     """The same figure printed in two places must agree."""
     cid = check_id_for(check_type, rule_id, *sorted([first.cell_id, second.cell_id]))
     base: dict[str, Any] = dict(
@@ -87,9 +88,10 @@ def equality_check(*, check_type: str, dataset: str, rule_id: str, first: Cell, 
         source_ids=sorted({first.source_id, second.source_id}), member_cell_ids=[second.cell_id],
         target_cell_id=first.cell_id, tolerance_rule=EQUAL_RULE_TEXT, official=official,
     )
-    if first.value_parsed is None or second.value_parsed is None:
-        return Check(**base, result="not_evaluable", not_evaluable_reason="one of the two figures could not be parsed",
-                     description=f"Could not compare {what} between {where_first} and {where_second}.")
+    if blocked_reason or first.value_parsed is None or second.value_parsed is None:
+        reason = blocked_reason or "one of the two figures could not be parsed"
+        return Check(**base, result="not_evaluable", not_evaluable_reason=reason,
+                     description=f"Could not compare {what} between {where_first} and {where_second}: {reason}.")
     a, b = Decimal(first.value_parsed), Decimal(second.value_parsed)
     residual = b - a
     unit = _unit([first, second])
@@ -224,7 +226,8 @@ def dispute_test(chk: Check, cells_by_id: dict[str, Cell], checks_by_cell: dict[
                if c.official and c.check_type in DISPUTE_ARITHMETIC and c.source_ids == [cell.source_id]]
         if any(c.result == "fail" for c in own):
             return "an arithmetic check on one reading failed"
-        if not any(c.result in PASSING for c in own):
+        if not any(c.result in PASSING and (c.check_type not in TARGET_ONLY_CHECKS or c.target_cell_id == cell.cell_id)
+                   for c in own):
             return "a reading has no passed arithmetic check in its own table"
     return None
 

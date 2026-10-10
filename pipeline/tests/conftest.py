@@ -64,3 +64,13 @@ def make_cell(source: str, row: int, col: int, raw: str, parsed: str | None, *, 
         mapping_method="dictionary" if series else "unmapped", extractor_name="docling", extractor_version="test",
         run_id="TEST__run-01", extract_config_sha256="0" * 64, unit="PKR", scale_factor=1000000,
     )
+
+
+@pytest.fixture(autouse=True)
+def synthetic_cpi_basket(monkeypatch):
+    """CPI tests use a synthetic basket (weights that add to exactly 100), not specs/cpi_basket_weights.yaml."""
+    from datalab.datasets import common, cpi
+
+    groups = [g["slug"] for g in common.load_spec("cpi")["groups"]]
+    weights = ["34.58", "1.02", "8.60", "23.63", "4.10", "2.79", "5.91", "2.21", "1.59", "3.79", "6.92", "4.86"]
+    monkeypatch.setattr(cpi, "_BASKET", {("2015-16", "national", g): w for g, w in zip(groups, weights)})

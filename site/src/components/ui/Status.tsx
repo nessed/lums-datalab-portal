@@ -6,7 +6,7 @@
 //   gap-pending  dotted square    (not yet verified by us)
 //   withheld     crossed square   (failed checks)
 //   unknown      short dash       (a value this code does not know: raw label)
-import { STATUS, STATUS_ORDER, statusOf, TIER_SHORT, type StatusInfo, type StatusKey } from "@/lib/status";
+import { STATUS, STATUS_ORDER, statusOf, type StatusInfo, type StatusKey } from "@/lib/status";
 
 export function StatusMark({ k, title }: { k: StatusKey; title?: string }) {
   const common = { className: "st-mark", viewBox: "0 0 10 10", "aria-hidden": title ? undefined : true, role: title ? "img" : undefined } as const;
@@ -59,23 +59,23 @@ export function StatusMark({ k, title }: { k: StatusKey; title?: string }) {
   }
 }
 
-/** Mark + label. `tier` adds the tier in words to a checked status. */
-export function StatusBadge({ info, tier, short }: { info: StatusInfo; tier?: string | null; short?: boolean }) {
+/** Mark + label. `detail` adds a short phrase (for example the evidence) after the label. */
+export function StatusBadge({ info, detail, short }: { info: StatusInfo; detail?: string | null; short?: boolean }) {
   const label = short && info.key.startsWith("gap") ? "Gap" : info.label;
   return (
     <span className={`st st--${info.key}`} title={info.meaning}>
       <StatusMark k={info.key} />
       <span className="st-label">
         {label}
-        {info.key === "checked" && tier && TIER_SHORT[tier] ? <span className="muted" style={{ fontWeight: 400 }}>{`: ${TIER_SHORT[tier]}`}</span> : null}
+        {detail ? <span className="st-detail">{`: ${detail}`}</span> : null}
       </span>
     </span>
   );
 }
 
 /** Convenience: badge straight from an observation-like record. */
-export function ObsStatus({ obs, tier, short }: { obs: Parameters<typeof statusOf>[0]; tier?: boolean; short?: boolean }) {
-  return <StatusBadge info={statusOf(obs)} tier={tier ? (obs?.status === "checked" ? (obs as { tier?: string | null }).tier : null) : null} short={short} />;
+export function ObsStatus({ obs, short }: { obs: Parameters<typeof statusOf>[0]; short?: boolean }) {
+  return <StatusBadge info={statusOf(obs)} short={short} />;
 }
 
 const FILL_CLASS: Partial<Record<StatusKey, string>> = {

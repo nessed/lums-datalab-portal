@@ -5,6 +5,7 @@
 // JavaScript the trigger is a plain link to /browse.
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { search, type SearchEntry } from "@/lib/search";
+import { useIsMac } from "@/lib/url-state";
 import { IconSearch } from "@/components/ui/Icons";
 
 function Highlight({ text, q }: { text: string; q: string }) {
@@ -26,7 +27,7 @@ export default function SearchDialog({ indexUrl }: { indexUrl: string }) {
   const [q, setQ] = useState("");
   const [active, setActive] = useState(0);
   const listId = useId();
-  const [mac, setMac] = useState(false);
+  const mac = useIsMac();
 
   const open = useCallback(() => {
     const d = dialog.current;
@@ -42,7 +43,6 @@ export default function SearchDialog({ indexUrl }: { indexUrl: string }) {
   }, [index, failed, indexUrl]);
 
   useEffect(() => {
-    setMac(/Mac|iPhone|iPad/.test(navigator.platform));
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);

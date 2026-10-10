@@ -103,6 +103,19 @@ const rowFor = (o, s) => {
 for (const s of series) {
   const rows = (bySeries.get(s.series_id) ?? []).slice().sort((a, b) => (a.period + a.vintage < b.period + b.vintage ? -1 : 1));
   fs.writeFileSync(path.join(csvDir, `${slugify(s.series_id)}.csv`), [cols.join(","), ...rows.map((o) => rowFor(o, s))].join("\n") + "\n");
+  // The same rows as JSON, with the series definition. Unpublished rows carry no value.
+  fs.writeFileSync(
+    path.join(csvDir, `${slugify(s.series_id)}.json`),
+    JSON.stringify(
+      {
+        release: { version: release.version, label: release.label, doi: release.doi, created_at: release.created_at },
+        series: s,
+        observations: rows.map((o) => ({ ...o, value: o.published ? o.value : null })),
+      },
+      null,
+      1,
+    ),
+  );
 }
 // One CSV row per observation, beside its JSON receipt.
 for (const o of observations) {

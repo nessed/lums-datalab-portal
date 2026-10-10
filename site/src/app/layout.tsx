@@ -12,7 +12,6 @@ import "./globals.css";
 const serif = localFont({
   src: [
     { path: "../fonts/source-serif-4-latin-opsz-normal.woff2", style: "normal", weight: "200 900" },
-    { path: "../fonts/source-serif-4-latin-opsz-italic.woff2", style: "italic", weight: "200 900" },
   ],
   variable: "--font-source-serif",
   display: "swap",
@@ -21,7 +20,6 @@ const serif = localFont({
 const sans = localFont({
   src: [
     { path: "../fonts/source-sans-3-latin-wght-normal.woff2", style: "normal", weight: "200 900" },
-    { path: "../fonts/source-sans-3-latin-wght-italic.woff2", style: "italic", weight: "200 900" },
   ],
   variable: "--font-source-sans",
   display: "swap",

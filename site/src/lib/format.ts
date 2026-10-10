@@ -60,7 +60,7 @@ export function vintageWords(v: string | null | undefined): string {
 }
 
 export function vintageLong(v: string | null | undefined): string {
-  if (v === "na") return "Not applicable (this kind of figure has no estimate type)";
+  if (v === "na") return "The value as printed (this kind of figure has no budget, revised or actual stage)";
   if (v === "be") return "Budget estimate: the amount planned when the budget was presented";
   if (v === "re") return "Revised estimate: the government's updated figure, printed in the following year's budget";
   return vintageWords(v);
@@ -74,7 +74,7 @@ export const GAP_WORDS: Record<string, string> = {
 
 export const GAP_EXPLAIN: Record<string, string> = {
   not_in_source:
-    "The government document does not print this figure. There is nothing for us to read, so there is no value here.",
+    "The government document prints no number for this figure (a dash or a blank), so there is no value here. We do not read a dash as zero.",
   not_yet_verified:
     "The figure may exist in the government document, but we have not yet read and checked it. Until it passes our checks we show a gap, not a number.",
   failed_checks:

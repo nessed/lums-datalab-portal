@@ -396,27 +396,55 @@ export function disputedCells(o: Observation & { disputed_readings?: unknown }):
   return [...new Set(ids)].map((id) => d.cellById.get(id)).filter((c): c is Cell => !!c);
 }
 
-/** Guides for a magnified crop: where the table's row labels end (the left
- * edge of its leftmost number cell), and the left edge of the number printed
- * just left of this cell in the same row, so a crop never cuts a number. */
-export function cropGuides(cell: Cell): { labelRight: number | null; prevLeft: number | null } {
-  let min = Infinity;
-  let prev: Cell | null = null;
+export type CropGuides = {
+  /** Where the row labels end: the left edge of the leftmost number column. */
+  labelRight: number | null;
+  /** Left edge of the number column just left of this cell (over all its rows). */
+  prevLeft: number | null;
+  /** Top and bottom of every row of the table that holds numbers, in order. */
+  rows: [number, number][];
+  /** Index of this cell's row in `rows`. */
+  rowIndex: number;
+  /** Number columns as [left, right], used to count columns a crop leaves out. */
+  cols: [number, number][];
+  /** The band above the first row of numbers (column headings), if any. */
+  header: [number, number] | null;
+};
+
+/** Geometry for a magnified crop, from the table's own cells, so a crop
+ * never cuts a number or a row in half and can always show the headings. */
+export function cropGuides(cell: Cell): CropGuides {
   const b = cell.cell_bbox_norm;
   const same = (db().cellsBySource.get(cell.source_id) ?? []).filter((c) => c.page === cell.page && c.table_index === cell.table_index && c.cell_bbox_norm);
+  let min = Infinity;
+  let prev: Cell | null = null;
+  const rowMap = new Map<number, [number, number]>();
+  const colMap = new Map<number, [number, number]>();
   for (const c of same) {
     const cb = c.cell_bbox_norm!;
     min = Math.min(min, cb[0]);
     if (b && c.row_index === cell.row_index && cb[2] <= b[0] + 0.002 && (!prev || cb[2] > prev.cell_bbox_norm![2])) prev = c;
+    const r = rowMap.get(c.row_index);
+    rowMap.set(c.row_index, r ? [Math.min(r[0], cb[1]), Math.max(r[1], cb[3])] : [cb[1], cb[3]]);
+    const k = colMap.get(c.col_index);
+    colMap.set(c.col_index, k ? [Math.min(k[0], cb[0]), Math.max(k[1], cb[2])] : [cb[0], cb[2]]);
   }
-  // The neighbouring column's left edge over all its rows: wider numbers in
-  // other rows must not be cut either.
-  let prevLeft: number | null = null;
-  if (prev) {
-    prevLeft = prev.cell_bbox_norm![0];
-    for (const c of same) if (c.col_index === prev.col_index) prevLeft = Math.min(prevLeft, c.cell_bbox_norm![0]);
-  }
-  return { labelRight: Number.isFinite(min) ? min : null, prevLeft };
+  const prevLeft = prev ? (colMap.get(prev.col_index)?.[0] ?? prev.cell_bbox_norm![0]) : null;
+  const rows = [...rowMap.values()].sort((x, y) => x[0] - y[0]);
+  const mid = b ? (b[1] + b[3]) / 2 : 0;
+  const rowIndex = Math.max(0, rows.findIndex((r) => r[0] <= mid && r[1] >= mid));
+  const t = cell.table_bbox_norm;
+  const firstTop = rows.length ? rows[0][0] : null;
+  const header: [number, number] | null =
+    t && firstTop !== null && firstTop - t[1] > 0.012 ? [Math.max(t[1] - 0.004, firstTop - 0.075), firstTop - 0.002] : null;
+  return {
+    labelRight: Number.isFinite(min) ? min : null,
+    prevLeft,
+    rows,
+    rowIndex,
+    cols: [...colMap.values()].sort((x, y) => x[0] - y[0]),
+    header,
+  };
 }
 
 export const receiptCsvHref = (obsId: string) => `${DATA_BASE}/receipts/${slugify(obsId)}.csv`;

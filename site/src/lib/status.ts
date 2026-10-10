@@ -30,7 +30,7 @@ export const STATUS: Record<Exclude<StatusKey, "unknown">, StatusInfo> = {
   "gap-source": {
     key: "gap-source",
     label: "Not published by the government",
-    meaning: "The government document does not print this figure, so there is nothing to show.",
+    meaning: "The government document prints no number here (a dash or a blank), so there is no value to show.",
   },
   "gap-pending": {
     key: "gap-pending",

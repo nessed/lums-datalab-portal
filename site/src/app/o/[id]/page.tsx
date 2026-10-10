@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import Cite from "@/components/Cite";
 import { Breadcrumbs, Callout, Disclosure, DownloadLink, ExternalLink, TableWrap, Toc, type TocItem } from "@/components/ui/Basics";
 import CopyButton from "@/components/ui/CopyButton";
+import { ReportLink } from "@/components/chrome/Chrome";
 import { DocCrop, DocPage } from "@/components/ui/PageFrame";
 import { StatusBadge, StatusMark } from "@/components/ui/Status";
 import { cite } from "@/lib/cite";
@@ -14,6 +15,7 @@ import {
   datasetName,
   db,
   disputedCells,
+  ISSUES_URL,
   isDatasetPublished,
   cropGuides,
   neighbours,
@@ -88,7 +90,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const RESULT_WORDS: Record<string, string> = {
   pass: "Passed",
-  pass_within_rounding: "Passed within rounding",
+  pass_within_rounding: "Passed within the stated tolerance",
   fail: "Failed",
   not_evaluable: "Could not be run",
   disputed: "Printings disagree",
@@ -103,6 +105,29 @@ function ResultMark({ result }: { result: string }) {
       <span className="st-label">{RESULT_WORDS[result] ?? result.replaceAll("_", " ")}</span>
     </span>
   );
+}
+
+/** "a sum and a second printing": built from the checks that passed, so the
+ * headline never claims a kind of evidence the figure does not have. */
+function evidenceWords(checks: Check[]): string | null {
+  const kinds: string[] = [];
+  const add = (k: string) => {
+    if (!kinds.includes(k)) kinds.push(k);
+  };
+  for (const c of checks) {
+    if (c.official === false || (c.result !== "pass" && c.result !== "pass_within_rounding")) continue;
+    if (["column_total", "row_total", "hierarchy_sum", "accounting_identity"].includes(c.check_type)) add("a sum");
+    else if (c.check_type === "cross_edition") add("a second printing in another edition");
+    else if (c.check_type === "cross_table") add("a second printing in another table");
+    else if (c.check_type === "cross_source") add("another official source");
+    else if (c.check_type === "index_aggregation") add("recomputing the weighted average");
+    else if (c.check_type === "recompute") add("a recomputed rate");
+    else if (c.check_type === "weights_sum") add("weights that add up");
+    else add(c.check_type.replaceAll("_", " "));
+  }
+  if (kinds.length === 0) return null;
+  kinds.sort((a, b) => (a === "a sum" ? -1 : b === "a sum" ? 1 : 0));
+  return kinds.length === 1 ? kinds[0] : `${kinds.slice(0, -1).join(", ")} and ${kinds[kinds.length - 1]}`;
 }
 
 function srcShort(src: Source | undefined, id: string) {
@@ -153,6 +178,8 @@ function CheckItem({ check, obs }: { check: Check; obs: Observation }) {
   const members = check.member_cell_ids.map((id) => d.cellById.get(id)).filter((c): c is Cell => !!c);
   const target = check.target_cell_id ? d.cellById.get(check.target_cell_id) : undefined;
   const isEdition = check.check_type === "cross_edition" || check.check_type === "cross_source" || check.check_type === "cross_table";
+  const where = target ?? members[0];
+  const whereSrc = where ? d.sourceById.get(where.source_id) : undefined;
   return (
     <li className="check" data-check-result={check.result}>
       <div className="check-head">
@@ -160,7 +187,13 @@ function CheckItem({ check, obs }: { check: Check; obs: Observation }) {
         <span className="label">{CHECK_TYPE_WORDS[check.check_type] ?? check.check_type.replaceAll("_", " ")}</span>
         {check.official === false ? <span className="small muted">comparison only; does not affect the status</span> : null}
       </div>
+      {where && !isEdition ? (
+        <p className="check-where">
+          {srcShort(whereSrc, where.source_id)}, page {where.page}
+        </p>
+      ) : null}
       <p className="check-desc">{check.description}</p>
+      {check.result === "pass_within_rounding" && check.tolerance_rule ? <p className="check-tol">Tolerance: {check.tolerance_rule}</p> : null}
       {check.result === "not_evaluable" && check.not_evaluable_reason ? <p className="small">Why it could not run: {check.not_evaluable_reason}</p> : null}
       <Disclosure summary={isEdition ? "Show both printings" : "Show the arithmetic"} meta={`${members.length + (target ? 1 : 0)} printed figures`}>
         <TableWrap label={`Figures used by check ${check.check_id}`}>
@@ -233,7 +266,7 @@ function Printing({ cell, label }: { cell: Cell; label: ReactNode }) {
           .
         </span>
       </p>
-      {img ? <DocCrop image={img} cell={cell} guides={cropGuides(cell)} alt={`Close-up of page ${cell.page} of ${srcShort(src, cell.source_id)}, the figure ${cell.value_raw} boxed in its row.`} rows={2.4} /> : null}
+      {img ? <DocCrop image={img} cell={cell} guides={cropGuides(cell)} alt={`Close-up of page ${cell.page} of ${srcShort(src, cell.source_id)}, the figure ${cell.value_raw} boxed in its row.`} rows={2} /> : null}
     </div>
   );
 }
@@ -276,6 +309,13 @@ export default async function ReceiptPage({ params }: Props) {
   const title = obsTitle(obs, series);
   const apa = cite({ release: d.release, path, what: `Observation ${obs.obs_id}`, source: isValue ? source : null, page: isValue ? cell?.page : null }).apa;
 
+  const evidence = evidenceWords(checks);
+  const officialWorks = !(source?.verification_status ?? "").startsWith("wayback") && source?.verification_status !== "archive_copy_content_inspected";
+  const tableTitle = cell ? d.coverage.find((c) => c.source_id === cell.source_id && c.page === cell.page)?.table : undefined;
+  const ordOf = (p: string) => p;
+  const breakBetween = (a: string, b: string) => series.breaks.some((br) => ordOf(a) < br.at_period && br.at_period <= ordOf(b));
+  const between = (a: string, b: string) => series.breaks.find((br) => a < br.at_period && br.at_period <= b);
+  const breakNear = (nb.prev ? between(nb.prev.period, obs.period) : undefined) ?? (nb.next ? between(obs.period, nb.next.period) : undefined) ?? null;
   const caveats: ReactNode[] = [];
   if (obs.notes) caveats.push(<span key="obs">{obs.notes}</span>);
   if (series.notes) caveats.push(<span key="ser">{series.notes}</span>);
@@ -296,7 +336,7 @@ export default async function ReceiptPage({ params }: Props) {
     ...(isDisputed ? [{ id: "printings", label: "The printings that disagree" }] : []),
     ...(isValue && series.derived ? [{ id: "computed", label: "How it was computed" }] : []),
     { id: "checks", label: `Checks (${checks.length})` },
-    ...(supporting.length ? [{ id: "also", label: "Also printed in" }] : []),
+    ...(supporting.length ? [{ id: "also", label: "The other printing" }] : []),
     ...(caveats.length ? [{ id: "caveats", label: "Caveats" }] : []),
     { id: "provenance", label: "Provenance" },
     { id: "cite", label: "Cite and download" },
@@ -321,12 +361,15 @@ export default async function ReceiptPage({ params }: Props) {
       <header className={`receipt-top${image ? " has-crop" : ""}`}>
         <div className="receipt-id">
           <p className="kicker">Receipt for one {isValue ? "published figure" : "figure"}</p>
-          <h1 className="receipt-title">
-            <Link href={seriesHref(series.series_id)}>{series.name}</Link>
-          </h1>
+          <h1 className="receipt-title">{series.name}</h1>
           <p className="receipt-when">
-            {pWords}
-            {vintage ? <> · {vintage}</> : null} · {datasetName(series.dataset)}
+            {datasetName(series.dataset)} · <Link href={seriesHref(series.series_id)}>the whole series</Link>
+          </p>
+          <p className="figure-kind">
+            {vintage ? `${vintageWords(obs.vintage)} for ${pWords}` : pWords}
+            {cell && source && source.period && !source.period.startsWith(obs.period.slice(0, 7)) && isValue ? (
+              <span className="muted"> · as printed in {srcShort(source, cell.source_id)}</span>
+            ) : null}
           </p>
 
           {isValue ? (
@@ -341,7 +384,49 @@ export default async function ReceiptPage({ params }: Props) {
             </div>
           ) : (
             <div className={`figure figure-gap ${info.key === "gap-source" ? "fill-gap-source" : info.key === "gap-pending" ? "fill-gap-pending" : info.key === "withheld" ? "fill-withheld" : info.key === "disputed" ? "fill-disputed" : ""}`} data-receipt-gap={obs.gap_kind ?? (isDisputed ? "disputed" : "unknown")} {...(isDisputed ? { "data-receipt-disputed": "" } : {})}>
-              <p className="figure-none">{isDisputed ? "Two printings disagree" : "No figure shown"}</p>
+              <p className="figure-none">
+                {isDisputed ? (
+                  "Official printings disagree"
+                ) : info.key === "gap-source" && cell && showPage ? (
+                  <>
+                    Printed as <span className="figure-glyph">{cell.value_raw?.trim() || "(blank)"}</span>, not as a number
+                  </>
+                ) : (
+                  "No value in this release"
+                )}
+              </p>
+              {isDisputed && readings.length > 0 ? (
+                <table className="disputed-table">
+                  <caption className="sr-only">Every printing of this figure</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Document</th>
+                      <th scope="col">Pages</th>
+                      <th scope="col" className="num">
+                        Printed
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[...new Map(readings.map((c) => [`${c.source_id}|${c.value_raw}`, c])).values()].map((c) => (
+                      <tr key={`${c.source_id}|${c.value_raw}`}>
+                        <th scope="row">{srcShort(d.sourceById.get(c.source_id), c.source_id)}</th>
+                        <td>
+                          {readings
+                            .filter((r) => r.source_id === c.source_id && r.value_raw === c.value_raw)
+                            .map((r) => r.page)
+                            .join(", ")}
+                        </td>
+                        <td className="num">
+                          <span className="mono" data-printed>
+                            {c.value_raw}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : null}
             </div>
           )}
 
@@ -349,23 +434,38 @@ export default async function ReceiptPage({ params }: Props) {
 
         {image && cell ? (
           <div className="receipt-crop">
-            <DocCrop image={image} cell={cell} rows={4.5} guides={cropGuides(cell)} alt={`Close-up of page ${cell.page} of ${srcShort(source, cell.source_id)}: the row "${cell.row_label_raw}" with the figure ${cell.value_raw} boxed.`} />
-            <p className="small muted" style={{ marginTop: 8 }}>
-              Close-up of page {cell.page}. The box marks the figure; the row label is at the left. <a href="#page">See the whole page</a>.
+            <DocCrop image={image} cell={cell} rows={3} guides={cropGuides(cell)} alt={`Close-up of page ${cell.page} of ${srcShort(source, cell.source_id)}: the row "${cell.row_label_raw}" with the figure ${cell.value_raw} boxed.`} />
+            <p className="small muted" style={{ marginTop: 4 }}>
+              Close-up of page {cell.page}, magnified. <a href="#page">See the page</a>.
             </p>
           </div>
         ) : null}
 
         <div className="receipt-more">
           <div className="receipt-status">
-            <StatusBadge info={info} tier={isValue ? obs.tier : null} />
-            <p>{isValue ? (obs.evidence_summary ?? info.meaning) : obs.gap_kind && GAP_EXPLAIN[obs.gap_kind] ? GAP_EXPLAIN[obs.gap_kind] : info.meaning}</p>
+            <StatusBadge info={info} detail={isValue && evidence ? `verified by ${evidence}` : null} />
+            <p>
+              {isValue
+                ? (obs.evidence_summary ?? info.meaning)
+                : info.key === "gap-source" && cell && showPage
+                  ? "The document prints a dash (or nothing) in this cell. We show no value rather than reading the dash as zero; where a printed total depends on it, the total's own receipt says how it was checked."
+                  : obs.gap_kind && GAP_EXPLAIN[obs.gap_kind]
+                    ? GAP_EXPLAIN[obs.gap_kind]
+                    : info.meaning}
+            </p>
             {!isValue && obs.gap_reason ? (
               <p className="small">
                 <strong>Recorded reason:</strong> {obs.gap_reason}
               </p>
             ) : null}
           </div>
+
+          {breakNear ? (
+            <p className="receipt-break small">
+              <strong>Series break from {periodWords(breakNear.at_period, series.frequency)}</strong> ({breakNear.kind.replaceAll("_", " ")}): figures before and after it are not comparable.{" "}
+              <a href="#caveats">Why</a>
+            </p>
+          ) : null}
 
           {isValue && cell ? (
             <p className="receipt-printed small">
@@ -379,11 +479,32 @@ export default async function ReceiptPage({ params }: Props) {
           ) : null}
 
           <div className="action-row no-print">
-            <CopyButton text={apa} label="Copy citation" className="btn btn-primary" />
+            <CopyButton text={apa} label="Copy citation (APA)" className="btn btn-primary" />
             <CopyButton text={path} origin label="Copy link" />
             <DownloadLink href={receiptJsonHref(obs.obs_id)}>JSON</DownloadLink>
             <DownloadLink href={receiptCsvHref(obs.obs_id)}>CSV row</DownloadLink>
           </div>
+          <nav className="receipt-steps no-print" aria-label="Neighbouring figures">
+            {nb.prev ? (
+              <Link href={obsHref(nb.prev.obs_id)} rel="prev">
+                ‹ {periodWords(nb.prev.period, series.frequency)}
+                {breakBetween(nb.prev.period, obs.period) ? <span className="step-break"> (before the break)</span> : null}
+              </Link>
+            ) : (
+              <span className="muted">No earlier figure in this release</span>
+            )}
+            {nb.next ? (
+              <Link href={obsHref(nb.next.obs_id)} rel="next">
+                {periodWords(nb.next.period, series.frequency)}
+                {breakBetween(obs.period, nb.next.period) ? <span className="step-break"> (after the break)</span> : null} ›
+              </Link>
+            ) : (
+              <span className="muted">No later figure in this release</span>
+            )}
+            <ReportLink issuesUrl={ISSUES_URL} version={RELEASE_VERSION}>
+              Report a problem with this figure
+            </ReportLink>
+          </nav>
                 </div>
       </header>
 
@@ -402,7 +523,7 @@ export default async function ReceiptPage({ params }: Props) {
                 caption={
                   <>
                     What you are looking at: a picture of page {cell.page} of the PDF file, made from the copy whose fingerprint is recorded below. The solid box marks{" "}
-                    {isValue ? "the figure" : "the cell, which prints no figure"}; the dashed outline the table it was read from. Click the page to enlarge it.
+                    {isValue ? "the figure" : "the cell, which prints no figure"}; the dashed outline the table it was read from. Select the page to see all of it, enlarged.
                   </>
                 }
               />
@@ -412,15 +533,25 @@ export default async function ReceiptPage({ params }: Props) {
                     <strong>Is this the genuine document?</strong> {verif?.text}
                   </p>
                   <div className="action-row">
-                    {source.file_url ? (
+                    {source.wayback_url && !officialWorks ? (
+                      <ExternalLink className="btn" href={source.wayback_url}>
+                        Internet Archive copy (the file used)
+                      </ExternalLink>
+                    ) : null}
+                    {source.file_url && officialWorks ? (
                       <ExternalLink className="btn" href={source.file_url}>
                         Official PDF (go to page {cell.page})
                       </ExternalLink>
                     ) : null}
-                    {source.wayback_url ? (
+                    {source.wayback_url && officialWorks ? (
                       <ExternalLink className="btn" href={source.wayback_url}>
                         Internet Archive copy
                       </ExternalLink>
+                    ) : null}
+                    {source.file_url && !officialWorks ? (
+                      <span className="small muted">
+                        Official address, not responding when retrieved: <span className="mono">{source.file_url}</span>
+                      </span>
                     ) : null}
                     <Link className="btn btn-text" href={sourceHref(source.source_id)}>
                       Our record of this document
@@ -515,7 +646,7 @@ export default async function ReceiptPage({ params }: Props) {
 
           {/* ---------------- other printings ---------------- */}
           {supporting.length > 0 ? (
-            <Section id="also" title="Also printed in" lead="The same figure, printed in another official document. The cross-edition check above compares them.">
+            <Section id="also" title="The other printing, close up" lead="The same figure as printed in another official document or table. The check above compares the two.">
               {supporting.map((c) => (
                 <Printing key={c.cell_id} cell={c} label={null} />
               ))}
@@ -563,6 +694,12 @@ export default async function ReceiptPage({ params }: Props) {
                     {cell.page}
                     {source?.page_count ? ` of ${source.page_count}` : ""} (page of the PDF file; table {cell.table_index + 1} on the page)
                   </dd>
+                  {tableTitle ? (
+                    <>
+                      <dt>Table as printed</dt>
+                      <dd>{tableTitle}</dd>
+                    </>
+                  ) : null}
                   <dt>Row as printed</dt>
                   <dd>{cell.row_label_raw ?? "not recorded"}</dd>
                   <dt>Column as printed</dt>
@@ -633,8 +770,8 @@ export default async function ReceiptPage({ params }: Props) {
           <section>
             <h2>Same series</h2>
             <ul className="nb-list">
-              {nb.prev ? <NbItem o={nb.prev} s={series} label="Previous" /> : null}
-              {nb.next ? <NbItem o={nb.next} s={series} label="Next" /> : null}
+              {nb.prev ? <NbItem o={nb.prev} s={series} label={breakBetween(nb.prev.period, obs.period) ? "Previous (before the break)" : "Previous in this release"} /> : null}
+              {nb.next ? <NbItem o={nb.next} s={series} label={breakBetween(obs.period, nb.next.period) ? "Next (after the break)" : "Next in this release"} /> : null}
               {otherVintages.map((o) => (
                 <NbItem key={o.obs_id} o={o} s={series} label={vintageWords(o.vintage)} />
               ))}

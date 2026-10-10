@@ -29,7 +29,8 @@ for (const [name, url] of routes) {
   if (only && !only.has(name) && !only.has(name.split("-")[0])) continue;
   for (const w of widths) {
     const page = await browser.newPage({ viewport: { width: w, height: w < 600 ? 844 : 900 }, deviceScaleFactor: 1 });
-    const res = await page.goto(base + url, { waitUntil: "networkidle" });
+    const res = await page.goto(base + url, { waitUntil: "load" });
+    await page.waitForTimeout(300);
     // Lazy images below the fold: scroll through once so the full-page capture has them.
     await page.evaluate(async () => {
       for (let y = 0; y < document.body.scrollHeight; y += 700) {

@@ -23,7 +23,8 @@ for (const [name, url] of qaRoutes(siteDir)) {
   for (const width of [390, 1280]) {
     const context = await browser.newContext({ viewport: { width, height: 900 } });
     const page = await context.newPage();
-    await page.goto(base + url, { waitUntil: "networkidle" });
+    await page.goto(base + url, { waitUntil: "load" });
+    await page.waitForTimeout(400);
     const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
     const v = r.violations.map((x) => ({ id: x.id, impact: x.impact, help: x.help, nodes: x.nodes.length, sample: x.nodes[0]?.target?.join(" ") }));
     const bad = v.filter((x) => x.impact === "serious" || x.impact === "critical");

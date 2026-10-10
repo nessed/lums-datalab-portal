@@ -697,6 +697,15 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     checks += recompute_checks(cells, spec, titles, blocked)
     checks += shares_checks(cells, spec, labels_spec, titles, blocked)
     checks += cross_checks(cells, titles, order, series)
+    # Economic Survey labour chapter: cross-source evidence only; its cells carry no series id.
+    from .cross_source import pes_labour_checks
+
+    manifest = read_manifest()
+    pes_checks, pes_cells, pes_info = pes_labour_checks(cells, manifest, spec["cross_source_pes"],
+                                                        {s.series_id: s.name for s in catalogue}, titles)
+    checks += pes_checks
+    cells += pes_cells
+    titles.update({s.source_id: s.title for s in manifest if s.source_id == pes_info.get("source_id")})
     observations = build_observations(cells, checks, series, order, titles, release)
     observations += gap_observations(spec, observations, series, gap_reasons)
     used = {o.series_id for o in observations}
@@ -721,10 +730,12 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
             "arithmetic": pass_rate(checks, ["row_total", "column_total", "accounting_identity", "recompute",
                                              "weights_sum", "cross_table"]),
             "cross_edition": pass_rate(checks, ["cross_edition"]),
+            "cross_source": pass_rate(checks, ["cross_source"]),
             **{f"type:{t}": pass_rate(checks, [t]) for t in sorted({c.check_type for c in checks})},
         },
         "observations_by_outcome": dict(gaps), "tier_mix": dict(tiers),
         "comparability_text_search": comparability,
+        "cross_source_pes": pes_info,
     }
     save_dataset(DATASET, cells=cells, checks=checks, series=catalogue, observations=observations, coverage=coverage, info=info)
     return info

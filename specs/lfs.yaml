@@ -207,3 +207,65 @@ expected_every_round:
   measures: [unemployment_rate, lfpr_refined, lfpr_crude]
   sexes: [total, male, female]
   areas: [total]
+
+# Cross-source: the Pakistan Economic Survey 2024-25 labour chapter (datasets/cross_source.py).
+# Written before any comparison was run. Only figures that are the same concept, round and unit
+# as a series held here are compared; the chapter never supplies a published value.
+#   same concept: the tables below state "Source: Pakistan Bureau of Statistics (Labour Force Survey)"
+#   and print, per survey round, the labour force, the employed and unemployed labour force (in
+#   million) and the unemployment rate (%), for both sexes, Pakistan / Rural / Urban.
+# Tables are found by their printed title, rows by their labels, column years and column measures
+# from the text layer by position. A table whose title is found twice, whose header does not give
+# what is expected, or that is flagged by the extraction detectors is not used at all.
+cross_source_pes:
+  source_id: pes-fed-2024-25-labour
+  rule: "|LFS figure - Economic Survey figure| <= half a unit of the last printed digit of each"
+  # Rounds on the 13th ICLS definitions that a registered LFS report prints.
+  rounds: ["2013-14", "2014-15", "2017-18", "2018-19", "2020-21"]
+  measures:
+    labour_force: {unit: persons, scale_factor: 1000000}
+    employed: {unit: persons, scale_factor: 1000000}
+    unemployed: {unit: persons, scale_factor: 1000000}
+    unemployment_rate: {unit: percent}
+    lfpr_crude: {unit: percent}
+  tables:
+    - kind: measures_by_year
+      title: Labour Force and Employment
+      layout: measures_by_year
+      caption: '^table[\s\-]*[\d.]+ labour force and employment\b'
+      unit_marker: '\bin million\b'
+      # Row labels (lower case, hyphenation at line ends removed), matched whole. A row with a
+      # `measure` opens a block; `measure: null` opens a block that is not compared; rows with an
+      # `area` belong to the open block. Any other label closes the block.
+      rows:
+        - {pattern: 'population', measure: null}
+        - {pattern: 'working age population', measure: null}
+        - {pattern: 'labour force', measure: labour_force}
+        - {pattern: 'employed labour force', measure: employed}
+        - {pattern: 'unemployed labour force', measure: unemployed}
+        - {pattern: 'unemployment rate ?\(%\)', measure: unemployment_rate}
+        # Printed as "Labour Force Participation Rates (%)" with no word saying crude or refined:
+        # which of our two participation series it is cannot be established, so it is not compared.
+        - {pattern: 'labour force participation rates? ?\(%\)', measure: null}
+        - {pattern: 'rural', area: rural}
+        - {pattern: 'urban', area: urban}
+    - kind: years_by_measure
+      title: Population and Labour Force
+      layout: years_by_measure
+      caption: '^table[\s\-]*[\d.]+ population and labour force\b'
+      unit_marker: '\bin million\b'
+      # Column headers (words above the column by position, hyphenation removed), matched whole.
+      # The sector columns of this table are employment in million by a seven-way grouping that is
+      # not the grouping (or the unit) of our industry shares: not compared.
+      columns:
+        - {pattern: 'crude activity rate ?\(%\)', measure: lfpr_crude}
+        - {pattern: 'labour force', measure: labour_force}
+        - {pattern: 'unemployed labour force', measure: unemployed}
+        - {pattern: 'employed labour force', measure: employed}
+  not_compared:
+    - "Labour Force Participation Rates (%) in 'Labour Force and Employment': the table does not say crude or refined."
+    - "Population and working-age population: no such series is held."
+    - "Sector columns of 'Population and Labour Force' (million, seven groups) and the table 'Distribution of employed persons by major industries' (seven groups, mining with manufacturing): not the grouping of the LFS industry shares held here."
+    - "Percentage distribution by major industry 2020-21 (21 ISIC sections, by province): a different classification."
+    - "Age-specific participation rates: no such series is held."
+

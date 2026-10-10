@@ -61,7 +61,7 @@ register → profile → extract → validate structure → normalise → arithm
 
 Based on the extraction procedure tested in August 2026 (`TEST2_PROTOCOL_AND_SOP.md`, section 4). In short:
 
-1. **Register:** compute SHA-256, record the file in `sources/manifest.csv`. Source files are read-only forever.
+1. **Register:** download from the official URL (Wayback, then the archive copy, as fallbacks), inspect the content by code, compute SHA-256, write `sources/manifest.csv` and `sources/verification/<source_id>.json`. Source files are read-only forever. A file whose verification status is `failed` is never used.
 2. **Profile:** born-digital or scanned, ruled or borderless tables, Urdu or English. Scanned documents go to a separate track. Don't continue on the normal track if more than 20% of pages are scanned.
 3. **Extract:** Docling on the **full document, never chunked** (chunking breaks multi-page tables). Accurate table mode. Record the config hash. Run IDs look like `{DOC}_{FY}__docling__full-document__run-{NN}`; **never overwrite a run, increment NN.**
 4. **Validate structure:** file hash unchanged, every page accounted for exactly once, error log empty, plus the Docling failure detectors in section 7. **The extraction step never marks its own run complete; only the validator does, after every check passes.**
@@ -120,7 +120,7 @@ Spreadsheets and API data skip profile/extract/structure/second-reader but go th
 - **CI runs the checks on every PR**; failing checks block merging.
 - **Commits:** small and focused, with messages that say why. Put the ClickUp task link in the PR description.
 - **No source files in git.** No PDFs, Excel source files or raw API dumps. They live under `SOURCES_DIR` and are referenced by the manifest. Tiny test fixtures need explicit sign-off.
-- **Never write to `SOURCES_DIR`** or anywhere in the `ra-ship` archive. Read only.
+- **Never write anywhere in the `ra-ship` archive.** Read only. `SOURCES_DIR` is a separate folder outside the repo; only `datalab register` and `datalab fetch` write to it (downloads recorded in the manifest). Never edit, rename or hand-place a file there: a source enters through `sources/plan.yaml` and `datalab register`, or not at all.
 - **Local processing output goes in `work/`** (git-ignored). Only frozen releases leave it.
 - **Secrets only in `.env`**, never committed, never printed in logs or PR descriptions.
 - **Paths:** use `pathlib` and read locations from environment variables. The RAs are on different machines; no hard-coded absolute paths, no backslash string paths.

@@ -199,3 +199,71 @@ State: `proto/v0` pushed, tests green, `check-release` green, site builds (4,758
 | Extended backlog | not started; E8 skipped (reassigned to the UI agent) |
 
 Release now: 4,236 observations, 3,692 published (ABS 2,111, CPI 1,254, LFS 327), 11 disputed.
+
+## C5 National LFS 2014-15 (D30) and C6 cross-source checks (merged 04:27)
+
+Track note: `docs/reports/track_sources.md`.
+
+| Source | Status | Role | From |
+|---|---|---|---|
+| `lfs-pbs-2014-15-national` | official download | core | the alternative PBS address; 55 pages |
+| `sbp-easydata-cpi-national-yoy` | official download (guest form) | cross-source | the CSV the first run downloaded |
+| `pes-fed-2024-25-inflation` | official, identical to the archive copy | cross-source | finance.gov.pk, chapter 7, 28 pages |
+| `pes-fed-2024-25-labour` | official, identical to the archive copy | cross-source | finance.gov.pk, chapter 12, 29 pages |
+
+- **LFS 2014-15:** the alternative address serves the national report. It passed the marker check that rejected the AJK
+  file, plus a whole-document check. Full-document run (55 pages), all 7 table kinds located, coverage 100%, no flags.
+  **2014-15 against 2017-18: 78 pairs, 78 agree exactly.**
+- **CPI against SBP EasyData** (national year-on-year, base 2015-16): 5 pairs, 1 equal, 3 within rounding, 1 differs
+  (June 2021: PBS prints 9.65, SBP gives 9.655669291). The four that agree move the PBS figure from tier B to tier A.
+  The one that differs stays published at tier B with the disagreement stated on the receipt.
+- **LFS against the Economic Survey 2024-25 labour chapter:** 126 pairs, 113 equal, 13 within rounding, 0 differ.
+- **CPI against the Economic Survey inflation chapter:** no check. Nothing in it is the same concept as a monthly value.
+- Not done: a repeatable SBP pull needs an API key (a human must supply it); SBP's reuse terms are unconfirmed.
+- CPI review findings 9 and 10 (SBP reader) were closed at this merge. All 13 CPI findings are now closed: 12 fixed,
+  1 rejected as a code change (frozen tolerance) with the difference now stated on the receipt.
+
+## C1 LFS review fixes (merged 04:33)
+
+Note: `docs/reports/fix_lfs.md`. All eight findings fixed with their tests; two of the reviewer's unproven items too
+(cells of a blocked table earn no cross-edition pass; a missing industry makes the shares sum "could not be run").
+
+Effect on the data (same runs, no new extraction): 25 tables located before and after; cells and coverage identical;
+30 unemployment-rate recomputations changed from "within rounding" to "could not be run" because the printed counts
+are too coarse to single out the rate. **20 unemployment rates that had nothing else behind them are now withheld**,
+including the 2018-19 headline rate (printed 6.9). Five others drop from tier A to tier B.
+
+## Release after C1 to C7 (04:36)
+
+| Data type | State | Published | Tiers | Disputed | Withheld or gaps | Coverage | Checks passed (evaluable) | Cross-edition agree / within one unit / fail / disputed |
+|---|---|---|---|---|---|---|---|---|
+| ABS | published | 2,111 | 436 A, 1,675 B | 3 | 216 failed checks, 200 no check, 78 not printed | 98.96% | 98.6% of 1,604 | 459 / 1 / 2 / 3 |
+| CPI | published | 1,254 | 132 A, 1,122 B | 2 | 0 | 100% | 99.7% of 891 | 125 / 3 / 0 / 2 |
+| LFS | published (under D26) | 387 | 204 A, 183 B | 6 | 54 no check, 3 failed checks | 100% | 99.0% of 674 | 267 / 3 / 0 / 6 |
+
+3,752 published values in 4,314 observations, 11 disputed. 121 page renders. Tests pass (no expected failures left),
+`check-release` passes, the site builds (4,840 pages).
+
+Three receipts were read from the release data (the site itself belongs to the UI agent):
+- checked, tier A: `cpi.national.yoy.general:2025-06:na` = 3.23, "Matches the recomputation ... Equal to the figure
+  printed in the SBP EasyData ... (within rounding)."
+- disputed: `cpi.group.food.b2007_08:2018-06:na`, no value, "Printed as 236.58 in the Monthly Review of Price Indices,
+  June 2018 (p.5) and as 236.56 in the Monthly Review of Price Indices, June 2019 (p.5). ..."
+- second reader: `cpi.urban.general.b2015_16:2021-06:na` = 144.55, "Read by a second tool (pdfplumber) because the
+  first tool (docling) lost a column and merged rows in this table; ..."
+
+## Extended backlog ledger
+
+| Item | State | Notes |
+|---|---|---|
+| C8 full-document LFS runs | running in the background | isolated in `work/tracks/c8`; compared with the page-range runs when done |
+| E1 eight more ABS editions | started 04:38 (subagent, `proto/v0-e1-abs-editions`) | |
+| E2 ABS receipts side | started 04:38 (subagent, `proto/v0-e2-abs-receipts`) | |
+| E3 LFS provinces and 19th ICLS | started 04:45 (subagent, `proto/v0-e3-lfs-depth`) | |
+| E4 monthly CPI | started 04:45 (subagent, `proto/v0-e4-cpi-monthly`) | |
+| E5 reproduction from a clean clone | script and `diff-release` being written (subagent, `proto/v0-e-tools`); the run itself is hours of CPU | |
+| E6 sanity report | started (same subagent) | |
+| E7 source-change check | started (same subagent) | never scheduled |
+| E8 site depth | skipped | reassigned to the UI agent by Ali |
+| E9 Economic Survey tables | not started | after E1 to E4 |
+| E10 hardening | started (same subagent as E6) | |

@@ -126,7 +126,8 @@ def classify(caption: str, source_round: str, spec: dict[str, Any]) -> tuple[dic
     """Which kind of table a printed title names. Exactly one kind must match."""
     if not caption:
         return None, "no_title"
-    hits = [k for k in spec["tables"] if any(re.search(p, caption) for p in k["captions"])]
+    hits = [k for k in spec["tables"] if any(re.search(p, caption) for p in k["captions"])
+            and not (k.get("exclude") and re.search(k["exclude"], caption))]
     if not hits:
         return None, "not_a_target"
     if len(hits) > 1:

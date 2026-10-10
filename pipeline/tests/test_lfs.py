@@ -59,6 +59,7 @@ def test_title_names_one_kind(caption, round_, kind):
 @pytest.mark.parametrize("caption,round_,result", [
     ("", "2017-18", "no_title"),
     ("table-18 informal sector workers - distribution by major industry divisions", "2017-18", "not_a_target"),
+    ("table-26 occupational injuries/diseases -distribution of employed persons by major industry divisions (%)", "2017-18", "not_a_target"),
     ("table 3.8 civilian labour force - pakistan and provinces (19th icls)", "2024-25", "other_definition"),
     ("table 9.2 unemployment rate by province, region & sex (%)", "2024-25", "definition_not_stated"),
 ])

@@ -118,6 +118,7 @@ tables:
     measure: employment_share.industry
     unit: percent
     unit_marker: '\(%\)|percent'
+    exclude: 'occupational|injur|informal|subsidiary'   # other tables that also break down by industry
     captions:
       - '\bemployed ?- ?distribution by major industry divisions'
       - '\bdistribution of employed persons? by major industry divisions'

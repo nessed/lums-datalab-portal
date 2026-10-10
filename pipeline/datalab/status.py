@@ -75,7 +75,22 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
         if not chk.official:
             continue
         how = {"pass": "exactly", "pass_within_rounding": "within rounding"}.get(chk.result)
-        if chk.check_type in ARITHMETIC_CHECKS and chk.check_type != "cross_table" and chk.expected is not None:
+        if chk.check_type == "recompute" and chk.expected is not None:
+            # A rate recomputed from other printed figures is not a sum; say so on the receipt.
+            n = len(chk.member_cell_ids)
+            if chk.target_cell_id == primary.cell_id:
+                if how:
+                    parts.append(f"Matches the value recomputed from {n} other printed figures ({how}).")
+                elif chk.result == "fail":
+                    parts.append(f"Does NOT match the value recomputed from {n} other printed figures "
+                                 f"(difference {fmt(chk.residual)}).")
+            elif how:
+                parts.append(f"One of {n} printed figures from which the printed rate {fmt(chk.expected)} "
+                             f"was recomputed ({how}).")
+            elif chk.result == "fail":
+                parts.append(f"One of {n} printed figures from which the printed rate {fmt(chk.expected)} "
+                             f"could not be reproduced (difference {fmt(chk.residual)}).")
+        elif chk.check_type in ARITHMETIC_CHECKS and chk.check_type != "cross_table" and chk.expected is not None:
             target = cells_by_id.get(chk.target_cell_id or "")
             target_label = (target.row_label_raw if target else "the printed total").strip()
             n = len(chk.member_cell_ids)

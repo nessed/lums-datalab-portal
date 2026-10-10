@@ -84,6 +84,7 @@ Tests only (no Docling, no PDFs): install `pipeline\requirements-ci.lock`, then 
 - CPI basket weights used to validate row labels are taken by code from the issues themselves. Confirm against the PBS methodology note.
 - CPI 2007-08 base: series carry no area and a draft note that the base covered urban centres only. Confirm.
 - ABS detail tables: the document prints no development or total figure per function; series are named for the four parts it does print. "Less Recoveries" lines are not modelled, so the blocks containing them fail and are withheld. Is a derived "current + development" health series wanted, and with what definition?
+- ABS receipts (D32, `docs/reports/track_e2_abs_receipts.md` section 10): are "Credit from Banking Sector" and "Domestic Debt Receipts (Bank) - Net" one line? Is the 2026-27 "E03 ... (Bank) - Net" label under capital receipts a misprint for "(Non Bank)"? Should capital, external and financing lines sit under `fed.rev.*`? 6 receipts figures are disputed (Budget 2021-22 direct-tax heads, Budget 2016-17 external loans and grants).
 - Still open from the first run: cover-less ABS editions; the 2017-18 text-layer deviation; the scanned-page definition; LFS 19th ICLS tables; DOI; hosting PDFs; repo organisation; branch protection; LUMS name and logo sign-off.
 
 ## Queued follow-ups
@@ -91,6 +92,7 @@ Tests only (no Docling, no PDFs): install `pipeline\requirements-ci.lock`, then 
 - Create the Vercel project (root directory `site`).
 - June 2022 CPI issue (would give the June 2021 values a second printing).
 - Second reader on the flagged ABS detail tables (7 tables).
+- ABS receipts side is built in the `abs` dataset (branch `proto/v0-e2-abs-receipts`): 18 tables, 778 values pass; the release and the site are not rebuilt yet. Non-tax, capital and external receipts by item (the pages after the tax statement) are not processed.
 - The rest of the continuation plan (LFS 2014-15, cross-source checks, full-document LFS runs, extended backlog): see the ledger in the report.
 
 ## Known traps

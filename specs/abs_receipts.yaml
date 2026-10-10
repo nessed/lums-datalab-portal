@@ -1,0 +1,345 @@
+# Federal Annual Budget Statement (ABS): the RECEIPTS side (plan item E2, decision D32).
+#
+# What the document prints, in every edition surveyed (docs/reports/track_e2_abs_receipts.md):
+#
+#   1. "Receipts - Summary" / "Summary of Receipts": one page. Tax revenue
+#      receipts (direct, indirect; from 2016-17 also "FBR Taxes"), non-tax
+#      receipts by head, total revenue receipts, capital receipts, total
+#      internal receipts, external receipts, public account receipts, gross
+#      federal resources, less provincial share in federal taxes, net federal
+#      resources, the financing lines and total resources.
+#   2. "Statement of Revenue Receipts - Tax Revenue" (newer editions: the table
+#      under "2 Revenue Receipts"): the next page. Direct taxes and indirect
+#      taxes by head (taxes on income, customs duties, sales tax, federal
+#      excise, ...), total tax revenue.
+#
+# Each edition e prints three columns: Budget Estimates e-1, Revised Estimates
+# e-1, Budget Estimates e (read from the PDF text layer by `abs.map_columns`,
+# with the column words of specs/abs.yaml; anything else maps nothing).
+#
+# Series are named for what is printed. The composition of a line changes over
+# the years and is NOT smoothed: "Indirect Taxes" includes the petroleum levy
+# in 2010-11 and 2011-12 and does not afterwards; "Tax Revenue Receipts"
+# includes "Other Taxes" in 2016-17 and 2017-18 and is FBR taxes only from
+# 2021-22. The definitions say so.
+
+dataset: abs
+
+# Flag read by datasets/abs.py. When false the receipts tables are not read at
+# all and the ABS dataset is exactly what it was before this file existed.
+enabled: true
+
+expected_value_columns: 3
+min_table_coverage: 0.90         # same value as thresholds/thresholds.yaml coverage.min_per_table
+
+# Tables are located by the names of the heads they print, never by page
+# number. A table qualifies when at least `min_matches` of the patterns occur
+# in its text; a tie between two tables, or one table winning both roles,
+# means not located.
+tables:
+  - id: summary
+    name: "Summary of Receipts"
+    locator:
+      min_matches: 8
+      patterns:
+        - 'tax revenue receipts'
+        - 'non-? ?tax( revenue)? receipts'
+        - 'total revenue receipts'
+        - 'capital receipts'
+        - 'total internal receipts'
+        - 'external receipts'
+        - 'gross federal resources'
+        - 'provincial share'
+        - 'net federal resources'
+        - 'total ?-? ?resources'
+    # A missing one of these becomes a labelled gap (never a blank).
+    expected:
+      - fed.rev.tax
+      - fed.rev.tax.direct
+      - fed.rev.tax.indirect
+      - fed.rev.nontax
+      - fed.rev.revenue
+      - fed.rev.capital
+      - fed.rev.internal
+      - fed.rev.external
+      - fed.rev.gross_federal_resources
+      - fed.rev.provincial_share
+      - fed.rev.net_federal_resources
+      - fed.rev.total_resources
+  - id: tax
+    name: "Statement of Tax Revenue"
+    locator:
+      min_matches: 6
+      patterns:
+        - 'direct taxes'
+        - 'indirect taxes'
+        - 'taxes on income'
+        - 'capital value tax'
+        - 'customs duties'
+        - 'sales tax'
+        - 'federal excise'
+        - 'tax revenue ?\((a\+b|i\+ii)\)'
+    expected:
+      - fed.rev.tax.direct.income
+      - fed.rev.tax.indirect.customs
+      - fed.rev.tax.indirect.sales_tax
+      - fed.rev.tax.indirect.federal_excise
+
+# The line the previous prototype lost in one year. Its state is reported per
+# edition in the build info (`receipts.sales_tax`): mapped, or a gap with the reason.
+watch_series: [fed.rev.tax.indirect.sales_tax]
+
+breaks:
+  - at_period: "2010-11"
+    kind: nfc_award
+    note: >-
+      7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net
+      federal resources and everything computed from them are not comparable with earlier years.
+
+# Sum rules, applied to every column of each located table separately (a line
+# printed in both tables is compared by the cross-table check, not summed
+# across tables). A rule whose target is not printed is skipped; `optional`
+# members are added when the edition prints them. Tolerances are the frozen
+# ones (checks.sum_check); nothing here sets a tolerance.
+rules:
+  - id: abs_receipts.tax_is_direct_plus_indirect
+    # editions that print no "FBR Taxes" line above direct and indirect taxes
+    type: hierarchy_sum
+    target: fed.rev.tax
+    unless_present: fed.rev.tax.fbr
+    members: [fed.rev.tax.direct, fed.rev.tax.indirect]
+    what_members: direct taxes and indirect taxes
+    what_target: "Tax revenue"
+  - id: abs_receipts.fbr_is_direct_plus_indirect
+    type: hierarchy_sum
+    target: fed.rev.tax.fbr
+    members: [fed.rev.tax.direct, fed.rev.tax.indirect]
+    what_members: direct taxes and indirect taxes
+    what_target: "FBR taxes"
+  - id: abs_receipts.tax_is_fbr_plus_other
+    type: hierarchy_sum
+    target: fed.rev.tax
+    if_present: fed.rev.tax.fbr
+    members: [fed.rev.tax.fbr]
+    optional: [fed.rev.tax.other]
+    what_members: FBR taxes (and other taxes where the edition prints them)
+    what_target: "Tax revenue"
+  - id: abs_receipts.direct_tax_heads
+    type: hierarchy_sum
+    target: fed.rev.tax.direct
+    children_of_target: true
+    what_members: the heads listed under direct taxes
+    what_target: "Direct taxes"
+  - id: abs_receipts.indirect_tax_heads
+    type: hierarchy_sum
+    target: fed.rev.tax.indirect
+    children_of_target: true
+    what_members: the heads listed under indirect taxes
+    what_target: "Indirect taxes"
+  - id: abs_receipts.other_tax_heads
+    type: hierarchy_sum
+    target: fed.rev.tax.other
+    children_of_target: true
+    what_members: the heads listed under other taxes
+    what_target: "Other taxes"
+  - id: abs_receipts.nontax_heads
+    type: hierarchy_sum
+    target: fed.rev.nontax
+    children_of_target: true
+    what_members: the heads listed under non-tax receipts
+    what_target: "Non-tax revenue receipts"
+  - id: abs_receipts.revenue_total
+    type: accounting_identity
+    target: fed.rev.revenue
+    members: [fed.rev.tax, fed.rev.nontax]
+    what_members: tax revenue receipts and non-tax receipts
+    what_target: "Total revenue receipts (1+2)"
+  - id: abs_receipts.capital_heads
+    type: hierarchy_sum
+    target: fed.rev.capital
+    children_of_target: true
+    what_members: the heads listed under capital receipts
+    what_target: "Capital receipts"
+  - id: abs_receipts.internal_total
+    type: accounting_identity
+    target: fed.rev.internal
+    members: [fed.rev.revenue, fed.rev.capital]
+    what_members: total revenue receipts and capital receipts
+    what_target: "Total internal receipts (3+4)"
+  - id: abs_receipts.external_heads
+    type: hierarchy_sum
+    target: fed.rev.external
+    children_of_target: true
+    what_members: the heads listed under external receipts
+    what_target: "External receipts"
+  - id: abs_receipts.internal_and_external_total
+    type: accounting_identity
+    target: fed.rev.internal_and_external
+    members: [fed.rev.internal, fed.rev.external]
+    what_members: total internal receipts and external receipts
+    what_target: "Total internal and external receipts (5+6)"
+  - id: abs_receipts.public_account_heads
+    type: hierarchy_sum
+    target: fed.rev.public_account
+    children_of_target: true
+    what_members: the heads listed under public account receipts
+    what_target: "Public account receipts"
+  - id: abs_receipts.gross_resources
+    # editions that print "Total Internal and External Receipts (5+6)": gross = (7+8)
+    type: accounting_identity
+    target: fed.rev.gross_federal_resources
+    if_present: fed.rev.internal_and_external
+    members: [fed.rev.internal_and_external, fed.rev.public_account]
+    what_members: total internal and external receipts and public account receipts
+    what_target: "Gross federal resources (7+8)"
+  - id: abs_receipts.gross_resources_three_parts
+    # editions without that line: gross = (5+6+7)
+    type: accounting_identity
+    target: fed.rev.gross_federal_resources
+    unless_present: fed.rev.internal_and_external
+    members: [fed.rev.internal, fed.rev.external, fed.rev.public_account]
+    what_members: total internal receipts, external receipts and public account receipts
+    what_target: "Gross federal resources (5+6+7)"
+  - id: abs_receipts.net_resources
+    type: accounting_identity
+    target: fed.rev.net_federal_resources
+    members:
+      - fed.rev.gross_federal_resources
+      - {series: fed.rev.provincial_share, sign: -1}
+    what_members: gross federal resources less the provincial share in federal taxes
+    what_target: "Net federal resources"
+  - id: abs_receipts.total_resources
+    type: accounting_identity
+    target: fed.rev.total_resources
+    members: [fed.rev.net_federal_resources]
+    optional:
+      - fed.rev.provincial_cash_surplus
+      - fed.rev.privatization_proceeds
+      - fed.rev.credit_from_banking_sector
+      - fed.rev.domestic_debt_bank_net
+    what_members: net federal resources and the financing lines printed below it
+    what_target: "Total resources"
+  - id: abs_receipts.consolidated_fund
+    type: accounting_identity
+    target: fed.rev.consolidated_fund
+    members: [fed.rev.internal, fed.rev.external]
+    what_members: total internal receipts and external receipts
+    what_target: "Federal Consolidated Fund (5+6)"
+  - id: abs_receipts.consolidated_fund_net
+    type: accounting_identity
+    target: fed.rev.consolidated_fund_net
+    members:
+      - fed.rev.internal
+      - fed.rev.external
+      - {series: fed.rev.provincial_share, sign: -1}
+    what_members: total internal receipts and external receipts less the provincial share in federal taxes
+    what_target: "Federal Consolidated Fund (5+6-10)"
+
+# The same figure printed twice.
+agreement:
+  same_in_other_table: {id: abs_receipts.same_line_in_both_receipts_tables, type: cross_table}
+  next_edition: {id: abs_receipts.same_figure_in_next_edition, type: cross_edition}
+
+# Series. `parent` reflects the printed hierarchy (the line a figure is listed
+# under, or the total it is added into). Definitions are drafts for a human to edit.
+series:
+  - {id: fed.rev.total_resources, name: "Total resources", parent: null, sort: 5000,
+     definition: "Last line of the Summary of Receipts in the Annual Budget Statement: net federal resources plus the financing lines the edition prints (cash balance of the provinces, privatization proceeds, borrowing from banks)."}
+  - {id: fed.rev.net_federal_resources, name: "Net federal resources", parent: fed.rev.total_resources, sort: 5010,
+     definition: "Gross federal resources less the provincial share in federal taxes, as printed in the Summary of Receipts."}
+  - {id: fed.rev.gross_federal_resources, name: "Gross federal resources", parent: fed.rev.net_federal_resources, sort: 5020,
+     definition: "Total internal receipts, external receipts and public account receipts (net), as printed in the Summary of Receipts.", synonyms: ["gross revenue receipts", "gross receipts"]}
+  - {id: fed.rev.provincial_share, name: "Less: provincial share in federal taxes", parent: fed.rev.net_federal_resources, sort: 5030,
+     definition: "The provinces' share in federal taxes, which the Summary of Receipts subtracts from gross federal resources. Printed as a positive amount.", synonyms: ["NFC transfers", "transfers to provinces", "divisible pool"]}
+  - {id: fed.rev.internal_and_external, name: "Total internal and external receipts", parent: fed.rev.gross_federal_resources, sort: 5040,
+     definition: "Total internal receipts plus external receipts. Printed as a line of its own from the 2016-17 edition; earlier editions add the two straight into gross federal resources."}
+  - {id: fed.rev.internal, name: "Total internal receipts", parent: fed.rev.internal_and_external, sort: 5050,
+     definition: "Total revenue receipts plus capital receipts, as printed in the Summary of Receipts."}
+  - {id: fed.rev.revenue, name: "Total revenue receipts", parent: fed.rev.internal, sort: 5060,
+     definition: "Tax revenue receipts plus non-tax receipts of the federal government, before the provincial share is taken out, as printed in the Summary of Receipts.", synonyms: ["total revenue", "federal revenue", "gross revenue receipts"]}
+  - {id: fed.rev.tax, name: "Tax revenue receipts", parent: fed.rev.revenue, sort: 5100,
+     definition: "Federal tax revenue as printed in the Annual Budget Statement. What the line contains changes: in the 2016-17 and 2017-18 editions it is FBR taxes plus 'other taxes' (petroleum levy, gas cess and surcharge, airport tax, ICT taxes); from the 2021-22 edition it is FBR taxes only, and the levies are printed under non-tax receipts.", synonyms: ["tax revenue", "taxes"]}
+  - {id: fed.rev.tax.fbr, name: "FBR taxes", parent: fed.rev.tax, sort: 5110,
+     definition: "Taxes collected by the Federal Board of Revenue: direct taxes plus indirect taxes. Printed as a line from the 2016-17 edition.", synonyms: ["Federal Board of Revenue"]}
+  - {id: fed.rev.tax.direct, name: "Direct taxes", parent: fed.rev.tax, sort: 5120,
+     definition: "Direct taxes as printed in the Annual Budget Statement: taxes on income and the smaller direct heads the edition lists.", synonyms: ["income tax"]}
+  - {id: fed.rev.tax.direct.income, name: "Taxes on income", parent: fed.rev.tax.direct, sort: 5121,
+     definition: "Object B011, taxes on income, as printed in the statement of tax revenue.", synonyms: ["income tax"]}
+  - {id: fed.rev.tax.direct.workers_welfare_fund, name: "Workers' Welfare Fund", parent: fed.rev.tax.direct, sort: 5122,
+     definition: "Object B01501, Workers' Welfare Fund (newer editions: 'WWF (Ordinary Collection)'), listed under direct taxes.", synonyms: ["WWF"]}
+  - {id: fed.rev.tax.direct.workers_profit_participation_fund, name: "Workers' Profit Participation Fund", parent: fed.rev.tax.direct, sort: 5123,
+     definition: "Object B01502, Workers' (Profit) Participation Fund (newer editions: 'WPPF (Contribution under Companies Profit)'), listed under direct taxes.", synonyms: ["WPPF"]}
+  - {id: fed.rev.tax.direct.capital_value_tax, name: "Capital value tax", parent: fed.rev.tax.direct, sort: 5124,
+     definition: "Objects B017-18, capital value tax, listed under direct taxes.", synonyms: ["CVT"]}
+  - {id: fed.rev.tax.indirect, name: "Indirect taxes", parent: fed.rev.tax, sort: 5130,
+     definition: "Indirect taxes as printed in the Annual Budget Statement. In the 2010-11 and 2011-12 editions the line includes the petroleum levy, Islamabad Capital Territory taxes and airport tax; from 2016-17 it is customs duties, sales tax and federal excise only."}
+  - {id: fed.rev.tax.indirect.customs, name: "Customs duties", parent: fed.rev.tax.indirect, sort: 5131,
+     definition: "Objects B020-22, customs duties, as printed in the statement of tax revenue.", synonyms: ["customs", "import duty"]}
+  - {id: fed.rev.tax.indirect.sales_tax, name: "Sales tax", parent: fed.rev.tax.indirect, sort: 5132,
+     definition: "Object B023, sales tax, as printed in the statement of tax revenue.", synonyms: ["GST", "general sales tax"]}
+  - {id: fed.rev.tax.indirect.federal_excise, name: "Federal excise", parent: fed.rev.tax.indirect, sort: 5133,
+     definition: "Objects B024-25, federal excise duty, as printed in the statement of tax revenue.", synonyms: ["FED", "excise duty"]}
+  - {id: fed.rev.tax.indirect.petroleum_levy, name: "Petroleum levy (listed under indirect taxes)", parent: fed.rev.tax.indirect, sort: 5134,
+     definition: "Petroleum levy where the edition lists it under indirect taxes (2010-11 and 2011-12 editions). Later editions print it elsewhere; those figures are separate series.", synonyms: ["PDL", "petroleum development levy"]}
+  - {id: fed.rev.tax.indirect.ict_taxes, name: "Islamabad Capital Territory taxes (listed under indirect taxes)", parent: fed.rev.tax.indirect, sort: 5135,
+     definition: "Objects B026-30, Islamabad Capital Territory taxes, where the edition lists them under indirect taxes (2010-11 and 2011-12 editions)."}
+  - {id: fed.rev.tax.indirect.airport_tax, name: "Airport tax (listed under indirect taxes)", parent: fed.rev.tax.indirect, sort: 5136,
+     definition: "Object B03064, airport tax, where the edition lists it under indirect taxes (2010-11 and 2011-12 editions)."}
+  - {id: fed.rev.tax.other, name: "Other taxes", parent: fed.rev.tax, sort: 5140,
+     definition: "'Other Taxes' line of the 2016-17 and 2017-18 editions: taxes outside the FBR (ICT taxes, airport tax, gas infrastructure development cess, natural gas development surcharge, petroleum levy)."}
+  - {id: fed.rev.tax.other.other_indirect_taxes_ict, name: "Other indirect taxes (ICT)", parent: fed.rev.tax.other, sort: 5141,
+     definition: "Objects B026-30, 'Other Indirect Taxes (ICT)', listed under other taxes."}
+  - {id: fed.rev.tax.other.airport_tax, name: "Airport tax (listed under other taxes)", parent: fed.rev.tax.other, sort: 5142,
+     definition: "Object B03064, airport tax, where the edition lists it under other taxes."}
+  - {id: fed.rev.tax.other.gas_infrastructure_development_cess, name: "Gas infrastructure development cess", parent: fed.rev.tax.other, sort: 5143,
+     definition: "Object B03083, gas infrastructure development cess, listed under other taxes.", synonyms: ["GIDC"]}
+  - {id: fed.rev.tax.other.natural_gas_development_surcharge, name: "Natural gas development surcharge", parent: fed.rev.tax.other, sort: 5144,
+     definition: "Object B03084, natural gas development surcharge, listed under other taxes.", synonyms: ["GDS"]}
+  - {id: fed.rev.tax.other.petroleum_levy, name: "Petroleum levy (listed under other taxes)", parent: fed.rev.tax.other, sort: 5145,
+     definition: "Object B03085, petroleum levy, where the edition lists it under other taxes (2016-17 and 2017-18 editions).", synonyms: ["PDL", "petroleum development levy"]}
+  - {id: fed.rev.nontax, name: "Non-tax revenue receipts", parent: fed.rev.revenue, sort: 5200,
+     definition: "Federal non-tax receipts as printed in the Summary of Receipts. From the 2021-22 edition the line also carries 'Levies and Fees', which earlier editions did not print here.", synonyms: ["non-tax revenue", "non tax"]}
+  - {id: fed.rev.nontax.levies_and_fees, name: "Levies and fees", parent: fed.rev.nontax, sort: 5201,
+     definition: "Object B03, levies and fees, listed under non-tax revenue receipts from the 2021-22 edition."}
+  - {id: fed.rev.nontax.property_and_enterprise, name: "Income from property and enterprise", parent: fed.rev.nontax, sort: 5202,
+     definition: "Object C01, income from property and enterprise, listed under non-tax receipts."}
+  - {id: fed.rev.nontax.civil_administration, name: "Receipts from civil administration etc.", parent: fed.rev.nontax, sort: 5203,
+     definition: "Object C02, receipts from civil administration and other functions, listed under non-tax receipts."}
+  - {id: fed.rev.nontax.miscellaneous, name: "Miscellaneous receipts", parent: fed.rev.nontax, sort: 5204,
+     definition: "Object C03, miscellaneous receipts, listed under non-tax receipts."}
+  - {id: fed.rev.capital, name: "Capital receipts", parent: fed.rev.internal, sort: 5300,
+     definition: "Federal capital receipts as printed in the Summary of Receipts: recovery of loans and advances and domestic debt receipts."}
+  - {id: fed.rev.capital.recovery_of_loans_and_advances, name: "Recovery of loans and advances", parent: fed.rev.capital, sort: 5301,
+     definition: "Object E02, recovery of loans and advances, listed under capital receipts."}
+  - {id: fed.rev.capital.domestic_debt_net, name: "Domestic debt receipts (net)", parent: fed.rev.capital, sort: 5302,
+     definition: "Object E03, 'Domestic Debt Receipts (Net)', listed under capital receipts in the 2010-11 to 2017-18 editions."}
+  - {id: fed.rev.capital.domestic_debt_non_bank_net, name: "Domestic debt receipts (non bank), net", parent: fed.rev.capital, sort: 5303,
+     definition: "Object E03, 'Domestic Debt Receipts (Non Bank) - Net', listed under capital receipts from the 2021-22 edition. Kept apart from the older '(Net)' line: the document changed the label."}
+  - {id: fed.rev.capital.domestic_debt_bank_net, name: "Domestic debt receipts (bank), net (listed under capital receipts)", parent: fed.rev.capital, sort: 5304,
+     definition: "Object E03 line that the 2026-27 edition prints under capital receipts with the label 'Domestic Debt Receipts (Bank) - Net'. Kept as printed and apart from the '(Non Bank)' line of earlier editions; a human should decide whether the label is a misprint."}
+  - {id: fed.rev.external, name: "External receipts", parent: fed.rev.internal_and_external, sort: 5400,
+     definition: "External receipts (loans and grants) as printed in the Summary of Receipts.", synonyms: ["foreign loans", "foreign grants", "external loans"]}
+  - {id: fed.rev.external.loans, name: "External loans", parent: fed.rev.external, sort: 5401,
+     definition: "'Loans' line listed under external receipts (editions up to 2022-23)."}
+  - {id: fed.rev.external.grants, name: "External grants", parent: fed.rev.external, sort: 5402,
+     definition: "'Grants' line listed under external receipts (editions up to 2022-23)."}
+  - {id: fed.rev.external.project_loans_and_grants_outside_psdp, name: "Project loans and grants outside PSDP", parent: fed.rev.external, sort: 5403,
+     definition: "'Project Loans & Grants Outside PSDP' line listed under external receipts (2017-18 and 2021-22 editions; the 2022-23 edition prints it as 'Project Loans & Grants')."}
+  - {id: fed.rev.public_account, name: "Public account receipts (net)", parent: fed.rev.gross_federal_resources, sort: 5500,
+     definition: "Net receipts of the Public Account of the Federation, as printed in the Summary of Receipts."}
+  - {id: fed.rev.public_account.deferred_liabilities, name: "Deferred liabilities (net)", parent: fed.rev.public_account, sort: 5501,
+     definition: "'Deferred Liabilities (Net)' line listed under public account receipts."}
+  - {id: fed.rev.public_account.deposits_and_reserves, name: "Deposits and reserves (net)", parent: fed.rev.public_account, sort: 5502,
+     definition: "'Deposit and Reserves (Net)' line listed under public account receipts."}
+  - {id: fed.rev.provincial_cash_surplus, name: "Cash balance built up by the provinces", parent: fed.rev.total_resources, sort: 5600,
+     definition: "'Cash Balance built up by the Provinces' (from the 2022-23 edition: 'Cash Balance Surplus by the Provinces'), a financing line of the Summary of Receipts.", synonyms: ["provincial surplus"]}
+  - {id: fed.rev.privatization_proceeds, name: "Privatization proceeds", parent: fed.rev.total_resources, sort: 5610,
+     definition: "'Privatization Proceeds', a financing line of the Summary of Receipts."}
+  - {id: fed.rev.credit_from_banking_sector, name: "Credit from banking sector", parent: fed.rev.total_resources, sort: 5620,
+     definition: "'Credit from Banking Sector', a financing line of the Summary of Receipts in editions up to 2024-25.", synonyms: ["bank borrowing"]}
+  - {id: fed.rev.domestic_debt_bank_net, name: "Domestic debt receipts (bank), net", parent: fed.rev.total_resources, sort: 5630,
+     definition: "'Domestic Debt Receipts (Bank) - Net', the financing line that the 2025-26 and 2026-27 editions print where earlier editions print 'Credit from Banking Sector'. Kept as a separate series until a human confirms the two are the same line.", synonyms: ["bank borrowing"]}
+  - {id: fed.rev.consolidated_fund, name: "Federal Consolidated Fund (internal plus external receipts)", parent: null, sort: 5700,
+     definition: "First line of the Summary of Receipts in the 2010-11 and 2011-12 editions, 'Federal Consolidated Fund (5+6)': total internal receipts plus external receipts."}
+  - {id: fed.rev.consolidated_fund_net, name: "Federal Consolidated Fund (net of provincial share)", parent: null, sort: 5710,
+     definition: "First line of the Summary of Receipts in the 2016-17 and 2017-18 editions, 'Federal Consolidated Fund (5+6-10)': total internal receipts plus external receipts less the provincial share in federal taxes. Not the same line as the 2010-11 '(5+6)' figure."}

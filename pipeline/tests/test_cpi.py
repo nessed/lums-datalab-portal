@@ -75,13 +75,13 @@ def test_month_add_crosses_years():
 def test_expected_base_follows_the_rebasing():
     assert cpi.rebase_side("2019-06", SPEC)["base_year"] == "2007-08"
     assert cpi.rebase_side("2019-08", SPEC)["base_year"] == "2015-16"
-    assert cpi.rebase_side("2016-06", SPEC)["areas"] == ["national"]
+    assert cpi.rebase_side("2016-06", SPEC)["areas"] == ["not_stated"]      # D27: the old table prints no area
     assert cpi.rebase_side("2025-06", SPEC)["areas"] == ["national", "urban", "rural"]
 
 
 def test_series_ids_keep_bases_apart():
     assert cpi.series_id_for("national", "index", "general", "b2015_16") == "cpi.national.general.b2015_16"
-    assert cpi.series_id_for("national", "index", "food", "b2007_08") == "cpi.national.group.food.b2007_08"
+    assert cpi.series_id_for("not_stated", "index", "food", "b2007_08") == "cpi.group.food.b2007_08"
     assert cpi.series_id_for("urban", "weight", "health", "b2015_16") == "cpi.urban.weight.health.b2015_16"
     assert cpi.series_id_for("national", "yoy", "general", "b2015_16") == "cpi.national.yoy.general"
     assert cpi.series_id_for("national", "yoy", "food", "b2015_16") == "cpi.national.yoy.group.food"
@@ -93,13 +93,13 @@ def test_catalogue_every_series_carries_the_rebase_break():
     catalogue = cpi.series_catalogue(SPEC)
     ids = {s.series_id for s in catalogue}
     assert len(ids) == len(catalogue)
-    assert {"cpi.national.general.b2015_16", "cpi.national.general.b2007_08", "cpi.rural.group.food.b2015_16",
-            "cpi.national.weight.food.b2007_08", "cpi.national.yoy.general"} <= ids
-    assert "cpi.urban.general.b2007_08" not in ids
+    assert {"cpi.national.general.b2015_16", "cpi.general.b2007_08", "cpi.rural.group.food.b2015_16",
+            "cpi.weight.food.b2007_08", "cpi.national.yoy.general"} <= ids
+    assert not any(i.endswith("b2007_08") and i.split(".")[1] in ("national", "urban", "rural") for i in ids)
     for s in catalogue:
         assert s.dataset == "cpi" and s.frequency == "month" and s.scale_factor == 1
         assert [b.at_period for b in s.breaks] == ["2019-08"] and s.breaks[0].kind == "rebase"
-        assert s.unit == ("index" if ".general.b" in s.series_id or ".group." in s.series_id and s.series_id[-8:-6] == "b2" else "percent")
+        assert s.unit == ("index" if s.dims["measure"] == "index" else "percent")
     general = next(s for s in catalogue if s.series_id == "cpi.national.general.b2015_16")
     assert general.dims == {"area": "national", "group": "general", "measure": "index", "base_year": "2015-16"}
 
@@ -147,7 +147,7 @@ def test_captions_give_area_and_base():
         12: "Table 5: Wholesale Price Index by Group of Commodities (Base 2015-16)",
     }
     caps = cpi.find_captions(texts, SPEC)
-    assert [(c["page"], c["area"], c["base_year"]) for c in caps] == [(5, "national", "2007-08"), (8, "national", "2015-16"),
+    assert [(c["page"], c["area"], c["base_year"]) for c in caps] == [(5, "not_stated", "2007-08"), (8, "national", "2015-16"),
                                                                        (9, "urban", "2015-16")]
 
 
@@ -428,8 +428,8 @@ def test_expected_observations_per_issue():
     old = cpi.expected_observations("2016-06", SPEC)
     assert len(new) == 3 * (13 * 5 + 12) and len(old) == 13 * 5 + 12
     assert ("national", "cpi.national.general.b2015_16", "2024-06") in new
-    assert ("national", "cpi.national.general.b2007_08", "2015-06") in old
-    assert not any(area != "national" for area, _, _ in old)
+    assert ("not_stated", "cpi.general.b2007_08", "2015-06") in old
+    assert not any(area != "not_stated" or not sid.endswith(".b2007_08") for area, sid, _ in old)
 
 
 def test_gap_observations_are_labelled_not_yet_verified():

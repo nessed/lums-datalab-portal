@@ -7,7 +7,9 @@ Rules that matter (AGENTS.md sections 3, 4, 7):
 - the meaning of a column (weight / index for which month / % change) is established from the
   PDF text layer by position and must equal what the issue is expected to print, or the whole
   table stays unmapped;
-- index levels on the 2007-08 and 2015-16 bases are separate series, never spliced.
+- index levels on the 2007-08 and 2015-16 bases are separate series, never spliced;
+- the 2007-08 base table prints no national/urban/rural label, so its series carry no area
+  segment (decision D27): `cpi.general.b2007_08`, never `cpi.national.*` or `cpi.urban.*`.
 """
 from __future__ import annotations
 
@@ -74,8 +76,31 @@ def base_tag(base_year: str) -> str:
 
 # ----------------------------------------------------------------------------- series ids
 
+# Area key of a table whose caption names no area (the single CPI table of issues on the 2007-08
+# base). It is a key for code only: it never appears in a series id (decision D27).
+AREA_NOT_STATED = "not_stated"
+
+
+def old_base_series_id(role: str, row: str, tag: str) -> str | None:
+    """Series id for a cell of a table that states no area: named by what is printed, base always in the id."""
+    if role == "index":
+        return f"cpi.general.{tag}" if row == "general" else f"cpi.group.{row}.{tag}"
+    if role == "weight":
+        return None if row == "general" else f"cpi.weight.{row}.{tag}"
+    if role in ("yoy", "mom"):
+        return f"cpi.{role}.general.{tag}" if row == "general" else f"cpi.{role}.group.{row}.{tag}"
+    return None
+
+
+def table_words(area: str) -> str:
+    """How a table is named in check descriptions and gap reasons."""
+    return "CPI table (no area stated)" if area == AREA_NOT_STATED else f"{area} CPI table"
+
+
 def series_id_for(area: str, role: str, row: str, tag: str) -> str | None:
     """Series id for one cell, or None when the cell is not a published measure."""
+    if area == AREA_NOT_STATED:
+        return old_base_series_id(role, row, tag)
     if role == "index":
         return f"cpi.{area}.general.{tag}" if row == "general" else f"cpi.{area}.group.{row}.{tag}"
     if role == "weight":
@@ -90,7 +115,7 @@ def series_catalogue(spec: dict[str, Any]) -> list[Series]:
     out: list[Series] = []
     rows = [{"slug": "general", "name": spec["general"]["name"], "definition": spec["general"]["definition"],
              "synonyms": spec["general"].get("synonyms", []), "sort": 0}] + list(spec["groups"])
-    area_order = {"national": 0, "urban": 1, "rural": 2}
+    area_order = {"national": 0, "urban": 1, "rural": 2, AREA_NOT_STATED: 3}
     measure_order = {"index": 0, "yoy": 1, "mom": 2, "weight": 3}
 
     def add(area: str, role: str, row: dict[str, Any], side: dict[str, Any] | None) -> None:
@@ -103,8 +128,12 @@ def series_catalogue(spec: dict[str, Any]) -> list[Series]:
         base_year = side["base_year"] if side else None
         name = f"CPI {a['name']}: {row['name']}, {m['name']}" + (f" (base {base_year})" if base_year else "")
         definition = f"{row['definition'].strip()} {m['definition_suffix'].format(base_year=base_year or '')}".strip()
-        notes = a.get("note_old_base", "") if (side and side is spec["rebase"]["old"]) or (not side and area == "national") else ""
-        dims = {"area": area, "group": row["slug"], "measure": role}
+        notes = a.get("note", "")
+        if area == AREA_NOT_STATED:
+            # D27: the document prints no area, so no `area` dimension is asserted.
+            dims = {"area_as_printed": a["area_as_printed"], "group": row["slug"], "measure": role}
+        else:
+            dims = {"area": area, "group": row["slug"], "measure": role}
         if base_year:
             dims["base_year"] = base_year
         general_id = series_id_for(area, role, "general", tag)
@@ -122,7 +151,12 @@ def series_catalogue(spec: dict[str, Any]) -> list[Series]:
             for row in rows:
                 add(area, "index", row, side)
                 add(area, "weight", row, side)
+                if area == AREA_NOT_STATED:  # the change series of this table exist on its own base only
+                    add(area, "yoy", row, side)
+                    add(area, "mom", row, side)
     for area in spec["areas"]:
+        if area == AREA_NOT_STATED:
+            continue
         for row in rows:
             add(area, "yoy", row, None)
             add(area, "mom", row, None)
@@ -137,7 +171,7 @@ def find_captions(page_texts: dict[int, str], spec: dict[str, Any]) -> list[dict
     out: list[dict[str, Any]] = []
     for page in sorted(page_texts):
         for m in pattern.finditer(page_texts[page]):
-            out.append({"page": page, "area": (m.group(1) or "national").lower(),
+            out.append({"page": page, "area": (m.group(1) or AREA_NOT_STATED).lower(),
                         "base_year": re.sub(r"\s+", "", m.group(2)), "caption": clean_text(m.group(0))})
     return out
 
@@ -155,7 +189,7 @@ def locate(tables: list[Table], captions: list[dict[str, Any]], expected: dict[s
     for area in expected["areas"]:
         caps = [c for c in captions if c["area"] == area]
         if len(caps) != 1:
-            problems[area] = (f"The caption of the {area} CPI table was found {len(caps)} times in the text layer "
+            problems[area] = (f"The caption of the {table_words(area)} was found {len(caps)} times in the text layer "
                               "(exactly one is needed)")
             log.append({"area": area, "result": "caption_not_unique", "captions": caps})
             continue
@@ -166,7 +200,7 @@ def locate(tables: list[Table], captions: list[dict[str, Any]], expected: dict[s
                  "candidates": [{"table_index": t.table_index, "score": s, "rows": t.num_rows, "cols": t.num_cols}
                                 for s, t in scored]}
         if len(good) != 1:
-            problems[area] = (f"The {area} CPI table could not be located on page {cap['page']} "
+            problems[area] = (f"The {table_words(area)} could not be located on page {cap['page']} "
                               f"({len(good)} extracted tables qualify; exactly one is needed)")
             entry["result"] = "not_found" if not good else "tie"
         else:
@@ -483,7 +517,7 @@ def recompute_tolerance(pct: str, a: str, b: str) -> Decimal:
 
 
 def table_name(t: dict[str, Any], titles: dict[str, str]) -> str:
-    return f"the {t['area']} CPI table of the {titles.get(t['source_id'], t['source_id'])}"
+    return f"the {table_words(t['area'])} of the {titles.get(t['source_id'], t['source_id'])}"
 
 
 def weights_sum_check(t: dict[str, Any], group_slugs: list[str], spec: dict[str, Any], titles: dict[str, str],
@@ -692,10 +726,10 @@ def gap_observations(spec: dict[str, Any], sources: list[Any], located: dict[str
             if key in not_located:
                 reason = f"{not_located[key]} in the {src.title}."
             elif located.get(key, {}).get("column_problems") or not located.get(key, {}).get("base_confirmed", True):
-                reason = (f"The column headings of the {area} CPI table in the {src.title} could not be confirmed by code, "
+                reason = (f"The column headings of the {table_words(area)} in the {src.title} could not be confirmed by code, "
                           "so no figure from it is shown.")
             else:
-                reason = (f"A row of the {area} CPI table in the {src.title} could not be matched to a group with "
+                reason = (f"A row of the {table_words(area)} in the {src.title} could not be matched to a group with "
                           "certainty, so this figure is not shown.")
             s = series[series_id]
             out.append(Observation(obs_id=oid, series_id=series_id, period=period, vintage="na", unit=s.unit,

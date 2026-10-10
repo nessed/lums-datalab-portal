@@ -137,6 +137,11 @@ export default async function ReceiptPage({ params }: Props) {
           <p style={{ margin: "6px 0 0" }}>
             <StatusBadge status={obs.status} /> <span className="small">{obs.evidence_summary}</span>
           </p>
+          {obs.notes && (
+            <p className="small" data-receipt-note style={{ margin: "8px 0 0" }}>
+              <strong>Note:</strong> {obs.notes}
+            </p>
+          )}
         </div>
       ) : (
         <div className="receipt-head is-gap" data-receipt-gap={obs.gap_kind ?? "unknown"}>

@@ -103,6 +103,7 @@ export type Observation = {
   gap_kind: string | null;
   gap_reason: string | null;
   evidence_summary: string | null;
+  notes?: string | null;
   derived_from: string[];
 };
 

@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T21:15:03+00:00 from commit `6bf5529e6c9e`. Label: **prototype**. DOI: none.
+Built 2026-10-10T21:28:03+00:00 from commit `736a53d593b3`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -9,12 +9,13 @@ Built 2026-10-10T21:15:03+00:00 from commit `6bf5529e6c9e`. Label: **prototype**
 
 | Data type | State | Sources | Published values | Withheld / gaps |
 |---|---|---|---|---|
-| Federal Annual Budget Statement | published | 7 | 436 | not_in_source: 2, not_yet_verified: 60 |
+| Federal Annual Budget Statement | coming | 8 | 0 | not_in_source: 2, not_yet_verified: 517 |
 | Consumer Price Index | coming | 0 | 0 | none |
 | Labour Force Survey | coming | 0 | 0 | none |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
+- Federal Annual Budget Statement: cross-edition agreement 0.978 is below 0.98
 - Consumer Price Index: not processed yet
 - Labour Force Survey: not processed yet
 
@@ -24,7 +25,7 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 
 | Data type | A | B | C | D |
 |---|---|---|---|---|
-| abs | 75 | 361 | 0 | 0 |
+| abs | 94 | 393 | 0 | 0 |
 | cpi | 0 | 0 | 0 | 0 |
 | lfs | 0 | 0 | 0 | 0 |
 
@@ -39,6 +40,7 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | abs-fed-2016-17 | 12 | 90 | 90 | 100.0% | 100.0% |
 | abs-fed-2017-18 | 11 | 89 | 86 | 96.6% | 96.6% |
 | abs-fed-2021-22 | 17 | 75 | 75 | 100.0% | 100.0% |
+| abs-fed-2022-23 | 15 | 84 | 84 | 100.0% | 100.0% |
 | abs-fed-2024-25 | 17 | 87 | 85 | 97.7% | 97.7% |
 | abs-fed-2025-26 | 17 | 87 | 87 | 100.0% | 100.0% |
 
@@ -46,7 +48,7 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 
 | Data type | Passed exactly | Passed within rounding | Failed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement |
 |---|---|---|---|---|---|---|
-| abs | 220 | 34 | 0 | 0 | 100.0% | 100.0% (72 pairs) |
+| abs | 252 | 40 | 2 | 0 | 99.3% | 97.8% (91 pairs) |
 
 **Measured error rate: pending gold-set labelling.** The gold-set kit is in `gold/`; until two humans have labelled it, no absolute error rate is claimed.
 

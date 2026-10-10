@@ -111,6 +111,35 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
     return " ".join(unique)
 
 
+def disagreement_note(primary: Cell, checks_by_cell: dict[str, list[Check]], cells_by_id: dict[str, Cell],
+                      source_titles: dict[str, str]) -> str:
+    """Say so, in words, when another official printing of the same figure disagrees (never hidden).
+
+    The published value is the primary printing, which passed its own check. If the other
+    printing also passed an arithmetic check in its own table, both numbers are as printed,
+    i.e. the publisher restated the figure.
+    """
+    notes: list[str] = []
+    for chk in checks_by_cell.get(primary.cell_id, []):
+        if not chk.official or chk.result != "fail" or chk.check_type not in AGREEMENT_CHECKS:
+            continue
+        other_id = chk.member_cell_ids[0] if chk.target_cell_id == primary.cell_id else chk.target_cell_id
+        other = cells_by_id.get(other_id or "")
+        if other is None:
+            continue
+        other_ok = any(c.official and c.result in PASSING and c.check_type in ARITHMETIC_CHECKS
+                       for c in checks_by_cell.get(other.cell_id, []))
+        where = source_titles.get(other.source_id, other.source_id)
+        here = source_titles.get(primary.source_id, primary.source_id)
+        text = (f"The {where} prints a different figure for this ({fmt(other.value_parsed)}). The value shown is the one "
+                f"printed in the {here}.")
+        if other_ok:
+            text += (" Both figures add up within their own tables, so each is as printed: the publisher restated the "
+                     "figure in the later document.")
+        notes.append(text)
+    return " ".join(sorted(set(notes)))
+
+
 def build_observations(cells: Iterable[Cell], checks: Iterable[Check], series: dict[str, Series],
                        source_order: dict[str, str], source_titles: dict[str, str], release: str) -> list[Observation]:
     """Group mapped cells into observations and assign tier/status from evidence."""
@@ -145,7 +174,8 @@ def build_observations(cells: Iterable[Cell], checks: Iterable[Check], series: d
         sentence = evidence_sentence(primary, tier, checks_by_cell, cells_by_id, source_titles)
         if tier in ("A", "B"):
             out.append(Observation(**base, value=primary.value_parsed, tier=tier, status="checked", published=True,
-                                   evidence_summary=sentence, first_published_release=release, last_changed_release=release))
+                                   evidence_summary=sentence, notes=disagreement_note(primary, checks_by_cell, cells_by_id, source_titles),
+                                   first_published_release=release, last_changed_release=release))
         elif tier == "C":
             out.append(Observation(**base, tier=tier, status="unchecked", published=False, gap_kind="not_yet_verified",
                                    gap_reason="No deterministic check covers this figure yet.", evidence_summary=sentence))

@@ -197,3 +197,18 @@ def test_status_is_deterministic():
     a = [o.model_dump() for o in tiers(cells, run_rules(cells)).values()]
     b = [o.model_dump() for o in tiers(list(reversed(cells)), list(reversed(run_rules(cells)))).values()]
     assert a == b
+
+
+def test_disagreeing_second_printing_is_said_in_words_not_hidden():
+    e1 = column("e1", {"s.a": "100", "s.b": "200", "s.c": "300", "s.total": "600"})
+    e2 = column("e2", {"s.a": "150", "s.b": "150", "s.c": "300", "s.total": "600"}, col=0)   # restated between a and b
+    checks = run_rules(e1 + e2)
+    for a, b in zip(e1, e2):
+        checks.append(equality_check(check_type="cross_edition", dataset="abs", rule_id="x", first=a, second=b, what="w",
+                                     where_first="Edition 1", where_second="Edition 2"))
+    obs = tiers(e1 + e2, checks)
+    o = obs["s.a:2025-26:be"]
+    assert o.published and o.tier == "B" and o.value == "100"          # the primary printing, checked by its own sum
+    assert "prints a different figure for this (150)" in o.notes and "restated" in o.notes
+    assert "Differs from the figure printed in" in o.evidence_summary
+    assert obs["s.c:2025-26:be"].tier == "A" and obs["s.c:2025-26:be"].notes == ""

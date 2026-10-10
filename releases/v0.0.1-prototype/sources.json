@@ -480,8 +480,12 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2022-23.json",
     "notes": "",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      15
+    ],
+    "run_ids": [
+      "ABS_2022-23__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
       "retrieved_at": "2026-10-10T20:55:10+00:00",

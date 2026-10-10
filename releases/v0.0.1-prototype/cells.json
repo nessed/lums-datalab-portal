@@ -17186,6 +17186,3174 @@
     "second_reader": null
   },
   {
+    "cell_id": "c_6f0435117954",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.26906,
+      0.6254,
+      0.27737
+    ],
+    "row_index": 2,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "7,523,248",
+    "value_parsed": "7523248",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_0669f03b1a8a",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.26906,
+      0.74161,
+      0.27737
+    ],
+    "row_index": 2,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "8,388,798",
+    "value_parsed": "8388798",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_a0544199ffdc",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.26906,
+      0.85032,
+      0.27737
+    ],
+    "row_index": 2,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "a. Current Exp. on Revenue Account",
+    "row_label_path": [
+      "a. Current Exp. on Revenue Account"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "8,707,970",
+    "value_parsed": "8707970",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.revenue_account",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_00636b8f257c",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.28926,
+      0.6254,
+      0.29804
+    ],
+    "row_index": 3,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "5,435,201",
+    "value_parsed": "5435201",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7e3213b4755f",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.28926,
+      0.74161,
+      0.29804
+    ],
+    "row_index": 3,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "5,633,043",
+    "value_parsed": "5633043",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_532389a13c1d",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.28926,
+      0.85032,
+      0.29804
+    ],
+    "row_index": 3,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "01 General Public Services",
+    "row_label_path": [
+      "01 General Public Services"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "6,245,478",
+    "value_parsed": "6245478",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.general_public_services",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_34f83eb44189",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.30935,
+      0.6254,
+      0.31813
+    ],
+    "row_index": 4,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "1,373,275",
+    "value_parsed": "1373275",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ffd337c3a34e",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.30935,
+      0.74161,
+      0.31813
+    ],
+    "row_index": 4,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "1,483,922",
+    "value_parsed": "1483922",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bb7ccd560fe4",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.30935,
+      0.85032,
+      0.31813
+    ],
+    "row_index": 4,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "02 Defence Affairs and Services",
+    "row_label_path": [
+      "02 Defence Affairs and Services"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "1,566,698",
+    "value_parsed": "1566698",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.defence_affairs_and_services",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4b2253145811",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.57817,
+      0.32945,
+      0.6254,
+      0.33822
+    ],
+    "row_index": 5,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "178,511",
+    "value_parsed": "178511",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_bc5bcfc998e2",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.32945,
+      0.74161,
+      0.33822
+    ],
+    "row_index": 5,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "191,491",
+    "value_parsed": "191491",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_8edda6c328e7",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.32945,
+      0.85032,
+      0.33822
+    ],
+    "row_index": 5,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "03 Public Order and Safety Affairs",
+    "row_label_path": [
+      "03 Public Order and Safety Affairs"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "209,161",
+    "value_parsed": "209161",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.public_order_and_safety_affairs",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_5fa701600551",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.57817,
+      0.34957,
+      0.6254,
+      0.35834
+    ],
+    "row_index": 6,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "114,201",
+    "value_parsed": "114201",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2bb2552140ec",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.34957,
+      0.74161,
+      0.35834
+    ],
+    "row_index": 6,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "453,050",
+    "value_parsed": "453050",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b3e894a41cef",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.34957,
+      0.85032,
+      0.35834
+    ],
+    "row_index": 6,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "04 Economic Affairs",
+    "row_label_path": [
+      "04 Economic Affairs"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "182,369",
+    "value_parsed": "182369",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.economic_affairs",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_39e3a0da5077",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.60359,
+      0.36966,
+      0.6254,
+      0.37843
+    ],
+    "row_index": 7,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "436",
+    "value_parsed": "436",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e4d5f626e8a1",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.71978,
+      0.36966,
+      0.7416,
+      0.37843
+    ],
+    "row_index": 7,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "452",
+    "value_parsed": "452",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_44f26467972e",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.82853,
+      0.36966,
+      0.85034,
+      0.37843
+    ],
+    "row_index": 7,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "05 Environment Protection",
+    "row_label_path": [
+      "05 Environment Protection"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "749",
+    "value_parsed": "749",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.environment_protection",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_443074c26107",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.58543,
+      0.38975,
+      0.62543,
+      0.39852
+    ],
+    "row_index": 8,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "34,597",
+    "value_parsed": "34597",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f0be9cc8acc5",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.7089,
+      0.38975,
+      0.74161,
+      0.39852
+    ],
+    "row_index": 8,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "5,463",
+    "value_parsed": "5463",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b8fc777ee976",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.81761,
+      0.38975,
+      0.85032,
+      0.39852
+    ],
+    "row_index": 8,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "06 Housing and Community Amenities",
+    "row_label_path": [
+      "06 Housing and Community Amenities"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "7,850",
+    "value_parsed": "7850",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.housing_and_community_amenities",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7edb4d7c7373",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.58543,
+      0.40985,
+      0.62543,
+      0.41863
+    ],
+    "row_index": 9,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "28,352",
+    "value_parsed": "28352",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ce0cf07284ba",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.40985,
+      0.74161,
+      0.41863
+    ],
+    "row_index": 9,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "154,889",
+    "value_parsed": "154889",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_13ea770ff4e5",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.81035,
+      0.40985,
+      0.85035,
+      0.41863
+    ],
+    "row_index": 9,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "07 Health",
+    "row_label_path": [
+      "07 Health"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "19,582",
+    "value_parsed": "19582",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.health",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ebca52114c48",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.58543,
+      0.42994,
+      0.62543,
+      0.43872
+    ],
+    "row_index": 10,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "11,414",
+    "value_parsed": "11414",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_ae2f8532d87f",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.70164,
+      0.42994,
+      0.74164,
+      0.43872
+    ],
+    "row_index": 10,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "13,422",
+    "value_parsed": "13422",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fb80d3469585",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.81035,
+      0.42994,
+      0.85035,
+      0.43872
+    ],
+    "row_index": 10,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "08 Recreation, Culture and Religion",
+    "row_label_path": [
+      "08 Recreation, Culture and Religion"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "15,424",
+    "value_parsed": "15424",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.recreation_culture_and_religion",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fdc4e5f2e2be",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.58543,
+      0.45003,
+      0.62543,
+      0.45881
+    ],
+    "row_index": 11,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "91,970",
+    "value_parsed": "91970",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3a1c5614b635",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.70164,
+      0.45003,
+      0.74164,
+      0.45881
+    ],
+    "row_index": 11,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "90,861",
+    "value_parsed": "90861",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_aedf51894c03",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.81035,
+      0.45003,
+      0.85035,
+      0.45881
+    ],
+    "row_index": 11,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "09 Education Affairs and Services",
+    "row_label_path": [
+      "09 Education Affairs and Services"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "90,556",
+    "value_parsed": "90556",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.education_affairs_and_services",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_42d8946260da",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.57817,
+      0.47013,
+      0.6254,
+      0.4789
+    ],
+    "row_index": 12,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "255,292",
+    "value_parsed": "255292",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_52ee1cea2f99",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.47013,
+      0.74161,
+      0.4789
+    ],
+    "row_index": 12,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "362,205",
+    "value_parsed": "362205",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c344baa18037",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.47013,
+      0.85032,
+      0.4789
+    ],
+    "row_index": 12,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "10 Social Protection",
+    "row_label_path": [
+      "10 Social Protection"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "370,103",
+    "value_parsed": "370103",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.function.social_protection",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fb8885b5ce9c",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.49013,
+      0.6254,
+      0.49844
+    ],
+    "row_index": 13,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "1,601,211",
+    "value_parsed": "1601211",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2f876343ba91",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.49013,
+      0.74161,
+      0.49844
+    ],
+    "row_index": 13,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "2,516,227",
+    "value_parsed": "2516227",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e7c35b89fb38",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.49013,
+      0.85032,
+      0.49844
+    ],
+    "row_index": 13,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "b. Current Exp. on Capital Account",
+    "row_label_path": [
+      "b. Current Exp. on Capital Account"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "4,036,273",
+    "value_parsed": "4036273",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_aed4411639b3",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.51034,
+      0.6254,
+      0.51911
+    ],
+    "row_index": 14,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Foreign Loans Repayment",
+    "row_label_path": [
+      "011 Foreign Loans Repayment"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "1,427,592",
+    "value_parsed": "1427592",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_d06a8bda9bc9",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.51034,
+      0.74161,
+      0.51911
+    ],
+    "row_index": 14,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Foreign Loans Repayment",
+    "row_label_path": [
+      "011 Foreign Loans Repayment"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "2,336,594",
+    "value_parsed": "2336594",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_afe8087b06e4",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.51034,
+      0.85032,
+      0.51911
+    ],
+    "row_index": 14,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Foreign Loans Repayment",
+    "row_label_path": [
+      "011 Foreign Loans Repayment"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "3,792,401",
+    "value_parsed": "3792401",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.foreign_loans_repayment",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e0fc368318cd",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.58543,
+      0.53043,
+      0.62543,
+      0.5392
+    ],
+    "row_index": 15,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Repayment of Short Term Foreign Credits",
+    "row_label_path": [
+      "011 Repayment of Short Term Foreign Credits"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "74,405",
+    "value_parsed": "74405",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f2a87f9c7e40",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.70164,
+      0.53043,
+      0.74164,
+      0.5392
+    ],
+    "row_index": 15,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Repayment of Short Term Foreign Credits",
+    "row_label_path": [
+      "011 Repayment of Short Term Foreign Credits"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "95,006",
+    "value_parsed": "95006",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_fdee2f1e9ab2",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.53043,
+      0.85032,
+      0.5392
+    ],
+    "row_index": 15,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "011 Repayment of Short Term Foreign Credits",
+    "row_label_path": [
+      "011 Repayment of Short Term Foreign Credits"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "142,772",
+    "value_parsed": "142772",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.short_term_foreign_credits_repayment",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_5733a365c587",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.58543,
+      0.55052,
+      0.62543,
+      0.5593
+    ],
+    "row_index": 16,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "014 Transfers",
+    "row_label_path": [
+      "014 Transfers"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "99,214",
+    "value_parsed": "99214",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2db20ae8786e",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.70164,
+      0.55052,
+      0.74164,
+      0.5593
+    ],
+    "row_index": 16,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "014 Transfers",
+    "row_label_path": [
+      "014 Transfers"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "84,627",
+    "value_parsed": "84627",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4261fdf37af2",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.55052,
+      0.85032,
+      0.5593
+    ],
+    "row_index": 16,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "014 Transfers",
+    "row_label_path": [
+      "014 Transfers"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "101,101",
+    "value_parsed": "101101",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.capital_account.transfers",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_1c935d4b90d5",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.57051,
+      0.6254,
+      0.57882
+    ],
+    "row_index": 17,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "9,124,459",
+    "value_parsed": "9124459",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_6dab5a00c399",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.67619,
+      0.57051,
+      0.74161,
+      0.57882
+    ],
+    "row_index": 17,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "10,905,025",
+    "value_parsed": "10905025",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f9897d8b4292",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.78494,
+      0.57051,
+      0.85036,
+      0.57882
+    ],
+    "row_index": 17,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "1 Total Current Expenditure (a + b)",
+    "row_label_path": [
+      "1 Total Current Expenditure (a + b)"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "12,744,243",
+    "value_parsed": "12744243",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.current.total",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_18c04ca10127",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.57817,
+      0.6107,
+      0.6254,
+      0.619
+    ],
+    "row_index": 19,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "c. Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "c. Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "599,080",
+    "value_parsed": "599080",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_b1347a4b2662",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.6107,
+      0.74161,
+      0.619
+    ],
+    "row_index": 19,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "c. Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "c. Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "392,888",
+    "value_parsed": "392888",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_18c9e1be5f1f",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.6107,
+      0.85032,
+      0.619
+    ],
+    "row_index": 19,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "c. Dev. Exp. on Revenue Account",
+    "row_label_path": [
+      "c. Dev. Exp. on Revenue Account"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "491,190",
+    "value_parsed": "491190",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.revenue_account",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_6b30c4eb7d00",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.57817,
+      0.63081,
+      0.6254,
+      0.63912
+    ],
+    "row_index": 20,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Exp. on Capital Account",
+    "row_label_path": [
+      "d. Dev. Exp. on Capital Account"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "538,770",
+    "value_parsed": "538770",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_4573c613aca4",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.63081,
+      0.74161,
+      0.63912
+    ],
+    "row_index": 20,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Exp. on Capital Account",
+    "row_label_path": [
+      "d. Dev. Exp. on Capital Account"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "416,322",
+    "value_parsed": "416322",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2acbabc6e528",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.80309,
+      0.63081,
+      0.85032,
+      0.63912
+    ],
+    "row_index": 20,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "d. Dev. Exp. on Capital Account",
+    "row_label_path": [
+      "d. Dev. Exp. on Capital Account"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "532,686",
+    "value_parsed": "532686",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.capital_account",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_f1dcd4f231c1",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.65091,
+      0.6254,
+      0.65922
+    ],
+    "row_index": 21,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c+d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c+d)"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "1,137,850",
+    "value_parsed": "1137850",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_2f444bd89858",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.69438,
+      0.65091,
+      0.74161,
+      0.65922
+    ],
+    "row_index": 21,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c+d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c+d)"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "809,211",
+    "value_parsed": "809211",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_7ffadebcd84b",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.65091,
+      0.85032,
+      0.65922
+    ],
+    "row_index": 21,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "2 Total Development Expenditure (c+d)",
+    "row_label_path": [
+      "2 Total Development Expenditure (c+d)"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "1,023,877",
+    "value_parsed": "1023877",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.development.total",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_cca584866107",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56001,
+      0.671,
+      0.62543,
+      0.67931
+    ],
+    "row_index": 22,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Grand Total - Expenditure (1+2)",
+    "row_label_path": [
+      "Grand Total - Expenditure (1+2)"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "10,262,309",
+    "value_parsed": "10262309",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_9c1345370cf1",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.67619,
+      0.671,
+      0.74161,
+      0.67931
+    ],
+    "row_index": 22,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Grand Total - Expenditure (1+2)",
+    "row_label_path": [
+      "Grand Total - Expenditure (1+2)"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "11,714,236",
+    "value_parsed": "11714236",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_41c3c6839ab3",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.78494,
+      0.671,
+      0.85036,
+      0.67931
+    ],
+    "row_index": 22,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Grand Total - Expenditure (1+2)",
+    "row_label_path": [
+      "Grand Total - Expenditure (1+2)"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "13,768,120",
+    "value_parsed": "13768120",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.total",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_e9b034fdbe54",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.71118,
+      0.6254,
+      0.71949
+    ],
+    "row_index": 24,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Revenue Account (a+c)",
+    "row_label_path": [
+      "Revenue Account (a+c)"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "8,122,328",
+    "value_parsed": "8122328",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_45dc9a0138e5",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.71118,
+      0.74161,
+      0.71949
+    ],
+    "row_index": 24,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Revenue Account (a+c)",
+    "row_label_path": [
+      "Revenue Account (a+c)"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "8,781,686",
+    "value_parsed": "8781686",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_c7578f4d9ca9",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.71118,
+      0.85032,
+      0.71949
+    ],
+    "row_index": 24,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Revenue Account (a+c)",
+    "row_label_path": [
+      "Revenue Account (a+c)"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "9,199,160",
+    "value_parsed": "9199160",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.revenue",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_58eadfc28362",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.56727,
+      0.73128,
+      0.6254,
+      0.73959
+    ],
+    "row_index": 25,
+    "col_index": 2,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "(Current revenue and capital been mentioned Budget Estimates 2021-22",
+    "col_label_path": [
+      "(Current revenue and capital been mentioned Budget Estimates 2021-22"
+    ],
+    "value_raw": "2,139,981",
+    "value_parsed": "2139981",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2021-22",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_6c22416e5b75",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.68348,
+      0.73128,
+      0.74161,
+      0.73959
+    ],
+    "row_index": 25,
+    "col_index": 3,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "Dev) account) and Article 80(2) Revised Estimates 2021-22",
+    "col_label_path": [
+      "Dev) account) and Article 80(2) Revised Estimates 2021-22"
+    ],
+    "value_raw": "2,932,549",
+    "value_parsed": "2932549",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2021-22",
+    "vintage": "re",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
+    "cell_id": "c_3fe42a601279",
+    "source_id": "abs-fed-2022-23",
+    "page": 15,
+    "page_render_sha256": "b6ff1d49132d885983c8139a07189655168e4ff00424c362726e0444659fe053",
+    "table_index": 0,
+    "table_bbox_norm": [
+      0.13917,
+      0.19307,
+      0.8585,
+      0.74146
+    ],
+    "cell_bbox_norm": [
+      0.79219,
+      0.73128,
+      0.85032,
+      0.73959
+    ],
+    "row_index": 25,
+    "col_index": 4,
+    "row_span": 1,
+    "col_span": 1,
+    "row_label_raw": "Capital Account (b+d)",
+    "row_label_path": [
+      "Capital Account (b+d)"
+    ],
+    "col_label_raw": "Estimates of Constitution (Rs in million) Budget Estimates 2022-23",
+    "col_label_path": [
+      "Estimates of Constitution (Rs in million) Budget Estimates 2022-23"
+    ],
+    "value_raw": "4,568,960",
+    "value_parsed": "4568960",
+    "is_missing": false,
+    "missing_marker": null,
+    "normalization_flags": [],
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "series_id": "fed.exp.account.capital",
+    "period": "2022-23",
+    "vintage": "be",
+    "mapping_method": "dictionary",
+    "extractor_name": "docling",
+    "extractor_version": "2.119.0",
+    "run_id": "ABS_2022-23__docling__full-document__run-01",
+    "extract_config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+    "structural_flags": [],
+    "second_reader": null
+  },
+  {
     "cell_id": "c_d096343ce32d",
     "source_id": "abs-fed-2024-25",
     "page": 17,

@@ -88,6 +88,21 @@ export default function SeriesView({ series }: { series: Series }) {
           </tbody>
         </table>
       </div>
+      {all.some((o) => o.notes) && (
+        <ul className="small" data-series-notes>
+          {all
+            .filter((o) => o.notes)
+            .map((o) => (
+              <li key={o.obs_id}>
+                <Link href={obsHref(o.obs_id)}>
+                  {o.period}
+                  {o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}
+                </Link>
+                : {o.notes}
+              </li>
+            ))}
+        </ul>
+      )}
     </section>
   );
 }

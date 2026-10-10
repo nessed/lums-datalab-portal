@@ -1,14 +1,13 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T21:15:03+00:00",
-  "git_commit": "6bf5529e6c9e57f48973d0a428fe4b0eba942ad0",
+  "created_at": "2026-10-10T21:28:03+00:00",
+  "git_commit": "736a53d593b3eb6f9ad963568270c3aa96f67ba1",
   "label": "prototype",
   "doi": null,
   "scope": {
-    "datasets": [
-      "abs"
-    ],
+    "datasets": [],
     "datasets_coming": [
+      "abs",
       "cpi",
       "lfs"
     ],
@@ -18,23 +17,12 @@
       "abs-fed-2016-17",
       "abs-fed-2017-18",
       "abs-fed-2021-22",
+      "abs-fed-2022-23",
       "abs-fed-2024-25",
       "abs-fed-2025-26"
     ],
     "periods": {
-      "abs": [
-        "2009-10",
-        "2010-11",
-        "2011-12",
-        "2015-16",
-        "2016-17",
-        "2017-18",
-        "2020-21",
-        "2021-22",
-        "2023-24",
-        "2024-25",
-        "2025-26"
-      ],
+      "abs": [],
       "cpi": [],
       "lfs": []
     }
@@ -77,60 +65,62 @@
   },
   "counts": {
     "sources": 20,
-    "cells": 495,
-    "cells_mapped": 495,
-    "cells_behind_published_values": 492,
+    "cells": 561,
+    "cells_mapped": 561,
+    "cells_behind_published_values": 0,
     "series": 30,
-    "observations": 498,
+    "observations": 519,
     "observations_by_dataset": {
       "abs": {
         "gap:not_in_source": 2,
-        "gap:not_yet_verified": 60,
-        "published": 436
+        "gap:not_yet_verified": 517
       },
       "cpi": {},
       "lfs": {}
     },
     "tiers_by_dataset": {
       "abs": {
-        "A": 75,
-        "B": 361
+        "A": 94,
+        "B": 393
       },
       "cpi": {},
       "lfs": {}
     },
     "checks_by_result": {
-      "pass": 220,
-      "pass_within_rounding": 34
+      "pass": 252,
+      "pass_within_rounding": 40,
+      "fail": 2
     },
     "checks_by_type": {
       "accounting_identity": {
-        "pass": 99,
-        "pass_within_rounding": 18
+        "pass": 111,
+        "pass_within_rounding": 21
       },
       "column_total": {
-        "pass": 6,
-        "pass_within_rounding": 15
+        "pass": 8,
+        "pass_within_rounding": 16
       },
       "cross_edition": {
-        "pass": 72
+        "pass": 88,
+        "fail": 2,
+        "pass_within_rounding": 1
       },
       "cross_table": {
         "pass": 20
       },
       "hierarchy_sum": {
-        "pass": 23,
-        "pass_within_rounding": 1
+        "pass": 25,
+        "pass_within_rounding": 2
       }
     },
-    "page_renders": 7
+    "page_renders": 8
   },
   "coverage_summary": {
     "abs": {
-      "printed_numeric_tokens": 610,
-      "matched": 605,
-      "coverage": 0.9918,
-      "tables": 7,
+      "printed_numeric_tokens": 694,
+      "matched": 689,
+      "coverage": 0.9928,
+      "tables": 8,
       "tables_below_per_table_minimum": []
     },
     "cpi": null,
@@ -139,20 +129,20 @@
   "check_pass_rates": {
     "abs": {
       "all": {
-        "pass": 220,
-        "pass_within_rounding": 34,
-        "fail": 0,
+        "pass": 252,
+        "pass_within_rounding": 40,
+        "fail": 2,
         "not_evaluable": 0,
-        "evaluable": 254,
-        "pass_rate": 1.0
+        "evaluable": 294,
+        "pass_rate": 0.9932
       },
       "cross_edition": {
-        "pass": 72,
-        "pass_within_rounding": 0,
-        "fail": 0,
+        "pass": 88,
+        "pass_within_rounding": 1,
+        "fail": 2,
         "not_evaluable": 0,
-        "evaluable": 72,
-        "pass_rate": 1.0
+        "evaluable": 91,
+        "pass_rate": 0.978
       }
     },
     "cpi": {
@@ -168,31 +158,33 @@
     "abs": {
       "dataset": "abs",
       "name": "Federal Annual Budget Statement",
-      "meets_thresholds": true,
-      "state": "published",
-      "reasons": [],
+      "meets_thresholds": false,
+      "state": "coming",
+      "reasons": [
+        "cross-edition agreement 0.978 is below 0.98"
+      ],
       "coverage": {
-        "printed_numeric_tokens": 610,
-        "matched": 605,
-        "coverage": 0.9918,
-        "tables": 7,
+        "printed_numeric_tokens": 694,
+        "matched": 689,
+        "coverage": 0.9928,
+        "tables": 8,
         "tables_below_per_table_minimum": []
       },
       "check_pass_rate": {
-        "pass": 220,
-        "pass_within_rounding": 34,
-        "fail": 0,
+        "pass": 252,
+        "pass_within_rounding": 40,
+        "fail": 2,
         "not_evaluable": 0,
-        "evaluable": 254,
-        "pass_rate": 1.0
+        "evaluable": 294,
+        "pass_rate": 0.9932
       },
       "cross_edition_agreement": {
-        "pass": 72,
-        "pass_within_rounding": 0,
-        "fail": 0,
+        "pass": 88,
+        "pass_within_rounding": 1,
+        "fail": 2,
         "not_evaluable": 0,
-        "evaluable": 72,
-        "pass_rate": 1.0
+        "evaluable": 91,
+        "pass_rate": 0.978
       }
     },
     "cpi": {

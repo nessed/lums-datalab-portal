@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T23:02:14+00:00",
-  "git_commit": "0a5c434c7f0dde8643f3760af80c83c2fb18939d",
+  "created_at": "2026-10-10T23:14:50+00:00",
+  "git_commit": "c85ae0a0a630d29d888becd23eaa2ad325e5ebc6",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -21,6 +21,9 @@
       "abs-fed-2024-25",
       "abs-fed-2025-26",
       "abs-fed-2026-27",
+      "cpi-pbs-2016-06",
+      "cpi-pbs-2018-06",
+      "cpi-pbs-2019-06",
       "cpi-pbs-2021-06",
       "cpi-pbs-2023-06",
       "cpi-pbs-2024-06",
@@ -48,6 +51,14 @@
         "2026-27"
       ],
       "cpi": [
+        "2015-06",
+        "2016-05",
+        "2016-06",
+        "2017-06",
+        "2018-05",
+        "2018-06",
+        "2019-05",
+        "2019-06",
         "2020-06",
         "2021-05",
         "2021-06",
@@ -110,49 +121,54 @@
   },
   "counts": {
     "sources": 22,
-    "cells": 4746,
-    "cells_mapped": 2355,
-    "cells_behind_published_values": 2298,
-    "series": 286,
-    "observations": 2165,
+    "cells": 8996,
+    "cells_mapped": 5454,
+    "cells_behind_published_values": 4873,
+    "series": 491,
+    "observations": 4236,
     "observations_by_dataset": {
       "abs": {
-        "gap:disputed": 2,
-        "gap:not_in_source": 2,
-        "published": 533
+        "gap:disputed": 3,
+        "gap:failed_checks": 216,
+        "gap:not_in_source": 78,
+        "gap:not_yet_verified": 200,
+        "published": 2111
       },
       "cpi": {
-        "gap:not_yet_verified": 218,
-        "published": 1038
+        "gap:disputed": 2,
+        "published": 1254
       },
       "lfs": {
         "gap:disputed": 6,
-        "gap:failed_checks": 2,
+        "gap:failed_checks": 3,
         "gap:not_yet_verified": 36,
-        "published": 328
+        "published": 327
       }
     },
     "tiers_by_dataset": {
       "abs": {
-        "A": 118,
-        "B": 415
+        "A": 436,
+        "B": 1675,
+        "C": 200,
+        "D": 216
       },
       "cpi": {
-        "A": 117,
-        "B": 921
+        "A": 128,
+        "B": 1126
       },
       "lfs": {
-        "A": 138,
+        "A": 137,
         "B": 190,
         "C": 36,
-        "D": 2
+        "D": 3
       }
     },
     "checks_by_result": {
-      "pass": 941,
-      "pass_within_rounding": 569,
-      "disputed": 8,
-      "fail": 1
+      "pass": 2060,
+      "pass_within_rounding": 831,
+      "disputed": 11,
+      "fail": 20,
+      "not_evaluable": 123
     },
     "checks_by_type": {
       "accounting_identity": {
@@ -160,55 +176,64 @@
         "pass_within_rounding": 37
       },
       "column_total": {
-        "pass": 66,
-        "pass_within_rounding": 21
+        "pass": 104,
+        "pass_within_rounding": 51,
+        "not_evaluable": 30
       },
       "cross_edition": {
-        "pass": 417,
-        "disputed": 8,
-        "pass_within_rounding": 4
+        "pass": 773,
+        "disputed": 11,
+        "pass_within_rounding": 7,
+        "fail": 2
       },
       "cross_table": {
-        "pass": 22
+        "pass": 397,
+        "pass_within_rounding": 3
       },
       "hierarchy_sum": {
-        "pass": 28,
-        "pass_within_rounding": 2
+        "pass": 341,
+        "pass_within_rounding": 139,
+        "fail": 17,
+        "not_evaluable": 93
       },
       "index_aggregation": {
-        "pass_within_rounding": 45
+        "pass_within_rounding": 54
       },
       "recompute": {
-        "pass_within_rounding": 443,
+        "pass_within_rounding": 520,
+        "pass": 1,
         "fail": 1
       },
       "reference_value": {
-        "pass": 180
+        "pass": 216
       },
       "row_total": {
         "pass": 54,
         "pass_within_rounding": 6
       },
       "weights_sum": {
-        "pass_within_rounding": 11,
+        "pass_within_rounding": 14,
         "pass": 28
       }
     },
-    "page_renders": 47
+    "page_renders": 113
   },
   "coverage_summary": {
     "abs": {
-      "printed_numeric_tokens": 781,
-      "matched": 773,
-      "coverage": 0.9898,
-      "tables": 9,
-      "tables_below_per_table_minimum": []
+      "printed_numeric_tokens": 5593,
+      "matched": 5535,
+      "coverage": 0.9896,
+      "tables": 72,
+      "tables_below_per_table_minimum": [
+        "abs-fed-2017-18 p.12",
+        "abs-fed-2022-23 p.16"
+      ]
     },
     "cpi": {
-      "printed_numeric_tokens": 2121,
-      "matched": 2121,
+      "printed_numeric_tokens": 2547,
+      "matched": 2547,
       "coverage": 1.0,
-      "tables": 15,
+      "tables": 18,
       "tables_below_per_table_minimum": []
     },
     "lfs": {
@@ -222,41 +247,41 @@
   "check_pass_rates": {
     "abs": {
       "all": {
-        "pass": 291,
-        "pass_within_rounding": 47,
-        "fail": 0,
-        "not_evaluable": 0,
-        "disputed": 2,
-        "evaluable": 340,
-        "pass_rate": 0.9941
+        "pass": 1365,
+        "pass_within_rounding": 217,
+        "fail": 19,
+        "not_evaluable": 123,
+        "disputed": 3,
+        "evaluable": 1604,
+        "pass_rate": 0.9863
       },
       "cross_edition": {
-        "pass": 111,
+        "pass": 459,
         "pass_within_rounding": 1,
-        "fail": 0,
+        "fail": 2,
         "not_evaluable": 0,
-        "disputed": 2,
-        "evaluable": 112,
-        "pass_rate": 1.0
+        "disputed": 3,
+        "evaluable": 462,
+        "pass_rate": 0.9957
       }
     },
     "cpi": {
       "all": {
-        "pass": 302,
-        "pass_within_rounding": 445,
+        "pass": 347,
+        "pass_within_rounding": 537,
         "fail": 0,
         "not_evaluable": 0,
-        "disputed": 0,
-        "evaluable": 747,
-        "pass_rate": 1.0
+        "disputed": 2,
+        "evaluable": 886,
+        "pass_rate": 0.9977
       },
       "cross_edition": {
-        "pass": 117,
-        "pass_within_rounding": 0,
+        "pass": 125,
+        "pass_within_rounding": 3,
         "fail": 0,
         "not_evaluable": 0,
-        "disputed": 0,
-        "evaluable": 117,
+        "disputed": 2,
+        "evaluable": 128,
         "pass_rate": 1.0
       }
     },
@@ -289,36 +314,42 @@
       "state": "published",
       "reasons": [],
       "coverage": {
-        "printed_numeric_tokens": 781,
-        "matched": 773,
-        "coverage": 0.9898,
-        "tables": 9,
-        "tables_below_per_table_minimum": []
+        "printed_numeric_tokens": 5593,
+        "matched": 5535,
+        "coverage": 0.9896,
+        "tables": 72,
+        "tables_below_per_table_minimum": [
+          "abs-fed-2017-18 p.12",
+          "abs-fed-2022-23 p.16"
+        ]
       },
       "check_pass_rate": {
-        "pass": 291,
-        "pass_within_rounding": 47,
-        "fail": 0,
-        "not_evaluable": 0,
-        "disputed": 2,
-        "evaluable": 340,
-        "pass_rate": 0.9941
+        "pass": 1365,
+        "pass_within_rounding": 217,
+        "fail": 19,
+        "not_evaluable": 123,
+        "disputed": 3,
+        "evaluable": 1604,
+        "pass_rate": 0.9863
       },
       "cross_edition_agreement": {
-        "pass": 111,
+        "pass": 459,
         "pass_within_rounding": 1,
-        "fail": 0,
+        "fail": 2,
         "not_evaluable": 0,
-        "disputed": 2,
-        "evaluable": 112,
-        "pass_rate": 1.0
+        "disputed": 3,
+        "evaluable": 462,
+        "pass_rate": 0.9957
       },
       "disputes": {
-        "differing_pairs": 2,
-        "disputed": 2,
-        "kept_as_fail": {},
-        "cross_edition_pairs": 114,
-        "disputed_share": 0.0175,
+        "differing_pairs": 5,
+        "disputed": 3,
+        "kept_as_fail": {
+          "a table or cell carries an extraction flag": 1,
+          "a table or row carries a structural flag": 1
+        },
+        "cross_edition_pairs": 465,
+        "disputed_share": 0.0065,
         "max_disputed_share": "0.05"
       }
     },
@@ -329,36 +360,36 @@
       "state": "published",
       "reasons": [],
       "coverage": {
-        "printed_numeric_tokens": 2121,
-        "matched": 2121,
+        "printed_numeric_tokens": 2547,
+        "matched": 2547,
         "coverage": 1.0,
-        "tables": 15,
+        "tables": 18,
         "tables_below_per_table_minimum": []
       },
       "check_pass_rate": {
-        "pass": 302,
-        "pass_within_rounding": 445,
+        "pass": 347,
+        "pass_within_rounding": 537,
         "fail": 0,
         "not_evaluable": 0,
-        "disputed": 0,
-        "evaluable": 747,
-        "pass_rate": 1.0
+        "disputed": 2,
+        "evaluable": 886,
+        "pass_rate": 0.9977
       },
       "cross_edition_agreement": {
-        "pass": 117,
-        "pass_within_rounding": 0,
+        "pass": 125,
+        "pass_within_rounding": 3,
         "fail": 0,
         "not_evaluable": 0,
-        "disputed": 0,
-        "evaluable": 117,
+        "disputed": 2,
+        "evaluable": 128,
         "pass_rate": 1.0
       },
       "disputes": {
-        "differing_pairs": 0,
-        "disputed": 0,
+        "differing_pairs": 2,
+        "disputed": 2,
         "kept_as_fail": {},
-        "cross_edition_pairs": 117,
-        "disputed_share": 0.0,
+        "cross_edition_pairs": 130,
+        "disputed_share": 0.0154,
         "max_disputed_share": "0.05"
       }
     },

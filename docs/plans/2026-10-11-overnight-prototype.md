@@ -36,6 +36,7 @@ Read this whole file once before you start. Then read `AGENTS.md`. Then begin at
 - **Prefer boring, deterministic, tested code** over clever code. The reviewer tomorrow is a different agent plus two humans with no context from tonight.
 - **Look at your own output.** After any extraction or render, view the overlay images (section 6.4) and sanity-read a few rows. Viewing is permitted; it is QA of the code. It never changes a value or a status.
 - **Write things down as you go**, not at the end: `STATUS.md`, the report, `DECISIONS.md`. If you run out of time, the record is more valuable than one more feature.
+- **Context hygiene (this is a long run).** Never read a Docling JSON/markdown output, a page's full text, a big CSV or a PDF dump into your context; inspect them with short scripts that print counts, heads and the specific rows you need. Delegate exploration and anything with large output to subagents. Your context will be compacted automatically at some point; that is fine because the state lives on disk. After any compaction, re-read `STATUS.md` and the last entries of the report before continuing.
 
 ---
 

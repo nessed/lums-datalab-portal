@@ -1,0 +1,190 @@
+// Display helpers. Values are decimal strings and stay strings for display:
+// thousands separators are inserted by string manipulation, never parseFloat.
+
+export function formatDecimalString(value: string | null | undefined): string {
+  if (value === null || value === undefined) return "";
+  const s = String(value).trim();
+  const m = /^([+-]?)(\d+)(\.\d+)?$/.exec(s);
+  if (!m) return s; // not a plain decimal: show exactly as stored
+  const sign = m[1] === "-" ? "−" : "";
+  const int = m[2].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return `${sign}${int}${m[3] ?? ""}`;
+}
+
+const SCALE_WORDS: Record<string, string> = {
+  "1": "",
+  "1000": "thousand",
+  "100000": "lakh",
+  "1000000": "million",
+  "10000000": "crore",
+  "1000000000": "billion",
+};
+
+/** e.g. ("PKR", 1000000) -> "Rs million". */
+export function unitLabel(unit: string | null | undefined, scale: number | null | undefined): string {
+  const scaleWord = SCALE_WORDS[String(scale ?? 1)] ?? (scale && scale !== 1 ? `× ${formatDecimalString(String(scale))}` : "");
+  switch (unit) {
+    case "PKR":
+      return scaleWord ? `Rs ${scaleWord}` : "Rs";
+    case "percent":
+      return "per cent";
+    case "index":
+      return "index points";
+    case "persons":
+      return scaleWord ? `${scaleWord} persons` : "persons";
+    default:
+      return [scaleWord, unit ?? ""].filter(Boolean).join(" ");
+  }
+}
+
+/** e.g. "7,283 (Rs million)". */
+export function valueWithUnit(value: string | null, unit: string | null | undefined, scale: number | null | undefined): string {
+  return `${formatDecimalString(value)} (${unitLabel(unit, scale)})`;
+}
+
+const VINTAGE_WORDS: Record<string, string> = {
+  be: "Budget estimate",
+  re: "Revised estimate",
+  na: "Not applicable",
+  actual: "Actual",
+  ac: "Actual",
+  provisional: "Provisional",
+  pe: "Provisional estimate",
+  final: "Final",
+  rebased: "Rebased",
+};
+
+export function vintageWords(v: string | null | undefined): string {
+  if (!v) return "Not stated";
+  return VINTAGE_WORDS[v] ?? v.toUpperCase();
+}
+
+export function vintageLong(v: string | null | undefined): string {
+  if (v === "na") return "Not applicable (this kind of figure has no estimate type)";
+  if (v === "be") return "Budget estimate: the amount planned when the budget was presented";
+  if (v === "re") return "Revised estimate: the government's updated figure, printed in the following year's budget";
+  return vintageWords(v);
+}
+
+export const GAP_WORDS: Record<string, string> = {
+  not_in_source: "Not published by the government",
+  not_yet_verified: "Not yet verified by us",
+  failed_checks: "We could not verify this figure; it is withheld",
+};
+
+export const GAP_EXPLAIN: Record<string, string> = {
+  not_in_source:
+    "The government document does not print this figure. There is nothing for us to read, so there is no value here.",
+  not_yet_verified:
+    "The figure may exist in the government document, but we have not yet read and checked it. Until it passes our checks we show a gap, not a number.",
+  failed_checks:
+    "We read a figure from the document, but it did not pass our checks and nothing independent tells us which number is wrong. We withhold it and do not guess.",
+};
+
+export function gapWords(kind: string | null | undefined): string {
+  if (!kind) return "No value in this release";
+  return GAP_WORDS[kind] ?? `No value (${kind.replaceAll("_", " ")})`;
+}
+
+export const CHECKED_HELP =
+  "Checked: we read this figure from the government page and it passed at least one deterministic check, such as adding up to a printed total or matching the same figure printed elsewhere. It is not a guarantee that the figure is free of error.";
+
+const STATUS_WORDS: Record<string, string> = {
+  checked: "Checked",
+  unchecked: "Not checked",
+  disputed: "Disputed",
+};
+export const statusWords = (s: string) => STATUS_WORDS[s] ?? s;
+
+export const TIER_WORDS: Record<string, string> = {
+  A: "Tier A, verified: an arithmetic check passed and the same figure was found in a second official printing.",
+  B: "Tier B, corroborated: either an arithmetic check passed, or the same figure was found in a second official printing (one of the two, not both).",
+  C: "Tier C, single source: no check covers this figure yet, so it is not published.",
+  D: "Tier D, quarantined: a check failed or the table looked damaged, so the figure is withheld.",
+  E: "Tier E: not assessed.",
+};
+
+export const CHECK_RESULT_WORDS: Record<string, string> = {
+  pass: "Pass",
+  pass_within_rounding: "Pass, within rounding",
+  fail: "Fail",
+  not_evaluable: "Could not run",
+};
+
+export const CHECK_TYPE_WORDS: Record<string, string> = {
+  column_total: "Column total",
+  row_total: "Row total",
+  hierarchy_sum: "Parts add to the whole",
+  cross_edition: "Same figure in another edition",
+  cross_table: "Same figure in another table",
+  accounting_identity: "Accounting identity",
+  cross_source: "Same figure in another official source",
+  recompute: "Recomputed",
+  weights_sum: "Weights add up",
+  index_aggregation: "Index aggregation",
+};
+
+export const VERIFICATION_WORDS: Record<string, { text: string; caveat: boolean }> = {
+  official_match_archive: {
+    text: "Downloaded from the official government website. The file is identical, byte for byte, to an independently archived copy.",
+    caveat: false,
+  },
+  official_only: {
+    text: "Downloaded from the official government website. No independent archived copy was available to compare it with.",
+    caveat: false,
+  },
+  official_differs_from_archive: {
+    text: "Downloaded from the official government website. It differs from an older archived copy, which suggests the file was reissued. We use the official download.",
+    caveat: false,
+  },
+  wayback_only: {
+    text: "Caveat: the official link did not work, so this file comes from an Internet Archive (Wayback Machine) snapshot of the official page.",
+    caveat: true,
+  },
+  archive_copy_content_inspected: {
+    text: "Caveat: the official link and the Internet Archive both failed. This file comes from a research archive copy; its contents were inspected by code but it could not be compared with an official download.",
+    caveat: true,
+  },
+};
+
+export function verificationWords(status: string | null | undefined): { text: string; caveat: boolean } {
+  if (status && VERIFICATION_WORDS[status]) return VERIFICATION_WORDS[status];
+  return {
+    text: `Caveat: verification status "${(status ?? "unknown").replaceAll("_", " ")}". Treat this source with care.`,
+    caveat: true,
+  };
+}
+
+export const DOC_TYPE_WORDS: Record<string, string> = {
+  abs: "Annual Budget Statement",
+  cpi_monthly_review: "Monthly Review of Price Indices",
+  lfs_annual_report: "Labour Force Survey annual report",
+  pes_chapter: "Pakistan Economic Survey chapter",
+  sbp_easydata: "State Bank of Pakistan EasyData",
+};
+
+export const ROLE_WORDS: Record<string, string> = {
+  core: "Core source: values are read from this document.",
+  corroboration: "Corroboration: used to confirm figures printed in other editions.",
+  cross_source: "Cross-source: a different publication used to confirm figures.",
+};
+
+/** Ratio (0..1) -> "97.3%". Used only for rates stored in the release, never for data values. */
+export function pct(ratio: number | null | undefined): string {
+  if (ratio === null || ratio === undefined || Number.isNaN(ratio)) return "not available";
+  const v = ratio * 100;
+  return `${Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)}%`;
+}
+
+export function count(n: number | null | undefined): string {
+  return n === null || n === undefined ? "0" : formatDecimalString(String(n));
+}
+
+export function dateOnly(iso: string | null | undefined): string {
+  return iso ? iso.slice(0, 10) : "not recorded";
+}
+
+export function bytes(n: number | null | undefined): string {
+  if (!n && n !== 0) return "not recorded";
+  return `${formatDecimalString(String(n))} bytes`;
+}

@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2010-11",
-  "registered_at": "2026-10-10T20:28:56+00:00",
+  "registered_at": "2026-10-10T20:51:17+00:00",
   "file_url": "https://www.finance.gov.pk/budget/abs_10_11.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2010_11.html",
-  "retrieved_at": "2026-10-10T20:28:59+00:00",
+  "retrieved_at": "2026-10-10T20:51:20+00:00",
   "retrieved_via": "official",
   "sha256": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
   "size_bytes": 66238,
@@ -20,22 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/abs_10_11.pdf",
-      "time": "2026-10-10T20:28:56+00:00",
+      "time": "2026-10-10T20:51:17+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
       "url": "https://www.finance.gov.pk/fb_2010_11.html",
-      "time": "2026-10-10T20:28:59+00:00",
+      "time": "2026-10-10T20:51:21+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
-      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/abs_10_11.pdf",
-      "time": "2026-10-10T20:29:01+00:00",
-      "outcome": "error:JSONDecodeError"
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/abs_10_11.pdf",
+      "time": "2026-10-10T20:51:24+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
     }
   ],
   "local_path": "abs/2010-11/abs_10_11.pdf",
@@ -53,6 +54,8 @@
       "CreationDate": "D:20100708161614+05'00'"
     },
     "pages_with_text_layer": 29,
+    "blank_pages": [],
+    "pages_without_text_layer": [],
     "text_layer_fraction": 1.0,
     "ascii_ratio_first_pages": 0.9535,
     "markers": {
@@ -94,5 +97,11 @@
     }
   },
   "verification_status": "official_match_archive",
-  "wayback": null
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250619205318/https://finance.gov.pk/budget/abs_10_11.pdf",
+    "wayback_timestamp": "20250619205318",
+    "snapshots_seen": 17,
+    "snapshot_digest": "FN673HS66WFVJ4M3QF34HZ4B7ALPYESM",
+    "digest_matches_file": true
+  }
 }

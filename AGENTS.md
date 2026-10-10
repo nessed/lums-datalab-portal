@@ -105,6 +105,13 @@ Spreadsheets and API data skip profile/extract/structure/second-reader but go th
 - **Arslan's old ABS pipeline** used pdftotext, not Docling, and has known defects: Health dropped in 16 of 17 years (`extract_text_tables.py:79`), merged rows for FY2024-27, missing Sales Tax in FY2023-24, wrong page numbers. Use its outputs **only to compare against**, never as a source.
 - **Registry page counts are empty** because of a bug in the old manifest script: `len(PdfReader(path))` must be `len(PdfReader(path).pages)`.
 - **PES 2025-26 p.135** is an unresolved sign/column question from the August tests. Don't pick a winner; it belongs in the gold set.
+- **Docling on Windows without MSVC:** every page fails with `InvalidCxxCompiler: cl is not found` because torch tries to compile. `datalab extract` sets `TORCHDYNAMO_DISABLE=1` (in the hashed config). Run 01 of ABS 2010-11 is the recorded failure.
+- **Docling glues wrapped headings onto the next row.** In ABS 2025-26 the row label comes out as `Account General Public Services` and `Development Expenditure c. Dev. Exp. on Revenue Account`. Numbers are fine; labels are not. The label dictionary (`specs/abs_labels.yaml`) lists these prefixes explicitly, and the sum checks validate the mapping.
+- **Docling column headers are unreliable** (`Estimates 2024-25` with "Budget"/"Revised" lost). Column year and vintage are read from the PDF text layer by position (`datasets/common.column_header_text`) and must match what the edition is expected to print.
+- **The ABS function lines are current expenditure on revenue account only.** The Summary of Expenditure does not print development spending by function. Never label them "expenditure on health" without that qualifier.
+- **ABS covers:** 2010-11 has no cover page in the file and 2017-18's cover is an image, so the title cannot be read from the text layer. Pages 2, 4, 6 of newer editions are blank. See the verification records.
+- **Wayback:** the availability API (`archive.org/wayback/available`) returns nothing for most of these PDFs; the CDX index (`web.archive.org/cdx/search/cdx`) works and carries a SHA-1 digest that can be compared with the local file.
+- **Git Bash heredocs** choke on some multi-byte characters; write long text files with a file tool or Python, not `cat <<EOF`.
 - **Series breaks:** 18th Amendment / 7th NFC (FY2010-11), CPI rebased to 2015-16 (2019), GDP rebased to 2015-16 (2022). Mark them; never smooth across them.
 
 ## 8. Working conventions

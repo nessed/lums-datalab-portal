@@ -34,6 +34,7 @@ labels:
   - {pattern: 'other dev(\.|elopment)? exp(\.|enditure)? on revenue account', series: fed.exp.development.revenue_account.other}
   - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account', series: fed.exp.development.capital_account}
   - {pattern: 'total development expenditure ?\(c\+d\)', series: fed.exp.development.total}
+  - {pattern: '\(total public sector dev(\.|elopment)? program(me)?\) ?\(i\+d\)', series: fed.exp.development.psdp_total}
   - {pattern: 'estimated operational shortfall in psdp', series: fed.exp.operational_shortfall}
   - {pattern: '(grand )?total ?- ?expenditure ?\(1\+2(\+3)?\)', series: fed.exp.total}
   - {pattern: 'total expenditure', series: fed.exp.total}
@@ -46,6 +47,8 @@ labels:
   - {pattern: 'transfers', series: fed.exp.current.capital_account.transfers}
 
 extra_series:
+  - {id: fed.exp.development.psdp_total, name: "Total Public Sector Development Programme (i+d)", parent: null, sort: 65,
+     definition: "PSDP total as printed in older editions: development expenditure on revenue account (PSDP) plus development expenditure on capital account."}
   - {id: fed.exp.development.revenue_account.psdp, name: "Development expenditure on revenue account (PSDP)", parent: fed.exp.development.revenue_account, sort: 63,
      definition: "The Public Sector Development Programme part of development expenditure on revenue account (printed in older editions)."}
   - {id: fed.exp.development.revenue_account.other, name: "Other development expenditure on revenue account", parent: fed.exp.development.revenue_account, sort: 64,

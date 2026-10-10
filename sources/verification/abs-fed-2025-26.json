@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2025-26",
-  "registered_at": "2026-10-10T20:29:15+00:00",
+  "registered_at": "2026-10-10T20:56:27+00:00",
   "file_url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2025_26.html",
-  "retrieved_at": "2026-10-10T20:29:18+00:00",
+  "retrieved_at": "2026-10-10T20:56:30+00:00",
   "retrieved_via": "official",
   "sha256": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
   "size_bytes": 2645541,
@@ -20,22 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
-      "time": "2026-10-10T20:29:15+00:00",
+      "time": "2026-10-10T20:56:27+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
       "url": "https://www.finance.gov.pk/fb_2025_26.html",
-      "time": "2026-10-10T20:29:19+00:00",
+      "time": "2026-10-10T20:56:31+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
-      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
-      "time": "2026-10-10T20:29:21+00:00",
-      "outcome": "error:JSONDecodeError"
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+      "time": "2026-10-10T20:56:33+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
     }
   ],
   "local_path": "abs/2025-26/abs_eng_10062025.pdf",
@@ -53,7 +54,13 @@
       "CreationDate": "D:20250608230629+05'00'"
     },
     "pages_with_text_layer": 51,
-    "text_layer_fraction": 0.9444,
+    "blank_pages": [
+      2,
+      4,
+      6
+    ],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
     "ascii_ratio_first_pages": 1.0,
     "markers": {
       "all": {
@@ -74,9 +81,15 @@
     },
     "markers_ok": true
   },
-  "text_layer_ok": false,
+  "text_layer_ok": true,
   "landing_page_links_file": true,
   "identity_route": "cover_markers",
   "verification_status": "official_differs_from_archive",
-  "wayback": null
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20251103022823/https://finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+    "wayback_timestamp": "20251103022823",
+    "snapshots_seen": 3,
+    "snapshot_digest": "JM3OEGIRWQIHRSI32VS4VED33ZY276YI",
+    "digest_matches_file": true
+  }
 }

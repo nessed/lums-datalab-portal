@@ -18,7 +18,7 @@ from ..sources import read_manifest, source_path
 from ..status import build_observations
 from ..tables import Table, page_words
 from ..validate import BLOCKING_TABLE_FLAGS, detect_table_flags, render_overlay, table_coverage
-from .common import (LabelMap, column_header_text, fiscal_years_in, load_spec, make_cell, previous_fy, row_label,
+from .common import (LabelMap, column_header_text, text_layer_row_label, fiscal_years_in, load_spec, make_cell, previous_fy, row_label,
                      save_dataset, score_table, validated_tables)
 
 DATASET = "abs"
@@ -83,20 +83,31 @@ def build_cells(source, run, table: Table, spec: dict[str, Any], labels: LabelMa
     cells: list[Cell] = []
     unmapped: list[str] = []
     ambiguous: list[str] = []
+    relabelled: list[str] = []
     for r in range(table.num_rows):
         row_cells = [grid[r][k] for k in value_cols if grid[r][k] is not None and grid[r][k].row == r and grid[r][k].col == k]
         if not row_cells or all(c.column_header for c in row_cells) or not any(c.text.strip() for c in row_cells):
             continue
         label = row_label(table, grid, r, value_cols)
         series_id, how = labels.lookup(label)
-        if series_id is None and label:
-            (ambiguous if how == "ambiguous" else unmapped).append(label)
+        row_flags = list(flags)
+        if series_id is None:
+            # Docling sometimes merges two rows' label cells into one. Fall back to the label read
+            # from the text layer on the amount's own line; the sum checks still validate the result.
+            alt = text_layer_row_label(table, grid, r, value_cols, words)
+            alt_series, alt_how = labels.lookup(alt)
+            if alt_series is not None:
+                series_id, how, label = alt_series, alt_how, alt
+                row_flags.append("row_label_from_text_layer")
+                relabelled.append(alt)
+        if series_id is None:
+            (ambiguous if how == "ambiguous" else unmapped).append(label or "(row with no label)")
         for tc in row_cells:
             if not tc.text.strip():
                 continue
             period, vintage, header = col_map.get(tc.col, (None, None, ""))
             cell = make_cell(source=source, run=run, table=table, tcell=tc, row_label_raw=label, col_label_raw=header,
-                             table_flags=flags)
+                             table_flags=row_flags)
             cell.unit = "PKR"
             cell.scale_factor = spec["scale_factor"] if scale_ok else None
             if series_id and period and not col_problems and scale_ok:
@@ -107,7 +118,8 @@ def build_cells(source, run, table: Table, spec: dict[str, Any], labels: LabelMa
         "rows": table.num_rows, "cols": table.num_cols, "value_columns": value_cols, "table_flags": flags,
         "columns": {str(k): {"period": v[0], "vintage": v[1], "header": v[2]} for k, v in col_map.items()},
         "column_problems": col_problems, "scale_factor_detected": scale, "scale_confirmed": bool(scale_ok),
-        "unmapped_labels": unmapped, "ambiguous_labels": ambiguous, "coverage": coverage,
+        "unmapped_labels": unmapped, "ambiguous_labels": ambiguous,
+        "labels_from_text_layer": relabelled, "coverage": coverage,
     }
     return cells, info
 
@@ -140,7 +152,7 @@ def cross_checks(cells: list[Cell], titles: dict[str, str], order: dict[str, str
     """The same figure printed twice: in a later edition (cross_edition) or twice on one page (cross_table)."""
     groups: dict[tuple[str, str, str], list[Cell]] = defaultdict(list)
     for c in cells:
-        if c.series_id and c.period and c.vintage:
+        if c.series_id and c.period and c.vintage and not c.is_missing:
             groups[(c.series_id, c.period, c.vintage)].append(c)
     out: list[Check] = []
     for (sid, period, vintage), group in sorted(groups.items()):
@@ -219,8 +231,11 @@ def gap_observations(spec: dict[str, Any], located: dict[str, dict[str, Any]], n
                 have.add(oid)
                 if sid in not_located:
                     kind, reason = "not_yet_verified", f"{not_located[sid]} in the {src.title}."
-                elif located.get(sid, {}).get("table_flags") or located.get(sid, {}).get("column_problems"):
-                    kind, reason = "not_yet_verified", f"The table in the {src.title} was not read cleanly, so this row could not be matched."
+                elif (located.get(sid, {}).get("table_flags") or located.get(sid, {}).get("column_problems")
+                      or located.get(sid, {}).get("unmapped_labels") or located.get(sid, {}).get("ambiguous_labels")):
+                    # We cannot claim the government did not print it while a row of the table is unmatched.
+                    kind, reason = "not_yet_verified", (f"A row of the table in the {src.title} could not be matched to a line "
+                                                        "with certainty, so this figure is not shown.")
                 else:
                     kind, reason = "not_in_source", f"The Summary of Expenditure in the {src.title} does not print this line."
                 s = series[series_id]

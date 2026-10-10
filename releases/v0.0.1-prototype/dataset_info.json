@@ -1,7 +1,7 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T20:46:53+00:00",
+    "built_at": "2026-10-10T20:59:49+00:00",
     "located": {
       "abs-fed-2010-11": {
         "source_id": "abs-fed-2010-11",
@@ -36,10 +36,9 @@
         "column_problems": [],
         "scale_factor_detected": 1000000,
         "scale_confirmed": true,
-        "unmapped_labels": [
-          "(Total Public Sector Dev. Program) (i+d)"
-        ],
+        "unmapped_labels": [],
         "ambiguous_labels": [],
+        "labels_from_text_layer": [],
         "coverage": {
           "page": 9,
           "table_index": 0,
@@ -74,6 +73,167 @@
               "table_index": 0,
               "score": 4,
               "rows": 20,
+              "cols": 5
+            }
+          ],
+          "result": "found"
+        }
+      },
+      "abs-fed-2011-12": {
+        "source_id": "abs-fed-2011-12",
+        "page": 11,
+        "table_index": 0,
+        "run_id": "ABS_2011-12__docling__full-document__run-01",
+        "rows": 28,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2010-11",
+            "vintage": "be",
+            "header": "SUMMARY Budget Estimates 2010-11"
+          },
+          "3": {
+            "period": "2010-11",
+            "vintage": "re",
+            "header": "(Rs Revised Estimates 2010-11"
+          },
+          "4": {
+            "period": "2011-12",
+            "vintage": "be",
+            "header": "in million) Budget Estimates 2011-12"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "labels_from_text_layer": [
+          "(Total Public Sector Dev. Program) (i+d)",
+          "2 Total Development Expenditure (c + d)"
+        ],
+        "coverage": {
+          "page": 11,
+          "table_index": 0,
+          "printed_numeric_tokens": 90,
+          "matched": 90,
+          "coverage": 1.0,
+          "missing_tokens_sample": [],
+          "row_band_printed_numeric_tokens": 90,
+          "row_band_matched": 90,
+          "coverage_row_band": 1.0,
+          "row_band_missing_sample": [],
+          "emitted_numeric_tokens": 90
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 11,
+              "table_index": 0,
+              "score": 10,
+              "rows": 28,
+              "cols": 5
+            },
+            {
+              "page": 16,
+              "table_index": 0,
+              "score": 5,
+              "rows": 24,
+              "cols": 5
+            },
+            {
+              "page": 13,
+              "table_index": 0,
+              "score": 4,
+              "rows": 19,
+              "cols": 5
+            }
+          ],
+          "result": "found"
+        }
+      },
+      "abs-fed-2024-25": {
+        "source_id": "abs-fed-2024-25",
+        "page": 17,
+        "table_index": 0,
+        "run_id": "ABS_2024-25__docling__full-document__run-01",
+        "rows": 26,
+        "cols": 5,
+        "value_columns": [
+          2,
+          3,
+          4
+        ],
+        "table_flags": [],
+        "columns": {
+          "2": {
+            "period": "2023-24",
+            "vintage": "be",
+            "header": "EXPENDITURE (on revenue and accounts) have Budget Estimates 2023-24"
+          },
+          "3": {
+            "period": "2023-24",
+            "vintage": "re",
+            "header": "capital account) been mentioned Revised Estimates 2023-24"
+          },
+          "4": {
+            "period": "2024-25",
+            "vintage": "be",
+            "header": "and Budget as per Article in million) Budget Estimates 2024-25"
+          }
+        },
+        "column_problems": [],
+        "scale_factor_detected": 1000000,
+        "scale_confirmed": true,
+        "unmapped_labels": [],
+        "ambiguous_labels": [],
+        "labels_from_text_layer": [],
+        "coverage": {
+          "page": 17,
+          "table_index": 0,
+          "printed_numeric_tokens": 87,
+          "matched": 85,
+          "coverage": 0.977,
+          "missing_tokens_sample": [
+            "1",
+            "2"
+          ],
+          "row_band_printed_numeric_tokens": 87,
+          "row_band_matched": 85,
+          "coverage_row_band": 0.977,
+          "row_band_missing_sample": [
+            "1",
+            "2"
+          ],
+          "emitted_numeric_tokens": 85
+        },
+        "locator": {
+          "candidates": [
+            {
+              "page": 17,
+              "table_index": 0,
+              "score": 10,
+              "rows": 26,
+              "cols": 5
+            },
+            {
+              "page": 22,
+              "table_index": 0,
+              "score": 6,
+              "rows": 29,
+              "cols": 5
+            },
+            {
+              "page": 19,
+              "table_index": 0,
+              "score": 4,
+              "rows": 22,
               "cols": 5
             }
           ],
@@ -115,6 +275,7 @@
         "scale_confirmed": true,
         "unmapped_labels": [],
         "ambiguous_labels": [],
+        "labels_from_text_layer": [],
         "coverage": {
           "page": 17,
           "table_index": 0,
@@ -157,38 +318,36 @@
       }
     },
     "not_located": {
-      "abs-fed-2011-12": "No validated extraction run exists",
       "abs-fed-2016-17": "No validated extraction run exists",
       "abs-fed-2017-18": "No validated extraction run exists",
       "abs-fed-2021-22": "No validated extraction run exists",
       "abs-fed-2022-23": "No validated extraction run exists",
-      "abs-fed-2024-25": "No validated extraction run exists",
       "abs-fed-2026-27": "No validated extraction run exists"
     },
     "check_pass_rates": {
       "all": {
-        "pass": 42,
-        "pass_within_rounding": 9,
+        "pass": 133,
+        "pass_within_rounding": 19,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 51,
+        "evaluable": 152,
         "pass_rate": 1.0
       },
       "arithmetic": {
-        "pass": 42,
-        "pass_within_rounding": 9,
+        "pass": 85,
+        "pass_within_rounding": 19,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 51,
+        "evaluable": 104,
         "pass_rate": 1.0
       },
       "cross_edition": {
-        "pass": 0,
+        "pass": 48,
         "pass_within_rounding": 0,
         "fail": 0,
         "not_evaluable": 0,
-        "evaluable": 0,
-        "pass_rate": null
+        "evaluable": 48,
+        "pass_rate": 1.0
       }
     },
     "comparison_arslan": {

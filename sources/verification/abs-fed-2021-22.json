@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2021-22",
-  "registered_at": "2026-10-10T20:27:34+00:00",
+  "registered_at": "2026-10-10T20:54:57+00:00",
   "file_url": "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2021_22.html",
-  "retrieved_at": "2026-10-10T20:27:38+00:00",
+  "retrieved_at": "2026-10-10T20:55:00+00:00",
   "retrieved_via": "official",
   "sha256": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
   "size_bytes": 724184,
@@ -20,15 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
-      "time": "2026-10-10T20:27:34+00:00",
+      "time": "2026-10-10T20:54:57+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
-      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
-      "time": "2026-10-10T20:27:38+00:00",
-      "outcome": "error:JSONDecodeError"
+      "url": "https://www.finance.gov.pk/fb_2021_22.html",
+      "time": "2026-10-10T20:55:00+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
+      "time": "2026-10-10T20:55:02+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
     }
   ],
   "local_path": "abs/2021-22/1_ABS-English_2021_22.pdf",
@@ -46,7 +54,13 @@
       "CreationDate": "D:20210610075844+05'00'"
     },
     "pages_with_text_layer": 47,
-    "text_layer_fraction": 0.94,
+    "blank_pages": [
+      2,
+      4,
+      6
+    ],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
     "ascii_ratio_first_pages": 1.0,
     "markers": {
       "all": {
@@ -67,7 +81,15 @@
     },
     "markers_ok": true
   },
-  "text_layer_ok": false,
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
   "verification_status": "official_match_archive",
-  "wayback": null
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260803133604/https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
+    "wayback_timestamp": "20260803133604",
+    "snapshots_seen": 24,
+    "snapshot_digest": "2TWPG5L3SRHPUPCY6TWFD7LOSJONFFAU",
+    "digest_matches_file": true
+  }
 }

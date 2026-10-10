@@ -73,6 +73,14 @@ def test_blocked_table_is_not_evaluable_even_if_it_adds_up():
     assert chk.result == "not_evaluable"
 
 
+def test_printed_dash_member_counts_as_nil_and_is_not_credited():
+    cells = column("e1", {"s.a": "100", "s.b": "200", "s.total": "300"})
+    dash = make_cell("e1", 2, 2, "-", None, series="s.c", missing=True)
+    (chk,) = run_rules(cells + [dash])
+    assert chk.result == "pass"
+    assert dash.cell_id not in chk.member_cell_ids
+
+
 def test_rule_skipped_when_target_not_printed():
     assert run_rules(column("e1", {"s.a": "100", "s.b": "200", "s.c": "300"})) == []
 

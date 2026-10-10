@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T20:47:22+00:00 from commit `588386d5ad33`. Label: **prototype**. DOI: none.
+Built 2026-10-10T21:00:05+00:00 from commit `18c458f2feb0`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -9,7 +9,7 @@ Built 2026-10-10T20:47:22+00:00 from commit `588386d5ad33`. Label: **prototype**
 
 | Data type | State | Sources | Published values | Withheld / gaps |
 |---|---|---|---|---|
-| Federal Annual Budget Statement | published | 2 | 144 | not_yet_verified: 240 |
+| Federal Annual Budget Statement | published | 4 | 244 | not_in_source: 1, not_yet_verified: 180 |
 | Consumer Price Index | coming | 0 | 0 | none |
 | Labour Force Survey | coming | 0 | 0 | none |
 
@@ -24,7 +24,7 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 
 | Data type | A | B | C | D |
 |---|---|---|---|---|
-| abs | 0 | 144 | 0 | 0 |
+| abs | 49 | 195 | 0 | 0 |
 | cpi | 0 | 0 | 0 | 0 |
 | lfs | 0 | 0 | 0 | 0 |
 
@@ -35,13 +35,15 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | Source | Page | Printed numbers | Captured | Coverage | Coverage, full-width row band |
 |---|---|---|---|---|---|
 | abs-fed-2010-11 | 9 | 92 | 92 | 100.0% | 100.0% |
+| abs-fed-2011-12 | 11 | 90 | 90 | 100.0% | 100.0% |
+| abs-fed-2024-25 | 17 | 87 | 85 | 97.7% | 97.7% |
 | abs-fed-2025-26 | 17 | 87 | 87 | 100.0% | 100.0% |
 
 ## Accuracy evidence: deterministic checks
 
 | Data type | Passed exactly | Passed within rounding | Failed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement |
 |---|---|---|---|---|---|---|
-| abs | 42 | 9 | 0 | 0 | 100.0% | n/a (0 pairs) |
+| abs | 133 | 19 | 0 | 0 | 100.0% | 100.0% (48 pairs) |
 
 **Measured error rate: pending gold-set labelling.** The gold-set kit is in `gold/`; until two humans have labelled it, no absolute error rate is claimed.
 

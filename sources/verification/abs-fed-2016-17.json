@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2016-17",
-  "registered_at": "2026-10-10T20:29:03+00:00",
+  "registered_at": "2026-10-10T20:53:12+00:00",
   "file_url": "https://www.finance.gov.pk/budget/abs_2016_17.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2016_17.html",
-  "retrieved_at": "2026-10-10T20:29:05+00:00",
+  "retrieved_at": "2026-10-10T20:53:15+00:00",
   "retrieved_via": "official",
   "sha256": "a663de0aebf8e5ae8f6bb0b415803ace13ceb73bc00e079f2547ed5c4581da0d",
   "size_bytes": 1032138,
@@ -20,22 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/abs_2016_17.pdf",
-      "time": "2026-10-10T20:29:03+00:00",
+      "time": "2026-10-10T20:53:12+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
       "url": "https://www.finance.gov.pk/fb_2016_17.html",
-      "time": "2026-10-10T20:29:06+00:00",
+      "time": "2026-10-10T20:53:15+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
-      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/abs_2016_17.pdf",
-      "time": "2026-10-10T20:29:07+00:00",
-      "outcome": "error:JSONDecodeError"
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/abs_2016_17.pdf",
+      "time": "2026-10-10T20:53:17+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "error:ReadTimeout"
     }
   ],
   "local_path": "abs/2016-17/abs_2016_17.pdf",
@@ -53,6 +54,10 @@
       "CreationDate": "D:20160603193800+05'00'"
     },
     "pages_with_text_layer": 32,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      1
+    ],
     "text_layer_fraction": 0.9697,
     "ascii_ratio_first_pages": 0.8935,
     "markers": {

@@ -672,6 +672,34 @@
     "notes": ""
   },
   {
+    "series_id": "fed.exp.development.psdp_total",
+    "name": "Total Public Sector Development Programme (i+d)",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {},
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "PSDP total as printed in older editions: development expenditure on revenue account (PSDP) plus development expenditure on capital account.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2011-12",
+        "kind": "devolution",
+        "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 65,
+    "notes": ""
+  },
+  {
     "series_id": "fed.exp.operational_shortfall",
     "name": "Estimated operational shortfall in PSDP",
     "parent_id": "fed.exp.total",

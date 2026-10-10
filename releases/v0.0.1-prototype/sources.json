@@ -9,9 +9,9 @@
     "role": "core",
     "landing_url": "https://www.finance.gov.pk/fb_2010_11.html",
     "file_url": "https://www.finance.gov.pk/budget/abs_10_11.pdf",
-    "wayback_url": null,
-    "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:28:59+00:00",
+    "wayback_url": "https://web.archive.org/web/20250619205318/https://finance.gov.pk/budget/abs_10_11.pdf",
+    "wayback_timestamp": "20250619205318",
+    "retrieved_at": "2026-10-10T20:51:20+00:00",
     "retrieved_via": "official",
     "sha256": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
     "size_bytes": 66238,
@@ -31,7 +31,7 @@
     ],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:28:59+00:00",
+      "retrieved_at": "2026-10-10T20:51:20+00:00",
       "identity_route": "contents_markers_plus_official_landing_link",
       "landing_page_links_file": true,
       "archive_copy": {
@@ -48,6 +48,8 @@
           "CreationDate": "D:20100708161614+05'00'"
         },
         "pages_with_text_layer": 29,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
         "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 0.9535,
         "markers": {
@@ -79,7 +81,13 @@
           "ETag": "\"fcd7cdd8bba1d01:0\""
         }
       },
-      "wayback": null,
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250619205318/https://finance.gov.pk/budget/abs_10_11.pdf",
+        "wayback_timestamp": "20250619205318",
+        "snapshots_seen": 17,
+        "snapshot_digest": "FN673HS66WFVJ4M3QF34HZ4B7ALPYESM",
+        "digest_matches_file": true
+      },
       "text_layer_ok": true
     }
   },
@@ -95,7 +103,7 @@
     "file_url": "https://www.finance.gov.pk/budget/abs_11_12.pdf",
     "wayback_url": null,
     "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:27:20+00:00",
+    "retrieved_at": "2026-10-10T20:52:25+00:00",
     "retrieved_via": "official",
     "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
     "size_bytes": 112873,
@@ -107,13 +115,17 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2011-12.json",
     "notes": "",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      11
+    ],
+    "run_ids": [
+      "ABS_2011-12__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:27:20+00:00",
-      "identity_route": null,
-      "landing_page_links_file": null,
+      "retrieved_at": "2026-10-10T20:52:25+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
       "archive_copy": {
         "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2011-12/abs_fy_2011-12.pdf",
         "sha256": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
@@ -128,6 +140,8 @@
           "CreationDate": "D:20110604115651+05'00'"
         },
         "pages_with_text_layer": 31,
+        "blank_pages": [],
+        "pages_without_text_layer": [],
         "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 0.9256,
         "markers": {
@@ -175,7 +189,7 @@
     "file_url": "https://www.finance.gov.pk/budget/abs_2016_17.pdf",
     "wayback_url": null,
     "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:29:05+00:00",
+    "retrieved_at": "2026-10-10T20:53:15+00:00",
     "retrieved_via": "official",
     "sha256": "a663de0aebf8e5ae8f6bb0b415803ace13ceb73bc00e079f2547ed5c4581da0d",
     "size_bytes": 1032138,
@@ -191,7 +205,7 @@
     "run_ids": [],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:29:05+00:00",
+      "retrieved_at": "2026-10-10T20:53:15+00:00",
       "identity_route": "cover_markers",
       "landing_page_links_file": true,
       "archive_copy": {
@@ -208,6 +222,10 @@
           "CreationDate": "D:20160603193800+05'00'"
         },
         "pages_with_text_layer": 32,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          1
+        ],
         "text_layer_fraction": 0.9697,
         "ascii_ratio_first_pages": 0.8935,
         "markers": {
@@ -253,9 +271,9 @@
     "role": "corroboration",
     "landing_url": "https://www.finance.gov.pk/fb_2017_18.html",
     "file_url": "https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf",
-    "wayback_url": null,
-    "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:29:11+00:00",
+    "wayback_url": "https://web.archive.org/web/20250527104257/https://www.finance.gov.pk/budget/Annual%20Budget%20Statement%202017-18.pdf",
+    "wayback_timestamp": "20250527104257",
+    "retrieved_at": "2026-10-10T20:54:20+00:00",
     "retrieved_via": "official",
     "sha256": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
     "size_bytes": 1087862,
@@ -266,12 +284,12 @@
     "local_path": "abs/2017-18/Annual Budget Statement 2017-18.pdf",
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2017-18.json",
-    "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year.",
+    "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year. Text layer on 31 of 33 printed pages, below the 95% inspection level: page(s) 1, 33 are images (covers). Used under a recorded deviation; every page that values are taken from has a text layer.",
     "pages_used": [],
     "run_ids": [],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:29:11+00:00",
+      "retrieved_at": "2026-10-10T20:54:20+00:00",
       "identity_route": "contents_markers_plus_official_landing_link",
       "landing_page_links_file": true,
       "archive_copy": {
@@ -288,6 +306,11 @@
           "CreationDate": "D:20170526214737+05'00'"
         },
         "pages_with_text_layer": 31,
+        "blank_pages": [],
+        "pages_without_text_layer": [
+          1,
+          33
+        ],
         "text_layer_fraction": 0.9394,
         "ascii_ratio_first_pages": 0.9191,
         "markers": {
@@ -319,7 +342,13 @@
           "ETag": "\"77c4ff6546d8d21:0\""
         }
       },
-      "wayback": null,
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250527104257/https://www.finance.gov.pk/budget/Annual%20Budget%20Statement%202017-18.pdf",
+        "wayback_timestamp": "20250527104257",
+        "snapshots_seen": 31,
+        "snapshot_digest": "6P4FNC3RHEZCWYMQFOOWK4NT24UR3RHT",
+        "digest_matches_file": true
+      },
       "text_layer_ok": false
     }
   },
@@ -333,9 +362,9 @@
     "role": "core",
     "landing_url": "https://www.finance.gov.pk/fb_2021_22.html",
     "file_url": "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
-    "wayback_url": null,
-    "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:27:38+00:00",
+    "wayback_url": "https://web.archive.org/web/20260803133604/https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
+    "wayback_timestamp": "20260803133604",
+    "retrieved_at": "2026-10-10T20:55:00+00:00",
     "retrieved_via": "official",
     "sha256": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
     "size_bytes": 724184,
@@ -351,9 +380,9 @@
     "run_ids": [],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:27:38+00:00",
-      "identity_route": null,
-      "landing_page_links_file": null,
+      "retrieved_at": "2026-10-10T20:55:00+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
       "archive_copy": {
         "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2021-22/abs_fy_2021-22.pdf",
         "sha256": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
@@ -368,7 +397,13 @@
           "CreationDate": "D:20210610075844+05'00'"
         },
         "pages_with_text_layer": 47,
-        "text_layer_fraction": 0.94,
+        "blank_pages": [
+          2,
+          4,
+          6
+        ],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 1.0,
         "markers": {
           "all": {
@@ -399,8 +434,14 @@
           "ETag": "\"44d5b9d15ed71:0\""
         }
       },
-      "wayback": null,
-      "text_layer_ok": false
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20260803133604/https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf",
+        "wayback_timestamp": "20260803133604",
+        "snapshots_seen": 24,
+        "snapshot_digest": "2TWPG5L3SRHPUPCY6TWFD7LOSJONFFAU",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
     }
   },
   {
@@ -413,9 +454,9 @@
     "role": "corroboration",
     "landing_url": "https://www.finance.gov.pk/fb_2022_23.html",
     "file_url": "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
-    "wayback_url": null,
-    "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:27:45+00:00",
+    "wayback_url": "https://web.archive.org/web/20250708212618/https://finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+    "wayback_timestamp": "20250708212618",
+    "retrieved_at": "2026-10-10T20:55:10+00:00",
     "retrieved_via": "official",
     "sha256": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
     "size_bytes": 4313224,
@@ -431,9 +472,9 @@
     "run_ids": [],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:27:45+00:00",
-      "identity_route": null,
-      "landing_page_links_file": null,
+      "retrieved_at": "2026-10-10T20:55:10+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
       "archive_copy": {
         "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2022-23/abs_fy_2022-23.pdf",
         "sha256": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
@@ -448,7 +489,15 @@
           "CreationDate": "D:20220625120740Z"
         },
         "pages_with_text_layer": 49,
-        "text_layer_fraction": 0.9074,
+        "blank_pages": [
+          2,
+          4,
+          6,
+          30,
+          32
+        ],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 1.0,
         "markers": {
           "all": {
@@ -479,8 +528,14 @@
           "ETag": "\"085bb1bab8cd81:0\""
         }
       },
-      "wayback": null,
-      "text_layer_ok": false
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20250708212618/https://finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf",
+        "wayback_timestamp": "20250708212618",
+        "snapshots_seen": 13,
+        "snapshot_digest": "KEUSHTNDTLXN3EP3LT2BL7VMDTPIOVRA",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
     }
   },
   {
@@ -495,7 +550,7 @@
     "file_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
     "wayback_url": null,
     "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:27:53+00:00",
+    "retrieved_at": "2026-10-10T20:55:24+00:00",
     "retrieved_via": "official",
     "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
     "size_bytes": 3111490,
@@ -507,13 +562,17 @@
     "verification_status": "official_match_archive",
     "verification_record": "sources/verification/abs-fed-2024-25.json",
     "notes": "",
-    "pages_used": [],
-    "run_ids": [],
+    "pages_used": [
+      17
+    ],
+    "run_ids": [
+      "ABS_2024-25__docling__full-document__run-01"
+    ],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:27:53+00:00",
-      "identity_route": null,
-      "landing_page_links_file": null,
+      "retrieved_at": "2026-10-10T20:55:24+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
       "archive_copy": {
         "path_in_ra_ship": "Arsalan Archive/Archive/Budget Statements/budget_docs/2024-25/abs_fy_2024-25.pdf",
         "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
@@ -529,7 +588,13 @@
           "CreationDate": "D:20240612063606+05'00'"
         },
         "pages_with_text_layer": 56,
-        "text_layer_fraction": 0.9492,
+        "blank_pages": [
+          2,
+          4,
+          6
+        ],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 1.0,
         "markers": {
           "all": {
@@ -561,7 +626,7 @@
         }
       },
       "wayback": null,
-      "text_layer_ok": false
+      "text_layer_ok": true
     }
   },
   {
@@ -574,9 +639,9 @@
     "role": "core",
     "landing_url": "https://www.finance.gov.pk/fb_2025_26.html",
     "file_url": "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
-    "wayback_url": null,
-    "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:29:18+00:00",
+    "wayback_url": "https://web.archive.org/web/20251103022823/https://finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+    "wayback_timestamp": "20251103022823",
+    "retrieved_at": "2026-10-10T20:56:30+00:00",
     "retrieved_via": "official",
     "sha256": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
     "size_bytes": 2645541,
@@ -596,7 +661,7 @@
     ],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:29:18+00:00",
+      "retrieved_at": "2026-10-10T20:56:30+00:00",
       "identity_route": "cover_markers",
       "landing_page_links_file": true,
       "archive_copy": {
@@ -613,7 +678,13 @@
           "CreationDate": "D:20250608230629+05'00'"
         },
         "pages_with_text_layer": 51,
-        "text_layer_fraction": 0.9444,
+        "blank_pages": [
+          2,
+          4,
+          6
+        ],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 1.0,
         "markers": {
           "all": {
@@ -644,8 +715,14 @@
           "ETag": "\"c827948921dadb1:0\""
         }
       },
-      "wayback": null,
-      "text_layer_ok": false
+      "wayback": {
+        "wayback_url": "https://web.archive.org/web/20251103022823/https://finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf",
+        "wayback_timestamp": "20251103022823",
+        "snapshots_seen": 3,
+        "snapshot_digest": "JM3OEGIRWQIHRSI32VS4VED33ZY276YI",
+        "digest_matches_file": true
+      },
+      "text_layer_ok": true
     }
   },
   {
@@ -660,7 +737,7 @@
     "file_url": "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf",
     "wayback_url": null,
     "wayback_timestamp": null,
-    "retrieved_at": "2026-10-10T20:28:05+00:00",
+    "retrieved_at": "2026-10-10T20:56:52+00:00",
     "retrieved_via": "official",
     "sha256": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
     "size_bytes": 2380926,
@@ -676,9 +753,9 @@
     "run_ids": [],
     "verification": {
       "retrieved_via": "official",
-      "retrieved_at": "2026-10-10T20:28:05+00:00",
-      "identity_route": null,
-      "landing_page_links_file": null,
+      "retrieved_at": "2026-10-10T20:56:52+00:00",
+      "identity_route": "cover_markers",
+      "landing_page_links_file": true,
       "archive_copy": {
         "path_in_ra_ship": "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2026-27/ABS.pdf",
         "sha256": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
@@ -693,7 +770,13 @@
           "CreationDate": "D:20260611073313+05'00'"
         },
         "pages_with_text_layer": 54,
-        "text_layer_fraction": 0.9474,
+        "blank_pages": [
+          2,
+          4,
+          6
+        ],
+        "pages_without_text_layer": [],
+        "text_layer_fraction": 1.0,
         "ascii_ratio_first_pages": 0.997,
         "markers": {
           "all": {
@@ -725,7 +808,7 @@
         }
       },
       "wayback": null,
-      "text_layer_ok": false
+      "text_layer_ok": true
     }
   }
 ]

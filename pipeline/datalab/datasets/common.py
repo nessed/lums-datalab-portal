@@ -118,6 +118,26 @@ def row_label(table: Table, grid: list[list[Any]], row: int, value_cols: list[in
     return clean_text(" ".join(parts))
 
 
+def text_layer_row_label(table: Table, grid: list[list[Any]], row: int, value_cols: list[int],
+                         words: list[tuple[float, float, float, float, str]]) -> str:
+    """A row's label read from the PDF text layer by position (fallback when Docling merges label cells).
+
+    Words whose centre lies in the vertical band of the row's amounts and left
+    of the first amount column, in reading order. A label wrapped over two
+    lines is returned for the amount's own line only.
+    """
+    boxes = [grid[row][k].bbox for k in value_cols if grid[row][k] is not None and grid[row][k].row == row and grid[row][k].bbox]
+    if not boxes:
+        return ""
+    y0, y1 = min(b[1] for b in boxes), max(b[3] for b in boxes)
+    pad = (y1 - y0) * 0.15
+    left_edge = min(c.bbox[0] for c in table.cells if c.col in value_cols and c.bbox and not c.column_header)
+    picked = [w for w in words if y0 - pad <= (w[1] + w[3]) / 2 <= y1 + pad and w[2] <= left_edge + 0.002
+              and w[0] >= table.bbox[0] - 0.01]
+    picked.sort(key=lambda w: w[0])
+    return clean_text(" ".join(w[4] for w in picked))
+
+
 def make_cell(*, source: Source, run: RunManifest, table: Table, tcell: Any, row_label_raw: str, col_label_raw: str,
               table_flags: list[str]) -> Cell:
     parsed = parse_printed(tcell.text)

@@ -172,6 +172,11 @@ def evaluate_sum_rules(cells: list[Cell], rules: list[dict[str, Any]], dataset: 
                     sid, sign = (m, 1) if isinstance(m, str) else (m["series"], int(m.get("sign", 1)))
                     if sid in by_series:
                         members.append((by_series[sid], sign))
+            if target.is_missing:
+                continue  # the document prints no figure for the total; there is nothing to test
+            # An item printed as "-" or "nil" adds nothing to a sum. It is left out of the members,
+            # so it is never credited as checked; the sum only passes if the rest really add up.
+            members = [(c, sign) for c, sign in members if not c.is_missing]
             involved = [target, *(c for c, _ in members)]
             blocked = next((blocked_tables[(c.source_id, c.page, c.table_index)] for c in involved
                             if (c.source_id, c.page, c.table_index) in blocked_tables), None)

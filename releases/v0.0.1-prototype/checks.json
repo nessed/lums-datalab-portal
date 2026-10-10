@@ -80,6 +80,30 @@
     "rule_id": "abs.dev_revenue_parts"
   },
   {
+    "check_id": "chk_1e6e0b6d4c5b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11"
+    ],
+    "member_cell_ids": [
+      "c_1c52776723ae",
+      "c_7b14e1cf187a"
+    ],
+    "target_cell_id": "c_192813d5aa34",
+    "target_value": null,
+    "target_source": null,
+    "expected": "473013",
+    "observed": "473013",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2009-10' column of the Annual Budget Statement 2010-11, PSDP development expenditure on revenue account and development expenditure on capital account (2 amounts) add to 473,013; the printed Total Public Sector Development Programme (i+d) is 473,013. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total"
+  },
+  {
     "check_id": "chk_edc26094dacf",
     "check_type": "accounting_identity",
     "dataset": "abs",
@@ -255,6 +279,30 @@
     "description": "In the 'Revised Estimates 2009-10' column of the Annual Budget Statement 2010-11, the parts of development expenditure on revenue account (2 amounts) add to 316,445; the printed Development expenditure on revenue account is 316,446. They differ by 1, which is within rounding for 2 printed amounts.",
     "official": true,
     "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_89ca2c6d9854",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11"
+    ],
+    "member_cell_ids": [
+      "c_5298e368ad53",
+      "c_f6ce006669da"
+    ],
+    "target_cell_id": "c_c4ad4d82bc24",
+    "target_value": null,
+    "target_source": null,
+    "expected": "326042",
+    "observed": "326042",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2009-10' column of the Annual Budget Statement 2010-11, PSDP development expenditure on revenue account and development expenditure on capital account (2 amounts) add to 326,042; the printed Total Public Sector Development Programme (i+d) is 326,042. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total"
   },
   {
     "check_id": "chk_d8d1f8fe1232",
@@ -434,6 +482,30 @@
     "rule_id": "abs.dev_revenue_parts"
   },
   {
+    "check_id": "chk_c0c6e2f87904",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11"
+    ],
+    "member_cell_ids": [
+      "c_91b5e330feaa",
+      "c_eea3d5dea9da"
+    ],
+    "target_cell_id": "c_10f54a0c1c71",
+    "target_value": null,
+    "target_source": null,
+    "expected": "321385",
+    "observed": "321385",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2010-11, PSDP development expenditure on revenue account and development expenditure on capital account (2 amounts) add to 321,385; the printed Total Public Sector Development Programme (i+d) is 321,385. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total"
+  },
+  {
     "check_id": "chk_3b94e1ba0688",
     "check_type": "accounting_identity",
     "dataset": "abs",
@@ -527,6 +599,1139 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2010-11, current and development expenditure on capital account (2 amounts) add to 187,695; the printed Capital account (b+d) is 187,695. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_5bbf7820f970",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_0c12268e568d",
+      "c_1383a6a3d015",
+      "c_059a1ba01473",
+      "c_e6586b6aa4d4",
+      "c_eeaec805cd44",
+      "c_3d87c8a0f8de",
+      "c_c351be50838e",
+      "c_e8512c99fc4f",
+      "c_1b6a5233e2b1",
+      "c_fbc37027f188"
+    ],
+    "target_cell_id": "c_f2ea1c507875",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1997892",
+    "observed": "1997892",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, the ten function amounts (10 amounts) add to 1,997,892; the printed Current expenditure on revenue account is 1,997,892. They add exactly.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_596f611aa9e3",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_f2ea1c507875",
+      "c_92e5501ecfcb"
+    ],
+    "target_cell_id": "c_35431ec5c37e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2052542",
+    "observed": "2052542",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, current expenditure on revenue account and on capital account (2 amounts) add to 2,052,542; the printed Total current expenditure is 2,052,542. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_b17b921e26f2",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_1c31dd347540",
+      "c_faedd9de8f26"
+    ],
+    "target_cell_id": "c_f808c6e29825",
+    "target_value": null,
+    "target_source": null,
+    "expected": "311885",
+    "observed": "311885",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, the parts of development expenditure on revenue account (2 amounts) add to 311,885; the printed Development expenditure on revenue account is 311,885. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_45e6fc5d1479",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_1c31dd347540",
+      "c_9a27ed3906ed"
+    ],
+    "target_cell_id": "c_665b9d02e452",
+    "target_value": null,
+    "target_source": null,
+    "expected": "321385",
+    "observed": "321385",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, PSDP development expenditure on revenue account and development expenditure on capital account (2 amounts) add to 321,385; the printed Total Public Sector Development Programme (i+d) is 321,385. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total"
+  },
+  {
+    "check_id": "chk_102eae6ce7c2",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_f808c6e29825",
+      "c_9a27ed3906ed"
+    ],
+    "target_cell_id": "c_3a5c7cc10dff",
+    "target_value": null,
+    "target_source": null,
+    "expected": "444930",
+    "observed": "444930",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, development expenditure on revenue account and on capital account (2 amounts) add to 444,930; the printed Total development expenditure is 444,930. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_df8561292248",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_35431ec5c37e",
+      "c_3a5c7cc10dff",
+      "c_695a425dadca"
+    ],
+    "target_cell_id": "c_3f5d904d03bb",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2477472",
+    "observed": "2477472",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, total current and total development expenditure (and any other printed item) (3 amounts) add to 2,477,472; the printed Total expenditure is 2,477,472. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_9845f477c351",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_f2ea1c507875",
+      "c_f808c6e29825"
+    ],
+    "target_cell_id": "c_2374ee111a39",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2309777",
+    "observed": "2309777",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, current and development expenditure on revenue account (2 amounts) add to 2,309,777; the printed Revenue account (a+c) is 2,309,777. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_9eb5301b4c38",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_92e5501ecfcb",
+      "c_9a27ed3906ed"
+    ],
+    "target_cell_id": "c_c5996f4da4cb",
+    "target_value": null,
+    "target_source": null,
+    "expected": "187695",
+    "observed": "187695",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2010-11' column of the Annual Budget Statement 2011-12, current and development expenditure on capital account (2 amounts) add to 187,695; the printed Capital account (b+d) is 187,695. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_f02f24f732c1",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_0ff751f02080",
+      "c_c5fff5384a02",
+      "c_bf5d6034e578",
+      "c_b7462a944a06",
+      "c_87bd48b4ed48",
+      "c_428b1047a498",
+      "c_224759d75dad",
+      "c_694ce944374d",
+      "c_de7a1a710040",
+      "c_1a607adc7873"
+    ],
+    "target_cell_id": "c_3cb8ad52025e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2295921",
+    "observed": "2295922",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, the ten function amounts (10 amounts) add to 2,295,922; the printed Current expenditure on revenue account is 2,295,921. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_fcc069bfb73a",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_3cb8ad52025e",
+      "c_26c7811a3f0d"
+    ],
+    "target_cell_id": "c_d29eddc438c5",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2356887",
+    "observed": "2356887",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, current expenditure on revenue account and on capital account (2 amounts) add to 2,356,887; the printed Total current expenditure is 2,356,887. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_e11f73731f17",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_dd78fc61e5c6",
+      "c_3a536dd9c6c4"
+    ],
+    "target_cell_id": "c_c63cb7292282",
+    "target_value": null,
+    "target_source": null,
+    "expected": "202661",
+    "observed": "202661",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, the parts of development expenditure on revenue account (2 amounts) add to 202,661; the printed Development expenditure on revenue account is 202,661. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_021ffebcbe84",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_dd78fc61e5c6",
+      "c_b51b942fbf90"
+    ],
+    "target_cell_id": "c_2e9c39bdb148",
+    "target_value": null,
+    "target_source": null,
+    "expected": "275727",
+    "observed": "275727",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, PSDP development expenditure on revenue account and development expenditure on capital account (2 amounts) add to 275,727; the printed Total Public Sector Development Programme (i+d) is 275,727. They add exactly.",
+    "official": true,
+    "rule_id": "abs.psdp_total"
+  },
+  {
+    "check_id": "chk_c5944e164c71",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_c63cb7292282",
+      "c_b51b942fbf90"
+    ],
+    "target_cell_id": "c_4421f38bab3f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "321244",
+    "observed": "321244",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, development expenditure on revenue account and on capital account (2 amounts) add to 321,244; the printed Total development expenditure is 321,244. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_2b0bffd4d0ca",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_d29eddc438c5",
+      "c_4421f38bab3f",
+      "c_23bca7d1584f"
+    ],
+    "target_cell_id": "c_582a34a57b8a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2620335",
+    "observed": "2620335",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, total current and total development expenditure (and any other printed item) (3 amounts) add to 2,620,335; the printed Total expenditure is 2,620,335. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_7738344ca529",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_3cb8ad52025e",
+      "c_c63cb7292282"
+    ],
+    "target_cell_id": "c_73e0fd178a2a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2498582",
+    "observed": "2498582",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, current and development expenditure on revenue account (2 amounts) add to 2,498,582; the printed Revenue account (a+c) is 2,498,582. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_6bf1bac88c69",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_26c7811a3f0d",
+      "c_b51b942fbf90"
+    ],
+    "target_cell_id": "c_088aed9a119a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "179549",
+    "observed": "179549",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2010-11' column of the Annual Budget Statement 2011-12, current and development expenditure on capital account (2 amounts) add to 179,549; the printed Capital account (b+d) is 179,549. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_7f2bbb8514d6",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_a92a1aa07e9d",
+      "c_a77b7460739e",
+      "c_32e0095052f7",
+      "c_bed74c64e840",
+      "c_b4583274c00f",
+      "c_67ed06d8ffc1",
+      "c_6c20f5419d98",
+      "c_e690e3fa8fe5",
+      "c_255ea769d8b3",
+      "c_0cd24bfcd47e"
+    ],
+    "target_cell_id": "c_31b0501491f4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2314859",
+    "observed": "2314858",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, the ten function amounts (10 amounts) add to 2,314,858; the printed Current expenditure on revenue account is 2,314,859. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_dfe1db349af1",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_31b0501491f4",
+      "c_5d2cf3c3ecd1"
+    ],
+    "target_cell_id": "c_9d1902f58ffb",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2383416",
+    "observed": "2383416",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, current expenditure on revenue account and on capital account (2 amounts) add to 2,383,416; the printed Total current expenditure is 2,383,416. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_f79b5098f141",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_9f57050fb65c",
+      "c_b503412abb03"
+    ],
+    "target_cell_id": "c_3f32643cad75",
+    "target_value": null,
+    "target_source": null,
+    "expected": "273950",
+    "observed": "273950",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, the parts of development expenditure on revenue account (2 amounts) add to 273,950; the printed Development expenditure on revenue account is 273,950. They add exactly.",
+    "official": true,
+    "rule_id": "abs.dev_revenue_parts"
+  },
+  {
+    "check_id": "chk_d9e08b4a42c9",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_9f57050fb65c",
+      "c_d58b82f636e3"
+    ],
+    "target_cell_id": "c_fa7cd012c7cc",
+    "target_value": null,
+    "target_source": null,
+    "expected": "354872",
+    "observed": "354873",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, PSDP development expenditure on revenue account and development expenditure on capital account (2 amounts) add to 354,873; the printed Total Public Sector Development Programme (i+d) is 354,872. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.psdp_total"
+  },
+  {
+    "check_id": "chk_2ab9fe6a60d1",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_3f32643cad75",
+      "c_d58b82f636e3"
+    ],
+    "target_cell_id": "c_788871f768a1",
+    "target_value": null,
+    "target_source": null,
+    "expected": "451957",
+    "observed": "451958",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, development expenditure on revenue account and on capital account (2 amounts) add to 451,958; the printed Total development expenditure is 451,957. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_adebcb47d49b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_9d1902f58ffb",
+      "c_788871f768a1"
+    ],
+    "target_cell_id": "c_0c9bc78036a4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2835373",
+    "observed": "2835373",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, total current and total development expenditure (and any other printed item) (2 amounts) add to 2,835,373; the printed Total expenditure is 2,835,373. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_ebea4ffe3ef2",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_31b0501491f4",
+      "c_3f32643cad75"
+    ],
+    "target_cell_id": "c_d7bde1c27fe5",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2588808",
+    "observed": "2588809",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, current and development expenditure on revenue account (2 amounts) add to 2,588,809; the printed Revenue account (a+c) is 2,588,808. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_8d3158667f29",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_5d2cf3c3ecd1",
+      "c_d58b82f636e3"
+    ],
+    "target_cell_id": "c_e827417351c4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "246565",
+    "observed": "246565",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2011-12' column of the Annual Budget Statement 2011-12, current and development expenditure on capital account (2 amounts) add to 246,565; the printed Capital account (b+d) is 246,565. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_983890abc420",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_5ae8120fffe7",
+      "c_8f4eb2da13c4",
+      "c_375bf2128081",
+      "c_a849672a5cc1",
+      "c_65176502e2c3",
+      "c_eaa140d22656",
+      "c_6993843df068",
+      "c_fd3e4b84bb3e",
+      "c_574b38a14d07",
+      "c_f88c21d3c36a"
+    ],
+    "target_cell_id": "c_d096343ce32d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "13344395",
+    "observed": "13344394",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, the ten function amounts (10 amounts) add to 13,344,394; the printed Current expenditure on revenue account is 13,344,395. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_3e13631fdc07",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_1c561416492d",
+      "c_45349824bfb7",
+      "c_fe087d5f92c0"
+    ],
+    "target_cell_id": "c_32c9c4338e2a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4608359",
+    "observed": "4608359",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, the items listed under current expenditure on capital account (3 amounts) add to 4,608,359; the printed Current expenditure on capital account is 4,608,359. They add exactly.",
+    "official": true,
+    "rule_id": "abs.capital_items_add_to_current_capital"
+  },
+  {
+    "check_id": "chk_c4df8b82ef36",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_d096343ce32d",
+      "c_32c9c4338e2a"
+    ],
+    "target_cell_id": "c_d0efc9e0c5f5",
+    "target_value": null,
+    "target_source": null,
+    "expected": "17952753",
+    "observed": "17952754",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, current expenditure on revenue account and on capital account (2 amounts) add to 17,952,754; the printed Total current expenditure is 17,952,753. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_ffb4b93c8750",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_29bf2cc5b83e",
+      "c_df86c09f0411"
+    ],
+    "target_cell_id": "c_7324db1b5865",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1608644",
+    "observed": "1608644",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, development expenditure on revenue account and on capital account (2 amounts) add to 1,608,644; the printed Total development expenditure is 1,608,644. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_da3ce18ce2be",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_d0efc9e0c5f5",
+      "c_7324db1b5865"
+    ],
+    "target_cell_id": "c_a55ea85dc45f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "19561397",
+    "observed": "19561397",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, total current and total development expenditure (and any other printed item) (2 amounts) add to 19,561,397; the printed Total expenditure is 19,561,397. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_00df77810bd8",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_d096343ce32d",
+      "c_29bf2cc5b83e"
+    ],
+    "target_cell_id": "c_0c8217d5e8b9",
+    "target_value": null,
+    "target_source": null,
+    "expected": "13976745",
+    "observed": "13976745",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, current and development expenditure on revenue account (2 amounts) add to 13,976,745; the printed Revenue account (a+c) is 13,976,745. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_df2533348d3a",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_32c9c4338e2a",
+      "c_df86c09f0411"
+    ],
+    "target_cell_id": "c_94bbb6230302",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5584653",
+    "observed": "5584653",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2023-24' column of the Annual Budget Statement 2024-25, current and development expenditure on capital account (2 amounts) add to 5,584,653; the printed Capital account (b+d) is 5,584,653. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_3c8af60e678d",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_42a5cb5c8cc9",
+      "c_9cc319f0f9e0",
+      "c_ef7331d4e957",
+      "c_3bedb76bdd48",
+      "c_55918650dd2b",
+      "c_4a6df1a6e191",
+      "c_c60c34a37ba6",
+      "c_ba9ca0780aa3",
+      "c_f82de0085f38",
+      "c_6c24729a2e32"
+    ],
+    "target_cell_id": "c_9b92af5fb767",
+    "target_value": null,
+    "target_source": null,
+    "expected": "14334431",
+    "observed": "14334431",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, the ten function amounts (10 amounts) add to 14,334,431; the printed Current expenditure on revenue account is 14,334,431. They add exactly.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_a9ff99ff3276",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_e3be24d6bf4b",
+      "c_100d2a2ab291",
+      "c_3628941ab1e7"
+    ],
+    "target_cell_id": "c_91b3336ad73c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2593698",
+    "observed": "2593698",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, the items listed under current expenditure on capital account (3 amounts) add to 2,593,698; the printed Current expenditure on capital account is 2,593,698. They add exactly.",
+    "official": true,
+    "rule_id": "abs.capital_items_add_to_current_capital"
+  },
+  {
+    "check_id": "chk_31dc3aa7c7d2",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_9b92af5fb767",
+      "c_91b3336ad73c"
+    ],
+    "target_cell_id": "c_88300308a9db",
+    "target_value": null,
+    "target_source": null,
+    "expected": "16928129",
+    "observed": "16928129",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, current expenditure on revenue account and on capital account (2 amounts) add to 16,928,129; the printed Total current expenditure is 16,928,129. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_d236c5b55709",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_74577e8726fa",
+      "c_9ed72ed382cb"
+    ],
+    "target_cell_id": "c_f8831f8f002a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1490013",
+    "observed": "1490014",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, development expenditure on revenue account and on capital account (2 amounts) add to 1,490,014; the printed Total development expenditure is 1,490,013. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_026dd6a2d466",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_88300308a9db",
+      "c_f8831f8f002a"
+    ],
+    "target_cell_id": "c_2f27e5fb3ca8",
+    "target_value": null,
+    "target_source": null,
+    "expected": "18418142",
+    "observed": "18418142",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, total current and total development expenditure (and any other printed item) (2 amounts) add to 18,418,142; the printed Total expenditure is 18,418,142. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_6e4d8be64b7b",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_9b92af5fb767",
+      "c_74577e8726fa"
+    ],
+    "target_cell_id": "c_dadd31cde1f4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "14823076",
+    "observed": "14823077",
+    "residual": "1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, current and development expenditure on revenue account (2 amounts) add to 14,823,077; the printed Revenue account (a+c) is 14,823,076. They differ by 1, which is within rounding for 2 printed amounts.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_a087a13b11ef",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_91b3336ad73c",
+      "c_9ed72ed382cb"
+    ],
+    "target_cell_id": "c_8218ae62f4df",
+    "target_value": null,
+    "target_source": null,
+    "expected": "3595066",
+    "observed": "3595066",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Revised Estimates 2023-24' column of the Annual Budget Statement 2024-25, current and development expenditure on capital account (2 amounts) add to 3,595,066; the printed Capital account (b+d) is 3,595,066. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_capital"
+  },
+  {
+    "check_id": "chk_129bfc303045",
+    "check_type": "column_total",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_f8a9e0a5dee9",
+      "c_281718c8dfce",
+      "c_a9f2cd621d7c",
+      "c_49af24d60b8e",
+      "c_fb242100158d",
+      "c_73561d344bb0",
+      "c_33e03703bd6f",
+      "c_ab21c454257b",
+      "c_33484f3bbcde",
+      "c_91b8760b6cb5"
+    ],
+    "target_cell_id": "c_7b930832072c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "17203391",
+    "observed": "17203390",
+    "residual": "-1",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass_within_rounding",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, the ten function amounts (10 amounts) add to 17,203,390; the printed Current expenditure on revenue account is 17,203,391. They differ by 1, which is within rounding for 10 printed amounts.",
+    "official": true,
+    "rule_id": "abs.functions_add_to_current_revenue"
+  },
+  {
+    "check_id": "chk_f6f639173622",
+    "check_type": "hierarchy_sum",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_22beb0348fbd",
+      "c_7f342e8bb162",
+      "c_6de506be2814"
+    ],
+    "target_cell_id": "c_f064b3c9abff",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5168439",
+    "observed": "5168439",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, the items listed under current expenditure on capital account (3 amounts) add to 5,168,439; the printed Current expenditure on capital account is 5,168,439. They add exactly.",
+    "official": true,
+    "rule_id": "abs.capital_items_add_to_current_capital"
+  },
+  {
+    "check_id": "chk_488cf7589ce0",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_7b930832072c",
+      "c_f064b3c9abff"
+    ],
+    "target_cell_id": "c_4c28aad1db07",
+    "target_value": null,
+    "target_source": null,
+    "expected": "22371830",
+    "observed": "22371830",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, current expenditure on revenue account and on capital account (2 amounts) add to 22,371,830; the printed Total current expenditure is 22,371,830. They add exactly.",
+    "official": true,
+    "rule_id": "abs.current_total"
+  },
+  {
+    "check_id": "chk_daf7753b2f37",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_e51d067f200f",
+      "c_bf5d49a7631f"
+    ],
+    "target_cell_id": "c_ec21ebbb2b68",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2017000",
+    "observed": "2017000",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, development expenditure on revenue account and on capital account (2 amounts) add to 2,017,000; the printed Total development expenditure is 2,017,000. They add exactly.",
+    "official": true,
+    "rule_id": "abs.development_total"
+  },
+  {
+    "check_id": "chk_8861c49a68a6",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_4c28aad1db07",
+      "c_ec21ebbb2b68"
+    ],
+    "target_cell_id": "c_c8111280edc0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "24388830",
+    "observed": "24388830",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, total current and total development expenditure (and any other printed item) (2 amounts) add to 24,388,830; the printed Total expenditure is 24,388,830. They add exactly.",
+    "official": true,
+    "rule_id": "abs.grand_total"
+  },
+  {
+    "check_id": "chk_8129e90b188f",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_7b930832072c",
+      "c_e51d067f200f"
+    ],
+    "target_cell_id": "c_a6b9001986c9",
+    "target_value": null,
+    "target_source": null,
+    "expected": "18155949",
+    "observed": "18155949",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, current and development expenditure on revenue account (2 amounts) add to 18,155,949; the printed Revenue account (a+c) is 18,155,949. They add exactly.",
+    "official": true,
+    "rule_id": "abs.account_revenue"
+  },
+  {
+    "check_id": "chk_34d03cd56994",
+    "check_type": "accounting_identity",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_f064b3c9abff",
+      "c_bf5d49a7631f"
+    ],
+    "target_cell_id": "c_3c71925b1dcc",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6232881",
+    "observed": "6232881",
+    "residual": "0",
+    "tolerance_rule": "Exact match passes. A difference of at most half a unit of the last printed digit per item added passes as 'within rounding'. Anything larger fails.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "In the 'Budget Estimates 2024-25' column of the Annual Budget Statement 2024-25, current and development expenditure on capital account (2 amounts) add to 6,232,881; the printed Capital account (b+d) is 6,232,881. They add exactly.",
     "official": true,
     "rule_id": "abs.account_capital"
   },
@@ -1062,6 +2267,1014 @@
     "rule_id": "abs.account_capital"
   },
   {
+    "check_id": "chk_b7f61a6c6c49",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_c5996f4da4cb"
+    ],
+    "target_cell_id": "c_2a922e6926cb",
+    "target_value": null,
+    "target_source": null,
+    "expected": "187695",
+    "observed": "187695",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Expenditure on capital account (current + development), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'Capital Account (b+d)') prints 187,695; the Annual Budget Statement 2011-12 (row 'Capital Account (b+d)') prints 187,695. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_a3de763a2d8f",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_4b13fb429933"
+    ],
+    "target_cell_id": "c_3c71925b1dcc",
+    "target_value": null,
+    "target_source": null,
+    "expected": "6232881",
+    "observed": "6232881",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Expenditure on capital account (current + development), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Capital Account (b+d)') prints 6,232,881; the Annual Budget Statement 2025-26 (row 'Capital Account (b+d)') prints 6,232,881. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_d2e40b00f987",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_2374ee111a39"
+    ],
+    "target_cell_id": "c_764639079f15",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2309777",
+    "observed": "2309777",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Expenditure on revenue account (current + development), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'Revenue Account (a+c)') prints 2,309,777; the Annual Budget Statement 2011-12 (row 'Revenue Account (a+c)') prints 2,309,777. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_50ae3eca047c",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_f0ca6f693b39"
+    ],
+    "target_cell_id": "c_a6b9001986c9",
+    "target_value": null,
+    "target_source": null,
+    "expected": "18155949",
+    "observed": "18155949",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Expenditure on revenue account (current + development), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Revenue Account (a+c)') prints 18,155,949; the Annual Budget Statement 2025-26 (row '3 Break-up of Expenditure Revenue Account (a+c)') prints 18,155,949. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_10d7e4c4511c",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_92e5501ecfcb"
+    ],
+    "target_cell_id": "c_84084b56e0ca",
+    "target_value": null,
+    "target_source": null,
+    "expected": "54650",
+    "observed": "54650",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Current expenditure on capital account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'b. Current Exp. on Capital Account') prints 54,650; the Annual Budget Statement 2011-12 (row 'b. Current Exp. on Capital Account') prints 54,650. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_8d761e7f620a",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_fa3c1fd1d593"
+    ],
+    "target_cell_id": "c_f064b3c9abff",
+    "target_value": null,
+    "target_source": null,
+    "expected": "5168439",
+    "observed": "5168439",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Current expenditure on capital account, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'b. Current Exp. on Capital Account') prints 5,168,439; the Annual Budget Statement 2025-26 (row 'b. Current Exp. on Capital Account') prints 5,168,439. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_174275182e23",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_21a27177f31c"
+    ],
+    "target_cell_id": "c_22beb0348fbd",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4989963",
+    "observed": "4989963",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Foreign loans repayment, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '011 Foreign Loans Repayment') prints 4,989,963; the Annual Budget Statement 2025-26 (row '011 Foreign Loans Repayment') prints 4,989,963. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_4d54b4e2008b",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_0ad7f5451c6d"
+    ],
+    "target_cell_id": "c_7f342e8bb162",
+    "target_value": null,
+    "target_source": null,
+    "expected": "29500",
+    "observed": "29500",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Repayment of short-term foreign credits, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '011 Repayment of Short Term Foreign Credits') prints 29,500; the Annual Budget Statement 2025-26 (row '011 Repayment of Short Term Foreign Credits') prints 29,500. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_41955b6f8a6b",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_f5e2f966ab04"
+    ],
+    "target_cell_id": "c_6de506be2814",
+    "target_value": null,
+    "target_source": null,
+    "expected": "148976",
+    "observed": "148976",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Transfers (current expenditure on capital account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '014 Transfers') prints 148,976; the Annual Budget Statement 2025-26 (row '014 Transfers') prints 148,976. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_432310429420",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_1383a6a3d015"
+    ],
+    "target_cell_id": "c_bdecda5880b9",
+    "target_value": null,
+    "target_source": null,
+    "expected": "442173",
+    "observed": "442173",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Defence affairs and services (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '02 Defence Affairs and Services') prints 442,173; the Annual Budget Statement 2011-12 (row '02 Defence Affairs and Services') prints 442,173. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_905faef134f3",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_94eb4fd64aa1"
+    ],
+    "target_cell_id": "c_281718c8dfce",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2128781",
+    "observed": "2128781",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Defence affairs and services (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '02 Defence Affairs and Services') prints 2,128,781; the Annual Budget Statement 2025-26 (row '02 Defence Affairs and Services') prints 2,128,781. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_651f0a75214e",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_e6586b6aa4d4"
+    ],
+    "target_cell_id": "c_000b42e7486a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "66897",
+    "observed": "66897",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Economic affairs (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '04 Economic Affairs') prints 66,897; the Annual Budget Statement 2011-12 (row '04 Economic Affairs') prints 66,897. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_d389a0811598",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_259b4b0de780"
+    ],
+    "target_cell_id": "c_49af24d60b8e",
+    "target_value": null,
+    "target_source": null,
+    "expected": "357735",
+    "observed": "357735",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Economic affairs (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '04 Economic Affairs') prints 357,735; the Annual Budget Statement 2025-26 (row '04 Economic Affairs') prints 357,735. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_5dafee7dae2f",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_1b6a5233e2b1"
+    ],
+    "target_cell_id": "c_f818f2408427",
+    "target_value": null,
+    "target_source": null,
+    "expected": "34500",
+    "observed": "34500",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Education affairs and services (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '09 Education Affairs and Services') prints 34,500; the Annual Budget Statement 2011-12 (row '09 Education Affairs and Services') prints 34,500. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_ec1429f36581",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_afbd8d69036b"
+    ],
+    "target_cell_id": "c_33484f3bbcde",
+    "target_value": null,
+    "target_source": null,
+    "expected": "103781",
+    "observed": "103781",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Education affairs and services (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '09 Education Affairs and Services') prints 103,781; the Annual Budget Statement 2025-26 (row '09 Education Affairs and Services') prints 103,781. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_3b54653830ec",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_eeaec805cd44"
+    ],
+    "target_cell_id": "c_85f9b339f11a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "448",
+    "observed": "448",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Environment protection (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '05 Environment Protection') prints 448; the Annual Budget Statement 2011-12 (row '05 Environment Protection') prints 448. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_fc9163e5a374",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_91884ac20906"
+    ],
+    "target_cell_id": "c_fb242100158d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "7252",
+    "observed": "7252",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Environment protection (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '05 Environment Protection') prints 7,252; the Annual Budget Statement 2025-26 (row '05 Environment Protection') prints 7,252. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_f377b29a2542",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_0c12268e568d"
+    ],
+    "target_cell_id": "c_31f4f7e5f5c6",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1387664",
+    "observed": "1387664",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "General public services (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '01 General Public Services') prints 1,387,664; the Annual Budget Statement 2011-12 (row '01 General Public Services') prints 1,387,664. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_a81b31bfb347",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_e6c19139de93"
+    ],
+    "target_cell_id": "c_f8a9e0a5dee9",
+    "target_value": null,
+    "target_source": null,
+    "expected": "13640239",
+    "observed": "13640239",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "General public services (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '01 General Public Services') prints 13,640,239; the Annual Budget Statement 2025-26 (row '01 General Public Services') prints 13,640,239. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_07d82892a6f6",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_c351be50838e"
+    ],
+    "target_cell_id": "c_29a53cd7bd37",
+    "target_value": null,
+    "target_source": null,
+    "expected": "7283",
+    "observed": "7283",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Health (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '07 Health') prints 7,283; the Annual Budget Statement 2011-12 (row '07 Health') prints 7,283. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_fb7f6366058e",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_2db6acc9dca6"
+    ],
+    "target_cell_id": "c_33e03703bd6f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "28171",
+    "observed": "28171",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Health (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '07 Health') prints 28,171; the Annual Budget Statement 2025-26 (row '07 Health') prints 28,171. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_3f6bfc3e5c00",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_3d87c8a0f8de"
+    ],
+    "target_cell_id": "c_aa06621c6a18",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1842",
+    "observed": "1842",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Housing and community amenities (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '06 Housing and Community Amenities') prints 1,842; the Annual Budget Statement 2011-12 (row '06 Housing and Community Amenities') prints 1,842. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_10021ec7be23",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_39d406348861"
+    ],
+    "target_cell_id": "c_73561d344bb0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "27917",
+    "observed": "27917",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Housing and community amenities (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '06 Housing and Community Amenities') prints 27,917; the Annual Budget Statement 2025-26 (row '06 Housing and Community Amenities') prints 27,917. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_0d59329cf6d6",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_059a1ba01473"
+    ],
+    "target_cell_id": "c_7172115fc9d3",
+    "target_value": null,
+    "target_source": null,
+    "expected": "51263",
+    "observed": "51263",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Public order and safety affairs (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '03 Public Order and Safety Affairs') prints 51,263; the Annual Budget Statement 2011-12 (row '03 Public Order and Safety Affairs') prints 51,263. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_393bddf28947",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_fe1597788b5d"
+    ],
+    "target_cell_id": "c_a9f2cd621d7c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "283051",
+    "observed": "283051",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Public order and safety affairs (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '03 Public Order and Safety Affairs') prints 283,051; the Annual Budget Statement 2025-26 (row '03 Public Order and Safety Affairs') prints 283,051. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_9444adfd1c1f",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_e8512c99fc4f"
+    ],
+    "target_cell_id": "c_95252a2403b8",
+    "target_value": null,
+    "target_source": null,
+    "expected": "4359",
+    "observed": "4359",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Recreation, culture and religion (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '08 Recreation, Culture and Religion') prints 4,359; the Annual Budget Statement 2011-12 (row '08 Recreation, Culture and Religion') prints 4,359. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_e06caef1dd36",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_309f182b79bf"
+    ],
+    "target_cell_id": "c_ab21c454257b",
+    "target_value": null,
+    "target_source": null,
+    "expected": "18466",
+    "observed": "18466",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Recreation, culture and religion (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '08 Recreation, Culture and Religion') prints 18,466; the Annual Budget Statement 2025-26 (row '08 Recreation, Culture and Religion') prints 18,466. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_c7e80486a160",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_fbc37027f188"
+    ],
+    "target_cell_id": "c_bf447485af63",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1463",
+    "observed": "1463",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Social protection (current, revenue account), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '10 Social Protection') prints 1,463; the Annual Budget Statement 2011-12 (row '10 Social Protection') prints 1,463. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_47fcd88be491",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_7fc4c5f4d850"
+    ],
+    "target_cell_id": "c_91b8760b6cb5",
+    "target_value": null,
+    "target_source": null,
+    "expected": "607997",
+    "observed": "607997",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Social protection (current, revenue account), Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row '10 Social Protection') prints 607,997; the Annual Budget Statement 2025-26 (row '10 Social Protection') prints 607,997. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_25eb1b843a0d",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_f2ea1c507875"
+    ],
+    "target_cell_id": "c_b9777fc5ce0c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1997892",
+    "observed": "1997892",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Current expenditure on revenue account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'a. Current Exp. on Revenue Account') prints 1,997,892; the Annual Budget Statement 2011-12 (row 'a. Current Exp. on Revenue Account') prints 1,997,892. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_53dd3c08359c",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_89f93ffc0492"
+    ],
+    "target_cell_id": "c_7b930832072c",
+    "target_value": null,
+    "target_source": null,
+    "expected": "17203391",
+    "observed": "17203391",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Current expenditure on revenue account, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'a. Current Exp. on Revenue Account') prints 17,203,391; the Annual Budget Statement 2025-26 (row 'a. Current Exp. on Revenue Account') prints 17,203,391. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_13c1d16a7b60",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_35431ec5c37e"
+    ],
+    "target_cell_id": "c_bd633c2b2807",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2052542",
+    "observed": "2052542",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total current expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '1 Total Current Expenditure (a + b)') prints 2,052,542; the Annual Budget Statement 2011-12 (row '1 Total Current Expenditure (a + b)') prints 2,052,542. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_f576fb7c0bc7",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_cf305739b688"
+    ],
+    "target_cell_id": "c_4c28aad1db07",
+    "target_value": null,
+    "target_source": null,
+    "expected": "22371830",
+    "observed": "22371830",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total current expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Total Current Expenditure (a + b)') prints 22,371,830; the Annual Budget Statement 2025-26 (row '1 Total Current Expenditure (a + b)') prints 22,371,830. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_73c4405bee76",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_9a27ed3906ed"
+    ],
+    "target_cell_id": "c_eea3d5dea9da",
+    "target_value": null,
+    "target_source": null,
+    "expected": "133045",
+    "observed": "133045",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on capital account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'd. Dev. Expenditure on Capital Account') prints 133,045; the Annual Budget Statement 2011-12 (row 'd. Dev. Expenditure on Capital Account') prints 133,045. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_22c61d040336",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_d8d587d4ff10"
+    ],
+    "target_cell_id": "c_bf5d49a7631f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "1064442",
+    "observed": "1064442",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on capital account, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'd. Dev. Exp. on Capital Account') prints 1,064,442; the Annual Budget Statement 2025-26 (row 'd. Dev. Exp. on Capital Account') prints 1,064,442. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_d8a76f59f54a",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_665b9d02e452"
+    ],
+    "target_cell_id": "c_10f54a0c1c71",
+    "target_value": null,
+    "target_source": null,
+    "expected": "321385",
+    "observed": "321385",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total Public Sector Development Programme (i+d), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '(Total Public Sector Dev. Program) (i+d)') prints 321,385; the Annual Budget Statement 2011-12 (row '(Total Public Sector Dev. Program) (i+d)') prints 321,385. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_cccdeb9a1051",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_f808c6e29825"
+    ],
+    "target_cell_id": "c_45858d849e73",
+    "target_value": null,
+    "target_source": null,
+    "expected": "311885",
+    "observed": "311885",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on revenue account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'c. Dev. Exp. on Revenue Account (i+ii)') prints 311,885; the Annual Budget Statement 2011-12 (row 'c. Dev. Exp. on Revenue Account (i+ii)') prints 311,885. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_1a6eca4aec86",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_eed8e9ebf03e"
+    ],
+    "target_cell_id": "c_e51d067f200f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "952558",
+    "observed": "952558",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on revenue account, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Development Expenditure c. Dev. Exp. on Revenue Account') prints 952,558; the Annual Budget Statement 2025-26 (row 'Development Expenditure c. Dev. Exp. on Revenue Account') prints 952,558. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_17be22a517d0",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_faedd9de8f26"
+    ],
+    "target_cell_id": "c_1d37568b331d",
+    "target_value": null,
+    "target_source": null,
+    "expected": "123545",
+    "observed": "123545",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Other development expenditure on revenue account, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'ii. Other Dev. Exp. on Revenue Account') prints 123,545; the Annual Budget Statement 2011-12 (row 'ii. Other Dev. Exp. on Revenue Account') prints 123,545. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_ee68112caf98",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_1c31dd347540"
+    ],
+    "target_cell_id": "c_91b5e330feaa",
+    "target_value": null,
+    "target_source": null,
+    "expected": "188340",
+    "observed": "188340",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Development expenditure on revenue account (PSDP), Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'i. Dev. Exp. on Revenue Account (PSDP)') prints 188,340; the Annual Budget Statement 2011-12 (row 'i. Dev. Exp. on Revenue Account (PSDP)') prints 188,340. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_6fce10069ee9",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_3a5c7cc10dff"
+    ],
+    "target_cell_id": "c_1c314446acbc",
+    "target_value": null,
+    "target_source": null,
+    "expected": "444930",
+    "observed": "444930",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total development expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '2 Total Development Expenditure (c + d)') prints 444,930; the Annual Budget Statement 2011-12 (row '2 Total Development Expenditure (c + d)') prints 444,930. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_dcf6699cf014",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_aca2979565bb"
+    ],
+    "target_cell_id": "c_ec21ebbb2b68",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2017000",
+    "observed": "2017000",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total development expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Total Development Expenditure (c+d)') prints 2,017,000; the Annual Budget Statement 2025-26 (row '2 Total Development Expenditure (c+d)') prints 2,017,000. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
     "check_id": "chk_57afd1c3ff58",
     "check_type": "cross_table",
     "dataset": "abs",
@@ -1127,6 +3340,77 @@
     "result": "pass",
     "not_evaluable_reason": null,
     "description": "Estimated operational shortfall in PSDP, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '3 Estimated Operational Shortfall in PSDP') prints -20,000; the Annual Budget Statement 2010-11 (row 'Estimated Operational Shortfall in PSDP') prints -20,000. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_6259d5636aef",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_695a425dadca"
+    ],
+    "target_cell_id": "c_777a86f6d512",
+    "target_value": null,
+    "target_source": null,
+    "expected": "-20000",
+    "observed": "-20000",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Estimated operational shortfall in PSDP, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '3 Estimated Operational Shortfall in PSDP') prints -20,000; the Annual Budget Statement 2011-12 (row '3 Estimated Operational Shortfall in PSDP') prints -20,000. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_922b7b9eab76",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_b8a17c693200"
+    ],
+    "target_cell_id": "c_777a86f6d512",
+    "target_value": null,
+    "target_source": null,
+    "expected": "-20000",
+    "observed": "-20000",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Estimated operational shortfall in PSDP, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row '3 Estimated Operational Shortfall in PSDP') prints -20,000; the Annual Budget Statement 2011-12 (row 'Estimated Operational Shortfall in PSDP') prints -20,000. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_118f4f24d941",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_8cca0ff5df9f"
+    ],
+    "target_cell_id": "c_23bca7d1584f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "-57796",
+    "observed": "-57796",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Estimated operational shortfall in PSDP, Revised Estimates 2010-11: the Annual Budget Statement 2011-12 (row '3 Estimated Operational Shortfall in PSDP') prints -57,796; the Annual Budget Statement 2011-12 (row 'Estimated Operational Shortfall in PSDP') prints -57,796. They are equal.",
     "official": true,
     "rule_id": "abs.restated_on_same_page"
   },
@@ -1200,16 +3484,156 @@
     "rule_id": "abs.restated_on_same_page"
   },
   {
-    "check_id": "chk_ae19545189c3",
+    "check_id": "chk_1bb451f34746",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_3f5d904d03bb"
+    ],
+    "target_cell_id": "c_44834367e350",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2477472",
+    "observed": "2477472",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'Total - Expenditure (1+2+3)') prints 2,477,472; the Annual Budget Statement 2011-12 (row 'Total - Expenditure (1+2+3)') prints 2,477,472. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_98fb4d86e309",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_6682b7251971"
+    ],
+    "target_cell_id": "c_44834367e350",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2477472",
+    "observed": "2477472",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2010-11: the Annual Budget Statement 2010-11 (row 'Total - Expenditure (1+2+3)') prints 2,477,472; the Annual Budget Statement 2011-12 (row 'Total Expenditure') prints 2,477,472. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_0440e811cbd2",
     "check_type": "cross_table",
     "dataset": "abs",
     "source_ids": [
-      "abs-fed-2025-26"
+      "abs-fed-2011-12"
     ],
     "member_cell_ids": [
-      "c_712e71823684"
+      "c_cd885eac2359"
     ],
-    "target_cell_id": "c_bb016e2ef415",
+    "target_cell_id": "c_582a34a57b8a",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2620335",
+    "observed": "2620335",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Revised Estimates 2010-11: the Annual Budget Statement 2011-12 (row 'Total - Expenditure (1+2+3)') prints 2,620,335; the Annual Budget Statement 2011-12 (row 'Total Expenditure') prints 2,620,335. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_ee98b3c0d56e",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2011-12"
+    ],
+    "member_cell_ids": [
+      "c_a1945ea637ff"
+    ],
+    "target_cell_id": "c_0c9bc78036a4",
+    "target_value": null,
+    "target_source": null,
+    "expected": "2835373",
+    "observed": "2835373",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2011-12: the Annual Budget Statement 2011-12 (row 'Total - Expenditure (1+2+3)') prints 2,835,373; the Annual Budget Statement 2011-12 (row 'Total Expenditure') prints 2,835,373. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_629ad0cf1139",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_d609d675c7ac"
+    ],
+    "target_cell_id": "c_a55ea85dc45f",
+    "target_value": null,
+    "target_source": null,
+    "expected": "19561397",
+    "observed": "19561397",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2023-24: the Annual Budget Statement 2024-25 (row 'Grand Total - Expenditure (1+2)') prints 19,561,397; the Annual Budget Statement 2024-25 (row 'Total Expenditure:') prints 19,561,397. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_b52e6c87729c",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_ff79d7556a42"
+    ],
+    "target_cell_id": "c_2f27e5fb3ca8",
+    "target_value": null,
+    "target_source": null,
+    "expected": "18418142",
+    "observed": "18418142",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Revised Estimates 2023-24: the Annual Budget Statement 2024-25 (row 'Grand Total - Expenditure (1+2)') prints 18,418,142; the Annual Budget Statement 2024-25 (row 'Total Expenditure:') prints 18,418,142. They are equal.",
+    "official": true,
+    "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_e7ee0f93dd15",
+    "check_type": "cross_table",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25"
+    ],
+    "member_cell_ids": [
+      "c_e99e49b859b1"
+    ],
+    "target_cell_id": "c_c8111280edc0",
     "target_value": null,
     "target_source": null,
     "expected": "24388830",
@@ -1218,9 +3642,57 @@
     "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
     "result": "pass",
     "not_evaluable_reason": null,
-    "description": "Total federal expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2025-26 (row 'Grand Total - Expenditure (1+2)') prints 24,388,830; the Annual Budget Statement 2025-26 (row 'Total Expenditure:') prints 24,388,830. They are equal.",
+    "description": "Total federal expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Grand Total - Expenditure (1+2)') prints 24,388,830; the Annual Budget Statement 2024-25 (row 'Total Expenditure:') prints 24,388,830. They are equal.",
     "official": true,
     "rule_id": "abs.restated_on_same_page"
+  },
+  {
+    "check_id": "chk_9fbc02480a0e",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_bb016e2ef415"
+    ],
+    "target_cell_id": "c_c8111280edc0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "24388830",
+    "observed": "24388830",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Grand Total - Expenditure (1+2)') prints 24,388,830; the Annual Budget Statement 2025-26 (row 'Grand Total - Expenditure (1+2)') prints 24,388,830. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
+  },
+  {
+    "check_id": "chk_7d9625c09f67",
+    "check_type": "cross_edition",
+    "dataset": "abs",
+    "source_ids": [
+      "abs-fed-2024-25",
+      "abs-fed-2025-26"
+    ],
+    "member_cell_ids": [
+      "c_712e71823684"
+    ],
+    "target_cell_id": "c_c8111280edc0",
+    "target_value": null,
+    "target_source": null,
+    "expected": "24388830",
+    "observed": "24388830",
+    "residual": "0",
+    "tolerance_rule": "The two printed figures must be equal within 1 unit of the last printed digit.",
+    "result": "pass",
+    "not_evaluable_reason": null,
+    "description": "Total federal expenditure, Budget Estimates 2024-25: the Annual Budget Statement 2024-25 (row 'Grand Total - Expenditure (1+2)') prints 24,388,830; the Annual Budget Statement 2025-26 (row 'Total Expenditure:') prints 24,388,830. They are equal.",
+    "official": true,
+    "rule_id": "abs.same_figure_in_next_edition"
   },
   {
     "check_id": "chk_2d90f58d53bf",

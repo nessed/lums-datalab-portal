@@ -80,23 +80,51 @@ def download(url: str, dest: Path, attempts_log: list[dict[str, Any]], timeout: 
     return None
 
 
-def wayback_lookup(url: str, attempts_log: list[dict[str, Any]], timestamp: str = "") -> dict[str, str] | None:
-    """Closest Wayback snapshot of `url`, or None."""
+def sha1_base32(path: Path) -> str:
+    """The digest format the Wayback CDX index uses for a capture's content."""
+    import base64
+    import hashlib
+
+    h = hashlib.sha1()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return base64.b32encode(h.digest()).decode("ascii")
+
+
+def wayback_lookup(url: str, attempts_log: list[dict[str, Any]], local_file: Path | None = None) -> dict[str, Any] | None:
+    """A Wayback snapshot of `url` from the CDX index, or None.
+
+    If `local_file` is given, a snapshot whose content digest equals the
+    file's is preferred: that proves the archived bytes are the bytes we used.
+    (The simpler "availability" API often answers with nothing for PDFs.)
+    """
     session = _session()
-    api = "https://archive.org/wayback/available"
-    entry: dict[str, Any] = {"url": f"{api}?url={url}", "time": config.now_iso()}
+    api = "http://web.archive.org/cdx/search/cdx"
+    entry: dict[str, Any] = {"url": f"{api}?url={url}", "time": config.now_iso(), "purpose": "wayback_cdx_lookup"}
     try:
-        r = session.get(api, params={"url": url, "timestamp": timestamp}, timeout=45)
-        snap = (r.json().get("archived_snapshots") or {}).get("closest") or {}
-        if snap.get("available") and str(snap.get("status")) == "200":
-            entry["outcome"] = "snapshot_found"
-            attempts_log.append(entry)
-            return {"wayback_url": snap["url"].replace("http://", "https://"), "wayback_timestamp": snap["timestamp"]}
-        entry["outcome"] = "no_snapshot"
+        r = session.get(api, params={"url": url.split("://", 1)[-1], "output": "json", "filter": "statuscode:200",
+                                     "fl": "timestamp,original,digest,length", "limit": "-40"}, timeout=60)
+        rows = r.json()[1:] if r.status_code == 200 and r.text.strip() else []
     except Exception as exc:
         entry["outcome"] = f"error:{type(exc).__name__}"
+        attempts_log.append(entry)
+        return None
+    if not rows:
+        entry["outcome"] = "no_snapshot"
+        attempts_log.append(entry)
+        return None
+    digest = sha1_base32(local_file) if local_file is not None and local_file.exists() else None
+    matching = [row for row in rows if digest and row[2] == digest]
+    timestamp, original, snap_digest, _length = (matching or rows)[-1]
+    entry["outcome"] = "snapshot_found"
     attempts_log.append(entry)
-    return None
+    time.sleep(1.0)
+    return {
+        "wayback_url": f"https://web.archive.org/web/{timestamp}/{original}", "wayback_timestamp": timestamp,
+        "snapshots_seen": len(rows), "snapshot_digest": snap_digest,
+        "digest_matches_file": (snap_digest == digest) if digest else None,
+    }
 
 
 def wayback_raw_url(snapshot: dict[str, str], url: str) -> str:
@@ -115,9 +143,26 @@ def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], peri
     meta = reader.metadata or {}
     out["pdf_metadata"] = {k: str(meta.get(f"/{k}")) for k in ("Title", "Producer", "Creator", "CreationDate") if meta.get(f"/{k}")}
     doc = pymupdf.open(path)
-    with_text = sum(1 for page in doc if len(page.get_text().strip()) >= 20)
+    with_text = 0
+    blank: list[int] = []
+    image_only: list[int] = []
+    for number, page in enumerate(doc, start=1):
+        if len(page.get_text().strip()) >= 20:
+            with_text += 1
+            continue
+        # A page with no text is either blank (nothing printed) or an image (a scan or a picture cover).
+        samples = page.get_pixmap(dpi=36, colorspace=pymupdf.csGRAY).samples
+        white = sum(1 for value in samples if value > 245) / max(len(samples), 1)
+        if white > 0.995 and not page.get_images():
+            blank.append(number)
+        else:
+            image_only.append(number)
+    printed_pages = len(doc) - len(blank)
     out["pages_with_text_layer"] = with_text
-    out["text_layer_fraction"] = round(with_text / max(len(doc), 1), 4)
+    out["blank_pages"] = blank
+    out["pages_without_text_layer"] = image_only
+    # Blank pages have nothing that could carry a text layer, so they are left out of the fraction.
+    out["text_layer_fraction"] = round(with_text / max(printed_pages, 1), 4)
     first = " ".join(doc[i].get_text() for i in range(min(3, len(doc))))
     first_norm = re.sub(r"\s+", " ", first).lower()
     ascii_chars = sum(1 for ch in first if ord(ch) < 128)
@@ -297,11 +342,11 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
     record["verification_status"] = status
 
     # Best-effort Wayback record: an existing snapshot is looked up; a save is requested once.
-    if snapshot is None and file_url:
-        snapshot = wayback_lookup(file_url, attempts)
+    if file_url and (snapshot is None or snapshot.get("digest_matches_file") is None):
+        snapshot = wayback_lookup(file_url, attempts, dest) or snapshot
     if save_to_wayback and file_url and retrieved_via == "official" and snapshot is None:
         record["wayback_save"] = wayback_save(file_url)
-        snapshot = wayback_lookup(file_url, attempts)
+        snapshot = wayback_lookup(file_url, attempts, dest)
     record["wayback"] = snapshot
     record["attempts"] = attempts
 
@@ -310,6 +355,11 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
     if record.get("identity_route") == "contents_markers_plus_official_landing_link":
         notes = (notes + " The cover page carries no text, so the title could not be read by code; the file is identified by "
                  "its contents page, the fiscal year in its tables and the link from the official budget page for that year.").strip()
+    if not record["text_layer_ok"]:
+        notes = (notes + f" Text layer on {inspection['pages_with_text_layer']} of "
+                 f"{inspection['page_count'] - len(inspection['blank_pages'])} printed pages, below the 95% inspection level: "
+                 f"page(s) {', '.join(str(n) for n in inspection['pages_without_text_layer'])} are images (covers). "
+                 "Used under a recorded deviation; every page that values are taken from has a text layer.").strip()
     if status == "official_differs_from_archive":
         notes = (notes + " reissued_or_differs: official download differs from the archive copy.").strip()
     return Source(

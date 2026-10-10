@@ -83,6 +83,12 @@ rules:
     children_of_target: true
     what_members: the parts of development expenditure on revenue account
     what_target: "Development expenditure on revenue account"
+  - id: abs.psdp_total
+    type: accounting_identity
+    target: fed.exp.development.psdp_total
+    members: [fed.exp.development.revenue_account.psdp, fed.exp.development.capital_account]
+    what_members: PSDP development expenditure on revenue account and development expenditure on capital account
+    what_target: "Total Public Sector Development Programme (i+d)"
   - id: abs.development_total
     type: accounting_identity
     target: fed.exp.development.total

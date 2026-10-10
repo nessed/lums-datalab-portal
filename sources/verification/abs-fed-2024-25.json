@@ -1,9 +1,9 @@
 {
   "source_id": "abs-fed-2024-25",
-  "registered_at": "2026-10-10T20:27:48+00:00",
+  "registered_at": "2026-10-10T20:55:21+00:00",
   "file_url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
   "landing_url": "https://www.finance.gov.pk/fb_2024_25.html",
-  "retrieved_at": "2026-10-10T20:27:53+00:00",
+  "retrieved_at": "2026-10-10T20:55:24+00:00",
   "retrieved_via": "official",
   "sha256": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
   "size_bytes": 3111490,
@@ -20,15 +20,23 @@
   "attempts": [
     {
       "url": "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
-      "time": "2026-10-10T20:27:48+00:00",
+      "time": "2026-10-10T20:55:21+00:00",
       "attempt": 1,
       "http_status": 200,
       "outcome": "ok"
     },
     {
-      "url": "https://archive.org/wayback/available?url=https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
-      "time": "2026-10-10T20:27:54+00:00",
-      "outcome": "error:JSONDecodeError"
+      "url": "https://www.finance.gov.pk/fb_2024_25.html",
+      "time": "2026-10-10T20:55:25+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf",
+      "time": "2026-10-10T20:55:27+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "error:ReadTimeout"
     }
   ],
   "local_path": "abs/2024-25/Annual_Budget_Statement.pdf",
@@ -47,7 +55,13 @@
       "CreationDate": "D:20240612063606+05'00'"
     },
     "pages_with_text_layer": 56,
-    "text_layer_fraction": 0.9492,
+    "blank_pages": [
+      2,
+      4,
+      6
+    ],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
     "ascii_ratio_first_pages": 1.0,
     "markers": {
       "all": {
@@ -68,7 +82,9 @@
     },
     "markers_ok": true
   },
-  "text_layer_ok": false,
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
   "verification_status": "official_match_archive",
   "wayback": null
 }

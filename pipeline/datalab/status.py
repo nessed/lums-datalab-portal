@@ -75,21 +75,26 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
         if not chk.official:
             continue
         how = {"pass": "exactly", "pass_within_rounding": "within rounding"}.get(chk.result)
-        if chk.check_type == "recompute" and chk.expected is not None:
-            # A rate recomputed from other printed figures is not a sum; say so on the receipt.
+        if chk.check_type in ("recompute", "index_aggregation") and chk.expected is not None:
+            # Not a plain sum: a figure recomputed from other printed figures (CPI, LFS).
+            target = cells_by_id.get(chk.target_cell_id or "")
             n = len(chk.member_cell_ids)
+            kind = ("weighted average of the group indices" if chk.check_type == "index_aggregation"
+                    else "recomputation from the printed figures it is derived from")
             if chk.target_cell_id == primary.cell_id:
                 if how:
-                    parts.append(f"Matches the value recomputed from {n} other printed figures ({how}).")
+                    parts.append(f"Matches the {kind} ({n} printed figures; {how}).")
                 elif chk.result == "fail":
-                    parts.append(f"Does NOT match the value recomputed from {n} other printed figures "
+                    parts.append(f"Does NOT match the {kind} (difference {fmt(chk.residual)}).")
+            else:
+                label = (target.row_label_raw if target else "").strip()
+                col = (target.col_label_raw if target else "").strip()
+                what = f"the printed '{label}' figure {fmt(chk.expected)}" + (f" in column '{col}'" if col else "")
+                if how:
+                    parts.append(f"One of {n} printed figures from which {what} recomputes ({how}).")
+                elif chk.result == "fail":
+                    parts.append(f"One of {n} printed figures from which {what} should recompute but does not "
                                  f"(difference {fmt(chk.residual)}).")
-            elif how:
-                parts.append(f"One of {n} printed figures from which the printed rate {fmt(chk.expected)} "
-                             f"was recomputed ({how}).")
-            elif chk.result == "fail":
-                parts.append(f"One of {n} printed figures from which the printed rate {fmt(chk.expected)} "
-                             f"could not be reproduced (difference {fmt(chk.residual)}).")
         elif chk.check_type in ARITHMETIC_CHECKS and chk.check_type != "cross_table" and chk.expected is not None:
             target = cells_by_id.get(chk.target_cell_id or "")
             target_label = (target.row_label_raw if target else "the printed total").strip()
@@ -107,7 +112,11 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
                     parts.append(f"One of {n} amounts that should add to the printed '{target_label}' "
                                  f"{fmt(chk.expected)} but do not (difference {fmt(chk.residual)}).")
         elif chk.check_type in ("cross_edition", "cross_table", "cross_source"):
-            other_id = chk.member_cell_ids[0] if chk.target_cell_id == primary.cell_id else chk.target_cell_id
+            if chk.target_cell_id == primary.cell_id:
+                # A cross-source check against a non-PDF source has no member cell, only `target_source`.
+                other_id = chk.member_cell_ids[0] if chk.member_cell_ids else None
+            else:
+                other_id = chk.target_cell_id
             other = cells_by_id.get(other_id or "")
             where = source_titles.get(other.source_id, other.source_id) if other else (chk.target_source or "another printing")
             same_doc = other is not None and other.source_id == primary.source_id
@@ -116,6 +125,8 @@ def evidence_sentence(primary: Cell, tier: str, checks_by_cell: dict[str, list[C
                 parts.append(f"Equal to the figure printed in {place} ({how}).")
             elif chk.result == "fail" and other is not None:
                 parts.append(f"Differs from the figure printed in {place} ({fmt(other.value_parsed)}).")
+            elif chk.result == "fail" and chk.target_value is not None:
+                parts.append(f"Differs from the figure given by {place} ({fmt(chk.target_value)}).")
         elif chk.result == "not_evaluable":
             parts.append(f"A {chk.check_type.replace('_', ' ')} check could not be run: {chk.not_evaluable_reason}.")
     if not parts:

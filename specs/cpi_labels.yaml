@@ -1,0 +1,39 @@
+# Printed row label -> row key, for the PBS CPI "by Group of Commodities and
+# Services" tables (decision D20).
+#
+# Written by hand from the labels the six June issues print (2016, 2019, 2023,
+# 2024, 2025, 2026; national, urban and rural tables). Each pattern must match
+# the WHOLE normalised label (lowercase, leading numbering such as "1." / "10."
+# stripped, "&" spelled "and", trailing punctuation stripped). A label that
+# matches nothing stays unmapped and is never published. The mapping is
+# validated by the checks: a wrong row makes the weights sum, the index
+# aggregation or the percentage recomputation fail.
+#
+# `series` here is a ROW KEY ("general" or a group slug from specs/cpi.yaml);
+# the code builds the series ids from it, the area, the measure and the base.
+#
+# Two labels wrap over two printed lines ("Housing, Water, Electricity, / Gas &
+# Fuels" and "Furnishing & Household / Equipment Maintenance"). The patterns
+# accept the full label only. If Docling splits such a label the row stays
+# unmapped unless the text-layer fallback recovers a full label.
+
+labels:
+  - {pattern: 'general', series: general}
+  - {pattern: 'food and non-alcoholic bev(\.|erages)?', series: food}
+  - {pattern: 'alcoholic bev(\.|erages)? ?and tobacco', series: alcohol_tobacco}
+  - {pattern: 'clothing and footwear', series: clothing_footwear}
+  - {pattern: 'housing, water, electricity, ?gas and fuels', series: housing_utilities}
+  - {pattern: 'furnishing and household equip(\.|ment)?( and)? maint(\.|enance)?', series: furnishing_household}
+  - {pattern: 'health', series: health}
+  - {pattern: 'transport', series: transport}
+  - {pattern: 'communication', series: communication}
+  - {pattern: 'recreation and culture', series: recreation_culture}
+  - {pattern: 'education', series: education}
+  - {pattern: 'restaurants and hotels', series: restaurants_hotels}
+  - {pattern: 'miscellaneous', series: miscellaneous}
+
+# Rows the table prints that are deliberately not targeted in this prototype.
+# They stay cells without a series and are not counted as unmapped surprises.
+not_targeted:
+  - 'non-perishable food items'
+  - 'perishable food items'

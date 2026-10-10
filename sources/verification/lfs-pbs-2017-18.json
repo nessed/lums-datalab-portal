@@ -1,6 +1,6 @@
 {
   "source_id": "lfs-pbs-2017-18",
-  "registered_at": "2026-10-10T21:07:44+00:00",
+  "registered_at": "2026-10-10T21:52:12+00:00",
   "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
   "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
   "retrieved_at": "2026-10-10T20:17:09Z",
@@ -22,14 +22,14 @@
     },
     {
       "url": "https://www.pbs.gov.pk/content/labour-force-statistics",
-      "time": "2026-10-10T21:07:45+00:00",
+      "time": "2026-10-10T21:52:13+00:00",
       "purpose": "landing_page_link_check",
       "http_status": 200,
       "outcome": "link_found"
     },
     {
       "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
-      "time": "2026-10-10T21:07:47+00:00",
+      "time": "2026-10-10T21:52:17+00:00",
       "purpose": "wayback_cdx_lookup",
       "outcome": "snapshot_found"
     }
@@ -67,6 +67,7 @@
   "text_layer_ok": true,
   "landing_page_links_file": true,
   "identity_route": "cover_markers",
+  "excluded_markers_found": [],
   "verification_status": "official_only",
   "wayback": {
     "wayback_url": "https://web.archive.org/web/20260314063715/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",

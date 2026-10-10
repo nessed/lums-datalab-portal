@@ -906,5 +906,2672 @@
     },
     "sort_key": 900,
     "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.total.total",
+    "name": "Unemployment rate, both sexes, Pakistan",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: both sexes, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 100,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.total.rural",
+    "name": "Unemployment rate, both sexes, rural areas",
+    "parent_id": "lfs.unemployment_rate.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: both sexes, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 101,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.total.urban",
+    "name": "Unemployment rate, both sexes, urban areas",
+    "parent_id": "lfs.unemployment_rate.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: both sexes, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 102,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.male.total",
+    "name": "Unemployment rate, male, Pakistan",
+    "parent_id": "lfs.unemployment_rate.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: male, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 103,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.male.rural",
+    "name": "Unemployment rate, male, rural areas",
+    "parent_id": "lfs.unemployment_rate.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: male, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 104,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.male.urban",
+    "name": "Unemployment rate, male, urban areas",
+    "parent_id": "lfs.unemployment_rate.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: male, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 105,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.female.total",
+    "name": "Unemployment rate, female, Pakistan",
+    "parent_id": "lfs.unemployment_rate.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: female, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 106,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.female.rural",
+    "name": "Unemployment rate, female, rural areas",
+    "parent_id": "lfs.unemployment_rate.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: female, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 107,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployment_rate.female.urban",
+    "name": "Unemployment rate, female, urban areas",
+    "parent_id": "lfs.unemployment_rate.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Unemployed persons as a percentage of the civilian labour force (10 years and over), as printed in the Labour Force Survey annual report, on the 13th ICLS definitions used by every round up to 2020-21. Coverage: female, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment",
+      "jobless rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 108,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.total.total",
+    "name": "Labour force participation rate (refined), both sexes, Pakistan",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: both sexes, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 200,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.total.rural",
+    "name": "Labour force participation rate (refined), both sexes, rural areas",
+    "parent_id": "lfs.lfpr_refined.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: both sexes, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 201,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.total.urban",
+    "name": "Labour force participation rate (refined), both sexes, urban areas",
+    "parent_id": "lfs.lfpr_refined.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: both sexes, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 202,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.male.total",
+    "name": "Labour force participation rate (refined), male, Pakistan",
+    "parent_id": "lfs.lfpr_refined.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: male, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 203,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.male.rural",
+    "name": "Labour force participation rate (refined), male, rural areas",
+    "parent_id": "lfs.lfpr_refined.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: male, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 204,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.male.urban",
+    "name": "Labour force participation rate (refined), male, urban areas",
+    "parent_id": "lfs.lfpr_refined.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: male, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 205,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.female.total",
+    "name": "Labour force participation rate (refined), female, Pakistan",
+    "parent_id": "lfs.lfpr_refined.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: female, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 206,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.female.rural",
+    "name": "Labour force participation rate (refined), female, rural areas",
+    "parent_id": "lfs.lfpr_refined.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: female, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 207,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_refined.female.urban",
+    "name": "Labour force participation rate (refined), female, urban areas",
+    "parent_id": "lfs.lfpr_refined.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Refined activity (participation) rate: the civilian labour force as a percentage of the population aged 10 years and over, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: female, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "participation rate",
+      "activity rate",
+      "LFPR"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 208,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.total.total",
+    "name": "Labour force participation rate (crude), both sexes, Pakistan",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: both sexes, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 300,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.total.rural",
+    "name": "Labour force participation rate (crude), both sexes, rural areas",
+    "parent_id": "lfs.lfpr_crude.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: both sexes, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 301,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.total.urban",
+    "name": "Labour force participation rate (crude), both sexes, urban areas",
+    "parent_id": "lfs.lfpr_crude.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: both sexes, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 302,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.male.total",
+    "name": "Labour force participation rate (crude), male, Pakistan",
+    "parent_id": "lfs.lfpr_crude.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: male, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 303,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.male.rural",
+    "name": "Labour force participation rate (crude), male, rural areas",
+    "parent_id": "lfs.lfpr_crude.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: male, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 304,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.male.urban",
+    "name": "Labour force participation rate (crude), male, urban areas",
+    "parent_id": "lfs.lfpr_crude.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: male, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 305,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.female.total",
+    "name": "Labour force participation rate (crude), female, Pakistan",
+    "parent_id": "lfs.lfpr_crude.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: female, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 306,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.female.rural",
+    "name": "Labour force participation rate (crude), female, rural areas",
+    "parent_id": "lfs.lfpr_crude.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: female, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 307,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.lfpr_crude.female.urban",
+    "name": "Labour force participation rate (crude), female, urban areas",
+    "parent_id": "lfs.lfpr_crude.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Crude activity (participation) rate: the civilian labour force as a percentage of the TOTAL population of all ages, as printed in the Labour Force Survey annual report (13th ICLS definitions). Coverage: female, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "crude participation rate",
+      "crude activity rate"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 308,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.total.total",
+    "name": "Civilian labour force, both sexes, Pakistan",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 400,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.total.rural",
+    "name": "Civilian labour force, both sexes, rural areas",
+    "parent_id": "lfs.labour_force.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 401,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.total.urban",
+    "name": "Civilian labour force, both sexes, urban areas",
+    "parent_id": "lfs.labour_force.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 402,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.male.total",
+    "name": "Civilian labour force, male, Pakistan",
+    "parent_id": "lfs.labour_force.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 403,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.male.rural",
+    "name": "Civilian labour force, male, rural areas",
+    "parent_id": "lfs.labour_force.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 404,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.male.urban",
+    "name": "Civilian labour force, male, urban areas",
+    "parent_id": "lfs.labour_force.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 405,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.female.total",
+    "name": "Civilian labour force, female, Pakistan",
+    "parent_id": "lfs.labour_force.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 406,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.female.rural",
+    "name": "Civilian labour force, female, rural areas",
+    "parent_id": "lfs.labour_force.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 407,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.labour_force.female.urban",
+    "name": "Civilian labour force, female, urban areas",
+    "parent_id": "lfs.labour_force.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Civilian labour force (employed plus unemployed, 10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "labour force",
+      "workforce"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 408,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.total.total",
+    "name": "Employed persons, both sexes, Pakistan",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 500,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.total.rural",
+    "name": "Employed persons, both sexes, rural areas",
+    "parent_id": "lfs.employed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 501,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.total.urban",
+    "name": "Employed persons, both sexes, urban areas",
+    "parent_id": "lfs.employed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 502,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.male.total",
+    "name": "Employed persons, male, Pakistan",
+    "parent_id": "lfs.employed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 503,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.male.rural",
+    "name": "Employed persons, male, rural areas",
+    "parent_id": "lfs.employed.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 504,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.male.urban",
+    "name": "Employed persons, male, urban areas",
+    "parent_id": "lfs.employed.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 505,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.female.total",
+    "name": "Employed persons, female, Pakistan",
+    "parent_id": "lfs.employed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 506,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.female.rural",
+    "name": "Employed persons, female, rural areas",
+    "parent_id": "lfs.employed.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 507,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employed.female.urban",
+    "name": "Employed persons, female, urban areas",
+    "parent_id": "lfs.employed.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Employed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 508,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.total.total",
+    "name": "Unemployed persons, both sexes, Pakistan",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 600,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.total.rural",
+    "name": "Unemployed persons, both sexes, rural areas",
+    "parent_id": "lfs.unemployed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 601,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.total.urban",
+    "name": "Unemployed persons, both sexes, urban areas",
+    "parent_id": "lfs.unemployed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "total",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: both sexes, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 602,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.male.total",
+    "name": "Unemployed persons, male, Pakistan",
+    "parent_id": "lfs.unemployed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 603,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.male.rural",
+    "name": "Unemployed persons, male, rural areas",
+    "parent_id": "lfs.unemployed.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 604,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.male.urban",
+    "name": "Unemployed persons, male, urban areas",
+    "parent_id": "lfs.unemployed.male.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "male",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: male, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 605,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.female.total",
+    "name": "Unemployed persons, female, Pakistan",
+    "parent_id": "lfs.unemployed.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, Pakistan.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 606,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.female.rural",
+    "name": "Unemployed persons, female, rural areas",
+    "parent_id": "lfs.unemployed.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "rural"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, rural areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 607,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.unemployed.female.urban",
+    "name": "Unemployed persons, female, urban areas",
+    "parent_id": "lfs.unemployed.female.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "sex": "female",
+      "area": "urban"
+    },
+    "frequency": "survey_round",
+    "unit": "persons",
+    "scale_factor": 1000000,
+    "definition": "Unemployed persons (10 years and over), in million persons as printed (13th ICLS definitions). Coverage: female, urban areas.",
+    "definition_status": "draft",
+    "synonyms": [
+      "unemployment count"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 608,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.all.total.total",
+    "name": "Share of employed persons: All industry divisions, both sexes",
+    "parent_id": null,
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "all",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: All industry divisions; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 700,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.all.male.total",
+    "name": "Share of employed persons: All industry divisions, male",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "all",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: All industry divisions; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 701,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.all.female.total",
+    "name": "Share of employed persons: All industry divisions, female",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "all",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: All industry divisions; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 702,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.agriculture.total.total",
+    "name": "Share of employed persons: Agriculture, forestry, hunting and fishing, both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "agriculture",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Agriculture, forestry, hunting and fishing; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 703,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.agriculture.male.total",
+    "name": "Share of employed persons: Agriculture, forestry, hunting and fishing, male",
+    "parent_id": "lfs.employment_share.industry.agriculture.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "agriculture",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Agriculture, forestry, hunting and fishing; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 704,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.agriculture.female.total",
+    "name": "Share of employed persons: Agriculture, forestry, hunting and fishing, female",
+    "parent_id": "lfs.employment_share.industry.agriculture.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "agriculture",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Agriculture, forestry, hunting and fishing; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 705,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.manufacturing.total.total",
+    "name": "Share of employed persons: Manufacturing, both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "manufacturing",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Manufacturing; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 706,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.manufacturing.male.total",
+    "name": "Share of employed persons: Manufacturing, male",
+    "parent_id": "lfs.employment_share.industry.manufacturing.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "manufacturing",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Manufacturing; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 707,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.manufacturing.female.total",
+    "name": "Share of employed persons: Manufacturing, female",
+    "parent_id": "lfs.employment_share.industry.manufacturing.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "manufacturing",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Manufacturing; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 708,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.construction.total.total",
+    "name": "Share of employed persons: Construction, both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "construction",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Construction; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 709,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.construction.male.total",
+    "name": "Share of employed persons: Construction, male",
+    "parent_id": "lfs.employment_share.industry.construction.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "construction",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Construction; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 710,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.construction.female.total",
+    "name": "Share of employed persons: Construction, female",
+    "parent_id": "lfs.employment_share.industry.construction.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "construction",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Construction; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 711,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.wholesale_retail_trade.total.total",
+    "name": "Share of employed persons: Wholesale and retail trade, both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "wholesale_retail_trade",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Wholesale and retail trade; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 712,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.wholesale_retail_trade.male.total",
+    "name": "Share of employed persons: Wholesale and retail trade, male",
+    "parent_id": "lfs.employment_share.industry.wholesale_retail_trade.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "wholesale_retail_trade",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Wholesale and retail trade; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 713,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.wholesale_retail_trade.female.total",
+    "name": "Share of employed persons: Wholesale and retail trade, female",
+    "parent_id": "lfs.employment_share.industry.wholesale_retail_trade.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "wholesale_retail_trade",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Wholesale and retail trade; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 714,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.transport_storage_communication.total.total",
+    "name": "Share of employed persons: Transport, storage and communication, both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "transport_storage_communication",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Transport, storage and communication; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 715,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.transport_storage_communication.male.total",
+    "name": "Share of employed persons: Transport, storage and communication, male",
+    "parent_id": "lfs.employment_share.industry.transport_storage_communication.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "transport_storage_communication",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Transport, storage and communication; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 716,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.transport_storage_communication.female.total",
+    "name": "Share of employed persons: Transport, storage and communication, female",
+    "parent_id": "lfs.employment_share.industry.transport_storage_communication.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "transport_storage_communication",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Transport, storage and communication; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 717,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.community_social_personal_services.total.total",
+    "name": "Share of employed persons: Community, social and personal services, both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "community_social_personal_services",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Community, social and personal services; both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 718,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.community_social_personal_services.male.total",
+    "name": "Share of employed persons: Community, social and personal services, male",
+    "parent_id": "lfs.employment_share.industry.community_social_personal_services.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "community_social_personal_services",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Community, social and personal services; male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 719,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.community_social_personal_services.female.total",
+    "name": "Share of employed persons: Community, social and personal services, female",
+    "parent_id": "lfs.employment_share.industry.community_social_personal_services.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "community_social_personal_services",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Community, social and personal services; female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 720,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.others.total.total",
+    "name": "Share of employed persons: Others (see the report footnote for what is included), both sexes",
+    "parent_id": "lfs.employment_share.industry.all.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "others",
+      "sex": "total",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Others (see the report footnote for what is included); both sexes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 721,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.others.male.total",
+    "name": "Share of employed persons: Others (see the report footnote for what is included), male",
+    "parent_id": "lfs.employment_share.industry.others.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "others",
+      "sex": "male",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Others (see the report footnote for what is included); male.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 722,
+    "notes": ""
+  },
+  {
+    "series_id": "lfs.employment_share.industry.others.female.total",
+    "name": "Share of employed persons: Others (see the report footnote for what is included), female",
+    "parent_id": "lfs.employment_share.industry.others.total.total",
+    "dataset": "lfs",
+    "geo": "pk",
+    "dims": {
+      "industry": "others",
+      "sex": "female",
+      "area": "total"
+    },
+    "frequency": "survey_round",
+    "unit": "percent",
+    "scale_factor": 1,
+    "definition": "Percentage distribution of employed persons (10 years and over) by major industry division, as printed in the Labour Force Survey annual report (13th ICLS definitions). Pakistan as a whole. Industry division: Others (see the report footnote for what is included); female.",
+    "definition_status": "draft",
+    "synonyms": [
+      "employment by industry",
+      "sectoral employment"
+    ],
+    "breaks": [
+      {
+        "at_period": "2024-25",
+        "kind": "check_comparability",
+        "note": "2024-25 uses a new sampling frame after the 2023 census; comparability with earlier rounds is not established"
+      }
+    ],
+    "source_doc_types": [
+      "lfs_annual_report"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 723,
+    "notes": ""
   }
 ]

@@ -331,7 +331,14 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
         if alt["markers_ok"] and record["landing_page_links_file"] is True:
             identity_ok = True
             record["identity_route"] = "contents_markers_plus_official_landing_link"
-    if not identity_ok:
+    # Words that must NOT appear in the first pages (e.g. a regional edition filed under the national name).
+    excluded = [m for m in (entry.get("markers_none") or [])
+                if inspect_pdf(dest, [m], [], [], marker_pages=int(entry.get("marker_pages", 3)))["markers_ok"]]
+    record["excluded_markers_found"] = excluded
+    if excluded:
+        status = "failed"
+        record["reason"] = f"the first pages contain {excluded}: this is not the document the plan describes"
+    elif not identity_ok:
         status = "failed"
         record["reason"] = "expected text markers not found in the first pages"
     elif retrieved_via == "official":

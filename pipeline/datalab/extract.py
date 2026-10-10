@@ -151,6 +151,8 @@ def profile_pdf(path: Path) -> dict[str, Any]:
 def extract(source_id: str, page_range: tuple[int, int] | None = None, cfg: dict[str, Any] | None = None) -> RunManifest:
     """Run Docling once on a registered source and write the run manifest."""
     source = get_source(source_id)
+    if source.verification_status == "failed":
+        raise SystemExit(f"{source_id}: source verification failed; the file is not used (see {source.verification_record})")
     pdf = source_path(source)
     sha = config.sha256_file(pdf)
     if sha != source.sha256:

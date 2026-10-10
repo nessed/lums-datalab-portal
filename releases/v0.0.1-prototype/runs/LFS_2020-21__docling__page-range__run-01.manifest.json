@@ -1,0 +1,57 @@
+{
+  "run_id": "LFS_2020-21__docling__page-range__run-01",
+  "source_id": "lfs-pbs-2020-21",
+  "sha256_at_run": "ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9",
+  "run_mode": "page-range",
+  "page_range": [
+    26,
+    45
+  ],
+  "tool_versions": {
+    "python": "3.12.10",
+    "docling": "2.119.0",
+    "docling-core": "2.101.1",
+    "docling-parse": "7.22.2",
+    "docling-ibm-models": "3.15.0",
+    "pymupdf": "1.28.2",
+    "pdfplumber": "0.11.10",
+    "pypdf": "6.20.0"
+  },
+  "config": {
+    "extractor": "docling",
+    "pipeline": "standard_pdf",
+    "pdf_backend": "docling_parse",
+    "do_ocr": false,
+    "do_table_structure": true,
+    "table_mode": "accurate",
+    "table_cell_matching": true,
+    "device": "cpu",
+    "num_threads": 8,
+    "generate_page_images": false,
+    "generate_picture_images": false,
+    "torch_dynamo_disabled": true,
+    "pdf_backend_class": "DoclingParseDocumentBackend"
+  },
+  "config_sha256": "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf",
+  "started_at": "2026-10-10T21:33:59+00:00",
+  "finished_at": "2026-10-10T21:37:27+00:00",
+  "duration_s": 207.7,
+  "pages_emitted": 20,
+  "tables_emitted": 14,
+  "errors": {
+    "count": 0,
+    "path": "errors.log"
+  },
+  "profile": {
+    "page_count": 230,
+    "text_layer_page_fraction": 1.0,
+    "scanned_page_fraction": 0.0,
+    "track": "born_digital",
+    "ruled_page_fraction": 0.8957,
+    "table_style_hint": "ruled",
+    "ascii_ratio": 0.9999,
+    "language_hint": "en"
+  },
+  "validated": true,
+  "validator_report": "validator_report.json"
+}

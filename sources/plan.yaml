@@ -35,6 +35,8 @@ defaults:
     language: en
     markers_all: ["labour force survey"]
     markers_any: []
+    # The PBS link labelled "LFS 2014-15" serves the Azad Jammu & Kashmir edition, not the national report.
+    markers_none: ["azad jammu"]
     marker_period: true
     marker_pages: 4
 

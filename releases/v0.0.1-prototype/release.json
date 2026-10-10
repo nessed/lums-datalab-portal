@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T21:40:36+00:00",
-  "git_commit": "0cb5b11f50c4c4389408eb98e2cc5a7b5667f4cf",
+  "created_at": "2026-10-10T21:53:20+00:00",
+  "git_commit": "e6a27fcf47be52ffead3cffe94a9a7d8eec2b2d3",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -21,7 +21,11 @@
       "abs-fed-2022-23",
       "abs-fed-2024-25",
       "abs-fed-2025-26",
-      "abs-fed-2026-27"
+      "abs-fed-2026-27",
+      "lfs-pbs-2017-18",
+      "lfs-pbs-2018-19",
+      "lfs-pbs-2020-21",
+      "lfs-pbs-2024-25"
     ],
     "periods": {
       "abs": [
@@ -81,18 +85,21 @@
   },
   "counts": {
     "sources": 20,
-    "cells": 630,
-    "cells_mapped": 630,
+    "cells": 2736,
+    "cells_mapped": 1200,
     "cells_behind_published_values": 627,
-    "series": 30,
-    "observations": 537,
+    "series": 108,
+    "observations": 909,
     "observations_by_dataset": {
       "abs": {
         "gap:not_in_source": 2,
         "published": 535
       },
       "cpi": {},
-      "lfs": {}
+      "lfs": {
+        "gap:failed_checks": 1,
+        "gap:not_yet_verified": 371
+      }
     },
     "tiers_by_dataset": {
       "abs": {
@@ -100,26 +107,31 @@
         "B": 417
       },
       "cpi": {},
-      "lfs": {}
+      "lfs": {
+        "A": 138,
+        "B": 197,
+        "C": 36,
+        "D": 1
+      }
     },
     "checks_by_result": {
-      "pass": 291,
-      "pass_within_rounding": 47,
-      "fail": 2
+      "pass": 639,
+      "pass_within_rounding": 124,
+      "fail": 9
     },
     "checks_by_type": {
       "accounting_identity": {
-        "pass": 122,
-        "pass_within_rounding": 25
+        "pass": 146,
+        "pass_within_rounding": 37
       },
       "column_total": {
-        "pass": 8,
-        "pass_within_rounding": 19
+        "pass": 66,
+        "pass_within_rounding": 21
       },
       "cross_edition": {
-        "pass": 111,
-        "fail": 2,
-        "pass_within_rounding": 1
+        "pass": 300,
+        "fail": 8,
+        "pass_within_rounding": 4
       },
       "cross_table": {
         "pass": 22
@@ -127,9 +139,21 @@
       "hierarchy_sum": {
         "pass": 28,
         "pass_within_rounding": 2
+      },
+      "recompute": {
+        "pass_within_rounding": 53,
+        "fail": 1
+      },
+      "row_total": {
+        "pass": 54,
+        "pass_within_rounding": 6
+      },
+      "weights_sum": {
+        "pass": 23,
+        "pass_within_rounding": 1
       }
     },
-    "page_renders": 9
+    "page_renders": 32
   },
   "coverage_summary": {
     "abs": {
@@ -140,7 +164,13 @@
       "tables_below_per_table_minimum": []
     },
     "cpi": null,
-    "lfs": null
+    "lfs": {
+      "printed_numeric_tokens": 2108,
+      "matched": 2108,
+      "coverage": 1.0,
+      "tables": 25,
+      "tables_below_per_table_minimum": []
+    }
   },
   "check_pass_rates": {
     "abs": {
@@ -166,8 +196,22 @@
       "cross_edition": null
     },
     "lfs": {
-      "all": null,
-      "cross_edition": null
+      "all": {
+        "pass": 348,
+        "pass_within_rounding": 77,
+        "fail": 7,
+        "not_evaluable": 0,
+        "evaluable": 432,
+        "pass_rate": 0.9838
+      },
+      "cross_edition": {
+        "pass": 189,
+        "pass_within_rounding": 3,
+        "fail": 6,
+        "not_evaluable": 0,
+        "evaluable": 198,
+        "pass_rate": 0.9697
+      }
     }
   },
   "dataset_status": {
@@ -216,8 +260,31 @@
       "meets_thresholds": false,
       "state": "coming",
       "reasons": [
-        "not processed yet"
-      ]
+        "cross-edition agreement 0.9697 is below 0.98"
+      ],
+      "coverage": {
+        "printed_numeric_tokens": 2108,
+        "matched": 2108,
+        "coverage": 1.0,
+        "tables": 25,
+        "tables_below_per_table_minimum": []
+      },
+      "check_pass_rate": {
+        "pass": 348,
+        "pass_within_rounding": 77,
+        "fail": 7,
+        "not_evaluable": 0,
+        "evaluable": 432,
+        "pass_rate": 0.9838
+      },
+      "cross_edition_agreement": {
+        "pass": 189,
+        "pass_within_rounding": 3,
+        "fail": 6,
+        "not_evaluable": 0,
+        "evaluable": 198,
+        "pass_rate": 0.9697
+      }
     }
   },
   "gold_set": {

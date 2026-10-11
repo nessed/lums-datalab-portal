@@ -42,3 +42,6 @@ desktop.ini
 
 # Site: page renders copied from the release at build time
 site/public/data/
+
+# Hypothesis example database (property tests run derandomised; nothing in it is needed)
+.hypothesis/

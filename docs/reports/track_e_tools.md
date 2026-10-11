@@ -216,7 +216,7 @@ from the release files and prints it beside its file and field. One thing it sur
 of ABS 2025-26 stores a scanned-page share of 0.0556, which is its three blank pages over 54 pages (the
 run was profiled before blank pages were counted apart). The document says so.
 
-**`docs/GLOSSARY.md`**: about 90 terms, one or two sentences each.
+**`docs/GLOSSARY.md`**: 83 entries, one or two sentences each.
 
 ## 6. Not done, and why
 

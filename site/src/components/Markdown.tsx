@@ -40,6 +40,26 @@ function inline(text: string, keyBase: string): ReactNode[] {
   return out;
 }
 
+/** Anchor for a heading: "Two separate questions: how much..." -> "two-separate-questions-how-much". */
+export function headingSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[`*_[\]()]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 60);
+}
+
+/** Headings of a Markdown document at one level, for a table of contents. */
+export function markdownHeadings(source: string, level = 2): { id: string; label: string }[] {
+  const re = new RegExp("^#{" + level + "}\\s+(.*)$");
+  return source
+    .split(/\r?\n/)
+    .map((l) => re.exec(l))
+    .filter((m): m is RegExpExecArray => !!m)
+    .map((m) => ({ id: headingSlug(m[1]), label: m[1].replace(/[`*]/g, "") }));
+}
+
 const splitRow = (line: string) =>
   line
     .trim()
@@ -81,7 +101,11 @@ export default function Markdown({ source, headingOffset = 1 }: { source: string
     if (h) {
       const level = Math.min(6, h[1].length + headingOffset);
       const Tag = `h${level}` as "h2";
-      blocks.push(<Tag key={key}>{inline(h[2], key)}</Tag>);
+      blocks.push(
+        <Tag key={key} id={headingSlug(h[2])}>
+          {inline(h[2], key)}
+        </Tag>,
+      );
       i++;
       continue;
     }
@@ -102,12 +126,14 @@ export default function Markdown({ source, headingOffset = 1 }: { source: string
       const rows: string[][] = [];
       while (i < lines.length && lines[i].trim().startsWith("|")) rows.push(splitRow(lines[i++]));
       blocks.push(
-        <div key={key} className="table-scroll">
+        <div key={key} className="table-wrap" role="region" aria-label={head.join(", ").slice(0, 80) || "Table"} tabIndex={0}>
           <table>
             <thead>
               <tr>
                 {head.map((c, j) => (
-                  <th key={j}>{inline(c, `${key}h${j}`)}</th>
+                  <th key={j} scope="col">
+                    {inline(c, `${key}h${j}`)}
+                  </th>
                 ))}
               </tr>
             </thead>

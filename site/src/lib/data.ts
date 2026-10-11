@@ -84,6 +84,9 @@ export type Series = {
   derived: boolean;
   derivation: { formula: string; inputs: string[] } | null;
   sort_key: number;
+  notes?: string | null;
+  geo?: string | null;
+  source_doc_types?: string[];
 };
 
 export type Observation = {
@@ -105,6 +108,10 @@ export type Observation = {
   evidence_summary: string | null;
   notes?: string | null;
   derived_from: string[];
+  first_published_release?: string | null;
+  last_changed_release?: string | null;
+  /** Added by the pipeline for status "disputed"; shape tolerated loosely. */
+  disputed_readings?: unknown;
 };
 
 export type Cell = {
@@ -141,6 +148,8 @@ export type Check = {
   source_ids: string[];
   member_cell_ids: string[];
   target_cell_id: string | null;
+  target_value?: string | null;
+  target_source?: string | null;
   expected: string | null;
   observed: string | null;
   residual: string | null;
@@ -343,6 +352,104 @@ export function visibleSeries(): Series[] {
 export function publishedObs(seriesId: string): Observation[] {
   return (db().obsBySeries.get(seriesId) ?? []).filter((o) => o.published && o.value !== null);
 }
+
+/* ---------- relations used by receipts ---------- */
+
+let obsByCellCache: Map<string, Observation> | null = null;
+
+/** The observation a printed cell supports (as primary or as another printing). */
+export function obsForCell(cellId: string): Observation | undefined {
+  if (!obsByCellCache) {
+    obsByCellCache = new Map();
+    for (const o of db().observations) {
+      if (o.primary_cell_id) obsByCellCache.set(o.primary_cell_id, o);
+      for (const c of o.supporting_cell_ids) if (!obsByCellCache.has(c)) obsByCellCache.set(c, o);
+    }
+  }
+  return obsByCellCache.get(cellId);
+}
+
+/** Same series and vintage, the periods either side. */
+export function neighbours(o: Observation): { prev?: Observation; next?: Observation } {
+  const list = (db().obsBySeries.get(o.series_id) ?? []).filter((x) => x.vintage === o.vintage);
+  const i = list.findIndex((x) => x.obs_id === o.obs_id);
+  return { prev: i > 0 ? list[i - 1] : undefined, next: i >= 0 && i < list.length - 1 ? list[i + 1] : undefined };
+}
+
+/** The same period and vintage in another series (parent, sibling), if present. */
+export function obsAt(seriesId: string, period: string, vintage: string): Observation | undefined {
+  return db().obsById.get(`${seriesId}:${period}:${vintage}`);
+}
+
+/** Readings of a disputed observation. Tolerates the field being absent, a
+ * list of cell ids, or a list of objects with a cell_id. Falls back to the
+ * primary and supporting cells. */
+export function disputedCells(o: Observation & { disputed_readings?: unknown }): Cell[] {
+  const d = db();
+  const raw = o.disputed_readings;
+  const ids: string[] = [];
+  if (Array.isArray(raw)) {
+    for (const r of raw) {
+      if (typeof r === "string") ids.push(r);
+      else if (r && typeof r === "object" && typeof (r as { cell_id?: unknown }).cell_id === "string") ids.push((r as { cell_id: string }).cell_id);
+    }
+  }
+  if (ids.length === 0) ids.push(...[o.primary_cell_id, ...o.supporting_cell_ids].filter((x): x is string => !!x));
+  return [...new Set(ids)].map((id) => d.cellById.get(id)).filter((c): c is Cell => !!c);
+}
+
+export type CropGuides = {
+  /** Where the row labels end: the left edge of the leftmost number column. */
+  labelRight: number | null;
+  /** Left edge of the number column just left of this cell (over all its rows). */
+  prevLeft: number | null;
+  /** Top and bottom of every row of the table that holds numbers, in order. */
+  rows: [number, number][];
+  /** Index of this cell's row in `rows`. */
+  rowIndex: number;
+  /** Number columns as [left, right], used to count columns a crop leaves out. */
+  cols: [number, number][];
+  /** The band above the first row of numbers (column headings), if any. */
+  header: [number, number] | null;
+};
+
+/** Geometry for a magnified crop, from the table's own cells, so a crop
+ * never cuts a number or a row in half and can always show the headings. */
+export function cropGuides(cell: Cell): CropGuides {
+  const b = cell.cell_bbox_norm;
+  const same = (db().cellsBySource.get(cell.source_id) ?? []).filter((c) => c.page === cell.page && c.table_index === cell.table_index && c.cell_bbox_norm);
+  let min = Infinity;
+  let prev: Cell | null = null;
+  const rowMap = new Map<number, [number, number]>();
+  const colMap = new Map<number, [number, number]>();
+  for (const c of same) {
+    const cb = c.cell_bbox_norm!;
+    min = Math.min(min, cb[0]);
+    if (b && c.row_index === cell.row_index && cb[2] <= b[0] + 0.002 && (!prev || cb[2] > prev.cell_bbox_norm![2])) prev = c;
+    const r = rowMap.get(c.row_index);
+    rowMap.set(c.row_index, r ? [Math.min(r[0], cb[1]), Math.max(r[1], cb[3])] : [cb[1], cb[3]]);
+    const k = colMap.get(c.col_index);
+    colMap.set(c.col_index, k ? [Math.min(k[0], cb[0]), Math.max(k[1], cb[2])] : [cb[0], cb[2]]);
+  }
+  const prevLeft = prev ? (colMap.get(prev.col_index)?.[0] ?? prev.cell_bbox_norm![0]) : null;
+  const rows = [...rowMap.values()].sort((x, y) => x[0] - y[0]);
+  const mid = b ? (b[1] + b[3]) / 2 : 0;
+  const rowIndex = Math.max(0, rows.findIndex((r) => r[0] <= mid && r[1] >= mid));
+  const t = cell.table_bbox_norm;
+  const firstTop = rows.length ? rows[0][0] : null;
+  const header: [number, number] | null =
+    t && firstTop !== null && firstTop - t[1] > 0.012 ? [Math.max(t[1] - 0.004, firstTop - 0.075), firstTop - 0.002] : null;
+  return {
+    labelRight: Number.isFinite(min) ? min : null,
+    prevLeft,
+    rows,
+    rowIndex,
+    cols: [...colMap.values()].sort((x, y) => x[0] - y[0]),
+    header,
+  };
+}
+
+export const receiptCsvHref = (obsId: string) => `${DATA_BASE}/receipts/${slugify(obsId)}.csv`;
 
 /* ---------- page renders ---------- */
 

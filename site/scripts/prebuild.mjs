@@ -84,24 +84,78 @@ for (const o of observations) {
   if (!bySeries.has(o.series_id)) bySeries.set(o.series_id, []);
   bySeries.get(o.series_id).push(o);
 }
+const rowFor = (o, s) => {
+  const cell = o.primary_cell_id ? cellById.get(o.primary_cell_id) : null;
+  const source = cell ? sourceById.get(cell.source_id) : null;
+  const rec = {
+    obs_id: o.obs_id, series_id: o.series_id, series_name: s?.name, dataset: s?.dataset, period: o.period,
+    vintage: o.vintage, value: o.published ? o.value : null, unit: o.unit, scale_factor: o.scale_factor,
+    status: o.status, tier: o.tier, published: o.published, gap_kind: o.gap_kind, gap_reason: o.gap_reason,
+    source_id: source?.source_id, source_title: source?.title, source_file_url: source?.file_url,
+    source_sha256: source?.sha256, page: cell?.page, cell_id: cell?.cell_id,
+    // A printed reading is included only for published values: a gap never carries a number.
+    value_as_printed: o.published ? cell?.value_raw : null,
+    check_ids: (o.check_ids ?? []).join(" "), derived_from: (o.derived_from ?? []).join(" "),
+    evidence_summary: o.evidence_summary, release: release.version,
+  };
+  return cols.map((c) => esc(rec[c])).join(",");
+};
 for (const s of series) {
   const rows = (bySeries.get(s.series_id) ?? []).slice().sort((a, b) => (a.period + a.vintage < b.period + b.vintage ? -1 : 1));
-  const lines = [cols.join(",")];
-  for (const o of rows) {
-    const cell = o.primary_cell_id ? cellById.get(o.primary_cell_id) : null;
-    const source = cell ? sourceById.get(cell.source_id) : null;
-    const rec = {
-      obs_id: o.obs_id, series_id: o.series_id, series_name: s.name, dataset: s.dataset, period: o.period,
-      vintage: o.vintage, value: o.published ? o.value : null, unit: o.unit, scale_factor: o.scale_factor,
-      status: o.status, tier: o.tier, published: o.published, gap_kind: o.gap_kind, gap_reason: o.gap_reason,
-      source_id: source?.source_id, source_title: source?.title, source_file_url: source?.file_url,
-      source_sha256: source?.sha256, page: cell?.page, cell_id: cell?.cell_id, value_as_printed: cell?.value_raw,
-      check_ids: (o.check_ids ?? []).join(" "), derived_from: (o.derived_from ?? []).join(" "),
-      evidence_summary: o.evidence_summary, release: release.version,
-    };
-    lines.push(cols.map((c) => esc(rec[c])).join(","));
-  }
-  fs.writeFileSync(path.join(csvDir, `${slugify(s.series_id)}.csv`), lines.join("\n") + "\n");
+  fs.writeFileSync(path.join(csvDir, `${slugify(s.series_id)}.csv`), [cols.join(","), ...rows.map((o) => rowFor(o, s))].join("\n") + "\n");
+  // The same rows as JSON, with the series definition. Unpublished rows carry no value.
+  fs.writeFileSync(
+    path.join(csvDir, `${slugify(s.series_id)}.json`),
+    JSON.stringify(
+      {
+        release: { version: release.version, label: release.label, doi: release.doi, created_at: release.created_at },
+        series: s,
+        observations: rows.map((o) => ({ ...o, value: o.published ? o.value : null })),
+      },
+      null,
+      1,
+    ),
+  );
 }
+// One CSV row per observation, beside its JSON receipt.
+for (const o of observations) {
+  fs.writeFileSync(path.join(receiptDir, `${slugify(o.obs_id)}.csv`), `${cols.join(",")}\n${rowFor(o, seriesById.get(o.series_id))}\n`);
+}
+
+// Search index: series of published datasets and every source document. Kept
+// small (short keys, no values) so the browser can fetch it on first search.
+const SCALE = { 1000: "thousand", 100000: "lakh", 1000000: "million", 10000000: "crore", 1000000000: "billion" };
+const unitText = (u, s) => {
+  const w = SCALE[s] ?? "";
+  if (u === "PKR") return w ? `Rs ${w}` : "Rs";
+  if (u === "percent") return "per cent";
+  if (u === "index") return "index points";
+  if (u === "persons") return w ? `${w} persons` : "persons";
+  return [w, u].filter(Boolean).join(" ");
+};
+const docWords = { abs: "Annual Budget Statement", cpi_monthly_review: "Monthly Review of Price Indices", lfs_annual_report: "Labour Force Survey annual report" };
+const isPublished = (ds) => release.dataset_status?.[ds]?.state === "published";
+const index = [];
+for (const s of series) {
+  if (!isPublished(s.dataset)) continue;
+  const pub = (bySeries.get(s.series_id) ?? []).filter((o) => o.published && o.value !== null).map((o) => o.period).sort();
+  index.push({
+    k: "s",
+    id: s.series_id,
+    n: s.name,
+    d: release.dataset_status?.[s.dataset]?.name ?? s.dataset,
+    u: unitText(s.unit, s.scale_factor),
+    f: s.frequency,
+    p: pub.length ? `${pub[0]} to ${pub[pub.length - 1]}` : "",
+    c: pub.length,
+    y: (s.synonyms ?? []).join(" "),
+    x: s.derived ? 1 : 0,
+    h: `/series/${slugify(s.series_id)}`,
+  });
+}
+for (const src of sources) {
+  index.push({ k: "d", id: src.source_id, n: src.title, d: docWords[src.doc_type] ?? src.doc_type, p: src.period, h: `/sources/${slugify(src.source_id)}` });
+}
+fs.writeFileSync(path.join(dest, "search.json"), JSON.stringify(index));
 
 console.log(`prebuild: copied release ${version} -> public/data/${version} (${observations.length} receipts, ${series.length} series CSVs)`);

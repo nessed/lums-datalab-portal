@@ -1,0 +1,83 @@
+/* Design tokens. The only place colours, type sizes, spacing and the status
+ * system are defined. Components and pages use these names, never raw values.
+ * See docs/DESIGN.md for the reasoning. */
+
+:root {
+  /* ---- type ---- */
+  --font-sans: var(--font-source-sans), "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Scale: ratio ~1.2 from a 17px body. Sizes in rem so user zoom works. */
+  --step--2: 0.75rem; /* 12  fine print, axis ticks */
+  --step--1: 0.875rem; /* 14  meta, table secondary */
+  --step-0: 1.0625rem; /* 17  body */
+  --step-1: 1.25rem; /* 20  h3, lede */
+  --step-2: 1.5rem; /* 24  h2 */
+  --step-3: 2rem; /* 32  h1 */
+  --step-4: 2.75rem; /* 44  the receipt figure on small screens */
+  --step-5: 3.5rem; /* 56  the receipt figure */
+
+  --leading-tight: 1.2;
+  --leading-body: 1.55;
+  --measure: 68ch; /* long-form line length */
+
+  /* ---- space (4px base) ---- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --gutter: 1rem;
+  --page-max: 76rem;
+
+  /* ---- colour: paper and ink ---- */
+  --paper: #fbfaf7;
+  --paper-2: #f3f1ec; /* recessed panels, table header */
+  --paper-3: #e9e6df;
+  --card: #ffffff; /* the document render frame only */
+  --ink: #1c1d1f;
+  --ink-2: #44484e;
+  --ink-3: #62676e; /* AA on paper: 5.6:1 */
+  --rule: #d6d2c9; /* hairlines */
+  --rule-strong: #a9a49a;
+
+  /* ---- colour: the one accent (links, focus, the receipt box) ---- */
+  --accent: #0b5c78;
+  --accent-ink: #07465c;
+  --accent-tint: rgb(11 92 120 / 0.09);
+  --accent-wash: #e6eff2;
+  --focus: #0b5c78;
+
+  /* ---- status system: one meaning, one colour, one shape, everywhere ---- */
+  --st-checked: #2f6b4f; /* solid disc */
+  --st-checked-wash: #e8f0eb;
+  --st-disputed: #9a5800; /* hollow ring */
+  --st-disputed-wash: #f8eedc;
+  --st-gap: #6d7178; /* gap marks: hatched (not published) / dotted (not yet verified) */
+  --st-gap-wash: #eeece7;
+  --st-withheld: #5d5146; /* crossed square */
+  --st-withheld-wash: #efe9e4;
+  --st-unknown: #6d7178;
+
+  /* Cell fills for gaps in tables. Patterns, not just colour, so they survive greyscale print. */
+  --fill-hatched: repeating-linear-gradient(135deg, transparent 0 5px, rgb(109 113 120 / 0.22) 5px 6px);
+  --fill-dotted: radial-gradient(rgb(109 113 120 / 0.38) 0.8px, transparent 1.1px) 0 0 / 6px 6px;
+
+  /* ---- chart ---- */
+  --chart-be: #0b5c78; /* budget estimate: accent, solid */
+  --chart-re: #a2470e; /* revised estimate: rust, dashed */
+  --chart-other: #4b5563;
+  --chart-grid: #e4e0d8;
+  --chart-axis: #8d887e;
+
+  /* ---- shape ---- */
+  --r-1: 2px;
+  --r-2: 4px;
+  --hair: 1px solid var(--rule);
+  --hair-strong: 1px solid var(--rule-strong);
+  --shadow-page: 0 1px 0 rgb(0 0 0 / 0.04), 0 2px 10px rgb(40 30 10 / 0.08);
+}

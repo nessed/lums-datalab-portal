@@ -1,7 +1,7 @@
 {
   "abs": {
     "dataset": "abs",
-    "built_at": "2026-10-10T23:14:27+00:00",
+    "built_at": "2026-10-11T00:09:05+00:00",
     "located": {
       "abs-fed-2010-11": {
         "footnote_lines": [],
@@ -744,31 +744,31 @@
     "not_located": {},
     "check_pass_rates": {
       "all": {
-        "pass": 1365,
-        "pass_within_rounding": 217,
+        "pass": 2020,
+        "pass_within_rounding": 281,
         "fail": 19,
         "not_evaluable": 123,
-        "disputed": 3,
-        "evaluable": 1601,
-        "pass_rate": 0.9881
+        "disputed": 9,
+        "evaluable": 2320,
+        "pass_rate": 0.9918
       },
       "arithmetic": {
-        "pass": 906,
-        "pass_within_rounding": 216,
+        "pass": 1382,
+        "pass_within_rounding": 271,
         "fail": 17,
         "not_evaluable": 123,
         "disputed": 0,
-        "evaluable": 1139,
-        "pass_rate": 0.9851
+        "evaluable": 1670,
+        "pass_rate": 0.9898
       },
       "cross_edition": {
-        "pass": 459,
-        "pass_within_rounding": 1,
+        "pass": 638,
+        "pass_within_rounding": 10,
         "fail": 2,
         "not_evaluable": 0,
-        "disputed": 3,
-        "evaluable": 462,
-        "pass_rate": 0.9957
+        "disputed": 9,
+        "evaluable": 650,
+        "pass_rate": 0.9969
       }
     },
     "comparison_arslan": {
@@ -4590,6 +4590,2148 @@
           "disputed": 0,
           "evaluable": 351,
           "pass_rate": 0.9915
+        }
+      }
+    },
+    "receipts": {
+      "enabled": true,
+      "editions": {
+        "abs-fed-2010-11": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 2,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 27,
+                  "cols": 6
+                },
+                {
+                  "page": 1,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 15,
+                  "cols": 3
+                },
+                {
+                  "page": 4,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 30,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 16,
+                  "cols": 5
+                },
+                {
+                  "page": 2,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 27,
+                  "cols": 6
+                },
+                {
+                  "page": 1,
+                  "table_index": 0,
+                  "score": 0,
+                  "rows": 15,
+                  "cols": 3
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2010-11",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 2,
+              "table_index": 0,
+              "run_id": "ABS_2010-11__docling__full-document__run-02",
+              "rows": 27,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2009-10",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2009-10"
+                },
+                "4": {
+                  "period": "2009-10",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2009-10"
+                },
+                "5": {
+                  "period": "2010-11",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2010-11"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 26,
+              "rows_mapped": 26,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.consolidated_fund",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.external.grants",
+                "fed.rev.external.loans",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 2,
+                "table_index": 0,
+                "printed_numeric_tokens": 112,
+                "matched": 112,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 112,
+                "row_band_matched": 112,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 112
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2010-11",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 3,
+              "table_index": 0,
+              "run_id": "ABS_2010-11__docling__full-document__run-02",
+              "rows": 16,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2009-10",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2009-10"
+                },
+                "3": {
+                  "period": "2009-10",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2009-10"
+                },
+                "4": {
+                  "period": "2010-11",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2010-11"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 14,
+              "rows_mapped": 13,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_profit_participation_fund",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.airport_tax",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.ict_taxes",
+                "fed.rev.tax.indirect.petroleum_levy",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [
+                "*Of which FBR"
+              ],
+              "labels_from_text_layer": [
+                "I) Total Tax Revenue (a+b)*"
+              ],
+              "labels_with_footnote_mark": [
+                "I) Total Tax Revenue (a+b)*",
+                "*Of which FBR"
+              ],
+              "coverage": {
+                "page": 3,
+                "table_index": 0,
+                "printed_numeric_tokens": 54,
+                "matched": 54,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 54,
+                "row_band_matched": 54,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 54
+              }
+            }
+          }
+        },
+        "abs-fed-2011-12": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 26,
+                  "cols": 6
+                },
+                {
+                  "page": 2,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 15,
+                  "cols": 3
+                },
+                {
+                  "page": 5,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 31,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 4,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 15,
+                  "cols": 5
+                },
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 26,
+                  "cols": 6
+                },
+                {
+                  "page": 2,
+                  "table_index": 0,
+                  "score": 0,
+                  "rows": 15,
+                  "cols": 3
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2011-12",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 3,
+              "table_index": 0,
+              "run_id": "ABS_2011-12__docling__full-document__run-01",
+              "rows": 26,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2010-11",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2010-11"
+                },
+                "4": {
+                  "period": "2010-11",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2010-11"
+                },
+                "5": {
+                  "period": "2011-12",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2011-12"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 25,
+              "rows_mapped": 25,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.consolidated_fund",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.external.grants",
+                "fed.rev.external.loans",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 3,
+                "table_index": 0,
+                "printed_numeric_tokens": 109,
+                "matched": 109,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 109,
+                "row_band_matched": 109,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 109
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2011-12",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 4,
+              "table_index": 0,
+              "run_id": "ABS_2011-12__docling__full-document__run-01",
+              "rows": 15,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2010-11",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2010-11"
+                },
+                "3": {
+                  "period": "2010-11",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2010-11"
+                },
+                "4": {
+                  "period": "2011-12",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2011-12"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 13,
+              "rows_mapped": 12,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.airport_tax",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.ict_taxes",
+                "fed.rev.tax.indirect.petroleum_levy",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [
+                "*Of which FBR taxes"
+              ],
+              "labels_from_text_layer": [
+                "*Of which FBR taxes"
+              ],
+              "labels_with_footnote_mark": [
+                "I) Total Tax Revenue (a+b)*",
+                "*Of which FBR taxes"
+              ],
+              "coverage": {
+                "page": 4,
+                "table_index": 0,
+                "printed_numeric_tokens": 52,
+                "matched": 52,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 52,
+                "row_band_matched": 52,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 52
+              }
+            }
+          }
+        },
+        "abs-fed-2016-17": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 4,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 30,
+                  "cols": 6
+                },
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 15,
+                  "cols": 3
+                },
+                {
+                  "page": 6,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 33,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 5,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 18,
+                  "cols": 5
+                },
+                {
+                  "page": 4,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 30,
+                  "cols": 6
+                },
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 0,
+                  "rows": 15,
+                  "cols": 3
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2016-17",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 4,
+              "table_index": 0,
+              "run_id": "ABS_2016-17__docling__full-document__run-01",
+              "rows": 30,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2015-16",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2015-16"
+                },
+                "4": {
+                  "period": "2015-16",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2015-16"
+                },
+                "5": {
+                  "period": "2016-17",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2016-17"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 29,
+              "rows_mapped": 29,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.consolidated_fund_net",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.external.grants",
+                "fed.rev.external.loans",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.other",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 4,
+                "table_index": 0,
+                "printed_numeric_tokens": 124,
+                "matched": 124,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 124,
+                "row_band_matched": 124,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 124
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2016-17",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 5,
+              "table_index": 0,
+              "run_id": "ABS_2016-17__docling__full-document__run-01",
+              "rows": 18,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2015-16",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2015-16"
+                },
+                "3": {
+                  "period": "2015-16",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2015-16"
+                },
+                "4": {
+                  "period": "2016-17",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2016-17"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 16,
+              "rows_mapped": 16,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax",
+                "fed.rev.tax.other",
+                "fed.rev.tax.other.airport_tax",
+                "fed.rev.tax.other.gas_infrastructure_development_cess",
+                "fed.rev.tax.other.natural_gas_development_surcharge",
+                "fed.rev.tax.other.other_indirect_taxes_ict",
+                "fed.rev.tax.other.petroleum_levy"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 5,
+                "table_index": 0,
+                "printed_numeric_tokens": 66,
+                "matched": 66,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 66,
+                "row_band_matched": 66,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 66
+              }
+            }
+          }
+        },
+        "abs-fed-2017-18": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 31,
+                  "cols": 6
+                },
+                {
+                  "page": 2,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 15,
+                  "cols": 3
+                },
+                {
+                  "page": 5,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 32,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 4,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 18,
+                  "cols": 5
+                },
+                {
+                  "page": 3,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 31,
+                  "cols": 6
+                },
+                {
+                  "page": 2,
+                  "table_index": 0,
+                  "score": 0,
+                  "rows": 15,
+                  "cols": 3
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2017-18",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 3,
+              "table_index": 0,
+              "run_id": "ABS_2017-18__docling__full-document__run-01",
+              "rows": 31,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2016-17",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2016-17"
+                },
+                "4": {
+                  "period": "2016-17",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2016-17"
+                },
+                "5": {
+                  "period": "2017-18",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2017-18"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 30,
+              "rows_mapped": 30,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.consolidated_fund_net",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.external.grants",
+                "fed.rev.external.loans",
+                "fed.rev.external.project_loans_and_grants_outside_psdp",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.other",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 3,
+                "table_index": 0,
+                "printed_numeric_tokens": 127,
+                "matched": 127,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 127,
+                "row_band_matched": 127,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 127
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2017-18",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 4,
+              "table_index": 0,
+              "run_id": "ABS_2017-18__docling__full-document__run-01",
+              "rows": 18,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2016-17",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2016-17"
+                },
+                "3": {
+                  "period": "2016-17",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2016-17"
+                },
+                "4": {
+                  "period": "2017-18",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2017-18"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 16,
+              "rows_mapped": 16,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax",
+                "fed.rev.tax.other",
+                "fed.rev.tax.other.airport_tax",
+                "fed.rev.tax.other.gas_infrastructure_development_cess",
+                "fed.rev.tax.other.natural_gas_development_surcharge",
+                "fed.rev.tax.other.other_indirect_taxes_ict",
+                "fed.rev.tax.other.petroleum_levy"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 4,
+                "table_index": 0,
+                "printed_numeric_tokens": 66,
+                "matched": 66,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 66,
+                "row_band_matched": 66,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 66
+              }
+            }
+          }
+        },
+        "abs-fed-2021-22": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 31,
+                  "cols": 6
+                },
+                {
+                  "page": 5,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 23,
+                  "cols": 3
+                },
+                {
+                  "page": 10,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 12,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 8,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 13,
+                  "cols": 5
+                },
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 31,
+                  "cols": 6
+                },
+                {
+                  "page": 15,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 39,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2021-22",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 7,
+              "table_index": 0,
+              "run_id": "ABS_2021-22__docling__full-document__run-01",
+              "rows": 31,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2020-21",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2020-21"
+                },
+                "4": {
+                  "period": "2020-21",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2020-21"
+                },
+                "5": {
+                  "period": "2021-22",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2021-22"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 29,
+              "rows_mapped": 29,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_non_bank_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.external.grants",
+                "fed.rev.external.loans",
+                "fed.rev.external.project_loans_and_grants_outside_psdp",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.levies_and_fees",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 7,
+                "table_index": 0,
+                "printed_numeric_tokens": 121,
+                "matched": 121,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 121,
+                "row_band_matched": 121,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 121
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2021-22",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 8,
+              "table_index": 0,
+              "run_id": "ABS_2021-22__docling__full-document__run-01",
+              "rows": 13,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2020-21",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2020-21"
+                },
+                "3": {
+                  "period": "2020-21",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2020-21"
+                },
+                "4": {
+                  "period": "2021-22",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2021-22"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 11,
+              "rows_mapped": 11,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_profit_participation_fund",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 8,
+                "table_index": 0,
+                "printed_numeric_tokens": 46,
+                "matched": 46,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 46,
+                "row_band_matched": 46,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 46
+              }
+            }
+          }
+        },
+        "abs-fed-2022-23": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 32,
+                  "cols": 5
+                },
+                {
+                  "page": 9,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 37,
+                  "cols": 5
+                },
+                {
+                  "page": 11,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 23,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 8,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 13,
+                  "cols": 5
+                },
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 32,
+                  "cols": 5
+                },
+                {
+                  "page": 14,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 43,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2022-23",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 7,
+              "table_index": 0,
+              "run_id": "ABS_2022-23__docling__full-document__run-01",
+              "rows": 32,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2021-22",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2021-22"
+                },
+                "3": {
+                  "period": "2021-22",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2021-22"
+                },
+                "4": {
+                  "period": "2022-23",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2022-23"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 29,
+              "rows_mapped": 29,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_non_bank_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.external.grants",
+                "fed.rev.external.loans",
+                "fed.rev.external.project_loans_and_grants_outside_psdp",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.levies_and_fees",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 7,
+                "table_index": 0,
+                "printed_numeric_tokens": 121,
+                "matched": 121,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 121,
+                "row_band_matched": 121,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 121
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2022-23",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 8,
+              "table_index": 0,
+              "run_id": "ABS_2022-23__docling__full-document__run-01",
+              "rows": 13,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2021-22",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2021-22"
+                },
+                "3": {
+                  "period": "2021-22",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2021-22"
+                },
+                "4": {
+                  "period": "2022-23",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2022-23"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 11,
+              "rows_mapped": 11,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_profit_participation_fund",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 8,
+                "table_index": 0,
+                "printed_numeric_tokens": 46,
+                "matched": 46,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 46,
+                "row_band_matched": 46,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 46
+              }
+            }
+          }
+        },
+        "abs-fed-2024-25": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 29,
+                  "cols": 6
+                },
+                {
+                  "page": 5,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 25,
+                  "cols": 4
+                },
+                {
+                  "page": 10,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 13,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 8,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 13,
+                  "cols": 5
+                },
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 29,
+                  "cols": 6
+                },
+                {
+                  "page": 5,
+                  "table_index": 0,
+                  "score": 0,
+                  "rows": 25,
+                  "cols": 4
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2024-25",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 7,
+              "table_index": 0,
+              "run_id": "ABS_2024-25__docling__full-document__run-01",
+              "rows": 29,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2023-24",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2023-24"
+                },
+                "4": {
+                  "period": "2023-24",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2023-24"
+                },
+                "5": {
+                  "period": "2024-25",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2024-25"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 26,
+              "rows_mapped": 26,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_non_bank_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.credit_from_banking_sector",
+                "fed.rev.external",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.levies_and_fees",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 7,
+                "table_index": 0,
+                "printed_numeric_tokens": 115,
+                "matched": 115,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 115,
+                "row_band_matched": 115,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 115
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2024-25",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 8,
+              "table_index": 0,
+              "run_id": "ABS_2024-25__docling__full-document__run-01",
+              "rows": 13,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2023-24",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2023-24"
+                },
+                "3": {
+                  "period": "2023-24",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2023-24"
+                },
+                "4": {
+                  "period": "2024-25",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2024-25"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 11,
+              "rows_mapped": 11,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_profit_participation_fund",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 8,
+                "table_index": 0,
+                "printed_numeric_tokens": 46,
+                "matched": 46,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 46,
+                "row_band_matched": 46,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 46
+              }
+            }
+          }
+        },
+        "abs-fed-2025-26": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 29,
+                  "cols": 5
+                },
+                {
+                  "page": 10,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 20,
+                  "cols": 5
+                },
+                {
+                  "page": 12,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 25,
+                  "cols": 4
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 8,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 14,
+                  "cols": 5
+                },
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 29,
+                  "cols": 5
+                },
+                {
+                  "page": 47,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 4,
+                  "cols": 3
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2025-26",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 7,
+              "table_index": 0,
+              "run_id": "ABS_2025-26__docling__full-document__run-01",
+              "rows": 29,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2024-25",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2024-25"
+                },
+                "3": {
+                  "period": "2024-25",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2024-25"
+                },
+                "4": {
+                  "period": "2025-26",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2025-26"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 26,
+              "rows_mapped": 26,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_non_bank_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.domestic_debt_bank_net",
+                "fed.rev.external",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.levies_and_fees",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [
+                "11 Net Federal Resources (9-10)",
+                "13 Privatization Proceeds"
+              ],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 7,
+                "table_index": 0,
+                "printed_numeric_tokens": 115,
+                "matched": 115,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 115,
+                "row_band_matched": 115,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 115
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2025-26",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 8,
+              "table_index": 0,
+              "run_id": "ABS_2025-26__docling__full-document__run-01",
+              "rows": 14,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2024-25",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2024-25"
+                },
+                "3": {
+                  "period": "2024-25",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2024-25"
+                },
+                "4": {
+                  "period": "2025-26",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2025-26"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 11,
+              "rows_mapped": 11,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_profit_participation_fund",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 8,
+                "table_index": 0,
+                "printed_numeric_tokens": 46,
+                "matched": 46,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 46,
+                "row_band_matched": 46,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 46
+              }
+            }
+          }
+        },
+        "abs-fed-2026-27": {
+          "located": [
+            "summary",
+            "tax"
+          ],
+          "locator": {
+            "summary": {
+              "candidates": [
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 10,
+                  "rows": 30,
+                  "cols": 6
+                },
+                {
+                  "page": 10,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 21,
+                  "cols": 5
+                },
+                {
+                  "page": 12,
+                  "table_index": 0,
+                  "score": 1,
+                  "rows": 23,
+                  "cols": 4
+                }
+              ],
+              "result": "found"
+            },
+            "tax": {
+              "candidates": [
+                {
+                  "page": 8,
+                  "table_index": 0,
+                  "score": 8,
+                  "rows": 13,
+                  "cols": 5
+                },
+                {
+                  "page": 7,
+                  "table_index": 0,
+                  "score": 2,
+                  "rows": 30,
+                  "cols": 6
+                },
+                {
+                  "page": 9,
+                  "table_index": 0,
+                  "score": 0,
+                  "rows": 23,
+                  "cols": 5
+                }
+              ],
+              "result": "found"
+            }
+          },
+          "tables": {
+            "summary": {
+              "source_id": "abs-fed-2026-27",
+              "table": "summary",
+              "table_name": "Summary of Receipts",
+              "page": 7,
+              "table_index": 0,
+              "run_id": "ABS_2026-27__docling__full-document__run-01",
+              "rows": 30,
+              "cols": 6,
+              "value_columns": [
+                3,
+                4,
+                5
+              ],
+              "table_flags": [],
+              "columns": {
+                "3": {
+                  "period": "2025-26",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2025-26"
+                },
+                "4": {
+                  "period": "2025-26",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2025-26"
+                },
+                "5": {
+                  "period": "2026-27",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2026-27"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 26,
+              "rows_mapped": 26,
+              "series_mapped": [
+                "fed.rev.capital",
+                "fed.rev.capital.domestic_debt_bank_net",
+                "fed.rev.capital.recovery_of_loans_and_advances",
+                "fed.rev.domestic_debt_bank_net",
+                "fed.rev.external",
+                "fed.rev.gross_federal_resources",
+                "fed.rev.internal",
+                "fed.rev.internal_and_external",
+                "fed.rev.net_federal_resources",
+                "fed.rev.nontax",
+                "fed.rev.nontax.civil_administration",
+                "fed.rev.nontax.levies_and_fees",
+                "fed.rev.nontax.miscellaneous",
+                "fed.rev.nontax.property_and_enterprise",
+                "fed.rev.privatization_proceeds",
+                "fed.rev.provincial_cash_surplus",
+                "fed.rev.provincial_share",
+                "fed.rev.public_account",
+                "fed.rev.public_account.deferred_liabilities",
+                "fed.rev.public_account.deposits_and_reserves",
+                "fed.rev.revenue",
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.total_resources"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 7,
+                "table_index": 0,
+                "printed_numeric_tokens": 115,
+                "matched": 115,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 115,
+                "row_band_matched": 115,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 115
+              }
+            },
+            "tax": {
+              "source_id": "abs-fed-2026-27",
+              "table": "tax",
+              "table_name": "Statement of Tax Revenue",
+              "page": 8,
+              "table_index": 0,
+              "run_id": "ABS_2026-27__docling__full-document__run-01",
+              "rows": 13,
+              "cols": 5,
+              "value_columns": [
+                2,
+                3,
+                4
+              ],
+              "table_flags": [],
+              "columns": {
+                "2": {
+                  "period": "2025-26",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2025-26"
+                },
+                "3": {
+                  "period": "2025-26",
+                  "vintage": "re",
+                  "header": "Revised Estimates 2025-26"
+                },
+                "4": {
+                  "period": "2026-27",
+                  "vintage": "be",
+                  "header": "Budget Estimates 2026-27"
+                }
+              },
+              "column_problems": [],
+              "scale_factor_detected": 1000000,
+              "scale_confirmed": true,
+              "amount_rows": 11,
+              "rows_mapped": 11,
+              "series_mapped": [
+                "fed.rev.tax",
+                "fed.rev.tax.direct",
+                "fed.rev.tax.direct.capital_value_tax",
+                "fed.rev.tax.direct.income",
+                "fed.rev.tax.direct.workers_profit_participation_fund",
+                "fed.rev.tax.direct.workers_welfare_fund",
+                "fed.rev.tax.fbr",
+                "fed.rev.tax.indirect",
+                "fed.rev.tax.indirect.customs",
+                "fed.rev.tax.indirect.federal_excise",
+                "fed.rev.tax.indirect.sales_tax"
+              ],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "labels_outside_their_block": [],
+              "duplicate_labels": [],
+              "ignored_labels": [],
+              "labels_from_text_layer": [],
+              "labels_with_footnote_mark": [],
+              "coverage": {
+                "page": 8,
+                "table_index": 0,
+                "printed_numeric_tokens": 46,
+                "matched": 46,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 46,
+                "row_band_matched": 46,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 46
+              }
+            }
+          }
+        }
+      },
+      "blocked_tables": {},
+      "watch": {
+        "fed.rev.tax.indirect.sales_tax": {
+          "abs-fed-2010-11": {
+            "mapped": true,
+            "page": 3,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2009-10 be",
+              "2009-10 re",
+              "2010-11 be"
+            ]
+          },
+          "abs-fed-2011-12": {
+            "mapped": true,
+            "page": 4,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2010-11 be",
+              "2010-11 re",
+              "2011-12 be"
+            ]
+          },
+          "abs-fed-2016-17": {
+            "mapped": true,
+            "page": 5,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2015-16 be",
+              "2015-16 re",
+              "2016-17 be"
+            ]
+          },
+          "abs-fed-2017-18": {
+            "mapped": true,
+            "page": 4,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2016-17 be",
+              "2016-17 re",
+              "2017-18 be"
+            ]
+          },
+          "abs-fed-2021-22": {
+            "mapped": true,
+            "page": 8,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2020-21 be",
+              "2020-21 re",
+              "2021-22 be"
+            ]
+          },
+          "abs-fed-2022-23": {
+            "mapped": true,
+            "page": 8,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2021-22 be",
+              "2021-22 re",
+              "2022-23 be"
+            ]
+          },
+          "abs-fed-2024-25": {
+            "mapped": true,
+            "page": 8,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2023-24 be",
+              "2023-24 re",
+              "2024-25 be"
+            ]
+          },
+          "abs-fed-2025-26": {
+            "mapped": true,
+            "page": 8,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2024-25 be",
+              "2024-25 re",
+              "2025-26 be"
+            ]
+          },
+          "abs-fed-2026-27": {
+            "mapped": true,
+            "page": 8,
+            "row_label": "B023 Sales Tax",
+            "columns": [
+              "2025-26 be",
+              "2025-26 re",
+              "2026-27 be"
+            ]
+          }
+        }
+      },
+      "check_pass_rates": {
+        "sums": {
+          "pass": 368,
+          "pass_within_rounding": 55,
+          "fail": 0,
+          "not_evaluable": 0,
+          "disputed": 0,
+          "evaluable": 423,
+          "pass_rate": 1.0
+        },
+        "same_in_both_tables": {
+          "pass": 108,
+          "pass_within_rounding": 0,
+          "fail": 0,
+          "not_evaluable": 0,
+          "disputed": 0,
+          "evaluable": 108,
+          "pass_rate": 1.0
+        },
+        "cross_edition": {
+          "pass": 179,
+          "pass_within_rounding": 9,
+          "fail": 0,
+          "not_evaluable": 0,
+          "disputed": 6,
+          "evaluable": 188,
+          "pass_rate": 1.0
         }
       }
     }

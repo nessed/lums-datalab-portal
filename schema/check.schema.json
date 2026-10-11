@@ -74,6 +74,14 @@
       "title": "Member Cell Ids",
       "type": "array"
     },
+    "member_signs": {
+      "description": "For a sum with subtracted members: +1 or -1 per member, in order. Empty means all added.",
+      "items": {
+        "type": "integer"
+      },
+      "title": "Member Signs",
+      "type": "array"
+    },
     "not_evaluable_reason": {
       "anyOf": [
         {

@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-10T23:32:36+00:00",
-  "git_commit": "4b9ad00b262e0b36859ee23d6e2ab381636eabff",
+  "created_at": "2026-10-11T00:09:46+00:00",
+  "git_commit": "f56d10ef7adf083bcce3a5e234e75e1d6ba08fa7",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -128,18 +128,18 @@
   },
   "counts": {
     "sources": 26,
-    "cells": 9708,
-    "cells_mapped": 5610,
-    "cells_behind_published_values": 5011,
-    "series": 491,
-    "observations": 4314,
+    "cells": 10788,
+    "cells_mapped": 6684,
+    "cells_behind_published_values": 6065,
+    "series": 541,
+    "observations": 5106,
     "observations_by_dataset": {
       "abs": {
-        "gap:disputed": 3,
+        "gap:disputed": 9,
         "gap:failed_checks": 216,
-        "gap:not_in_source": 78,
+        "gap:not_in_source": 86,
         "gap:not_yet_verified": 200,
-        "published": 2111
+        "published": 2889
       },
       "cpi": {
         "gap:disputed": 2,
@@ -154,8 +154,8 @@
     },
     "tiers_by_dataset": {
       "abs": {
-        "A": 436,
-        "B": 1675,
+        "A": 604,
+        "B": 2285,
         "C": 200,
         "D": 216
       },
@@ -171,16 +171,16 @@
       }
     },
     "checks_by_result": {
-      "pass": 2312,
-      "pass_within_rounding": 825,
-      "disputed": 11,
+      "pass": 2967,
+      "pass_within_rounding": 889,
+      "disputed": 17,
       "fail": 21,
       "not_evaluable": 163
     },
     "checks_by_type": {
       "accounting_identity": {
-        "pass": 164,
-        "pass_within_rounding": 37
+        "pass": 299,
+        "pass_within_rounding": 70
       },
       "column_total": {
         "pass": 122,
@@ -188,9 +188,9 @@
         "not_evaluable": 30
       },
       "cross_edition": {
-        "pass": 851,
-        "disputed": 11,
-        "pass_within_rounding": 7,
+        "pass": 1030,
+        "disputed": 17,
+        "pass_within_rounding": 16,
         "fail": 2
       },
       "cross_source": {
@@ -199,12 +199,12 @@
         "pass_within_rounding": 16
       },
       "cross_table": {
-        "pass": 397,
+        "pass": 505,
         "pass_within_rounding": 3
       },
       "hierarchy_sum": {
-        "pass": 341,
-        "pass_within_rounding": 139,
+        "pass": 574,
+        "pass_within_rounding": 161,
         "fail": 17,
         "not_evaluable": 93
       },
@@ -229,14 +229,14 @@
         "pass": 34
       }
     },
-    "page_renders": 121
+    "page_renders": 139
   },
   "coverage_summary": {
     "abs": {
-      "printed_numeric_tokens": 5593,
-      "matched": 5535,
-      "coverage": 0.9896,
-      "tables": 72,
+      "printed_numeric_tokens": 7120,
+      "matched": 7062,
+      "coverage": 0.9919,
+      "tables": 90,
       "tables_below_per_table_minimum": [
         "abs-fed-2017-18 p.12",
         "abs-fed-2022-23 p.16"
@@ -260,22 +260,22 @@
   "check_pass_rates": {
     "abs": {
       "all": {
-        "pass": 1365,
-        "pass_within_rounding": 217,
+        "pass": 2020,
+        "pass_within_rounding": 281,
         "fail": 19,
         "not_evaluable": 123,
-        "disputed": 3,
-        "evaluable": 1604,
-        "pass_rate": 0.9863
+        "disputed": 9,
+        "evaluable": 2329,
+        "pass_rate": 0.988
       },
       "cross_edition": {
-        "pass": 459,
-        "pass_within_rounding": 1,
+        "pass": 638,
+        "pass_within_rounding": 10,
         "fail": 2,
         "not_evaluable": 0,
-        "disputed": 3,
-        "evaluable": 462,
-        "pass_rate": 0.9957
+        "disputed": 9,
+        "evaluable": 650,
+        "pass_rate": 0.9969
       }
     },
     "cpi": {
@@ -327,42 +327,42 @@
       "state": "published",
       "reasons": [],
       "coverage": {
-        "printed_numeric_tokens": 5593,
-        "matched": 5535,
-        "coverage": 0.9896,
-        "tables": 72,
+        "printed_numeric_tokens": 7120,
+        "matched": 7062,
+        "coverage": 0.9919,
+        "tables": 90,
         "tables_below_per_table_minimum": [
           "abs-fed-2017-18 p.12",
           "abs-fed-2022-23 p.16"
         ]
       },
       "check_pass_rate": {
-        "pass": 1365,
-        "pass_within_rounding": 217,
+        "pass": 2020,
+        "pass_within_rounding": 281,
         "fail": 19,
         "not_evaluable": 123,
-        "disputed": 3,
-        "evaluable": 1604,
-        "pass_rate": 0.9863
+        "disputed": 9,
+        "evaluable": 2329,
+        "pass_rate": 0.988
       },
       "cross_edition_agreement": {
-        "pass": 459,
-        "pass_within_rounding": 1,
+        "pass": 638,
+        "pass_within_rounding": 10,
         "fail": 2,
         "not_evaluable": 0,
-        "disputed": 3,
-        "evaluable": 462,
-        "pass_rate": 0.9957
+        "disputed": 9,
+        "evaluable": 650,
+        "pass_rate": 0.9969
       },
       "disputes": {
-        "differing_pairs": 5,
-        "disputed": 3,
+        "differing_pairs": 11,
+        "disputed": 9,
         "kept_as_fail": {
           "a table or cell carries an extraction flag": 1,
           "a table or row carries a structural flag": 1
         },
-        "cross_edition_pairs": 465,
-        "disputed_share": 0.0065,
+        "cross_edition_pairs": 659,
+        "disputed_share": 0.0137,
         "max_disputed_share": "0.05"
       }
     },

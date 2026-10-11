@@ -146,6 +146,11 @@ evidence; it needs no PDFs and runs in CI.
 | `Cell.extractor_name` | value `pdfplumber` | A second-reader cell. Its `run_id` is the Docling run that routed the table; `extract_config_sha256` is the hash of the second reader's configuration. |
 | `Cell.structural_flags` | new value `superseded_by_second_reader` | On the first tool's cells of a table whose second reading was promoted. Those cells stay in the record, unmapped. |
 | `Cell.second_reader` | now filled | On the first tool's cells of a promoted table: what the second tool read at that spot. Shape unchanged. |
+| `Check.credits_members` | new boolean, default true | False on a check that is evidence for its target only (the LFS rate recomputation). |
+| `Check.member_signs` | new list, empty by default | For a sum with subtracted members (gross minus provincial share = net): +1 or -1 per member, in order. Empty means all added. |
+| `Cell.normalization_flags` | new value `detached_minus` | A minus sign separated from its number by a space; ambiguous, blocking. |
+| `Series.dims` | new keys | `area_as_printed` (CPI 2007-08 base), `side: receipts` (ABS receipts series). |
+| `Source.doc_type` | values now used | `sbp_easydata`, `pes_chapter` (cross-source files; `role: cross_source`). A cross-source check against a file with no pages has `target_source` and `target_value` and no member cell. |
 | `release.json` `dataset_status.<type>.disputes` | new object | `differing_pairs`, `disputed`, `kept_as_fail` (reason: count), `cross_edition_pairs`, `disputed_share`, `max_disputed_share`. |
 | `release.json` pass-rate objects | new key `disputed` | Count of disputed pairs beside `pass`, `pass_within_rounding`, `fail`, `not_evaluable`. `pass_rate` of `cross_edition_agreement` leaves them out (D26); `check_pass_rate` counts them as not passed. |
 | `observations.csv` | new column `disputed_readings` | `value (source p.N) | value (source p.N)`; blank unless disputed. `value` is blank for a disputed row. |

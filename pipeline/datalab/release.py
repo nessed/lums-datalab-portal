@@ -379,7 +379,8 @@ def check_release(path: Path | str) -> list[str]:
         try:
             if chk.check_type in SUM_TYPES or chk.check_type == "weights_sum":
                 members = [cells[cid] for cid in chk.member_cell_ids]
-                observed = sum((Decimal(m.value_parsed) for m in members), Decimal(0))
+                signs = chk.member_signs or [1] * len(members)
+                observed = sum((Decimal(m.value_parsed) * s for m, s in zip(members, signs, strict=True)), Decimal(0))
                 if chk.observed is None or Decimal(chk.observed) != observed:
                     problems.append(f"check {chk.check_id}: stored sum {chk.observed} != recomputed {observed}")
                 expected = Decimal(cells[chk.target_cell_id].value_parsed) if chk.target_cell_id else Decimal(chk.expected)

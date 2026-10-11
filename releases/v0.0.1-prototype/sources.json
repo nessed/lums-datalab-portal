@@ -24,6 +24,8 @@
     "verification_record": "sources/verification/abs-fed-2010-11.json",
     "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year.",
     "pages_used": [
+      2,
+      3,
       9,
       10,
       11,
@@ -123,6 +125,8 @@
     "verification_record": "sources/verification/abs-fed-2011-12.json",
     "notes": "",
     "pages_used": [
+      3,
+      4,
       11,
       12,
       13,
@@ -222,6 +226,8 @@
     "verification_record": "sources/verification/abs-fed-2016-17.json",
     "notes": "",
     "pages_used": [
+      4,
+      5,
       12,
       13,
       14,
@@ -323,6 +329,8 @@
     "verification_record": "sources/verification/abs-fed-2017-18.json",
     "notes": "The cover page carries no text, so the title could not be read by code; the file is identified by its contents page, the fiscal year in its tables and the link from the official budget page for that year. Text layer on 31 of 33 printed pages, below the 95% inspection level: page(s) 1, 33 are images (covers). Used under a recorded deviation; every page that values are taken from has a text layer.",
     "pages_used": [
+      3,
+      4,
       11,
       12,
       13,
@@ -425,6 +433,8 @@
     "verification_record": "sources/verification/abs-fed-2021-22.json",
     "notes": "",
     "pages_used": [
+      7,
+      8,
       17,
       18,
       19,
@@ -528,6 +538,8 @@
     "verification_record": "sources/verification/abs-fed-2022-23.json",
     "notes": "",
     "pages_used": [
+      7,
+      8,
       15,
       16,
       17,
@@ -633,6 +645,8 @@
     "verification_record": "sources/verification/abs-fed-2024-25.json",
     "notes": "",
     "pages_used": [
+      7,
+      8,
       17,
       18,
       19,
@@ -737,6 +751,8 @@
     "verification_record": "sources/verification/abs-fed-2025-26.json",
     "notes": "reissued_or_differs: official download differs from the archive copy.",
     "pages_used": [
+      7,
+      8,
       17,
       18,
       19,
@@ -840,6 +856,8 @@
     "verification_record": "sources/verification/abs-fed-2026-27.json",
     "notes": "",
     "pages_used": [
+      7,
+      8,
       17,
       18,
       19,

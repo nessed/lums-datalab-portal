@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-10T23:32:36+00:00 from commit `4b9ad00b262e`. Label: **prototype**. DOI: none.
+Built 2026-10-11T00:09:46+00:00 from commit `f56d10ef7adf`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -9,7 +9,7 @@ Built 2026-10-10T23:32:36+00:00 from commit `4b9ad00b262e`. Label: **prototype**
 
 | Data type | State | Sources | Published values | Withheld / gaps |
 |---|---|---|---|---|
-| Federal Annual Budget Statement | published | 9 | 2111 | disputed: 3, failed_checks: 216, not_in_source: 78, not_yet_verified: 200 |
+| Federal Annual Budget Statement | published | 9 | 2889 | disputed: 9, failed_checks: 216, not_in_source: 86, not_yet_verified: 200 |
 | Consumer Price Index | published | 8 | 1254 | disputed: 2 |
 | Labour Force Survey | published | 5 | 387 | disputed: 6, failed_checks: 3, not_yet_verified: 54 |
 
@@ -22,7 +22,7 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 
 | Data type | A | B | C | D |
 |---|---|---|---|---|
-| abs | 436 | 1675 | 200 | 216 |
+| abs | 604 | 2285 | 200 | 216 |
 | cpi | 132 | 1122 | 0 | 0 |
 | lfs | 204 | 183 | 54 | 3 |
 
@@ -104,6 +104,24 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | abs-fed-2026-27 | 22 | 110 | 110 | 100.0% | 100.0% |
 | abs-fed-2026-27 | 23 | 63 | 63 | 100.0% | 100.0% |
 | abs-fed-2026-27 | 24 | 43 | 43 | 100.0% | 100.0% |
+| abs-fed-2010-11 | 2 | 112 | 112 | 100.0% | 100.0% |
+| abs-fed-2010-11 | 3 | 54 | 54 | 100.0% | 100.0% |
+| abs-fed-2011-12 | 3 | 109 | 109 | 100.0% | 100.0% |
+| abs-fed-2011-12 | 4 | 52 | 52 | 100.0% | 100.0% |
+| abs-fed-2016-17 | 4 | 124 | 124 | 100.0% | 100.0% |
+| abs-fed-2016-17 | 5 | 66 | 66 | 100.0% | 100.0% |
+| abs-fed-2017-18 | 3 | 127 | 127 | 100.0% | 100.0% |
+| abs-fed-2017-18 | 4 | 66 | 66 | 100.0% | 100.0% |
+| abs-fed-2021-22 | 7 | 121 | 121 | 100.0% | 100.0% |
+| abs-fed-2021-22 | 8 | 46 | 46 | 100.0% | 100.0% |
+| abs-fed-2022-23 | 7 | 121 | 121 | 100.0% | 100.0% |
+| abs-fed-2022-23 | 8 | 46 | 46 | 100.0% | 100.0% |
+| abs-fed-2024-25 | 7 | 115 | 115 | 100.0% | 100.0% |
+| abs-fed-2024-25 | 8 | 46 | 46 | 100.0% | 100.0% |
+| abs-fed-2025-26 | 7 | 115 | 115 | 100.0% | 100.0% |
+| abs-fed-2025-26 | 8 | 46 | 46 | 100.0% | 100.0% |
+| abs-fed-2026-27 | 7 | 115 | 115 | 100.0% | 100.0% |
+| abs-fed-2026-27 | 8 | 46 | 46 | 100.0% | 100.0% |
 | cpi-pbs-2016-06 | 5 | 142 | 142 | 100.0% | 100.0% |
 | cpi-pbs-2018-06 | 5 | 142 | 142 | 100.0% | 100.0% |
 | cpi-pbs-2019-06 | 5 | 142 | 142 | 100.0% | 100.0% |
@@ -159,7 +177,7 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 
 | Data type | Passed exactly | Passed within rounding | Failed | Disputed | Not evaluable | Pass rate of evaluable checks | Cross-edition agreement | Disputed pairs |
 |---|---|---|---|---|---|---|---|---|
-| abs | 1365 | 217 | 19 | 3 | 123 | 98.6% | 99.6% (460 of 462 pairs) | 3 of 465 pairs (0.7%) |
+| abs | 2020 | 281 | 19 | 9 | 123 | 98.8% | 99.7% (648 of 650 pairs) | 9 of 659 pairs (1.4%) |
 | cpi | 348 | 540 | 1 | 2 | 0 | 99.7% | 100.0% (128 of 128 pairs) | 2 of 130 pairs (1.5%) |
 | lfs | 599 | 68 | 1 | 6 | 40 | 99.0% | 100.0% (270 of 270 pairs) | 6 of 276 pairs (2.2%) |
 

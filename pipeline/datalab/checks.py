@@ -54,6 +54,7 @@ def sum_check(*, check_type: str, dataset: str, rule_id: str, target: Cell, memb
         check_id=cid, check_type=check_type, dataset=dataset, rule_id=rule_id,
         source_ids=sorted({target.source_id, *(c.source_id for c in member_cells)}),
         member_cell_ids=[c.cell_id for c in member_cells], target_cell_id=target.cell_id,
+        member_signs=[sign for _, sign in members] if any(sign != 1 for _, sign in members) else [],
         tolerance_rule=SUM_RULE_TEXT if abs_tolerance is None else f"Absolute tolerance {abs_tolerance}.",
     )
     unparsed = [c for c in [target, *member_cells] if c.value_parsed is None]

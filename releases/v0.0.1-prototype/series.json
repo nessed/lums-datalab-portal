@@ -5814,6 +5814,36 @@
     "notes": ""
   },
   {
+    "series_id": "fed.rev.total_resources",
+    "name": "Total resources",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Last line of the Summary of Receipts in the Annual Budget Statement: net federal resources plus the financing lines the edition prints (cash balance of the provinces, privatization proceeds, borrowing from banks).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5000,
+    "notes": ""
+  },
+  {
     "series_id": "fed.exp.development.capital_account.psdp.function.general_public_services",
     "name": "General public services (development, capital account, PSDP)",
     "parent_id": "fed.exp.development.capital_account.psdp",
@@ -5834,6 +5864,36 @@
         "at_period": "2011-12",
         "kind": "devolution",
         "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5010,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.net_federal_resources",
+    "name": "Net federal resources",
+    "parent_id": "fed.rev.total_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Gross federal resources less the provincial share in federal taxes, as printed in the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
       }
     ],
     "source_doc_types": [
@@ -5941,6 +6001,73 @@
     "notes": ""
   },
   {
+    "series_id": "fed.rev.gross_federal_resources",
+    "name": "Gross federal resources",
+    "parent_id": "fed.rev.net_federal_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Total internal receipts, external receipts and public account receipts (net), as printed in the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [
+      "gross revenue receipts",
+      "gross receipts"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5020,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.provincial_share",
+    "name": "Less: provincial share in federal taxes",
+    "parent_id": "fed.rev.net_federal_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "The provinces' share in federal taxes, which the Summary of Receipts subtracts from gross federal resources. Printed as a positive amount.",
+    "definition_status": "draft",
+    "synonyms": [
+      "NFC transfers",
+      "transfers to provinces",
+      "divisible pool"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5030,
+    "notes": ""
+  },
+  {
     "series_id": "fed.exp.development.capital_account.psdp.function.economic_affairs",
     "name": "Economic affairs (development, capital account, PSDP)",
     "parent_id": "fed.exp.development.capital_account.psdp",
@@ -5961,6 +6088,36 @@
         "at_period": "2011-12",
         "kind": "devolution",
         "note": "18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5040,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.internal_and_external",
+    "name": "Total internal and external receipts",
+    "parent_id": "fed.rev.gross_federal_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Total internal receipts plus external receipts. Printed as a line of its own from the 2016-17 edition; earlier editions add the two straight into gross federal resources.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
       }
     ],
     "source_doc_types": [
@@ -6097,6 +6254,1407 @@
     "derived": false,
     "derivation": null,
     "sort_key": 5045,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.internal",
+    "name": "Total internal receipts",
+    "parent_id": "fed.rev.internal_and_external",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Total revenue receipts plus capital receipts, as printed in the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5050,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.revenue",
+    "name": "Total revenue receipts",
+    "parent_id": "fed.rev.internal",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Tax revenue receipts plus non-tax receipts of the federal government, before the provincial share is taken out, as printed in the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [
+      "total revenue",
+      "federal revenue",
+      "gross revenue receipts"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5060,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax",
+    "name": "Tax revenue receipts",
+    "parent_id": "fed.rev.revenue",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal tax revenue as printed in the Annual Budget Statement. What the line contains changes: in the 2016-17 and 2017-18 editions it is FBR taxes plus 'other taxes' (petroleum levy, gas cess and surcharge, airport tax, ICT taxes); from the 2021-22 edition it is FBR taxes only, and the levies are printed under non-tax receipts.",
+    "definition_status": "draft",
+    "synonyms": [
+      "tax revenue",
+      "taxes"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5100,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.fbr",
+    "name": "FBR taxes",
+    "parent_id": "fed.rev.tax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Taxes collected by the Federal Board of Revenue: direct taxes plus indirect taxes. Printed as a line from the 2016-17 edition.",
+    "definition_status": "draft",
+    "synonyms": [
+      "Federal Board of Revenue"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5110,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.direct",
+    "name": "Direct taxes",
+    "parent_id": "fed.rev.tax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Direct taxes as printed in the Annual Budget Statement: taxes on income and the smaller direct heads the edition lists.",
+    "definition_status": "draft",
+    "synonyms": [
+      "income tax"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5120,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.direct.income",
+    "name": "Taxes on income",
+    "parent_id": "fed.rev.tax.direct",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B011, taxes on income, as printed in the statement of tax revenue.",
+    "definition_status": "draft",
+    "synonyms": [
+      "income tax"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5121,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.direct.workers_welfare_fund",
+    "name": "Workers' Welfare Fund",
+    "parent_id": "fed.rev.tax.direct",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B01501, Workers' Welfare Fund (newer editions: 'WWF (Ordinary Collection)'), listed under direct taxes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "WWF"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5122,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.direct.workers_profit_participation_fund",
+    "name": "Workers' Profit Participation Fund",
+    "parent_id": "fed.rev.tax.direct",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B01502, Workers' (Profit) Participation Fund (newer editions: 'WPPF (Contribution under Companies Profit)'), listed under direct taxes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "WPPF"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5123,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.direct.capital_value_tax",
+    "name": "Capital value tax",
+    "parent_id": "fed.rev.tax.direct",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Objects B017-18, capital value tax, listed under direct taxes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "CVT"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5124,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect",
+    "name": "Indirect taxes",
+    "parent_id": "fed.rev.tax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Indirect taxes as printed in the Annual Budget Statement. In the 2010-11 and 2011-12 editions the line includes the petroleum levy, Islamabad Capital Territory taxes and airport tax; from 2016-17 it is customs duties, sales tax and federal excise only.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5130,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect.customs",
+    "name": "Customs duties",
+    "parent_id": "fed.rev.tax.indirect",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Objects B020-22, customs duties, as printed in the statement of tax revenue.",
+    "definition_status": "draft",
+    "synonyms": [
+      "customs",
+      "import duty"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5131,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect.sales_tax",
+    "name": "Sales tax",
+    "parent_id": "fed.rev.tax.indirect",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B023, sales tax, as printed in the statement of tax revenue.",
+    "definition_status": "draft",
+    "synonyms": [
+      "GST",
+      "general sales tax"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5132,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect.federal_excise",
+    "name": "Federal excise",
+    "parent_id": "fed.rev.tax.indirect",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Objects B024-25, federal excise duty, as printed in the statement of tax revenue.",
+    "definition_status": "draft",
+    "synonyms": [
+      "FED",
+      "excise duty"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5133,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect.petroleum_levy",
+    "name": "Petroleum levy (listed under indirect taxes)",
+    "parent_id": "fed.rev.tax.indirect",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Petroleum levy where the edition lists it under indirect taxes (2010-11 and 2011-12 editions). Later editions print it elsewhere; those figures are separate series.",
+    "definition_status": "draft",
+    "synonyms": [
+      "PDL",
+      "petroleum development levy"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5134,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect.ict_taxes",
+    "name": "Islamabad Capital Territory taxes (listed under indirect taxes)",
+    "parent_id": "fed.rev.tax.indirect",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Objects B026-30, Islamabad Capital Territory taxes, where the edition lists them under indirect taxes (2010-11 and 2011-12 editions).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5135,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.indirect.airport_tax",
+    "name": "Airport tax (listed under indirect taxes)",
+    "parent_id": "fed.rev.tax.indirect",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B03064, airport tax, where the edition lists it under indirect taxes (2010-11 and 2011-12 editions).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5136,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.other",
+    "name": "Other taxes",
+    "parent_id": "fed.rev.tax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Other Taxes' line of the 2016-17 and 2017-18 editions: taxes outside the FBR (ICT taxes, airport tax, gas infrastructure development cess, natural gas development surcharge, petroleum levy).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5140,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.other.other_indirect_taxes_ict",
+    "name": "Other indirect taxes (ICT)",
+    "parent_id": "fed.rev.tax.other",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Objects B026-30, 'Other Indirect Taxes (ICT)', listed under other taxes.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5141,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.other.airport_tax",
+    "name": "Airport tax (listed under other taxes)",
+    "parent_id": "fed.rev.tax.other",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B03064, airport tax, where the edition lists it under other taxes.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5142,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.other.gas_infrastructure_development_cess",
+    "name": "Gas infrastructure development cess",
+    "parent_id": "fed.rev.tax.other",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B03083, gas infrastructure development cess, listed under other taxes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "GIDC"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5143,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.other.natural_gas_development_surcharge",
+    "name": "Natural gas development surcharge",
+    "parent_id": "fed.rev.tax.other",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B03084, natural gas development surcharge, listed under other taxes.",
+    "definition_status": "draft",
+    "synonyms": [
+      "GDS"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5144,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.tax.other.petroleum_levy",
+    "name": "Petroleum levy (listed under other taxes)",
+    "parent_id": "fed.rev.tax.other",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B03085, petroleum levy, where the edition lists it under other taxes (2016-17 and 2017-18 editions).",
+    "definition_status": "draft",
+    "synonyms": [
+      "PDL",
+      "petroleum development levy"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5145,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.nontax",
+    "name": "Non-tax revenue receipts",
+    "parent_id": "fed.rev.revenue",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal non-tax receipts as printed in the Summary of Receipts. From the 2021-22 edition the line also carries 'Levies and Fees', which earlier editions did not print here.",
+    "definition_status": "draft",
+    "synonyms": [
+      "non-tax revenue",
+      "non tax"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5200,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.nontax.levies_and_fees",
+    "name": "Levies and fees",
+    "parent_id": "fed.rev.nontax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object B03, levies and fees, listed under non-tax revenue receipts from the 2021-22 edition.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5201,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.nontax.property_and_enterprise",
+    "name": "Income from property and enterprise",
+    "parent_id": "fed.rev.nontax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object C01, income from property and enterprise, listed under non-tax receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5202,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.nontax.civil_administration",
+    "name": "Receipts from civil administration etc.",
+    "parent_id": "fed.rev.nontax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object C02, receipts from civil administration and other functions, listed under non-tax receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5203,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.nontax.miscellaneous",
+    "name": "Miscellaneous receipts",
+    "parent_id": "fed.rev.nontax",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object C03, miscellaneous receipts, listed under non-tax receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5204,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.capital",
+    "name": "Capital receipts",
+    "parent_id": "fed.rev.internal",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Federal capital receipts as printed in the Summary of Receipts: recovery of loans and advances and domestic debt receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5300,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.capital.recovery_of_loans_and_advances",
+    "name": "Recovery of loans and advances",
+    "parent_id": "fed.rev.capital",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object E02, recovery of loans and advances, listed under capital receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5301,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.capital.domestic_debt_net",
+    "name": "Domestic debt receipts (net)",
+    "parent_id": "fed.rev.capital",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object E03, 'Domestic Debt Receipts (Net)', listed under capital receipts in the 2010-11 to 2017-18 editions.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5302,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.capital.domestic_debt_non_bank_net",
+    "name": "Domestic debt receipts (non bank), net",
+    "parent_id": "fed.rev.capital",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object E03, 'Domestic Debt Receipts (Non Bank) - Net', listed under capital receipts from the 2021-22 edition. Kept apart from the older '(Net)' line: the document changed the label.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5303,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.capital.domestic_debt_bank_net",
+    "name": "Domestic debt receipts (bank), net (listed under capital receipts)",
+    "parent_id": "fed.rev.capital",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Object E03 line that the 2026-27 edition prints under capital receipts with the label 'Domestic Debt Receipts (Bank) - Net'. Kept as printed and apart from the '(Non Bank)' line of earlier editions; a human should decide whether the label is a misprint.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5304,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.external",
+    "name": "External receipts",
+    "parent_id": "fed.rev.internal_and_external",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "External receipts (loans and grants) as printed in the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [
+      "foreign loans",
+      "foreign grants",
+      "external loans"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5400,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.external.loans",
+    "name": "External loans",
+    "parent_id": "fed.rev.external",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Loans' line listed under external receipts (editions up to 2022-23).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5401,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.external.grants",
+    "name": "External grants",
+    "parent_id": "fed.rev.external",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Grants' line listed under external receipts (editions up to 2022-23).",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5402,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.external.project_loans_and_grants_outside_psdp",
+    "name": "Project loans and grants outside PSDP",
+    "parent_id": "fed.rev.external",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Project Loans & Grants Outside PSDP' line listed under external receipts (2017-18 and 2021-22 editions; the 2022-23 edition prints it as 'Project Loans & Grants').",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5403,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.public_account",
+    "name": "Public account receipts (net)",
+    "parent_id": "fed.rev.gross_federal_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "Net receipts of the Public Account of the Federation, as printed in the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5500,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.public_account.deferred_liabilities",
+    "name": "Deferred liabilities (net)",
+    "parent_id": "fed.rev.public_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Deferred Liabilities (Net)' line listed under public account receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5501,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.public_account.deposits_and_reserves",
+    "name": "Deposits and reserves (net)",
+    "parent_id": "fed.rev.public_account",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Deposit and Reserves (Net)' line listed under public account receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5502,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.provincial_cash_surplus",
+    "name": "Cash balance built up by the provinces",
+    "parent_id": "fed.rev.total_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Cash Balance built up by the Provinces' (from the 2022-23 edition: 'Cash Balance Surplus by the Provinces'), a financing line of the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [
+      "provincial surplus"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5600,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.privatization_proceeds",
+    "name": "Privatization proceeds",
+    "parent_id": "fed.rev.total_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Privatization Proceeds', a financing line of the Summary of Receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5610,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.credit_from_banking_sector",
+    "name": "Credit from banking sector",
+    "parent_id": "fed.rev.total_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Credit from Banking Sector', a financing line of the Summary of Receipts in editions up to 2024-25.",
+    "definition_status": "draft",
+    "synonyms": [
+      "bank borrowing"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5620,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.domestic_debt_bank_net",
+    "name": "Domestic debt receipts (bank), net",
+    "parent_id": "fed.rev.total_resources",
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "'Domestic Debt Receipts (Bank) - Net', the financing line that the 2025-26 and 2026-27 editions print where earlier editions print 'Credit from Banking Sector'. Kept as a separate series until a human confirms the two are the same line.",
+    "definition_status": "draft",
+    "synonyms": [
+      "bank borrowing"
+    ],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5630,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.consolidated_fund",
+    "name": "Federal Consolidated Fund (internal plus external receipts)",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "First line of the Summary of Receipts in the 2010-11 and 2011-12 editions, 'Federal Consolidated Fund (5+6)': total internal receipts plus external receipts.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5700,
+    "notes": ""
+  },
+  {
+    "series_id": "fed.rev.consolidated_fund_net",
+    "name": "Federal Consolidated Fund (net of provincial share)",
+    "parent_id": null,
+    "dataset": "abs",
+    "geo": "pk",
+    "dims": {
+      "side": "receipts"
+    },
+    "frequency": "fiscal_year",
+    "unit": "PKR",
+    "scale_factor": 1000000,
+    "definition": "First line of the Summary of Receipts in the 2016-17 and 2017-18 editions, 'Federal Consolidated Fund (5+6-10)': total internal receipts plus external receipts less the provincial share in federal taxes. Not the same line as the 2010-11 '(5+6)' figure.",
+    "definition_status": "draft",
+    "synonyms": [],
+    "breaks": [
+      {
+        "at_period": "2010-11",
+        "kind": "nfc_award",
+        "note": "7th NFC Award: from 2010-11 the provincial share in federal taxes is much larger. The share, net federal resources and everything computed from them are not comparable with earlier years."
+      }
+    ],
+    "source_doc_types": [
+      "abs"
+    ],
+    "derived": false,
+    "derivation": null,
+    "sort_key": 5710,
     "notes": ""
   },
   {

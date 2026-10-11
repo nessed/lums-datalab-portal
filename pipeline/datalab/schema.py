@@ -252,6 +252,8 @@ class Check(Model):
     dataset: Dataset
     source_ids: list[str]
     member_cell_ids: list[str] = Field(default_factory=list)
+    member_signs: list[int] = Field(
+        default_factory=list, description="For a sum with subtracted members: +1 or -1 per member, in order. Empty means all added.")
     target_cell_id: Optional[str] = None
     target_value: Optional[DecimalStr] = None
     target_source: Optional[str] = None

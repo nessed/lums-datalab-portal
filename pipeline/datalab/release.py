@@ -450,7 +450,7 @@ def check_release(path: Path | str) -> list[str]:
             continue
         if o.disputed_readings:
             problems.append(f"observation {o.obs_id}: lists disputed readings but is not disputed")
-        tier, _ = decide_tier(primary, supporting, checks_by_cell)
+        tier, _ = decide_tier(primary, supporting, checks_by_cell, cells)
         if tier != o.tier:
             problems.append(f"observation {o.obs_id}: stored tier {o.tier} != tier from evidence {tier}")
         if s.dataset in gated and o.published:

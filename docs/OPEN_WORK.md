@@ -353,7 +353,7 @@ Read this first:
 - **Traps:** keep every schema change additive; the site reads these files at build time.
 
 ### P10 Sums credit figures smaller than their own rounding allowance
-- **State:** not started. Found by the sanity report, not by a review. A sum check passes "within rounding" when the
+- **State:** code, tests and impact report done on branch `phase4/p10-small-members` (draft PR; H12 confirmed by Ahmad, see `DECISIONS.md`). **Release not rebuilt:** `check-release` fails on the frozen release until it is rebuilt with `work/` (tiers and one dispute change). Found by the sanity report, not by a review. A sum check passes "within rounding" when the
   difference is at most half a unit per item. A member smaller than that allowance could be anything and the sum would
   still pass, yet the member is credited as checked. Real case: ABS 2021-22 p.20 prints `0.4`, `0.2` and `0.3` for
   "081 Recreational and Sporting Services" in a table of whole millions; the first two are published at tier B on the

@@ -358,7 +358,12 @@ def test_promoted_values_are_tier_b_and_the_receipt_says_a_second_tool_read_them
     assert o.evidence_summary.startswith("Read by a second tool (pdfplumber) because the first tool (docling) lost a column "
                                          "and merged rows in this table;")
     assert "One of 2 amounts that add to the printed 'Total' 1.5 (exactly)." in o.evidence_summary
-    assert len(obs) == 15 and all(v.tier == "B" for v in obs.values())
+    # P10: the count column (1, 2, 3 = 6) has a rounding allowance of 1.5, so the member 1 earns nothing from that sum;
+    # every other figure, including the other two members and the total, is still tier B.
+    assert len(obs) == 15
+    small = obs["t.food.count:2025-26:be"]
+    assert small.tier == "C" and not small.published
+    assert all(v.tier == "B" for k, v in obs.items() if k != small.obs_id)
 
 
 def test_one_altered_digit_fails_the_check_and_nothing_is_promoted(tmp_path, monkeypatch, first_table):

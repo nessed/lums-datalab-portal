@@ -7,6 +7,7 @@ Tolerances follow decision D9:
 """
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from decimal import Decimal
 from typing import Any, Iterable, Sequence
@@ -17,6 +18,7 @@ from .schema import BLOCKING_CELL_FLAGS, DISPUTE_ARITHMETIC, PASSING, TARGET_ONL
 SUM_RULE_TEXT = ("Exact match passes. A difference of at most half a unit of the last printed digit per "
                  "item added passes as 'within rounding'. Anything larger fails.")
 EQUAL_RULE_TEXT = "The two printed figures must be equal within 1 unit of the last printed digit."
+_ABS_TOLERANCE_RULE = re.compile(r"^Absolute tolerance (\d+(?:\.\d+)?)\.$")
 
 
 def fmt(value: Decimal | str | None) -> str:
@@ -37,6 +39,34 @@ def classify_sum(residual: Decimal, members: int, unit: Decimal, abs_tolerance: 
         return "pass"
     limit = abs_tolerance if abs_tolerance is not None else Decimal("0.5") * members * unit
     return "pass_within_rounding" if abs(residual) <= limit else "fail"
+
+
+def sum_allowance(chk: Check, cells_by_id: dict[str, Cell]) -> Decimal | None:
+    """The rounding allowance of a sum check, recomputed from what the record stores (P10, H12), else None.
+
+    None for every check that is not a plain sum (agreements, recomputed rates and indices): the member floor
+    below does not apply to them. For a sum it is the largest residual its rule passes: 0.5 x members x the
+    coarsest last digit, or the absolute tolerance the rule states.
+    """
+    if chk.tolerance_rule == SUM_RULE_TEXT:
+        cells = [cells_by_id.get(i) for i in [chk.target_cell_id, *chk.member_cell_ids] if i]
+        if not chk.member_cell_ids or any(c is None or c.value_parsed is None for c in cells):
+            return None
+        return Decimal("0.5") * len(chk.member_cell_ids) * _unit(cells)
+    m = _ABS_TOLERANCE_RULE.match(chk.tolerance_rule)
+    return Decimal(m.group(1)) if m else None
+
+
+def below_allowance(chk: Check, cell: Cell, cells_by_id: dict[str, Cell]) -> bool:
+    """True when a passed sum cannot be evidence for this member: the member is no larger than the sum's own
+    rounding allowance, so a wrong figure of that size would have passed the same check (P10, H12).
+
+    The sum's target is never held to this; the rule is about the members added up.
+    """
+    if chk.target_cell_id == cell.cell_id or cell.value_parsed is None:
+        return False
+    allowance = sum_allowance(chk, cells_by_id)
+    return allowance is not None and abs(Decimal(cell.value_parsed)) <= allowance
 
 
 def _unit(cells: Iterable[Cell]) -> Decimal:
@@ -231,7 +261,8 @@ def dispute_test(chk: Check, cells_by_id: dict[str, Cell], checks_by_cell: dict[
                if c.official and c.check_type in DISPUTE_ARITHMETIC and c.source_ids == [cell.source_id]]
         if any(c.result == "fail" for c in own):
             return "an arithmetic check on one reading failed"
-        if not any(c.result in PASSING and ((c.check_type not in TARGET_ONLY_CHECKS and c.credits_members)
+        if not any(c.result in PASSING and ((c.check_type not in TARGET_ONLY_CHECKS and c.credits_members
+                                             and not below_allowance(c, cell, cells_by_id))
                                             or c.target_cell_id == cell.cell_id) for c in own):
             return "a reading has no passed arithmetic check in its own table"
     return None

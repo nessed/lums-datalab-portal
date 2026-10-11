@@ -488,9 +488,48 @@ Owner: the site agent. All site work so far is in `main` (PR #1, `bebff67`); the
 (last site commit `23e670a`). Start any S item from a new branch off `main`. Story: `docs/reports/2026-10-12-ui-report.md`.
 Design rules: `docs/DESIGN.md`. Plan the site was built to: `docs/plans/2026-10-12-ui.md` (sections 4 to 7).
 
-**Recommended order:** S1, S2, S3, S4, S5, S6, S7, S8, then S9 to S15 as listed. S1 and S2 are correctness: a
+**Recommended order (changed by Ali, 2026-10-12):** S1 (small correctness fix), then **S16 (high priority)**,
+then S2, S3, S4, S5, S6, S7, S8, then S9 to S15 as listed. S3 to S5 screenshots and critiques should be taken
+after S16, not before, or they will be redone. S1 and S2 are correctness: a
 receipt must never misstate a sum, and new release content must not mislead. S3 to S5 are the evidence the plan's
 "done means" asks for and should come before any polish. S10 needs H3 first; S13 needs a second release.
+
+### S16 HIGH PRIORITY: redesign the site as a data lab, not a report
+- **State:** not started. Added by Ali on 2026-10-12 after using the live site: the layout and UX read like a
+  printed report (long text pages, figures reached by reading), not like a data portal people come to in order to
+  find, chart, compare and download numbers. This is a direction problem, not polish: `docs/DESIGN.md` "What it
+  should feel like" asks for "a statistical yearbook brought online", and the site does exactly that.
+- **Where:** `docs/DESIGN.md` (the brief), `site/src/app/page.tsx` (home), `site/src/app/browse/`,
+  `site/src/app/series/[id]/`, `site/src/app/compare/`, `site/src/app/data/`, `site/src/components/` and
+  `site/src/components/chrome/` (header, navigation), `site/src/design/tokens.css`, `site/src/app/globals.css`.
+- **Left to do:**
+  1. Study how data portals are laid out and write down what to take from each: World Bank DataBank and Data360,
+     FRED, Our World in Data, IMF Data, ONS, Eurostat. Look at the first screen, search, the series page, the
+     chart builder, downloads and the API page.
+  2. Rewrite the "What it should feel like" and "Layout" sections of `docs/DESIGN.md` around a data tool: search
+     and browse first, the chart and table as the centre of every series page, compare and download one click
+     away, text and method notes secondary (collapsed or in a side panel). Keep the status system, receipts,
+     caveats-in-place and the "Things we do not do" list. Show the new brief to Ali before writing code.
+  3. Home: a search box and the data itself on the first screen (topics or datasets with counts, a few headline
+     series with sparklines, latest release), not paragraphs.
+  4. Series page: large interactive chart and table first; unit, source, status and caveats as compact metadata;
+     download (CSV, JSON) and cite always visible; related series alongside.
+  5. Browse: a faceted catalogue (dataset, topic, province, frequency, status) with result counts and inline
+     sparklines, instead of a long list.
+  6. Compare: pick several series and chart them together, with a shareable URL.
+  7. Receipts stay the evidence layer: reached from any value in a chart or table, layout tightened to match.
+  8. Rebuild, run `scripts/check-build.mjs`, then take S3 screenshots and run the S5 critique on the new layout.
+- **Done when:** Ali has approved the new brief in `docs/DESIGN.md`; from the home page a first-time visitor can
+  reach a chart of any series in two clicks and download it in one more; `npm run lint`, `npm run build` and
+  `node scripts/check-build.mjs` pass; screenshots of every route are in the report.
+- **Effort:** large: several agent sessions. Step 2 needs Ali's sign-off before steps 3 to 7. Can run beside
+  pipeline work.
+- **Needs from a human:** Ali (and Ahmad) approve the new direction in `docs/DESIGN.md`, ideally pointing at one
+  or two portals they want it to feel like.
+- **Traps:** every number, date and title must still come from the release (AGENTS.md sections 3 and 4); no
+  number is computed or reworded in the browser beyond what the release holds. "Data lab" does not mean the
+  default dashboard look the "Things we do not do" list rules out. Do not drop receipts or caveats to make pages
+  look cleaner; move them, do not delete them.
 
 ### S1 Receipts: show subtracted members and honour `credits_members`
 - **State:** not started. Found on 2026-10-12 while checking the merge. The release has 33 `accounting_identity`

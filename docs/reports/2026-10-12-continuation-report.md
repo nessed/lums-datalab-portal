@@ -267,3 +267,99 @@ Three receipts were read from the release data (the site itself belongs to the U
 | E8 site depth | skipped | reassigned to the UI agent by Ali |
 | E9 Economic Survey tables | not started | after E1 to E4 |
 | E10 hardening | started (same subagent as E6) | |
+
+## E2 ABS receipts side (D32) (merged 05:05)
+
+Track note: `docs/reports/track_e2_abs_receipts.md`. From the nine validated runs; no new Docling run.
+
+- Every edition prints a Summary of Receipts and, on the next page, a tax revenue statement: 18 tables located by head
+  names, coverage 1,527 of 1,527, no table flagged.
+- 48 series `fed.rev.*` with the printed hierarchy. **Sales tax is mapped and published in all nine editions** (the old
+  prototype lost it in one year).
+- Checks: sub-items add to parent 255 of 255; accounting identities (gross minus provincial share = net, and others)
+  168 of 168; figure printed in both tables 108 of 108; next edition agrees 188, differs 6, all six disputed by the
+  code (parent totals identical across the two editions, only the split differs).
+- 778 published values (168 A, 610 B), 6 disputed, 8 printed as a dash.
+- The release self-check caught a gap at merge: sums with subtracted members could not be recomputed because the signs
+  were not stored. `Check.member_signs` was added and `check-release` now recomputes them.
+- What changes between editions is written into the series definitions, not smoothed (for example "indirect taxes"
+  includes the petroleum levy in 2010-11 and 2011-12 only).
+
+## E3 LFS provinces and 19th ICLS tables (D33, D34) (merged 05:20)
+
+Track note: `docs/reports/track_e3_lfs_depth.md`. No new Docling run.
+
+- **Provinces:** 180 series for Punjab, Sindh, Khyber Pakhtunkhwa and Balochistan, attributed by the block heading
+  printed above the rows. 847 published (345 A, 502 B), 144 without a check (participation rates printed once), 17
+  withheld for failed checks.
+- **19th ICLS (2024-25):** 6 tables located, 204 series ending `.icls19`, 114 published (all B), 90 without a check.
+  Two count tables were read by the second reader because Docling merged cells; all 39 sums of each pass on that reading.
+  The definition text is quoted from the report by code (pp. 45 and 48).
+- **Eight provincial checks fail and stay failures.** Six are sums off by 0.02 where the limit is 0.01. The other group
+  is one printed figure: LFS 2020-21 p.38 prints employed males in KP as 6.68; it fails male + female, rural + urban and
+  provinces-add-to-Pakistan, and LFS 2024-25 p.72 prints 7.68. The overlay shows the box on "6.68": the page prints it.
+- **National is not quite unchanged:** under the strict rule the Pakistan total for employed males 2020-21 (51.91) is
+  withheld together with the failed provinces sum. Accepted and listed as an open question.
+- Not published: the 19th ICLS unemployment rate (its table prints no unit in the title); provincial unemployment rates
+  (printed in a title-less continuation table).
+- LFS gate: coverage 100%, checks 99.4% of 2,477, agreement 917 of 918, disputed 6 of 924.
+
+## E5 (building blocks), E6, E7, E10 (merged 05:40)
+
+Track note: `docs/reports/track_e_tools.md`.
+
+- **E6 `datalab sanity`** writes `docs/reports/sanity_2026-10-11.md` from the release only. It changes nothing. Things a
+  human should look at first: (1) the three figures `0.4`, `0.2`, `0.3` for "081 Recreational and Sporting Services" in
+  ABS 2021-22 p.20, in a table of whole millions. The lead looked at the page: it does print them. The sum that covers
+  them cannot confirm a figure that small, so their evidence is weak, and the Budget 2021-22 one is disputed (the next
+  edition prints 1,042). (2) Large jumps in single sub-function lines (education not elsewhere classified 1,426 then
+  55,973; housing development 30,720 then 969). (3) Alcohol and tobacco index up 109.5% from June 2022 to June 2023.
+  (4) 36 of 37 accounting identities that passed within rounding used their whole allowance (two amounts off by 1).
+- **E7 `datalab watch --dry-run`:** one polite HEAD request per official file; a download and hash only when the length
+  differs. One real run: 21 unchanged, 0 changed, 4 unreachable (the CPI issues already recorded as Wayback-only),
+  1 without an official address (SBP). It runs once and exits; nothing is scheduled. "Unchanged" means same byte length.
+- **E5 `datalab diff-release A B`** and `pipeline/scripts/reproduce.ps1` are written and tested (the diff against
+  itself is clean). **The reproduction itself has not been run** (about three hours of CPU); see the ledger.
+- **E10:** property-based tests for the normaliser found one real bug ("2015 -16.3" parsed as 0.3), fixed; no released
+  value moved. Gold scoring reworked (two labellers needed; raw agreement and Cohen's kappa). New documents:
+  `docs/HOW_A_NUMBER_GETS_ON_THE_SITE.md` (generated from the release) and `docs/GLOSSARY.md`.
+- Not done: regression fixtures cut from real run JSON (needs a human decision on which excerpts may be committed).
+
+## The UI agent's requests (read at handoff 2)
+
+- Printed page number per cell: **done** (`Cell.page_label`; 111 of 144 pages have exactly one page-number line).
+- Table title per cell: not done; queued.
+- Whether a dash means nil: left as "not printed as a figure"; human decision.
+- Publication date per source: not established by anything the pipeline reads; not added.
+
+The UI agent pushes to `proto/v0` directly. From 05:16 this run pulls before every push; one push was rejected and
+merged cleanly.
+
+## Interim handoff 2 (05:45)
+
+State: `proto/v0` pushed, 403+ tests green, `check-release` green, site builds (7,278 pages) and passes the UI agent's
+`check-build` (5,490 value receipts, 811 gap receipts, 17 disputed receipts).
+
+| Data type | Published | Tiers | Disputed | Withheld or gaps |
+|---|---|---|---|---|
+| ABS | 2,889 | 604 A, 2,285 B | 9 | 216 failed checks, 200 no check, 86 not printed |
+| CPI | 1,254 | 132 A, 1,122 B | 2 | 0 |
+| LFS | 1,347 | 548 A, 799 B | 6 | 288 no check, 21 failed checks |
+
+5,490 published values in 6,318 observations; 925 series; 26 source files.
+
+### Extended backlog ledger (as of 05:45)
+
+| Item | State | Notes |
+|---|---|---|
+| C8 full-document LFS runs | running in the background | isolated in `work/tracks/c8` |
+| E1 eight more ABS editions | running (subagent) | |
+| E2 ABS receipts side | **landed** | 778 values |
+| E3 LFS provinces and 19th ICLS | **landed** | 961 values |
+| E4 monthly CPI | running (subagent) | |
+| E5 reproduction from a clean clone | tools landed; the run itself not started | needs about three hours of free CPU |
+| E6 sanity report | **landed** | |
+| E7 source-change check | **landed** | never scheduled |
+| E8 site depth | skipped | reassigned to the UI agent by Ali |
+| E9 Economic Survey tables | not started | after E1 and E4 |
+| E10 hardening | **landed** except regression fixtures | |

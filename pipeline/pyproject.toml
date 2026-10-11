@@ -22,7 +22,7 @@ dependencies = [
 
 [project.optional-dependencies]
 extract = ["docling==2.119.0", "pdfplumber"]
-dev = ["pytest"]
+dev = ["pytest", "hypothesis"]
 
 [tool.setuptools.packages.find]
 include = ["datalab*"]

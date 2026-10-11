@@ -146,8 +146,51 @@ def cmd_gold_score(a) -> int:
 
     from .gold import gold_score
 
-    gold_score([Path(f) for f in a.labels], a.version)
+    gold_score([Path(f) for f in a.labels], a.version, out_path=Path(a.out) if a.out else None)
     return 0
+
+
+def cmd_sanity(a) -> int:
+    """Report only: reads a release folder, writes one Markdown file, changes nothing else."""
+    from .sanity import write_sanity_report
+
+    path = write_sanity_report(a.version)
+    print(f"[sanity] wrote {(path.relative_to(config.REPO_ROOT) if path.is_relative_to(config.REPO_ROOT) else path).as_posix()}")
+    return 0
+
+
+def cmd_watch(a) -> int:
+    """One pass over the manifest, then exit. Never scheduled, never a loop."""
+    if not a.dry_run:
+        print("[watch] only --dry-run exists: it prints a table and writes nothing. Run `datalab watch --dry-run`.")
+        return 2
+    from . import sources, watch
+
+    rows = sources.read_manifest()
+    if a.source:
+        rows = [s for s in rows if s.source_id in a.source]
+    print(f"[watch] dry run over {len(rows)} manifest rows; at least {watch.MIN_INTERVAL_S:g} s between requests to one host")
+    result = watch.watch_once(rows, save_to_wayback=a.save_to_wayback)
+    print(watch.format_table(result))
+    return 0
+
+
+def _release_path(text: str):
+    """A release folder given as a path, a path relative to the repo, or a version name under releases/."""
+    from pathlib import Path
+
+    for candidate in (Path(text), config.REPO_ROOT / text, config.RELEASES_DIR / text):
+        if (candidate / "release.json").exists():
+            return candidate
+    raise SystemExit(f"[diff-release] no release.json found for '{text}'")
+
+
+def cmd_diff_release(a) -> int:
+    from .diff_release import diff_releases, format_diff
+
+    result = diff_releases(_release_path(a.a), _release_path(a.b))
+    print(format_diff(result))
+    return 0 if result["same"] else 1
 
 
 def cmd_all(a) -> int:
@@ -159,6 +202,10 @@ def cmd_all(a) -> int:
     if fetch():
         return 1
     for s in _sources_for(a.dataset, None):
+        if s.verification_status == "failed":
+            # A file that failed verification is never used; `extract` would stop the whole command on it.
+            print(f"[all] {s.source_id}: skipped, source verification failed")
+            continue
         if a.reuse_runs and latest_run(s.source_id, validated_only=True):
             continue
         validate_run(extract(s.source_id).run_id)
@@ -207,6 +254,16 @@ def main(argv: list[str] | None = None) -> int:
     sp = add("gold-score", cmd_gold_score, "compare finished human labels with the release (error rate)")
     sp.add_argument("labels", nargs="+")
     sp.add_argument("--version", default=config.DEFAULT_RELEASE)
+    sp.add_argument("--out", help="where to write the score (default: gold/score.json)")
+    sp = add("sanity", cmd_sanity, "write docs/reports/sanity_<release date>.md from a release folder (report only)")
+    sp.add_argument("--version", default=config.DEFAULT_RELEASE)
+    sp = add("watch", cmd_watch, "check once whether the official files changed (HEAD, then hash); prints a table and exits")
+    sp.add_argument("--dry-run", action="store_true", help="required: print the table, write nothing")
+    sp.add_argument("--save-to-wayback", action="store_true", help="ask the Wayback Machine to save a file that changed (default: off)")
+    sp.add_argument("--source", action="append", help="limit to these source ids (repeatable)")
+    sp = add("diff-release", cmd_diff_release, "semantic diff of two release folders; exit code 1 if the data differ")
+    sp.add_argument("a")
+    sp.add_argument("b")
     sp = add("all", cmd_all, "fetch, extract, validate and build one dataset")
     sp.add_argument("--dataset", choices=DATASETS, required=True)
     sp.add_argument("--reuse-runs", action="store_true", help="skip extraction where a validated run exists")

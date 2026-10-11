@@ -24,6 +24,10 @@ MISSING_MARKERS = frozenset(
 # Rule 3: fiscal-year labels such as 2024-25, 2024-2025, 1999-00.
 FISCAL_YEAR = re.compile(r"\b((?:19|20)\d{2})\s*-\s*(\d{4}|\d{2})\b")
 _LONE_YEAR = re.compile(r"^(?:19|20)\d{2}$")
+# In a cell, a year label is masked only when it is not the front of a longer number. "2015 -16.3"
+# is a year and the figure -16.3 merged into one cell, not the label 2015-16 followed by ".3"
+# (found by the property tests: it was read as 0.3). The same holds for "2015 -16,300".
+_FISCAL_YEAR_LABEL = re.compile(FISCAL_YEAR.pattern + r"(?!\.\d|,\d{3}(?!\d))")
 
 _NUMBER = re.compile(r"-?(?:\d[\d,]*(?:\.\d+)?\.?|\.\d+)")
 _BRACKETED = re.compile(r"^\(\s*(-?\d[\d,]*(?:\.\d+)?)\s*\)$")
@@ -103,8 +107,8 @@ def parse_printed(text: object) -> Parsed:
         return Parsed(raw=raw, is_missing=True, missing_marker=t, flags=tuple(flags))
 
     # Rule 3: mask fiscal-year labels before looking for numbers.
-    fiscal_years = tuple(f"{a}-{b}" for a, b in FISCAL_YEAR.findall(t))
-    masked = FISCAL_YEAR.sub(" ", t).strip()
+    fiscal_years = tuple(f"{a}-{b}" for a, b in _FISCAL_YEAR_LABEL.findall(t))
+    masked = _FISCAL_YEAR_LABEL.sub(" ", t).strip()
     if fiscal_years and not _NUMBER.search(masked):
         flags.append("year_label_only")
         return Parsed(raw=raw, flags=tuple(flags), fiscal_years=fiscal_years)

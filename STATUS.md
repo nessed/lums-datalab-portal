@@ -1,6 +1,6 @@
 # STATUS
 
-Last updated: 2026-10-12, by Claude Code at Ali's request: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
+Last updated: 2026-10-12, by Claude Code at Ali's request: S16 site rebuild as a data lab, merged into `main` (PR #6, with PR #5 for the design docs). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
 
 ## State in one paragraph
 The pipeline works end to end for three data types and the release `releases/v0.0.1-prototype/`
@@ -56,7 +56,7 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
 into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
 
-**S16 data lab rebuild: done on branch `claude/epic-mccarthy-ose3yj` (PR against `docs/open-work-ux-redesign`), not merged.**
+**S16 data lab rebuild: done and merged into `main` (PR #6 from `claude/epic-mccarthy-ose3yj`; PR #5 carried the design docs).**
 `docs/DESIGN.md` is still marked DRAFT; the build follows it, with the answers to its questions recorded as
 provisional decisions in `DECISIONS.md` (UI, 2026-10-12, S16). Ali and Ahmad confirm or overturn them in review.
 

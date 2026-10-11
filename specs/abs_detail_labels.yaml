@@ -89,7 +89,7 @@ subfunctions:
   - {code: '063', slug: water_supply, name: "Water supply", pattern: 'water supply'}
   # 07 Health
   - {code: '071', slug: medical_products_appliances_and_equipment, name: "Medical products, appliances and equipment", pattern: 'medical products, appliances and equipments?'}
-  - {code: '072', slug: out_patient_services, name: "Out-patient services", pattern: 'out patient services'}
+  - {code: '072', slug: out_patient_services, name: "Out-patient services", pattern: 'out patients? services'}
   - {code: '073', slug: hospital_services, name: "Hospital services", pattern: 'hospital services'}
   - {code: '074', slug: public_health_services, name: "Public health services", pattern: 'public health services'}
   - {code: '075', slug: research_and_development_health, name: "Research and development, health", pattern: '(r ?and ?d|research and development) health'}

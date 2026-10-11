@@ -167,6 +167,9 @@ class Cell(Model):
     source_id: str
     page: int
     page_render_sha256: Optional[str] = None
+    page_label: Optional[str] = Field(
+        default=None, description="The page number as printed on the page (folio), verbatim, when exactly one is found "
+                                  "in the top or bottom margin; null otherwise. `page` is always the PDF page.")
     table_index: int
     table_bbox_norm: list[float]
     cell_bbox_norm: list[float]

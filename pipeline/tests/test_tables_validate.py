@@ -75,3 +75,17 @@ def test_coverage_multiset_counts_duplicates():
     matched, missing = _multiset_match(printed, emitted)
     assert matched == 3                   # only one 415 was captured; 5.0 == 5
     assert missing == ["415"]
+
+
+def test_printed_page_label_is_read_only_when_unambiguous():
+    from datalab.tables import printed_page_label
+
+    body = [(0.1, 0.5, 0.2, 0.52, "1,234")]
+    assert printed_page_label(body + [(0.5, 0.95, 0.52, 0.96, "9")]) == "9"
+    assert printed_page_label(body + [(0.45, 0.95, 0.47, 0.96, "-"), (0.5, 0.95, 0.52, 0.96, "9"), (0.55, 0.95, 0.57, 0.96, "-")]) == "9"
+    assert printed_page_label(body + [(0.8, 0.95, 0.83, 0.96, "Page"), (0.84, 0.95, 0.85, 0.96, "9"),
+                                      (0.86, 0.95, 0.88, 0.96, "of"), (0.89, 0.95, 0.91, 0.96, "18")]) == "9"
+    assert printed_page_label(body + [(0.5, 0.95, 0.52, 0.96, "ix")]) == "ix"
+    assert printed_page_label(body) is None                                              # a number in the body is not a folio
+    assert printed_page_label(body + [(0.5, 0.95, 0.52, 0.96, "9"), (0.5, 0.03, 0.52, 0.04, "12")]) is None   # two candidates
+    assert printed_page_label(body + [(0.4, 0.95, 0.5, 0.96, "Budget"), (0.51, 0.95, 0.6, 0.96, "2025-26")]) is None

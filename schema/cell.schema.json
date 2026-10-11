@@ -151,6 +151,19 @@
       "title": "Page",
       "type": "integer"
     },
+    "page_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The page number as printed on the page (folio), verbatim, when exactly one is found in the top or bottom margin; null otherwise. `page` is always the PDF page.",
+      "title": "Page Label"
+    },
     "page_render_sha256": {
       "anyOf": [
         {

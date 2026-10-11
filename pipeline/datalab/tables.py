@@ -138,6 +138,31 @@ def page_words(pdf_path: Path, page: int) -> list[tuple[float, float, float, flo
         return [(x0 / w, y0 / h, x1 / w, y1 / h, text) for x0, y0, x1, y1, text, *_ in pg.get_text("words")]
 
 
+_FOLIO = re.compile(r"(?i)^(?:page\s+)?[-\u2013(\[]?\s*(\d{1,4}|[ivxlc]{1,7})\s*[-\u2013)\]]?(?:\s+of\s+\d{1,4})?$")
+
+
+def printed_page_label(words: list[tuple[float, float, float, float, str]], margin: float = 0.08) -> str | None:
+    """The page number printed on a page (its folio), read from the text layer. Never guessed.
+
+    A candidate is a whole line in the top or bottom margin that is only a page number ("9", "- 9 -",
+    "(ix)", "Page 9 of 18"). Exactly one candidate gives the label (the number as printed, without the
+    decoration); none or several give None.
+    """
+    lines: dict[tuple[str, int], list[tuple[float, str]]] = {}
+    for x0, y0, x1, y1, text in words:
+        yc = (y0 + y1) / 2
+        band = "top" if yc < margin else "bottom" if yc > 1 - margin else None
+        if band:
+            lines.setdefault((band, round(yc / 0.006)), []).append((x0, text))
+    found = []
+    for parts in lines.values():
+        line = " ".join(t for _, t in sorted(parts)).strip()
+        m = _FOLIO.match(line)
+        if m:
+            found.append(m.group(1))
+    return found[0] if len(found) == 1 else None
+
+
 # Title or caption text that Docling sometimes emits as a data value (AGENTS.md section 7).
 TITLE_TEXT = re.compile(r"(?i)\bTable\s*\d+|\bC-\d+\b|\bFY ?\d{2}\b|\bQ[1-4]\b|\b20\d\d-\d\d\b")
 MERGED_ROW = re.compile(r"\d[\d,]*\s{2,}\d[\d,]*")

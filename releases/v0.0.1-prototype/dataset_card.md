@@ -1,6 +1,6 @@
 # Dataset card: LUMS DataLab Portal v0.0.1-prototype
 
-Built 2026-10-11T00:09:46+00:00 from commit `f56d10ef7adf`. Label: **prototype**. DOI: none.
+Built 2026-10-11T00:19:14+00:00 from commit `9e674a3ce310`. Label: **prototype**. DOI: none.
 
 > Prototype. Not for citation in publications yet. Every published value passed deterministic checks;
 > the absolute error rate has not been measured yet (it needs the human-labelled gold set).
@@ -11,7 +11,7 @@ Built 2026-10-11T00:09:46+00:00 from commit `f56d10ef7adf`. Label: **prototype**
 |---|---|---|---|---|
 | Federal Annual Budget Statement | published | 9 | 2889 | disputed: 9, failed_checks: 216, not_in_source: 86, not_yet_verified: 200 |
 | Consumer Price Index | published | 8 | 1254 | disputed: 2 |
-| Labour Force Survey | published | 5 | 387 | disputed: 6, failed_checks: 3, not_yet_verified: 54 |
+| Labour Force Survey | published | 5 | 1347 | disputed: 6, failed_checks: 21, not_yet_verified: 288 |
 
 A data type marked *coming* is below a frozen threshold or not processed yet; none of its values are published.
 
@@ -24,7 +24,7 @@ A = arithmetic check passed and a second official printing agrees. B = one of th
 |---|---|---|---|---|
 | abs | 604 | 2285 | 200 | 216 |
 | cpi | 132 | 1122 | 0 | 0 |
-| lfs | 204 | 183 | 54 | 3 |
+| lfs | 548 | 799 | 288 | 21 |
 
 ## Coverage: how much of each printed table was captured
 
@@ -166,11 +166,17 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 | lfs-pbs-2020-21 | 35 | 90 | 90 | 100.0% | 100.0% |
 | lfs-pbs-2020-21 | 38 | 90 | 90 | 100.0% | 100.0% |
 | lfs-pbs-2020-21 | 39 | 48 | 48 | 100.0% | 100.0% |
+| lfs-pbs-2024-25 | 57 | 45 | 45 | 100.0% | 100.0% |
 | lfs-pbs-2024-25 | 58 | 90 | 90 | 100.0% | 100.0% |
+| lfs-pbs-2024-25 | 59 | 46 | 46 | 100.0% | 100.0% |
 | lfs-pbs-2024-25 | 60 | 90 | 90 | 100.0% | 100.0% |
+| lfs-pbs-2024-25 | 62 | 45 | 45 | 100.0% | 100.0% |
 | lfs-pbs-2024-25 | 64 | 91 | 91 | 100.0% | 100.0% |
+| lfs-pbs-2024-25 | 71 | 45 | 45 | 100.0% | 100.0% |
 | lfs-pbs-2024-25 | 72 | 90 | 90 | 100.0% | 100.0% |
+| lfs-pbs-2024-25 | 76 | 24 | 24 | 100.0% | 100.0% |
 | lfs-pbs-2024-25 | 76 | 48 | 48 | 100.0% | 100.0% |
+| lfs-pbs-2024-25 | 144 | 15 | 15 | 100.0% | 100.0% |
 | lfs-pbs-2024-25 | 145 | 19 | 19 | 100.0% | 100.0% |
 
 ## Accuracy evidence: deterministic checks
@@ -179,12 +185,13 @@ Measured by code: numbers found in the PDF text layer inside the table region ve
 |---|---|---|---|---|---|---|---|---|
 | abs | 2020 | 281 | 19 | 9 | 123 | 98.8% | 99.7% (648 of 650 pairs) | 9 of 659 pairs (1.4%) |
 | cpi | 348 | 540 | 1 | 2 | 0 | 99.7% | 100.0% (128 of 128 pairs) | 2 of 130 pairs (1.5%) |
-| lfs | 599 | 68 | 1 | 6 | 40 | 99.0% | 100.0% (270 of 270 pairs) | 6 of 276 pairs (2.2%) |
+| lfs | 2220 | 242 | 9 | 6 | 40 | 99.4% | 99.9% (917 of 918 pairs) | 6 of 924 pairs (0.7%) |
 
 **Disputed** means two official documents print different figures for the same thing and each printing adds up in its own table (a restatement by the publisher). A disputed figure is not published as checked: the site shows both printings and no value. A differing pair that does not meet those conditions is a failure and its value is withheld.
 
 **Deviation (decision D26, definition changed after results existed):** cross-edition agreement is agree / (agree + fail), with disputed pairs counted separately in the last column; the frozen 98% applies to that ratio. In the pass rate of evaluable checks a disputed pair counts as not passed. A data type whose disputed pairs exceed 5% of its cross-edition pairs is not published. The thresholds file is unchanged.
 - abs: differing pairs kept as failures: a table or cell carries an extraction flag: 1; a table or row carries a structural flag: 1.
+- lfs: differing pairs kept as failures: an arithmetic check on one reading failed: 1.
 
 **Measured error rate: pending gold-set labelling.** The gold-set kit is in `gold/`; until two humans have labelled it, no absolute error rate is claimed.
 

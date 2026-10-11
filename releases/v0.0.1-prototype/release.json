@@ -1,7 +1,7 @@
 {
   "version": "v0.0.1-prototype",
-  "created_at": "2026-10-11T00:09:46+00:00",
-  "git_commit": "f56d10ef7adf083bcce3a5e234e75e1d6ba08fa7",
+  "created_at": "2026-10-11T00:19:14+00:00",
+  "git_commit": "9e674a3ce310c9aa15e27ea3be9d54f6870d4c44",
   "label": "prototype",
   "doi": null,
   "scope": {
@@ -128,11 +128,11 @@
   },
   "counts": {
     "sources": 26,
-    "cells": 10788,
-    "cells_mapped": 6684,
-    "cells_behind_published_values": 6065,
-    "series": 541,
-    "observations": 5106,
+    "cells": 11081,
+    "cells_mapped": 8544,
+    "cells_behind_published_values": 7657,
+    "series": 925,
+    "observations": 6318,
     "observations_by_dataset": {
       "abs": {
         "gap:disputed": 9,
@@ -147,9 +147,9 @@
       },
       "lfs": {
         "gap:disputed": 6,
-        "gap:failed_checks": 3,
-        "gap:not_yet_verified": 54,
-        "published": 387
+        "gap:failed_checks": 21,
+        "gap:not_yet_verified": 288,
+        "published": 1347
       }
     },
     "tiers_by_dataset": {
@@ -164,34 +164,36 @@
         "B": 1122
       },
       "lfs": {
-        "A": 204,
-        "B": 183,
-        "C": 54,
-        "D": 3
+        "A": 548,
+        "B": 799,
+        "C": 288,
+        "D": 21
       }
     },
     "checks_by_result": {
-      "pass": 2967,
-      "pass_within_rounding": 889,
+      "pass": 4588,
+      "pass_within_rounding": 1063,
       "disputed": 17,
-      "fail": 21,
+      "fail": 29,
       "not_evaluable": 163
     },
     "checks_by_type": {
       "accounting_identity": {
-        "pass": 299,
-        "pass_within_rounding": 70
+        "pass": 456,
+        "pass_within_rounding": 125,
+        "fail": 4
       },
       "column_total": {
-        "pass": 122,
-        "pass_within_rounding": 51,
-        "not_evaluable": 30
+        "pass": 456,
+        "pass_within_rounding": 58,
+        "not_evaluable": 30,
+        "fail": 1
       },
       "cross_edition": {
-        "pass": 1030,
+        "pass": 1676,
         "disputed": 17,
-        "pass_within_rounding": 16,
-        "fail": 2
+        "pass_within_rounding": 17,
+        "fail": 3
       },
       "cross_source": {
         "fail": 1,
@@ -203,9 +205,9 @@
         "pass_within_rounding": 3
       },
       "hierarchy_sum": {
-        "pass": 574,
-        "pass_within_rounding": 161,
-        "fail": 17,
+        "pass": 730,
+        "pass_within_rounding": 256,
+        "fail": 18,
         "not_evaluable": 93
       },
       "index_aggregation": {
@@ -221,15 +223,16 @@
         "pass": 216
       },
       "row_total": {
-        "pass": 72,
-        "pass_within_rounding": 6
+        "pass": 400,
+        "pass_within_rounding": 19,
+        "fail": 1
       },
       "weights_sum": {
-        "pass_within_rounding": 14,
+        "pass_within_rounding": 17,
         "pass": 34
       }
     },
-    "page_renders": 139
+    "page_renders": 144
   },
   "coverage_summary": {
     "abs": {
@@ -250,10 +253,10 @@
       "tables_below_per_table_minimum": []
     },
     "lfs": {
-      "printed_numeric_tokens": 2744,
-      "matched": 2744,
+      "printed_numeric_tokens": 2964,
+      "matched": 2964,
       "coverage": 1.0,
-      "tables": 32,
+      "tables": 38,
       "tables_below_per_table_minimum": []
     }
   },
@@ -300,22 +303,22 @@
     },
     "lfs": {
       "all": {
-        "pass": 599,
-        "pass_within_rounding": 68,
-        "fail": 1,
+        "pass": 2220,
+        "pass_within_rounding": 242,
+        "fail": 9,
         "not_evaluable": 40,
         "disputed": 6,
-        "evaluable": 674,
-        "pass_rate": 0.9896
+        "evaluable": 2477,
+        "pass_rate": 0.9939
       },
       "cross_edition": {
-        "pass": 267,
-        "pass_within_rounding": 3,
-        "fail": 0,
+        "pass": 913,
+        "pass_within_rounding": 4,
+        "fail": 1,
         "not_evaluable": 0,
         "disputed": 6,
-        "evaluable": 270,
-        "pass_rate": 1.0
+        "evaluable": 918,
+        "pass_rate": 0.9989
       }
     }
   },
@@ -413,36 +416,38 @@
       "state": "published",
       "reasons": [],
       "coverage": {
-        "printed_numeric_tokens": 2744,
-        "matched": 2744,
+        "printed_numeric_tokens": 2964,
+        "matched": 2964,
         "coverage": 1.0,
-        "tables": 32,
+        "tables": 38,
         "tables_below_per_table_minimum": []
       },
       "check_pass_rate": {
-        "pass": 599,
-        "pass_within_rounding": 68,
-        "fail": 1,
+        "pass": 2220,
+        "pass_within_rounding": 242,
+        "fail": 9,
         "not_evaluable": 40,
         "disputed": 6,
-        "evaluable": 674,
-        "pass_rate": 0.9896
+        "evaluable": 2477,
+        "pass_rate": 0.9939
       },
       "cross_edition_agreement": {
-        "pass": 267,
-        "pass_within_rounding": 3,
-        "fail": 0,
+        "pass": 913,
+        "pass_within_rounding": 4,
+        "fail": 1,
         "not_evaluable": 0,
         "disputed": 6,
-        "evaluable": 270,
-        "pass_rate": 1.0
+        "evaluable": 918,
+        "pass_rate": 0.9989
       },
       "disputes": {
-        "differing_pairs": 6,
+        "differing_pairs": 7,
         "disputed": 6,
-        "kept_as_fail": {},
-        "cross_edition_pairs": 276,
-        "disputed_share": 0.0217,
+        "kept_as_fail": {
+          "an arithmetic check on one reading failed": 1
+        },
+        "cross_edition_pairs": 924,
+        "disputed_share": 0.0065,
         "max_disputed_share": "0.05"
       }
     }

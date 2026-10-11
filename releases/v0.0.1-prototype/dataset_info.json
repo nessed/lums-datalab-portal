@@ -9354,7 +9354,7 @@
   },
   "lfs": {
     "dataset": "lfs",
-    "built_at": "2026-10-10T23:32:03+00:00",
+    "built_at": "2026-10-11T00:18:15+00:00",
     "located": {
       "lfs-pbs-2014-15-national": {
         "runs": [
@@ -9370,6 +9370,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "lfpr_crude",
+            "definition": "13th ICLS",
             "table": "Crude activity (participation) rates",
             "page": 30,
             "table_index": 0,
@@ -9421,9 +9422,15 @@
             "unit_confirmed": true,
             "caption": "table-8 crude activity (participation) rates - pakistan and provinces (%) 2013-14 2014-15 province/ area * augmented * augmented total male female total male fe",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 30,
               "table_index": 0,
@@ -9441,6 +9448,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "lfpr_refined",
+            "definition": "13th ICLS",
             "table": "Refined activity (participation) rates",
             "page": 32,
             "table_index": 0,
@@ -9492,9 +9500,15 @@
             "unit_confirmed": true,
             "caption": "table-9 refined activity (participation) rates - pakistan and provinces (%) 2013-14 2014-15 province/area *augmented *augmented total male female total male fem",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 32,
               "table_index": 0,
@@ -9512,6 +9526,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "labour_force",
+            "definition": "13th ICLS",
             "table": "Civilian labour force",
             "page": 34,
             "table_index": 0,
@@ -9559,9 +9574,15 @@
             "unit_confirmed": true,
             "caption": "table-11 civilian labour force - pakistan and provinces (million) labour force province/area 2013-14 2014-15 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 34,
               "table_index": 0,
@@ -9579,6 +9600,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "employed",
+            "definition": "13th ICLS",
             "table": "Employed persons",
             "page": 35,
             "table_index": 0,
@@ -9626,9 +9648,15 @@
             "unit_confirmed": true,
             "caption": "table-12 employed - pakistan and provinces (million) employed province/area 2013-14 2014-15 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 35,
               "table_index": 0,
@@ -9646,6 +9674,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "industry",
+            "definition": "13th ICLS",
             "table": "Employed persons by major industry division",
             "page": 35,
             "table_index": 1,
@@ -9693,9 +9722,14 @@
             "unit_confirmed": true,
             "caption": "table-13 employed - distribution by major industry divisions (%) 2013-14 2014-15 major industry divisions total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 48,
+            "mapped_cells_by_group": {
+              "national": 48
+            },
             "coverage": {
               "page": 35,
               "table_index": 1,
@@ -9713,6 +9747,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "unemployment_rate",
+            "definition": "13th ICLS",
             "table": "Unemployment rates by area and sex",
             "page": 44,
             "table_index": 0,
@@ -9760,9 +9795,14 @@
             "unit_confirmed": true,
             "caption": "table-21 unemployment rates - by area and sex (%) area/sex 2013-14 2014-15 total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 18,
+            "mapped_cells_by_group": {
+              "national": 18
+            },
             "coverage": {
               "page": 44,
               "table_index": 0,
@@ -9780,6 +9820,7 @@
           {
             "source_id": "lfs-pbs-2014-15-national",
             "kind": "unemployed",
+            "definition": "13th ICLS",
             "table": "Unemployed persons",
             "page": 46,
             "table_index": 0,
@@ -9827,9 +9868,15 @@
             "unit_confirmed": true,
             "caption": "table-23 unemployed - pakistan and provinces (million) unemployed province/area 2013-14 2014-15 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 46,
               "table_index": 0,
@@ -9862,6 +9909,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "lfpr_crude",
+            "definition": "13th ICLS",
             "table": "Crude activity (participation) rates",
             "page": 30,
             "table_index": 0,
@@ -9913,9 +9961,15 @@
             "unit_confirmed": true,
             "caption": "table-8 crude activity (participation) rates - pakistan and provinces (%) 2014-15 2017-18 province/ area * augmented * augmented total male female total male fe",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 30,
               "table_index": 0,
@@ -9933,6 +9987,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "lfpr_refined",
+            "definition": "13th ICLS",
             "table": "Refined activity (participation) rates",
             "page": 32,
             "table_index": 0,
@@ -9984,9 +10039,15 @@
             "unit_confirmed": true,
             "caption": "table-9 refined activity (participation) rates - pakistan and provinces (%) 2014-15 2017-18 province/area *augmented *augmented total male female total male fem",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 32,
               "table_index": 0,
@@ -10004,6 +10065,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "labour_force",
+            "definition": "13th ICLS",
             "table": "Civilian labour force",
             "page": 34,
             "table_index": 0,
@@ -10051,9 +10113,15 @@
             "unit_confirmed": true,
             "caption": "table-11 civilian labour force - pakistan and provinces (million) labour force province/area 2014-15 2017-18 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 34,
               "table_index": 0,
@@ -10071,6 +10139,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "employed",
+            "definition": "13th ICLS",
             "table": "Employed persons",
             "page": 35,
             "table_index": 0,
@@ -10118,9 +10187,15 @@
             "unit_confirmed": true,
             "caption": "table-12 employed - pakistan and provinces (million) employed province/area 2014-15 2017-18 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 35,
               "table_index": 0,
@@ -10138,6 +10213,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "industry",
+            "definition": "13th ICLS",
             "table": "Employed persons by major industry division",
             "page": 35,
             "table_index": 1,
@@ -10185,9 +10261,14 @@
             "unit_confirmed": true,
             "caption": "table-13 employed - distribution by major industry divisions (%) 2014-15 2017-18 major industry divisions total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 48,
+            "mapped_cells_by_group": {
+              "national": 48
+            },
             "coverage": {
               "page": 35,
               "table_index": 1,
@@ -10205,6 +10286,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "unemployment_rate",
+            "definition": "13th ICLS",
             "table": "Unemployment rates by area and sex",
             "page": 44,
             "table_index": 0,
@@ -10252,9 +10334,14 @@
             "unit_confirmed": true,
             "caption": "table-21 unemployment rates - by area and sex (%) area/sex 2014-15 2017-18 total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 18,
+            "mapped_cells_by_group": {
+              "national": 18
+            },
             "coverage": {
               "page": 44,
               "table_index": 0,
@@ -10272,6 +10359,7 @@
           {
             "source_id": "lfs-pbs-2017-18",
             "kind": "unemployed",
+            "definition": "13th ICLS",
             "table": "Unemployed persons",
             "page": 46,
             "table_index": 0,
@@ -10319,9 +10407,15 @@
             "unit_confirmed": true,
             "caption": "table-23 unemployed - pakistan and provinces (million) unemployed province/area 2014-15 2017-18 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 46,
               "table_index": 0,
@@ -10357,6 +10451,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "lfpr_crude",
+            "definition": "13th ICLS",
             "table": "Crude activity (participation) rates",
             "page": 38,
             "table_index": 0,
@@ -10411,9 +10506,15 @@
             "unit_confirmed": true,
             "caption": "table-8 crude activity (participation) rates - pakistan and provinces (%) 2017-18 2018-19 province/ * augmented * augmented area total male female total male fe",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 38,
               "table_index": 0,
@@ -10431,6 +10532,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "lfpr_refined",
+            "definition": "13th ICLS",
             "table": "Refined activity (participation) rates",
             "page": 40,
             "table_index": 0,
@@ -10485,9 +10587,15 @@
             "unit_confirmed": true,
             "caption": "table-9 refined activity (participation) rates - pakistan and provinces (%) 2017-18 2018-19 province/area *augmented *augmented total male female total male fem",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 40,
               "table_index": 0,
@@ -10505,6 +10613,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "labour_force",
+            "definition": "13th ICLS",
             "table": "Civilian labour force",
             "page": 43,
             "table_index": 0,
@@ -10555,9 +10664,15 @@
             "unit_confirmed": true,
             "caption": "table-11 civilian labour force - pakistan and provinces (million) labour force province/area 2017-18 2018-19 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 43,
               "table_index": 0,
@@ -10575,6 +10690,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "employed",
+            "definition": "13th ICLS",
             "table": "Employed persons",
             "page": 44,
             "table_index": 0,
@@ -10625,9 +10741,15 @@
             "unit_confirmed": true,
             "caption": "table-12 employed - pakistan and provinces (million) employed province/area 2017-18 2018-19 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 44,
               "table_index": 0,
@@ -10645,6 +10767,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "industry",
+            "definition": "13th ICLS",
             "table": "Employed persons by major industry division",
             "page": 44,
             "table_index": 1,
@@ -10695,9 +10818,14 @@
             "unit_confirmed": true,
             "caption": "table-13 employed - distribution by major industry divisions (%) 2017-18 2018-19 major industry divisions total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 48,
+            "mapped_cells_by_group": {
+              "national": 48
+            },
             "coverage": {
               "page": 44,
               "table_index": 1,
@@ -10715,6 +10843,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "unemployment_rate",
+            "definition": "13th ICLS",
             "table": "Unemployment rates by area and sex",
             "page": 53,
             "table_index": 0,
@@ -10765,9 +10894,14 @@
             "unit_confirmed": true,
             "caption": "table-21 unemployment rates - by area and sex (%) area/sex 2017-18 2018-19 total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 18,
+            "mapped_cells_by_group": {
+              "national": 18
+            },
             "coverage": {
               "page": 53,
               "table_index": 0,
@@ -10785,6 +10919,7 @@
           {
             "source_id": "lfs-pbs-2018-19",
             "kind": "unemployed",
+            "definition": "13th ICLS",
             "table": "Unemployed persons",
             "page": 55,
             "table_index": 0,
@@ -10835,9 +10970,15 @@
             "unit_confirmed": true,
             "caption": "table-23 unemployed - pakistan and provinces (million) unemployed province/area 2017-18 2018-19 total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 55,
               "table_index": 0,
@@ -10883,6 +11024,7 @@
           {
             "source_id": "lfs-pbs-2020-21",
             "kind": "labour_force",
+            "definition": "13th ICLS",
             "table": "Civilian labour force",
             "page": 32,
             "table_index": 0,
@@ -10933,9 +11075,15 @@
             "unit_confirmed": true,
             "caption": "table 3.6 civilian labour force - pakistan and provinces (million) labour force 2018-19 2020-21 province/area total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 32,
               "table_index": 0,
@@ -10953,6 +11101,7 @@
           {
             "source_id": "lfs-pbs-2020-21",
             "kind": "lfpr_crude",
+            "definition": "13th ICLS",
             "table": "Crude activity (participation) rates",
             "page": 33,
             "table_index": 0,
@@ -11003,9 +11152,15 @@
             "unit_confirmed": true,
             "caption": "table 3.7 crude activity (participation) rates - pakistan and provinces (%) 2018-19 2020-21 province/area total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 33,
               "table_index": 0,
@@ -11023,6 +11178,7 @@
           {
             "source_id": "lfs-pbs-2020-21",
             "kind": "lfpr_refined",
+            "definition": "13th ICLS",
             "table": "Refined activity (participation) rates",
             "page": 35,
             "table_index": 0,
@@ -11073,9 +11229,15 @@
             "unit_confirmed": true,
             "caption": "table 3.8 refined activity (participation) rates - pakistan and provinces (%) 2018-19 2020-21 province/area total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 35,
               "table_index": 0,
@@ -11093,6 +11255,7 @@
           {
             "source_id": "lfs-pbs-2020-21",
             "kind": "employed",
+            "definition": "13th ICLS",
             "table": "Employed persons",
             "page": 38,
             "table_index": 0,
@@ -11143,9 +11306,15 @@
             "unit_confirmed": true,
             "caption": "table 4.1 employed - pakistan and provinces (million) employed 2018-19 2020-21 province/area total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 38,
               "table_index": 0,
@@ -11163,6 +11332,7 @@
           {
             "source_id": "lfs-pbs-2020-21",
             "kind": "industry",
+            "definition": "13th ICLS",
             "table": "Employed persons by major industry division",
             "page": 39,
             "table_index": 0,
@@ -11213,9 +11383,14 @@
             "unit_confirmed": true,
             "caption": "table 4.2 employed - distribution by major industry divisions (%) 2018-19 2020-21 major industry divisions total male female total male female",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 48,
+            "mapped_cells_by_group": {
+              "national": 48
+            },
             "coverage": {
               "page": 39,
               "table_index": 0,
@@ -11264,6 +11439,159 @@
           {
             "source_id": "lfs-pbs-2024-25",
             "kind": "labour_force",
+            "definition": "19th ICLS",
+            "table": "Civilian labour force",
+            "page": 57,
+            "table_index": 0,
+            "run_id": "LFS_2024-25__docling__page-range__run-01",
+            "run_mode": "page-range",
+            "page_range": [
+              48,
+              79
+            ],
+            "rows": 22,
+            "cols": 4,
+            "value_columns": [
+              1,
+              2,
+              3
+            ],
+            "table_flags": [
+              "merged_rows"
+            ],
+            "columns": {
+              "1": {
+                "period": "2024-25",
+                "sex": "total"
+              },
+              "2": {
+                "period": "2024-25",
+                "sex": "male"
+              },
+              "3": {
+                "period": "2024-25",
+                "sex": "female"
+              }
+            },
+            "column_problems": [],
+            "unit_confirmed": true,
+            "caption": "table 3.8 civilian labour force - pakistan and provinces (19th icls) labour force (million) 2024-25 province/area total male female pakistan",
+            "unmapped_labels": [],
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
+            "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 45,
+            "mapped_cells_by_group": {
+              "icls19": 45
+            },
+            "coverage": {
+              "page": 57,
+              "table_index": 0,
+              "printed_numeric_tokens": 45,
+              "matched": 45,
+              "coverage": 1.0,
+              "missing_tokens_sample": [],
+              "row_band_printed_numeric_tokens": 45,
+              "row_band_matched": 45,
+              "coverage_row_band": 1.0,
+              "row_band_missing_sample": [],
+              "emitted_numeric_tokens": 45
+            },
+            "second_reader": {
+              "routed_by": [
+                "merged_rows"
+              ],
+              "reading": {
+                "usable": true,
+                "reason": null,
+                "reader": "pdfplumber",
+                "version": "0.11.10",
+                "config_sha256": "b081aede84a0f6da09de13590153f13926ffa6c06e58ba210f853651ef7b3f1a",
+                "page": 57,
+                "column_bands": [
+                  [
+                    0.38206,
+                    0.42379
+                  ],
+                  [
+                    0.57399,
+                    0.61572
+                  ],
+                  [
+                    0.76614,
+                    0.80787
+                  ]
+                ],
+                "words_in_box": 73,
+                "header_lines": 3,
+                "data_rows": 15,
+                "value_cells": 45,
+                "columns_found": 3,
+                "columns_expected": 3,
+                "label_columns": 1,
+                "anchors_matched": 3,
+                "anchors_given": 3
+              },
+              "promoted": true,
+              "table_flags": [],
+              "coverage": {
+                "page": 57,
+                "table_index": 0,
+                "printed_numeric_tokens": 45,
+                "matched": 45,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 45,
+                "row_band_matched": 45,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 45
+              },
+              "column_problems": [],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "cells_read": 45,
+              "cells_with_a_number": 45,
+              "cells_mapped": 45,
+              "checks": {
+                "row_total": {
+                  "pass": 13,
+                  "pass_within_rounding": 2,
+                  "fail": 0,
+                  "not_evaluable": 0
+                },
+                "column_total": {
+                  "pass": 15,
+                  "pass_within_rounding": 0,
+                  "fail": 0,
+                  "not_evaluable": 0
+                },
+                "hierarchy_sum": {
+                  "pass": 7,
+                  "pass_within_rounding": 2,
+                  "fail": 0,
+                  "not_evaluable": 0
+                }
+              },
+              "checks_run": 39,
+              "checks_passed": 39,
+              "checks_not_passed_sample": [],
+              "numbers_also_read_by_first_reader": {
+                "first_reader_numeric_tokens": 45,
+                "second_reader_numeric_tokens": 45,
+                "numeric_tokens_in_both": 45
+              },
+              "overlay": "overlay_lfs-pbs-2024-25_p057_second_reader.png",
+              "decision": "used: all 39 arithmetic checks pass on the second reading",
+              "block_heading_from_text_layer": "Pakistan",
+              "rows_out_of_scope": 0
+            }
+          },
+          {
+            "source_id": "lfs-pbs-2024-25",
+            "kind": "labour_force",
+            "definition": "13th ICLS",
             "table": "Civilian labour force",
             "page": 58,
             "table_index": 0,
@@ -11314,9 +11642,15 @@
             "unit_confirmed": true,
             "caption": "table 3.9 civilian labour force - pakistan and provinces (13th icls) labour force (millions) 2020-21 2024-25 province/area total male female total male female p",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 58,
               "table_index": 0,
@@ -11334,6 +11668,68 @@
           {
             "source_id": "lfs-pbs-2024-25",
             "kind": "lfpr_crude",
+            "definition": "19th ICLS",
+            "table": "Crude activity (participation) rates",
+            "page": 59,
+            "table_index": 0,
+            "run_id": "LFS_2024-25__docling__page-range__run-01",
+            "run_mode": "page-range",
+            "page_range": [
+              48,
+              79
+            ],
+            "rows": 22,
+            "cols": 4,
+            "value_columns": [
+              1,
+              2,
+              3
+            ],
+            "table_flags": [],
+            "columns": {
+              "1": {
+                "period": "2024-25",
+                "sex": "total"
+              },
+              "2": {
+                "period": "2024-25",
+                "sex": "male"
+              },
+              "3": {
+                "period": "2024-25",
+                "sex": "female"
+              }
+            },
+            "column_problems": [],
+            "unit_confirmed": true,
+            "caption": "table 3.10: crude labour force participation rate-19th icls (%) crude participation rate 2024-25 (19th icls) province/region total male female pakistan",
+            "unmapped_labels": [],
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
+            "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 45,
+            "mapped_cells_by_group": {
+              "icls19": 45
+            },
+            "coverage": {
+              "page": 59,
+              "table_index": 0,
+              "printed_numeric_tokens": 46,
+              "matched": 46,
+              "coverage": 1.0,
+              "missing_tokens_sample": [],
+              "row_band_printed_numeric_tokens": 46,
+              "row_band_matched": 46,
+              "coverage_row_band": 1.0,
+              "row_band_missing_sample": [],
+              "emitted_numeric_tokens": 46
+            }
+          },
+          {
+            "source_id": "lfs-pbs-2024-25",
+            "kind": "lfpr_crude",
+            "definition": "13th ICLS",
             "table": "Crude activity (participation) rates",
             "page": 60,
             "table_index": 0,
@@ -11384,9 +11780,15 @@
             "unit_confirmed": true,
             "caption": "table 3.11 crude labour force participation rate-13th icls (%) 2020-21 2024-25 province/area total male female total male female pakistan",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 60,
               "table_index": 0,
@@ -11404,6 +11806,68 @@
           {
             "source_id": "lfs-pbs-2024-25",
             "kind": "lfpr_refined",
+            "definition": "19th ICLS",
+            "table": "Refined activity (participation) rates",
+            "page": 62,
+            "table_index": 0,
+            "run_id": "LFS_2024-25__docling__page-range__run-01",
+            "run_mode": "page-range",
+            "page_range": [
+              48,
+              79
+            ],
+            "rows": 21,
+            "cols": 4,
+            "value_columns": [
+              1,
+              2,
+              3
+            ],
+            "table_flags": [],
+            "columns": {
+              "1": {
+                "period": "2024-25",
+                "sex": "total"
+              },
+              "2": {
+                "period": "2024-25",
+                "sex": "male"
+              },
+              "3": {
+                "period": "2024-25",
+                "sex": "female"
+              }
+            },
+            "column_problems": [],
+            "unit_confirmed": true,
+            "caption": "table 3.12 refined labour force participation rate by province-19th icls (%) 2024-25 province/area total male female pakistan",
+            "unmapped_labels": [],
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
+            "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 45,
+            "mapped_cells_by_group": {
+              "icls19": 45
+            },
+            "coverage": {
+              "page": 62,
+              "table_index": 0,
+              "printed_numeric_tokens": 45,
+              "matched": 45,
+              "coverage": 1.0,
+              "missing_tokens_sample": [],
+              "row_band_printed_numeric_tokens": 45,
+              "row_band_matched": 45,
+              "coverage_row_band": 1.0,
+              "row_band_missing_sample": [],
+              "emitted_numeric_tokens": 45
+            }
+          },
+          {
+            "source_id": "lfs-pbs-2024-25",
+            "kind": "lfpr_refined",
+            "definition": "13th ICLS",
             "table": "Refined activity (participation) rates",
             "page": 64,
             "table_index": 0,
@@ -11454,9 +11918,15 @@
             "unit_confirmed": true,
             "caption": "table 3.13 refined labour force participation rate by province (13th icls) (%) refined participation rate (13th icls) 2020-21 2024-25 province/area total male f",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 64,
               "table_index": 0,
@@ -11474,6 +11944,149 @@
           {
             "source_id": "lfs-pbs-2024-25",
             "kind": "employed",
+            "definition": "19th ICLS",
+            "table": "Employed persons",
+            "page": 71,
+            "table_index": 0,
+            "run_id": "LFS_2024-25__docling__page-range__run-01",
+            "run_mode": "page-range",
+            "page_range": [
+              48,
+              79
+            ],
+            "rows": 22,
+            "cols": 4,
+            "value_columns": [
+              1,
+              2,
+              3
+            ],
+            "table_flags": [
+              "merged_rows",
+              "column_unmapped"
+            ],
+            "columns": {},
+            "column_problems": [
+              "fewer than three value columns"
+            ],
+            "unit_confirmed": true,
+            "caption": "table 4.1 employed population - pakistan and provinces 19th icls employed population (million) 2024-25 province/area total male female pakistan",
+            "unmapped_labels": [],
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
+            "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 45,
+            "mapped_cells_by_group": {
+              "icls19": 45
+            },
+            "coverage": {
+              "page": 71,
+              "table_index": 0,
+              "printed_numeric_tokens": 45,
+              "matched": 45,
+              "coverage": 1.0,
+              "missing_tokens_sample": [],
+              "row_band_printed_numeric_tokens": 45,
+              "row_band_matched": 45,
+              "coverage_row_band": 1.0,
+              "row_band_missing_sample": [],
+              "emitted_numeric_tokens": 45
+            },
+            "second_reader": {
+              "routed_by": [
+                "merged_rows"
+              ],
+              "reading": {
+                "usable": true,
+                "reason": null,
+                "reader": "pdfplumber",
+                "version": "0.11.10",
+                "config_sha256": "b081aede84a0f6da09de13590153f13926ffa6c06e58ba210f853651ef7b3f1a",
+                "page": 71,
+                "column_bands": [
+                  [
+                    0.38468,
+                    0.41714
+                  ],
+                  [
+                    0.57561,
+                    0.60806
+                  ],
+                  [
+                    0.76675,
+                    0.7992
+                  ]
+                ],
+                "words_in_box": 73,
+                "header_lines": 3,
+                "data_rows": 15,
+                "value_cells": 45,
+                "columns_found": 3,
+                "columns_expected": 3,
+                "label_columns": 1,
+                "anchors_matched": 1,
+                "anchors_given": 1
+              },
+              "promoted": true,
+              "table_flags": [],
+              "coverage": {
+                "page": 71,
+                "table_index": 0,
+                "printed_numeric_tokens": 45,
+                "matched": 45,
+                "coverage": 1.0,
+                "missing_tokens_sample": [],
+                "row_band_printed_numeric_tokens": 45,
+                "row_band_matched": 45,
+                "coverage_row_band": 1.0,
+                "row_band_missing_sample": [],
+                "emitted_numeric_tokens": 45
+              },
+              "column_problems": [],
+              "unmapped_labels": [],
+              "ambiguous_labels": [],
+              "cells_read": 45,
+              "cells_with_a_number": 45,
+              "cells_mapped": 45,
+              "checks": {
+                "row_total": {
+                  "pass": 14,
+                  "pass_within_rounding": 1,
+                  "fail": 0,
+                  "not_evaluable": 0
+                },
+                "column_total": {
+                  "pass": 14,
+                  "pass_within_rounding": 1,
+                  "fail": 0,
+                  "not_evaluable": 0
+                },
+                "hierarchy_sum": {
+                  "pass": 4,
+                  "pass_within_rounding": 5,
+                  "fail": 0,
+                  "not_evaluable": 0
+                }
+              },
+              "checks_run": 39,
+              "checks_passed": 39,
+              "checks_not_passed_sample": [],
+              "numbers_also_read_by_first_reader": {
+                "first_reader_numeric_tokens": 45,
+                "second_reader_numeric_tokens": 45,
+                "numeric_tokens_in_both": 45
+              },
+              "overlay": "overlay_lfs-pbs-2024-25_p071_second_reader.png",
+              "decision": "used: all 39 arithmetic checks pass on the second reading",
+              "block_heading_from_text_layer": "Pakistan",
+              "rows_out_of_scope": 0
+            }
+          },
+          {
+            "source_id": "lfs-pbs-2024-25",
+            "kind": "employed",
+            "definition": "13th ICLS",
             "table": "Employed persons",
             "page": 72,
             "table_index": 0,
@@ -11524,9 +12137,15 @@
             "unit_confirmed": true,
             "caption": "table 4.2 employed population - pakistan and provinces 13th icls employed population (million) 2020-21 2024-25 province/area total male female total male female",
             "unmapped_labels": [],
-            "rows_out_of_scope": 12,
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
             "header_rows_as_data": [],
-            "mapped_cells": 18,
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 90,
+            "mapped_cells_by_group": {
+              "national": 18,
+              "provincial": 72
+            },
             "coverage": {
               "page": 72,
               "table_index": 0,
@@ -11544,6 +12163,68 @@
           {
             "source_id": "lfs-pbs-2024-25",
             "kind": "industry",
+            "definition": "19th ICLS",
+            "table": "Employed persons by major industry division",
+            "page": 76,
+            "table_index": 0,
+            "run_id": "LFS_2024-25__docling__page-range__run-01",
+            "run_mode": "page-range",
+            "page_range": [
+              48,
+              79
+            ],
+            "rows": 10,
+            "cols": 4,
+            "value_columns": [
+              1,
+              2,
+              3
+            ],
+            "table_flags": [],
+            "columns": {
+              "1": {
+                "period": "2024-25",
+                "sex": "total"
+              },
+              "2": {
+                "period": "2024-25",
+                "sex": "male"
+              },
+              "3": {
+                "period": "2024-25",
+                "sex": "female"
+              }
+            },
+            "column_problems": [],
+            "unit_confirmed": true,
+            "caption": "table 4.5 distribution of employed person by major industry divisions-19th icls (%) major industry divisions 2024-25 major industry divisions total male female",
+            "unmapped_labels": [],
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
+            "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 24,
+            "mapped_cells_by_group": {
+              "icls19": 24
+            },
+            "coverage": {
+              "page": 76,
+              "table_index": 0,
+              "printed_numeric_tokens": 24,
+              "matched": 24,
+              "coverage": 1.0,
+              "missing_tokens_sample": [],
+              "row_band_printed_numeric_tokens": 24,
+              "row_band_matched": 24,
+              "coverage_row_band": 1.0,
+              "row_band_missing_sample": [],
+              "emitted_numeric_tokens": 24
+            }
+          },
+          {
+            "source_id": "lfs-pbs-2024-25",
+            "kind": "industry",
+            "definition": "13th ICLS",
             "table": "Employed persons by major industry division",
             "page": 76,
             "table_index": 1,
@@ -11594,9 +12275,14 @@
             "unit_confirmed": true,
             "caption": "table 4.6 distribution of employed person by major industry divisions -13th icls (%) major industry divisions 2020-21 2024-25 major industry divisions total mal",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 48,
+            "mapped_cells_by_group": {
+              "national": 48
+            },
             "coverage": {
               "page": 76,
               "table_index": 1,
@@ -11614,6 +12300,68 @@
           {
             "source_id": "lfs-pbs-2024-25",
             "kind": "unemployment_rate",
+            "definition": "19th ICLS",
+            "table": "Unemployment rates by area and sex",
+            "page": 144,
+            "table_index": 0,
+            "run_id": "LFS_2024-25__docling__page-range__run-02",
+            "run_mode": "page-range",
+            "page_range": [
+              140,
+              150
+            ],
+            "rows": 7,
+            "cols": 4,
+            "value_columns": [
+              1,
+              2,
+              3
+            ],
+            "table_flags": [
+              "scale_not_confirmed"
+            ],
+            "columns": {
+              "1": {
+                "period": "2024-25",
+                "sex": "total"
+              },
+              "2": {
+                "period": "2024-25",
+                "sex": "male"
+              },
+              "3": {
+                "period": "2024-25",
+                "sex": "female"
+              }
+            },
+            "column_problems": [],
+            "unit_confirmed": false,
+            "caption": "table 9.2 unemployment rate- pakistan and provinces (19th icls) unemployment rate (2024-25) province/area total male female",
+            "unmapped_labels": [],
+            "unknown_headings": [],
+            "rows_out_of_scope": 0,
+            "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
+            "mapped_cells": 0,
+            "mapped_cells_by_group": {},
+            "coverage": {
+              "page": 144,
+              "table_index": 0,
+              "printed_numeric_tokens": 15,
+              "matched": 15,
+              "coverage": 1.0,
+              "missing_tokens_sample": [],
+              "row_band_printed_numeric_tokens": 15,
+              "row_band_matched": 15,
+              "coverage_row_band": 1.0,
+              "row_band_missing_sample": [],
+              "emitted_numeric_tokens": 15
+            }
+          },
+          {
+            "source_id": "lfs-pbs-2024-25",
+            "kind": "unemployment_rate",
+            "definition": "13th ICLS",
             "table": "Unemployment rates by area and sex",
             "page": 145,
             "table_index": 0,
@@ -11664,9 +12412,14 @@
             "unit_confirmed": true,
             "caption": "table 9.3 unemployment rate by province, region & sex (%) unemployment rate (13th icls) 2020-21 2024-25 province/region total male female total male female paki",
             "unmapped_labels": [],
+            "unknown_headings": [],
             "rows_out_of_scope": 0,
             "header_rows_as_data": [],
+            "block_heading_from_text_layer": null,
             "mapped_cells": 18,
+            "mapped_cells_by_group": {
+              "national": 18
+            },
             "coverage": {
               "page": 145,
               "table_index": 0,
@@ -11682,27 +12435,11 @@
             }
           }
         ],
-        "rejected": [
-          {
-            "page": 57,
-            "table_index": 0,
-            "result": "other_definition",
-            "caption": "table 3.8 civilian labour force - pakistan and provinces (19th icls) labour force (million) 2024-25 province/area total "
-          },
-          {
-            "page": 71,
-            "table_index": 0,
-            "result": "other_definition",
-            "caption": "table 4.1 employed population - pakistan and provinces 19th icls employed population (million) 2024-25 province/area tot"
-          },
-          {
-            "page": 76,
-            "table_index": 0,
-            "result": "other_definition",
-            "caption": "table 4.5 distribution of employed person by major industry divisions-19th icls (%) major industry divisions 2024-25 maj"
-          }
-        ],
+        "rejected": [],
         "kinds_not_located": [
+          "unemployed"
+        ],
+        "kinds_not_located_icls19": [
           "unemployed"
         ]
       }
@@ -11712,39 +12449,39 @@
     },
     "rounds_registered_twice": {},
     "coverage_overall": {
-      "printed_numeric_tokens": 2744,
-      "matched": 2744,
+      "printed_numeric_tokens": 2964,
+      "matched": 2964,
       "coverage": 1.0,
-      "tables": 32,
+      "tables": 38,
       "min_table_coverage": 1.0
     },
     "check_pass_rates": {
       "all": {
-        "pass": 599,
-        "pass_within_rounding": 68,
-        "fail": 1,
+        "pass": 2220,
+        "pass_within_rounding": 242,
+        "fail": 9,
         "not_evaluable": 40,
         "disputed": 6,
-        "evaluable": 668,
-        "pass_rate": 0.9985
+        "evaluable": 2471,
+        "pass_rate": 0.9964
       },
       "arithmetic": {
-        "pass": 219,
-        "pass_within_rounding": 52,
-        "fail": 1,
+        "pass": 1194,
+        "pass_within_rounding": 225,
+        "fail": 8,
         "not_evaluable": 40,
         "disputed": 0,
-        "evaluable": 272,
-        "pass_rate": 0.9963
+        "evaluable": 1427,
+        "pass_rate": 0.9944
       },
       "cross_edition": {
-        "pass": 267,
-        "pass_within_rounding": 3,
-        "fail": 0,
+        "pass": 913,
+        "pass_within_rounding": 4,
+        "fail": 1,
         "not_evaluable": 0,
         "disputed": 6,
-        "evaluable": 270,
-        "pass_rate": 1.0
+        "evaluable": 918,
+        "pass_rate": 0.9989
       },
       "cross_source": {
         "pass": 113,
@@ -11756,31 +12493,31 @@
         "pass_rate": 1.0
       },
       "type:accounting_identity": {
-        "pass": 42,
-        "pass_within_rounding": 12,
-        "fail": 0,
+        "pass": 199,
+        "pass_within_rounding": 67,
+        "fail": 4,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 54,
-        "pass_rate": 1.0
+        "evaluable": 270,
+        "pass_rate": 0.9852
       },
       "type:column_total": {
-        "pass": 76,
-        "pass_within_rounding": 2,
-        "fail": 0,
+        "pass": 410,
+        "pass_within_rounding": 9,
+        "fail": 1,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 78,
-        "pass_rate": 1.0
+        "evaluable": 420,
+        "pass_rate": 0.9976
       },
       "type:cross_edition": {
-        "pass": 267,
-        "pass_within_rounding": 3,
-        "fail": 0,
+        "pass": 913,
+        "pass_within_rounding": 4,
+        "fail": 1,
         "not_evaluable": 0,
         "disputed": 6,
-        "evaluable": 270,
-        "pass_rate": 1.0
+        "evaluable": 918,
+        "pass_rate": 0.9989
       },
       "type:cross_source": {
         "pass": 113,
@@ -11790,6 +12527,15 @@
         "disputed": 0,
         "evaluable": 126,
         "pass_rate": 1.0
+      },
+      "type:hierarchy_sum": {
+        "pass": 156,
+        "pass_within_rounding": 95,
+        "fail": 1,
+        "not_evaluable": 0,
+        "disputed": 0,
+        "evaluable": 252,
+        "pass_rate": 0.996
       },
       "type:recompute": {
         "pass": 0,
@@ -11801,36 +12547,77 @@
         "pass_rate": 0.9688
       },
       "type:row_total": {
-        "pass": 72,
-        "pass_within_rounding": 6,
-        "fail": 0,
+        "pass": 400,
+        "pass_within_rounding": 19,
+        "fail": 1,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 78,
-        "pass_rate": 1.0
+        "evaluable": 420,
+        "pass_rate": 0.9976
       },
       "type:weights_sum": {
         "pass": 29,
-        "pass_within_rounding": 1,
+        "pass_within_rounding": 4,
         "fail": 0,
         "not_evaluable": 0,
         "disputed": 0,
-        "evaluable": 30,
+        "evaluable": 33,
         "pass_rate": 1.0
       }
     },
     "observations_by_outcome": {
-      "published": 387,
+      "published": 1347,
+      "failed_checks": 21,
       "disputed": 6,
-      "failed_checks": 3,
-      "not_yet_verified": 54
+      "not_yet_verified": 288
     },
     "tier_mix": {
-      "B": 183,
-      "A": 204,
+      "B": 799,
+      "A": 548,
+      "D": 21,
       "none": 6,
-      "D": 3,
-      "C": 54
+      "C": 288
+    },
+    "observations_by_group": {
+      "icls19": {
+        "not_yet_verified, tier C": 90,
+        "published, tier B": 114
+      },
+      "national": {
+        "disputed, tier none": 6,
+        "failed_checks, tier D": 4,
+        "not_yet_verified, tier C": 54,
+        "published, tier A": 203,
+        "published, tier B": 183
+      },
+      "provincial": {
+        "failed_checks, tier D": 17,
+        "not_yet_verified, tier C": 144,
+        "published, tier A": 345,
+        "published, tier B": 502
+      }
+    },
+    "depth": {
+      "provinces_enabled": true,
+      "icls19_enabled": true,
+      "tables_with_other_regions": []
+    },
+    "icls19_definition_statement": {
+      "source_id": "lfs-pbs-2024-25",
+      "quotes": [
+        {
+          "page": 45,
+          "text": "Under 19th ICLS, the definition of employment is narrower and more precise, it includes only work performed for pay or profit and mainly intended for others. Individuals engaged in subsistence agriculture (workers produced goods mainly for their own use) are excluded from employment under this definition.",
+          "found_on_page": true
+        },
+        {
+          "page": 48,
+          "text": "As per the 19th International Conference of Labour Statisticians (ICLS) framework, the LFS 2024-25 excludes 2.48 million own-use producers from employment, aligning with the updated classification standards.",
+          "found_on_page": true
+        }
+      ],
+      "text": "Definition as stated in the report: (p.45) \"Under 19th ICLS, the definition of employment is narrower and more precise, it includes only work performed for pay or profit and mainly intended for others. Individuals engaged in subsistence agriculture (workers produced goods mainly for their own use) are excluded from employment under this definition.\" (p.48) \"As per the 19th International Conference of Labour Statisticians (ICLS) framework, the LFS 2024-25 excludes 2.48 million own-use producers from employment, aligning with the updated classification standards.\"",
+      "status": "searched"
     },
     "comparability_text_search": {
       "status": "searched",

@@ -20,6 +20,7 @@ from .checks import classify_sum, dispute_summary, dispute_test, pass_rate
 from .normalise import last_digit_unit
 from .schema import (AGREEMENT_CHECKS, PASSING, Cell, Check, Observation, Release, RunManifest, Series, Source)
 from .status import decide_tier, disputed_readings, is_disputed
+from .tables import printed_page_label
 
 SUM_TYPES = frozenset({"column_total", "hierarchy_sum", "row_total", "accounting_identity"})
 EQUAL_TYPES = frozenset({"cross_edition", "cross_table"})
@@ -84,8 +85,9 @@ def gate_dataset(dataset: str, coverage: list[dict[str, Any]], checks: list[Chec
     }
 
 
-def render_pages(cells: list[Cell], sources: dict[str, Source], out_dir: Path, dpi: int = 144) -> dict[tuple[str, int], str]:
-    """One PNG per used page (D12). Returns {(source_id, page): sha256}."""
+def render_pages(cells: list[Cell], sources: dict[str, Source], out_dir: Path, dpi: int = 144,
+                 labels: dict[tuple[str, int], str | None] | None = None) -> dict[tuple[str, int], str]:
+    """One PNG per used page (D12). Returns {(source_id, page): sha256}; fills `labels` with printed page numbers."""
     import pymupdf
 
     from .sources import source_path
@@ -103,6 +105,11 @@ def render_pages(cells: list[Cell], sources: dict[str, Source], out_dir: Path, d
                 pix = doc[page - 1].get_pixmap(dpi=dpi, colorspace=pymupdf.csGRAY if False else pymupdf.csRGB, alpha=False)
                 pix.save(out)
                 hashes[(sid, page)] = config.sha256_file(out)
+                if labels is not None:
+                    pg = doc[page - 1]
+                    w, h = pg.rect.width, pg.rect.height
+                    labels[(sid, page)] = printed_page_label(
+                        [(x0 / w, y0 / h, x1 / w, y1 / h, text) for x0, y0, x1, y1, text, *_ in pg.get_text("words")])
     return hashes
 
 
@@ -185,9 +192,11 @@ def build_release(version: str = config.DEFAULT_RELEASE, only: list[str] | None 
 
     # Page renders for every page that holds a cell.
     used_sources = {c.source_id for c in all_cells}
-    hashes = render_pages(all_cells, sources, out / "pages")
+    page_labels: dict[tuple[str, int], str | None] = {}
+    hashes = render_pages(all_cells, sources, out / "pages", labels=page_labels)
     for c in all_cells:
         c.page_render_sha256 = hashes[(c.source_id, c.page)]
+        c.page_label = page_labels.get((c.source_id, c.page))
     # Unpublished observations never carry a value.
     for o in all_obs:
         if not o.published:
@@ -231,7 +240,7 @@ def build_release(version: str = config.DEFAULT_RELEASE, only: list[str] | None 
     cell_fields = ["cell_id", "source_id", "page", "table_index", "row_index", "col_index", "row_label_raw", "col_label_raw",
                    "value_raw", "value_parsed", "is_missing", "series_id", "period", "vintage", "unit", "scale_factor",
                    "normalization_flags", "structural_flags", "cell_bbox_norm", "run_id", "extractor_name",
-                   "extractor_version", "extract_config_sha256", "page_render_sha256"]
+                   "extractor_version", "extract_config_sha256", "page_render_sha256", "page_label"]
     published_cells = {o.primary_cell_id for o in all_obs if o.published} | {cid for o in all_obs if o.published for cid in o.supporting_cell_ids}
     cell_rows = []
     for c in all_cells:

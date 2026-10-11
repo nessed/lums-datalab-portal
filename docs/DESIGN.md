@@ -23,6 +23,47 @@ number, a chart, a file and a citation. Every data page follows the same order:
    arithmetic it passed. This is what no other Pakistani portal has. It is a layer under the
    data that the reader can open, not prose the reader has to get through first.
 
+## Every number is a link to its source
+
+This is the key rule of the site, and the redesign must keep it on every page.
+
+**Any number a reader can see is clickable and leads to where it was printed.** This covers:
+
+- the home page headline values and the last value beside a sparkline;
+- every point on a chart and every cell in a table, on series, compare and data type pages;
+- the values in the catalogue and in search results;
+- figures quoted in the text of the demo and other analysis.
+
+The path is always the same, two steps:
+
+1. **The number** opens its **receipt** (`/o/<series>~<period>~<estimate type>`). The receipt shows:
+   - the image of the printed page, with the figure boxed;
+   - the document, the page number and the printed text;
+   - the checks the figure passed.
+2. **The receipt** links to the **official PDF**:
+   - at the publisher's own address, opened at that page where the browser allows it;
+   - and to the Internet Archive copy.
+
+   A reader can open the government's file and find the same number in the same place.
+
+The rest of the rule:
+
+- **Derived values** (share of total, change over a period) open a note that gives the formula and
+  links to the receipt of every input.
+- **A gap** (not published, not yet verified, withheld, disputed) also opens its receipt, which
+  says why there is no value. A disputed receipt shows every printing with its page.
+- **The CSV and JSON downloads** carry the same trail in columns. They already hold `obs_id`, the
+  source document and its official URL, the page, `value_as_printed` and `source_sha256`. A
+  `receipt_url` column is to be added, which needs a pipeline change requested under
+  `STATUS.md → Requests for the pipeline`.
+- **On keyboard and touch:** every number link can be reached by keyboard and has an accessible
+  name ("Health, budget estimate 2025-26, Rs 31,975 million: see where it is printed"). On touch,
+  a tap opens a small card with the value and a "See source" link.
+- **What the build checks:** `scripts/check-build.mjs` already confirms that every published value has a
+  prerendered receipt that holds the printed value and the box over the page. The redesign
+  extends it to check that each chart point, table cell
+  and headline value links to an existing receipt.
+
 Trust is still earned by evidence, and the evidence stays one click away. Text supports the data:
 a one-line definition, compact metadata, a caveat where it applies. Long explanations live on the
 Methods page. Researchers come first (downloads, ids, estimate types, sources); the same pages
@@ -193,6 +234,8 @@ published" gap may show the printed dash that proves it.
 
 These come from `AGENTS.md` sections 3 and 4. A new layout changes none of them.
 
+- **Every number traces to its source page and links there** (see "Every number is a link to its
+  source" above). A number on screen with no way to reach its printed page is a bug.
 - **Every number, date and title is read from the release.** Nothing is typed into a page.
 - **A figure that is not checked never shows a number:** not in charts, sparklines, headline
   tiles, compare views, CSVs, tooltips or crops.
@@ -252,7 +295,7 @@ What is new:
   - no axes, with the last checked value and its period printed beside the line;
   - gaps and breaks shown as breaks in the line;
   - checked values only;
-  - the whole sparkline links to the series.
+  - the whole sparkline links to the series, and the printed last value links to its receipt.
 - **Share and embed:** "copy link to this view". An embeddable version is a later step.
 
 ## What changes from the current site
@@ -292,7 +335,8 @@ What is new:
    the results. Prose pages use `.page-head` and `.prose`.
 3. Show any figure's status with `<StatusBadge info={statusOf(o)} />`; use `cellFillClass()` in
    tables. Never write a new colour; add a token if one is truly missing.
-4. Give citable things a `<Cite>`, data a `<DownloadLink>`, and the view a copy-link button.
+4. Make every number on the page a link to its receipt (none may be plain text). Give citable
+   things a `<Cite>`, data a `<DownloadLink>`, and the view a copy-link button.
 5. Screenshot it at 390, 820 and 1280 px (`node scripts/screenshot.mjs`) and check the
    first-screen rule on each. Run `node scripts/a11y.mjs`, then build, lint and
    `node scripts/check-build.mjs`.

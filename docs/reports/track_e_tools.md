@@ -29,7 +29,7 @@ touch the network. The gold tests write only to pytest's temporary folder.
 
 ## 2. Sanity report (E6)
 
-`docs/reports/sanity_2026-10-10.md`, for `releases/v0.0.1-prototype` as built at commit `839584b`.
+`docs/reports/sanity_2026-10-11.md`, for `releases/v0.0.1-prototype` as built at commit `839584b`.
 It is a list of places to look, not a list of errors.
 
 Counts printed by the command: 2,488 period comparisons made; 126 skipped at a series break (75 ABS

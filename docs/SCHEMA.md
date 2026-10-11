@@ -151,6 +151,9 @@ evidence; it needs no PDFs and runs in CI.
 | `Cell.normalization_flags` | new value `detached_minus` | A minus sign separated from its number by a space; ambiguous, blocking. |
 | `Series.dims` | new keys | `area_as_printed` (CPI 2007-08 base), `side: receipts` (ABS receipts series). |
 | `Source.doc_type` | values now used | `sbp_easydata`, `pes_chapter` (cross-source files; `role: cross_source`). A cross-source check against a file with no pages has `target_source` and `target_value` and no member cell. |
+| `Cell.page_label` | new optional string | The page number printed on the page (folio), verbatim, when exactly one is found in the top or bottom margin; null otherwise. `page` stays the PDF page. |
+| `Series.geo` | new values | `pk-pb`, `pk-sd`, `pk-kp`, `pk-ba` (LFS provincial series). |
+| `Series.dims.definition` | new key | "13th ICLS" or "19th ICLS" on every LFS series. 19th ICLS series ids end in `.icls19` and are never paired with 13th ICLS series. |
 | `release.json` `dataset_status.<type>.disputes` | new object | `differing_pairs`, `disputed`, `kept_as_fail` (reason: count), `cross_edition_pairs`, `disputed_share`, `max_disputed_share`. |
 | `release.json` pass-rate objects | new key `disputed` | Count of disputed pairs beside `pass`, `pass_within_rounding`, `fail`, `not_evaluable`. `pass_rate` of `cross_edition_agreement` leaves them out (D26); `check_pass_rate` counts them as not passed. |
 | `observations.csv` | new column `disputed_readings` | `value (source p.N) | value (source p.N)`; blank unless disputed. `value` is blank for a disputed row. |

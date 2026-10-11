@@ -488,7 +488,7 @@ Owner: the site agent. All site work so far is in `main` (PR #1, `bebff67`); the
 (last site commit `23e670a`). Start any S item from a new branch off `main`. Story: `docs/reports/2026-10-12-ui-report.md`.
 Design rules: `docs/DESIGN.md`. Plan the site was built to: `docs/plans/2026-10-12-ui.md` (sections 4 to 7).
 
-**Recommended order (changed by Ali, 2026-10-12):** S1 and S16 are built (S16 PR, under review); next S2 and S5, then the rest. Original order: S1 (small correctness fix), then **S16 (high priority)**,
+**Recommended order (changed by Ali, 2026-10-12):** S1 and S16 are built and merged (S16: PR #6); next S2 and S5, then the rest. Original order: S1 (small correctness fix), then **S16 (high priority)**,
 then S2, S3, S4, S5, S6, S7, S8, then S9 to S15 as listed. S3 to S5 screenshots and critiques should be taken
 after S16, not before, or they will be redone. S1 and S2 are correctness: a
 receipt must never misstate a sum, and new release content must not mislead. S3 to S5 are the evidence the plan's

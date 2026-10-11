@@ -177,9 +177,9 @@ def test_failed_sum_member_is_withheld_even_when_reprinted_unchanged():
 
 def test_flagged_cell_is_quarantined():
     cell = make_cell("e1", 0, 2, "852  251,130", None, series="s.a", flags=["merged_cell_suspected"])
-    assert decide_tier(cell, [], {})[0] == "D"
+    assert decide_tier(cell, [], {}, {})[0] == "D"
     blocked = make_cell("e1", 0, 2, "100", "100", series="s.a", struct=["dropped_column"])
-    assert decide_tier(blocked, [], {})[0] == "D"
+    assert decide_tier(blocked, [], {}, {})[0] == "D"
 
 
 def test_not_evaluable_never_counts_as_evidence():
@@ -257,3 +257,58 @@ def test_differing_pair_stays_fail_without_arithmetic_evidence_on_both_sides():
     assert dispute_summary(checks)["kept_as_fail"] == {"a reading has no passed arithmetic check in its own table": 1}
     o = tiers(e1 + e2, checks)["s.a:2025-26:be"]
     assert not o.published and o.tier == "D"          # withheld although its own sum passed
+
+
+# ---- P10 / H12: a passed sum is no evidence for a member no larger than the sum's own rounding allowance
+
+def _tier_of(cells, checks, series_id, cell_by_id=None):
+    cells_by_id = {c.cell_id: c for c in cells}
+    primary = next(c for c in cells if c.series_id == series_id)
+    return decide_tier(primary, [], by_cell(checks), cells_by_id)[0]
+
+
+def test_sum_allowance_is_half_a_unit_per_member_at_the_coarsest_digit():
+    from datalab.checks import below_allowance, sum_allowance
+    cells = column("e1", {"s.a": "0.4", "s.b": "200", "s.c": "300", "s.total": "500"})
+    (chk,) = run_rules(cells)
+    by_id = {c.cell_id: c for c in cells}
+    assert chk.result == "pass_within_rounding"
+    assert sum_allowance(chk, by_id) == Decimal("1.5")          # 0.5 x 3 members x unit 1
+    small = next(c for c in cells if c.series_id == "s.a")
+    big = next(c for c in cells if c.series_id == "s.b")
+    total = next(c for c in cells if c.series_id == "s.total")
+    assert below_allowance(chk, small, by_id) and not below_allowance(chk, big, by_id)
+    assert not below_allowance(chk, total, by_id)                 # the target is never held to the floor
+
+
+def test_member_no_larger_than_the_allowance_earns_nothing_from_the_sum():
+    cells = column("e1", {"s.a": "1", "s.b": "200", "s.c": "300", "s.total": "501"})
+    (chk,) = run_rules(cells)
+    assert chk.result == "pass"
+    assert _tier_of(cells, [chk], "s.a") == "C"                   # 1 <= allowance 1.5: withheld as not yet verified
+    assert _tier_of(cells, [chk], "s.b") == "B"
+    assert _tier_of(cells, [chk], "s.total") == "B"
+
+
+def test_member_just_above_the_allowance_is_still_credited():
+    cells = column("e1", {"s.a": "2", "s.b": "200", "s.c": "300", "s.total": "502"})
+    (chk,) = run_rules(cells)
+    assert _tier_of(cells, [chk], "s.a") == "B"                   # 2 > 1.5
+
+
+def test_negative_member_is_held_to_the_floor_by_size():
+    cells = column("e1", {"s.a": "-1", "s.b": "200", "s.c": "300", "s.total": "499"})
+    (chk,) = run_rules(cells)
+    assert _tier_of(cells, [chk], "s.a") == "C"
+
+
+def test_a_small_member_can_still_be_confirmed_by_a_second_printing():
+    first = column("e1", {"s.a": "1", "s.b": "200", "s.c": "300", "s.total": "501"})
+    later = column("e2", {"s.a": "1", "s.b": "200", "s.c": "300", "s.total": "501"}, period="2025-26")
+    cells = first + later
+    (chk,) = run_rules(first)
+    agree = equality_check(check_type="cross_edition", dataset="abs", rule_id="t.x", first=first[0], second=later[0],
+                           what="s.a", where_first="e1", where_second="e2")
+    cells_by_id = {c.cell_id: c for c in cells}
+    tier, _ = decide_tier(first[0], [later[0]], by_cell([chk, agree]), cells_by_id)
+    assert tier == "B"                                            # agreement alone, not the sum

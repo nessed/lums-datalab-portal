@@ -26,7 +26,7 @@ from collections import defaultdict
 from decimal import Decimal
 from typing import Iterable
 
-from .checks import fmt
+from .checks import below_allowance, fmt
 from .normalise import last_digit_unit
 from .schema import (AGREEMENT_CHECKS, ARITHMETIC_CHECKS, BLOCKING_CELL_FLAGS, PASSING, TARGET_ONLY_CHECKS, Cell, Check,
                      DisputedReading, Observation, Series, obs_id_for)
@@ -41,15 +41,18 @@ def _agree(a: Cell, b: Cell) -> bool:
     return abs(Decimal(a.value_parsed) - Decimal(b.value_parsed)) <= unit
 
 
-def credits(chk: Check, cell_id: str) -> bool:
+def credits(chk: Check, cell: Cell, cells_by_id: dict[str, Cell]) -> bool:
     """Does a passed check count as evidence for this cell? Target-only checks credit their target alone.
 
     A check is target-only by its type (TARGET_ONLY_CHECKS) or because it says so itself (`credits_members` False).
+    A passed sum does not credit a member no larger than its own rounding allowance (P10, H12).
     """
-    return (chk.check_type not in TARGET_ONLY_CHECKS and chk.credits_members) or chk.target_cell_id == cell_id
+    return ((chk.check_type not in TARGET_ONLY_CHECKS and chk.credits_members and not below_allowance(chk, cell, cells_by_id))
+            or chk.target_cell_id == cell.cell_id)
 
 
-def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str, list[Check]]) -> tuple[str, list[str]]:
+def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str, list[Check]],
+                cells_by_id: dict[str, Cell]) -> tuple[str, list[str]]:
     """Return (tier, reasons). Pure function of the cells and their checks."""
     reasons: list[str] = []
     agreeing = [s for s in supporting if _agree(primary, s)]
@@ -62,14 +65,14 @@ def decide_tier(primary: Cell, supporting: list[Cell], checks_by_cell: dict[str,
 
     own = [c for c in checks_by_cell.get(primary.cell_id, []) if c.official]
     failed = [c for c in own if c.result == "fail"]
-    passed = [c for c in own if c.result in PASSING and credits(c, primary.cell_id)]
+    passed = [c for c in own if c.result in PASSING and credits(c, primary, cells_by_id)]
     arithmetic = [c for c in passed if c.check_type in ARITHMETIC_CHECKS]
     agreement = [c for c in passed if c.check_type in AGREEMENT_CHECKS]
     # Arithmetic evidence on a second printing counts only if that printing shows the same figure.
     if not arithmetic:
         for s in agreeing:
             arithmetic += [c for c in checks_by_cell.get(s.cell_id, []) if c.official and c.result in PASSING
-                           and c.check_type in ARITHMETIC_CHECKS and credits(c, s.cell_id)]
+                           and c.check_type in ARITHMETIC_CHECKS and credits(c, s, cells_by_id)]
     if any(c.check_type == "cross_edition" for c in failed):
         # Another official document prints a different figure and the difference is not established
         # as a restatement (the D25 conditions do not all hold): withheld, never shown as checked.
@@ -292,7 +295,7 @@ def build_observations(cells: Iterable[Cell], checks: Iterable[Check], series: d
                                    gap_reason="Two official documents print different figures for this.",
                                    evidence_summary=sentence, disputed_readings=readings))
             continue
-        tier, reasons = decide_tier(primary, supporting, checks_by_cell)
+        tier, reasons = decide_tier(primary, supporting, checks_by_cell, cells_by_id)
         sentence = evidence_sentence(primary, tier, checks_by_cell, cells_by_id, source_titles)
         if tier in ("A", "B"):
             out.append(Observation(**base, value=primary.value_parsed, tier=tier, status="checked", published=True,

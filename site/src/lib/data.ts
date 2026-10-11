@@ -1,6 +1,7 @@
 // Build-time data access. Everything on the site comes from the frozen release
 // folder ../releases/<version>/ (relative to site/). Nothing is fetched in the
 // browser. The version lives in one place: site/release.config.json.
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import config from "../../release.config.json";
@@ -498,6 +499,42 @@ export function releaseMarkdown(name: string): string | null {
 export function methodsMarkdown(): string | null {
   const p = path.join(DOCS_DIR, "METHODS.md");
   return fs.existsSync(p) ? fs.readFileSync(p, "utf8") : null;
+}
+
+export type ThresholdRow = { section: string; key: string; value: string; comment: string };
+
+/** The frozen publication thresholds. They are not in the release folder, so
+ * they are read from ../thresholds/thresholds.yaml, and only if the file's
+ * SHA-256 equals release.json `thresholds_sha256` (otherwise null: the page
+ * then says they are not available for this release). Two-level YAML of
+ * scalars only, parsed by hand; anything else is skipped. */
+export function frozenThresholds(): { rows: ThresholdRow[]; sha256: string } | null {
+  const file = path.resolve(process.cwd(), "..", "thresholds", "thresholds.yaml");
+  if (!fs.existsSync(file)) return null;
+  const buf = fs.readFileSync(file);
+  const sha = crypto.createHash("sha256").update(buf).digest("hex");
+  if (!db().release.thresholds_sha256 || sha !== db().release.thresholds_sha256) return null;
+  const rows: ThresholdRow[] = [];
+  let section = "";
+  let sub = "";
+  for (const raw of buf.toString("utf8").split(/\r?\n/)) {
+    if (/^\s*#/.test(raw) || !raw.trim()) continue;
+    const m = /^(\s*)([A-Za-z0-9_]+):\s*(.*?)\s*$/.exec(raw);
+    if (!m) continue;
+    const indent = m[1].length;
+    const [valuePart, ...rest] = m[3].split(/\s+#\s*/);
+    const value = valuePart.replace(/^"(.*)"$/, "$1");
+    const comment = rest.join(" # ").trim();
+    if (indent === 0) {
+      section = m[2];
+      sub = "";
+      if (value) rows.push({ section: "", key: m[2], value, comment });
+    } else if (indent <= 2) {
+      sub = value ? "" : m[2];
+      if (value) rows.push({ section, key: m[2], value, comment });
+    } else rows.push({ section: sub ? `${section}.${sub}` : section, key: m[2], value, comment });
+  }
+  return { rows, sha256: sha };
 }
 
 export function releaseFileExists(name: string): boolean {

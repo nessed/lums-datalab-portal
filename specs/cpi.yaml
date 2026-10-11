@@ -20,6 +20,11 @@ scale_factor: 1
 expected_value_columns: 8
 min_table_coverage: 0.90
 
+# Issues that are registered (and may be extracted) but held out of the build pending a human
+# decision (decision D35). Nothing is read from them; their expected figures are labelled gaps.
+# Each entry needs its reason in docs/reports/track_e4_cpi_monthly.md.
+skip_sources: []
+
 locator:
   # The caption is read from the PDF text layer of each page (never from Docling).
   # Group 1 = area (absent on the 2007-08 base), group 2 = base year.

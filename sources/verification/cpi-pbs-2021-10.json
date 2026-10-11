@@ -1,0 +1,115 @@
+{
+  "source_id": "cpi-pbs-2021-10",
+  "registered_at": "2026-10-11T00:33:08+00:00",
+  "file_url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-11T00:33:35+00:00",
+  "retrieved_via": "wayback",
+  "sha256": "6cc8c04cc56ded276218b4a3958c98c9580c8f8e313d108de82d16a5120a8815",
+  "size_bytes": 745943,
+  "response": null,
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+      "time": "2026-10-11T00:33:09+00:00",
+      "attempt": 1,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+      "time": "2026-10-11T00:33:12+00:00",
+      "attempt": 2,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+      "time": "2026-10-11T00:33:17+00:00",
+      "attempt": 3,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+      "time": "2026-10-11T00:33:25+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "http_status": 200,
+      "attempts": 1,
+      "outcome": "snapshot_found"
+    },
+    {
+      "url": "https://web.archive.org/web/20250617110101id_/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+      "time": "2026-10-11T00:33:29+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-11T00:33:37+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+      "time": "2026-10-11T00:33:42+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "http_status": 200,
+      "attempts": 1,
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2021-10/cpi_review_october_2021.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2010",
+      "Creator": "Microsoft® Word 2010",
+      "CreationDate": "D:20211101110022+05'00'"
+    },
+    "pages_with_text_layer": 14,
+    "blank_pages": [
+      2
+    ],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8235,
+    "ascii_ratio_first_pages": 0.9995,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "october 2021": true,
+        "october, 2021": true,
+        "october,2021": false,
+        "october2021": false,
+        "october-2021": false
+      },
+      "regex_all": {
+        "monthly review on price indices october ?,? ?2021 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "wayback_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250617110101/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_october_2021.pdf",
+    "wayback_timestamp": "20250617110101",
+    "snapshots_seen": 4,
+    "snapshot_digest": "AOXJT3RQ4OSXUL63YMLKAARQDAR6QRSP",
+    "digest_matches_file": true
+  }
+}

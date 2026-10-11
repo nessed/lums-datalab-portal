@@ -1,0 +1,91 @@
+{
+  "source_id": "cpi-pbs-2023-08",
+  "registered_at": "2026-10-11T00:11:18+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_August_2023.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-11T00:11:24+00:00",
+  "retrieved_via": "official",
+  "sha256": "137c3b515a57a67167b7e47a92f222ddd2a51290e791c544607349812bf3fd20",
+  "size_bytes": 1348898,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_August_2023.pdf",
+    "headers": {
+      "Last-Modified": "Tue, 23 Jan 2024 05:25:14 GMT",
+      "Content-Length": "1348898",
+      "Content-Type": "application/pdf",
+      "ETag": "\"65af4dba-149522\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_August_2023.pdf",
+      "time": "2026-10-11T00:11:19+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-11T00:11:27+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_August_2023.pdf",
+      "time": "2026-10-11T00:11:31+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2023-08/Monthly_Review_August_2023.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word LTSC",
+      "Creator": "Microsoft® Word LTSC",
+      "CreationDate": "D:20230901140800+05'00'"
+    },
+    "pages_with_text_layer": 15,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8333,
+    "ascii_ratio_first_pages": 0.9995,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "august 2023": true,
+        "august, 2023": true,
+        "august,2023": false,
+        "august2023": false,
+        "august-2023": false
+      },
+      "regex_all": {
+        "monthly review on price indices august ?,? ?2023 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260430173834/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_August_2023.pdf",
+    "wayback_timestamp": "20260430173834",
+    "snapshots_seen": 3,
+    "snapshot_digest": "GGO3XXYHMBRYTHZKRSJT7KR5CEWGT3BX",
+    "digest_matches_file": true
+  }
+}

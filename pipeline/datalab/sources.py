@@ -23,11 +23,13 @@ import yaml
 from . import config
 from .schema import Source
 
+# A descriptive agent string: the publishers' servers should be able to see who is asking and why.
 USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/126.0 Safari/537.36"
+    "LUMS-DataLab-Portal/0.1 (research data portal, source registration; "
+    "https://github.com/nessed/lums-datalab-portal)"
 )
 MANIFEST_FIELDS = list(Source.model_fields.keys())
+WAYBACK_BACKOFF_SECONDS = (5.0, 15.0, 30.0)   # waits after a 429 / 5xx answer from the Wayback index
 
 
 def _session():
@@ -102,12 +104,26 @@ def wayback_lookup(url: str, attempts_log: list[dict[str, Any]], local_file: Pat
     session = _session()
     api = "http://web.archive.org/cdx/search/cdx"
     entry: dict[str, Any] = {"url": f"{api}?url={url}", "time": config.now_iso(), "purpose": "wayback_cdx_lookup"}
-    try:
-        r = session.get(api, params={"url": url.split("://", 1)[-1], "output": "json", "filter": "statuscode:200",
-                                     "fl": "timestamp,original,digest,length", "limit": "-40"}, timeout=60)
-        rows = r.json()[1:] if r.status_code == 200 and r.text.strip() else []
-    except Exception as exc:
-        entry["outcome"] = f"error:{type(exc).__name__}"
+    rows: list[list[str]] = []
+    # The index answers 429 or 5xx when busy. That is "not known", never "no snapshot": back off and
+    # ask again, and record the status if it still fails.
+    for attempt, pause in enumerate(WAYBACK_BACKOFF_SECONDS, start=1):
+        try:
+            r = session.get(api, params={"url": url.split("://", 1)[-1], "output": "json", "filter": "statuscode:200",
+                                         "fl": "timestamp,original,digest,length", "limit": "-40"}, timeout=60)
+        except Exception as exc:
+            entry["outcome"] = f"error:{type(exc).__name__}"
+            attempts_log.append(entry)
+            return None
+        entry["http_status"], entry["attempts"] = r.status_code, attempt
+        if r.status_code == 200:
+            rows = r.json()[1:] if r.text.strip() else []
+            break
+        if r.status_code != 429 and r.status_code < 500:
+            break
+        time.sleep(pause)
+    if entry.get("http_status") != 200:
+        entry["outcome"] = f"http_{entry.get('http_status')}"
         attempts_log.append(entry)
         return None
     if not rows:
@@ -133,8 +149,14 @@ def wayback_raw_url(snapshot: dict[str, str], url: str) -> str:
 
 
 def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], period_markers: list[str],
-                marker_pages: int = 3) -> dict[str, Any]:
-    """Content inspection by code: page count, metadata, text layer, expected markers."""
+                marker_pages: int = 3, markers_regex_all: list[str] | None = None) -> dict[str, Any]:
+    """Content inspection by code: page count, metadata, text layer, expected markers.
+
+    `markers_regex_all` are patterns that must each match the first pages' text (lower case, runs of
+    white space collapsed). A plain marker such as "june 2025" is also printed inside the July issue
+    ("as compared to ... in June 2025"), so a monthly issue is identified by a pattern anchored on
+    its cover line: title, month, year and base year next to each other.
+    """
     import pymupdf
     from pypdf import PdfReader
 
@@ -173,7 +195,9 @@ def inspect_pdf(path: Path, markers_all: list[str], markers_any: list[str], peri
         "any": {m: (m.lower() in first_norm) for m in markers_any},
         "period": {m: (m.lower() in first_norm) for m in period_markers},
     }
-    ok_all = all(out["markers"]["all"].values())
+    if markers_regex_all:
+        out["markers"]["regex_all"] = {m: bool(re.search(m, first_norm)) for m in markers_regex_all}
+    ok_all = all(out["markers"]["all"].values()) and all(out["markers"].get("regex_all", {}).values())
     ok_any = any(out["markers"]["any"].values()) if markers_any else True
     ok_period = any(out["markers"]["period"].values()) if period_markers else True
     out["markers_ok"] = bool(ok_all and ok_any and ok_period)
@@ -410,7 +434,8 @@ def register_one(entry: dict[str, Any], save_to_wayback: bool = True) -> Source 
 
     period_markers = period_marker_variants(entry["period"]) if entry.get("marker_period") else list(entry.get("markers_period") or [])
     inspection = inspect_pdf(dest, list(entry.get("markers_all") or []), list(entry.get("markers_any") or []), period_markers,
-                             marker_pages=int(entry.get("marker_pages", 3)))
+                             marker_pages=int(entry.get("marker_pages", 3)),
+                             markers_regex_all=list(entry.get("markers_regex_all") or []))
     if entry.get("prefetched", {}).get("sha256") and entry["prefetched"]["sha256"] != sha:
         record["prefetched_hash_mismatch"] = True
     record["inspection"] = inspection
@@ -513,7 +538,7 @@ def landing_links_file(landing_url: str | None, file_url: str | None, attempts_l
         found = any(h.lstrip("./").endswith(path) or path.endswith(h.lstrip("./")) and len(h) > 8 for h in hrefs)
         entry["outcome"] = "link_found" if found else "link_not_found"
         attempts_log.append(entry)
-        time.sleep(1.0)
+        time.sleep(2.0)
         return found
     except Exception as exc:
         entry["outcome"] = f"error:{type(exc).__name__}"

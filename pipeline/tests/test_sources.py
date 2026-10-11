@@ -150,3 +150,86 @@ def test_fetch_does_not_write_a_guess_for_a_data_file(repo, monkeypatch, capsys)
     monkeypatch.setattr(sources, "download", lambda *a, **k: (_ for _ in ()).throw(AssertionError("no GET")))
     assert sources.fetch() == 0          # a cross-source file does not block a rebuild
     assert not dest.exists() and "NOT FETCHABLE BY URL" in capsys.readouterr().out
+
+
+JULY_ISSUE = ["Monthly Review" + chr(10) + "on" + chr(10) + "Price Indices" + chr(10) + "July 2025" + chr(10) + "(Base Year 2015-16)",
+              "Inflation in Brief" + chr(10) + "CPI inflation General increased to 4.1% in July 2025 against 3.2% in June 2025."]
+JUNE_COVER = r"monthly review on price indices june ?,? ?2025 \(base (year )?2015-16\)"
+JULY_COVER = r"monthly review on price indices july ?,? ?2025 \(base (year )?2015-16\)"
+
+
+def test_a_month_named_inside_the_next_issue_does_not_identify_it(tmp_path):
+    """The July issue prints "June 2025" too. Only the cover line (title, month, year, base together) says which issue it is."""
+    pdf = make_pdf(tmp_path / "Monthly-Review-June-2025.pdf", JULY_ISSUE)      # a misleading file name on purpose
+    plain = sources.inspect_pdf(pdf, [], ["monthly review"], ["june 2025"], marker_pages=2)
+    assert plain["markers_ok"] is True                                         # the weak marker is fooled
+    as_june = sources.inspect_pdf(pdf, [], ["monthly review"], ["june 2025"], marker_pages=2, markers_regex_all=[JUNE_COVER])
+    assert as_june["markers_ok"] is False and as_june["markers"]["regex_all"] == {JUNE_COVER: False}
+    as_july = sources.inspect_pdf(pdf, [], ["monthly review"], ["july 2025"], marker_pages=2, markers_regex_all=[JULY_COVER])
+    assert as_july["markers_ok"] is True
+    old_base = JULY_COVER.replace("2015-16", "2007-08")
+    assert sources.inspect_pdf(pdf, [], [], [], marker_pages=2, markers_regex_all=[old_base])["markers_ok"] is False
+
+
+def test_register_fails_a_monthly_issue_whose_cover_names_another_month(repo):
+    def entry(period: str, month: str, cover: str) -> dict:
+        folder = repo / "cpi_monthly_review" / period
+        folder.mkdir(parents=True)
+        pdf = make_pdf(folder / "review.pdf", JULY_ISSUE)
+        return {"source_id": f"cpi-test-{period}", "doc_type": "cpi_monthly_review", "publisher": "PBS", "jurisdiction": "pbs",
+                "title": f"Monthly Review, {month}", "period": period, "role": "core",
+                "file_url": "https://example.invalid/review.pdf", "filename": "review.pdf", "markers_any": ["monthly review"],
+                "markers_period": [month.lower()], "marker_pages": 2, "markers_regex_all": [cover],
+                "prefetched": {"retrieved_via": "official", "retrieved_at": "2026-01-01T00:00:00Z",
+                               "sha256": config.sha256_file(pdf)}}
+
+    as_june = sources.register_one(entry("2025-06", "June 2025", JUNE_COVER), save_to_wayback=False)
+    assert as_june.verification_status == "failed"
+    record = config.read_json(config.VERIFICATION_DIR / "cpi-test-2025-06.json")
+    assert record["reason"] == "expected text markers not found in the first pages"
+    assert record["inspection"]["markers"]["period"] == {"june 2025": True}   # the plain marker alone would have passed it
+    as_july = sources.register_one(entry("2025-07", "July 2025", JULY_COVER), save_to_wayback=False)
+    assert as_july.verification_status == "official_only"
+
+
+class FakeResponse:
+    def __init__(self, status_code: int, rows: list | None = None):
+        self.status_code, self._rows, self.text = status_code, rows, "x" if rows is not None else ""
+
+    def json(self):
+        return self._rows
+
+
+@pytest.mark.parametrize("answers,outcome,found", [
+    ([504, 429, 200], "snapshot_found", True),        # busy twice, then the listing
+    ([504, 504, 504], "http_504", False),             # still busy: recorded as such, not as "no snapshot"
+    ([200], "snapshot_found", True),
+    ([404], "http_404", False),                       # not a busy answer: no retry
+])
+def test_wayback_lookup_backs_off_when_the_index_is_busy(monkeypatch, answers, outcome, found):
+    calls = []
+    listing = [["timestamp", "original", "digest", "length"], ["20220703003819", "https://example.invalid/a.pdf", "DIGEST", "10"]]
+
+    class FakeSession:
+        def get(self, *a, **k):
+            calls.append(1)
+            status = answers[len(calls) - 1]
+            return FakeResponse(status, listing if status == 200 else None)
+
+    monkeypatch.setattr(sources, "_session", lambda: FakeSession())
+    monkeypatch.setattr(sources.time, "sleep", lambda s: None)
+    log: list[dict] = []
+    snap = sources.wayback_lookup("https://example.invalid/a.pdf", log)
+    assert (snap is not None) is found and log[-1]["outcome"] == outcome and len(calls) == len(answers)
+    if found:
+        assert snap["wayback_timestamp"] == "20220703003819" and snap["snapshot_digest"] == "DIGEST"
+
+
+def test_wayback_lookup_reports_no_snapshot_only_when_the_index_answered(monkeypatch):
+    class FakeSession:
+        def get(self, *a, **k):
+            return FakeResponse(200, [])
+
+    monkeypatch.setattr(sources, "_session", lambda: FakeSession())
+    log: list[dict] = []
+    assert sources.wayback_lookup("https://example.invalid/a.pdf", log) is None and log[-1]["outcome"] == "no_snapshot"

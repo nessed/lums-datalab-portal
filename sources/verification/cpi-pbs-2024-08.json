@@ -1,0 +1,91 @@
+{
+  "source_id": "cpi-pbs-2024-08",
+  "registered_at": "2026-10-11T00:00:40+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_August_2024.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-11T00:00:46+00:00",
+  "retrieved_via": "official",
+  "sha256": "cfa658d0ccf5c925ca213a5c9607d2ec3e1d7a634ea932dd89f91d7d57c3728f",
+  "size_bytes": 991204,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_August_2024.pdf",
+    "headers": {
+      "Last-Modified": "Fri, 18 Oct 2024 06:43:38 GMT",
+      "Content-Length": "991204",
+      "Content-Type": "application/pdf",
+      "ETag": "\"6712039a-f1fe4\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_August_2024.pdf",
+      "time": "2026-10-11T00:00:41+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-11T00:00:50+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_August_2024.pdf",
+      "time": "2026-10-11T00:00:56+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2024-08/CPI_Review_August_2024.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2016",
+      "Creator": "Microsoft® Word 2016",
+      "CreationDate": "D:20240902124302+05'00'"
+    },
+    "pages_with_text_layer": 15,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8333,
+    "ascii_ratio_first_pages": 0.9995,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "august 2024": true,
+        "august, 2024": false,
+        "august,2024": false,
+        "august2024": false,
+        "august-2024": false
+      },
+      "regex_all": {
+        "monthly review on price indices august ?,? ?2024 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260430173821/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_August_2024.pdf",
+    "wayback_timestamp": "20260430173821",
+    "snapshots_seen": 1,
+    "snapshot_digest": "WOA433WK7FJZF5YOKSFABPJ4PQEESNBN",
+    "digest_matches_file": true
+  }
+}

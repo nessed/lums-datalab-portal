@@ -79,6 +79,8 @@ def base_tag(base_year: str) -> str:
 # Area key of a table whose caption names no area (the single CPI table of issues on the 2007-08
 # base). It is a key for code only: it never appears in a series id (decision D27).
 AREA_NOT_STATED = "not_stated"
+HELD_OUT_REASON = ("The issue is held out of this build pending a human decision (skip_sources in specs/cpi.yaml), "
+                   "so no table was read")
 
 
 def old_base_series_id(role: str, row: str, tag: str) -> str | None:
@@ -879,8 +881,15 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
     locator_log: dict[str, Any] = {}
     coverage: list[dict[str, Any]] = []
     blocked: dict[tuple[str, int, int], str] = {}
+    # Issues held out of the build pending a human decision (decision D35). They stay registered and
+    # extracted; nothing is read from them here and their figures are labelled gaps, never dropped silently.
+    held_out = sorted(set(spec.get("skip_sources") or []) & {s.source_id for s in sources})
     for source in sources:
         expected = rebase_side(source.period, spec)
+        if source.source_id in held_out:
+            for area in expected["areas"]:
+                not_located[f"{source.source_id}:{area}"] = HELD_OUT_REASON
+            continue
         got = validated_tables(source)
         if got is None:
             for area in expected["areas"]:
@@ -950,6 +959,7 @@ def build(release: str = config.DEFAULT_RELEASE) -> dict[str, Any]:
             "cross_source": pass_rate(checks, ["cross_source"]),
         },
         "cross_source_sbp": cross_source_info,
+        "held_out_sources": held_out,
     }
     save_dataset(DATASET, cells=cells, checks=checks, series=catalogue, observations=observations, coverage=coverage, info=info)
     return info

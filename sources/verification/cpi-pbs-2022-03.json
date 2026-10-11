@@ -1,0 +1,113 @@
+{
+  "source_id": "cpi-pbs-2022-03",
+  "registered_at": "2026-10-11T00:27:00+00:00",
+  "file_url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-11T00:27:34+00:00",
+  "retrieved_via": "wayback",
+  "sha256": "d6c6b77182041ed1839610717eaea5c46e7ece7dca1f752bec02c709220e32a6",
+  "size_bytes": 744679,
+  "response": null,
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+      "time": "2026-10-11T00:27:00+00:00",
+      "attempt": 1,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+      "time": "2026-10-11T00:27:04+00:00",
+      "attempt": 2,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+      "time": "2026-10-11T00:27:09+00:00",
+      "attempt": 3,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+      "time": "2026-10-11T00:27:16+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "http_status": 200,
+      "attempts": 1,
+      "outcome": "snapshot_found"
+    },
+    {
+      "url": "https://web.archive.org/web/20250617105958id_/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+      "time": "2026-10-11T00:27:27+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-11T00:27:35+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+      "time": "2026-10-11T00:27:40+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "http_status": 200,
+      "attempts": 1,
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2022-03/cpi_monthly_review_march_2022.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2010",
+      "Creator": "Microsoft® Word 2010",
+      "CreationDate": "D:20220331160356+05'00'"
+    },
+    "pages_with_text_layer": 15,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8333,
+    "ascii_ratio_first_pages": 0.9995,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "march 2022": true,
+        "march, 2022": true,
+        "march,2022": false,
+        "march2022": false,
+        "march-2022": false
+      },
+      "regex_all": {
+        "monthly review on price indices march ?,? ?2022 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "wayback_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250617105958/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_monthly_review_march_2022.pdf",
+    "wayback_timestamp": "20250617105958",
+    "snapshots_seen": 6,
+    "snapshot_digest": "ED6HPOSVXOPP2ICQAOSBQ3T532VRSRHA",
+    "digest_matches_file": true
+  }
+}

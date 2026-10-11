@@ -1,0 +1,91 @@
+{
+  "source_id": "cpi-pbs-2024-11",
+  "registered_at": "2026-10-10T23:58:27+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_November_2024.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-10T23:58:31+00:00",
+  "retrieved_via": "official",
+  "sha256": "fc39a09b51df6897a140902868f0125d5f3b4951cac4c95728489060d3d8d223",
+  "size_bytes": 979669,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_November_2024.pdf",
+    "headers": {
+      "Last-Modified": "Thu, 12 Dec 2024 09:01:03 GMT",
+      "Content-Length": "979669",
+      "Content-Type": "application/pdf",
+      "ETag": "\"675aa64f-ef2d5\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_November_2024.pdf",
+      "time": "2026-10-10T23:58:27+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-10T23:58:33+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_November_2024.pdf",
+      "time": "2026-10-10T23:58:38+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2024-11/Monthly_Review_November_2024.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2016",
+      "Creator": "Microsoft® Word 2016",
+      "CreationDate": "D:20241202105848+05'00'"
+    },
+    "pages_with_text_layer": 15,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8333,
+    "ascii_ratio_first_pages": 0.9995,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "november 2024": true,
+        "november, 2024": false,
+        "november,2024": false,
+        "november2024": false,
+        "november-2024": false
+      },
+      "regex_all": {
+        "monthly review on price indices november ?,? ?2024 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260430173818/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_November_2024.pdf",
+    "wayback_timestamp": "20260430173818",
+    "snapshots_seen": 1,
+    "snapshot_digest": "GWHXBQAFWQW5M3QEFTGNM66BYIQ4QYTX",
+    "digest_matches_file": true
+  }
+}

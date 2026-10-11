@@ -1,0 +1,115 @@
+{
+  "source_id": "cpi-pbs-2021-07",
+  "registered_at": "2026-10-11T00:35:54+00:00",
+  "file_url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-11T00:36:29+00:00",
+  "retrieved_via": "wayback",
+  "sha256": "09ec40e61ca49f843f6e4342c3decfebaa1ec102b89cfd461a653e07b5775b62",
+  "size_bytes": 737476,
+  "response": null,
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+      "time": "2026-10-11T00:35:55+00:00",
+      "attempt": 1,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+      "time": "2026-10-11T00:35:58+00:00",
+      "attempt": 2,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+      "time": "2026-10-11T00:36:04+00:00",
+      "attempt": 3,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+      "time": "2026-10-11T00:36:11+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "http_status": 200,
+      "attempts": 1,
+      "outcome": "snapshot_found"
+    },
+    {
+      "url": "https://web.archive.org/web/20250617110137id_/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+      "time": "2026-10-11T00:36:21+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-11T00:36:31+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_not_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+      "time": "2026-10-11T00:36:35+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "http_status": 200,
+      "attempts": 1,
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2021-07/cpi_review_july_2021.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2010",
+      "Creator": "Microsoft® Word 2010",
+      "CreationDate": "D:20210730140235+05'00'"
+    },
+    "pages_with_text_layer": 14,
+    "blank_pages": [
+      2
+    ],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8235,
+    "ascii_ratio_first_pages": 0.9994,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "july 2021": true,
+        "july, 2021": true,
+        "july,2021": false,
+        "july2021": false,
+        "july-2021": false
+      },
+      "regex_all": {
+        "monthly review on price indices july ?,? ?2021 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": false,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "wayback_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20250617110137/https://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_july_2021.pdf",
+    "wayback_timestamp": "20250617110137",
+    "snapshots_seen": 4,
+    "snapshot_digest": "645F5HMN4ZVMVZ7V4LJQG6URMI7452RP",
+    "digest_matches_file": true
+  }
+}

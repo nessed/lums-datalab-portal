@@ -1,0 +1,103 @@
+{
+  "source_id": "cpi-pbs-2026-09",
+  "registered_at": "2026-10-10T23:40:16+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "retrieved_at": "2026-10-10T23:40:21+00:00",
+  "retrieved_via": "official",
+  "sha256": "63abd15a32c08e9484e83a6d8579d9cf83d45f7176fcf45e3919e493e32caf81",
+  "size_bytes": 1601800,
+  "response": {
+    "http_status": 200,
+    "final_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+    "headers": {
+      "Last-Modified": "Thu, 01 Oct 2026 08:29:44 GMT",
+      "Content-Length": "1601800",
+      "Content-Type": "application/pdf",
+      "ETag": "\"6abe19f8-187108\""
+    }
+  },
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+      "time": "2026-10-10T23:40:16+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "ok"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/?page_id=7291",
+      "time": "2026-10-10T23:40:24+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+      "time": "2026-10-10T23:40:27+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "no_snapshot"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+      "time": "2026-10-10T23:41:03+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "cpi_monthly_review/2026-09/Monthly-Review-September2026.pdf",
+  "inspection": {
+    "page_count": 18,
+    "pdf_metadata": {
+      "Producer": "Microsoft® Word 2016",
+      "Creator": "Microsoft® Word 2016",
+      "CreationDate": "D:20261001103101+05'00'"
+    },
+    "pages_with_text_layer": 15,
+    "blank_pages": [],
+    "pages_without_text_layer": [
+      5,
+      6,
+      7
+    ],
+    "text_layer_fraction": 0.8333,
+    "ascii_ratio_first_pages": 0.9995,
+    "markers": {
+      "all": {},
+      "any": {
+        "monthly review": true,
+        "price indices": true,
+        "consumer price index": false
+      },
+      "period": {
+        "september 2026": true,
+        "september, 2026": false,
+        "september,2026": false,
+        "september2026": false,
+        "september-2026": false
+      },
+      "regex_all": {
+        "monthly review on price indices september ?,? ?2026 \\(base (year )?2015-16\\)": true
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": false,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_only",
+  "wayback_save": {
+    "requested_at": "2026-10-10T23:40:44+00:00",
+    "url": "https://web.archive.org/save/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+    "http_status": 200,
+    "content_location": "https://web.archive.org/web/20261010234048/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf"
+  },
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20261010234048/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-September2026.pdf",
+    "wayback_timestamp": "20261010234048",
+    "snapshots_seen": 1,
+    "snapshot_digest": "JESLL6LWAH72B4MYFCXLPLWLWKBUBX62",
+    "digest_matches_file": true
+  }
+}

@@ -334,3 +334,23 @@ def test_end_to_end_misread_index_fails_its_checks(tmp_path, monkeypatch):
     # the general index for the issue month no longer aggregates; the Health row's two % changes no longer recompute
     assert sorted(c["check_type"] for c in failed) == ["index_aggregation", "recompute", "recompute"]
     assert out["info"]["check_pass_rates"]["index_aggregation"]["fail"] == 1
+
+
+def test_end_to_end_issue_held_out_by_the_spec_reads_nothing_and_leaves_labelled_gaps(tmp_path, monkeypatch):
+    """`skip_sources` (D35): the issue stays registered, no cell or check comes from it, its figures are gaps."""
+    real = cpi.load_spec
+    monkeypatch.setattr(cpi, "load_spec", lambda name: {**real(name), "skip_sources": ["cpi-t-2019-06", "cpi-not-registered"]}
+                        if name == "cpi" else real(name))
+    out = build_from(tmp_path, monkeypatch, {"cpi-t-2018-06": {"issue": "2018-06"}, "cpi-t-2019-06": {"issue": "2019-06"}})
+    info = out["info"]
+    assert info["held_out_sources"] == ["cpi-t-2019-06"]
+    assert set(info["located"]) == {f"cpi-t-2018-06:{OLD}"}
+    assert info["not_located"] == {f"cpi-t-2019-06:{OLD}": cpi.HELD_OUT_REASON}
+    assert not any(c["source_id"] == "cpi-t-2019-06" for c in out["cells"])
+    assert not any("cpi-t-2019-06" in c["source_ids"] for c in out["checks"]) and by_type(out["checks"], "cross_edition") == []
+    obs = {o["obs_id"]: o for o in out["observations"]}
+    gap = obs["cpi.general.b2007_08:2019-06:na"]
+    assert gap["published"] is False and gap["value"] is None and gap["gap_kind"] == "not_yet_verified"
+    assert "held out of this build" in gap["gap_reason"]
+    june18 = obs["cpi.general.b2007_08:2018-06:na"]             # still published from its own issue, one printing only
+    assert june18["published"] and june18["tier"] == "B" and june18["supporting_cell_ids"] == []

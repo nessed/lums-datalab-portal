@@ -1,0 +1,44 @@
+{
+  "source_id": "cpi-pbs-2022-07",
+  "registered_at": "2026-10-11T00:21:52+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_July_2022.pdf",
+  "landing_url": "https://www.pbs.gov.pk/?page_id=7291",
+  "verification_status": "failed",
+  "reason": "no copy obtainable",
+  "attempts": [
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_July_2022.pdf",
+      "time": "2026-10-11T00:21:56+00:00",
+      "attempt": 1,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_July_2022.pdf",
+      "time": "2026-10-11T00:22:05+00:00",
+      "attempt": 2,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_July_2022.pdf",
+      "time": "2026-10-11T00:22:12+00:00",
+      "attempt": 3,
+      "http_status": 404,
+      "outcome": "http_404"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_July_2022.pdf",
+      "time": "2026-10-11T00:22:22+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    },
+    {
+      "url": "https://web.archive.org/web/20260430173845id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly_Review_July_2022.pdf",
+      "time": "2026-10-11T00:22:33+00:00",
+      "attempt": 1,
+      "http_status": 200,
+      "outcome": "not_a_pdf"
+    }
+  ]
+}

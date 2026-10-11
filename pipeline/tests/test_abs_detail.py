@@ -152,6 +152,25 @@ def test_a_missed_total_line_never_moves_functions_into_the_next_part(write_doc)
     assert len(got["structure"].parts[0].blocks) == 2               # only the development page's own functions
 
 
+def test_a_total_line_printed_twice_closes_nothing(write_doc):
+    # ABS 2012-13 p.19: "d. Dev. Expenditure on Capital Account" is printed after the PSDP function lines
+    # and again, with another amount, after the "Other" lines. Taking the first as the part total would
+    # publish PSDP-only function lines as all development expenditure on capital account.
+    page = [HEADER,
+            row("04", "Economic Affairs", 20),
+            row("045", "Construction and Transport", 20),
+            row("", "d. Dev. Expenditure on Capital Account", 20),
+            row("014", "Transfers", 5),
+            row("", "d. Dev. Expenditure on Capital Account", 25)]
+    got = build(load_tables(write_doc([docling_table(current_revenue_page(), page=1), docling_table(page, page=2)], pages=2)))
+    assert got["parts_closed"] == ["current_revenue"]
+    assert any("printed twice" in u for u in got["structure"].unassigned)
+    assert any("printed twice" in n for n in got["structure"].notes)
+    mapped = {c.series_id for c in got["cells"] if c.series_id}
+    assert not any("development.capital_account" in s for s in mapped)
+    assert all(c.series_id is None for c in got["cells"] if c.row_label_raw.startswith(("04", "045", "d.")))
+
+
 def test_unknown_or_misplaced_coded_rows_make_sums_not_evaluable(write_doc):
     page = current_revenue_page()
     page.insert(4, row("075", "Some New Health Line", 0))           # a sub-function the dictionary does not know

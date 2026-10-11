@@ -221,7 +221,8 @@ def walk(rows: list[Row]) -> Structure:
     - a sub-function row must sit under the function its code starts with, otherwise the part's
       sum is not evaluable (a function line was probably lost);
     - a coded row the dictionary does not know makes its function's sum not evaluable;
-    - a part closed twice in one edition is kept the first time only.
+    - a total line printed twice in one edition closes nothing: the label cannot say which of the two
+      lines a block belongs to, so the blocks above both occurrences are dropped.
     """
     out = Structure()
     blocks: list[Block] = []
@@ -272,8 +273,16 @@ def walk(rows: list[Row]) -> Structure:
                 current = None
         elif got.kind == "closing":
             if got.part in seen_parts:
-                out.notes.append(f"p.{row.table.page} '{row.label}': this total line appears twice; second occurrence ignored")
-                drop("its total line appears twice in the edition")
+                # One label, two different lines: ABS 2012-13 prints "d. Dev. Expenditure on Capital Account"
+                # first for the PSDP part and again for the whole. Which one a block belongs to cannot be
+                # told from the label, so neither occurrence closes a part and nothing above either is mapped.
+                out.notes.append(f"p.{row.table.page} '{row.label}': this total line is printed twice in the edition; "
+                                 "neither occurrence is used and the function lines above them are not mapped")
+                for earlier in [p for p in out.parts if p.part_id == got.part]:
+                    out.parts.remove(earlier)
+                    for b in earlier.blocks:
+                        out.unassigned.append(f"p.{b.function.table.page} '{b.function.label}': its total line is printed twice in the edition")
+                drop("its total line is printed twice in the edition")
                 continue
             seen_parts.add(got.part)
             out.parts.append(Part(part_id=got.part, closing=row, blocks=blocks, problems=problems, tables=tables))

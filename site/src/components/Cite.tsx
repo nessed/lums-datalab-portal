@@ -13,6 +13,7 @@ export default function Cite({
   what,
   source,
   page,
+  pageLabel,
   open,
   heading = true,
 }: {
@@ -20,11 +21,12 @@ export default function Cite({
   what?: string;
   source?: Source | null;
   page?: number | null;
+  pageLabel?: string | null;
   open?: boolean;
   heading?: boolean;
 }) {
   const release = db().release;
-  const c = cite({ release, path, what, source, page });
+  const c = cite({ release, path, what, source, page, pageLabel });
   const ris = `data:application/x-research-info-systems;charset=utf-8,${encodeURIComponent(c.ris)}`;
   const body = (
     <>

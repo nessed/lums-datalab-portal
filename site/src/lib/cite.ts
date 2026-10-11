@@ -14,8 +14,9 @@ function portalUrl(path: string): string {
 const key = (s: string) => s.replace(/[^A-Za-z0-9]+/g, "_").replace(/^_|_$/g, "");
 const bib = (s: string) => s.replace(/[{}]/g, "");
 
-export function cite(opts: { release: Release; path: string; what?: string; source?: Source | null; page?: number | null }): Citation {
-  const { release, path, what, source, page } = opts;
+export function cite(opts: { release: Release; path: string; what?: string; source?: Source | null; page?: number | null; pageLabel?: string | null }): Citation {
+  const { release, path, what, source, page, pageLabel } = opts;
+  const printed = pageLabel && page && pageLabel !== String(page) ? pageLabel : null;
   const accessed = buildDate();
   const year = release.created_at ? release.created_at.slice(0, 4) : "n.d.";
   const url = portalUrl(path);
@@ -28,7 +29,7 @@ export function cite(opts: { release: Release; path: string; what?: string; sour
 
   if (source) {
     const srcUrl = source.file_url ?? source.landing_url ?? source.wayback_url ?? "";
-    const pg = page ? ` (p. ${page} of the PDF file)` : "";
+    const pg = page ? (printed ? ` (p. ${printed}; page ${page} of the PDF file)` : ` (p. ${page} of the PDF file)`) : "";
     const docType = DOC_TYPE_WORDS[source.doc_type] ?? source.doc_type;
     const retrieved = `Retrieved ${dateOnly(source.retrieved_at)}. SHA-256 ${source.sha256}`;
     apa.push(`${source.publisher}. (n.d.). ${source.title}${pg}. ${srcUrl} (${retrieved})`);
@@ -39,7 +40,7 @@ export function cite(opts: { release: Release; path: string; what?: string; sour
         `  title = {${bib(source.title)}},`,
         `  howpublished = {${bib(docType)}},`,
         `  url = {${srcUrl}},`,
-        page ? `  pages = {${page}},` : "",
+        page ? `  pages = {${printed ?? page}},` : "",
         `  note = {${retrieved}}`,
         `}`,
       ]
@@ -53,7 +54,7 @@ export function cite(opts: { release: Release; path: string; what?: string; sour
         `TI  - ${source.title}`,
         `PB  - ${source.publisher}`,
         srcUrl ? `UR  - ${srcUrl}` : "",
-        page ? `SP  - ${page}` : "",
+        page ? `SP  - ${printed ?? page}` : "",
         `N1  - ${retrieved}`,
         "ER  - ",
       ]

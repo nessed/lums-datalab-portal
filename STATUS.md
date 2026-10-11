@@ -49,18 +49,18 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 Owned by the UI agent (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md` in that branch).
 This branch does not edit `site/` except to keep `npm run build` green.
 
-### State (UI agent, updated 2026-10-11 05:20)
-- **Rebuilt and merged:** design system (`site/src/design/tokens.css`, `docs/DESIGN.md`), header with
-  search (Ctrl/Cmd-K, index at `public/data/<v>/search.json`), prototype notice, footer with a
-  per-page "report an error" link; **receipt** `/o/[id]` (figure, status with evidence in words,
-  magnified crop with headings and row label, page framed to the table, checks with arithmetic,
-  disputed printings, provenance, citation, CSV/JSON); **series** `/series/[id]` (chart with URL
-  state, every figure with status and document/page); **browse** (catalogue with filters).
-- **Not yet rebuilt** (old pages restyled by the new tokens): home, sources, methods, demo,
-  releases, about, 404; `/compare` and `/data` do not exist yet.
-- Checks: `npm run build`, `npm run lint`, `node scripts/check-build.mjs` (now also checks disputed
-  receipts and allows a page box on a "not published" gap only where the cell prints no number),
-  `node scripts/a11y.mjs` (axe; receipts, series, browse, demo clean), `node scripts/screenshot.mjs`.
+### State (UI agent, updated 2026-10-11 06:05)
+- **Rebuilt (merged unless noted):** design system (`site/src/design/tokens.css`, `docs/DESIGN.md`);
+  header with search (Ctrl/Cmd-K or "/", index `public/data/<v>/search.json`), prototype notice,
+  footer with a per-page "report an error" link; **receipt** `/o/[id]`; **series** `/series/[id]`;
+  **browse** (catalogue with filters); **home**; **sources** and `/sources/[id]`; **methods**;
+  **demo**, **compare** (`/compare?s=a,b,c`), **data access** (`/data`), **releases**, **about**,
+  **404** (these last six merge with the next green gate).
+- Receipts now say "printed page N (page M of the PDF file)" from `Cell.page_label`, and
+  citations cite the printed page.
+- Checks: `npm run build`, `npm run lint`, `node scripts/check-build.mjs` (also checks disputed
+  receipts; allows a page box on a "not published" gap only where the cell prints no number),
+  `node scripts/a11y.mjs` (axe on every route type), `node scripts/screenshot.mjs`.
 - Report: `docs/reports/2026-10-12-ui-report.md`; screenshots `docs/reports/qa/ui/`.
 
 ### What changed in the release that the site should handle (details: end of `docs/SCHEMA.md`)
@@ -73,16 +73,18 @@ This branch does not edit `site/` except to keep `npm run build` green.
 
 ### Requests for the pipeline
 (The UI agent writes requests here, in its own branch; this run reads them at each handoff.)
-- **Printed page number (folio).** Cells and citations give the PDF page; the page itself prints a
-  different folio (ABS 2017-18: PDF p. 11 prints "9"). Researchers cite the folio. Request:
-  `Cell.page_label` (the printed number, verbatim, or null) so receipts can say "printed p. 9, PDF
-  p. 11". The site shows the PDF page only until then.
+- ~~Printed page number (folio)~~: done in the release (`Cell.page_label`); the site uses it.
 - **Table title as printed.** The receipt takes it from `coverage.json` (`table`) by source and
   page. A `Cell.table_title_raw` (or a table record) would be exact where a page has two tables.
 - **Dash means nil?** "Not published by the government" is used where the ABS prints "-". In ABS
   tables a dash often means nil, and the parent totals are consistent with zero. The site says
   "printed as a dash; we do not read it as zero". A human decision; see the UI report questions.
 - **Publication date of each source** (`Source.published_on`, or null): citations print "(n.d.)".
+- **Threshold values in the release.** The methods page reads `thresholds/thresholds.yaml` and shows it
+  only if its SHA-256 equals `release.json` `thresholds_sha256`. Copying the values into
+  `release.json` would make the release self-contained.
+- **PDF metadata encoding.** `verification.inspection.pdf_metadata` holds double-encoded text
+  ("MicrosoftÂ® Excel"); the site shows only the creation date from it.
 
 ## How to run (short)
 ```powershell

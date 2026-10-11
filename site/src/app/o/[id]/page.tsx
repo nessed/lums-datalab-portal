@@ -23,6 +23,8 @@ import {
   obsForCell,
   obsHref,
   pageImage,
+  pageShort,
+  pageWords,
   receiptCsvHref,
   receiptJsonHref,
   RELEASE_VERSION,
@@ -152,7 +154,7 @@ function MemberRow({ cell, highlight, role }: { cell: Cell; highlight: boolean; 
         {highlight ? <span className="break-tag">This figure</span> : null}
       </th>
       <td className="small muted">
-        {srcShort(src, cell.source_id)}, p.&nbsp;{cell.page}
+        {srcShort(src, cell.source_id)}, {pageShort(cell)}
       </td>
       <td className="num">
         {showValue ? (
@@ -268,8 +270,7 @@ function Printing({ cell, label }: { cell: Cell; label: ReactNode }) {
       <p className="printing-head">
         {label}{" "}
         <span>
-          <Link href={sourceHref(cell.source_id)}>{srcShort(src, cell.source_id)}</Link>, page {cell.page}
-          {src?.page_count ? ` of ${src.page_count}` : ""}. Row &ldquo;{cell.row_label_raw}&rdquo;, column &ldquo;{cell.col_label_raw}&rdquo;. Printed{" "}
+          <Link href={sourceHref(cell.source_id)}>{srcShort(src, cell.source_id)}</Link>, {pageWords(cell, src?.page_count)}. Row &ldquo;{cell.row_label_raw}&rdquo;, column &ldquo;{cell.col_label_raw}&rdquo;. Printed{" "}
           <span className="mono" data-printed>
             {cell.value_raw}
           </span>
@@ -317,7 +318,7 @@ export default async function ReceiptPage({ params }: Props) {
   const pWords = periodWords(obs.period, series.frequency);
   const vintage = obs.vintage !== "na" ? vintageWords(obs.vintage).toLowerCase() : null;
   const title = obsTitle(obs, series);
-  const apa = cite({ release: d.release, path, what: `Observation ${obs.obs_id}`, source: isValue ? source : null, page: isValue ? cell?.page : null }).apa;
+  const apa = cite({ release: d.release, path, what: `Observation ${obs.obs_id}`, source: isValue ? source : null, page: isValue ? cell?.page : null, pageLabel: isValue ? cell?.page_label : null }).apa;
 
   const evidence = evidenceWords(checks);
   const officialWorks = !(source?.verification_status ?? "").startsWith("wayback") && source?.verification_status !== "archive_copy_content_inspected";
@@ -483,7 +484,7 @@ export default async function ReceiptPage({ params }: Props) {
               <span className="mono" data-printed>
                 {cell.value_raw}
               </span>{" "}
-              on page {cell.page} of <Link href={sourceHref(cell.source_id)}>{srcShort(source, cell.source_id)}</Link>, row &ldquo;{cell.row_label_raw}&rdquo;,
+              on {pageWords(cell)} of <Link href={sourceHref(cell.source_id)}>{srcShort(source, cell.source_id)}</Link>, row &ldquo;{cell.row_label_raw}&rdquo;,
               column &ldquo;{cell.col_label_raw}&rdquo;.
             </p>
           ) : null}
@@ -532,7 +533,7 @@ export default async function ReceiptPage({ params }: Props) {
                 alt={`Page ${cell.page} of ${srcShort(source, cell.source_id)}${isValue ? `, with the figure ${cell.value_raw} boxed` : ", with the empty cell boxed"} in the row "${cell.row_label_raw}" and the column "${cell.col_label_raw}". The dashed outline marks the table it was read from.`}
                 caption={
                   <>
-                    What you are looking at: a picture of page {cell.page} of the PDF file, made from the copy whose fingerprint is recorded below. The solid box marks{" "}
+                    What you are looking at: a picture of {pageWords(cell)}, made from the copy whose fingerprint is recorded below. The solid box marks{" "}
                     {isValue ? "the figure" : "the cell, which prints no figure"}; the dashed outline the table it was read from. Select the page to see all of it, enlarged.
                   </>
                 }
@@ -701,8 +702,7 @@ export default async function ReceiptPage({ params }: Props) {
                   </dd>
                   <dt>Page</dt>
                   <dd>
-                    {cell.page}
-                    {source?.page_count ? ` of ${source.page_count}` : ""} (page of the PDF file; table {cell.table_index + 1} on the page)
+                    {pageWords(cell, source?.page_count)}; table {cell.table_index + 1} on the page
                   </dd>
                   {tableTitle ? (
                     <>
@@ -766,7 +766,7 @@ export default async function ReceiptPage({ params }: Props) {
 
           {/* ---------------- cite and download ---------------- */}
           <Section id="cite" title="Cite and download">
-            <Cite path={path} what={`Observation ${obs.obs_id}`} source={isValue ? source : null} page={isValue ? cell?.page : null} heading={false} />
+            <Cite path={path} what={`Observation ${obs.obs_id}`} source={isValue ? source : null} page={isValue ? cell?.page : null} pageLabel={isValue ? cell?.page_label : null} heading={false} />
             <div className="action-row">
               <DownloadLink href={receiptJsonHref(obs.obs_id)}>This receipt as JSON</DownloadLink>
               <DownloadLink href={receiptCsvHref(obs.obs_id)}>CSV row with provenance columns</DownloadLink>

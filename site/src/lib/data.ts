@@ -119,6 +119,8 @@ export type Cell = {
   cell_id: string;
   source_id: string;
   page: number;
+  /** The page number printed on the page itself, verbatim; null if none. */
+  page_label?: string | null;
   table_index: number;
   table_bbox_norm: number[] | null;
   cell_bbox_norm: number[] | null;
@@ -448,6 +450,17 @@ export function cropGuides(cell: Cell): CropGuides {
     cols: [...colMap.values()].sort((x, y) => x[0] - y[0]),
     header,
   };
+}
+
+/** "printed page 7 (page 9 of the PDF file)", or "page 9 of the PDF file". */
+export function pageWords(cell: Pick<Cell, "page" | "page_label">, pageCount?: number | null): string {
+  const pdf = `page ${cell.page}${pageCount ? ` of ${pageCount}` : ""} of the PDF file`;
+  return cell.page_label && cell.page_label !== String(cell.page) ? `printed page ${cell.page_label} (${pdf})` : pdf;
+}
+
+/** Short form for tables: "p. 7 (PDF p. 9)" or "p. 9". */
+export function pageShort(cell: Pick<Cell, "page" | "page_label">): string {
+  return cell.page_label && cell.page_label !== String(cell.page) ? `p. ${cell.page_label} (PDF p. ${cell.page})` : `p. ${cell.page}`;
 }
 
 export const receiptCsvHref = (obsId: string) => `${DATA_BASE}/receipts/${slugify(obsId)}.csv`;

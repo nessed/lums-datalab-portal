@@ -174,7 +174,7 @@ def numeric_tokens(text: object) -> list[Decimal]:
     because Decimal equality ignores trailing zeros.
     """
     t = clean_text(text)
-    t = FISCAL_YEAR.sub(" ", t)
+    t = _FISCAL_YEAR_LABEL.sub(" ", t)
     out: list[Decimal] = []
     for m in re.finditer(r"(\()?\s*(-?\d[\d,]*(?:\.\d+)?)\.?\s*(\))?", t):
         value = _to_decimal(m.group(2))

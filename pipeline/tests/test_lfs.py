@@ -64,7 +64,10 @@ def test_title_names_one_kind(caption, round_, kind):
     ("table 9.2 unemployment rate by province, region & sex (%)", "2024-25", "definition_not_stated"),
 ])
 def test_title_rejected(caption, round_, result):
-    got, why = lfs.classify(caption, round_, SPEC)
+    # With `icls19.enabled` off a 19th ICLS table is refused as before (decision D34 adds it as a
+    # separate series when the flag is on: tests/test_lfs_depth.py).
+    spec = {**SPEC, "icls19": {**SPEC["icls19"], "enabled": False}}
+    got, why = lfs.classify(caption, round_, spec)
     assert got is None and why == result
 
 

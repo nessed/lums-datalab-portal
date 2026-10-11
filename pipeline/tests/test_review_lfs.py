@@ -20,6 +20,9 @@ from datalab.status import build_observations
 from conftest import docling_doc, docling_table, make_cell
 
 SPEC = load_spec("lfs")
+# These are regression tests of the national block. Provincial rows (decision D33) and 19th ICLS
+# tables (D34) are tested in test_lfs_depth.py; here both are switched off, as the spec flags allow.
+NATIONAL_ONLY = {**SPEC, "provinces": {**SPEC["provinces"], "enabled": False}, "icls19": {**SPEC["icls19"], "enabled": False}}
 LABELS = load_spec("lfs_labels")
 TITLES = {"lfs-a": "LFS 2017-18 report"}
 ORDER = {"lfs-a": "2017-18"}
@@ -202,7 +205,7 @@ def amounts(first: int) -> list[str]:
     return [f"{first + i}.00" for i in range(6)]
 
 
-def build_one_table(tmp_path, monkeypatch, body_rows, *, header_rows: int = 2):
+def build_one_table(tmp_path, monkeypatch, body_rows, *, header_rows: int = 2, spec=None):
     """One synthetic report page: a PDF text layer and the Docling table that goes with it.
 
     The same grid positions are used for the printed words and for Docling's cell boxes, so the
@@ -234,10 +237,11 @@ def build_one_table(tmp_path, monkeypatch, body_rows, *, header_rows: int = 2):
     monkeypatch.setattr(lfs, "source_path", lambda source: pdf)
     source = SimpleNamespace(source_id="lfs-x", period="2017-18", local_path="lfs.pdf", title="LFS synthetic report")
     run = manifest("LFS_TEST__docling__full-document__run-01", "full-document", None)
-    found, _ = lfs.locate_tables(source, [(run, t) for t in load_tables(out)], SPEC)
+    spec = spec or NATIONAL_ONLY
+    found, _ = lfs.locate_tables(source, [(run, t) for t in load_tables(out)], spec)
     assert [f["kind"]["kind"] for f in found] == ["labour_force"]
     f = found[0]
-    return lfs.build_cells(source, run, f["table"], f["kind"], f["caption"], f["header_words"], SPEC, LABELS)
+    return lfs.build_cells(source, run, f["table"], f["kind"], f["caption"], f["header_words"], spec, LABELS)
 
 
 def test_fixture_baseline_maps_the_national_block_only(tmp_path, monkeypatch):
@@ -264,6 +268,9 @@ def test_pakistan_row_under_a_rural_heading_is_not_the_national_total(tmp_path, 
     lfs.labour_force.*.total. Nothing repeats, so the duplicate guard stays silent.
     """
     body = [["Rural"] + [None] * 6, ["Pakistan"] + amounts(41), ["KP"] + amounts(5), ["Punjab"] + amounts(25)]
+    # With provincial rows mapped (D33) the rule must hold just the same: nothing below the heading is mapped.
+    cells, info = build_one_table(tmp_path, monkeypatch, body, spec=SPEC)
+    assert info["mapped_cells"] == 0 and not [c for c in cells if c.series_id]
     cells, info = build_one_table(tmp_path, monkeypatch, body)
     wrong = sorted({c.series_id for c in cells if c.series_id and c.series_id.endswith(".total")})
     assert wrong == [], f"rural figures mapped to {wrong}"

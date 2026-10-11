@@ -3,10 +3,14 @@
 # single spaces). A label that matches nothing stays unmapped and is never published.
 
 # Area tables. `block` says which block of rows a label opens:
-#   pakistan  the national block (the only one mapped)
-#   province  a provincial block (out of scope; its Rural/Urban rows stay unmapped)
-#   same      a bare Total/Rural/Urban row: belongs to the block opened last
-# `area` is the area of Pakistan the row stands for when its block is the national one.
+#   pakistan         the national block
+#   pb, sd, kp, ba   the block of one province (keys of `provinces.list` in specs/lfs.yaml;
+#                    mapped only while `provinces.enabled` is on, decision D33)
+#   same             a bare Total/Rural/Urban row: belongs to the block whose heading was printed last
+# `area` is the area the row stands for inside its block. A label that matches nothing closes the
+# block: the bare rows below it belong to nobody.
+# Khyber Pakhtunkhwa: the reports read so far print "KP". The former name (NWFP, N.W.F.P.,
+# North West Frontier Province) is listed so that an older report maps to the same series.
 area_labels:
   - {pattern: 'pakistan( total)?', block: pakistan, area: total}
   - {pattern: 'pakistan rural', block: pakistan, area: rural}
@@ -14,7 +18,18 @@ area_labels:
   - {pattern: 'total', block: same, area: total}
   - {pattern: 'rural', block: same, area: rural}
   - {pattern: 'urban', block: same, area: urban}
-  - {pattern: '(kp|kpk|k\.p\.?|khyber pakhtunkhwa|punjab|sindh|balochistan)( total| rural| urban)?', block: province}
+  - {pattern: '(kp|kpk|k\.p\.?|khyber pakhtunkhwa|nwfp|n\.w\.f\.p\.?|north[ -]west frontier province)( total)?', block: kp, area: total}
+  - {pattern: '(kp|kpk|k\.p\.?|khyber pakhtunkhwa|nwfp|n\.w\.f\.p\.?|north[ -]west frontier province) rural', block: kp, area: rural}
+  - {pattern: '(kp|kpk|k\.p\.?|khyber pakhtunkhwa|nwfp|n\.w\.f\.p\.?|north[ -]west frontier province) urban', block: kp, area: urban}
+  - {pattern: 'punjab( total)?', block: pb, area: total}
+  - {pattern: 'punjab rural', block: pb, area: rural}
+  - {pattern: 'punjab urban', block: pb, area: urban}
+  - {pattern: 'sindh( total)?', block: sd, area: total}
+  - {pattern: 'sindh rural', block: sd, area: rural}
+  - {pattern: 'sindh urban', block: sd, area: urban}
+  - {pattern: 'balochistan( total)?', block: ba, area: total}
+  - {pattern: 'balochistan rural', block: ba, area: rural}
+  - {pattern: 'balochistan urban', block: ba, area: urban}
 
 # Industry divisions as printed in the "distribution by major industry divisions" table.
 # NOTE: the composition of "Others" is stated in a footnote and differs between reports

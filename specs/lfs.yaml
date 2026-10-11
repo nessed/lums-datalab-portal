@@ -4,8 +4,10 @@
 # Almost all of them share one layout: rows are areas (Pakistan, then Rural and Urban,
 # then the provinces with their own Rural/Urban rows) and columns are two survey rounds
 # side by side (previous round on the left, the report's own round on the right), each
-# with Total / Male / Female. Only the Pakistan / Rural / Urban rows are mapped;
-# provincial rows are out of scope and stay unmapped.
+# with Total / Male / Female. The Pakistan / Rural / Urban rows feed the national
+# series; the blocks of the four provinces feed provincial series (decision D33,
+# `provinces` below). The 2024-25 tables on the 19th ICLS definitions feed separate
+# `.icls19` series (decision D34, `icls19` below).
 #
 # Everything a column or row means is established by code from the printed header
 # and label text. A table whose header does not give exactly the expected rounds and
@@ -45,6 +47,58 @@ icls:
   required_pattern: '13 ?th ?icls'
   forbidden_pattern: '19 ?th ?icls'
 
+# Decision D33: the provincial blocks of the located tables become series.
+#   series id   lfs.<measure>.<province key>.<sex>.<area>   (national ids are unchanged:
+#               lfs.<measure>.<sex>.<area>, no province segment)
+#   geo         ISO 3166-2 style codes: pk-pb Punjab, pk-sd Sindh, pk-kp Khyber Pakhtunkhwa,
+#               pk-ba Balochistan (national series keep geo "pk")
+# A row belongs to a province only through the block heading printed above it
+# (specs/lfs_labels.yaml). `enabled: false` puts every provincial row back out of scope
+# and removes the provinces-add-to-Pakistan check; nothing else changes.
+provinces:
+  enabled: true
+  list:
+    pb: {geo: pk-pb, name: Punjab}
+    sd: {geo: pk-sd, name: Sindh}
+    kp:
+      geo: pk-kp
+      name: Khyber Pakhtunkhwa
+      definition_note: >-
+        The province is Khyber Pakhtunkhwa; the reports read so far print it as "KP". A report that prints its
+        former name, NWFP (North-West Frontier Province), is mapped to this same series by the label dictionary.
+    ba: {geo: pk-ba, name: Balochistan}
+
+# Decision D34: tables that the title or header tags "19th ICLS" (LFS 2024-25) become
+# separate series: the 13th ICLS id plus the suffix `.icls19`, dims.definition "19th ICLS".
+# They are never joined to the 13th ICLS series and never compared with them: every check
+# pairs cells by series id, and the ids differ. A 19th ICLS table must print the report's
+# own round only. `enabled: false` rejects these tables again (`other_definition`).
+icls19:
+  enabled: true
+  rounds: ["2024-25"]
+  # What the report itself says the definition is. Each quote is searched by code on the
+  # page named (PDF page number, as on receipts); only quotes found word for word go into
+  # the series definition. If none is found the definition reads "Definition as stated in
+  # the report: not found." Nothing here is written from memory.
+  definition_statement:
+    source_id: lfs-pbs-2024-25
+    quotes:
+      - page: 45
+        text: >-
+          Under 19th ICLS, the definition of employment is narrower and more precise, it includes only work
+          performed for pay or profit and mainly intended for others. Individuals engaged in subsistence
+          agriculture (workers produced goods mainly for their own use) are excluded from employment under
+          this definition.
+      - page: 48
+        text: >-
+          As per the 19th International Conference of Labour Statisticians (ICLS) framework, the LFS 2024-25
+          excludes 2.48 million own-use producers from employment, aligning with the updated classification
+          standards.
+  series_note: >-
+    19th ICLS definitions. A separate series from the 13th ICLS series of the same name: the two are never
+    joined and no figure of one is checked against the other. The report prints no earlier round on this
+    definition.
+
 sexes: [total, male, female]
 areas: [total, rural, urban]
 
@@ -77,6 +131,9 @@ tables:
     captions:
       - '\bunemployment rates? ?- ?by area and sex ?\(%\)'
       - '\bunemployment rate by province, region (&|and) sex ?\(%\)'
+      # LFS 2024-25 table 9.2 (19th ICLS). Its title prints no unit, so `unit_marker` does not
+      # match and the table is located but maps nothing (flag `scale_not_confirmed`).
+      - '\bunemployment rate ?- ?pakistan and provinces ?\(19th icls\)'
   - kind: lfpr_crude
     title: Crude activity (participation) rates
     layout: area_by_round_sex
@@ -86,6 +143,7 @@ tables:
     captions:
       - '\bcrude activity \(participation\) rates? ?- ?pakistan and provinces ?\(%\)'
       - '\bcrude labour force participation rate ?- ?13th icls ?\(%\)'
+      - '\bcrude labour force participation rate ?- ?19th icls ?\(%\)'
   - kind: lfpr_refined
     title: Refined activity (participation) rates
     layout: area_by_round_sex
@@ -95,6 +153,7 @@ tables:
     captions:
       - '\brefined activity \(participation\) rates? ?- ?pakistan and provinces ?\(%\)'
       - '\brefined labour force participation rate by province ?\(13th icls\) ?\(%\)'
+      - '\brefined labour force participation rate by province ?- ?19th icls ?\(%\)'
   - kind: labour_force
     title: Civilian labour force
     layout: area_by_round_sex

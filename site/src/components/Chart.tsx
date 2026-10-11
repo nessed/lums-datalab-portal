@@ -133,8 +133,10 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   const log = !!options.log && canLog;
   // A single line needs no label: the page title names it.
   const labelled = view.lines.length > 1;
+  // Long labels (series names on the compare page) go in a key above the chart.
+  const keyAbove = labelled && (narrow || Math.max(...view.lines.map((l) => l.label.length)) > 24);
   const longest = labelled ? Math.max(...view.lines.map((l) => l.label.length)) : 0;
-  const M = { top: 30, right: narrow || !labelled ? 16 : Math.min(150, 14 + longest * 6.6), bottom: view.marks.length ? 62 : 40, left: model.unitCode === "PKR" ? (narrow ? 62 : 74) : narrow ? 44 : 54 };
+  const M = { top: 30, right: keyAbove || !labelled ? 16 : Math.min(150, 14 + longest * 6.6), bottom: view.marks.length ? 62 : 40, left: model.unitCode === "PKR" ? (narrow ? 62 : 74) : narrow ? 44 : 54 };
   const xs = [...view.periods.map((p) => p.x)];
   const xMin = Math.min(...xs) - model.step * 0.6;
   const xMax = Math.max(...xs) + model.step * 0.6;
@@ -199,7 +201,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   const descId = `${idBase}-desc`;
   return (
     <figure className="chart">
-      {multi && narrow ? (
+      {keyAbove ? (
         <ul className="chart-key" aria-hidden="true">
           {view.lines.map((l) => (
             <li key={l.key}>
@@ -293,8 +295,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
               ))}
             </g>
           ))}
-          {!narrow &&
-            labelled &&
+          {!keyAbove &&
             ends.map((e) => (
               <text key={e.key} x={e.x + 9} y={e.y + 4} className="c-label" fill={e.style.color} style={{ fill: e.style.color }}>
                 {e.label}

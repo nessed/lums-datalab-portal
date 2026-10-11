@@ -68,6 +68,13 @@ for (const o of observations) {
   if (!fs.existsSync(path.join(siteDir, "public", "data", cfg.version, "receipts", `${slug}.json`))) problem("receipt", o.obs_id, "no JSON receipt");
   // Only the server-rendered markup, not the serialized React payload in <script> tags.
   const html = fs.readFileSync(file, "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  // Every subtracted member (member_signs -1) of every check on the receipt is marked as subtracted (S1).
+  const minusWanted = (o.check_ids ?? []).reduce((n, id) => {
+    const ch = checks.get(id);
+    return n + (ch?.member_signs ?? []).filter((s, i) => s === -1 && cells.has(ch.member_cell_ids[i])).length;
+  }, 0);
+  const minusFound = (html.match(/data-member-sign="-1"/g) ?? []).length;
+  if (minusFound !== minusWanted) problem("receipt", o.obs_id, `${minusWanted} subtracted members, ${minusFound} marked as subtracted`);
   if (o.published) {
     values++;
     const cell = o.primary_cell_id ? cells.get(o.primary_cell_id) : null;
@@ -209,6 +216,9 @@ function countFor(key) {
       return facetTotals[b]?.get(p.slice(2).join(":")) ?? null;
     case "facetvalues":
       return facetTotals[b]?.size ?? null;
+    case "tables":
+      if (b === "source") return [...bestTable.values()].filter((cs) => cs[0].source_id === c && cs.some((x) => published(series.get(x.series_id)?.dataset))).length;
+      break;
     case "table": {
       const cs = bestTable.get(b);
       if (!cs) return null;

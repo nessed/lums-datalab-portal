@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <strong>
                 Prototype release <Num kind="version">{v}</Num>.
               </strong>{" "}
-              <span className="long">No DOI; </span>not yet for citation<span className="long"> in publications</span>. <span className="long">The printed document prevails. </span>
+              Not yet for citation<span className="long"> in publications; no DOI</span>. <span className="long">The printed document prevails. </span>
               <Link href="/about#disclaimer">Disclaimer</Link>
             </p>
             <DismissNotice version={v} />

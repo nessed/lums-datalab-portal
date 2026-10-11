@@ -1376,9 +1376,14 @@ figure.chart {
 .chart-svg .c-pt:focus {
   outline: none;
 }
-.chart-svg .c-pt:focus-visible .c-hit,
 .chart-svg .c-pt:hover .c-hit {
   fill: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+/* Keyboard focus on a point: a solid ring, not just a tint. */
+.chart-svg .c-pt:focus-visible .c-hit {
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+  stroke: var(--focus);
+  stroke-width: 2;
 }
 .chart-svg .c-hover-rule {
   stroke: var(--ink-3);
@@ -1636,12 +1641,14 @@ figure.chart {
   display: flex;
   flex-direction: column;
 }
-@media (max-width: 899px) {
-  /* Phones: cite and the official PDF come straight after the close-up. */
-  .receipt-more > .action-row:not(.action-row--quiet) {
-    order: -1;
-    margin-top: 0;
-  }
+/* Where it is printed, then cite and the official PDF, straight after the figure. */
+.receipt-more > .receipt-printed {
+  order: -2;
+  margin-top: 0;
+}
+.receipt-more > .action-row:not(.action-row--quiet) {
+  order: -1;
+  margin-top: var(--s-2);
 }
 @media (min-width: 900px) {
   .receipt-top.has-crop {
@@ -2361,6 +2368,16 @@ tr.is-this > * {
   display: grid;
   gap: var(--s-3);
   grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 640px) {
+  .dt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .dt-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 .dt-tile {
   margin: 0;
@@ -3236,6 +3253,40 @@ html.js .tabset[data-ready] .panel-h {
   margin-top: var(--s-5);
 }
 
+.series-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) 0;
+  color: var(--ink-2);
+  margin: 0 0 var(--s-3);
+}
+.series-meta span + span::before {
+  content: "·";
+  margin: 0 var(--s-2);
+  color: var(--ink-3);
+}
+@media (max-width: 899px) {
+  .receipt-top .doc-crop-note {
+    display: none;
+  }
+  .receipt-crop {
+    max-width: 36rem;
+  }
+  .compare {
+    display: flex;
+    flex-direction: column;
+  }
+  .compare > .cmp-controls {
+    order: 3;
+  }
+  .compare > .cmp-why {
+    order: 2;
+  }
+  .compare > .cmp-table {
+    order: 4;
+  }
+}
+
 /* Receipt additions */
 .checks-compact {
   list-style: none;
@@ -3468,6 +3519,47 @@ html.js .tabset[data-ready] .panel-h {
     grid-template-columns: 13rem minmax(0, 1fr);
   }
 }
+.tp-list-m {
+  display: none;
+}
+@media (max-width: 1099px) {
+  .tp-list {
+    display: none;
+  }
+  .tp-list-m {
+    display: block;
+    border: var(--hair);
+    background: var(--card);
+    font-size: var(--step--1);
+  }
+  .tp-list-m summary {
+    cursor: pointer;
+    padding: var(--s-2) var(--s-3);
+    font-weight: 600;
+    min-height: 28px;
+  }
+  .tp-list-m ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 var(--s-2);
+  }
+  .tp-list-m li {
+    margin: 0;
+  }
+  .tp-list-m a {
+    display: block;
+    padding: 6px var(--s-3);
+    text-decoration: none;
+  }
+  .tp-list-m a[aria-current="page"] {
+    background: var(--accent-wash);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .tp-editions {
+    margin-bottom: var(--s-3);
+  }
+}
 .tp-list ul {
   list-style: none;
   padding: 0;
@@ -3537,11 +3629,16 @@ html.js .tabset[data-ready] .panel-h {
   max-height: 80vh;
   overflow: auto;
 }
-.tv-doc-inner {
+.tv-doc-frame {
   position: relative;
-  line-height: 0;
+  overflow: hidden;
   background: var(--card);
   box-shadow: var(--shadow-page);
+  line-height: 0;
+}
+.tv-doc-inner {
+  position: absolute;
+  line-height: 0;
 }
 .tv-doc-inner img {
   display: block;
@@ -3558,6 +3655,9 @@ html.js .tabset[data-ready] .panel-h {
   100% {
     box-shadow: 0 0 0 10px rgb(11 92 120 / 0);
   }
+}
+.tv-page-ctl {
+  margin: var(--s-1) 0 0;
 }
 .tv-sel {
   border: var(--hair);

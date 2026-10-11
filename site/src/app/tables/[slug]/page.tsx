@@ -96,6 +96,7 @@ export default async function TablePage({ params }: Props) {
       unit: s ? unitLabel(s.unit, s.scale_factor) : null,
     };
   });
+  const units = [...new Set(cells.map((c) => c.unit).filter((u): u is string => !!u))];
   const nValues = cells.filter((c) => c.state === "v").length;
   const nGaps = cells.filter((c) => c.state !== "v" && c.state !== "none").length;
   const nNone = cells.filter((c) => c.state === "none").length;
@@ -149,6 +150,20 @@ export default async function TablePage({ params }: Props) {
       </nav>
 
       <div className="tp-layout">
+        <details className="tp-list-m">
+          <summary>
+            Tables in this edition (<Count k={`tables:source:${t.sourceId}`} n={siblings.length} />)
+          </summary>
+          <ul>
+            {siblings.map((x) => (
+              <li key={x.slug}>
+                <Link href={`/tables/${x.slug}`} aria-current={x.slug === t.slug ? "page" : undefined}>
+                  {x.title} <span className="muted">p. <Num kind="page">{x.pageLabel ?? x.page}</Num></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </details>
         <nav className="tp-list" aria-label="Tables in this edition">
           <p className="label">Tables in this edition</p>
           <ul>
@@ -174,7 +189,7 @@ export default async function TablePage({ params }: Props) {
                 , <Count k={`table:${t.slug}:none`} n={nNone} /> printed cells no series uses (shown as ·)
               </>
             ) : null}
-            . Read by <Num kind="id">{t.extractor}</Num>
+            .{units.length ? <> Values in {units.join(", ")}.</> : null} Read by <Num kind="id">{t.extractor}</Num>
             {t.extractor.startsWith("pdfplumber") ? ", the second table-reading tool, because the first reading of this table was flagged" : ""}.
           </p>
           <TableView rows={t.rows} cols={t.cols} cells={cells} image={image} tableBox={t.tableBox} caption={[t.title, src?.title ?? t.sourceId]} pageWords={pageWords(first, src?.page_count)} />

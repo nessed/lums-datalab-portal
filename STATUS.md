@@ -1,6 +1,6 @@
 # STATUS
 
-Last updated: 2026-10-12 morning, by Claude Code at Ali's request: both overnight runs stopped; `proto/v0` (pipeline and site) merged into `main`
+Last updated: 2026-10-12, by Claude Code at Ali's request: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
 
 ## State in one paragraph
 The pipeline works end to end for three data types and the release `releases/v0.0.1-prototype/`
@@ -21,6 +21,8 @@ site) stopped early; their work is merged into `main`. What they left unfinished
 | Plan for this run | `docs/plans/2026-10-12-continuation.md` | authorised by Ali; continues the first plan |
 | Report of this run | `docs/reports/2026-10-12-continuation-report.md` | written as the run goes; ends with the backlog ledger |
 | Site plan and report | `docs/plans/2026-10-12-ui.md`, `docs/reports/2026-10-12-ui-report.md`, `docs/DESIGN.md` | the UI agent's |
+| Site mockups (S16) | `docs/mockups/project/`, `docs/mockups/REVIEW.md` | Design canvas boards and the self-review the build follows |
+| Site config | `site/features.config.json`, `site/editorial.config.json` | planned-feature flags (all off); human-chosen headline series |
 | First run | `docs/plans/2026-10-11-overnight-prototype.md`, `docs/reports/2026-10-11-overnight-report.md` | |
 | Review notes | `docs/reports/review_cpi.md`, `review_lfs.md`, `fix_lfs.md` | adversarial reviews with failing tests |
 | Track notes | `docs/reports/track_*.md` | one per parallel track |
@@ -54,25 +56,62 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
 into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
 
-**2026-10-12, Ali: the site reads like a report, not a data lab (S16, high priority).** `docs/DESIGN.md` is now a
-DRAFT data-tool brief awaiting Ali and Ahmad's approval; the live site still follows the first brief until then.
+**S16 data lab rebuild: done on branch `claude/epic-mccarthy-ose3yj` (PR against `docs/open-work-ux-redesign`), not merged.**
+`docs/DESIGN.md` is still marked DRAFT; the build follows it, with the answers to its questions recorded as
+provisional decisions in `DECISIONS.md` (UI, 2026-10-12, S16). Ali and Ahmad confirm or overturn them in review.
 
-### State (UI agent, updated 2026-10-12, after the merge into `main`)
-- **Rebuilt, all in `main`:** design system (`site/src/design/tokens.css`, `docs/DESIGN.md`); header with
-  search (Ctrl/Cmd-K or "/", index `public/data/<v>/search.json`), prototype notice, footer with a
-  per-page "report an error" link; receipt `/o/[id]`; series `/series/[id]`; browse; home; sources and
-  `/sources/[id]`; methods; demo; compare (`/compare?s=a,b,c`); data access (`/data`); releases;
-  about; 404.
-- Receipts say "printed page N (page M of the PDF file)" from `Cell.page_label`; citations cite the
-  printed page.
-- Checked on `main` (`bebff67`): `npm run lint` clean; `npm run build` 7,280 pages; `node
-  scripts/check-build.mjs` OK (5,490 value receipts, 811 gap receipts, 17 disputed).
-- **Not yet done** (details in `docs/OPEN_WORK.md`): receipts ignore `member_signs` and
-  `credits_members` (S1); the new receipts, provincial and 19th ICLS series have not been looked at on
-  the site (S2); "after" screenshots exist for receipts only and predate later fixes (S3); axe last
-  ran before the last six pages were rebuilt (S4); critique round 2 (S5).
-- Other checks: `node scripts/a11y.mjs` (axe), `node scripts/screenshot.mjs`, both against a running
-  build on port 3100. Report: `docs/reports/2026-10-12-ui-report.md`.
+### State (S16 rebuild, 2026-10-12)
+- **Mockups and review:** `docs/mockups/project/` (Design canvas sources, v1 and v2 boards at 1280 and 390 px,
+  values are `[slot]` placeholders only), `docs/mockups/REVIEW.md` (35 findings from a skeptical-researcher pass,
+  what changed in v2). The canvas itself is a private claude.ai artifact; Ali shares it if wanted.
+- **Pages, all in `site/src/app/`:** home (search, headline series with sparklines, data type tiles, status key);
+  catalogue `/browse` (facets with live counts in a left column or a phone drawer, rows with sparkline, latest
+  checked value and CSV, filters in the URL, "By document" view); series `/series/[id]` (metadata strip, tabs
+  Chart | Table | Sources | Download | Cite, Download CSV primary, related series rail, About collapsed, sticky
+  actions on phones); compare `/compare` (up to six series, one chart when units agree, small multiples with a
+  shared period axis otherwise, a sentence saying why, aligned table, combined CSV, all in the URL); receipt
+  `/o/[id]` (value, status, crop, Official PDF and archive first; compact checks; subtracted members marked;
+  "see it on the chart"); data type pages `/datasets` and `/datasets/[id]` (coverage, check pass rate and
+  cross-edition agreement as separate numbers against the frozen thresholds; gaps by kind; disputes; tables as
+  printed); **tables as printed** `/tables/[slug]` (139 tables: the printed table redrawn as a site table, edition
+  switcher, click or Enter on a number boxes it on the page image, receipt link; only checked figures carry a
+  number); `/api` (Coming, plus the static file addresses). Sources, methods, releases, data access, about stay
+  text pages.
+- **Planned features** are one flag each in `site/features.config.json`, all off, each showing "Coming: not in
+  this release" in its slot. Turning a flag on before the feature exists fails the build (`src/lib/features.ts`).
+  What each needs is in the placeholder list below and in `docs/OPEN_WORK.md` S16.
+- **Editorial choices** (headline series, example searches, compare default) are in `site/editorial.config.json`;
+  values always come from the release.
+- **`scripts/check-build.mjs` now proves every digit on every page:** each one is a checked value linked to its
+  receipt (`data-v`), a count recomputed independently from the release (`data-count`), or a typed non-value
+  (`data-num`: period, date, page, id, axis, a printed reading on a receipt, a release label, a frozen threshold,
+  ...). A bare digit, a link to an unpublished value, a wrong count, a printed reading of an unpublished figure
+  outside its receipt, a broken internal link, or a subtracted member not marked as such fails the build.
+- **Checked on this branch (2026-10-12):** `npm run lint` clean; `npm run build` 7,423 pages (139 tables as
+  printed, 3 data type pages); `node scripts/check-build.mjs` OK (164,162 value links, 38,916 counts
+  recomputed, 6,318 receipts); `node scripts/a11y.mjs` no serious or critical violations on 28 routes at 390 and
+  1280 px (`docs/reports/qa/ui/a11y-after.json`); `node scripts/keyboard.mjs` every step of a 10-step
+  keyboard-only walkthrough works with visible focus (`docs/reports/qa/ui/keyboard.json`); 84 screenshots (28
+  routes x 390/820/1280) in `docs/reports/qa/ui/after/`, quantized to 256 colours to keep the repo small. Text
+  contrast: every text token on every ground is at least 4.5:1, borders that carry meaning at least 3:1.
+- **Found and fixed during the rebuild:** 108 withheld receipts printed unpublished figures inside failed-check
+  descriptions; not-evaluable reasons quoted recomputed rates. Descriptions now show only where every figure they
+  quote is checked, and check-build enforces it (AGENTS.md section 7).
+
+### Placeholders and what each needs before it can go live
+| Flag / item | Where it shows now | Needs |
+|---|---|---|
+| `realTerms` | series and compare chart controls (PKR series) | a checked deflator series in the release (CPI annual average or GDP deflator) and a human decision on base year and method |
+| `percentOfGdp` | series and compare chart controls (PKR series) | a checked nominal GDP series (PBS national accounts, both bases, break at the 2015-16 rebasing) |
+| `api` | `/api`, footer | a documented, versioned query API; until then the static JSON/CSV files under `/data/<version>/` are the interface |
+| `maps` | provincial LFS series ("Map") | province boundaries with a licence that allows reuse, and a human decision on how gaps and disputed figures show on a map |
+| `districts` | data type pages, catalogue geography facet | a district-level source registered and checked (none is in the corpus yet) |
+| `provincialBudgets` | budget data type page | provincial budget statements registered, a spec and builder (P items) |
+| `moreDataTypes` | home, data type list | the next data type built end to end, e.g. Pakistan Economic Survey tables (OPEN_WORK P5) |
+| `monthlyData` | CPI series and data type page | every monthly CPI issue processed (OPEN_WORK P2, decision D35) |
+| `errataBadges` | releases page | a second release and an errata entry format (S13) |
+| Headline series, example searches, compare default | home, compare | Ali confirms or replaces the list in `site/editorial.config.json` |
+| Design canvas | private artifact | Ali shares it if the team wants to look at the boards |
 
 ### What changed in the release that the site should handle (details: end of `docs/SCHEMA.md`)
 - `status: disputed` with `value: null`, `gap_kind: disputed`, `disputed_readings[]` (one boxed page per reading); `evidence_summary` carries the sentence.
@@ -98,6 +137,13 @@ DRAFT data-tool brief awaiting Ali and Ahmad's approval; the live site still fol
 - **Threshold values in the release.** The methods page reads `thresholds/thresholds.yaml` and shows it
   only if its SHA-256 equals `release.json` `thresholds_sha256`. Copying the values into
   `release.json` would make the release self-contained.
+- **(S16) `evidence_summary` calls a difference a sum.** Net federal resources 2009-10 BE: "Equals the sum of 2
+  printed amounts (exactly)", where the check is gross resources less the provincial share (`member_signs` -1).
+  The receipt's arithmetic table marks the subtraction; the sentence (also used as the page description) should
+  say "difference" when a sign is -1.
+- **(S16) Check wording that quotes only checked figures.** `Check.description` and `not_evaluable_reason` quote
+  printed or recomputed figures, some unpublished. The site now hides them unless every figure they name is
+  checked. A number-free variant of each sentence in the release would let the site say more on withheld receipts.
 - **PDF metadata encoding.** `verification.inspection.pdf_metadata` holds double-encoded text
   ("MicrosoftÂ® Excel"); the site shows only the creation date from it.
 

@@ -4,7 +4,7 @@
 // shows a link to its receipt; Ctrl/Cmd-click and middle-click open the
 // receipt directly. Only checked figures carry a number; gaps carry their
 // status and link to their receipt; unused printed cells show "·".
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type TVCell = {
   id: string;
@@ -37,7 +37,22 @@ const FILL: Record<string, string> = { "gap-source": "cell-gap-source", "gap-pen
 
 export default function TableView({ rows, cols, cells, image, tableBox, caption, pageWords }: TVProps) {
   const [sel, setSel] = useState<string | null>(null);
+  const [whole, setWhole] = useState(false);
   const figure = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  // Frame the page to the table (most pages are half empty); "whole page" undoes it.
+  const t = tableBox && tableBox.length === 4 && tableBox[2] > tableBox[0] && tableBox[3] > tableBox[1] ? tableBox : null;
+  const frame = !whole && t ? { x0: Math.max(0, t[0] - 0.03), x1: Math.min(1, t[2] + 0.03), y0: Math.max(0, t[1] - 0.05), y1: Math.min(1, t[3] + 0.03) } : { x0: 0, x1: 1, y0: 0, y1: 1 };
+  const xr = frame.x1 - frame.x0;
+  const yr = frame.y1 - frame.y0;
+  useEffect(() => {
+    const box = boxRef.current;
+    const wrap = figure.current;
+    if (!box || !wrap) return;
+    // Bring the box to the middle of the page view (the view scrolls on its own; the window does not move).
+    const top = box.getBoundingClientRect().top - wrap.getBoundingClientRect().top + wrap.scrollTop - wrap.clientHeight / 2;
+    wrap.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  }, [sel, whole]);
   const at = new Map(cells.map((c) => [`${c.r}|${c.c}`, c]));
   const selected = sel ? cells.find((c) => c.id === sel) : undefined;
   const rowOf = (r: number) => rows.find((x) => x.index === r)?.label;
@@ -112,22 +127,33 @@ export default function TableView({ rows, cols, cells, image, tableBox, caption,
       <div className="tv-page">
         {image ? (
           <div className="tv-doc" ref={figure}>
-            <div className="tv-doc-inner">
+            <div className="tv-doc-frame" style={{ aspectRatio: `${(xr * image.width).toFixed(1)} / ${(yr * image.height).toFixed(1)}` }}>
+            <div className="tv-doc-inner" style={{ width: pc(1 / xr), left: pc(-frame.x0 / xr), top: pc(-frame.y0 / yr) }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={image.src} alt={`${pageWords}. The table is outlined; the selected figure is boxed.`} width={image.width} height={image.height} loading="lazy" decoding="async" />
               {tableBox ? <div className="doc-table" style={{ left: pc(tableBox[0]), top: pc(tableBox[1]), width: pc(tableBox[2] - tableBox[0]), height: pc(tableBox[3] - tableBox[1]) }} /> : null}
               {selected?.box ? (
                 <div
+                  ref={boxRef}
                   className="doc-box tv-box"
                   data-cell-box={selected.id}
                   style={{ left: pc(selected.box[0] - 0.004), top: pc(selected.box[1] - 0.004), width: pc(selected.box[2] - selected.box[0] + 0.008), height: pc(selected.box[3] - selected.box[1] + 0.008) }}
                 />
               ) : null}
             </div>
+            </div>
           </div>
         ) : (
           <p className="small">No image of this page is in this release.</p>
         )}
+        {image && t ? (
+          <p className="tv-page-ctl small">
+            <button type="button" className="btn btn-text" onClick={() => setWhole((w) => !w)} aria-pressed={whole}>
+              {whole ? "Frame the page to the table" : "Show the whole page"}
+            </button>{" "}
+            · <a href={image.src}>Open the page image</a>
+          </p>
+        ) : null}
         <div className="tv-sel" aria-live="polite">
           {selected ? (
             <>

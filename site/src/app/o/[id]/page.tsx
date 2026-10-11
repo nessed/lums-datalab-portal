@@ -440,8 +440,8 @@ export default async function ReceiptPage({ params }: Props) {
     <article className="receipt" data-status={info.key}>
       <Breadcrumbs
         items={[
-          { href: "/browse", label: "Browse" },
-          { href: `/browse?dataset=${series.dataset}`, label: datasetName(series.dataset) },
+          { href: "/browse", label: "Data" },
+          { href: `/datasets/${series.dataset}`, label: datasetName(series.dataset) },
           ...(parent ? [{ href: seriesHref(parent.series_id), label: parent.name }] : []),
           { href: seriesHref(series.series_id), label: series.name },
           { label: <><Num kind="period">{pWords}</Num>{vintage ? `, ${vintage}` : ""}</> },

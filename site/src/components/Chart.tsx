@@ -299,7 +299,8 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
               ))}
             </g>
           ))}
-          {!keyAbove &&
+          {labelled &&
+            !keyAbove &&
             ends.map((e) => (
               <text key={e.key} x={e.x + 9} y={e.y + 4} className="c-label" fill={e.style.color} style={{ fill: e.style.color }}>
                 {e.label}

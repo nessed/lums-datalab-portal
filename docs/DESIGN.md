@@ -9,6 +9,11 @@ How the portal looks and why. Code: `site/src/design/tokens.css` (every colour, 
 > built from it reads like a report. Ali and Ahmad approve this brief (one line in `DECISIONS.md`)
 > before any site code changes. Until then the site follows the first brief, which is in git
 > history (`git show 9f0e6ad:docs/DESIGN.md`). Questions to settle are at the end of this file.
+>
+> **Update, 2026-10-12 (S16 build):** the site on `claude/epic-mccarthy-ose3yj` is built to this brief. The six
+> questions were answered provisionally (`DECISIONS.md`, "UI ... S16") so the build could go ahead; the brief
+> stays DRAFT until Ali and Ahmad approve or change those answers. Added during the build: tables as printed
+> (`/tables/[slug]`), and planned features as flags (`site/features.config.json`).
 
 ## What it should feel like
 

@@ -1,0 +1,338 @@
+[
+  {
+    "name": "home",
+    "url": "/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "home",
+    "url": "/",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "datasets",
+    "url": "/datasets",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "datasets",
+    "url": "/datasets",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "dataset-abs",
+    "url": "/datasets/abs",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "dataset-abs",
+    "url": "/datasets/abs",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "dataset-cpi",
+    "url": "/datasets/cpi",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "dataset-cpi",
+    "url": "/datasets/cpi",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "dataset-lfs",
+    "url": "/datasets/lfs",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "dataset-lfs",
+    "url": "/datasets/lfs",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "table-abs",
+    "url": "/tables/abs-fed-2025-26~p17~t0",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "table-abs",
+    "url": "/tables/abs-fed-2025-26~p17~t0",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "table-lfs",
+    "url": "/tables/lfs-pbs-2014-15-national~p30~t0",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "table-lfs",
+    "url": "/tables/lfs-pbs-2014-15-national~p30~t0",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "series-provincial",
+    "url": "/series/lfs.lfpr_refined.sd.total.total",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "series-provincial",
+    "url": "/series/lfs.lfpr_refined.sd.total.total",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/fed.exp.development.revenue_account.function.recreation_culture_and_religion.cultural_services",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/fed.exp.development.revenue_account.function.recreation_culture_and_religion.cultural_services",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.general.b2007_08~2015-06~na",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.general.b2007_08~2015-06~na",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.current.capital_account.function.economic_affairs~2015-16~be",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.current.capital_account.function.economic_affairs~2015-16~be",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-disputed",
+    "url": "/o/fed.exp.current.function.economic_affairs~2021-22~be",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-disputed",
+    "url": "/o/fed.exp.current.function.economic_affairs~2021-22~be",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-withheld",
+    "url": "/o/fed.exp.current.function.economic_affairs.other_industries~2021-22~be",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-withheld",
+    "url": "/o/fed.exp.current.function.economic_affairs.other_industries~2021-22~be",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "compare-mixed",
+    "url": "/compare?s=cpi.national.yoy.general,lfs.unemployment_rate.total.total,fed.exp.total",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "compare-mixed",
+    "url": "/compare?s=cpi.national.yoy.general,lfs.unemployment_rate.total.total,fed.exp.total",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "api",
+    "url": "/api",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "api",
+    "url": "/api",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 1280,
+    "violations": []
+  }
+]

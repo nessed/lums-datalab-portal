@@ -488,75 +488,54 @@ Owner: the site agent. All site work so far is in `main` (PR #1, `bebff67`); the
 (last site commit `23e670a`). Start any S item from a new branch off `main`. Story: `docs/reports/2026-10-12-ui-report.md`.
 Design rules: `docs/DESIGN.md`. Plan the site was built to: `docs/plans/2026-10-12-ui.md` (sections 4 to 7).
 
-**Recommended order (changed by Ali, 2026-10-12):** S1 (small correctness fix), then **S16 (high priority)**,
+**Recommended order (changed by Ali, 2026-10-12):** S1 and S16 are built (S16 PR, under review); next S2 and S5, then the rest. Original order: S1 (small correctness fix), then **S16 (high priority)**,
 then S2, S3, S4, S5, S6, S7, S8, then S9 to S15 as listed. S3 to S5 screenshots and critiques should be taken
 after S16, not before, or they will be redone. S1 and S2 are correctness: a
 receipt must never misstate a sum, and new release content must not mislead. S3 to S5 are the evidence the plan's
 "done means" asks for and should come before any polish. S10 needs H3 first; S13 needs a second release.
 
 ### S16 HIGH PRIORITY: redesign the site as a data lab, not a report
-- **State:** step 2 drafted (2026-10-12, PR #5): `docs/DESIGN.md` is rewritten as a data-tool brief, marked
-  DRAFT, with questions for Ali and Ahmad at its end. Waiting for their approval; no site code changed yet.
-  Added by Ali on 2026-10-12 after using the live site: the layout and UX read like a
-  printed report (long text pages, figures reached by reading), not like a data portal people come to in order to
-  find, chart, compare and download numbers. This is a direction problem, not polish: `docs/DESIGN.md` "What it
-  should feel like" asks for "a statistical yearbook brought online", and the site does exactly that.
-- **Where:** `docs/DESIGN.md` (the brief), `site/src/app/page.tsx` (home), `site/src/app/browse/`,
-  `site/src/app/series/[id]/`, `site/src/app/compare/`, `site/src/app/data/`, `site/src/components/` and
-  `site/src/components/chrome/` (header, navigation), `site/src/design/tokens.css`, `site/src/app/globals.css`.
+- **State:** built (2026-10-12) on `claude/epic-mccarthy-ose3yj`, branched off `docs/open-work-ux-redesign`
+  (PR #5); PR open against that branch, not merged. Mockups v1 and v2 with a self-review
+  (`docs/mockups/project/`, `docs/mockups/REVIEW.md`), then home, catalogue, series, compare, receipt, data type
+  pages, tables as printed (`/tables/[slug]`, added at Ali's request) and an API placeholder, all rebuilt.
+  `docs/DESIGN.md` is still marked DRAFT: its six questions were answered by best fit and recorded as provisional
+  decisions in `DECISIONS.md` (UI, S16). Checks: see `STATUS.md` → Site, and the UI report section "S16 rebuild".
+- **Where:** `site/src/app/` (every page), `site/src/components/` (`CatalogueFilter`, `Compare`, `SeriesChart`,
+  `Tabs`, `TableView`, `Spark`, `Figure`, `DataTypeTile`, `ui/Num`), `site/src/lib/` (`facets.mjs`, `tables.ts`,
+  `stats.ts`, `features.ts`), `site/features.config.json`, `site/editorial.config.json`,
+  `site/scripts/check-build.mjs`, `site/scripts/keyboard.mjs`.
 - **Left to do:**
-  1. Study how data portals are laid out and write down what to take from each: World Bank DataBank and Data360,
-     FRED, Our World in Data, IMF Data, ONS, Eurostat. Look at the first screen, search, the series page, the
-     chart builder, downloads and the API page.
-  2. Rewrite the "What it should feel like" and "Layout" sections of `docs/DESIGN.md` around a data tool: search
-     and browse first, the chart and table as the centre of every series page, compare and download one click
-     away, text and method notes secondary (collapsed or in a side panel). Keep the status system, receipts,
-     caveats-in-place and the "Things we do not do" list. Show the new brief to Ali before writing code.
-  3. Home: a search box and the data itself on the first screen (topics or datasets with counts, a few headline
-     series with sparklines, latest release), not paragraphs.
-  4. Series page: large interactive chart and table first; unit, source, status and caveats as compact metadata;
-     download (CSV, JSON) and cite always visible; related series alongside.
-  5. Browse: a faceted catalogue (dataset, topic, province, frequency, status) with result counts and inline
-     sparklines, instead of a long list.
-  6. Compare: pick several series and chart them together, with a shareable URL.
-  7. Receipts stay the evidence layer: reached from any value in a chart or table, layout tightened to match.
-  8. Rebuild, run `scripts/check-build.mjs`, then take S3 screenshots and run the S5 critique on the new layout.
-- **Done when:** Ali has approved the new brief in `docs/DESIGN.md`; from the home page a first-time visitor can
-  reach a chart of any series in two clicks and download it in one more; `npm run lint`, `npm run build` and
-  `node scripts/check-build.mjs` pass; screenshots of every route are in the report.
-- **Effort:** large: several agent sessions. Step 2 needs Ali's sign-off before steps 3 to 7. Can run beside
-  pipeline work.
-- **Needs from a human:** Ali (and Ahmad) approve the new direction in `docs/DESIGN.md`, ideally pointing at one
-  or two portals they want it to feel like.
-- **Traps:** every number, date and title must still come from the release (AGENTS.md sections 3 and 4); no
-  number is computed or reworded in the browser beyond what the release holds. "Data lab" does not mean the
-  default dashboard look the "Things we do not do" list rules out. Do not drop receipts or caveats to make pages
-  look cleaner; move them, do not delete them.
+  1. Ali and Ahmad review the PR and the provisional answers; record "Design brief 2026-10-12 approved" (or the
+     changes) in `DECISIONS.md` and drop the DRAFT banner in `docs/DESIGN.md`.
+  2. Ali confirms the headline series, example searches and compare default in `site/editorial.config.json`.
+  3. Run S5 (a fresh-eyes critique of the built pages; the mockup review is not that).
+  4. Each placeholder goes live only when what it needs exists (table below); flip its flag in
+     `site/features.config.json` in the same PR that builds it (the build fails if a flag is on without code).
+- **Placeholders (each one flag, off, showing "Coming: not in this release"):**
 
-### S1 Receipts: show subtracted members and honour `credits_members`
-- **State:** not started. Found on 2026-10-12 while checking the merge. The release has 33 `accounting_identity`
-  checks with a member sign of −1 (`Check.member_signs`, for example "gross federal resources less the provincial
-  share") and 72 checks with `credits_members: false`. The site reads neither field.
-- **Where:** `site/src/app/o/[id]/page.tsx` (`CheckItem`, `MemberRow`, `evidenceWords`); `site/src/lib/data.ts`
-  (`Check` type lacks both fields). Schema: end of `docs/SCHEMA.md`.
-- **Left to do:**
-  1. Add `member_signs?: number[] | null` and `credits_members?: boolean | null` to the `Check` type.
-  2. In the arithmetic table, print a "less" marker and a minus before each member whose sign is −1, and say
-     "added" / "subtracted" in the row for screen readers.
-  3. In `evidenceWords`, skip checks whose `credits_members` is false (they do not support the member's status);
-     keep showing them in the list, labelled "does not count towards this figure's status".
-  4. Extend `scripts/check-build.mjs`: for every published receipt whose checks include a −1 member, the HTML
-     holds the minus marker for that member.
-  5. Screenshot one receipt of each case (find ids with a short Python query over `checks.json`).
-- **Done when:** `npm run build && node scripts/check-build.mjs` passes with the new rule, and the receipt for a
-  net-federal-resources figure (2009-10 BE) shows the provincial share as subtracted.
-- **Effort:** 1 to 2 agent hours; a full build is about 6 minutes; can run beside pipeline work.
-- **Needs from a human:** nothing.
-- **Traps:** the check `description` already says "less"; only the table is wrong. Do not recompute sums in the
-  browser; display `residual` and the printed values only.
+  | Flag | Needs before it can go live |
+  |---|---|
+  | `realTerms` | a checked deflator series in the release (CPI annual average or GDP deflator); a human decision on base year and method |
+  | `percentOfGdp` | a checked nominal GDP series (PBS national accounts, both bases, with the 2015-16 rebasing break) |
+  | `api` | a documented, versioned query API; the static files under `/data/<version>/` serve until then |
+  | `maps` | province boundaries under a licence that allows reuse; a decision on how gaps and disputes show on a map |
+  | `districts` | a district-level source registered and checked (none in the corpus yet) |
+  | `provincialBudgets` | provincial budget statements registered, with a spec and builder |
+  | `moreDataTypes` | the next data type built end to end, e.g. Pakistan Economic Survey tables (P5) |
+  | `monthlyData` | every monthly CPI issue processed (P2, decision D35) |
+  | `errataBadges` | a second release and an errata entry format (S13) |
+
+- **Done when:** the PR is reviewed and merged, `DECISIONS.md` has the approval line, and `npm run lint`,
+  `npm run build`, `node scripts/check-build.mjs` pass on the merged head.
+- **Effort:** review only, plus whatever the review asks for.
+- **Needs from a human:** Ali and Ahmad: approve or change the provisional answers; Ali: the editorial config.
+- **Traps:** check descriptions and not-evaluable reasons quote figures, some unpublished; never show them on a
+  receipt unless every figure they name is checked (AGENTS.md section 7). A `next start` left running across a
+  rebuild serves pages without CSS; restart it before screenshots.
 
 ### S2 Look at the new release content on the site
-- **State:** not started. Since the site pages were built, the release gained ABS receipts series (`fed.rev.*`,
+- **State:** partial (S16 PR): the catalogue tags every series with its definition (13th / 19th ICLS), base year and "no area", and has definition and side facets; compare says in a sentence when chosen series differ in definition. Steps 3 to 5 are not verified. Before S16: Since the site pages were built, the release gained ABS receipts series (`fed.rev.*`,
   48), LFS provincial series (`lfs.<measure>.<pb|sd|kp|ba>.*`), 19th ICLS series (`*.icls19`), cross-source checks
   against SBP and Economic Survey files (5 with no member cell, `target_value` + `target_source` instead), and
   `pdfplumber` cells. The build passes on them; nobody has looked at the pages.
@@ -580,44 +559,6 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
 - **Needs from a human:** nothing.
 - **Traps:** AGENTS.md section 7 (LFS provincial layouts, `.icls19` never joined to 13th ICLS, a cross-source check
   never supplies a value).
-
-### S3 Production screenshots of every route, after the fixes
-- **State:** partial. `docs/reports/qa/ui/before/` holds the 51 baseline images (17 routes x 3 widths, release as of
-  2026-10-11 03:50). `docs/reports/qa/ui/after/` holds only 9 receipt images (tier A, CPI, gap) from commit
-  `bbc8e66`, which predate the critique fixes. No "after" images exist for home, browse, the three series, the
-  disputed receipt, sources, source detail, methods, releases, demo, compare, data, about or 404.
-- **Where:** `site/scripts/screenshot.mjs`, `site/scripts/qa-routes.mjs` (route list built from the release).
-- **Left to do:**
-  1. `npm run build`, then `npx next start -p 3100` (not `next dev`: on this machine Turbopack's dev cache serves
-     stale CSS and modules after edits; see the UI report).
-  2. `node scripts/screenshot.mjs --base http://localhost:3100 --out ../docs/reports/qa/ui/after` (all routes,
-     390/820/1280).
-  3. Look at every image; fix what is wrong; repeat.
-  4. Add a before/after table to the UI report (route, before file, after file, what changed).
-- **Done when:** `docs/reports/qa/ui/after/index.json` lists 18 routes x 3 widths with status 200 (404 page: 404),
-  and the report has the table.
-- **Effort:** 1 agent hour plus fixes; the images are about 15 MB, so replace the set rather than adding a second.
-- **Needs from a human:** nothing.
-- **Traps:** stop the server afterwards (`site/` plan section 2: no processes left running).
-
-### S4 Accessibility pass on every route, and the keyboard walkthrough
-- **State:** partial. The last full axe run (production build, 2026-10-11 about 04:55) was clean for receipts
-  (4 kinds), series (3), browse, home and demo at 390 and 1280 px; source, methods and releases failed
-  `scrollable-region-focusable` with the old markup, since rebuilt but not re-run. Compare, data, about, 404 never
-  ran with their new markup. No keyboard walkthrough is recorded. Baseline: `docs/reports/qa/ui/a11y-before.json`;
-  `a11y-after.json` does not exist.
-- **Where:** `site/scripts/a11y.mjs`.
-- **Left to do:**
-  1. With a production build on port 3100: `node scripts/a11y.mjs --out ../docs/reports/qa/ui/a11y-after.json`.
-  2. Fix every serious or critical finding.
-  3. Keyboard only: search (Ctrl+K, type, Enter) to a series, chart point to a receipt, receipt to "JSON" and
-     "Copy citation", browse filter, compare add/remove. Record each step and anything unreachable in the report.
-  4. Check focus visibility, heading order, and contrast of `--ink-3` text on `--paper-2` panels.
-- **Done when:** `node scripts/a11y.mjs` exits 0, `a11y-after.json` is committed, and the report has the
-  walkthrough.
-- **Effort:** 2 agent hours.
-- **Needs from a human:** nothing.
-- **Traps:** `waitUntil: "networkidle"` never settles because of link prefetching; the scripts wait for `load`.
 
 ### S5 Critique round 2 on every page built after the receipt
 - **State:** not started. Only the receipt had a fresh-eyes critique (15 findings, report section "Critique round 1").
@@ -857,3 +798,67 @@ Done 2026-10-12 on branch `followup/open-work-site` from `origin/main` at `bebff
 ## Done
 
 (Move finished entries here with the PR or commit.)
+
+### S1 Receipts: show subtracted members and honour `credits_members`
+- **State:** not started. Found on 2026-10-12 while checking the merge. The release has 33 `accounting_identity`
+  checks with a member sign of −1 (`Check.member_signs`, for example "gross federal resources less the provincial
+  share") and 72 checks with `credits_members: false`. The site reads neither field.
+- **Where:** `site/src/app/o/[id]/page.tsx` (`CheckItem`, `MemberRow`, `evidenceWords`); `site/src/lib/data.ts`
+  (`Check` type lacks both fields). Schema: end of `docs/SCHEMA.md`.
+- **Left to do:**
+  1. Add `member_signs?: number[] | null` and `credits_members?: boolean | null` to the `Check` type.
+  2. In the arithmetic table, print a "less" marker and a minus before each member whose sign is −1, and say
+     "added" / "subtracted" in the row for screen readers.
+  3. In `evidenceWords`, skip checks whose `credits_members` is false (they do not support the member's status);
+     keep showing them in the list, labelled "does not count towards this figure's status".
+  4. Extend `scripts/check-build.mjs`: for every published receipt whose checks include a −1 member, the HTML
+     holds the minus marker for that member.
+  5. Screenshot one receipt of each case (find ids with a short Python query over `checks.json`).
+- **Done when:** `npm run build && node scripts/check-build.mjs` passes with the new rule, and the receipt for a
+  net-federal-resources figure (2009-10 BE) shows the provincial share as subtracted.
+- **Effort:** 1 to 2 agent hours; a full build is about 6 minutes; can run beside pipeline work.
+- **Needs from a human:** nothing.
+- **Traps:** the check `description` already says "less"; only the table is wrong. Do not recompute sums in the
+  browser; display `residual` and the printed values only.
+- **Closed:** Done in the S16 PR (`claude/epic-mccarthy-ose3yj`): subtracted members show "less" and a minus, with "(subtracted)" for screen readers; checks with `credits_members: false` are listed but labelled and not counted; `check-build.mjs` fails a receipt whose subtracted members are not all marked (81 receipts carry the mark).
+
+### S3 Production screenshots of every route, after the fixes
+- **State:** partial. `docs/reports/qa/ui/before/` holds the 51 baseline images (17 routes x 3 widths, release as of
+  2026-10-11 03:50). `docs/reports/qa/ui/after/` holds only 9 receipt images (tier A, CPI, gap) from commit
+  `bbc8e66`, which predate the critique fixes. No "after" images exist for home, browse, the three series, the
+  disputed receipt, sources, source detail, methods, releases, demo, compare, data, about or 404.
+- **Where:** `site/scripts/screenshot.mjs`, `site/scripts/qa-routes.mjs` (route list built from the release).
+- **Left to do:**
+  1. `npm run build`, then `npx next start -p 3100` (not `next dev`: on this machine Turbopack's dev cache serves
+     stale CSS and modules after edits; see the UI report).
+  2. `node scripts/screenshot.mjs --base http://localhost:3100 --out ../docs/reports/qa/ui/after` (all routes,
+     390/820/1280).
+  3. Look at every image; fix what is wrong; repeat.
+  4. Add a before/after table to the UI report (route, before file, after file, what changed).
+- **Done when:** `docs/reports/qa/ui/after/index.json` lists 18 routes x 3 widths with status 200 (404 page: 404),
+  and the report has the table.
+- **Effort:** 1 agent hour plus fixes; the images are about 15 MB, so replace the set rather than adding a second.
+- **Needs from a human:** nothing.
+- **Traps:** stop the server afterwards (`site/` plan section 2: no processes left running).
+- **Closed:** Done in the S16 PR: 84 screenshots, 28 routes x 3 widths, in `docs/reports/qa/ui/after/`; table in the UI report, section "S16 rebuild".
+
+### S4 Accessibility pass on every route, and the keyboard walkthrough
+- **State:** partial. The last full axe run (production build, 2026-10-11 about 04:55) was clean for receipts
+  (4 kinds), series (3), browse, home and demo at 390 and 1280 px; source, methods and releases failed
+  `scrollable-region-focusable` with the old markup, since rebuilt but not re-run. Compare, data, about, 404 never
+  ran with their new markup. No keyboard walkthrough is recorded. Baseline: `docs/reports/qa/ui/a11y-before.json`;
+  `a11y-after.json` does not exist.
+- **Where:** `site/scripts/a11y.mjs`.
+- **Left to do:**
+  1. With a production build on port 3100: `node scripts/a11y.mjs --out ../docs/reports/qa/ui/a11y-after.json`.
+  2. Fix every serious or critical finding.
+  3. Keyboard only: search (Ctrl+K, type, Enter) to a series, chart point to a receipt, receipt to "JSON" and
+     "Copy citation", browse filter, compare add/remove. Record each step and anything unreachable in the report.
+  4. Check focus visibility, heading order, and contrast of `--ink-3` text on `--paper-2` panels.
+- **Done when:** `node scripts/a11y.mjs` exits 0, `a11y-after.json` is committed, and the report has the
+  walkthrough.
+- **Effort:** 2 agent hours.
+- **Needs from a human:** nothing.
+- **Traps:** `waitUntil: "networkidle"` never settles because of link prefetching; the scripts wait for `load`.
+- **Closed:** Done in the S16 PR: `a11y-after.json` (no serious or critical findings), `scripts/keyboard.mjs` walkthrough (`keyboard.json`), contrast computed; UI report, section "S16 rebuild".
+

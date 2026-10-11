@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datalab"
+version = "0.0.1"
+description = "LUMS DataLab Portal pipeline: register, extract, check and release official statistics with receipts."
+requires-python = ">=3.12"
+# Exact versions are pinned in requirements.lock (full, with Docling) and
+# requirements-ci.lock (no Docling; enough for tests and check-release).
+dependencies = [
+  "pydantic>=2",
+  "pyyaml",
+  "pymupdf",
+  "pdfplumber",   # second reader (D28); also needed by the tests
+  "pypdf",
+  "requests",
+  "pandas",
+  "pyarrow",
+]
+
+[project.optional-dependencies]
+extract = ["docling==2.119.0", "pdfplumber"]
+dev = ["pytest", "hypothesis"]
+
+[tool.setuptools.packages.find]
+include = ["datalab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,68 @@
+# Printed row label -> series, for the ABS Summary of Expenditure (decision D20).
+#
+# Written by hand from the labels the located tables actually print. Each
+# pattern must match the WHOLE normalised label (lowercase, numbering such as
+# "01" / "a." stripped, "&" spelled "and", spaces around brackets removed).
+# A label that matches nothing stays unmapped and is never published. The
+# mapping is validated by the sum checks: a wrong mapping makes a sum fail.
+#
+# "(account )?" at the start of some patterns: in a few editions the heading
+# "a. Current Exp. on Revenue / Account" wraps onto a second line and Docling
+# attaches the word "Account" to the next row's label. In the same way a section
+# heading ("Development Expenditure", "3 Break-up of Expenditure") is sometimes
+# glued in front of the first row under it; those prefixes are optional below.
+
+labels:
+  # the ten functions (current expenditure on revenue account)
+  - {pattern: '(account )?general public services?', series: fed.exp.current.function.general_public_services}
+  - {pattern: 'defence affairs (and )?services', series: fed.exp.current.function.defence_affairs_and_services}
+  - {pattern: 'public order (and )?safety affairs', series: fed.exp.current.function.public_order_and_safety_affairs}
+  - {pattern: 'economic affairs', series: fed.exp.current.function.economic_affairs}
+  - {pattern: 'environment protection', series: fed.exp.current.function.environment_protection}
+  - {pattern: 'housing (and )?community amenities', series: fed.exp.current.function.housing_and_community_amenities}
+  - {pattern: 'health( affairs (and )?services)?', series: fed.exp.current.function.health}
+  - {pattern: 'recreation,? culture,? (and )?religion', series: fed.exp.current.function.recreation_culture_and_religion}
+  - {pattern: 'education affairs,? (and )?services', series: fed.exp.current.function.education_affairs_and_services}
+  - {pattern: 'social protection', series: fed.exp.current.function.social_protection}
+
+  # sub-totals and totals
+  - {pattern: 'current exp(\.|enditure)? on revenue( account)?', series: fed.exp.current.revenue_account}
+  - {pattern: 'current exp(\.|enditure)? on capital( account)?', series: fed.exp.current.capital_account}
+  - {pattern: 'total current expenditure ?\(a\+b\)', series: fed.exp.current.total}
+  - {pattern: '(development expenditure c\. )?dev(\.|elopment)? exp(\.|enditure)? on revenue( account)?( ?\(i\+ii\))?', series: fed.exp.development.revenue_account}
+  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on revenue account ?\(psdp\)', series: fed.exp.development.revenue_account.psdp}
+  - {pattern: 'other dev(\.|elopment)? exp(\.|enditure)? on revenue account', series: fed.exp.development.revenue_account.other}
+  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account( ?\(i\+ii\))?', series: fed.exp.development.capital_account}
+  - {pattern: 'dev(\.|elopment)? exp(\.|enditure)? on capital account ?\(psdp\)', series: fed.exp.development.capital_account.psdp}
+  - {pattern: 'other dev(\.|elopment)? exp(\.|enditure)? on capital account', series: fed.exp.development.capital_account.other}
+  - {pattern: '\(?total public sector dev(\.|elopment)? program(me)?\)? ?\(ci\+di\)', series: fed.exp.development.psdp_total}
+  - {pattern: 'total development expenditure ?\(c\+d\)', series: fed.exp.development.total}
+  - {pattern: '\(total public sector dev(\.|elopment)? program(me)?\) ?\(i\+d\)', series: fed.exp.development.psdp_total}
+  - {pattern: 'estimated operational shortfall in psdp', series: fed.exp.operational_shortfall}
+  - {pattern: '(grand )?total ?- ?expenditure ?\(1\+2(\+3)?\)', series: fed.exp.total}
+  - {pattern: 'total expenditure', series: fed.exp.total}
+  - {pattern: '(break-up of expenditure )?revenue account ?\(a\+c\)', series: fed.exp.account.revenue}
+  - {pattern: 'capital account ?\(b\+d\)', series: fed.exp.account.capital}
+
+  # items under current expenditure on capital account (newer editions)
+  - {pattern: 'foreign loans? repayments?', series: fed.exp.current.capital_account.foreign_loans_repayment}
+  - {pattern: 'repayment of short term foreign( credits)?', series: fed.exp.current.capital_account.short_term_foreign_credits_repayment}
+  - {pattern: 'transfers', series: fed.exp.current.capital_account.transfers}
+
+extra_series:
+  - {id: fed.exp.development.capital_account.psdp, name: "Development expenditure on capital account (PSDP)", parent: fed.exp.development.capital_account, sort: 66,
+     definition: "The Public Sector Development Programme part of development expenditure on capital account (printed in some editions)."}
+  - {id: fed.exp.development.capital_account.other, name: "Other development expenditure on capital account", parent: fed.exp.development.capital_account, sort: 67,
+     definition: "Development expenditure on capital account outside the PSDP (printed in some editions)."}
+  - {id: fed.exp.development.psdp_total, name: "Total Public Sector Development Programme (i+d)", parent: null, sort: 65,
+     definition: "PSDP total as printed in older editions: the PSDP part of development expenditure on revenue account plus the PSDP part (or, where no split is printed, all) of development expenditure on capital account."}
+  - {id: fed.exp.development.revenue_account.psdp, name: "Development expenditure on revenue account (PSDP)", parent: fed.exp.development.revenue_account, sort: 63,
+     definition: "The Public Sector Development Programme part of development expenditure on revenue account (printed in older editions)."}
+  - {id: fed.exp.development.revenue_account.other, name: "Other development expenditure on revenue account", parent: fed.exp.development.revenue_account, sort: 64,
+     definition: "Development expenditure on revenue account outside the PSDP (printed in older editions)."}
+  - {id: fed.exp.current.capital_account.foreign_loans_repayment, name: "Foreign loans repayment", parent: fed.exp.current.capital_account, sort: 51,
+     definition: "Repayment of foreign loans, part of current expenditure on capital account."}
+  - {id: fed.exp.current.capital_account.short_term_foreign_credits_repayment, name: "Repayment of short-term foreign credits", parent: fed.exp.current.capital_account, sort: 52,
+     definition: "Repayment of short-term foreign credits, part of current expenditure on capital account."}
+  - {id: fed.exp.current.capital_account.transfers, name: "Transfers (current expenditure on capital account)", parent: fed.exp.current.capital_account, sort: 53,
+     definition: "Transfers recorded under current expenditure on capital account."}

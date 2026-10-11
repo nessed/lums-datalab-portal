@@ -1,0 +1,189 @@
+{
+  "$defs": {
+    "Derivation": {
+      "additionalProperties": false,
+      "properties": {
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "inputs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inputs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "formula",
+        "inputs"
+      ],
+      "title": "Derivation",
+      "type": "object"
+    },
+    "SeriesBreak": {
+      "additionalProperties": false,
+      "properties": {
+        "at_period": {
+          "title": "At Period",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "at_period",
+        "kind",
+        "note"
+      ],
+      "title": "SeriesBreak",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "What a number measures.",
+  "properties": {
+    "breaks": {
+      "items": {
+        "$ref": "#/$defs/SeriesBreak"
+      },
+      "title": "Breaks",
+      "type": "array"
+    },
+    "dataset": {
+      "enum": [
+        "abs",
+        "cpi",
+        "lfs"
+      ],
+      "title": "Dataset",
+      "type": "string"
+    },
+    "definition": {
+      "default": "",
+      "title": "Definition",
+      "type": "string"
+    },
+    "definition_status": {
+      "default": "draft",
+      "enum": [
+        "draft",
+        "reviewed"
+      ],
+      "title": "Definition Status",
+      "type": "string"
+    },
+    "derivation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Derivation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "derived": {
+      "default": false,
+      "title": "Derived",
+      "type": "boolean"
+    },
+    "dims": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Dims",
+      "type": "object"
+    },
+    "frequency": {
+      "enum": [
+        "fiscal_year",
+        "month",
+        "survey_round"
+      ],
+      "title": "Frequency",
+      "type": "string"
+    },
+    "geo": {
+      "default": "pk",
+      "title": "Geo",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "parent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parent Id"
+    },
+    "scale_factor": {
+      "default": 1,
+      "title": "Scale Factor",
+      "type": "integer"
+    },
+    "series_id": {
+      "title": "Series Id",
+      "type": "string"
+    },
+    "sort_key": {
+      "default": 0,
+      "title": "Sort Key",
+      "type": "integer"
+    },
+    "source_doc_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Doc Types",
+      "type": "array"
+    },
+    "synonyms": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Synonyms",
+      "type": "array"
+    },
+    "unit": {
+      "enum": [
+        "PKR",
+        "index",
+        "percent",
+        "persons"
+      ],
+      "title": "Unit",
+      "type": "string"
+    }
+  },
+  "required": [
+    "series_id",
+    "name",
+    "dataset",
+    "frequency",
+    "unit"
+  ],
+  "title": "Series",
+  "type": "object"
+}

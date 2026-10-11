@@ -1,0 +1,187 @@
+# PBS "Monthly Review of Price Indices": the "Consumer Price Index by Group of
+# Commodities and Services" tables.
+#
+# What the table is: one table per area. Issues on the 2007-08 base print one
+# CPI table; issues on the 2015-16 base (from 2019-08 on) print three: National,
+# Urban and Rural. Each table has a "General" row and 12 group rows (two food
+# sub-rows are printed as well and are not targeted here). Columns, left to
+# right: group weight (%), index for the issue month, index for the previous
+# month, index for the same month last year, % change of the issue month over
+# the previous month and over the same month last year, and the two "impact"
+# columns (in % points; not mapped, never published).
+#
+# Index levels on the two bases are different measures: every index and weight
+# series exists once per base and is never spliced or smoothed.
+
+dataset: cpi
+frequency: month
+vintage: na
+scale_factor: 1
+expected_value_columns: 8
+min_table_coverage: 0.90
+
+locator:
+  # The caption is read from the PDF text layer of each page (never from Docling).
+  # Group 1 = area (absent on the 2007-08 base), group 2 = base year.
+  caption_pattern: '(?i)table\s*\d+\s*:\s*consumer\s+price\s+index\s*(?:\(\s*(national|urban|rural)\s*\)\s*)?by\s+group\s+of\s+commodities\s+and\s+services\s*\(\s*base\s*(\d{4}\s*-\s*\d{2})\s*\)'
+  # A Docling table on the captioned page qualifies when at least `min_matches`
+  # of these appear in its text. Exactly one table must qualify.
+  min_matches: 10
+  row_patterns:
+    - 'general'
+    - 'food (and )?non-alcoholic'
+    - 'alcoholic bev.{0,8} ?(and )?tobacco'
+    - 'clothing (and )?footwear'
+    - 'housing, water'
+    - 'furnishing'
+    - 'health'
+    - 'transport'
+    - 'communication'
+    - 'recreation (and )?culture'
+    - 'education'
+    - 'restaurants (and )?hotels'
+    - 'miscellaneous'
+
+# The rebasing. Issues for months before `first_new_base_issue` are expected to
+# print base 2007-08 and one (unnamed) table; later issues base 2015-16 and three.
+# The 2007-08 base table prints no area, so its area key is `not_stated` and its
+# series ids carry no area segment (decision D27). It is never filed under
+# national or urban.
+rebase:
+  first_new_base_issue: "2019-08"
+  old: {base_year: "2007-08", tag: b2007_08, areas: [not_stated]}
+  new: {base_year: "2015-16", tag: b2015_16, areas: [national, urban, rural]}
+
+columns:
+  # Expected value columns, left to right. `month` says which month the bottom
+  # header line above the column must name, relative to the issue month:
+  # 0 = issue month, -1 = previous month, -12 = same month last year,
+  # none = the bottom header line must carry no month above this column.
+  # `group` is the word of the spanning header that must sit above the column(s).
+  # A table whose headers (read from the text layer by position) do not match
+  # this exactly is left unmapped and nothing from it is published.
+  layout:
+    - {role: weight,      month: none, group: weight}
+    - {role: index,       month: 0,    group: indices}
+    - {role: index,       month: -1,   group: indices}
+    - {role: index,       month: -12,  group: indices}
+    - {role: mom,         month: -1,   group: change}
+    - {role: yoy,         month: -12,  group: change}
+    - {role: impact_mom,  month: -1,   group: impact}
+    - {role: impact_yoy,  month: -12,  group: impact}
+  group_words:
+    weight: '(?i)^weight$'
+    indices: '(?i)^ind(ices|ex)$'
+    change: '(?i)^change$'
+    impact: '(?i)^impact$'
+  header_lookback: 0.14        # fraction of page height searched above the first data row
+  header_line_tolerance: 0.008 # month labels of all columns must sit on one line (page fraction)
+
+breaks:
+  - at_period: "2019-08"
+    kind: rebase
+    note: "CPI rebased from 2007-08 to 2015-16; values on the two bases are not comparable"
+
+# Tolerances. Fixed here before any result was looked at, derived from the
+# printed precision only (decision D9 style). u_x = one unit of the last
+# printed digit of x.
+checks:
+  weights_sum:
+    abs_tolerance: "0.05"     # thresholds.yaml: tolerances.cpi_weights_sum_abs
+    rule: "The 12 group weights must add to the printed general weight (100) within 0.05."
+  index_aggregation:
+    # general = sum(w_i * I_i) / 100. Every printed figure is rounded to its last digit, so the
+    # recomputed value can be off by at most
+    #   0.5*u_I * sum(w_i)/100          (rounding of the 12 group indices)
+    # + sum_i 0.5*u_w * I_i/100         (rounding of the 12 group weights)
+    # and the printed general index by 0.5*u_G. The tolerance is the sum of the three.
+    rule: >-
+      |sum(w_i x I_i)/100 - printed general| <= 0.5 u_I x sum(w_i)/100 + sum_i(0.5 u_w x I_i)/100 + 0.5 u_G
+  recompute:
+    # p = (a/b - 1) * 100 with a, b printed indices. |d(100 a/b)| <= 100 * (0.5 u_a / b) * (1 + a/b)
+    # when u_a = u_b; the printed percentage itself is rounded by at most 0.5 u_p.
+    rule: >-
+      |(a/b - 1) x 100 - printed %| <= 0.5 u_p + 100 x 0.5 u_I x (1 + a/b) / b
+  cross_edition:
+    units_of_last_digit: 1    # thresholds.yaml: tolerances.cross_edition_units_of_last_digit
+  cross_source_sbp:
+    # SBP EasyData prints national YoY to 1 decimal; PBS to 2. Both round the same quantity:
+    # |pbs - sbp| <= 0.5 u_sbp + 0.5 u_pbs.
+    doc_type: sbp_easydata
+    series_key: "TS_GP_PT_CPI_M.P00011516"
+    series_name_pattern: '(?i)cpi national\s*-?\s*yoy'
+    # The file's own descriptive columns must establish the base year and the unit in every row of
+    # the series; otherwise nothing is compared (datasets/cross_source.py).
+    dataset_pattern: 'New Base: 2015-16'
+    unit_pattern: '(?i)^percent$'
+    applies_to_series: cpi.national.yoy.general
+    value_unit_at_most: "0.1"   # SBP gives this series to at least one decimal; a value without decimals keeps that tolerance
+    first_period: "2019-08"   # the SBP series is on the 2015-16 base; never compared with old-base issues
+    rule: "|PBS YoY - SBP YoY| <= 0.5 u_SBP + 0.5 u_PBS"
+
+# Series catalogue. One entry per row of the table; ids are built by code:
+#   cpi.<area>.general.<base tag>            index, general
+#   cpi.<area>.group.<slug>.<base tag>       index, group
+#   cpi.<area>.weight.<slug>.<base tag>      weight (percent), period = the issue month
+#   cpi.<area>.yoy.general / .yoy.group.<slug>   % change over the same month last year
+#   cpi.<area>.mom.general / .mom.group.<slug>   % change over the previous month
+# The 2007-08 base table (area key `not_stated`) is named by what it prints, with
+# no area segment and the base in every id, change series included (D27):
+#   cpi.general.b2007_08, cpi.group.<slug>.b2007_08, cpi.weight.<slug>.b2007_08,
+#   cpi.yoy.general.b2007_08, cpi.yoy.group.<slug>.b2007_08, cpi.mom.(...).b2007_08
+# Definitions are plain-language drafts for a human to edit.
+areas:
+  national: {name: "National"}
+  urban: {name: "Urban"}
+  rural: {name: "Rural"}
+  not_stated:
+    name: "(no area stated)"
+    area_as_printed: "none stated"
+    note: "The 2007-08 base CPI was compiled from urban centres only (to confirm against PBS methodology; not stated in the monthly issue)"
+
+general:
+  name: "General (all groups)"
+  definition: >-
+    Consumer Price Index for all goods and services together, as printed in the PBS Monthly Review
+    of Price Indices. The average of the base year equals 100.
+  synonyms: [cpi, consumer price index, inflation, headline inflation, cost of living]
+
+groups:
+  - {slug: food, name: "Food and non-alcoholic beverages", sort: 1,
+     definition: "Prices of food and non-alcoholic drinks bought by households.", synonyms: [food prices, food inflation]}
+  - {slug: alcohol_tobacco, name: "Alcoholic beverages and tobacco", sort: 2,
+     definition: "Prices of alcoholic drinks and tobacco products such as cigarettes.", synonyms: [cigarettes, tobacco]}
+  - {slug: clothing_footwear, name: "Clothing and footwear", sort: 3,
+     definition: "Prices of clothes, cloth, tailoring and shoes.", synonyms: [clothes, shoes]}
+  - {slug: housing_utilities, name: "Housing, water, electricity, gas and fuels", sort: 4,
+     definition: "House rent, water charges, electricity, gas and other household fuels.", synonyms: [rent, electricity, gas, utilities]}
+  - {slug: furnishing_household, name: "Furnishing and household equipment maintenance", sort: 5,
+     definition: "Furniture, household appliances and goods and services for running a home.", synonyms: [furniture, appliances]}
+  - {slug: health, name: "Health", sort: 6,
+     definition: "Medicines, doctors' fees and other medical goods and services.", synonyms: [medicines, doctor fees]}
+  - {slug: transport, name: "Transport", sort: 7,
+     definition: "Vehicles, motor fuel and transport fares.", synonyms: [petrol, fares, fuel]}
+  - {slug: communication, name: "Communication", sort: 8,
+     definition: "Postal, telephone and internet services and equipment.", synonyms: [telephone, mobile, internet]}
+  - {slug: recreation_culture, name: "Recreation and culture", sort: 9,
+     definition: "Goods and services for leisure, such as newspapers, toys and televisions.", synonyms: [leisure, entertainment]}
+  - {slug: education, name: "Education", sort: 10,
+     definition: "School, college and university fees and related costs.", synonyms: [school fees, tuition]}
+  - {slug: restaurants_hotels, name: "Restaurants and hotels", sort: 11,
+     definition: "Meals eaten out and accommodation charges.", synonyms: [eating out, hotels]}
+  - {slug: miscellaneous, name: "Miscellaneous goods and services", sort: 12,
+     definition: "Other goods and services, such as personal care items.", synonyms: [personal care, other]}
+
+measures:
+  index:
+    name: "index"
+    definition_suffix: "Index level; the average of the base year {base_year} equals 100. Values on a different base year are a different series."
+  weight:
+    name: "weight in the CPI basket"
+    definition_suffix: "Share of this group in the CPI basket on the {base_year} base, in percent, as printed in the issue for that month."
+  yoy:
+    name: "change over the same month last year"
+    definition_suffix: "Percentage change of the index over the same month of the previous year, as printed by PBS."
+  mom:
+    name: "change over the previous month"
+    definition_suffix: "Percentage change of the index over the previous month, as printed by PBS."

@@ -1,0 +1,210 @@
+# Federal Annual Budget Statement (ABS): the "Summary of Expenditure" table.
+#
+# What the table is: one page per edition. It lists CURRENT expenditure on
+# revenue account by ten functions (codes 01-10), then current expenditure on
+# capital account, development expenditure on revenue and capital account, the
+# grand total, and a break-up by revenue/capital account. Each edition e prints
+# three columns: Budget Estimates e-1, Revised Estimates e-1, Budget Estimates e.
+#
+# Note for readers: the ten function rows are current expenditure on revenue
+# account only. The ABS does not print development expenditure by function in
+# this table. Series names and definitions say so.
+
+dataset: abs
+unit: PKR
+scale_factor: 1000000          # confirmed per edition from the page: "(Rs in million)"
+scale_marker: '(?i)rs\.?\s*in\s*million'
+frequency: fiscal_year
+expected_value_columns: 3
+
+locator:
+  # A table qualifies when at least `min_matches` of these appear in its text.
+  min_matches: 8
+  function_patterns:
+    - 'general public services?'
+    - 'defence affairs (and )?services'
+    - 'public order (and )?safety affairs'
+    - 'economic affairs'
+    - 'environment protection'
+    - 'housing (and )?community amenities'
+    - 'health'
+    - 'recreation,? culture (and )?religion'
+    - 'education affairs (and )?services'
+    - 'social protection'
+
+columns:
+  # Header text above each value column (read from the PDF text layer by
+  # position) must contain exactly one fiscal year and one of these words.
+  vintage_words:
+    be: '(?i)\bbudget\b'
+    re: '(?i)\brevised\b'
+
+breaks:
+  - at_period: "2011-12"
+    kind: devolution
+    note: >-
+      18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions
+      moved largely to the provinces. Federal figures before and after are not comparable.
+
+# Sum rules, applied to every column of every edition. `optional` members are
+# added when the edition prints them (the row set changed over the years).
+rules:
+  - id: abs.functions_add_to_current_revenue
+    type: column_total
+    target: fed.exp.current.revenue_account
+    members:
+      - fed.exp.current.function.general_public_services
+      - fed.exp.current.function.defence_affairs_and_services
+      - fed.exp.current.function.public_order_and_safety_affairs
+      - fed.exp.current.function.economic_affairs
+      - fed.exp.current.function.environment_protection
+      - fed.exp.current.function.housing_and_community_amenities
+      - fed.exp.current.function.health
+      - fed.exp.current.function.recreation_culture_and_religion
+      - fed.exp.current.function.education_affairs_and_services
+      - fed.exp.current.function.social_protection
+    what_members: the ten function amounts
+    what_target: "Current expenditure on revenue account"
+  - id: abs.capital_items_add_to_current_capital
+    type: hierarchy_sum
+    target: fed.exp.current.capital_account
+    children_of_target: true
+    what_members: the items listed under current expenditure on capital account
+    what_target: "Current expenditure on capital account"
+  - id: abs.current_total
+    type: accounting_identity
+    target: fed.exp.current.total
+    members: [fed.exp.current.revenue_account, fed.exp.current.capital_account]
+    what_members: current expenditure on revenue account and on capital account
+    what_target: "Total current expenditure"
+  - id: abs.dev_revenue_parts
+    type: hierarchy_sum
+    target: fed.exp.development.revenue_account
+    children_of_target: true
+    what_members: the parts of development expenditure on revenue account
+    what_target: "Development expenditure on revenue account"
+  - id: abs.psdp_total
+    # editions that print "(Total Public Sector Dev. Program) (i+d)": no PSDP split of the capital account
+    type: accounting_identity
+    target: fed.exp.development.psdp_total
+    unless_present: fed.exp.development.capital_account.psdp
+    members: [fed.exp.development.revenue_account.psdp, fed.exp.development.capital_account]
+    what_members: PSDP development expenditure on revenue account and development expenditure on capital account
+    what_target: "Total Public Sector Development Programme (i+d)"
+  - id: abs.psdp_total_split
+    # editions that print "Total Public Sector Dev. Program (ci+di)"
+    type: accounting_identity
+    target: fed.exp.development.psdp_total
+    if_present: fed.exp.development.capital_account.psdp
+    members: [fed.exp.development.revenue_account.psdp, fed.exp.development.capital_account.psdp]
+    what_members: the PSDP parts of development expenditure on revenue account and on capital account
+    what_target: "Total Public Sector Development Programme (ci+di)"
+  - id: abs.dev_capital_parts
+    type: hierarchy_sum
+    target: fed.exp.development.capital_account
+    children_of_target: true
+    what_members: the parts of development expenditure on capital account
+    what_target: "Development expenditure on capital account"
+  - id: abs.development_total
+    type: accounting_identity
+    target: fed.exp.development.total
+    members: [fed.exp.development.revenue_account, fed.exp.development.capital_account]
+    what_members: development expenditure on revenue account and on capital account
+    what_target: "Total development expenditure"
+  - id: abs.grand_total
+    type: accounting_identity
+    target: fed.exp.total
+    members: [fed.exp.current.total, fed.exp.development.total]
+    optional: [fed.exp.operational_shortfall]
+    what_members: total current and total development expenditure (and any other printed item)
+    what_target: "Total expenditure"
+  - id: abs.account_revenue
+    type: accounting_identity
+    target: fed.exp.account.revenue
+    members: [fed.exp.current.revenue_account, fed.exp.development.revenue_account]
+    what_members: current and development expenditure on revenue account
+    what_target: "Revenue account (a+c)"
+  - id: abs.account_capital
+    type: accounting_identity
+    target: fed.exp.account.capital
+    members: [fed.exp.current.capital_account, fed.exp.development.capital_account]
+    what_members: current and development expenditure on capital account
+    what_target: "Capital account (b+d)"
+
+series:
+  - {id: fed.exp.total, name: "Total federal expenditure", parent: null, sort: 10,
+     definition: "Grand total of federal expenditure in the Annual Budget Statement's Summary of Expenditure: total current plus total development expenditure (plus any other item the edition prints, such as the estimated operational shortfall in the PSDP)."}
+  - {id: fed.exp.current.total, name: "Total current expenditure", parent: fed.exp.total, sort: 20,
+     definition: "Federal current expenditure on revenue account plus current expenditure on capital account."}
+  - {id: fed.exp.current.revenue_account, name: "Current expenditure on revenue account", parent: fed.exp.current.total, sort: 30,
+     definition: "Federal current expenditure met from revenue. In the ABS it is the sum of the ten function lines."}
+  - {id: fed.exp.current.function.general_public_services, name: "General public services (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 31, function: "General Public Services",
+     definition: "Function 01. Federal current expenditure on revenue account for general public services, which includes debt servicing and transfers.", synonyms: ["general public service", "debt servicing"]}
+  - {id: fed.exp.current.function.defence_affairs_and_services, name: "Defence affairs and services (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 32, function: "Defence Affairs and Services",
+     definition: "Function 02. Federal current expenditure on revenue account for defence affairs and services.", synonyms: ["defence", "defense", "military"]}
+  - {id: fed.exp.current.function.public_order_and_safety_affairs, name: "Public order and safety affairs (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 33, function: "Public Order and Safety Affairs",
+     definition: "Function 03. Federal current expenditure on revenue account for public order and safety.", synonyms: ["police", "law and order", "courts"]}
+  - {id: fed.exp.current.function.economic_affairs, name: "Economic affairs (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 34, function: "Economic Affairs",
+     definition: "Function 04. Federal current expenditure on revenue account for economic affairs.", synonyms: ["subsidies", "agriculture", "energy"]}
+  - {id: fed.exp.current.function.environment_protection, name: "Environment protection (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 35, function: "Environment Protection",
+     definition: "Function 05. Federal current expenditure on revenue account for environment protection.", synonyms: ["environment", "climate"]}
+  - {id: fed.exp.current.function.housing_and_community_amenities, name: "Housing and community amenities (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 36, function: "Housing and Community Amenities",
+     definition: "Function 06. Federal current expenditure on revenue account for housing and community amenities.", synonyms: ["housing"]}
+  - {id: fed.exp.current.function.health, name: "Health (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 37, function: "Health",
+     definition: "Function 07. Federal current expenditure on revenue account for health. It excludes development spending on health and all provincial health spending.", synonyms: ["health", "hospitals", "health affairs and services"]}
+  - {id: fed.exp.current.function.recreation_culture_and_religion, name: "Recreation, culture and religion (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 38, function: "Recreation, Culture and Religion",
+     definition: "Function 08. Federal current expenditure on revenue account for recreation, culture and religion.", synonyms: ["culture", "religion"]}
+  - {id: fed.exp.current.function.education_affairs_and_services, name: "Education affairs and services (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 39, function: "Education Affairs and Services",
+     definition: "Function 09. Federal current expenditure on revenue account for education. It excludes development spending on education and all provincial education spending.", synonyms: ["education", "schools", "universities", "HEC"]}
+  - {id: fed.exp.current.function.social_protection, name: "Social protection (current, revenue account)", parent: fed.exp.current.revenue_account, sort: 40, function: "Social Protection",
+     definition: "Function 10. Federal current expenditure on revenue account for social protection.", synonyms: ["BISP", "social safety net", "pensions"]}
+  - {id: fed.exp.current.capital_account, name: "Current expenditure on capital account", parent: fed.exp.current.total, sort: 50,
+     definition: "Federal current expenditure on capital account, mainly repayment of foreign loans."}
+  - {id: fed.exp.development.total, name: "Total development expenditure", parent: fed.exp.total, sort: 60,
+     definition: "Federal development expenditure on revenue account plus development expenditure on capital account."}
+  - {id: fed.exp.development.revenue_account, name: "Development expenditure on revenue account", parent: fed.exp.development.total, sort: 61,
+     definition: "Federal development expenditure met from revenue."}
+  - {id: fed.exp.development.capital_account, name: "Development expenditure on capital account", parent: fed.exp.development.total, sort: 62,
+     definition: "Federal development expenditure on capital account."}
+  - {id: fed.exp.operational_shortfall, name: "Estimated operational shortfall in PSDP", parent: fed.exp.total, sort: 70,
+     definition: "A negative adjustment some editions print for the expected under-spending of the Public Sector Development Programme."}
+  - {id: fed.exp.account.revenue, name: "Expenditure on revenue account (current + development)", parent: null, sort: 80,
+     definition: "Break-up of total expenditure: the revenue-account part (a+c)."}
+  - {id: fed.exp.account.capital, name: "Expenditure on capital account (current + development)", parent: null, sort: 81,
+     definition: "Break-up of total expenditure: the capital-account part (b+d)."}
+
+# Series the reader should find in every edition: a missing one becomes a labelled gap.
+expected_every_edition:
+  - fed.exp.total
+  - fed.exp.current.total
+  - fed.exp.current.revenue_account
+  - fed.exp.current.capital_account
+  - fed.exp.development.total
+  - fed.exp.current.function.general_public_services
+  - fed.exp.current.function.defence_affairs_and_services
+  - fed.exp.current.function.public_order_and_safety_affairs
+  - fed.exp.current.function.economic_affairs
+  - fed.exp.current.function.environment_protection
+  - fed.exp.current.function.housing_and_community_amenities
+  - fed.exp.current.function.health
+  - fed.exp.current.function.recreation_culture_and_religion
+  - fed.exp.current.function.education_affairs_and_services
+  - fed.exp.current.function.social_protection
+
+derived:
+  - id: fed.exp.current.function.health.share_of_total
+    name: "Health (current, revenue account) as a share of total federal expenditure"
+    parent: fed.exp.current.function.health
+    unit: percent
+    formula: "fed.exp.current.function.health / fed.exp.total x 100, rounded half-even to 2 decimals; same period and vintage; both inputs must be published"
+    numerator: fed.exp.current.function.health
+    denominator: fed.exp.total
+    definition: "Federal current expenditure on health (revenue account) as a percentage of total federal expenditure in the same Annual Budget Statement column. Computed by code from two checked values."
+  - id: fed.exp.current.function.education_affairs_and_services.share_of_total
+    name: "Education (current, revenue account) as a share of total federal expenditure"
+    parent: fed.exp.current.function.education_affairs_and_services
+    unit: percent
+    formula: "fed.exp.current.function.education_affairs_and_services / fed.exp.total x 100, rounded half-even to 2 decimals; same period and vintage; both inputs must be published"
+    numerator: fed.exp.current.function.education_affairs_and_services
+    denominator: fed.exp.total
+    definition: "Federal current expenditure on education (revenue account) as a percentage of total federal expenditure in the same Annual Budget Statement column. Computed by code from two checked values."

@@ -4,7 +4,7 @@ An open research bank of Pakistan's economic and fiscal data, built by the DataL
 
 > **Mission (draft).** To be the authoritative open record of Pakistan's economic and fiscal data: complete, verified, and traceable to the printed page, so that anyone can find a number, check it, and cite it.
 
-**Status (2026-10-09):** planning done. Building the first prototype: federal budget (ABS), CPI and Labour Force Survey, 5 years each.
+**Status (2026-10-11):** first prototype built on branch `proto/v0` (draft PR #1). A working pipeline, a frozen prototype release under `releases/v0.0.1-prototype/` and a static site under `site/`. See [`STATUS.md`](STATUS.md) for exactly what works, and [`docs/reports/2026-10-11-overnight-report.md`](docs/reports/2026-10-11-overnight-report.md) for how it was built. The release is a prototype: no DOI, error rate not yet measured, not for citation in publications.
 
 ---
 
@@ -23,7 +23,7 @@ Pakistan's economic data is public but scattered, inconsistently formatted, most
 
 This portal's distinguishing feature is **trust you can check**:
 
-- **Every number links to its source.** Click any value and see a crop of the original government page with that number boxed.
+- **Every number links to its source.** Click any value and see the original government page with that number boxed.
 - **Every number is checked by code before it's published.** Totals must add up, the same figure printed in two editions must agree, and figures must match other official sources. Numbers that fail don't appear.
 - **Every number is citable.** Each has a permanent link and a cite button. Each data release has a DOI.
 - **Gaps are honest.** Missing data says whether the government didn't publish it or we haven't verified it yet. Every figure says whether it's a budget estimate, a revised estimate, an actual, provisional or rebased.
@@ -52,15 +52,17 @@ Because it carries the LUMS name, reliability comes before speed and before cove
 
 Data model: **Source → Series → Observation → Check → Release.**
 
-## First prototype
+## First prototype (release `v0.0.1-prototype`, 2026-10-11)
 
-| Type | Years | What | Checks |
+| Type | What is in the release | State | Checks |
 |---|---|---|---|
-| Federal budget (Annual Budget Statement) | 2010-11, 2016-17, 2021-22, 2024-25, 2025-26 | Expenditure by function (defence, health, education, interest…), budget / revised / actual | Lines sum to the printed total; adjacent editions agree; compared with an existing hand-built ABS dataset |
-| Consumer Price Index (PBS) | June of 5 years, spanning the 2019 rebasing | National index, 12 groups, weights | Weights sum to 100; inflation recomputes from the index; compared with SBP |
-| Labour Force Survey (PBS) | 5 most recent rounds | Participation, unemployment, employment by sector; by sex and urban/rural | Shares sum to 100%; rates recompute; compared with the Economic Survey |
+| Federal budget (Annual Budget Statement) | 9 editions (2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27): the Summary of Expenditure. Ten function lines (current expenditure on revenue account), current and development totals, grand total. Budget and revised estimates; the ABS prints no actuals | **Published**: 535 checked values, 2 labelled gaps | Lines sum to printed totals; accounting identities; the same figure in the next edition agrees |
+| Consumer Price Index (PBS Monthly Review) | June issues 2021, 2023, 2024, 2025, 2026 (base 2015-16): general index, 12 groups and weights; national, urban and rural; month-on-month and year-on-year change | **Published**: 884 checked values; 372 labelled gaps (the 2007-08 base, and two tables of the 2021 issue that were read badly and withheld) | Weights sum to 100; the general index recomputes from groups and weights; % changes recompute; consecutive issues agree |
+| Labour Force Survey (PBS annual reports) | 4 reports (2017-18, 2018-19, 2020-21, 2024-25): participation and unemployment rates, labour force and employment counts, employment by industry; by sex and urban/rural | **Coming**: processed and checked, but below the frozen cross-edition threshold, so nothing is published | Shares sum to 100; parts add to totals; rates recompute from counts; the next report's previous-round column agrees |
 
-The demo question: *How has real health spending changed since 2010, and what happened to jobs over the same period?*
+Numbers above are from `releases/v0.0.1-prototype/release.json`. The error rate is not measured yet (the gold set is unlabelled).
+
+The demo question: *How has federal health spending changed since 2010, and what happened to prices and jobs over the same period?* The demo page answers the part the checked data supports and labels the rest as gaps.
 
 ## Roadmap
 
@@ -72,26 +74,68 @@ The demo question: *How has real health spending changed since 2010, and what ha
 
 ## Repository layout
 
-Planned. Folders are created as work reaches them.
-
 ```
-schema/        the data format every number follows
-sources/       manifest of source files (URL, hash, metadata). Not the files themselves
-pipeline/      register → profile → extract → validate → normalise → check → tier → publish
-specs/         one spec per document type: where its tables are, units, its own checks
-checks/        deterministic check definitions and tests
-gold/          hand-labelled cells used to measure the error rate
-thresholds/    reliability thresholds, frozen before results are seen
-releases/      frozen, versioned outputs
-site/          the website
-docs/          methods and design notes
+STATUS.md      the map: what exists, where, in what state. Read it first
+AGENTS.md      rules for every agent and human (CLAUDE.md points to it)
+DECISIONS.md   one line per decision, with the reason
+schema/        JSON Schema for every record type (exported from pipeline/datalab/schema.py)
+sources/       plan.yaml (what we intend to use), manifest.csv (what was fetched, with hashes),
+               verification/<source_id>.json (how each file was checked). Not the files themselves
+specs/         one spec per document type: how to find its table, what the columns mean,
+               the label dictionary and the sum rules
+thresholds/    publication thresholds, frozen before results were seen
+pipeline/      the `datalab` Python package and its tests
+gold/          blind gold-set labelling kit (unlabelled until two humans label it)
+releases/      frozen, versioned outputs; the site reads only these
+site/          the website (Next.js, fully static)
+docs/          METHODS.md, SCHEMA.md, plans/, reports/
 work/          local processing output (git-ignored)
 ```
 
+## Quick start
+
+Windows PowerShell, Python 3.12, Node 24.
+
+```powershell
+py -3.12 -m venv pipeline\.venv
+pipeline\.venv\Scripts\python -m pip install -r pipeline
+equirements.lock
+pipeline\.venv\Scripts\python -m pip install -e pipeline --no-deps
+copy .env.example .env                                   # set SOURCES_DIR to a folder outside the repo
+pipeline\.venv\Scripts\python -m datalab fetch          # download every source in the manifest, verify hashes
+pipeline\.venv\Scripts\python -m datalab all --dataset abs   # fresh Docling runs, validate, check (about 5 min per document on CPU)
+pipeline\.venv\Scripts\python -m datalab release        # write releases/v0.0.1-prototype
+pipeline\.venv\Scripts\python -m datalab check-release releases/v0.0.1-prototype
+cd pipeline; .venv\Scripts\python -m pytest
+```
+
+To only run the tests and the release self-check (no Docling, no PDFs), install
+`pipeline/requirements-ci.lock` instead of `requirements.lock`. That is what CI does.
+
+Commands: `register`, `fetch`, `verify`, `profile`, `extract`, `validate`, `build` (normalise, locate,
+map, check and status in one pass; `normalise`, `locate`, `map`, `check`, `status`, `coverage` are aliases),
+`release` (includes page renders; `render` is an alias), `check-release`, `export-schema`, `gold-sample`,
+`gold-score`, `all --dataset <abs|cpi|lfs>`.
+
+The site:
+
+```powershell
+cd site
+npm ci
+npm run build      # reads ../releases/v0.0.1-prototype at build time
+npm run start
+```
+
+### Deploying on Vercel
+
+Import the repository, set **Root Directory** to `site`, framework **Next.js**, build command
+`npm run build`, Node 24, no environment variables. Production branch `main`; `proto/v0` deploys as
+a preview. The build reads `../releases/`, which is in the repository, so no storage is needed.
+
 ## Getting started
 
-1. Clone the repo.
-2. Copy `.env.example` to `.env` and set `SOURCES_DIR` to where the source documents live on your machine.
+1. Clone the repo and read [`STATUS.md`](STATUS.md).
+2. Copy `.env.example` to `.env` and set `SOURCES_DIR` to an empty folder outside the repo; `datalab fetch` fills it.
 3. Read [`AGENTS.md`](AGENTS.md). It holds the rules every contributor and every coding agent follows.
 4. Record any decision that changes direction in [`DECISIONS.md`](DECISIONS.md).
 

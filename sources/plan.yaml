@@ -1,0 +1,523 @@
+# Input to `python -m datalab register`: the files we intend to use and where
+# they are officially published. `sources/manifest.csv` and
+# `sources/verification/*.json` are the OUTPUT of registering these.
+#
+# Every file_url below was either read from the official landing page tonight
+# or taken from the ra-ship registry; none is guessed. `archive_path` is
+# relative to RA_SHIP_DIR and is used only to compare hashes (and as a last
+# resort copy, recorded as such).
+
+defaults:
+  abs:
+    doc_type: abs
+    publisher: "Finance Division, Government of Pakistan"
+    jurisdiction: federal
+    language: en
+    markers_all: ["annual budget statement"]
+    markers_any: ["government of pakistan", "finance division"]
+    marker_period: true          # the fiscal year must appear in the first pages
+    # Fallback for editions whose cover page has no text layer (2010-11, 2017-18): the contents
+    # page markers, accepted only together with a verified link from the official landing page.
+    alt_markers_all: ["contents", "receipts", "federal consolidated fund"]
+
+  cpi:
+    doc_type: cpi_monthly_review
+    publisher: "Pakistan Bureau of Statistics"
+    jurisdiction: pbs
+    language: en
+    markers_all: []
+    markers_any: ["monthly review", "price indices", "consumer price index"]
+    marker_pages: 4
+  lfs:
+    doc_type: lfs_annual_report
+    publisher: "Pakistan Bureau of Statistics"
+    jurisdiction: pbs
+    language: en
+    markers_all: ["labour force survey"]
+    markers_any: []
+    # The PBS link labelled "LFS 2014-15" serves the Azad Jammu & Kashmir edition, not the national report.
+    markers_none: ["azad jammu"]
+    marker_period: true
+    marker_pages: 4
+
+  # Pakistan Economic Survey chapters, used only to cross-check figures we already hold.
+  pes:
+    doc_type: pes_chapter
+    publisher: "Finance Division, Government of Pakistan"
+    jurisdiction: federal
+    language: en
+    markers_all: ["pakistan economic survey"]
+    markers_any: []
+    marker_period: true
+    marker_pages: 3
+
+sources:
+  - source_id: abs-fed-2010-11
+    period: "2010-11"
+    role: core
+    title: "Annual Budget Statement 2010-11"
+    landing_url: "https://www.finance.gov.pk/fb_2010_11.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_10_11.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2010-11/abs_fy_2010-11.pdf"
+  - source_id: abs-fed-2011-12
+    period: "2011-12"
+    role: corroboration
+    title: "Annual Budget Statement 2011-12"
+    landing_url: "https://www.finance.gov.pk/fb_2011_12.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_11_12.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2011-12/abs_fy_2011-12.pdf"
+  - source_id: abs-fed-2016-17
+    period: "2016-17"
+    role: core
+    title: "Annual Budget Statement 2016-17"
+    landing_url: "https://www.finance.gov.pk/fb_2016_17.html"
+    file_url: "https://www.finance.gov.pk/budget/abs_2016_17.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2016-17/abs_fy_2016-17.pdf"
+  - source_id: abs-fed-2017-18
+    period: "2017-18"
+    role: corroboration
+    title: "Annual Budget Statement 2017-18"
+    landing_url: "https://www.finance.gov.pk/fb_2017_18.html"
+    file_url: "https://www.finance.gov.pk/budget/Annual Budget Statement 2017-18.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2017-18/abs_fy_2017-18.pdf"
+  - source_id: abs-fed-2021-22
+    period: "2021-22"
+    role: core
+    title: "Annual Budget Statement 2021-22"
+    landing_url: "https://www.finance.gov.pk/fb_2021_22.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2021_22/1_ABS-English_2021_22.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2021-22/abs_fy_2021-22.pdf"
+  - source_id: abs-fed-2022-23
+    period: "2022-23"
+    role: corroboration
+    title: "Annual Budget Statement 2022-23"
+    landing_url: "https://www.finance.gov.pk/fb_2022_23.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2022_23/Annual_Budget_Statement_English.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2022-23/abs_fy_2022-23.pdf"
+  - source_id: abs-fed-2024-25
+    period: "2024-25"
+    role: core
+    title: "Annual Budget Statement 2024-25"
+    landing_url: "https://www.finance.gov.pk/fb_2024_25.html"
+    file_url: "https://www.finance.gov.pk/budget/Budget_2024_25/Annual_Budget_Statement.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2024-25/abs_fy_2024-25.pdf"
+  - source_id: abs-fed-2025-26
+    period: "2025-26"
+    role: core
+    title: "Annual Budget Statement 2025-26"
+    landing_url: "https://www.finance.gov.pk/fb_2025_26.html"
+    file_url: "https://www.finance.gov.pk/budget/budget_2025_26/abs_eng_10062025.pdf"
+    archive_path: "Arsalan Archive/Archive/Budget Statements/budget_docs/2025-26/abs_fy_2025-26.pdf"
+  - source_id: abs-fed-2026-27
+    period: "2026-27"
+    role: corroboration
+    title: "Annual Budget Statement 2026-27"
+    landing_url: "https://www.finance.gov.pk/fb_2026_27.html"
+    file_url: "https://www.finance.gov.pk/budget/budget_2026_27/Annual_Budget_Statement.pdf"
+    archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2026-27/ABS.pdf"
+
+  # CPI June issues and LFS annual reports, collected by the sources track on 2026-10-11
+  # (`prefetched`: how each file was obtained, as recorded at download time).
+  - source_id: lfs-pbs-2024-25
+    family: lfs
+    period: 2024-25
+    role: core
+    title: Labour Force Survey 2024-25 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf
+    filename: LFS-2024-25-Annual-Report.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:16:50Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Thu, 26 Mar 2026 16:47:10 GMT
+        Content-Length: '9425530'
+        Content-Type: application/pdf
+        ETag: '"69c5630e-8fd27a"'
+      wayback_url: https://web.archive.org/web/20260926050408id_/https://pbs.gov.pk/wp-content/uploads/2020/07/LFS-2024-25-Annual-Report.pdf
+      wayback_timestamp: '20260926050408'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48
+  - source_id: lfs-pbs-2020-21
+    family: lfs
+    period: 2020-21
+    role: core
+    title: Labour Force Survey 2020-21 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf
+    filename: LFS_2020-21_Report-3.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:16:58Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:20:37 GMT
+        Content-Length: '15154629'
+        Content-Type: application/pdf
+        ETag: '"65e18fd5-e73dc5"'
+      wayback_url: https://web.archive.org/web/20251028080642id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/LFS_2020-21_Report-3.pdf
+      wayback_timestamp: '20251028080642'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9
+  - source_id: lfs-pbs-2018-19
+    family: lfs
+    period: 2018-19
+    role: core
+    title: Labour Force Survey 2018-19 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf
+    filename: lfs_2018_19_final_report-1.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:17:04Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:21:49 GMT
+        Content-Length: '8176939'
+        Content-Type: application/pdf
+        ETag: '"65e1901d-7cc52b"'
+      wayback_url: https://web.archive.org/web/20251029190518id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/lfs_2018_19_final_report-1.pdf
+      wayback_timestamp: '20251029190518'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127
+  - source_id: lfs-pbs-2017-18
+    family: lfs
+    period: 2017-18
+    role: core
+    title: Labour Force Survey 2017-18 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf
+    filename: Annual-Report-of-LFS-2017-18.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:17:09Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:26:34 GMT
+        Content-Length: '1615654'
+        Content-Type: application/pdf
+        ETag: '"65e1913a-18a726"'
+      wayback_url: https://web.archive.org/web/20260314063715id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf
+      wayback_timestamp: '20260314063715'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904
+  - source_id: lfs-pbs-2014-15
+    family: lfs
+    period: 2014-15
+    role: core
+    title: Labour Force Survey 2014-15 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf
+    filename: Annual_Report_of_LFS_2014-15.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:17:10Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 01 Mar 2024 08:27:25 GMT
+        Content-Length: '874842'
+        Content-Type: application/pdf
+        ETag: '"65e1916d-d595a"'
+      wayback_url: https://web.archive.org/web/20260208164841id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15.pdf
+      wayback_timestamp: '20260208164841'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c
+  # Added 2026-10-12 (D30). The PBS labour-force page lists a second link for 2014-15; this one is the
+  # national report. The failed row above (the Azad Jammu & Kashmir edition) is kept as the record of
+  # what the first link serves. Accepted only if the cover says Government of Pakistan, no page of the
+  # whole document says "Azad Jammu", and the table titles say "Pakistan and Provinces".
+  - source_id: lfs-pbs-2014-15-national
+    family: lfs
+    period: 2014-15
+    role: core
+    title: Labour Force Survey 2014-15 Annual Report
+    landing_url: https://www.pbs.gov.pk/content/labour-force-statistics
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual_Report_of_LFS_2014-15-1.pdf
+    markers_all: ["labour force survey", "government of pakistan"]
+    body_markers_all: ["pakistan and provinces"]
+    body_markers_none: ["azad jammu"]
+  - source_id: cpi-pbs-2025-06
+    family: cpi
+    period: 2025-06
+    role: core
+    title: Monthly Review of Price Indices, June 2025
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf
+    filename: Monthly-Review-June-2025.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:18:22Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Wed, 09 Jul 2025 08:20:35 GMT
+        Content-Length: '954049'
+        Content-Type: application/pdf
+        ETag: '"686e2653-e8ec1"'
+      wayback_url: https://web.archive.org/web/20260811064726id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2025.pdf
+      wayback_timestamp: '20260811064726'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92
+    markers_period:
+    - june 2025
+    - june, 2025
+    - june,2025
+    - june2025
+    - june-2025
+  - source_id: cpi-pbs-2023-06
+    family: cpi
+    period: 2023-06
+    role: core
+    title: Monthly Review of Price Indices, June 2023
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf
+    filename: CPI_Review_June_2023.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:18:24Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Wed, 24 Jan 2024 06:28:00 GMT
+        Content-Length: '1342112'
+        Content-Type: application/pdf
+        ETag: '"65b0adf0-147aa0"'
+      wayback_url: https://web.archive.org/web/20260430173837id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2023.pdf
+      wayback_timestamp: '20260430173837'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35
+    markers_period:
+    - june 2023
+    - june, 2023
+    - june,2023
+    - june2023
+    - june-2023
+  - source_id: cpi-pbs-2019-06
+    family: cpi
+    period: 2019-06
+    role: core
+    title: Monthly Review of Price Indices, June 2019
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf
+    filename: cpi_review_june_2019.pdf
+    prefetched:
+      retrieved_via: wayback
+      retrieved_at: '2026-10-10T20:19:57Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: null
+        Content-Length: '1270182'
+        Content-Type: application/pdf
+        ETag: null
+      wayback_url: https://web.archive.org/web/20190710192504id_/http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2019/cpi_review_june_2019.pdf
+      wayback_timestamp: '20190710192504'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75
+    markers_period:
+    - june 2019
+    - june, 2019
+    - june,2019
+    - june2019
+    - june-2019
+    notes: 'Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit).'
+  - source_id: cpi-pbs-2024-06
+    family: cpi
+    period: 2024-06
+    role: core
+    title: Monthly Review of Price Indices, June 2024
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf
+    filename: CPI_Review_June_2024.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:19:59Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Fri, 18 Oct 2024 08:42:12 GMT
+        Content-Length: '1014978'
+        Content-Type: application/pdf
+        ETag: '"67121f64-f7cc2"'
+      wayback_url: https://web.archive.org/web/20260430173822id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/CPI_Review_June_2024.pdf
+      wayback_timestamp: '20260430173822'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022
+    markers_period:
+    - june 2024
+    - june, 2024
+    - june,2024
+    - june2024
+    - june-2024
+    notes: 'Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit).'
+  - source_id: cpi-pbs-2026-06
+    family: cpi
+    period: 2026-06
+    role: core
+    title: Monthly Review of Price Indices, June 2026
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf
+    filename: Monthly-Review-June-2026.pdf
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:20:00Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: Wed, 01 Jul 2026 08:59:35 GMT
+        Content-Length: '1627486'
+        Content-Type: application/pdf
+        ETag: '"6a44d6f7-18d55e"'
+      wayback_url: https://web.archive.org/web/20260811064643id_/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-June-2026.pdf
+      wayback_timestamp: '20260811064643'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: 1b0605b116d7c4e79031f709ea032870f764cf8deac62bb6a72e6ddb1c881a87
+    markers_period:
+    - june 2026
+    - june, 2026
+    - june,2026
+    - june2026
+    - june-2026
+    notes: 'Stand-in or spare June issue: June 2018 and June 2021 could not be downloaded tonight (Wayback rate limit).'
+  - source_id: cpi-pbs-2016-06
+    family: cpi
+    period: 2016-06
+    role: core
+    title: Monthly Review of Price Indices, June 2016
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf
+    filename: Monthly Review June,  2016_0.pdf
+    prefetched:
+      retrieved_via: wayback
+      retrieved_at: '2026-10-10T20:38:34Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: null
+        Content-Length: '575248'
+        Content-Type: application/pdf
+        ETag: null
+      wayback_url: https://web.archive.org/web/20160805174617id_/http://www.pbs.gov.pk/sites/default/files/price_statistics/monthly_price_indices/2016/Monthly%20Review%20June%2C%20%202016_0.pdf
+      wayback_timestamp: '20160805174617'
+      attempts:
+      - note: collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)
+      sha256: af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0
+    markers_period:
+    - june 2016
+    - june, 2016
+    - june,2016
+    - june2016
+    - june-2016
+
+  # Added 03:20: the two planned June issues that the Wayback Machine refused earlier in the night.
+  # The old PBS addresses are dead; `register` falls back to the Wayback snapshot and records it.
+  - source_id: cpi-pbs-2021-06
+    family: cpi
+    period: 2021-06
+    role: core
+    title: Monthly Review of Price Indices, June 2021
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files/price_statistics/cpi/cpi_review_june_2021.pdf
+    markers_period: [june 2021, 'june, 2021', 'june,2021', june2021, june-2021]
+  - source_id: cpi-pbs-2018-06
+    family: cpi
+    period: 2018-06
+    role: core
+    title: Monthly Review of Price Indices, June 2018
+    landing_url: https://www.pbs.gov.pk/?page_id=7291
+    file_url: http://www.pbs.gov.pk/sites/default/files//price_statistics/monthly_price_indices/2018/cpi_review_june_2018.pdf
+    markers_period: [june 2018, 'june, 2018', 'june,2018', june2018, june-2018]
+
+  # Added 2026-10-12 (C6). SBP EasyData, used ONLY to cross-check a figure we already hold; never a
+  # source of a published value. The file was downloaded on 2026-10-10 by the first run's sources track
+  # from the public "Download Series" form of the series page (no login, no API key), and its request was
+  # recorded next to it at download time; it had not been registered. The EasyData API
+  # (https://easydata.sbp.org.pk/api/v1/series) answers 401 without a key: not used, not worked around.
+  - source_id: sbp-easydata-cpi-national-yoy
+    family: sbp
+    doc_type: sbp_easydata
+    publisher: "State Bank of Pakistan"
+    jurisdiction: sbp
+    language: en
+    period: "2026-10-10"         # the day of the download (the series itself runs monthly, see the record)
+    role: cross_source
+    title: "SBP EasyData: National CPI, year-on-year change (series TS_GP_PT_CPI_M.P00011516)"
+    landing_url: https://easydata.sbp.org.pk
+    file_url: https://easydata.sbp.org.pk/apex/wwv_flow.accept
+    filename: data_series.csv
+    reproducible_by_url: false
+    csv_columns_all: ["Dataset", "Series Key", "Series", "Observation Date", "Observation Value", "Unit"]
+    # The series definition is taken from the file's own descriptive columns, in every row.
+    csv_column_patterns:
+      "Dataset": '^Inflation Snapshot \(New Base: 2015-16\)$'
+      "Series Key": '^TS_GP_PT_CPI_M\.P00011516$'
+      "Series": '(?i)^cpi national\s*-?\s*yoy$'
+      "Unit": '^Percent$'
+    terms_note: >-
+      The EasyData pages carry "Copyright (c) 2026, All Rights Reserved. State Bank of Pakistan" and link a
+      Disclaimer page; no open-data licence is stated on the pages that were saved. The file is used only to
+      compare with PBS figures (the SBP figure appears in a check record, not as a published series). A human
+      must read the Disclaimer and confirm that this use, and showing the SBP figure on a receipt, is allowed.
+    credentials_note: >-
+      Downloaded without an account from the public series page. The documented API needs an API key
+      (HTTP 401 without one). If the project wants a repeatable API pull, a human must register for a key
+      and put it in .env; nothing was done to get around that.
+    notes: >-
+      Cross-check only. Downloaded by submitting the public "Download Series" form (a POST bound to a browser
+      session), so it cannot be re-downloaded by URL and a later download would also hold later months.
+      Reuse terms not confirmed (see the verification record).
+    prefetched:
+      retrieved_via: official
+      retrieved_at: '2026-10-10T20:25:49Z'
+      http_status: 200
+      response_headers:
+        Last-Modified: null
+        Content-Length: '16278'
+        Content-Type: application/excel; charset=utf-8
+        ETag: null
+      sha256: 6afbf22e8c88170b47d02da4ff019ba0be73feda450595ace18cf709324ab447
+      request:
+        method: POST
+        url: https://easydata.sbp.org.pk/apex/wwv_flow.accept
+        p_request: DOWNLOAD
+        form_page_url: "https://easydata.sbp.org.pk/apex/f?p=10:222:3993964339093::NO::P222_DATASET_TYPE_CODE,P222_SERIES_KEY,P222_SERIES_MIN_DATE,P222_SERIES_MAX_DATE,P222_PAGE_ID:TS_GP_PT_CPI_M,TS_GP_PT_CPI_M.P00011516,31-Jul-2016,30-Sep-2026,120&cs=1064C623D4B7504386B9342D1E6296AC9"
+        series_page_url: "https://easydata.sbp.org.pk/apex/f?p=10:120:3993964339093::NO:RP:P120_SERIES_KEY,P120_ACTION,P120_PAGE_ID:TS_GP_PT_CPI_M.P00011516,New,100&cs=19B1F6AB22546BD04D5FCE70779BA769A"
+        items:
+          P222_DATASET_TYPE_CODE: TS_GP_PT_CPI_M
+          P222_DATASET_NAME: "Inflation Snapshot (New Base: 2015-16)"
+          P222_SERIES_KEY: TS_GP_PT_CPI_M.P00011516
+          P222_SERIES_NAME: "National CPI, an Inflation Measure (Year-on-Year basis)"
+          P222_FROM_DATE: 31-JUL-2016
+          P222_TO_DATE: 30-SEP-2026
+        recorded_in: "data_series.csv.request.json, written beside the file by the download step"
+      attempts:
+      - note: collected by the first run's sources track; full request log in work/track_a/attempts.jsonl (not in git)
+
+  # Added 2026-10-12 (C6). File URLs are the ones recorded in the ra-ship registry
+  # (pbs-corpus/manifest.csv); the landing page was fetched and links both files.
+  - source_id: pes-fed-2024-25-inflation
+    family: pes
+    period: 2024-25
+    role: cross_source
+    title: "Pakistan Economic Survey 2024-25, Chapter 7: Inflation"
+    landing_url: https://www.finance.gov.pk/survey_2025.html
+    file_url: https://www.finance.gov.pk/survey/chapter_25/7_Inflation.pdf
+    archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_inflation.pdf"
+    markers_all: ["pakistan economic survey", "inflation"]
+  - source_id: pes-fed-2024-25-labour
+    family: pes
+    period: 2024-25
+    role: cross_source
+    title: "Pakistan Economic Survey 2024-25, Chapter 12: Population, Labour Force and Employment"
+    landing_url: https://www.finance.gov.pk/survey_2025.html
+    file_url: https://www.finance.gov.pk/survey/chapter_25/12_Population.pdf
+    archive_path: "Agent Files/RA_WORKSPACE/02_sources/pbs-corpus/raw/federal/2024-25/PES_population_labor_force_and_employment.pdf"
+    markers_all: ["pakistan economic survey", "labour force"]
+    # The chapter title is printed as the running head of odd pages, first on page 4 (page 1 is an
+    # infographic, pages 2-3 carry the survey's name); the first try with 3 pages failed on this marker.
+    marker_pages: 4

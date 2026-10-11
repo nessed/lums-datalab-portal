@@ -1,0 +1,208 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "check_id": {
+      "title": "Check Id",
+      "type": "string"
+    },
+    "check_type": {
+      "enum": [
+        "column_total",
+        "row_total",
+        "hierarchy_sum",
+        "cross_edition",
+        "cross_table",
+        "accounting_identity",
+        "cross_source",
+        "recompute",
+        "weights_sum",
+        "index_aggregation",
+        "reference_value"
+      ],
+      "title": "Check Type",
+      "type": "string"
+    },
+    "credits_members": {
+      "default": true,
+      "description": "False when a pass is evidence for the target cell only, not for the member cells it was computed from (a rate recomputed from counts barely constrains the counts).",
+      "title": "Credits Members",
+      "type": "boolean"
+    },
+    "dataset": {
+      "enum": [
+        "abs",
+        "cpi",
+        "lfs"
+      ],
+      "title": "Dataset",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "dispute_rejected": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "For a failed cross-edition pair: which D25 condition kept it from being `disputed`.",
+      "title": "Dispute Rejected"
+    },
+    "expected": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected"
+    },
+    "member_cell_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Member Cell Ids",
+      "type": "array"
+    },
+    "member_signs": {
+      "description": "For a sum with subtracted members: +1 or -1 per member, in order. Empty means all added.",
+      "items": {
+        "type": "integer"
+      },
+      "title": "Member Signs",
+      "type": "array"
+    },
+    "not_evaluable_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Not Evaluable Reason"
+    },
+    "observed": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed"
+    },
+    "official": {
+      "default": true,
+      "description": "False for comparison-only sources that never feed status.",
+      "title": "Official",
+      "type": "boolean"
+    },
+    "residual": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Residual"
+    },
+    "result": {
+      "enum": [
+        "pass",
+        "pass_within_rounding",
+        "fail",
+        "not_evaluable",
+        "disputed"
+      ],
+      "title": "Result",
+      "type": "string"
+    },
+    "rule_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rule Id"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "target_cell_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Cell Id"
+    },
+    "target_source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Source"
+    },
+    "target_value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Value"
+    },
+    "tolerance_rule": {
+      "default": "",
+      "title": "Tolerance Rule",
+      "type": "string"
+    }
+  },
+  "required": [
+    "check_id",
+    "check_type",
+    "dataset",
+    "source_ids",
+    "result"
+  ],
+  "title": "Check",
+  "type": "object"
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-tierA-390.png"
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-tierA-820.png"
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-tierA-1280.png"
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-cpi-390.png"
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-cpi-820.png"
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-cpi-1280.png"
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-gap-390.png"
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-gap-820.png"
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-gap-1280.png"
+  }
+]

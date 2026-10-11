@@ -1,0 +1,121 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "check_pass_rates": {
+      "additionalProperties": true,
+      "title": "Check Pass Rates",
+      "type": "object"
+    },
+    "counts": {
+      "additionalProperties": true,
+      "title": "Counts",
+      "type": "object"
+    },
+    "coverage_summary": {
+      "additionalProperties": true,
+      "title": "Coverage Summary",
+      "type": "object"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "dataset_status": {
+      "additionalProperties": true,
+      "title": "Dataset Status",
+      "type": "object"
+    },
+    "doi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Doi"
+    },
+    "extract_config_sha256s": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Extract Config Sha256S",
+      "type": "array"
+    },
+    "git_commit": {
+      "title": "Git Commit",
+      "type": "string"
+    },
+    "gold_set": {
+      "additionalProperties": true,
+      "title": "Gold Set",
+      "type": "object"
+    },
+    "label": {
+      "default": "prototype",
+      "title": "Label",
+      "type": "string"
+    },
+    "measured_error_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Measured Error Rate"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "scope": {
+      "additionalProperties": true,
+      "title": "Scope",
+      "type": "object"
+    },
+    "source_sha256s": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Source Sha256S",
+      "type": "object"
+    },
+    "thresholds_sha256": {
+      "title": "Thresholds Sha256",
+      "type": "string"
+    },
+    "tool_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Tool Versions",
+      "type": "object"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "created_at",
+    "git_commit",
+    "scope",
+    "thresholds_sha256",
+    "tool_versions",
+    "extract_config_sha256s",
+    "source_sha256s",
+    "counts",
+    "coverage_summary",
+    "check_pass_rates"
+  ],
+  "title": "Release",
+  "type": "object"
+}

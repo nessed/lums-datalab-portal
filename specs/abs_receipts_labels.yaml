@@ -1,0 +1,114 @@
+# Printed row label -> series, for the receipts tables of the ABS (plan item E2, decision D20 style).
+#
+# Written by hand from the labels the located tables actually print
+# (docs/reports/track_e2_abs_receipts.md, section 1). How a label is matched:
+#
+# 1. The label is normalised (`normalise.normalise_label`: lowercase, "&" ->
+#    "and", leading "a." / "(i)" / "1" numbering and trailing punctuation
+#    stripped, spaces around brackets removed).
+# 2. The prefixes below are removed, once each, in this order: the object code
+#    the document prints in its first column ("B", "B01", "B017-18", "E033"),
+#    the line number ("1" .. "15"), an enumerator ("a.", "i.").
+# 3. The rest must match a pattern IN FULL. No partial matches.
+# 4. A line whose series sits under a block head (see `block_heads`) is only
+#    recognised while that head's block is open, i.e. in the rows that follow
+#    the head's own row. So "Petroleum Levy" under "Indirect Taxes" and under
+#    "Other Taxes" are two different series, and a head line that Docling lost
+#    leaves its members unmapped instead of adrift.
+# 5. A label that then matches nothing, or two series, stays unmapped and is
+#    never published. Two rows of one table that match the same series are both
+#    left unmapped.
+#
+# The mapping is validated by the sum checks: a wrong mapping makes a sum fail.
+
+strip_prefixes:
+  - '^[b-g]\d{0,5}(-\d{1,2})? '
+  - '^\d{1,2} '
+  - '^(?:[ivx]{1,3}|[ab])\. ?'
+
+# Lines that open a block: the rows after them are their members, until a row
+# that is not one of their members.
+block_heads:
+  - fed.rev.tax.direct
+  - fed.rev.tax.indirect
+  - fed.rev.tax.other
+  - fed.rev.nontax
+  - fed.rev.capital
+  - fed.rev.external
+  - fed.rev.public_account
+
+# Printed amount rows that are deliberately not modelled. They are reported as
+# such and are never an "unmapped label" problem.
+ignored:
+  # 2010-11 and 2011-12: a footnote row under the tax total ("*Of which FBR"). It is not the sum
+  # of the direct and indirect lines above it, so no check could cover it.
+  - {pattern: '\*? ?of which fbr( taxes)?', why: "footnote row under total tax revenue; no identity covers it"}
+
+labels:
+  # ---- tax revenue
+  - {pattern: 'tax revenue receipts', series: fed.rev.tax}
+  - {pattern: 'total tax revenue ?\((a\+b|i\+ii)\)', series: fed.rev.tax}
+  - {pattern: 'fbr taxes( ?\(i\+ii\))?', series: fed.rev.tax.fbr}
+  - {pattern: 'direct taxes', series: fed.rev.tax.direct}
+  - {pattern: 'taxes on income', series: fed.rev.tax.direct.income}
+  - {pattern: "worker'?s'? welfare fund", series: fed.rev.tax.direct.workers_welfare_fund}
+  - {pattern: 'wwf ?\(ordinary collection\)', series: fed.rev.tax.direct.workers_welfare_fund}
+  - {pattern: "worker'?s'? (profit )?participation fund", series: fed.rev.tax.direct.workers_profit_participation_fund}
+  - {pattern: 'wppf ?\(contribution under companies profit\)', series: fed.rev.tax.direct.workers_profit_participation_fund}
+  - {pattern: 'capital value tax( ?\(cvt\))?', series: fed.rev.tax.direct.capital_value_tax}
+  - {pattern: 'indirect taxes', series: fed.rev.tax.indirect}
+  - {pattern: 'customs duties', series: fed.rev.tax.indirect.customs}
+  - {pattern: 'sales tax', series: fed.rev.tax.indirect.sales_tax}
+  - {pattern: 'federal excise( duty)?', series: fed.rev.tax.indirect.federal_excise}
+  - {pattern: 'petroleum levy', series: fed.rev.tax.indirect.petroleum_levy}
+  - {pattern: 'islamabad capital territory taxes', series: fed.rev.tax.indirect.ict_taxes}
+  - {pattern: 'airport tax', series: fed.rev.tax.indirect.airport_tax}
+  - {pattern: 'other taxes', series: fed.rev.tax.other}
+  - {pattern: 'other indirect taxes( ?\(ict\))?', series: fed.rev.tax.other.other_indirect_taxes_ict}
+  - {pattern: 'airport tax', series: fed.rev.tax.other.airport_tax}
+  - {pattern: 'gas infrastructure development cess', series: fed.rev.tax.other.gas_infrastructure_development_cess}
+  - {pattern: 'natural gas development surcharge', series: fed.rev.tax.other.natural_gas_development_surcharge}
+  - {pattern: 'petroleum levy', series: fed.rev.tax.other.petroleum_levy}
+
+  # ---- non-tax receipts
+  - {pattern: 'non-? ?tax( revenue)? receipts', series: fed.rev.nontax}
+  - {pattern: 'levies and fees', series: fed.rev.nontax.levies_and_fees}
+  - {pattern: 'income from property and enterprises?', series: fed.rev.nontax.property_and_enterprise}
+  - {pattern: 'receipts from civil administration etc', series: fed.rev.nontax.civil_administration}
+  - {pattern: 'miscellaneous receipts', series: fed.rev.nontax.miscellaneous}
+  - {pattern: 'total revenue receipts ?\(1\+2\)', series: fed.rev.revenue}
+
+  # ---- capital, external and public account receipts
+  - {pattern: 'capital receipts', series: fed.rev.capital}
+  - {pattern: 'recovery of loans and advances', series: fed.rev.capital.recovery_of_loans_and_advances}
+  - {pattern: 'domestic debt receipts ?\(net\)', series: fed.rev.capital.domestic_debt_net}
+  - {pattern: 'domestic debt receipts ?\(non bank\) ?- ?net', series: fed.rev.capital.domestic_debt_non_bank_net}
+  # 2026-27 prints "(Bank) - Net" twice: under capital receipts (object E03) and as financing line 14.
+  # Rule 4 above tells them apart; inside the capital block the member wins.
+  - {pattern: 'domestic debt receipts ?\(bank\) ?- ?net', series: fed.rev.capital.domestic_debt_bank_net}
+  - {pattern: 'domestic debt receipts ?\(bank\) ?- ?net', series: fed.rev.domestic_debt_bank_net}
+  - {pattern: 'total internal receipts ?\(3\+4\)', series: fed.rev.internal}
+  - {pattern: 'external receipts', series: fed.rev.external}
+  - {pattern: 'loans', series: fed.rev.external.loans}
+  - {pattern: 'grants', series: fed.rev.external.grants}
+  - {pattern: 'project loans and grants( outside psdp)?', series: fed.rev.external.project_loans_and_grants_outside_psdp}
+  - {pattern: 'total internal and external receipts ?\(5\+6\)', series: fed.rev.internal_and_external}
+  - {pattern: 'public accounts? receipts( ?\(net\))?', series: fed.rev.public_account}
+  - {pattern: 'deferred liabilities ?\(net\)', series: fed.rev.public_account.deferred_liabilities}
+  - {pattern: 'deposits? and reserves ?\(net\)', series: fed.rev.public_account.deposits_and_reserves}
+
+  # ---- resources
+  - {pattern: 'gross federal resources ?\((5\+6\+7|7\+8)\)', series: fed.rev.gross_federal_resources}
+  # The label wraps ("10 Less Provincial Share in Federal" / "Taxes"). Docling puts the second line
+  # in front of this row (2024-25: "10 Taxes Less Provincial Share in Federal") or in front of the
+  # next one (2025-26: "Taxes 11 Net Federal Resources (9-10)"). The forms seen are listed; the
+  # check "gross - provincial share = net" validates them.
+  - {pattern: '(taxes )?less provincial share in federal( taxes)?', series: fed.rev.provincial_share}
+  - {pattern: 'net federal resources ?\((8-9|9-10)\)', series: fed.rev.net_federal_resources}
+  # Wrapped in 2025-26 ("12 Cash Balance Surplus by the" / "Provinces"); the cut form is listed.
+  - {pattern: 'cash balance (built up|surplus) by the( provinces)?', series: fed.rev.provincial_cash_surplus}
+  - {pattern: 'privatization proceeds', series: fed.rev.privatization_proceeds}
+  - {pattern: 'credit from banking sector', series: fed.rev.credit_from_banking_sector}
+  - {pattern: 'total ?-? ?resources ?\((10\+11\+12\+13|10\+11\+12|11\+12\+13\+14)\)', series: fed.rev.total_resources}
+  - {pattern: 'federal consolidated fund ?\(5\+6\)', series: fed.rev.consolidated_fund}
+  - {pattern: 'federal consolidated fund ?\(5\+6-10\)', series: fed.rev.consolidated_fund_net}

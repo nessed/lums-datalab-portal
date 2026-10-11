@@ -1,0 +1,79 @@
+{
+  "source_id": "lfs-pbs-2017-18",
+  "registered_at": "2026-10-10T21:52:12+00:00",
+  "file_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
+  "landing_url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+  "retrieved_at": "2026-10-10T20:17:09Z",
+  "retrieved_via": "official",
+  "sha256": "f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904",
+  "size_bytes": 1615654,
+  "response": {
+    "headers": {
+      "Last-Modified": "Fri, 01 Mar 2024 08:26:34 GMT",
+      "Content-Length": "1615654",
+      "Content-Type": "application/pdf",
+      "ETag": "\"65e1913a-18a726\""
+    },
+    "http_status": 200
+  },
+  "attempts": [
+    {
+      "note": "collected by the sources track; full request log in work/track_a/attempts.jsonl (not in git)"
+    },
+    {
+      "url": "https://www.pbs.gov.pk/content/labour-force-statistics",
+      "time": "2026-10-10T21:52:13+00:00",
+      "purpose": "landing_page_link_check",
+      "http_status": 200,
+      "outcome": "link_found"
+    },
+    {
+      "url": "http://web.archive.org/cdx/search/cdx?url=https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
+      "time": "2026-10-10T21:52:17+00:00",
+      "purpose": "wayback_cdx_lookup",
+      "outcome": "snapshot_found"
+    }
+  ],
+  "local_path": "lfs_annual_report/2017-18/Annual-Report-of-LFS-2017-18.pdf",
+  "inspection": {
+    "page_count": 54,
+    "pdf_metadata": {
+      "Title": "Draft Report",
+      "Producer": "Microsoft® Word 2013",
+      "Creator": "Microsoft® Word 2013",
+      "CreationDate": "D:20190124120403+05'00'"
+    },
+    "pages_with_text_layer": 54,
+    "blank_pages": [],
+    "pages_without_text_layer": [],
+    "text_layer_fraction": 1.0,
+    "ascii_ratio_first_pages": 0.9975,
+    "markers": {
+      "all": {
+        "labour force survey": true
+      },
+      "any": {},
+      "period": {
+        "2017-18": true,
+        "2017-2018": false,
+        "2017 - 18": false,
+        "2017–18": false,
+        "2017—18": false,
+        "2017 – 18": false
+      }
+    },
+    "markers_ok": true
+  },
+  "text_layer_ok": true,
+  "landing_page_links_file": true,
+  "identity_route": "cover_markers",
+  "excluded_markers_found": [],
+  "verification_status": "official_only",
+  "wayback": {
+    "wayback_url": "https://web.archive.org/web/20260314063715/https://www.pbs.gov.pk/wp-content/uploads/2020/07/Annual-Report-of-LFS-2017-18.pdf",
+    "wayback_timestamp": "20260314063715",
+    "snapshots_seen": 3,
+    "snapshot_digest": "24AOMEOQRBULBA5VRL35Y3STLI3HJD3E",
+    "digest_matches_file": true
+  }
+}

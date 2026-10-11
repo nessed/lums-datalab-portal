@@ -1,0 +1,460 @@
+{
+  "version": "v0.0.1-prototype",
+  "created_at": "2026-10-11T00:19:14+00:00",
+  "git_commit": "9e674a3ce310c9aa15e27ea3be9d54f6870d4c44",
+  "label": "prototype",
+  "doi": null,
+  "scope": {
+    "datasets": [
+      "abs",
+      "cpi",
+      "lfs"
+    ],
+    "datasets_coming": [],
+    "sources": [
+      "abs-fed-2010-11",
+      "abs-fed-2011-12",
+      "abs-fed-2016-17",
+      "abs-fed-2017-18",
+      "abs-fed-2021-22",
+      "abs-fed-2022-23",
+      "abs-fed-2024-25",
+      "abs-fed-2025-26",
+      "abs-fed-2026-27",
+      "cpi-pbs-2016-06",
+      "cpi-pbs-2018-06",
+      "cpi-pbs-2019-06",
+      "cpi-pbs-2021-06",
+      "cpi-pbs-2023-06",
+      "cpi-pbs-2024-06",
+      "cpi-pbs-2025-06",
+      "cpi-pbs-2026-06",
+      "lfs-pbs-2014-15-national",
+      "lfs-pbs-2017-18",
+      "lfs-pbs-2018-19",
+      "lfs-pbs-2020-21",
+      "lfs-pbs-2024-25",
+      "pes-fed-2024-25-labour"
+    ],
+    "periods": {
+      "abs": [
+        "2009-10",
+        "2010-11",
+        "2011-12",
+        "2015-16",
+        "2016-17",
+        "2017-18",
+        "2020-21",
+        "2021-22",
+        "2022-23",
+        "2023-24",
+        "2024-25",
+        "2025-26",
+        "2026-27"
+      ],
+      "cpi": [
+        "2015-06",
+        "2016-05",
+        "2016-06",
+        "2017-06",
+        "2018-05",
+        "2018-06",
+        "2019-05",
+        "2019-06",
+        "2020-06",
+        "2021-05",
+        "2021-06",
+        "2022-06",
+        "2023-05",
+        "2023-06",
+        "2024-05",
+        "2024-06",
+        "2025-05",
+        "2025-06",
+        "2026-05",
+        "2026-06"
+      ],
+      "lfs": [
+        "2013-14",
+        "2014-15",
+        "2017-18",
+        "2018-19",
+        "2020-21",
+        "2024-25"
+      ]
+    }
+  },
+  "thresholds_sha256": "85689c5c066fef50c825db8aab5a38595bf1c4d22d4515b7be22bdc5dd13e48b",
+  "tool_versions": {
+    "python": "3.12.10",
+    "docling": "2.119.0",
+    "docling-core": "2.101.1",
+    "docling-parse": "7.22.2",
+    "docling-ibm-models": "3.15.0",
+    "pymupdf": "1.28.2",
+    "pdfplumber": "0.11.10",
+    "pypdf": "6.20.0"
+  },
+  "extract_config_sha256s": [
+    "87e850735882d161e3150af372f4d19341dba822eaf4fb34d96fd6d3c0b6badf"
+  ],
+  "source_sha256s": {
+    "abs-fed-2010-11": "fd3d328c2db79dd43d3ae337570701f4c541bd0a0ad233812cc4a5194fb5cddb",
+    "abs-fed-2011-12": "1ac18e5f6464e2ad48d34d3600aaff64cd77d8913d6ec1eb3df1e10b42442cc7",
+    "abs-fed-2016-17": "a663de0aebf8e5ae8f6bb0b415803ace13ceb73bc00e079f2547ed5c4581da0d",
+    "abs-fed-2017-18": "1b97719696b2e2a20e2f5ef1666d936566a97e3435bfdc540121706f7bec550b",
+    "abs-fed-2021-22": "616f82badaed3a380502c9263c0748573442459acf384ba3d5896d296962ad90",
+    "abs-fed-2022-23": "53ba6de55ba4d44933b3cc11dbefde70aa35a21f262ffefc45a66d70118ea5d4",
+    "abs-fed-2024-25": "e0ec918e5b82314652e49235a7431f904b6d97c7a3864b684b70394b806561ce",
+    "abs-fed-2025-26": "7c212e5219304b9ead98dcb6320d8fe92dc87f6220adc8a789c0b83592f95f01",
+    "abs-fed-2026-27": "4e64990527af61beff6b7a51bba3cdf1de5b426ceab371d5180cf599153048b0",
+    "cpi-pbs-2016-06": "af0a2ad1df1b66215f6314fa1ea54c43f96fe961a7d0f8c99795a874660823b0",
+    "cpi-pbs-2018-06": "0b32a33cd371b61601db3a95ffdb7246835598de387e73f0bd90a0211060c555",
+    "cpi-pbs-2019-06": "c22af5361298d47669413f9f6c2666279c753f406affcfc51da802f897a9ba75",
+    "cpi-pbs-2021-06": "8ea0578d8df4da7b16d70cdc6d7fb46a51ba6cc8b5a59f662dc9f6003b54c6e1",
+    "cpi-pbs-2023-06": "458fb8d2842f178adce61fb28ad6a9d6821af83887d0de854bafa25862a94d35",
+    "cpi-pbs-2024-06": "faa5ac3b3a720e51815920c503c0694c5aa3e0b07a355c7c144895264862a022",
+    "cpi-pbs-2025-06": "b8641e41adb68bb69a4dfa5eb4114430e679ebe9ab17b2c08e7bfd73e477bc92",
+    "cpi-pbs-2026-06": "1b0605b116d7c4e79031f709ea032870f764cf8deac62bb6a72e6ddb1c881a87",
+    "lfs-pbs-2014-15": "56e5681bde6d03fe6ea2bcf820ad4046cbaa2a8f22ba5173c3a4820de9b46d1c",
+    "lfs-pbs-2014-15-national": "0d7e7e145f8f8dd12e5840387e8806713315b98c6a2af623bdaa0b5ea6df7251",
+    "lfs-pbs-2017-18": "f279ea72e131f059ee3f8ef85c0f54ee0fe8d5e5c1e3cea358f2e5c1e9168904",
+    "lfs-pbs-2018-19": "a7fe2600a5b8a10c4d1ae550225950ef2d96755e1ae981e95250f0b970c50127",
+    "lfs-pbs-2020-21": "ca9b1d7007d8dc4d5126fdeb63577b961c567d324fa1d3da776f8e16fb9c8ab9",
+    "lfs-pbs-2024-25": "79950b81ce4d738d48ff64f5e192f7905b112724a71b5d3018f4ff5991a57d48",
+    "pes-fed-2024-25-inflation": "420ba088b018ea06c9810d58e6feb9c4f3f38811c732401d2208aff24b5c24c5",
+    "pes-fed-2024-25-labour": "8cce28da939cd80232173ec1c76e327b878a5a33bdd4b35e013cbc4d36b3147e",
+    "sbp-easydata-cpi-national-yoy": "6afbf22e8c88170b47d02da4ff019ba0be73feda450595ace18cf709324ab447"
+  },
+  "counts": {
+    "sources": 26,
+    "cells": 11081,
+    "cells_mapped": 8544,
+    "cells_behind_published_values": 7657,
+    "series": 925,
+    "observations": 6318,
+    "observations_by_dataset": {
+      "abs": {
+        "gap:disputed": 9,
+        "gap:failed_checks": 216,
+        "gap:not_in_source": 86,
+        "gap:not_yet_verified": 200,
+        "published": 2889
+      },
+      "cpi": {
+        "gap:disputed": 2,
+        "published": 1254
+      },
+      "lfs": {
+        "gap:disputed": 6,
+        "gap:failed_checks": 21,
+        "gap:not_yet_verified": 288,
+        "published": 1347
+      }
+    },
+    "tiers_by_dataset": {
+      "abs": {
+        "A": 604,
+        "B": 2285,
+        "C": 200,
+        "D": 216
+      },
+      "cpi": {
+        "A": 132,
+        "B": 1122
+      },
+      "lfs": {
+        "A": 548,
+        "B": 799,
+        "C": 288,
+        "D": 21
+      }
+    },
+    "checks_by_result": {
+      "pass": 4588,
+      "pass_within_rounding": 1063,
+      "disputed": 17,
+      "fail": 29,
+      "not_evaluable": 163
+    },
+    "checks_by_type": {
+      "accounting_identity": {
+        "pass": 456,
+        "pass_within_rounding": 125,
+        "fail": 4
+      },
+      "column_total": {
+        "pass": 456,
+        "pass_within_rounding": 58,
+        "not_evaluable": 30,
+        "fail": 1
+      },
+      "cross_edition": {
+        "pass": 1676,
+        "disputed": 17,
+        "pass_within_rounding": 17,
+        "fail": 3
+      },
+      "cross_source": {
+        "fail": 1,
+        "pass": 114,
+        "pass_within_rounding": 16
+      },
+      "cross_table": {
+        "pass": 505,
+        "pass_within_rounding": 3
+      },
+      "hierarchy_sum": {
+        "pass": 730,
+        "pass_within_rounding": 256,
+        "fail": 18,
+        "not_evaluable": 93
+      },
+      "index_aggregation": {
+        "pass_within_rounding": 54
+      },
+      "recompute": {
+        "pass_within_rounding": 498,
+        "pass": 1,
+        "not_evaluable": 40,
+        "fail": 1
+      },
+      "reference_value": {
+        "pass": 216
+      },
+      "row_total": {
+        "pass": 400,
+        "pass_within_rounding": 19,
+        "fail": 1
+      },
+      "weights_sum": {
+        "pass_within_rounding": 17,
+        "pass": 34
+      }
+    },
+    "page_renders": 144
+  },
+  "coverage_summary": {
+    "abs": {
+      "printed_numeric_tokens": 7120,
+      "matched": 7062,
+      "coverage": 0.9919,
+      "tables": 90,
+      "tables_below_per_table_minimum": [
+        "abs-fed-2017-18 p.12",
+        "abs-fed-2022-23 p.16"
+      ]
+    },
+    "cpi": {
+      "printed_numeric_tokens": 2547,
+      "matched": 2547,
+      "coverage": 1.0,
+      "tables": 18,
+      "tables_below_per_table_minimum": []
+    },
+    "lfs": {
+      "printed_numeric_tokens": 2964,
+      "matched": 2964,
+      "coverage": 1.0,
+      "tables": 38,
+      "tables_below_per_table_minimum": []
+    }
+  },
+  "check_pass_rates": {
+    "abs": {
+      "all": {
+        "pass": 2020,
+        "pass_within_rounding": 281,
+        "fail": 19,
+        "not_evaluable": 123,
+        "disputed": 9,
+        "evaluable": 2329,
+        "pass_rate": 0.988
+      },
+      "cross_edition": {
+        "pass": 638,
+        "pass_within_rounding": 10,
+        "fail": 2,
+        "not_evaluable": 0,
+        "disputed": 9,
+        "evaluable": 650,
+        "pass_rate": 0.9969
+      }
+    },
+    "cpi": {
+      "all": {
+        "pass": 348,
+        "pass_within_rounding": 540,
+        "fail": 1,
+        "not_evaluable": 0,
+        "disputed": 2,
+        "evaluable": 891,
+        "pass_rate": 0.9966
+      },
+      "cross_edition": {
+        "pass": 125,
+        "pass_within_rounding": 3,
+        "fail": 0,
+        "not_evaluable": 0,
+        "disputed": 2,
+        "evaluable": 128,
+        "pass_rate": 1.0
+      }
+    },
+    "lfs": {
+      "all": {
+        "pass": 2220,
+        "pass_within_rounding": 242,
+        "fail": 9,
+        "not_evaluable": 40,
+        "disputed": 6,
+        "evaluable": 2477,
+        "pass_rate": 0.9939
+      },
+      "cross_edition": {
+        "pass": 913,
+        "pass_within_rounding": 4,
+        "fail": 1,
+        "not_evaluable": 0,
+        "disputed": 6,
+        "evaluable": 918,
+        "pass_rate": 0.9989
+      }
+    }
+  },
+  "dataset_status": {
+    "abs": {
+      "dataset": "abs",
+      "name": "Federal Annual Budget Statement",
+      "meets_thresholds": true,
+      "state": "published",
+      "reasons": [],
+      "coverage": {
+        "printed_numeric_tokens": 7120,
+        "matched": 7062,
+        "coverage": 0.9919,
+        "tables": 90,
+        "tables_below_per_table_minimum": [
+          "abs-fed-2017-18 p.12",
+          "abs-fed-2022-23 p.16"
+        ]
+      },
+      "check_pass_rate": {
+        "pass": 2020,
+        "pass_within_rounding": 281,
+        "fail": 19,
+        "not_evaluable": 123,
+        "disputed": 9,
+        "evaluable": 2329,
+        "pass_rate": 0.988
+      },
+      "cross_edition_agreement": {
+        "pass": 638,
+        "pass_within_rounding": 10,
+        "fail": 2,
+        "not_evaluable": 0,
+        "disputed": 9,
+        "evaluable": 650,
+        "pass_rate": 0.9969
+      },
+      "disputes": {
+        "differing_pairs": 11,
+        "disputed": 9,
+        "kept_as_fail": {
+          "a table or cell carries an extraction flag": 1,
+          "a table or row carries a structural flag": 1
+        },
+        "cross_edition_pairs": 659,
+        "disputed_share": 0.0137,
+        "max_disputed_share": "0.05"
+      }
+    },
+    "cpi": {
+      "dataset": "cpi",
+      "name": "Consumer Price Index",
+      "meets_thresholds": true,
+      "state": "published",
+      "reasons": [],
+      "coverage": {
+        "printed_numeric_tokens": 2547,
+        "matched": 2547,
+        "coverage": 1.0,
+        "tables": 18,
+        "tables_below_per_table_minimum": []
+      },
+      "check_pass_rate": {
+        "pass": 348,
+        "pass_within_rounding": 540,
+        "fail": 1,
+        "not_evaluable": 0,
+        "disputed": 2,
+        "evaluable": 891,
+        "pass_rate": 0.9966
+      },
+      "cross_edition_agreement": {
+        "pass": 125,
+        "pass_within_rounding": 3,
+        "fail": 0,
+        "not_evaluable": 0,
+        "disputed": 2,
+        "evaluable": 128,
+        "pass_rate": 1.0
+      },
+      "disputes": {
+        "differing_pairs": 2,
+        "disputed": 2,
+        "kept_as_fail": {},
+        "cross_edition_pairs": 130,
+        "disputed_share": 0.0154,
+        "max_disputed_share": "0.05"
+      }
+    },
+    "lfs": {
+      "dataset": "lfs",
+      "name": "Labour Force Survey",
+      "meets_thresholds": true,
+      "state": "published",
+      "reasons": [],
+      "coverage": {
+        "printed_numeric_tokens": 2964,
+        "matched": 2964,
+        "coverage": 1.0,
+        "tables": 38,
+        "tables_below_per_table_minimum": []
+      },
+      "check_pass_rate": {
+        "pass": 2220,
+        "pass_within_rounding": 242,
+        "fail": 9,
+        "not_evaluable": 40,
+        "disputed": 6,
+        "evaluable": 2477,
+        "pass_rate": 0.9939
+      },
+      "cross_edition_agreement": {
+        "pass": 913,
+        "pass_within_rounding": 4,
+        "fail": 1,
+        "not_evaluable": 0,
+        "disputed": 6,
+        "evaluable": 918,
+        "pass_rate": 0.9989
+      },
+      "disputes": {
+        "differing_pairs": 7,
+        "disputed": 6,
+        "kept_as_fail": {
+          "an arithmetic check on one reading failed": 1
+        },
+        "cross_edition_pairs": 924,
+        "disputed_share": 0.0065,
+        "max_disputed_share": "0.05"
+      }
+    }
+  },
+  "gold_set": {
+    "status": "pending_human_labelling"
+  },
+  "measured_error_rate": null,
+  "notes": "Prototype release, built unattended and rebuilt before first deployment (D29). No DOI. Not for citation in publications yet. Measured error rate is pending human gold-set labelling."
+}

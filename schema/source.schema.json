@@ -1,0 +1,209 @@
+{
+  "additionalProperties": false,
+  "description": "One original file.",
+  "properties": {
+    "doc_type": {
+      "enum": [
+        "abs",
+        "cpi_monthly_review",
+        "lfs_annual_report",
+        "pes_chapter",
+        "sbp_easydata",
+        "cpi_reference"
+      ],
+      "title": "Doc Type",
+      "type": "string"
+    },
+    "file_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "File Url"
+    },
+    "format": {
+      "default": "pdf",
+      "title": "Format",
+      "type": "string"
+    },
+    "is_born_digital": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Is Born Digital"
+    },
+    "jurisdiction": {
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "landing_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Landing Url"
+    },
+    "language": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Language"
+    },
+    "local_path": {
+      "description": "Path relative to SOURCES_DIR, forward slashes.",
+      "title": "Local Path",
+      "type": "string"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "page_count": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page Count"
+    },
+    "period": {
+      "title": "Period",
+      "type": "string"
+    },
+    "publisher": {
+      "title": "Publisher",
+      "type": "string"
+    },
+    "retrieved_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retrieved At"
+    },
+    "retrieved_via": {
+      "enum": [
+        "official",
+        "wayback",
+        "ra-ship-archive"
+      ],
+      "title": "Retrieved Via",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "core",
+        "corroboration",
+        "cross_source"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    },
+    "size_bytes": {
+      "title": "Size Bytes",
+      "type": "integer"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "verification_record": {
+      "title": "Verification Record",
+      "type": "string"
+    },
+    "verification_status": {
+      "enum": [
+        "official_match_archive",
+        "official_only",
+        "official_differs_from_archive",
+        "wayback_only",
+        "wayback_match_archive",
+        "archive_copy_content_inspected",
+        "failed"
+      ],
+      "title": "Verification Status",
+      "type": "string"
+    },
+    "wayback_timestamp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wayback Timestamp"
+    },
+    "wayback_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wayback Url"
+    }
+  },
+  "required": [
+    "source_id",
+    "doc_type",
+    "publisher",
+    "jurisdiction",
+    "title",
+    "period",
+    "role",
+    "retrieved_via",
+    "sha256",
+    "size_bytes",
+    "local_path",
+    "verification_status",
+    "verification_record"
+  ],
+  "title": "Source",
+  "type": "object"
+}

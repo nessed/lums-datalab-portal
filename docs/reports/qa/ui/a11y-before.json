@@ -1,0 +1,278 @@
+[
+  {
+    "name": "home",
+    "url": "/",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "home",
+    "url": "/",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 390,
+    "violations": [
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "help": "Interactive controls must not be nested",
+        "nodes": 1,
+        "sample": ".chart-svg"
+      }
+    ]
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 1280,
+    "violations": [
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "help": "Interactive controls must not be nested",
+        "nodes": 1,
+        "sample": ".chart-svg"
+      }
+    ]
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/cpi.national.general.b2007_08",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/cpi.national.general.b2007_08",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 390,
+    "violations": [
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "help": "Interactive controls must not be nested",
+        "nodes": 1,
+        "sample": "svg"
+      }
+    ]
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 1280,
+    "violations": [
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "help": "Interactive controls must not be nested",
+        "nodes": 1,
+        "sample": "svg"
+      }
+    ]
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-tierA",
+    "url": "/o/fed.exp.current.function.health~2010-11~be",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-cpi",
+    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "receipt-gap",
+    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 390,
+    "violations": [
+      {
+        "id": "scrollable-region-focusable",
+        "impact": "serious",
+        "help": "Scrollable region must have keyboard access",
+        "nodes": 1,
+        "sample": ".table-scroll"
+      }
+    ]
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 390,
+    "violations": [
+      {
+        "id": "scrollable-region-focusable",
+        "impact": "serious",
+        "help": "Scrollable region must have keyboard access",
+        "nodes": 2,
+        "sample": ".table-scroll:nth-child(6)"
+      }
+    ]
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 390,
+    "violations": [
+      {
+        "id": "scrollable-region-focusable",
+        "impact": "serious",
+        "help": "Scrollable region must have keyboard access",
+        "nodes": 4,
+        "sample": ".table-scroll:nth-child(5)"
+      }
+    ]
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 390,
+    "violations": [
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "help": "Interactive controls must not be nested",
+        "nodes": 3,
+        "sample": "section:nth-child(8) > figure > .chart-scroll > .chart-svg[viewBox=\"0 0 680 320\"][role=\"img\"]"
+      }
+    ]
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 1280,
+    "violations": [
+      {
+        "id": "nested-interactive",
+        "impact": "serious",
+        "help": "Interactive controls must not be nested",
+        "nodes": 3,
+        "sample": "section:nth-child(8) > figure > .chart-scroll > .chart-svg[viewBox=\"0 0 680 320\"][role=\"img\"]"
+      }
+    ]
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 1280,
+    "violations": []
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 1280,
+    "violations": []
+  }
+]

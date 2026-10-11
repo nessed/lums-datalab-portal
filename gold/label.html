@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gold set labelling (blind)</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#666; --line:#d0d0d0; --accent:#0b5d4e; --box:#d0021b; }
+  * { box-sizing: border-box; }
+  body { margin:0; font: 16px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:#f6f5f2; }
+  header { padding:12px 16px; background:#fff; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  header h1 { font-size:18px; margin:0 12px 0 0; }
+  main { display:grid; grid-template-columns: minmax(0,1fr) 340px; gap:16px; padding:16px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px; }
+  .page { position:relative; width:100%; }
+  .page img { display:block; width:100%; height:auto; }
+  .box { position:absolute; border:2px solid var(--box); background:rgba(208,2,27,.08); pointer-events:none; }
+  .zoom { position:relative; width:100%; height:150px; overflow:hidden; border:1px solid var(--line); margin-bottom:10px; background:#fff; }
+  .zoom img { position:absolute; transform-origin: 0 0; max-width:none; }
+  .zoom .box { border-width:2px; }
+  label { display:block; font-size:13px; color:var(--muted); margin:10px 0 4px; }
+  input[type=text] { width:100%; font: 20px/1.3 ui-monospace, Consolas, monospace; padding:8px; border:1px solid var(--line); border-radius:4px; }
+  button { font:inherit; padding:8px 12px; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:4px; cursor:pointer; }
+  button.secondary { background:#fff; color:var(--accent); }
+  .row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .meta { font-size:13px; color:var(--muted); }
+  .meta b { color:var(--ink); font-weight:600; }
+  progress { width:160px; }
+  .warn { background:#fff7e0; border:1px solid #e6c65c; padding:8px 10px; border-radius:4px; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Gold set labelling</h1>
+  <span>Labeller: <input id="who" type="text" style="width:140px;font-size:15px" placeholder="your name"></span>
+  <span id="count" class="meta"></span>
+  <progress id="prog" value="0" max="1"></progress>
+  <button class="secondary" id="export">Export my labels (CSV)</button>
+</header>
+<main>
+  <div class="panel">
+    <div class="page" id="page"><img id="img" alt="page render"><div class="box" id="box"></div></div>
+  </div>
+  <div class="panel">
+    <p class="warn">Type exactly what is printed inside the red box: digits, commas, brackets, minus signs, dashes. Do not look anything up. If the box is empty or you cannot read it, tick the box below. Work alone.</p>
+    <div class="zoom" id="zoom"><img id="zimg" alt="zoomed cell"><div class="box" id="zbox"></div></div>
+    <div class="meta"><b id="sid"></b> &middot; <span id="src"></span>, page <span id="pg"></span></div>
+    <div class="meta">Row: <b id="rl"></b></div>
+    <div class="meta">Column: <b id="cl"></b></div>
+    <label for="reading">Your reading of the boxed cell</label>
+    <input id="reading" type="text" autocomplete="off" spellcheck="false">
+    <label><input type="checkbox" id="unreadable"> Unreadable, or the box does not sit on a number</label>
+    <label for="note">Note (optional)</label>
+    <input id="note" type="text" style="font-size:14px">
+    <div class="row">
+      <button id="prev" class="secondary">Back</button>
+      <button id="next">Save and next (Enter)</button>
+      <button id="skip" class="secondary">Next unlabelled</button>
+    </div>
+    <p class="meta">Labels are kept in this browser until you export them. Export when done and save the file as <code>gold/labels_&lt;name&gt;.csv</code>.</p>
+  </div>
+</main>
+<script src="sample.js"></script>
+<script>
+(function () {
+  var S = window.GOLD_SAMPLE || [];
+  var KEY = "gold-labels-v1";
+  var store = JSON.parse(localStorage.getItem(KEY) || "{}");
+  var i = 0;
+  var $ = function (id) { return document.getElementById(id); };
+  $("who").value = localStorage.getItem(KEY + "-who") || "";
+  $("who").addEventListener("input", function () { localStorage.setItem(KEY + "-who", $("who").value); });
+
+  function place() {
+    var r = S[i]; if (!r) return;
+    var box = $("box");
+    box.style.left = (r.x0 * 100) + "%"; box.style.top = (r.y0 * 100) + "%";
+    box.style.width = ((r.x1 - r.x0) * 100) + "%"; box.style.height = ((r.y1 - r.y0) * 100) + "%";
+    var z = $("zoom"), zi = $("zimg"), zb = $("zbox");
+    var W = z.clientWidth, H = z.clientHeight, scale = 2.2;
+    var natW = $("img").naturalWidth || 1224, natH = $("img").naturalHeight || 1584;
+    var iw = natW * scale / 2, ih = natH * scale / 2;       // renders are 144 DPI; show at about 2.2x of 72 DPI
+    var cx = (r.x0 + r.x1) / 2 * iw, cy = (r.y0 + r.y1) / 2 * ih;
+    var left = W / 2 - cx, top = H / 2 - cy;
+    zi.style.width = iw + "px"; zi.style.height = ih + "px"; zi.style.left = left + "px"; zi.style.top = top + "px";
+    zb.style.left = (left + r.x0 * iw - 3) + "px"; zb.style.top = (top + r.y0 * ih - 3) + "px";
+    zb.style.width = ((r.x1 - r.x0) * iw + 6) + "px"; zb.style.height = ((r.y1 - r.y0) * ih + 6) + "px";
+  }
+  function show() {
+    var r = S[i]; if (!r) return;
+    $("img").src = r.render; $("zimg").src = r.render;
+    $("sid").textContent = r.sample_id; $("src").textContent = r.source_title; $("pg").textContent = r.page;
+    $("rl").textContent = r.row_label || "(none)"; $("cl").textContent = r.column_label || "(none)";
+    var saved = store[r.sample_id] || {};
+    $("reading").value = saved.reading || ""; $("unreadable").checked = !!saved.unreadable; $("note").value = saved.note || "";
+    var done = Object.keys(store).length;
+    $("count").textContent = (i + 1) + " of " + S.length + " (" + done + " labelled)";
+    $("prog").max = S.length; $("prog").value = done;
+    $("reading").focus();
+    $("img").onload = place; place();
+  }
+  function save() {
+    var r = S[i]; if (!r) return;
+    var reading = $("reading").value.trim(), un = $("unreadable").checked;
+    if (reading || un) { store[r.sample_id] = { reading: reading, unreadable: un, note: $("note").value.trim(), at: new Date().toISOString() }; }
+    localStorage.setItem(KEY, JSON.stringify(store));
+  }
+  $("next").onclick = function () { save(); if (i < S.length - 1) { i++; } show(); };
+  $("prev").onclick = function () { save(); if (i > 0) { i--; } show(); };
+  $("skip").onclick = function () { save(); for (var k = 0; k < S.length; k++) { var j = (i + 1 + k) % S.length; if (!store[S[j].sample_id]) { i = j; break; } } show(); };
+  $("reading").addEventListener("keydown", function (e) { if (e.key === "Enter") { $("next").click(); } });
+  window.addEventListener("resize", place);
+  $("export").onclick = function () {
+    save();
+    var who = $("who").value.trim() || "labeller";
+    var q = function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; };
+    var lines = ["sample_id,cell_id,labeller,reading,unreadable,note,labelled_at"];
+    S.forEach(function (r) { var s = store[r.sample_id]; if (s) { lines.push([r.sample_id, r.cell_id, who, s.reading, s.unreadable ? "true" : "", s.note, s.at].map(q).join(",")); } });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([lines.join("\n") + "\n"], { type: "text/csv" }));
+    a.download = "labels_" + who.replace(/[^a-z0-9]+/gi, "_").toLowerCase() + ".csv"; a.click();
+  };
+  if (!S.length) { document.querySelector("main").innerHTML = '<div class="panel">No sample found. Run <code>python -m datalab gold-sample</code> first.</div>'; }
+  else { show(); }
+})();
+</script>
+</body>
+</html>

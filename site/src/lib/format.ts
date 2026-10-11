@@ -122,6 +122,7 @@ export const CHECK_TYPE_WORDS: Record<string, string> = {
   recompute: "Recomputed",
   weights_sum: "Weights add up",
   index_aggregation: "Index aggregation",
+  reference_value: "Matches a recorded reference value",
 };
 
 export const VERIFICATION_WORDS: Record<string, { text: string; caveat: boolean }> = {

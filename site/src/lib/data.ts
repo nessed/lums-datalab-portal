@@ -148,6 +148,8 @@ export type Check = {
   source_ids: string[];
   member_cell_ids: string[];
   target_cell_id: string | null;
+  target_value?: string | null;
+  target_source?: string | null;
   expected: string | null;
   observed: string | null;
   residual: string | null;

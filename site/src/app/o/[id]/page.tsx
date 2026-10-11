@@ -123,6 +123,7 @@ function evidenceWords(checks: Check[]): string | null {
     else if (c.check_type === "index_aggregation") add("recomputing the weighted average");
     else if (c.check_type === "recompute") add("a recomputed rate");
     else if (c.check_type === "weights_sum") add("weights that add up");
+    else if (c.check_type === "reference_value") continue; // earns no status by itself
     else add(c.check_type.replaceAll("_", " "));
   }
   if (kinds.length === 0) return null;
@@ -221,6 +222,15 @@ function CheckItem({ check, obs }: { check: Check; obs: Observation }) {
               <dt>Difference</dt>
               <dd className="tnum">
                 {formatDecimalString(check.residual)} {check.residual === "0" ? "(exact)" : ""}
+              </dd>
+            </>
+          ) : null}
+          {check.target_value ? (
+            <>
+              <dt>Reference value</dt>
+              <dd>
+                <span className="mono">{check.target_value}</span>
+                {check.target_source ? `, from ${check.target_source}` : ""}
               </dd>
             </>
           ) : null}
@@ -445,7 +455,7 @@ export default async function ReceiptPage({ params }: Props) {
           <div className="receipt-status">
             <StatusBadge info={info} detail={isValue && evidence ? `verified by ${evidence}` : null} />
             <p>
-              {isValue
+              {isValue || isDisputed
                 ? (obs.evidence_summary ?? info.meaning)
                 : info.key === "gap-source" && cell && showPage
                   ? "The document prints a dash (or nothing) in this cell. We show no value rather than reading the dash as zero; where a printed total depends on it, the total's own receipt says how it was checked."
@@ -721,7 +731,10 @@ export default async function ReceiptPage({ params }: Props) {
                 <>
                   <dt>Read by</dt>
                   <dd>
-                    {cell.extractor_name} {cell.extractor_version}, a table-extraction tool (it reads printed text; it does not generate numbers)
+                    {cell.extractor_name} {cell.extractor_version}
+                    {cell.extractor_name === "pdfplumber"
+                      ? ", a second table-reading tool, used because the first tool's reading of this table was flagged; its reading was kept only because every check of the table passed on it"
+                      : ", a table-extraction tool (it reads printed text; it does not generate numbers)"}
                   </dd>
                   <dt>Extraction run</dt>
                   <dd className="mono">{cell.run_id}</dd>

@@ -51,22 +51,25 @@ Coverage is how much of each printed table was captured. Check pass rate is evid
 what was captured is right. Measured error rate: pending gold-set labelling.
 
 ## Site
-Owned by the UI agent (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md` in that branch).
-This branch does not edit `site/` except to keep `npm run build` green.
+Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
+into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
 
-### State (UI agent, updated 2026-10-11 06:05)
-- **Rebuilt (merged unless noted):** design system (`site/src/design/tokens.css`, `docs/DESIGN.md`);
-  header with search (Ctrl/Cmd-K or "/", index `public/data/<v>/search.json`), prototype notice,
-  footer with a per-page "report an error" link; **receipt** `/o/[id]`; **series** `/series/[id]`;
-  **browse** (catalogue with filters); **home**; **sources** and `/sources/[id]`; **methods**;
-  **demo**, **compare** (`/compare?s=a,b,c`), **data access** (`/data`), **releases**, **about**,
-  **404** (these last six merge with the next green gate).
-- Receipts now say "printed page N (page M of the PDF file)" from `Cell.page_label`, and
-  citations cite the printed page.
-- Checks: `npm run build`, `npm run lint`, `node scripts/check-build.mjs` (also checks disputed
-  receipts; allows a page box on a "not published" gap only where the cell prints no number),
-  `node scripts/a11y.mjs` (axe on every route type), `node scripts/screenshot.mjs`.
-- Report: `docs/reports/2026-10-12-ui-report.md`; screenshots `docs/reports/qa/ui/`.
+### State (UI agent, updated 2026-10-12, after the merge into `main`)
+- **Rebuilt, all in `main`:** design system (`site/src/design/tokens.css`, `docs/DESIGN.md`); header with
+  search (Ctrl/Cmd-K or "/", index `public/data/<v>/search.json`), prototype notice, footer with a
+  per-page "report an error" link; receipt `/o/[id]`; series `/series/[id]`; browse; home; sources and
+  `/sources/[id]`; methods; demo; compare (`/compare?s=a,b,c`); data access (`/data`); releases;
+  about; 404.
+- Receipts say "printed page N (page M of the PDF file)" from `Cell.page_label`; citations cite the
+  printed page.
+- Checked on `main` (`bebff67`): `npm run lint` clean; `npm run build` 7,280 pages; `node
+  scripts/check-build.mjs` OK (5,490 value receipts, 811 gap receipts, 17 disputed).
+- **Not yet done** (details in `docs/OPEN_WORK.md`): receipts ignore `member_signs` and
+  `credits_members` (S1); the new receipts, provincial and 19th ICLS series have not been looked at on
+  the site (S2); "after" screenshots exist for receipts only and predate later fixes (S3); axe last
+  ran before the last six pages were rebuilt (S4); critique round 2 (S5).
+- Other checks: `node scripts/a11y.mjs` (axe), `node scripts/screenshot.mjs`, both against a running
+  build on port 3100. Report: `docs/reports/2026-10-12-ui-report.md`.
 
 ### What changed in the release that the site should handle (details: end of `docs/SCHEMA.md`)
 - `status: disputed` with `value: null`, `gap_kind: disputed`, `disputed_readings[]` (one boxed page per reading); `evidence_summary` carries the sentence.
@@ -78,7 +81,7 @@ This branch does not edit `site/` except to keep `npm run build` green.
 - **New: LFS provincial series** `lfs.<measure>.<pb|sd|kp|ba>.<sex>.<area>` with `geo: pk-pb|pk-sd|pk-kp|pk-ba`; **19th ICLS series** end in `.icls19`. Every LFS series has `dims.definition` ("13th ICLS" or "19th ICLS"); the two must never share a chart line. LFS `sort_key` within a measure: national 0 to 8, provinces 10 to 48, 19th ICLS the same plus 50.
 - Cross-source files (`doc_type: sbp_easydata`, `pes_chapter`) appear in `sources.json`; a check against the SBP file has `target_source` and `target_value` and no member cell.
 - New check type `reference_value`; new check result `disputed`; `Check.member_signs` for sums with subtracted members; `Check.credits_members`.
-- The site now builds 7,278 static pages (about 4 minutes on this machine while other jobs run).
+- The site now builds 7,280 static pages (about 5.5 minutes on this machine while other jobs run).
 
 ### Requests for the pipeline
 (The UI agent writes requests here, in its own branch; this run reads them at each handoff.)

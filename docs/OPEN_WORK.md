@@ -605,10 +605,10 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
   3. Two checks with near-identical sentences (the same column total in two editions) read as duplicates; put the
      document and page first in bold (partly done: `check-where`), and consider grouping by document.
   4. On a phone the page render is small; open the enlarged view scrolled to the boxed cell.
-  5. "(n.d.)" in APA stays until H7 supplies publication dates.
+  5. "(n.d.)" in APA stays until H11 supplies publication dates.
 - **Done when:** each step is done or explicitly rejected in the report, with screenshots of a CPI and an ABS receipt.
 - **Effort:** 2 to 3 agent hours.
-- **Needs from a human:** H7 for step 5 only.
+- **Needs from a human:** H11 for step 5 only.
 - **Traps:** a crop must never cut a number or a row in half (`cropGuides()` in `site/src/lib/data.ts`).
 
 ### S7 Handoff documents for the site
@@ -731,9 +731,7 @@ CPI (P2) lands.
 - H4 Ahmad reviews what was merged into `main` (PR #1); fixes go in as new PRs.
 - H5 Site questions: a dash printed in an ABS table; the accent colour; light theme only.
 - H6 Still open from the first run: LUMS name and logo sign-off, DOI, hosting PDFs, branch protection on `main`.
-- H7 Publication dates of the source documents (or a decision to keep "(n.d.)"): the pipeline cannot establish them
-  from the files (STATUS.md, answers of handoff 2); citations print "(n.d.)" until then. Unblocks S6 step 5.
-- H8 Whether the generated walk-through `docs/HOW_A_NUMBER_GETS_ON_THE_SITE.md` is for the public site or for the
+- H16 Whether the generated walk-through `docs/HOW_A_NUMBER_GETS_ON_THE_SITE.md` is for the public site or for the
   team. Decides how S8 is built.
 
 Added by the pipeline agent (2026-10-12):
@@ -748,7 +746,7 @@ Added by the pipeline agent (2026-10-12):
 - H10 Sign off (or refuse) committing small excerpts of Docling output for real pages as test fixtures (P8). `AGENTS.md`
   section 8 requires explicit sign-off.
 - H11 Publication dates of the source documents, if citations should carry them (P9 d). Nothing the pipeline reads
-  establishes one.
+  establishes one. Also unblocks S6 step 5 ("(n.d.)" in citations).
 - H12 Should a passed sum count as evidence for a member smaller than the sum's rounding allowance? (P10.) Today it
   does; the proposal is that it should not.
 - H13 LFS 2024-25 table 9.2 (19th ICLS unemployment rate) prints no unit in its title. May "rate" plus a "(%)" found

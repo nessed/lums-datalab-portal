@@ -146,7 +146,7 @@ def cmd_gold_score(a) -> int:
 
     from .gold import gold_score
 
-    gold_score([Path(f) for f in a.labels], a.version)
+    gold_score([Path(f) for f in a.labels], a.version, out_path=Path(a.out) if a.out else None)
     return 0
 
 
@@ -254,6 +254,7 @@ def main(argv: list[str] | None = None) -> int:
     sp = add("gold-score", cmd_gold_score, "compare finished human labels with the release (error rate)")
     sp.add_argument("labels", nargs="+")
     sp.add_argument("--version", default=config.DEFAULT_RELEASE)
+    sp.add_argument("--out", help="where to write the score (default: gold/score.json)")
     sp = add("sanity", cmd_sanity, "write docs/reports/sanity_<release date>.md from a release folder (report only)")
     sp.add_argument("--version", default=config.DEFAULT_RELEASE)
     sp = add("watch", cmd_watch, "check once whether the official files changed (HEAD, then hash); prints a table and exits")

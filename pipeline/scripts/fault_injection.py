@@ -288,6 +288,13 @@ def main(argv: list[str]) -> int:
              "Sums, equalities, reference weights, cross-source checks, recomputed rates and index aggregations are redone from the "
              "changed value; where a recompute formula could not be reproduced the stored result is kept and the escape is counted as not simulated. Only value faults are injected: lost columns, merged cells and "
              "wrong row mapping are other failure modes.", "",
+             "## How to read it", "",
+             "- A fault no larger than a check's rounding tolerance cannot be seen by that check. The one-unit fault shows this: "
+             "the tolerances (half a unit per item in a sum, one unit between two printings) are what let it through, "
+             "so a last-digit misread in a published value is mostly invisible to the layer.",
+             "- Large faults (a shifted decimal point, a flipped sign, a swapped or dropped digit) are caught almost every time. "
+             "The few that escape are small values, inside a sum whose allowance is larger than the value (the P10 cases).",
+             "- So the gold set matters most for last-digit errors, which these checks cannot rule out.", "",
              "## Escape rate by fault", "", "| Fault | Injected | Escaped | Escape rate | Of which a check on it was not simulated |", "|---|---|---|---|---|"]
     for name in FAULTS:
         lines.append(f"| {name} | {injected[name]} | {escaped[name]} | {pct(escaped[name], injected[name])} | {uncertain[name]} |")

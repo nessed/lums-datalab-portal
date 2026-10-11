@@ -426,7 +426,7 @@ Read this first:
   inside their block (`AGENTS.md` section 7).
 
 ### P13 The coverage tokeniser hides a year glued to a negative number
-- **State:** not started. The property tests found that `parse_printed("2015 -16.3")` read the text as the fiscal-year
+- **State:** code fix and test done on branch `phase4/p13-tokeniser` (PR pending); coverage re-run against the PDFs still to do on a machine with `SOURCES_DIR`. The property tests found that `parse_printed("2015 -16.3")` read the text as the fiscal-year
   label 2015-16 followed by ".3". That is fixed for values (the cell is now flagged as merged and gives no value).
   `normalise.numeric_tokens`, which the coverage count uses, still masks such a pair as a fiscal-year label, so one
   printed number would be missing from both sides of the coverage ratio. It was left alone on purpose because coverage

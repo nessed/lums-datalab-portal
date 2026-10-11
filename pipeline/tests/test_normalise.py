@@ -148,3 +148,10 @@ def test_detect_scale(text, scale):
 )
 def test_normalise_label(raw, expected):
     assert normalise_label(raw) == expected
+
+
+def test_numeric_tokens_counts_a_negative_number_glued_to_a_year():
+    # P13: "2015 -16.3" is the year 2015 and the figure -16.3, not the label 2015-16 followed by ".3".
+    assert numeric_tokens("2015 -16.3") == [Decimal(2015), Decimal("-16.3")]
+    assert numeric_tokens("2015 -16,300") == [Decimal(2015), Decimal(-16300)]
+    assert numeric_tokens("Budget 2024-25 17,203") == [Decimal(17203)]   # a real label is still masked

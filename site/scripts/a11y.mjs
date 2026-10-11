@@ -16,7 +16,8 @@ const args = Object.fromEntries(
 const base = (args.base ?? "http://localhost:3100").replace(/\/$/, "");
 const out = args.out ? path.resolve(siteDir, args.out) : null;
 
-const browser = await chromium.launch();
+// CHROMIUM_PATH: a Chromium binary to use instead of the one Playwright downloads (for example in CI images).
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const results = [];
 let blocking = 0;
 for (const [name, url] of qaRoutes(siteDir)) {

@@ -18,7 +18,9 @@ export default function Code({ code, label }: { code: string; label: string }) {
         <span className="small muted">{label}</span>
         <CopyButton text={text} label="Copy" className="btn btn-text" />
       </div>
-      <pre className="code">{text}</pre>
+      <pre className="code" data-num="id">
+        {text}
+      </pre>
     </div>
   );
 }

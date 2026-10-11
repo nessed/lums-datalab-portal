@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const r = db().release;
   return (
-    <>
+    <div className="is-prose">
       <Breadcrumbs items={[{ label: "About" }]} />
       <header className="page-head">
         <h1>About the portal</h1>
@@ -86,6 +86,6 @@ export default function AboutPage() {
           </ul>
         </section>
       </div>
-    </>
+    </div>
   );
 }

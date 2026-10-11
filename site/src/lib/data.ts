@@ -162,6 +162,10 @@ export type Check = {
   description: string;
   official?: boolean;
   rule_id?: string;
+  /** +1 or -1 per member cell, for sums with subtracted members ("gross less provincial share"). */
+  member_signs?: number[] | null;
+  /** false: the check runs, but passing it does not count towards its members' status. */
+  credits_members?: boolean | null;
 };
 
 export type Source = {
@@ -349,7 +353,11 @@ export function isDatasetPublished(key: string): boolean {
 
 /** Series the site may show values for: only datasets whose state is "published". */
 export function visibleSeries(): Series[] {
-  return db().series.filter((s) => isDatasetPublished(s.dataset));
+  const order = Object.keys(db().release.dataset_status ?? {});
+  const rank = (k: string) => (order.indexOf(k) < 0 ? order.length : order.indexOf(k));
+  return db()
+    .series.filter((s) => isDatasetPublished(s.dataset))
+    .sort((a, b) => rank(a.dataset) - rank(b.dataset) || a.sort_key - b.sort_key || a.series_id.localeCompare(b.series_id));
 }
 
 export function publishedObs(seriesId: string): Observation[] {

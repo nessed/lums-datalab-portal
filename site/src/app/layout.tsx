@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import localFont from "next/font/local";
-import { NavLinks, DismissNotice, ReportLink } from "@/components/chrome/Chrome";
+import { NavLinks, DismissNotice, ReportLink, MobileMenu } from "@/components/chrome/Chrome";
+import { Num } from "@/components/ui/Num";
+import { COMING } from "@/lib/features";
 import SearchDialog from "@/components/chrome/SearchDialog";
 import { DATA_BASE, db, ISSUES_URL, REPO_URL, SITE_URL } from "@/lib/data";
 import { dateOnly } from "@/lib/format";
@@ -34,10 +36,10 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  { href: "/browse", label: "Browse" },
+  { href: "/browse", label: "Data", also: ["/series", "/o", "/datasets", "/tables"] },
+  { href: "/compare", label: "Compare" },
   { href: "/sources", label: "Sources" },
   { href: "/methods", label: "Methods" },
-  { href: "/releases", label: "Releases" },
   { href: "/about", label: "About" },
 ];
 
@@ -45,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const release = db().release;
   const v = release.version;
   // Runs before paint: hides the notice if this visitor dismissed it for this release.
-  const noticeScript = `try{if(localStorage.getItem("proto-notice-dismissed")===${JSON.stringify(v)})document.documentElement.dataset.protoDismissed="true"}catch(e){}`;
+  const noticeScript = `document.documentElement.classList.add("js");try{if(localStorage.getItem("proto-notice-dismissed")===${JSON.stringify(v)})document.documentElement.dataset.protoDismissed="true"}catch(e){}`;
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
@@ -58,8 +60,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="proto-notice" role="note" aria-label="Prototype notice">
           <div className="wrap">
             <p>
-              <strong>Prototype release {v}.</strong> No DOI; not yet for citation in publications.{" "}
-              <span className="long">Figures are compiled from official publications and the printed document prevails. </span>
+              <strong>
+                Prototype release <Num kind="version">{v}</Num>.
+              </strong>{" "}
+              <span className="long">No DOI; </span>not yet for citation<span className="long"> in publications</span>. <span className="long">The printed document prevails. </span>
               <Link href="/about#disclaimer">Disclaimer</Link>
             </p>
             <DismissNotice version={v} />
@@ -73,13 +77,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </span>
               <span className="proto-mark">Prototype</span>
             </Link>
-            <NavLinks items={NAV} />
-            <div className="header-tools">
+            <div className="header-search">
               <SearchDialog indexUrl={`${DATA_BASE}/search.json`} />
-              <Link href="/releases" className="release-tag" title="The data release this site shows">
-                Release <span className="mono">{v}</span>
-              </Link>
             </div>
+            <NavLinks items={NAV} />
+            <Link href="/releases" className="release-tag" title="The data release this site shows">
+              Release <Num kind="version">{v}</Num>
+            </Link>
+            <MobileMenu items={NAV} />
           </div>
         </header>
         <main id="main" tabIndex={-1}>
@@ -90,9 +95,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <section aria-labelledby="ft-what">
               <h2 id="ft-what">LUMS DataLab Portal</h2>
               <p>
-                <strong>Prototype release {v}</strong>, built {dateOnly(release.created_at)}. {release.doi ? `DOI ${release.doi}.` : "No DOI yet."} Not yet
-                for citation in publications. An unofficial research project of the LUMS Department of Economics DataLab. Figures are compiled from
-                official publications; where this site and the printed document differ, the document prevails.
+                <strong>
+                  Prototype release <Num kind="version">{v}</Num>
+                </strong>
+                , built <Num kind="date">{dateOnly(release.created_at)}</Num>. {release.doi ? <>DOI <Num kind="id">{release.doi}</Num>.</> : "No DOI yet."} Not yet for
+                citation in publications. An unofficial research project of the LUMS Department of Economics DataLab. Figures are compiled from official
+                publications; where this site and the printed document differ, the document prevails.
               </p>
               <p>
                 Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT. No language model writes a published number or
@@ -103,13 +111,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <h2 id="ft-use">Use the data</h2>
               <ul>
                 <li>
+                  <Link href="/browse">The catalogue</Link>
+                </li>
+                <li>
                   <Link href="/data">Download and file formats</Link>
                 </li>
                 <li>
-                  <Link href="/releases">Releases, changelog and errata</Link>
+                  <Link href="/api">API</Link> <span className="coming-inline">{COMING}</span>
                 </li>
                 <li>
-                  <Link href="/methods">Methods and quality numbers</Link>
+                  <Link href="/releases">Releases, changelog and errata</Link>
                 </li>
                 <li>
                   <Link href="/demo/health-and-jobs">Worked example</Link>
@@ -117,12 +128,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </ul>
             </section>
             <section aria-labelledby="ft-help">
-              <h2 id="ft-help">Found a mistake?</h2>
+              <h2 id="ft-help">Check and correct</h2>
               <ul>
                 <li>
                   <ReportLink issuesUrl={ISSUES_URL} version={v}>
                     Report an error on this page
                   </ReportLink>
+                </li>
+                <li>
+                  <Link href="/methods">Methods and quality numbers</Link>
                 </li>
                 <li>
                   <a href={REPO_URL}>Source code and pipeline</a>

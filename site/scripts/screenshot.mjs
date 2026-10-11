@@ -23,7 +23,8 @@ const only = args.only ? new Set(args.only.split(",")) : null;
 const routes = qaRoutes(siteDir);
 
 fs.mkdirSync(out, { recursive: true });
-const browser = await chromium.launch();
+// CHROMIUM_PATH: a Chromium binary to use instead of the one Playwright downloads (for example in CI images).
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const index = [];
 for (const [name, url] of routes) {
   if (only && !only.has(name) && !only.has(name.split("-")[0])) continue;

@@ -38,7 +38,7 @@ export default function Cite({
         date this page was built; replace it with the date you used it.
       </p>
       <div className="cite-apa">
-        <pre className="code" style={{ whiteSpace: "pre-wrap" }}>
+        <pre className="code" style={{ whiteSpace: "pre-wrap" }} data-num="cite">
           {c.apa}
         </pre>
       </div>
@@ -52,9 +52,9 @@ export default function Cite({
       </div>
       <Disclosure summary="Show BibTeX and RIS">
         <h4>BibTeX</h4>
-        <pre className="code">{c.bibtex}</pre>
+        <pre className="code" data-num="cite">{c.bibtex}</pre>
         <h4>RIS</h4>
-        <pre className="code">{c.ris}</pre>
+        <pre className="code" data-num="cite">{c.ris}</pre>
       </Disclosure>
     </>
   );

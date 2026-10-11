@@ -86,7 +86,7 @@ export function Toc({ items, label = "On this page" }: { items: TocItem[]; label
 }
 
 /** Thin bar with the number beside it (coverage, pass rates). Ratio 0..1. */
-export function Bar({ ratio, label }: { ratio: number | null | undefined; label: string }) {
+export function Bar({ ratio, label }: { ratio: number | null | undefined; label: ReactNode }) {
   const r = ratio === null || ratio === undefined || Number.isNaN(ratio) ? null : Math.max(0, Math.min(1, ratio));
   return (
     <span className="bar">

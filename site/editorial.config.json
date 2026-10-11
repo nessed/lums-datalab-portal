@@ -1,0 +1,13 @@
+{
+  "$comment": "Editorial choices, made by people, not generated. Series are named by id; every value shown for them is read from the release. An id the release does not hold is left out, never filled in. PROVISIONAL (unattended run, 2026-10-12): chosen by the agent for S16; Ali and Ahmad confirm or replace them.",
+  "headline": [
+    "fed.exp.total",
+    "fed.rev.tax",
+    "fed.exp.current.function.health",
+    "cpi.national.yoy.general",
+    "lfs.unemployment_rate.total.total",
+    "lfs.labour_force.total.total"
+  ],
+  "exampleSearches": ["health budget", "CPI food", "unemployment female"],
+  "compareDefault": ["fed.exp.current.function.health", "fed.exp.current.function.education_affairs_and_services"]
+}

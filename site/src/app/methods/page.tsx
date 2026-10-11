@@ -8,7 +8,8 @@ import Markdown, { markdownHeadings } from "@/components/Markdown";
 import { Bar, Breadcrumbs, Callout, TableWrap, Toc } from "@/components/ui/Basics";
 import { StatusLegend } from "@/components/ui/Status";
 import { datasetKeys, db, frozenThresholds, isDatasetPublished, methodsMarkdown, type PassRate } from "@/lib/data";
-import { CHECK_TYPE_WORDS, count, pct } from "@/lib/format";
+import { CHECK_TYPE_WORDS, pct } from "@/lib/format";
+import { Count, Num } from "@/components/ui/Num";
 import { datasetStateWords } from "@/lib/status";
 
 export const metadata: Metadata = {
@@ -51,7 +52,7 @@ function fmtThreshold(v: string, fmt?: string): string {
   return `${fmt === "atLeastPct" ? "≥ " : fmt === "atMostPct" ? "≤ " : ""}${pct(n)}`;
 }
 
-function PassRow({ label, p }: { label: string; p: (PassRate & { disputed?: number }) | null | undefined }) {
+function PassRow({ label, p, path }: { label: string; p: (PassRate & { disputed?: number }) | null | undefined; path: string }) {
   if (!p) {
     return (
       <tr>
@@ -65,11 +66,23 @@ function PassRow({ label, p }: { label: string; p: (PassRate & { disputed?: numb
   return (
     <tr>
       <th scope="row">{label}</th>
-      <td className="num">{count(p.pass)}</td>
-      <td className="num">{count(p.pass_within_rounding)}</td>
-      <td className="num">{count(p.fail)}</td>
-      <td className="num">{count(p.disputed ?? 0)}</td>
-      <td>{p.pass_rate === null || p.pass_rate === undefined ? <span className="muted">no checks of this kind</span> : <Bar ratio={p.pass_rate} label={pct(p.pass_rate)} />}</td>
+      <td className="num">
+        <Count k={`release:${path}.pass`} n={p.pass} />
+      </td>
+      <td className="num">
+        <Count k={`release:${path}.pass_within_rounding`} n={p.pass_within_rounding} />
+      </td>
+      <td className="num">
+        <Count k={`release:${path}.fail`} n={p.fail} />
+      </td>
+      <td className="num">{p.disputed !== undefined ? <Count k={`release:${path}.disputed`} n={p.disputed} /> : "none"}</td>
+      <td>
+        {p.pass_rate === null || p.pass_rate === undefined ? (
+          <span className="muted">no checks of this kind</span>
+        ) : (
+          <Bar ratio={p.pass_rate} label={<Count k={`release:${path}.pass_rate`} n={p.pass_rate} rate />} />
+        )}
+      </td>
     </tr>
   );
 }
@@ -85,12 +98,12 @@ export default function MethodsPage() {
   const tools = Object.entries(r.tool_versions ?? {});
 
   return (
-    <>
+    <div className="is-prose">
       <Breadcrumbs items={[{ label: "Methods" }]} />
       <header className="page-head">
         <h1>Methods</h1>
         <p className="lede">
-          How a figure gets from a government PDF to a receipt on this site, what the checks are, and how well release {r.version} does by its own
+          How a figure gets from a government PDF to a receipt on this site, what the checks are, and how well release <Num kind="version">{r.version}</Num> does by its own
           measures. Coverage and accuracy are separate questions with separate numbers; we never combine them.
         </p>
       </header>
@@ -128,11 +141,15 @@ export default function MethodsPage() {
                         <td className="small">{datasetStateWords(ds?.state)}</td>
                         {c ? (
                           <>
-                            <td className="num">{c.tables !== undefined ? count(c.tables) : ""}</td>
-                            <td className="num">{count(c.printed_numeric_tokens)}</td>
-                            <td className="num">{count(c.matched)}</td>
+                            <td className="num">{c.tables !== undefined ? <Count k={`release:dataset_status.${k}.coverage.tables`} n={c.tables} /> : ""}</td>
+                            <td className="num">
+                              <Count k={`release:dataset_status.${k}.coverage.printed_numeric_tokens`} n={c.printed_numeric_tokens} />
+                            </td>
+                            <td className="num">
+                              <Count k={`release:dataset_status.${k}.coverage.matched`} n={c.matched} />
+                            </td>
                             <td>
-                              <Bar ratio={c.coverage} label={pct(c.coverage)} />
+                              <Bar ratio={c.coverage} label={<Count k={`release:dataset_status.${k}.coverage.coverage`} n={c.coverage} rate />} />
                             </td>
                           </>
                         ) : (
@@ -171,8 +188,8 @@ export default function MethodsPage() {
                   {keys.flatMap((k) => {
                     const ds = r.dataset_status[k];
                     return [
-                      <PassRow key={`${k}-a`} label={`${ds?.name ?? k}: all checks`} p={ds?.check_pass_rate} />,
-                      <PassRow key={`${k}-x`} label={`${ds?.name ?? k}: agreement between editions`} p={ds?.cross_edition_agreement} />,
+                      <PassRow key={`${k}-a`} label={`${ds?.name ?? k}: all checks`} p={ds?.check_pass_rate} path={`dataset_status.${k}.check_pass_rate`} />,
+                      <PassRow key={`${k}-x`} label={`${ds?.name ?? k}: agreement between editions`} p={ds?.cross_edition_agreement} path={`dataset_status.${k}.cross_edition_agreement`} />,
                     ];
                   })}
                 </tbody>
@@ -185,7 +202,7 @@ export default function MethodsPage() {
             <div id="error-rate">
               <Callout kind="caveat" title="Measured error rate: pending">
                 <p>
-                  Passing checks is not the same as being right. The error rate will be measured on a sample of about 400 figures that two people
+                  Passing checks is not the same as being right. The error rate will be measured on a sample of about <Num kind="threshold">{thresholds?.rows.find((t) => t.key === "target_cells")?.value ?? "400"}</Num> figures that two people
                   read from the page images by hand without seeing our values. That labelling has not been done
                   {r.gold_set?.status ? ` (status: ${r.gold_set.status.replaceAll("_", " ")})` : ""}, so no error rate is claimed for this release.
                 </p>
@@ -198,7 +215,9 @@ export default function MethodsPage() {
             <ol className="pipeline">
               {STEPS.map((s, i) => (
                 <li key={s.k}>
-                  <span className="pl-n">{i + 1}</span>
+                  <span className="pl-n" data-num="ui">
+                    {i + 1}
+                  </span>
                   <span className="pl-k">{s.k}</span>
                   <span className="pl-d">{s.d}</span>
                 </li>
@@ -243,10 +262,23 @@ export default function MethodsPage() {
                     return (
                       <tr key={t}>
                         <th scope="row">{CHECK_TYPE_WORDS[t] ?? t.replaceAll("_", " ")}</th>
-                        <td className="num">{count(total)}</td>
-                        <td className="num">{count(res.pass ?? 0)}</td>
-                        <td className="num">{count(res.pass_within_rounding ?? 0)}</td>
-                        <td className="small">{other.length ? other.map(([k, n]) => `${count(n)} ${k.replaceAll("_", " ")}`).join(", ") : "none"}</td>
+                        <td className="num">
+                          <Count k={`checktype:${t}:total`} n={total} />
+                        </td>
+                        <td className="num">{res.pass !== undefined ? <Count k={`release:counts.checks_by_type.${t}.pass`} n={res.pass} /> : "none"}</td>
+                        <td className="num">
+                          {res.pass_within_rounding !== undefined ? <Count k={`release:counts.checks_by_type.${t}.pass_within_rounding`} n={res.pass_within_rounding} /> : "none"}
+                        </td>
+                        <td className="small">
+                          {other.length
+                            ? other.map(([k2, n], i) => (
+                                <span key={k2}>
+                                  {i ? ", " : ""}
+                                  <Count k={`release:counts.checks_by_type.${t}.${k2}`} n={n} /> {k2.replaceAll("_", " ")}
+                                </span>
+                              ))
+                            : "none"}
+                        </td>
                       </tr>
                     );
                   })}
@@ -261,7 +293,7 @@ export default function MethodsPage() {
               <>
                 <p className="small measure">
                   A dataset below any of these is not published (the site marks it &ldquo;coming&rdquo;). The file&rsquo;s fingerprint matches the
-                  one recorded in this release (<span className="hash">{thresholds.sha256.slice(0, 16)}…</span>). Changes after results are seen are
+                  one recorded in this release (<Num kind="id" className="hash">{thresholds.sha256.slice(0, 16)}</Num>…). Changes after results are seen are
                   recorded as deviations, never made silently.
                 </p>
                 <TableWrap label="Frozen thresholds">
@@ -283,9 +315,15 @@ export default function MethodsPage() {
                             <tr key={`${t.section}.${t.key}`}>
                               <th scope="row" style={{ fontWeight: 500 }}>
                                 {w?.label ?? `${t.section.replaceAll("_", " ")}: ${t.key.replaceAll("_", " ")}`}
-                                {!w && t.comment ? <span className="cell-sub">{t.comment}</span> : null}
+                                {!w && t.comment ? (
+                                  <span className="cell-sub" data-num="md" data-file="repo:thresholds/thresholds.yaml">
+                                    {t.comment}
+                                  </span>
+                                ) : null}
                               </th>
-                              <td className="num">{t.key === "exact" ? "residual 0" : fmtThreshold(t.value, w?.fmt)}</td>
+                              <td className="num">
+                                <Num kind="threshold">{t.key === "exact" ? "residual 0" : fmtThreshold(t.value, w?.fmt)}</Num>
+                              </td>
                             </tr>
                           );
                         })}
@@ -294,7 +332,7 @@ export default function MethodsPage() {
                 </TableWrap>
               </>
             ) : (
-              <p className="measure">The threshold values are not available for this release (their fingerprint is {r.thresholds_sha256 ?? "not recorded"}).</p>
+              <p className="measure">The threshold values are not available for this release (their fingerprint is <Num kind="id">{r.thresholds_sha256 ?? "not recorded"}</Num>).</p>
             )}
           </section>
 
@@ -327,14 +365,21 @@ export default function MethodsPage() {
             <dl className="facts">
               <dt>Release</dt>
               <dd>
-                <Link href="/releases">{r.version}</Link> ({r.label}), built {r.created_at}
+                <Link href="/releases">
+                  <Num kind="version">{r.version}</Num>
+                </Link>{" "}
+                ({r.label}), built <Num kind="id">{r.created_at}</Num>
               </dd>
               <dt>Code commit</dt>
-              <dd className="mono">{r.git_commit}</dd>
+              <dd className="mono">
+                <Num kind="id">{r.git_commit}</Num>
+              </dd>
               {tools.length > 0 ? (
                 <>
                   <dt>Tool versions</dt>
-                  <dd className="small">{tools.map(([k, v]) => `${k} ${v}`).join(" · ")}</dd>
+                  <dd className="small">
+                    <Num kind="id">{tools.map(([k, v]) => `${k} ${v}`).join(" · ")}</Num>
+                  </dd>
                 </>
               ) : null}
               <dt>Reproduce it</dt>
@@ -348,7 +393,9 @@ export default function MethodsPage() {
           <section id="full" aria-labelledby="full-h" className="prose">
             <h2 id="full-h">The method in full</h2>
             {md ? (
-              <Markdown source={md.replace(/^# .*\n/, "")} headingOffset={1} />
+              <div data-num="md" data-file="repo:docs/METHODS.md">
+                <Markdown source={md.replace(/^# .*\n/, "")} headingOffset={1} />
+              </div>
             ) : (
               <p>The full methods document is not included in this build.</p>
             )}
@@ -374,10 +421,11 @@ export default function MethodsPage() {
             ]}
           />
           <p className="small muted" style={{ marginTop: 16 }}>
-            {keys.filter(isDatasetPublished).length} of {keys.length} datasets published in this release.
+            <Count k="datasets:published" n={keys.filter(isDatasetPublished).length} /> of <Count k="datasets:all" n={keys.length} /> datasets published in this
+            release.
           </p>
         </aside>
       </div>
-    </>
+    </div>
   );
 }

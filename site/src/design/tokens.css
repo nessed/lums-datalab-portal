@@ -32,18 +32,22 @@
   --s-7: 3rem;
   --s-8: 4rem;
   --gutter: 1rem;
-  --page-max: 76rem;
+  --page-max: 90rem; /* data pages: charts and tables want width */
+  --prose-max: 76rem;
 
-  /* ---- colour: paper and ink ---- */
-  --paper: #fbfaf7;
-  --paper-2: #f3f1ec; /* recessed panels, table header */
-  --paper-3: #e9e6df;
-  --card: #ffffff; /* the document render frame only */
+  /* ---- colour: a neutral ground and ink. The warm paper tone is kept only
+   * around page images (--doc-ground), where it reads as a document. ---- */
+  --paper: #fbfbfa;
+  --paper-2: #f1f2f2; /* recessed panels, table header */
+  --paper-3: #e5e7e7;
+  --card: #ffffff;
+  --doc-ground: #f3f1ec;
+  --doc-rule: #d6d2c9;
   --ink: #1c1d1f;
-  --ink-2: #44484e;
-  --ink-3: #62676e; /* AA on paper: 5.6:1 */
-  --rule: #d6d2c9; /* hairlines */
-  --rule-strong: #a9a49a;
+  --ink-2: #41454b;
+  --ink-3: #575c63; /* AA on paper-2: 6.1:1 */
+  --rule: #d8dada; /* hairlines */
+  --rule-strong: #8f959b; /* control borders: 3:1 on paper */
 
   /* ---- colour: the one accent (links, focus, the receipt box) ---- */
   --accent: #0b5c78;
@@ -71,8 +75,18 @@
   --chart-be: #0b5c78; /* budget estimate: accent, solid */
   --chart-re: #a2470e; /* revised estimate: rust, dashed */
   --chart-other: #4b5563;
-  --chart-grid: #e4e0d8;
-  --chart-axis: #8d887e;
+  --chart-grid: #e6e8e8;
+  --chart-axis: #7d838a;
+  /* Categorical palette for compare and multi-line charts. Validated with the
+   * dataviz palette checks (light surface #fbfbfa): CVD separation, the
+   * normal-vision floor and 3:1 contrast all pass in this order. No purple.
+   * Each line also gets its own dash and marker, so colour is never the only cue. */
+  --cat-1: #2a78d6;
+  --cat-2: #d4561f;
+  --cat-3: #16936a;
+  --cat-4: #b07800;
+  --cat-5: #cc4f86;
+  --cat-6: #2f7d1a;
 
   /* ---- shape ---- */
   --r-1: 2px;

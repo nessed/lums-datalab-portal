@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { Breadcrumbs, Callout, TableWrap, Toc } from "@/components/ui/Basics";
 import Code from "@/components/ui/Code";
+import { Num } from "@/components/ui/Num";
 import { DATA_BASE, db, publishedObs, RELEASE_VERSION, releaseFileExists, REPO_URL, slugify } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -30,19 +31,29 @@ const FILES: { file: string; what: string }[] = [
   { file: "ERRATA.md", what: "Corrections to published figures." },
 ];
 
-const COLUMNS: [string, string][] = [
+const COLUMNS: [string, React.ReactNode][] = [
   ["obs_id", "Permanent id of the figure: series_id:period:vintage. Survives re-extraction."],
   ["series_id, series_name, dataset", "Which series it belongs to (see series.json)."],
-  ["period", "Fiscal year (2025-26), month (2026-06) or survey round, as the document labels it."],
+  [
+    "period",
+    <>
+      Fiscal year (<Num kind="period">2025-26</Num>), month (<Num kind="period">2026-06</Num>) or survey round, as the document labels it.
+    </>,
+  ],
   ["vintage", "Kind of figure: be (budget estimate), re (revised estimate), actual, provisional, na (no such distinction)."],
   ["value", "The figure as a decimal string, present only when published. Multiply by scale_factor for the full amount."],
-  ["unit, scale_factor", "PKR with 1000000 means rupees in millions; percent; index; persons."],
+  [
+    "unit, scale_factor",
+    <>
+      PKR with <Num kind="ui">1000000</Num> means rupees in millions; percent; index; persons.
+    </>,
+  ],
   ["status", "checked, unchecked or disputed. Only checked figures carry a value."],
   ["tier", "Internal evidence tier: A (a check and a second printing), B (one of the two)."],
   ["published", "true when the value is shown on the site."],
   ["gap_kind, gap_reason", "For a row without a value: not_in_source, not_yet_verified, failed_checks or disputed, and why."],
   ["source_id … page, cell_id", "Where the figure is printed: the document, its official address and fingerprint, the page of the PDF file, the cell."],
-  ["value_as_printed", "The printed text exactly as it appears on the page (for example 7,283)."],
+  ["value_as_printed", "The printed text exactly as it appears on the page: digits, separators and signs as printed."],
   ["disputed_readings", "For disputed rows: every printing, as value (source p.N), separated by |."],
   ["evidence_summary", "The checks behind the figure, in one sentence."],
   ["release", "The release the row comes from."],
@@ -84,18 +95,18 @@ s <- obs |>
 s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
 
   return (
-    <>
+    <div className="is-prose">
       <Breadcrumbs items={[{ label: "Data access" }]} />
       <header className="page-head">
         <h1>Data access</h1>
         <p className="lede">
-          Everything on this site comes from one frozen release, {RELEASE_VERSION}, and every file of it can be downloaded. The CSV is the place to
+          Everything on this site comes from one frozen release, <Num kind="version">{RELEASE_VERSION}</Num>, and every file of it can be downloaded. The CSV is the place to
           start; the receipt of any figure is also a JSON file.
         </p>
       </header>
       <Callout kind="caveat" title="Prototype release">
         <p>
-          {d.release.doi ? `DOI ${d.release.doi}.` : "No DOI yet."} Not yet for citation in publications. Data CC BY 4.0. Values are decimal strings:
+          {d.release.doi ? <Num kind="id">{`DOI ${d.release.doi}.`}</Num> : "No DOI yet."} Not yet for citation in publications. Data CC BY 4.0. Values are decimal strings:
           read them as text and convert deliberately, or rounding errors creep in.
         </p>
       </Callout>
@@ -124,15 +135,18 @@ s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
                         </a>
                       </th>
                       <td className="small">{f.what}</td>
-                      <td className="num small">{size(f.file)}</td>
+                      <td className="num small">
+                        <Num kind="ui">{size(f.file)}</Num>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </TableWrap>
             <p className="small">
-              Also: one CSV and one JSON per series at <code>{DATA_BASE}/series/&lt;series_id&gt;.csv</code>, page images at{" "}
-              <code>{DATA_BASE}/pages/&lt;source_id&gt;/p&lt;NNN&gt;.png</code>, and the extraction run records at <code>{DATA_BASE}/runs/</code>.
+              Also: one CSV and one JSON per series at <code data-num="id">{`${DATA_BASE}/series/<series_id>.csv`}</code>, one CSV per data type at{" "}
+              <code data-num="id">{`${DATA_BASE}/datasets/<data type>.csv`}</code>, page images at <code data-num="id">{`${DATA_BASE}/pages/<source_id>/p<NNN>.png`}</code>, and
+              the extraction run records at <code data-num="id">{`${DATA_BASE}/runs/`}</code>.
             </p>
           </section>
 
@@ -165,18 +179,21 @@ s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
                 <code>/o/&lt;obs_id&gt;</code> with the colons written as <code>~</code>
                 {exObs ? (
                   <>
-                    , for example <Link href={`/o/${slugify(exObs.obs_id)}`}>/o/{slugify(exObs.obs_id)}</Link>
+                    , for example{" "}
+                    <Link href={`/o/${slugify(exObs.obs_id)}`}>
+                      <Num kind="id">{`/o/${slugify(exObs.obs_id)}`}</Num>
+                    </Link>
                   </>
                 ) : null}
               </dd>
               <dt>Its receipt as data</dt>
               <dd>
-                <code>{DATA_BASE}/receipts/&lt;same id&gt;.json</code>: the observation, its cells with page boxes, its checks and its source documents.
+                <code data-num="id">{`${DATA_BASE}/receipts/<same id>.json`}</code>: the observation, its cells with page boxes, its checks and its source documents.
                 One CSV row with provenance columns at the same address ending <code>.csv</code>.
               </dd>
               <dt>A series</dt>
               <dd>
-                <code>/series/&lt;series_id&gt;</code>; chart settings stay in the address (<code>?scale=log&amp;from=2015-16</code>).
+                <code>/series/&lt;series_id&gt;</code>; chart settings stay in the address (<code data-num="id">?scale=log&amp;from=2015-16</code>).
               </dd>
               <dt>A document</dt>
               <dd>
@@ -210,6 +227,6 @@ s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
           />
         </aside>
       </div>
-    </>
+    </div>
   );
 }

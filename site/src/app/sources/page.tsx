@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bar, Breadcrumbs, TableWrap } from "@/components/ui/Basics";
 import { db, sourceHref } from "@/lib/data";
-import { count, DOC_TYPE_WORDS, pct, ROLE_WORDS } from "@/lib/format";
+import { DOC_TYPE_WORDS, ROLE_WORDS } from "@/lib/format";
+import { Count } from "@/components/ui/Num";
 import { VerifBadge } from "@/components/ui/Verif";
 import { ROLE_SHORT, sourceCoverage, valuesFromSource, verifLong, VERIF_SHORT } from "@/lib/sources";
 
@@ -19,12 +20,12 @@ export default function SourcesPage() {
   const used = new Set(d.sources.map((s) => s.verification_status));
   const keyed = Object.keys(VERIF_SHORT).filter((k) => used.has(k));
   return (
-    <>
+    <div className="is-prose">
       <Breadcrumbs items={[{ label: "Sources" }]} />
       <header className="page-head">
         <h1>Source documents</h1>
         <p className="lede">
-          Every figure on this site is read from one of these {d.sources.length} government files. For each one we record where it was downloaded,
+          Every figure on this site is read from one of these <Count k="sources:all" n={d.sources.length} /> government files. For each one we record where it was downloaded,
           its SHA-256 fingerprint, and how we confirmed it is the genuine document. Files are never edited.
         </p>
       </header>
@@ -56,7 +57,7 @@ export default function SourcesPage() {
           <section key={t} aria-labelledby={`t-${t}`}>
             <h2 id={`t-${t}`}>{DOC_TYPE_WORDS[t] ?? t.replaceAll("_", " ")}</h2>
             <p className="small muted">
-              {list[0]?.publisher}. {list.length} {list.length === 1 ? "file" : "files"}.
+              {list[0]?.publisher}. <Count k={`sources:type:${t}`} n={list.length} /> {list.length === 1 ? "file" : "files"}.
             </p>
             <TableWrap label={`${DOC_TYPE_WORDS[t] ?? t} files`} sticky>
               <table className="src-table">
@@ -88,15 +89,25 @@ export default function SourcesPage() {
                         <td>
                           <VerifBadge status={s.verification_status} />
                         </td>
-                        <td className="num">{pages ? count(pages) : <span className="muted">none</span>}</td>
+                        <td className="num">{pages ? <Count k={`pages:source:${s.source_id}`} n={pages} /> : <span className="muted">none</span>}</td>
                         <td className="small">
                           {cov.ratio !== null ? (
-                            <Bar ratio={cov.ratio} label={`${pct(cov.ratio)} (${count(cov.matched)} of ${count(cov.printed)})`} />
+                            <Bar
+                              ratio={cov.ratio}
+                              label={
+                                <>
+                                  <Count k={`coverage:source:${s.source_id}`} n={cov.ratio} rate /> (<Count k={`coverage:source:${s.source_id}:matched`} n={cov.matched} /> of{" "}
+                                  <Count k={`coverage:source:${s.source_id}:printed`} n={cov.printed} />)
+                                </>
+                              }
+                            />
                           ) : (
                             <span className="muted">not measured</span>
                           )}
                         </td>
-                        <td className="num">{count(valuesFromSource(s.source_id))}</td>
+                        <td className="num">
+                          <Count k={`values:source:${s.source_id}`} n={valuesFromSource(s.source_id)} />
+                        </td>
                       </tr>
                     );
                   })}
@@ -106,6 +117,6 @@ export default function SourcesPage() {
           </section>
         );
       })}
-    </>
+    </div>
   );
 }

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Data type, 390, v1</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.ph{border:1px solid #d9d9d6;background:#fff;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:10px;text-align:center}
+.q{border-top:1px solid #d9d9d6;padding:8px 0;font-size:14px}
+</style>
+</helmet>
+<div class="r" style="width:390px;height:2050px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:12px;padding:6px 16px"><strong>Prototype v0.0.1-prototype.</strong> Not yet for citation. <a href="#">Disclaimer</a></div>
+  <header style="padding:8px 16px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <div style="display:flex;align-items:center;justify-content:space-between"><a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a><button class="btn">Menu</button></div>
+    <label style="display:flex;align-items:center;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:44px;background:#fff;margin-top:8px"><span class="mut">Search series and documents</span></label>
+  </header>
+  <main style="padding:10px 16px 0">
+    <h1 style="font-size:22px;margin:0 0 4px">Federal Annual Budget Statement</h1>
+    <p style="margin:0;font-size:14px">Federal expenditure and receipts as printed in the Annual Budget Statement.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px;font-size:14px">
+      <div><strong style="font-size:20px"><span class="slot">n</span></strong><br><span class="mut">series</span></div>
+      <div><strong style="font-size:20px"><span class="slot">n</span></strong><br><span class="mut">checked values</span></div>
+      <div><strong style="font-size:20px"><span class="slot">n</span></strong><br><span class="mut">labelled gaps</span></div>
+      <div><strong style="font-size:20px"><span class="slot">n</span></strong><br><span class="mut">editions</span></div>
+    </div>
+    <h2 style="font-size:17px;margin:16px 0 4px">Quality, measured separately</h2>
+    <div class="q"><strong>Coverage</strong> <span class="slot">coverage</span><br><span class="mut">threshold <span class="slot">t</span></span></div>
+    <div class="q"><strong>Check pass rate</strong> <span class="slot">pass rate</span><br><span class="mut">threshold <span class="slot">t</span></span></div>
+    <div class="q" style="border-bottom:1px solid #d9d9d6"><strong>Cross-edition agreement</strong> <span class="slot">agreement</span><br><span class="mut">threshold <span class="slot">t</span></span></div>
+    <h2 style="font-size:17px;margin:16px 0 4px">Series</h2>
+    <a href="#" style="display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #e3e3e0;text-decoration:none"><span>Total federal expenditure</span><span class="slot">latest</span></a>
+    <a href="#" style="display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #e3e3e0;text-decoration:none"><span>Total resources</span><span class="slot">latest</span></a>
+  </main>
+  <div class="fold" style="top:844px"><span>first screen 390x844</span></div>
+  <section style="padding:20px 16px 0">
+    <h2 style="font-size:17px;margin:0 0 4px">Documents</h2>
+    <a href="#" style="display:block;padding:10px 0;border-top:1px solid #e3e3e0">Annual Budget Statement 2010-11</a>
+    <a href="#" style="display:block;padding:10px 0;border-top:1px solid #e3e3e0;border-bottom:1px solid #e3e3e0">Annual Budget Statement 2011-12</a>
+    <h2 style="font-size:17px;margin:16px 0 4px">Gaps and disputes</h2>
+    <p style="font-size:14px;margin:0">Not published <span class="slot">n</span> · Not yet verified <span class="slot">n</span> · Withheld <span class="slot">n</span> · Disputed <span class="slot">n</span></p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2050}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

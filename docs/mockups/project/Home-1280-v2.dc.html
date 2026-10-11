@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home, 1280, v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.btn-p{background:#0b5c78;border-color:#0b5c78;color:#fff}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.ph{border:1px solid #d9d9d6;background:#fff;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:10px;text-align:center}
+.h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#3d4248;margin:0}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2f6b4f;flex:none}
+.hl{padding:12px 16px 12px 0;border-bottom:1px solid #d9d9d6;display:flex;gap:14px;align-items:center}
+.hl .v{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:8px;margin:2px 0}
+.hl .k{font-size:14px}
+.tile{display:block;border:1px solid #d9d9d6;background:#fff;padding:14px 16px;text-decoration:none;color:#1c1d1f}
+.tile b{display:block;font-size:17px;color:#0b5c78}
+</style>
+</helmet>
+<div class="r" style="width:1280px;height:1900px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:13px;padding:6px 32px;display:flex;justify-content:space-between;align-items:center">
+    <span><strong>Prototype release v0.0.1-prototype.</strong> No DOI; not yet for citation in publications. The printed document prevails. <a href="#">Disclaimer</a></span>
+    <button class="btn" style="min-height:26px;font-size:12px">Hide</button>
+  </div>
+  <header style="display:flex;align-items:center;gap:24px;padding:10px 32px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a>
+    <button style="flex:1;max-width:440px;display:flex;align-items:center;gap:8px;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:36px;background:#fff;font:inherit;cursor:text" aria-label="Search series and documents">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#565b62" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <span class="mut" style="font-size:14px">Search series and documents</span>
+      <span class="mut" style="margin-left:auto;font-size:12px;border:1px solid #c9ccd0;border-radius:3px;padding:0 5px">/</span>
+    </button>
+    <nav style="display:flex;gap:20px"><a href="#">Data</a><a href="#">Compare</a><a href="#">Sources</a><a href="#">Methods</a><a href="#">About</a></nav>
+    <a href="#" class="mut" style="margin-left:auto;font-size:13px">Release v0.0.1-prototype</a>
+  </header>
+
+  <main style="padding:26px 32px 0">
+    <h1 style="font-size:30px;line-height:1.2;margin:0;font-weight:700;max-width:920px">Pakistan&#39;s economic and fiscal statistics, every figure linked to the government page it was printed on.</h1>
+    <div style="display:flex;gap:12px;align-items:center;margin:16px 0 6px">
+      <label style="width:620px;display:flex;align-items:center;gap:10px;border:2px solid #0b5c78;border-radius:4px;padding:0 12px;height:48px;background:#fff">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b5c78" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input type="search" placeholder="Search series, e.g. health spending" style="border:0;outline:0;font:inherit;font-size:16px;flex:1;background:transparent">
+      </label>
+      <button class="btn btn-p" style="min-height:48px">Search</button>
+    </div>
+    <p style="margin:0 0 20px;font-size:14px" class="mut">Try: <a href="#">health budget</a> · <a href="#">CPI food</a> · <a href="#">unemployment women</a> · or <a href="#">browse all <span class="slot">series count</span> series</a></p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+      <a class="tile" href="#"><b>Federal Annual Budget Statement</b><span class="mut" style="font-size:13px">Finance Division, Government of Pakistan</span>
+        <div style="font-size:14px;margin-top:6px"><span class="slot">series</span> series · <span class="slot">checked values</span> checked values</div>
+        <div class="mut" style="font-size:13px">Fiscal years <span class="slot">first</span> to <span class="slot">last</span> · <span class="slot">editions</span> editions</div></a>
+      <a class="tile" href="#"><b>Consumer Price Index</b><span class="mut" style="font-size:13px">Pakistan Bureau of Statistics</span>
+        <div style="font-size:14px;margin-top:6px"><span class="slot">series</span> series · <span class="slot">checked values</span> checked values</div>
+        <div class="mut" style="font-size:13px">Months <span class="slot">first</span> to <span class="slot">last</span> · <span class="slot">issues</span> issues</div></a>
+      <a class="tile" href="#"><b>Labour Force Survey</b><span class="mut" style="font-size:13px">Pakistan Bureau of Statistics</span>
+        <div style="font-size:14px;margin-top:6px"><span class="slot">series</span> series · <span class="slot">checked values</span> checked values</div>
+        <div class="mut" style="font-size:13px">Rounds <span class="slot">first</span> to <span class="slot">last</span> · <span class="slot">reports</span> reports</div></a>
+    </div>
+
+    <h2 class="h2" style="margin:24px 0 8px">Latest checked figures</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #d9d9d6">
+      <div class="hl"><div style="flex:1"><a href="#" style="font-weight:600">Total federal expenditure</a>
+        <div class="v"><span class="dot" title="Checked"></span><a href="#"><span class="slot">latest checked value</span></a><span class="mut" style="font-size:13px;font-weight:400">Rs million</span></div>
+        <div class="k">budget estimate <span class="slot">period</span></div></div><div class="ph" style="width:110px;height:42px">sparkline</div></div>
+      <div class="hl" style="padding-left:16px"><div style="flex:1"><a href="#" style="font-weight:600">Tax revenue receipts</a>
+        <div class="v"><span class="dot"></span><a href="#"><span class="slot">latest checked value</span></a><span class="mut" style="font-size:13px;font-weight:400">Rs million</span></div>
+        <div class="k"><span class="slot">estimate type</span> <span class="slot">period</span></div></div><div class="ph" style="width:110px;height:42px">sparkline</div></div>
+      <div class="hl" style="padding-left:16px;padding-right:0"><div style="flex:1"><a href="#" style="font-weight:600">Health (current, revenue account)</a>
+        <div class="v"><span class="dot"></span><a href="#"><span class="slot">latest checked value</span></a><span class="mut" style="font-size:13px;font-weight:400">Rs million</span></div>
+        <div class="k"><span class="slot">estimate type</span> <span class="slot">period</span></div></div><div class="ph" style="width:110px;height:42px">sparkline</div></div>
+      <div class="hl"><div style="flex:1"><a href="#" style="font-weight:600">CPI National: General (all groups), change over the same month last year</a>
+        <div class="v"><span class="dot"></span><a href="#"><span class="slot">latest checked value</span></a><span class="mut" style="font-size:13px;font-weight:400">per cent</span></div>
+        <div class="k"><span class="slot">month</span></div></div><div class="ph" style="width:110px;height:42px">sparkline</div></div>
+      <div class="hl" style="padding-left:16px"><div style="flex:1"><a href="#" style="font-weight:600">Unemployment rate, both sexes, Pakistan</a>
+        <div class="v"><span class="dot"></span><a href="#"><span class="slot">latest checked value</span></a><span class="mut" style="font-size:13px;font-weight:400">per cent</span></div>
+        <div class="k">survey round <span class="slot">round</span></div></div><div class="ph" style="width:110px;height:42px">sparkline</div></div>
+      <div class="hl" style="padding-left:16px;padding-right:0"><div style="flex:1"><a href="#" style="font-weight:600">Civilian labour force, both sexes, Pakistan</a>
+        <div class="v"><span class="dot"></span><a href="#"><span class="slot">latest checked value</span></a><span class="mut" style="font-size:13px;font-weight:400">million persons</span></div>
+        <div class="k">survey round <span class="slot">round</span></div></div><div class="ph" style="width:110px;height:42px">sparkline</div></div>
+    </div>
+    <p style="font-size:13px;margin:10px 0 0" class="mut">Release <a href="#">v0.0.1-prototype</a>, built <span class="slot">build date</span> · <a href="#">Download the release</a> · <span class="dot"></span> Checked · Disputed · Not published by the government · Not yet verified · Withheld: <a href="#">what the marks mean</a></p>
+  </main>
+
+  <div class="fold" style="top:800px"><span>first screen 1280x800</span></div>
+
+  <section style="padding:60px 32px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px">
+    <div>
+      <h2 style="font-size:22px;margin:0 0 10px">How a figure gets on this site</h2>
+      <ol style="padding-left:20px;margin:0;font-size:15px;line-height:1.6">
+        <li>Read from the official PDF by a table-extraction tool. No language model writes a number or decides whether it passes.</li>
+        <li>Checked by fixed rules: sums, accounting identities, the same figure in another edition.</li>
+        <li>Published only if it passes. Otherwise a labelled gap that says why.</li>
+      </ol>
+      <p style="margin:12px 0 0"><a href="#">Open a receipt</a> · <a href="#">Methods</a></p>
+    </div>
+    <div>
+      <h2 style="font-size:22px;margin:0 0 10px">Quality of this release</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead><tr style="text-align:left;border-bottom:1px solid #8c9299"><th style="padding:6px 0">Data type</th><th style="text-align:right">Coverage</th><th style="text-align:right">Checks passed</th><th style="text-align:right">Measured error rate</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #d9d9d6"><td style="padding:6px 0"><a href="#">Federal Annual Budget Statement</a></td><td style="text-align:right"><span class="slot">coverage</span></td><td style="text-align:right"><span class="slot">pass rate</span></td><td style="text-align:right">Pending</td></tr>
+          <tr style="border-bottom:1px solid #d9d9d6"><td style="padding:6px 0"><a href="#">Consumer Price Index</a></td><td style="text-align:right"><span class="slot">coverage</span></td><td style="text-align:right"><span class="slot">pass rate</span></td><td style="text-align:right">Pending</td></tr>
+          <tr style="border-bottom:1px solid #d9d9d6"><td style="padding:6px 0"><a href="#">Labour Force Survey</a></td><td style="text-align:right"><span class="slot">coverage</span></td><td style="text-align:right"><span class="slot">pass rate</span></td><td style="text-align:right">Pending</td></tr>
+        </tbody>
+      </table>
+      <p class="mut" style="font-size:13px">Coverage: how much of each printed table was captured. Checks passed: evidence that what was captured is right. They answer different questions and are never combined.</p>
+    </div>
+  </section>
+  <section style="padding:32px 32px 0;display:flex;gap:40px">
+    <div><a href="#" style="font-size:18px;font-weight:600">Worked example: health and jobs</a><p class="mut" style="margin:4px 0 0;max-width:560px">A short analysis in which every figure in the text links to its receipt.</p></div>
+    <p class="mut" style="font-size:13px;margin:0 0 0 auto;align-self:flex-end">More data types: Coming: not in this release. <a href="#">Planned</a></p>
+  </section>
+
+  <footer style="position:absolute;bottom:0;left:0;right:0;border-top:1px solid #d9d9d6;background:#f3f4f4;padding:24px 32px;font-size:13px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+    <div><strong>LUMS DataLab Portal</strong><br>Prototype release v0.0.1-prototype. Unofficial research project, LUMS Department of Economics. Data CC BY 4.0, code MIT.</div>
+    <div><a href="#">Download and file formats</a><br><a href="#">Releases and errata</a><br><a href="#">API</a> <span class="mut">Coming: not in this release</span></div>
+    <div><a href="#">Report an error on this page</a><br><a href="#">Source code and pipeline</a><br><a href="#">About</a></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1900}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

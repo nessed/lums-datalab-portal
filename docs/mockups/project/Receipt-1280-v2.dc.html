@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Receipt, 1280, v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.btn-p{background:#0b5c78;border-color:#0b5c78;color:#fff}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.paper{background:#f4f1ea;border:1px solid #d6d2c9;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:13px;text-align:center}
+.ck{border-bottom:1px solid #e3e3e0;padding:7px 0;display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:8px;align-items:baseline;font-size:14px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#2f6b4f;flex:none}
+.inset{border:1px solid #d9d9d6;background:#fff;padding:14px 16px}
+.lab{font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#565b62;margin:0 0 6px}
+</style>
+</helmet>
+<div class="r" style="width:1280px;height:1750px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:13px;padding:6px 32px"><strong>Prototype release v0.0.1-prototype.</strong> No DOI; not yet for citation in publications. <a href="#">Disclaimer</a></div>
+  <header style="display:flex;align-items:center;gap:24px;padding:10px 32px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a>
+    <button style="flex:1;max-width:440px;display:flex;align-items:center;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:36px;background:#fff;font:inherit"><span class="mut" style="font-size:14px">Search series and documents</span></button>
+    <nav style="display:flex;gap:20px"><a href="#">Data</a><a href="#">Compare</a><a href="#">Sources</a><a href="#">Methods</a><a href="#">About</a></nav>
+    <a href="#" class="mut" style="margin-left:auto;font-size:13px">Release v0.0.1-prototype</a>
+  </header>
+  <main style="padding:12px 32px 0">
+    <nav class="mut" style="font-size:13px"><a href="#">Data</a> › <a href="#">Federal Annual Budget Statement</a> › <a href="#">Health (current, revenue account)</a> › <span class="slot">period</span>, budget estimate</nav>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 540px;gap:36px;margin-top:8px">
+      <div>
+        <p class="lab">Receipt for one published figure</p>
+        <h1 style="font-size:26px;margin:0;line-height:1.2">Health (current, revenue account)</h1>
+        <p style="margin:2px 0 6px">Budget estimate for <span class="slot">period</span> · <a href="#">see it on the chart</a></p>
+        <p style="font-family:'Source Serif 4',Georgia,serif;font-size:52px;line-height:1.05;margin:4px 0 0;font-variant-numeric:tabular-nums"><span class="slot" style="font-size:20px;line-height:30px">checked value</span> <span style="font-family:'Source Sans 3';font-size:18px" class="mut">Rs million</span></p>
+        <p class="mut" style="margin:2px 0 0;font-size:14px">That is about <span class="slot">value in words, e.g. Rs … billion</span>.</p>
+        <p style="display:flex;gap:8px;align-items:center;margin:10px 0 4px"><span class="dot"></span><strong>Checked</strong>: verified by <span class="slot">evidence words from the checks that passed</span></p>
+        <p style="margin:4px 0;font-size:14px">Printed as <span class="slot">printed text</span> on printed page <span class="slot">n</span> (page <span class="slot">m</span> of the PDF file) of <a href="#">Annual Budget Statement <span class="slot">edition</span></a>, row “<span class="slot">row label</span>”, column “<span class="slot">column label</span>”.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 6px">
+          <a class="btn btn-p" href="#">Copy citation (APA)</a><a class="btn" href="#">Official PDF, page <span class="slot">n</span></a><a class="btn" href="#">Internet Archive copy</a>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:14px;align-items:center">
+          <a class="btn" href="#">Copy link</a><a class="btn" href="#">JSON</a><a class="btn" href="#">CSV row</a>
+          <span style="margin-left:auto;display:flex;gap:14px"><a href="#">‹ <span class="slot">previous period</span></a><a href="#"><span class="slot">next period</span> ›</a></span>
+        </div>
+      </div>
+      <div>
+        <div class="paper" style="height:190px;flex-direction:column;gap:4px">
+          <strong>Magnified crop of the printed page</strong>
+          <span>Column headings strip, the printed row label, the figure boxed</span>
+        </div>
+        <p class="mut" style="font-size:13px;margin:4px 0 8px">Close-up of page <span class="slot">n</span>, magnified. <a href="#">See the whole page</a></p>
+        <p style="font-weight:700;font-size:14px;margin:0 0 2px">Checks (<span class="slot">n</span>)</p>
+        <div class="ck"><span class="dot"></span><span><strong>Parts add to the whole</strong> <span class="mut">passed</span></span><a href="#">Show the arithmetic</a></div>
+        <div class="ck"><span class="dot"></span><span><strong>Same figure in another edition</strong> <span class="mut">passed</span></span><a href="#">Show both printings</a></div>
+        <p style="font-size:13px;margin:6px 0 0"><a href="#">Report a problem with this figure</a></p>
+      </div>
+    </div>
+  </main>
+  <div class="fold" style="top:800px"><span>first screen 1280x800</span></div>
+  <section style="padding:30px 32px 0;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:36px">
+    <div>
+      <h2 style="font-size:20px;margin:0 0 6px">Where it is printed</h2>
+      <div class="paper" style="height:260px">Page render, framed to the table, figure boxed; select to enlarge</div>
+      <h2 style="font-size:20px;margin:22px 0 6px">The checks, in full</h2>
+      <p class="mut" style="font-size:14px;margin:0">Each check opens to its arithmetic: every member as printed, with its page, the difference and the fixed rule.</p>
+      <details style="margin-top:16px;border-top:1px solid #d9d9d6;padding-top:8px"><summary style="font-weight:600">Provenance: document fingerprint (SHA-256), extraction run, cell id, release</summary></details>
+    </div>
+    <aside style="font-size:14px">
+      <p style="font-weight:700;margin:0 0 4px">Same series</p>
+      <a href="#" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e3e3e0;text-decoration:none"><span>Revised estimate</span><span class="slot">value</span></a>
+      <p style="font-weight:700;margin:14px 0 4px">Same column, other lines</p>
+      <a href="#" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e3e3e0;text-decoration:none"><span>Education affairs and services</span><span class="slot">value</span></a>
+      <a href="#" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e3e3e0;text-decoration:none"><span>Social protection</span><span class="slot">value</span></a>
+    </aside>
+  </section>
+  <section style="padding:34px 32px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px">
+    <div class="inset">
+      <p class="lab">Variant: a withheld figure</p>
+      <div style="padding:14px;background:#efe9e4;border:1px solid #d6d2c9"><strong style="font-size:20px">No value in this release</strong></div>
+      <p style="margin:8px 0 0;font-size:14px"><svg width="11" height="11" viewBox="0 0 10 10" aria-hidden="true"><rect x=".6" y=".6" width="8.8" height="8.8" fill="none" stroke="#5d5146"></rect><path d="M2.4 2.4 7.6 7.6M7.6 2.4 2.4 7.6" stroke="#5d5146" stroke-width="1.3"></path></svg> <strong>Withheld</strong>: we read a figure, but it did not pass its checks and nothing independent says which number is wrong. We do not guess.</p>
+      <p class="mut" style="font-size:13px;margin:4px 0 0">Recorded reason: <span class="slot">gap reason</span>. No page box and no printed reading are shown. The failed check is listed with its members' statuses, never their numbers.</p>
+    </div>
+    <div class="inset">
+      <p class="lab">Variant: a disputed figure</p>
+      <div style="padding:10px 14px;background:#f8eedc;border:1px solid #e3c99a"><strong style="font-size:18px">Official printings disagree</strong>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:6px"><thead><tr style="text-align:left;border-bottom:1px solid #c9b48a"><th>Document</th><th>Page</th><th style="text-align:right">Printed</th></tr></thead>
+        <tbody><tr><td>Annual Budget Statement <span class="slot">edition A</span></td><td><span class="slot">p</span></td><td style="text-align:right"><span class="slot">printing A</span></td></tr><tr><td>Annual Budget Statement <span class="slot">edition B</span></td><td><span class="slot">p</span></td><td style="text-align:right"><span class="slot">printing B</span></td></tr></tbody></table></div>
+      <p class="mut" style="font-size:13px;margin:8px 0 0">Each printing adds up in its own table. Both are shown, each with its own boxed page; neither is presented as the answer.</p>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1750}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

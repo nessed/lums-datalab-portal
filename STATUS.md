@@ -54,6 +54,9 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
 into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
 
+**2026-10-12, Ali: the site reads like a report, not a data lab (S16, high priority).** `docs/DESIGN.md` is now a
+DRAFT data-tool brief awaiting Ali and Ahmad's approval; the live site still follows the first brief until then.
+
 ### State (UI agent, updated 2026-10-12, after the merge into `main`)
 - **Rebuilt, all in `main`:** design system (`site/src/design/tokens.css`, `docs/DESIGN.md`); header with
   search (Ctrl/Cmd-K or "/", index `public/data/<v>/search.json`), prototype notice, footer with a

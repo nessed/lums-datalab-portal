@@ -495,7 +495,9 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
 "done means" asks for and should come before any polish. S10 needs H3 first; S13 needs a second release.
 
 ### S16 HIGH PRIORITY: redesign the site as a data lab, not a report
-- **State:** not started. Added by Ali on 2026-10-12 after using the live site: the layout and UX read like a
+- **State:** step 2 drafted (2026-10-12, PR #5): `docs/DESIGN.md` is rewritten as a data-tool brief, marked
+  DRAFT, with questions for Ali and Ahmad at its end. Waiting for their approval; no site code changed yet.
+  Added by Ali on 2026-10-12 after using the live site: the layout and UX read like a
   printed report (long text pages, figures reached by reading), not like a data portal people come to in order to
   find, chart, compare and download numbers. This is a direction problem, not polish: `docs/DESIGN.md` "What it
   should feel like" asks for "a statistical yearbook brought online", and the site does exactly that.

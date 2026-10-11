@@ -1,6 +1,6 @@
 # STATUS
 
-Last updated: 2026-10-12 interim handoff 2 (machine clock 05:45 PKT) by Claude Code (second unattended run) on branch proto/v0
+Last updated: 2026-10-12 morning, by Claude Code at Ali's request: both overnight runs stopped; `proto/v0` (pipeline and site) merged into `main`
 
 ## State in one paragraph
 The pipeline works end to end for three data types and the release `releases/v0.0.1-prototype/`
@@ -12,8 +12,8 @@ values). The status **disputed** marks 17 figures that two official documents pr
 although each adds up; they carry no value. LFS is published only because of a recorded change to
 how cross-edition agreement is counted (decision D26), which a human must confirm. Two adversarial
 reviews found 21 code defects and no wrong released value; all are fixed or decided. The error rate
-has not been measured: the gold set is unlabelled. Nothing is deployed. The site belongs to a
-second agent, which pushes to this branch. The run is still in progress: see the report.
+has not been measured: the gold set is unlabelled. Nothing is deployed. Both overnight runs (pipeline and
+site) stopped early; their work is merged into `main`. What they left unfinished is in `docs/OPEN_WORK.md`.
 
 ## Where things are
 | What | Path | Notes |
@@ -26,6 +26,7 @@ second agent, which pushes to this branch. The run is still in progress: see the
 | Track notes | `docs/reports/track_*.md` | one per parallel track |
 | Sanity report | `docs/reports/sanity_2026-10-11.md` | oddities for a human to look at; changes nothing |
 | How a number gets on the site | `docs/HOW_A_NUMBER_GETS_ON_THE_SITE.md`, `docs/GLOSSARY.md` | generated from the release |
+| Open work | `docs/OPEN_WORK.md` | what is left, item by item; pick the next job here |
 | Decisions | `DECISIONS.md` | everything dated 2026-10-11 and 2026-10-12 is provisional |
 | Thresholds | `thresholds/` | frozen before any run; not edited; one metric deviation recorded (D26) |
 | Pipeline package | `pipeline/datalab/` | CLI: `python -m datalab <command>` |
@@ -144,6 +145,11 @@ Tests only (no Docling, no PDFs): install `pipeline\requirements-ci.lock`, then 
 - SBP EasyData: reuse terms unconfirmed; a repeatable pull needs an API key from a human.
 - Still open from the first run: cover-less ABS editions; the 2017-18 text-layer deviation; the scanned-page
   definition; DOI; hosting PDFs; repo organisation; branch protection; LUMS name and logo sign-off.
+
+## Unfinished work from the overnight runs
+Listed item by item, with what exists and how to finish it, in `docs/OPEN_WORK.md` (each agent keeps its own
+section). Merged into `main` on Ali's instruction without the usual teammate review (see `DECISIONS.md`); Ahmad reviews
+afterwards. Not merged on purpose: branches `proto/v0-e1-abs-editions` and `proto/v0-e4-cpi-monthly` (work in progress).
 
 ## Queued follow-ups
 - Label the gold set (two people), then `datalab gold-score`.

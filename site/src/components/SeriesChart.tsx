@@ -12,6 +12,7 @@ type State = { view: "amount" | "share"; log: boolean; from: string | null; to: 
 export default function SeriesChart({ amount, share, shareLabel, amountLabel }: { amount: ChartModel; share?: ChartModel | null; shareLabel?: string; amountLabel: string }) {
   const q = useQuery();
   const s: State = { view: q.get("view") === "share" && share ? "share" : "amount", log: q.get("scale") === "log", from: q.get("from"), to: q.get("to") };
+  const highlight = q.get("hl");
   const update = (patch: Partial<State>) => {
     const next = { ...s, ...patch };
     setQuery({ view: next.view === "share" ? "share" : null, scale: next.log ? "log" : null, from: next.from, to: next.to });
@@ -54,7 +55,7 @@ export default function SeriesChart({ amount, share, shareLabel, amountLabel }: 
             <label className="label" htmlFor="rng-from">
               From
             </label>
-            <select id="rng-from" className="input" value={periods[fromIdx]} onChange={(e) => update({ from: e.target.value === periods[0] ? null : e.target.value })}>
+            <select id="rng-from" className="input" data-num="period" value={periods[fromIdx]} onChange={(e) => update({ from: e.target.value === periods[0] ? null : e.target.value })}>
               {periods.map((p, i) => (
                 <option key={p} value={p} disabled={i > toIdx}>
                   {model.periods[i].label}
@@ -64,7 +65,7 @@ export default function SeriesChart({ amount, share, shareLabel, amountLabel }: 
             <label className="label" htmlFor="rng-to">
               to
             </label>
-            <select id="rng-to" className="input" value={periods[toIdx] ?? periods[periods.length - 1]} onChange={(e) => update({ to: e.target.value === periods[periods.length - 1] ? null : e.target.value })}>
+            <select id="rng-to" className="input" data-num="period" value={periods[toIdx] ?? periods[periods.length - 1]} onChange={(e) => update({ to: e.target.value === periods[periods.length - 1] ? null : e.target.value })}>
               {periods.map((p, i) => (
                 <option key={p} value={p} disabled={i < fromIdx}>
                   {model.periods[i].label}
@@ -78,8 +79,11 @@ export default function SeriesChart({ amount, share, shareLabel, amountLabel }: 
             ) : null}
           </span>
         ) : null}
+        <button type="button" className="btn btn-text ctl-copy" onClick={() => navigator.clipboard?.writeText(window.location.href)}>
+          Copy link to this view
+        </button>
       </div>
-      <Chart model={model} options={{ log: s.log, from: s.from, to: s.to }} idBase={`chart-${s.view}`} />
+      <Chart model={model} options={{ log: s.log, from: s.from, to: s.to, highlight, noKey: true }} idBase={`chart-${s.view}`} />
     </div>
   );
 }

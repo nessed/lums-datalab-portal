@@ -6,8 +6,10 @@ import Link from "next/link";
 import { TableWrap } from "@/components/ui/Basics";
 import { StatusBadge, cellFillClass } from "@/components/ui/Status";
 import SortToggle from "@/components/SortToggle";
-import { db, obsHref, sourceHref, type Series } from "@/lib/data";
-import { formatDecimalString, periodWords, unitLabel, vintageWords } from "@/lib/format";
+import { db, obsHref, pageShort, sourceHref, type Series } from "@/lib/data";
+import { Count, Num, V } from "@/components/ui/Num";
+import { tableHrefOf, tableOfCell } from "@/lib/tables";
+import { periodWords, unitLabel, vintageWords } from "@/lib/format";
 import { statusOf } from "@/lib/status";
 
 export default function SeriesTable({ series, id = "data" }: { series: Series; id?: string }) {
@@ -23,7 +25,7 @@ export default function SeriesTable({ series, id = "data" }: { series: Series; i
     <>
       <div className="table-tools">
         <span className="small muted">
-          {all.length} {all.length === 1 ? "row" : "rows"}. Values in {unit}. A plain number is checked; anything else says why there is no number.
+          <Count k={`obs:series:${series.series_id}`} n={all.length} /> {all.length === 1 ? "row" : "rows"}. Values in {unit}. A plain number is checked; anything else says why there is no number.
         </span>
         <SortToggle target={tbodyId} />
       </div>
@@ -53,7 +55,7 @@ export default function SeriesTable({ series, id = "data" }: { series: Series; i
               return (
                 <tr key={o.obs_id} className={br ? "row-break" : undefined}>
                   <th scope="row">
-                    {periodWords(o.period, series.frequency)}
+                    <Num kind="period">{periodWords(o.period, series.frequency)}</Num>
                     {br ? <span className="break-tag">Series break: {br.kind.replaceAll("_", " ")}</span> : null}
                   </th>
                   {multiVintage ? (
@@ -66,9 +68,7 @@ export default function SeriesTable({ series, id = "data" }: { series: Series; i
                   ) : null}
                   <td className={`num ${cellFillClass(info.key)}`}>
                     {isValue ? (
-                      <Link href={obsHref(o.obs_id)} className="v-link">
-                        {formatDecimalString(o.value)}
-                      </Link>
+                      <V o={o} />
                     ) : (
                       <Link href={obsHref(o.obs_id)} className="gap-link" aria-label={`${info.label}: open the receipt`}>
                         <span aria-hidden="true">no value</span>
@@ -88,7 +88,14 @@ export default function SeriesTable({ series, id = "data" }: { series: Series; i
                   <td className="small">
                     {src && cell && (isValue || info.key === "gap-source" || info.key === "disputed") ? (
                       <>
-                        <Link href={sourceHref(src.source_id)}>{src.title}</Link>, p.&nbsp;{cell.page}
+                        <Link href={sourceHref(src.source_id)}>{src.title}</Link>,{" "}
+                        {tableOfCell(cell) ? (
+                          <Link href={tableHrefOf(cell)} title="See the table as printed">
+                            <Num kind="page">{pageShort(cell)}</Num>
+                          </Link>
+                        ) : (
+                          <Num kind="page">{pageShort(cell)}</Num>
+                        )}
                       </>
                     ) : (
                       <span className="muted">not shown for this status</span>

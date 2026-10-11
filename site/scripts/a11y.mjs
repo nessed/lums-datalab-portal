@@ -16,7 +16,8 @@ const args = Object.fromEntries(
 const base = (args.base ?? "http://localhost:3100").replace(/\/$/, "");
 const out = args.out ? path.resolve(siteDir, args.out) : null;
 
-const browser = await chromium.launch();
+// CHROMIUM_PATH: a Chromium binary to use instead of the one Playwright downloads (for example in CI images).
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const results = [];
 let blocking = 0;
 for (const [name, url] of qaRoutes(siteDir)) {
@@ -24,6 +25,11 @@ for (const [name, url] of qaRoutes(siteDir)) {
     const context = await browser.newContext({ viewport: { width, height: 900 } });
     const page = await context.newPage();
     await page.goto(base + url, { waitUntil: "load" });
+    // A page without its stylesheet (a stale server after a rebuild) makes every result meaningless: stop.
+    if (!(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()))) {
+      console.error(`${url}: the stylesheet did not load; is the server serving the current build?`);
+      process.exit(2);
+    }
     await page.waitForTimeout(400);
     const r = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
     const v = r.violations.map((x) => ({ id: x.id, impact: x.impact, help: x.help, nodes: x.nodes.length, sample: x.nodes[0]?.target?.join(" ") }));

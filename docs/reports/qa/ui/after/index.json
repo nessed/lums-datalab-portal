@@ -1,65 +1,758 @@
 [
   {
+    "name": "home",
+    "url": "/",
+    "width": 390,
+    "status": 200,
+    "file": "home-390.png",
+    "height": 3409,
+    "cut": false
+  },
+  {
+    "name": "home",
+    "url": "/",
+    "width": 820,
+    "status": 200,
+    "file": "home-820.png",
+    "height": 2067,
+    "cut": false
+  },
+  {
+    "name": "home",
+    "url": "/",
+    "width": 1280,
+    "status": 200,
+    "file": "home-1280.png",
+    "height": 1483,
+    "cut": false
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 390,
+    "status": 200,
+    "file": "browse-390.png",
+    "height": 171426,
+    "cut": true
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 820,
+    "status": 200,
+    "file": "browse-820.png",
+    "height": 121435,
+    "cut": true
+  },
+  {
+    "name": "browse",
+    "url": "/browse",
+    "width": 1280,
+    "status": 200,
+    "file": "browse-1280.png",
+    "height": 97519,
+    "cut": true
+  },
+  {
+    "name": "datasets",
+    "url": "/datasets",
+    "width": 390,
+    "status": 200,
+    "file": "datasets-390.png",
+    "height": 1478,
+    "cut": false
+  },
+  {
+    "name": "datasets",
+    "url": "/datasets",
+    "width": 820,
+    "status": 200,
+    "file": "datasets-820.png",
+    "height": 942,
+    "cut": false
+  },
+  {
+    "name": "datasets",
+    "url": "/datasets",
+    "width": 1280,
+    "status": 200,
+    "file": "datasets-1280.png",
+    "height": 900,
+    "cut": false
+  },
+  {
+    "name": "dataset-abs",
+    "url": "/datasets/abs",
+    "width": 390,
+    "status": 200,
+    "file": "dataset-abs-390.png",
+    "height": 5123,
+    "cut": false
+  },
+  {
+    "name": "dataset-abs",
+    "url": "/datasets/abs",
+    "width": 820,
+    "status": 200,
+    "file": "dataset-abs-820.png",
+    "height": 3525,
+    "cut": false
+  },
+  {
+    "name": "dataset-abs",
+    "url": "/datasets/abs",
+    "width": 1280,
+    "status": 200,
+    "file": "dataset-abs-1280.png",
+    "height": 2458,
+    "cut": false
+  },
+  {
+    "name": "dataset-cpi",
+    "url": "/datasets/cpi",
+    "width": 390,
+    "status": 200,
+    "file": "dataset-cpi-390.png",
+    "height": 4430,
+    "cut": false
+  },
+  {
+    "name": "dataset-cpi",
+    "url": "/datasets/cpi",
+    "width": 820,
+    "status": 200,
+    "file": "dataset-cpi-820.png",
+    "height": 2983,
+    "cut": false
+  },
+  {
+    "name": "dataset-cpi",
+    "url": "/datasets/cpi",
+    "width": 1280,
+    "status": 200,
+    "file": "dataset-cpi-1280.png",
+    "height": 2286,
+    "cut": false
+  },
+  {
+    "name": "dataset-lfs",
+    "url": "/datasets/lfs",
+    "width": 390,
+    "status": 200,
+    "file": "dataset-lfs-390.png",
+    "height": 4686,
+    "cut": false
+  },
+  {
+    "name": "dataset-lfs",
+    "url": "/datasets/lfs",
+    "width": 820,
+    "status": 200,
+    "file": "dataset-lfs-820.png",
+    "height": 3218,
+    "cut": false
+  },
+  {
+    "name": "dataset-lfs",
+    "url": "/datasets/lfs",
+    "width": 1280,
+    "status": 200,
+    "file": "dataset-lfs-1280.png",
+    "height": 2243,
+    "cut": false
+  },
+  {
+    "name": "table-abs",
+    "url": "/tables/abs-fed-2025-26~p17~t0",
+    "width": 390,
+    "status": 200,
+    "file": "table-abs-390.png",
+    "height": 2751,
+    "cut": false
+  },
+  {
+    "name": "table-abs",
+    "url": "/tables/abs-fed-2025-26~p17~t0",
+    "width": 820,
+    "status": 200,
+    "file": "table-abs-820.png",
+    "height": 2411,
+    "cut": false
+  },
+  {
+    "name": "table-abs",
+    "url": "/tables/abs-fed-2025-26~p17~t0",
+    "width": 1280,
+    "status": 200,
+    "file": "table-abs-1280.png",
+    "height": 1448,
+    "cut": false
+  },
+  {
+    "name": "table-lfs",
+    "url": "/tables/lfs-pbs-2014-15-national~p30~t0",
+    "width": 390,
+    "status": 200,
+    "file": "table-lfs-390.png",
+    "height": 2591,
+    "cut": false
+  },
+  {
+    "name": "table-lfs",
+    "url": "/tables/lfs-pbs-2014-15-national~p30~t0",
+    "width": 820,
+    "status": 200,
+    "file": "table-lfs-820.png",
+    "height": 2290,
+    "cut": false
+  },
+  {
+    "name": "table-lfs",
+    "url": "/tables/lfs-pbs-2014-15-national~p30~t0",
+    "width": 1280,
+    "status": 200,
+    "file": "table-lfs-1280.png",
+    "height": 1341,
+    "cut": false
+  },
+  {
+    "name": "series-provincial",
+    "url": "/series/lfs.lfpr_refined.sd.total.total",
+    "width": 390,
+    "status": 200,
+    "file": "series-provincial-390.png",
+    "height": 2675,
+    "cut": false
+  },
+  {
+    "name": "series-provincial",
+    "url": "/series/lfs.lfpr_refined.sd.total.total",
+    "width": 820,
+    "status": 200,
+    "file": "series-provincial-820.png",
+    "height": 2232,
+    "cut": false
+  },
+  {
+    "name": "series-provincial",
+    "url": "/series/lfs.lfpr_refined.sd.total.total",
+    "width": 1280,
+    "status": 200,
+    "file": "series-provincial-1280.png",
+    "height": 1646,
+    "cut": false
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 390,
+    "status": 200,
+    "file": "series-break-390.png",
+    "height": 2835,
+    "cut": false
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 820,
+    "status": 200,
+    "file": "series-break-820.png",
+    "height": 2371,
+    "cut": false
+  },
+  {
+    "name": "series-break",
+    "url": "/series/fed.exp.current.function.health",
+    "width": 1280,
+    "status": 200,
+    "file": "series-break-1280.png",
+    "height": 1707,
+    "cut": false
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/fed.exp.development.revenue_account.function.recreation_culture_and_religion.cultural_services",
+    "width": 390,
+    "status": 200,
+    "file": "series-gaps-390.png",
+    "height": 2196,
+    "cut": false
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/fed.exp.development.revenue_account.function.recreation_culture_and_religion.cultural_services",
+    "width": 820,
+    "status": 200,
+    "file": "series-gaps-820.png",
+    "height": 1788,
+    "cut": false
+  },
+  {
+    "name": "series-gaps",
+    "url": "/series/fed.exp.development.revenue_account.function.recreation_culture_and_religion.cultural_services",
+    "width": 1280,
+    "status": 200,
+    "file": "series-gaps-1280.png",
+    "height": 1372,
+    "cut": false
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 390,
+    "status": 200,
+    "file": "series-monthly-390.png",
+    "height": 2563,
+    "cut": false
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 820,
+    "status": 200,
+    "file": "series-monthly-820.png",
+    "height": 2113,
+    "cut": false
+  },
+  {
+    "name": "series-monthly",
+    "url": "/series/cpi.national.general.b2015_16",
+    "width": 1280,
+    "status": 200,
+    "file": "series-monthly-1280.png",
+    "height": 1500,
+    "cut": false
+  },
+  {
     "name": "receipt-tierA",
     "url": "/o/fed.exp.current.function.health~2010-11~be",
     "width": 390,
     "status": 200,
-    "file": "receipt-tierA-390.png"
+    "file": "receipt-tierA-390.png",
+    "height": 9288,
+    "cut": true
   },
   {
     "name": "receipt-tierA",
     "url": "/o/fed.exp.current.function.health~2010-11~be",
     "width": 820,
     "status": 200,
-    "file": "receipt-tierA-820.png"
+    "file": "receipt-tierA-820.png",
+    "height": 7505,
+    "cut": true
   },
   {
     "name": "receipt-tierA",
     "url": "/o/fed.exp.current.function.health~2010-11~be",
     "width": 1280,
     "status": 200,
-    "file": "receipt-tierA-1280.png"
+    "file": "receipt-tierA-1280.png",
+    "height": 6221,
+    "cut": true
   },
   {
     "name": "receipt-cpi",
-    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "url": "/o/cpi.general.b2007_08~2015-06~na",
     "width": 390,
     "status": 200,
-    "file": "receipt-cpi-390.png"
+    "file": "receipt-cpi-390.png",
+    "height": 6687,
+    "cut": true
   },
   {
     "name": "receipt-cpi",
-    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "url": "/o/cpi.general.b2007_08~2015-06~na",
     "width": 820,
     "status": 200,
-    "file": "receipt-cpi-820.png"
+    "file": "receipt-cpi-820.png",
+    "height": 4961,
+    "cut": false
   },
   {
     "name": "receipt-cpi",
-    "url": "/o/cpi.national.general.b2015_16~2020-06~na",
+    "url": "/o/cpi.general.b2007_08~2015-06~na",
     "width": 1280,
     "status": 200,
-    "file": "receipt-cpi-1280.png"
+    "file": "receipt-cpi-1280.png",
+    "height": 4350,
+    "cut": false
   },
   {
     "name": "receipt-gap",
-    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "url": "/o/fed.exp.current.capital_account.function.economic_affairs~2015-16~be",
     "width": 390,
     "status": 200,
-    "file": "receipt-gap-390.png"
+    "file": "receipt-gap-390.png",
+    "height": 5629,
+    "cut": false
   },
   {
     "name": "receipt-gap",
-    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "url": "/o/fed.exp.current.capital_account.function.economic_affairs~2015-16~be",
     "width": 820,
     "status": 200,
-    "file": "receipt-gap-820.png"
+    "file": "receipt-gap-820.png",
+    "height": 4671,
+    "cut": false
   },
   {
     "name": "receipt-gap",
-    "url": "/o/fed.exp.development.capital_account.other~2017-18~be",
+    "url": "/o/fed.exp.current.capital_account.function.economic_affairs~2015-16~be",
     "width": 1280,
     "status": 200,
-    "file": "receipt-gap-1280.png"
+    "file": "receipt-gap-1280.png",
+    "height": 3600,
+    "cut": false
+  },
+  {
+    "name": "receipt-disputed",
+    "url": "/o/fed.exp.current.function.economic_affairs~2021-22~be",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-disputed-390.png",
+    "height": 8467,
+    "cut": true
+  },
+  {
+    "name": "receipt-disputed",
+    "url": "/o/fed.exp.current.function.economic_affairs~2021-22~be",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-disputed-820.png",
+    "height": 6598,
+    "cut": true
+  },
+  {
+    "name": "receipt-disputed",
+    "url": "/o/fed.exp.current.function.economic_affairs~2021-22~be",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-disputed-1280.png",
+    "height": 5607,
+    "cut": false
+  },
+  {
+    "name": "receipt-withheld",
+    "url": "/o/fed.exp.current.function.economic_affairs.other_industries~2021-22~be",
+    "width": 390,
+    "status": 200,
+    "file": "receipt-withheld-390.png",
+    "height": 4833,
+    "cut": false
+  },
+  {
+    "name": "receipt-withheld",
+    "url": "/o/fed.exp.current.function.economic_affairs.other_industries~2021-22~be",
+    "width": 820,
+    "status": 200,
+    "file": "receipt-withheld-820.png",
+    "height": 3522,
+    "cut": false
+  },
+  {
+    "name": "receipt-withheld",
+    "url": "/o/fed.exp.current.function.economic_affairs.other_industries~2021-22~be",
+    "width": 1280,
+    "status": 200,
+    "file": "receipt-withheld-1280.png",
+    "height": 2666,
+    "cut": false
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 390,
+    "status": 200,
+    "file": "sources-390.png",
+    "height": 6486,
+    "cut": true
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 820,
+    "status": 200,
+    "file": "sources-820.png",
+    "height": 3975,
+    "cut": false
+  },
+  {
+    "name": "sources",
+    "url": "/sources",
+    "width": 1280,
+    "status": 200,
+    "file": "sources-1280.png",
+    "height": 3312,
+    "cut": false
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 390,
+    "status": 200,
+    "file": "source-390.png",
+    "height": 6752,
+    "cut": true
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 820,
+    "status": 200,
+    "file": "source-820.png",
+    "height": 4675,
+    "cut": false
+  },
+  {
+    "name": "source",
+    "url": "/sources/abs-fed-2010-11",
+    "width": 1280,
+    "status": 200,
+    "file": "source-1280.png",
+    "height": 3728,
+    "cut": false
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 390,
+    "status": 200,
+    "file": "methods-390.png",
+    "height": 15747,
+    "cut": true
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 820,
+    "status": 200,
+    "file": "methods-820.png",
+    "height": 10713,
+    "cut": true
+  },
+  {
+    "name": "methods",
+    "url": "/methods",
+    "width": 1280,
+    "status": 200,
+    "file": "methods-1280.png",
+    "height": 9843,
+    "cut": true
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 390,
+    "status": 200,
+    "file": "releases-390.png",
+    "height": 4971,
+    "cut": false
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 820,
+    "status": 200,
+    "file": "releases-820.png",
+    "height": 3673,
+    "cut": false
+  },
+  {
+    "name": "releases",
+    "url": "/releases",
+    "width": 1280,
+    "status": 200,
+    "file": "releases-1280.png",
+    "height": 3318,
+    "cut": false
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 390,
+    "status": 200,
+    "file": "demo-390.png",
+    "height": 4984,
+    "cut": false
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 820,
+    "status": 200,
+    "file": "demo-820.png",
+    "height": 3605,
+    "cut": false
+  },
+  {
+    "name": "demo",
+    "url": "/demo/health-and-jobs",
+    "width": 1280,
+    "status": 200,
+    "file": "demo-1280.png",
+    "height": 3485,
+    "cut": false
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 390,
+    "status": 200,
+    "file": "compare-390.png",
+    "height": 2992,
+    "cut": false
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 820,
+    "status": 200,
+    "file": "compare-820.png",
+    "height": 2119,
+    "cut": false
+  },
+  {
+    "name": "compare",
+    "url": "/compare",
+    "width": 1280,
+    "status": 200,
+    "file": "compare-1280.png",
+    "height": 1849,
+    "cut": false
+  },
+  {
+    "name": "compare-mixed",
+    "url": "/compare?s=cpi.national.yoy.general,lfs.unemployment_rate.total.total,fed.exp.total",
+    "width": 390,
+    "status": 200,
+    "file": "compare-mixed-390.png",
+    "height": 4183,
+    "cut": false
+  },
+  {
+    "name": "compare-mixed",
+    "url": "/compare?s=cpi.national.yoy.general,lfs.unemployment_rate.total.total,fed.exp.total",
+    "width": 820,
+    "status": 200,
+    "file": "compare-mixed-820.png",
+    "height": 3297,
+    "cut": false
+  },
+  {
+    "name": "compare-mixed",
+    "url": "/compare?s=cpi.national.yoy.general,lfs.unemployment_rate.total.total,fed.exp.total",
+    "width": 1280,
+    "status": 200,
+    "file": "compare-mixed-1280.png",
+    "height": 2429,
+    "cut": false
+  },
+  {
+    "name": "api",
+    "url": "/api",
+    "width": 390,
+    "status": 200,
+    "file": "api-390.png",
+    "height": 1464,
+    "cut": false
+  },
+  {
+    "name": "api",
+    "url": "/api",
+    "width": 820,
+    "status": 200,
+    "file": "api-820.png",
+    "height": 942,
+    "cut": false
+  },
+  {
+    "name": "api",
+    "url": "/api",
+    "width": 1280,
+    "status": 200,
+    "file": "api-1280.png",
+    "height": 900,
+    "cut": false
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 390,
+    "status": 200,
+    "file": "data-390.png",
+    "height": 6625,
+    "cut": true
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 820,
+    "status": 200,
+    "file": "data-820.png",
+    "height": 3955,
+    "cut": false
+  },
+  {
+    "name": "data",
+    "url": "/data",
+    "width": 1280,
+    "status": 200,
+    "file": "data-1280.png",
+    "height": 3478,
+    "cut": false
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 390,
+    "status": 200,
+    "file": "about-390.png",
+    "height": 2819,
+    "cut": false
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 820,
+    "status": 200,
+    "file": "about-820.png",
+    "height": 1920,
+    "cut": false
+  },
+  {
+    "name": "about",
+    "url": "/about",
+    "width": 1280,
+    "status": 200,
+    "file": "about-1280.png",
+    "height": 1841,
+    "cut": false
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 390,
+    "status": 404,
+    "file": "404-390.png",
+    "height": 1483,
+    "cut": false
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 820,
+    "status": 404,
+    "file": "404-820.png",
+    "height": 974,
+    "cut": false
+  },
+  {
+    "name": "404",
+    "url": "/no-such-page",
+    "width": 1280,
+    "status": 404,
+    "file": "404-1280.png",
+    "height": 900,
+    "cut": false
   }
 ]

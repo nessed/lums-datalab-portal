@@ -70,7 +70,7 @@ export function DocPage({
   return (
     <figure className="doc">
       <div className="doc-ground">
-        <ZoomDialog label={`Enlarge ${where}`} heading={<>{title} · {where}</>} large={page(true)}>
+        <ZoomDialog label={`Enlarge ${where}`} heading={<>{title} · <span data-num="page">{where}</span></>} large={page(true)}>
           {framed ? (
             <div className="doc-page">
               <CropWindow image={image} cell={cell} x0={0} x1={1} y0={fy0} y1={fy1} alt={alt} showTable lazy={!eager} />
@@ -82,7 +82,7 @@ export function DocPage({
       </div>
       <figcaption className="doc-caption">
         <span>
-          <span className="doc-title">{title}</span> · {where} of the PDF file{framed ? " (shown around the table; select it for the whole page)" : ""}
+          <span className="doc-title">{title}</span> · <span data-num="page">{where}</span> of the PDF file{framed ? " (shown around the table; select it for the whole page)" : ""}
         </span>
         <span>
           <a href={image.src}>Open the page image</a>
@@ -183,9 +183,13 @@ export function DocCrop({ image, cell, alt, rows = 2, guides }: { image: PageIma
       {head || segments.length > 1 ? (
         <figcaption className="doc-crop-note">
           {head ? "Column headings at the top, then the rows around the figure. " : ""}
-          {segments.length > 1
-            ? `Row labels on the left; ${hidden > 0 ? `${hidden} ${hidden === 1 ? "column" : "columns"} between them and the figure ${hidden === 1 ? "is" : "are"} not shown in this close-up` : "the space between them and the figure is not shown in this close-up"}.`
-            : ""}
+          {segments.length > 1 ? (
+            <span data-num="ui">
+              {hidden > 0
+                ? `Row labels on the left; ${hidden} ${hidden === 1 ? "column" : "columns"} between them and the figure ${hidden === 1 ? "is" : "are"} not shown in this close-up.`
+                : "Row labels on the left; the space between them and the figure is not shown in this close-up."}
+            </span>
+          ) : null}
         </figcaption>
       ) : null}
     </figure>

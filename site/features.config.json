@@ -1,0 +1,12 @@
+{
+  "$comment": "Planned features. Each is one flag. While a flag is false the site shows 'Coming: not in this release' in its slot. Turning one on without building it fails the build (src/lib/features.ts), so a flag can never switch on an empty or invented view. What each needs before it can go live is in docs/OPEN_WORK.md (S16) and STATUS.md.",
+  "realTerms": { "enabled": false, "label": "Real terms" },
+  "percentOfGdp": { "enabled": false, "label": "% of GDP" },
+  "api": { "enabled": false, "label": "API" },
+  "maps": { "enabled": false, "label": "Maps" },
+  "districts": { "enabled": false, "label": "Districts" },
+  "provincialBudgets": { "enabled": false, "label": "Provincial budgets" },
+  "moreDataTypes": { "enabled": false, "label": "More data types" },
+  "monthlyData": { "enabled": false, "label": "Every month of CPI" },
+  "errataBadges": { "enabled": false, "label": "Correction notes on figures" }
+}

@@ -3,20 +3,51 @@
 // prototype notice, and the "Report an error" link that names the current page.
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
-export function NavLinks({ items }: { items: { href: string; label: string }[] }) {
+type NavItem = { href: string; label: string; also?: string[] };
+
+const isActive = (path: string, n: NavItem) =>
+  [n.href, ...(n.also ?? [])].some((h) => path === h || path.startsWith(`${h}/`));
+
+export function NavLinks({ items }: { items: NavItem[] }) {
   const path = usePathname() ?? "/";
   return (
     <nav className="site-nav" aria-label="Main">
-      {items.map((n) => {
-        const active = path === n.href || path.startsWith(`${n.href}/`);
-        return (
-          <Link key={n.href} href={n.href} aria-current={active ? "page" : undefined}>
+      {items.map((n) => (
+        <Link key={n.href} href={n.href} aria-current={isActive(path, n) ? "page" : undefined}>
+          {n.label}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+/** Phones: the same links behind a "Menu" button. A <details> element, so it
+ * works without JavaScript; it closes itself after a navigation. */
+export function MobileMenu({ items }: { items: NavItem[] }) {
+  const path = usePathname() ?? "/";
+  const ref = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    if (ref.current) ref.current.open = false;
+  }, [path]);
+  return (
+    <details className="nav-menu" ref={ref}>
+      <summary>Menu</summary>
+      <nav aria-label="Main (menu)">
+        {items.map((n) => (
+          <Link key={n.href} href={n.href} aria-current={isActive(path, n) ? "page" : undefined}>
             {n.label}
           </Link>
-        );
-      })}
-    </nav>
+        ))}
+        <Link href="/releases" aria-current={path.startsWith("/releases") ? "page" : undefined}>
+          Releases and errata
+        </Link>
+        <Link href="/data" aria-current={path.startsWith("/data") ? "page" : undefined}>
+          Download and file formats
+        </Link>
+      </nav>
+    </details>
   );
 }
 

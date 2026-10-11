@@ -1,0 +1,295 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-11T11:40:00Z"
+  },
+  "title": "LUMS DataLab Mockups",
+  "launch": {
+    "view": "canvas",
+    "page": "v2"
+  },
+  "pages": [
+    {
+      "id": "v1",
+      "name": "v1 first draft"
+    },
+    {
+      "id": "v2",
+      "name": "v2 revised (build from this)"
+    }
+  ],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 1800,
+      "title": "v1 Home 1280",
+      "page": "v1"
+    },
+    "Home-390-v1.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 390,
+      "h": 2050,
+      "title": "v1 Home 390",
+      "page": "v1"
+    },
+    "Catalogue-1280-v1.dc.html": {
+      "x": 0,
+      "y": 2170,
+      "w": 1280,
+      "h": 1500,
+      "title": "v1 Catalogue 1280",
+      "page": "v1"
+    },
+    "Catalogue-390-v1.dc.html": {
+      "x": 1360,
+      "y": 2170,
+      "w": 390,
+      "h": 1950,
+      "title": "v1 Catalogue 390",
+      "page": "v1"
+    },
+    "Series-1280-v1.dc.html": {
+      "x": 0,
+      "y": 4240,
+      "w": 1280,
+      "h": 1750,
+      "title": "v1 Series 1280",
+      "page": "v1"
+    },
+    "Series-390-v1.dc.html": {
+      "x": 1360,
+      "y": 4240,
+      "w": 390,
+      "h": 2200,
+      "title": "v1 Series 390",
+      "page": "v1"
+    },
+    "Compare-1280-v1.dc.html": {
+      "x": 0,
+      "y": 6560,
+      "w": 1280,
+      "h": 1350,
+      "title": "v1 Compare 1280",
+      "page": "v1"
+    },
+    "Compare-390-v1.dc.html": {
+      "x": 1360,
+      "y": 6560,
+      "w": 390,
+      "h": 1750,
+      "title": "v1 Compare 390",
+      "page": "v1"
+    },
+    "Receipt-1280-v1.dc.html": {
+      "x": 0,
+      "y": 8430,
+      "w": 1280,
+      "h": 1650,
+      "title": "v1 Receipt 1280",
+      "page": "v1"
+    },
+    "Receipt-390-v1.dc.html": {
+      "x": 1360,
+      "y": 8430,
+      "w": 390,
+      "h": 2100,
+      "title": "v1 Receipt 390",
+      "page": "v1"
+    },
+    "Dataset-1280-v1.dc.html": {
+      "x": 0,
+      "y": 10650,
+      "w": 1280,
+      "h": 1650,
+      "title": "v1 Data type 1280",
+      "page": "v1"
+    },
+    "Dataset-390-v1.dc.html": {
+      "x": 1360,
+      "y": 10650,
+      "w": 390,
+      "h": 2050,
+      "title": "v1 Data type 390",
+      "page": "v1"
+    },
+    "Home-1280-v2.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1280,
+      "h": 1900,
+      "title": "v2 Home 1280",
+      "page": "v2"
+    },
+    "Home-390-v2.dc.html": {
+      "x": 1360,
+      "y": 0,
+      "w": 390,
+      "h": 2150,
+      "title": "v2 Home 390",
+      "page": "v2"
+    },
+    "Catalogue-1280-v2.dc.html": {
+      "x": 0,
+      "y": 2270,
+      "w": 1280,
+      "h": 1500,
+      "title": "v2 Catalogue 1280",
+      "page": "v2"
+    },
+    "Catalogue-390-v2.dc.html": {
+      "x": 1360,
+      "y": 2270,
+      "w": 390,
+      "h": 1950,
+      "title": "v2 Catalogue 390",
+      "page": "v2"
+    },
+    "Series-1280-v2.dc.html": {
+      "x": 0,
+      "y": 4340,
+      "w": 1280,
+      "h": 1750,
+      "title": "v2 Series 1280",
+      "page": "v2"
+    },
+    "Series-390-v2.dc.html": {
+      "x": 1360,
+      "y": 4340,
+      "w": 390,
+      "h": 2250,
+      "title": "v2 Series 390",
+      "page": "v2"
+    },
+    "Compare-1280-v2.dc.html": {
+      "x": 0,
+      "y": 6710,
+      "w": 1280,
+      "h": 1400,
+      "title": "v2 Compare 1280",
+      "page": "v2"
+    },
+    "Compare-390-v2.dc.html": {
+      "x": 1360,
+      "y": 6710,
+      "w": 390,
+      "h": 1800,
+      "title": "v2 Compare 390",
+      "page": "v2"
+    },
+    "Receipt-1280-v2.dc.html": {
+      "x": 0,
+      "y": 8630,
+      "w": 1280,
+      "h": 1750,
+      "title": "v2 Receipt 1280",
+      "page": "v2"
+    },
+    "Receipt-390-v2.dc.html": {
+      "x": 1360,
+      "y": 8630,
+      "w": 390,
+      "h": 2250,
+      "title": "v2 Receipt 390",
+      "page": "v2"
+    },
+    "Dataset-1280-v2.dc.html": {
+      "x": 0,
+      "y": 11000,
+      "w": 1280,
+      "h": 1750,
+      "title": "v2 Data type 1280",
+      "page": "v2"
+    },
+    "Dataset-390-v2.dc.html": {
+      "x": 1360,
+      "y": 11000,
+      "w": 390,
+      "h": 2150,
+      "title": "v2 Data type 390",
+      "page": "v2"
+    },
+    "Table-1280-v2.dc.html": {
+      "x": 0,
+      "y": 13270,
+      "w": 1280,
+      "h": 1500,
+      "title": "v2 Table as printed 1280 (added at Ali's request)",
+      "page": "v2"
+    },
+    "Table-390-v2.dc.html": {
+      "x": 1360,
+      "y": 13270,
+      "w": 390,
+      "h": 1900,
+      "title": "v2 Table as printed 390",
+      "page": "v2"
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Home-390-v1.dc.html",
+    "Catalogue-1280-v1.dc.html",
+    "Catalogue-390-v1.dc.html",
+    "Series-1280-v1.dc.html",
+    "Series-390-v1.dc.html",
+    "Compare-1280-v1.dc.html",
+    "Compare-390-v1.dc.html",
+    "Receipt-1280-v1.dc.html",
+    "Receipt-390-v1.dc.html",
+    "Dataset-1280-v1.dc.html",
+    "Dataset-390-v1.dc.html",
+    "Home-1280-v2.dc.html",
+    "Home-390-v2.dc.html",
+    "Catalogue-1280-v2.dc.html",
+    "Catalogue-390-v2.dc.html",
+    "Series-1280-v2.dc.html",
+    "Series-390-v2.dc.html",
+    "Compare-1280-v2.dc.html",
+    "Compare-390-v2.dc.html",
+    "Receipt-1280-v2.dc.html",
+    "Receipt-390-v2.dc.html",
+    "Dataset-1280-v2.dc.html",
+    "Dataset-390-v2.dc.html",
+    "Table-1280-v2.dc.html",
+    "Table-390-v2.dc.html"
+  ],
+  "notes": {
+    "t1": {
+      "x": 0,
+      "y": -320,
+      "text": "v1 first draft: home, catalogue, series, compare, receipt, data type",
+      "kind": "title1",
+      "maxW": 1750,
+      "page": "v1"
+    },
+    "legend1": {
+      "x": 1830,
+      "y": 0,
+      "w": 360,
+      "page": "v1",
+      "fill": "gray",
+      "text": "No value on these boards is real or sample data. A [bracketed slot] is filled from the release at build time; every value slot is a link to its receipt. Series names, definitions, break notes and the release version are copied verbatim from releases/v0.0.1-prototype. Charts are drawn as empty frames on purpose. The dashed orange rule marks the first screen (1280x800, 390x844)."
+    },
+    "t2": {
+      "x": 0,
+      "y": -320,
+      "text": "v2 revised: built from this version (see docs/mockups/REVIEW.md)",
+      "kind": "title1",
+      "maxW": 1750,
+      "page": "v2"
+    },
+    "legend2": {
+      "x": 1830,
+      "y": 0,
+      "w": 360,
+      "page": "v2",
+      "fill": "gray",
+      "text": "No value on these boards is real or sample data. A [bracketed slot] is filled from the release at build time; every value slot is a link to its receipt. Series names, definitions, break notes and the release version are copied verbatim from releases/v0.0.1-prototype. Charts are drawn as empty frames on purpose. The dashed orange rule marks the first screen (1280x800, 390x844)."
+    }
+  },
+  "designSystems": []
+}

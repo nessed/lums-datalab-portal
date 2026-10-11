@@ -19,17 +19,25 @@ const base = (args.base ?? "http://localhost:3100").replace(/\/$/, "");
 const out = path.resolve(siteDir, args.out ?? "../docs/reports/qa/ui/after");
 const widths = (args.widths ?? "390,820,1280").split(",").map(Number);
 const only = args.only ? new Set(args.only.split(",")) : null;
+// Very long pages (the full catalogue) are cut at this height, so the images stay a sensible size.
+const maxHeight = Number(args["max-height"] ?? 6000);
 
 const routes = qaRoutes(siteDir);
 
 fs.mkdirSync(out, { recursive: true });
-const browser = await chromium.launch();
+// CHROMIUM_PATH: a Chromium binary to use instead of the one Playwright downloads (for example in CI images).
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const index = [];
 for (const [name, url] of routes) {
   if (only && !only.has(name) && !only.has(name.split("-")[0])) continue;
   for (const w of widths) {
     const page = await browser.newPage({ viewport: { width: w, height: w < 600 ? 844 : 900 }, deviceScaleFactor: 1 });
     const res = await page.goto(base + url, { waitUntil: "load" });
+    // A page without its stylesheet (a stale server after a rebuild) makes every result meaningless: stop.
+    if (!(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()))) {
+      console.error(`${url}: the stylesheet did not load; is the server serving the current build?`);
+      process.exit(2);
+    }
     await page.waitForTimeout(300);
     // Lazy images below the fold: scroll through once so the full-page capture has them.
     await page.evaluate(async () => {
@@ -41,8 +49,9 @@ for (const [name, url] of routes) {
     });
     await page.waitForTimeout(150);
     const file = `${name}-${w}.png`;
-    await page.screenshot({ path: path.join(out, file), fullPage: true });
-    index.push({ name, url, width: w, status: res?.status() ?? null, file });
+    const height = await page.evaluate(() => document.documentElement.scrollHeight);
+    await page.screenshot({ path: path.join(out, file), fullPage: true, clip: { x: 0, y: 0, width: w, height: Math.min(height, maxHeight) } });
+    index.push({ name, url, width: w, status: res?.status() ?? null, file, height, cut: height > maxHeight });
     await page.close();
   }
   console.log(`${name.padEnd(18)} ${url}`);

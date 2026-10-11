@@ -117,6 +117,19 @@ for (const s of series) {
     ),
   );
 }
+// One CSV per published data type: the same rows as the series CSVs, copied, never recomputed.
+const dsDir = path.join(dest, "datasets");
+fs.mkdirSync(dsDir, { recursive: true });
+for (const ds of Object.keys(release.dataset_status ?? {})) {
+  if (release.dataset_status[ds]?.state !== "published") continue;
+  const rows = [];
+  for (const s of series) {
+    if (s.dataset !== ds) continue;
+    for (const o of (bySeries.get(s.series_id) ?? []).slice().sort((a, b) => (a.period + a.vintage < b.period + b.vintage ? -1 : 1))) rows.push(rowFor(o, s));
+  }
+  fs.writeFileSync(path.join(dsDir, `${ds}.csv`), [cols.join(","), ...rows].join("\n") + "\n");
+}
+
 // One CSV row per observation, beside its JSON receipt.
 for (const o of observations) {
   fs.writeFileSync(path.join(receiptDir, `${slugify(o.obs_id)}.csv`), `${cols.join(",")}\n${rowFor(o, seriesById.get(o.series_id))}\n`);

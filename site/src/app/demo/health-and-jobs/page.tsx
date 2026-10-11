@@ -8,8 +8,9 @@ import Cite from "@/components/Cite";
 import SeriesChart from "@/components/SeriesChart";
 import { Breadcrumbs, Callout } from "@/components/ui/Basics";
 import { buildChart } from "@/lib/chart";
-import { datasetName, db, isDatasetPublished, obsHref, publishedObs, seriesHref, visibleSeries, type Observation, type Series } from "@/lib/data";
-import { figureWords, formatDecimalString, humanAmount, periodWords, vintageWords } from "@/lib/format";
+import { datasetName, db, isDatasetPublished, publishedObs, seriesHref, visibleSeries, type Observation, type Series } from "@/lib/data";
+import { humanAmount, periodWords, unitLabel, vintageWords } from "@/lib/format";
+import { Count, Num, V } from "@/components/ui/Num";
 
 export const metadata: Metadata = {
   title: "Worked example: health and jobs",
@@ -49,11 +50,33 @@ function mainLine(s: Series, vintage?: string): Observation[] {
 
 /** A figure in the text: the value with its unit in words, linked to its receipt. */
 function Fig({ o, s, human }: { o: Observation; s: Series; human?: boolean }) {
+  const label = `${s.name}, ${periodWords(o.period, s.frequency)}${o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}: open the receipt`;
+  const unit = unitLabel(o.unit, o.scale_factor);
+  const v = <V o={o} className="v-link fig-link" label={label} />;
   return (
-    <Link href={obsHref(o.obs_id)} className="fig-link" title={`${s.name}, ${periodWords(o.period, s.frequency)}${o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}. Open the receipt.`}>
-      {figureWords(o.value, o.unit, o.scale_factor)}
-      {human && o.unit === "PKR" ? <span className="fig-human"> (about {humanAmount(Number(o.value), o.unit, o.scale_factor)})</span> : null}
-    </Link>
+    <span className="fig-in-text">
+      {o.unit === "PKR" ? (
+        <>
+          Rs {v} {unit.replace(/^Rs ?/, "")}
+        </>
+      ) : o.unit === "percent" ? (
+        <>{v} per cent</>
+      ) : (
+        <>
+          {v} {unit}
+        </>
+      )}
+      {human && o.unit === "PKR" ? (
+        <span className="fig-human">
+          {" "}
+          (about{" "}
+          <span data-num="approx" data-obs={o.obs_id}>
+            {humanAmount(Number(o.value), o.unit, o.scale_factor)}
+          </span>
+          )
+        </span>
+      ) : null}
+    </span>
   );
 }
 
@@ -113,8 +136,7 @@ export default function DemoPage() {
         {brk && beforeBreak && afterBreak ? (
           <p>
             The budget estimate goes from <Fig o={beforeBreak} s={health} /> in {beforeBreak.period} to <Fig o={afterBreak} s={health} /> in{" "}
-            {afterBreak.period}, but the series breaks in between: {brk.note.charAt(0).toLowerCase() + brk.note.slice(1)} The chart does not join the
-            lines across the break.
+            {afterBreak.period}, but the series breaks in between. {brk.note} The chart does not join the lines across the break.
           </p>
         ) : null}
       </>
@@ -135,7 +157,8 @@ export default function DemoPage() {
         {lastIdx && pricesIndex ? (
           <>
             {" "}
-            The index itself stood at <Fig o={lastIdx} s={pricesIndex} />, against 100 for the average of 2015-16.
+            The index itself stood at <Fig o={lastIdx} s={pricesIndex} />, against <Num kind="ui">100</Num> for the average of{" "}
+            <Num kind="period">2015-16</Num>.
           </>
         ) : null}{" "}
         This release reads the May and June figures printed in each June issue, so the chart shows those months only; the months in between are not
@@ -165,14 +188,13 @@ export default function DemoPage() {
           {pLast && lfpr ? (
             <>
               {" "}
-              <Fig o={pLast} s={lfpr} /> of people aged 10 and over were in the labour force (the refined participation rate).
+              <Fig o={pLast} s={lfpr} /> of people aged <Num kind="ui">10</Num> and over were in the labour force (the refined participation rate).
             </>
           ) : null}
         </p>
         {brk ? (
           <p>
-            Read the latest round with care: {brk.note.charAt(0).toLowerCase() + brk.note.slice(1)}. The chart marks it as a break and does not join the
-            lines across it.
+            Read the latest round with care. {brk.note} The chart marks it as a break and does not join the lines across it.
           </p>
         ) : null}
       </>
@@ -180,7 +202,7 @@ export default function DemoPage() {
   }
 
   return (
-    <article className="demo">
+    <article className="demo is-prose">
       <Breadcrumbs items={[{ href: "/", label: "Home" }, { label: "Worked example" }]} />
       <header className="page-head demo-head">
         <p className="kicker">Worked example</p>
@@ -259,7 +281,7 @@ export default function DemoPage() {
         <p>
           The sentences are templates filled from the release: no number on this page was typed by hand, and none was produced by a language model. If
           a figure in a later release changes, this page changes with it, and the old figure stays citable in the old release.{" "}
-          {formatDecimalString(String(visibleSeries().length))} series are available to do the same; <Link href="/browse">browse them</Link>.
+          <Count k="series" n={visibleSeries().length} /> series are available to do the same; <Link href="/browse">browse them</Link>.
         </p>
         <Cite path="/demo/health-and-jobs" />
       </section>

@@ -18,7 +18,10 @@ export default function Code({ code, label }: { code: string; label: string }) {
         <span className="small muted">{label}</span>
         <CopyButton text={text} label="Copy" className="btn btn-text" />
       </div>
-      <pre className="code">{text}</pre>
+      {/* Focusable, so a keyboard user can scroll a long line. */}
+      <pre className="code" data-num="id" tabIndex={0} aria-label={`${label} code`}>
+        {text}
+      </pre>
     </div>
   );
 }

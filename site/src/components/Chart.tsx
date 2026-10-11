@@ -14,9 +14,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { canConnect, type ChartLine, type ChartMark, type ChartModel, type LineStyle } from "@/lib/chart-model";
 import type { StatusKey } from "@/lib/status";
 
-export type ChartOptions = { log?: boolean; from?: string | null; to?: string | null };
+export type ChartOptions = { log?: boolean; from?: string | null; to?: string | null; highlight?: string | null; xDomain?: [number, number] | null; height?: number; noKey?: boolean };
 
-const H = 340;
+const DEFAULT_H = 340;
 
 function niceStep(raw: number) {
   const mag = Math.pow(10, Math.floor(Math.log10(raw)));
@@ -109,6 +109,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   }, []);
 
   const narrow = W < 520;
+  const H = options.height ?? (narrow ? 280 : DEFAULT_H);
   const view = useMemo(() => {
     const inRange = (p: string) => (!options.from || p >= options.from) && (!options.to || p <= options.to);
     const periods = model.periods.filter((p) => inRange(p.p));
@@ -135,11 +136,13 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   const labelled = view.lines.length > 1;
   // Long labels (series names on the compare page) go in a key above the chart.
   const keyAbove = labelled && (narrow || Math.max(...view.lines.map((l) => l.label.length)) > 24);
+  const showKey = keyAbove && !options.noKey;
   const longest = labelled ? Math.max(...view.lines.map((l) => l.label.length)) : 0;
   const M = { top: 30, right: keyAbove || !labelled ? 16 : Math.min(150, 14 + longest * 6.6), bottom: view.marks.length ? 62 : 40, left: model.unitCode === "PKR" ? (narrow ? 62 : 74) : narrow ? 44 : 54 };
   const xs = [...view.periods.map((p) => p.x)];
-  const xMin = Math.min(...xs) - model.step * 0.6;
-  const xMax = Math.max(...xs) + model.step * 0.6;
+  // Small multiples share one period axis: the caller passes the common domain.
+  const xMin = (options.xDomain ? options.xDomain[0] : Math.min(...xs)) - model.step * 0.6;
+  const xMax = (options.xDomain ? options.xDomain[1] : Math.max(...xs)) + model.step * 0.6;
   const ys = points.map((p) => p.y);
   const tf = (v: number) => (log ? Math.log10(v) : v);
   let yTicks: number[];
@@ -201,7 +204,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   const descId = `${idBase}-desc`;
   return (
     <figure className="chart">
-      {keyAbove ? (
+      {showKey ? (
         <ul className="chart-key" aria-hidden="true">
           {view.lines.map((l) => (
             <li key={l.key}>
@@ -234,7 +237,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           {yTicks.map((t) => (
             <g key={t}>
               <line x1={M.left} x2={W - M.right} y1={sy(t)} y2={sy(t)} className={t === 0 && !log ? "c-zero" : "c-grid"} />
-              <text x={M.left - 8} y={sy(t) + 4} textAnchor="end" className="c-tick">
+              <text x={M.left - 8} y={sy(t) + 4} textAnchor="end" className="c-tick" data-num="axis">
                 {tickText(t, model.unitCode, model.scale)}
               </text>
             </g>
@@ -243,7 +246,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           {shown.map((t) => (
             <g key={`${t.label}-${t.px}`}>
               <line x1={t.px} x2={t.px} y1={baseY} y2={baseY + 4} className="c-axis" />
-              <text x={t.px} y={baseY + 17} textAnchor="middle" className="c-tick">
+              <text x={t.px} y={baseY + 17} textAnchor="middle" className="c-tick" data-num="period">
                 {t.label}
               </text>
             </g>
@@ -290,12 +293,14 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
               {l.points.map((p) => (
                 <a key={p.period} href={p.href} className="c-pt" aria-label={`${multi ? `${l.label}, ` : ""}${p.periodLabel}: ${p.valueText} ${model.unit}. Open the receipt.`}>
                   <circle cx={sx(p.x)} cy={sy(p.y)} r={11} className="c-hit" fill="transparent" />
-                  <Marker style={l.style} cx={sx(p.x)} cy={sy(p.y)} r={tip && tip.x === p.x ? 5.5 : 4} />
+                  {options.highlight === p.period ? <circle cx={sx(p.x)} cy={sy(p.y)} r={9} className="c-hl" /> : null}
+                  <Marker style={l.style} cx={sx(p.x)} cy={sy(p.y)} r={tip && tip.x === p.x ? 5.5 : options.highlight === p.period ? 5.5 : 4} />
                 </a>
               ))}
             </g>
           ))}
-          {!keyAbove &&
+          {labelled &&
+            !keyAbove &&
             ends.map((e) => (
               <text key={e.key} x={e.x + 9} y={e.y + 4} className="c-label" fill={e.style.color} style={{ fill: e.style.color }}>
                 {e.label}

@@ -7,8 +7,10 @@ import Cite from "@/components/Cite";
 import Markdown from "@/components/Markdown";
 import { Breadcrumbs, Callout, Disclosure, TableWrap, Toc } from "@/components/ui/Basics";
 import { datasetKeys, db, releaseMarkdown } from "@/lib/data";
-import { count, dateOnly } from "@/lib/format";
+import { dateOnly } from "@/lib/format";
+import { Count, Num } from "@/components/ui/Num";
 import { datasetStateWords } from "@/lib/status";
+import { COMING, feature, type FeatureKey } from "@/lib/features";
 
 export const metadata: Metadata = {
   title: "Releases, changelog and errata",
@@ -30,6 +32,18 @@ const GAP_TITLE: Record<string, string> = {
   "gap:disputed": "Disputed: official printings disagree",
 };
 
+const PLANNED: Record<FeatureKey, string> = {
+  realTerms: "rupee series in constant prices, using a deflator that has been through the same checks.",
+  percentOfGdp: "rupee series as a share of GDP, once a checked GDP series is in the release.",
+  api: "a documented query API; every release file is already a static download.",
+  maps: "provincial series on a map.",
+  districts: "district figures.",
+  provincialBudgets: "the provincial budget statements.",
+  moreDataTypes: "further publications, starting with tables from the Pakistan Economic Survey.",
+  monthlyData: "every monthly CPI issue, not only June.",
+  errataBadges: "a note on each corrected figure, linking to its errata entry.",
+};
+
 /** A release Markdown file without its own first heading (the page gives one). */
 function body(md: string | null): string | null {
   return md ? md.replace(/^# .*\r?\n/, "") : null;
@@ -48,17 +62,21 @@ export default function ReleasesPage() {
   const sourcesRead = d.sources.filter((s) => (s.pages_used ?? []).length > 0).length;
 
   return (
-    <>
+    <div className="is-prose">
       <Breadcrumbs items={[{ label: "Releases" }]} />
       <header className="page-head">
         <p className="kicker">Current release</p>
-        <h1 className="mono-title">{r.version}</h1>
+        <h1 className="mono-title">
+          <Num kind="version">{r.version}</Num>
+        </h1>
         <p className="series-meta">
-          <span>Built {dateOnly(r.created_at)}</span>
-          <span>{r.label}</span>
-          <span>{r.doi ? `DOI ${r.doi}` : "No DOI yet"}</span>
           <span>
-            Code commit <span className="mono">{r.git_commit.slice(0, 10)}</span>
+            Built <Num kind="date">{dateOnly(r.created_at)}</Num>
+          </span>
+          <span>{r.label}</span>
+          <span>{r.doi ? <Num kind="id">{`DOI ${r.doi}`}</Num> : "No DOI yet"}</span>
+          <span>
+            Code commit <Num kind="id" className="mono">{r.git_commit.slice(0, 10)}</Num>
           </span>
         </p>
         <p className="lede">
@@ -87,8 +105,9 @@ export default function ReleasesPage() {
           <section id="contents" aria-labelledby="contents-h" className="wide">
             <h2 id="contents-h">What is in it</h2>
             <p>
-              {count(r.counts?.series)} series from {count(sourcesRead)} government documents ({count(r.counts?.sources)} registered),{" "}
-              {count(r.counts?.cells)} printed numbers read, {count(r.counts?.page_renders)} page images.
+              <Count k="release:counts.series" n={r.counts?.series} /> series from <Count k="sources:read" n={sourcesRead} /> government documents (
+              <Count k="release:counts.sources" n={r.counts?.sources} /> registered), <Count k="release:counts.cells" n={r.counts?.cells} /> printed numbers read,{" "}
+              <Count k="release:counts.page_renders" n={r.counts?.page_renders} /> page images.
             </p>
             <TableWrap label="Figures by dataset and status">
               <table>
@@ -110,7 +129,11 @@ export default function ReleasesPage() {
                       <td className="small">{datasetStateWords(r.dataset_status[k]?.state)}</td>
                       {kinds.map((g) => (
                         <td key={g} className="num">
-                          {byDataset[k]?.[g] ? count(byDataset[k][g]) : <span className="muted">0</span>}
+                          {byDataset[k]?.[g] ? (
+                            <Count k={`release:counts.observations_by_dataset.${k}.${g}`} n={byDataset[k][g]} />
+                          ) : (
+                            <span className="muted">none</span>
+                          )}
                         </td>
                       ))}
                     </tr>
@@ -120,24 +143,46 @@ export default function ReleasesPage() {
             </TableWrap>
             <p className="small">
               Periods covered:{" "}
-              {keys
-                .map((k) => {
-                  const p = r.scope?.periods?.[k] ?? [];
-                  return `${r.dataset_status[k]?.name ?? k} ${p.length ? `${p[0]} to ${p[p.length - 1]}` : "none"}`;
-                })
-                .join("; ")}
+              {keys.map((k, i) => {
+                const p = r.scope?.periods?.[k] ?? [];
+                return (
+                  <span key={k}>
+                    {i ? "; " : ""}
+                    {r.dataset_status[k]?.name ?? k}{" "}
+                    {p.length ? (
+                      <>
+                        <Num kind="period">{p[0]}</Num> to <Num kind="period">{p[p.length - 1]}</Num>
+                      </>
+                    ) : (
+                      "none"
+                    )}
+                  </span>
+                );
+              })}
               . Quality numbers are on the <Link href="/methods#quality">methods page</Link>.
             </p>
           </section>
 
           <section id="changelog" aria-labelledby="changelog-h">
             <h2 id="changelog-h">Changelog</h2>
-            {changelog ? <div className="prose md-small"><Markdown source={changelog} headingOffset={1} /></div> : <p className="muted">This release has no changelog file.</p>}
+            {changelog ? <div className="prose md-small" data-num="md" data-file="CHANGELOG.md"><Markdown source={changelog} headingOffset={1} /></div> : <p className="muted">This release has no changelog file.</p>}
+          </section>
+
+          <section id="planned" aria-labelledby="planned-h">
+            <h2 id="planned-h">Planned, not in this release</h2>
+            <p className="small">Each of these has a place on the site and switches on only when it is built and its data has passed the same checks.</p>
+            <ul className="planned">
+              {(Object.keys(PLANNED) as FeatureKey[]).map((k) => (
+                <li key={k}>
+                  <strong>{feature(k).label}</strong>: {PLANNED[k]} <span className="coming">{COMING}</span>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <section id="errata" aria-labelledby="errata-h">
             <h2 id="errata-h">Errata</h2>
-            {errata ? <div className="prose md-small"><Markdown source={errata} headingOffset={1} /></div> : <p className="muted">This release has no errata file.</p>}
+            {errata ? <div className="prose md-small" data-num="md" data-file="ERRATA.md"><Markdown source={errata} headingOffset={1} /></div> : <p className="muted">This release has no errata file.</p>}
             <p className="small">
               Found a figure that differs from the printed page? Use &ldquo;Report a problem with this figure&rdquo; on its receipt.
             </p>
@@ -158,11 +203,11 @@ export default function ReleasesPage() {
             <h2 id="reference-h">Reference documents</h2>
             <Disclosure summary="Dataset card" meta="scope, status mix, limitations">
               <span id="dataset-card" />
-              {card ? <div className="prose md-small"><Markdown source={card} headingOffset={2} /></div> : <p className="muted">Not included in this release.</p>}
+              {card ? <div className="prose md-small" data-num="md" data-file="dataset_card.md"><Markdown source={card} headingOffset={2} /></div> : <p className="muted">Not included in this release.</p>}
             </Disclosure>
             <Disclosure summary="How to reproduce this release" meta="commands and expected fingerprints">
               <span id="reproduce" />
-              {repro ? <div className="prose md-small"><Markdown source={repro} headingOffset={2} /></div> : <p className="muted">Not included in this release.</p>}
+              {repro ? <div className="prose md-small" data-num="md" data-file="HOW_TO_REPRODUCE.md"><Markdown source={repro} headingOffset={2} /></div> : <p className="muted">Not included in this release.</p>}
             </Disclosure>
           </section>
 
@@ -176,6 +221,7 @@ export default function ReleasesPage() {
             items={[
               { id: "contents", label: "What is in it" },
               { id: "changelog", label: "Changelog" },
+              { id: "planned", label: "Planned" },
               { id: "errata", label: "Errata" },
               { id: "versions", label: "Versions and citations" },
               { id: "reference", label: "Dataset card, reproduction" },
@@ -184,6 +230,6 @@ export default function ReleasesPage() {
           />
         </aside>
       </div>
-    </>
+    </div>
   );
 }

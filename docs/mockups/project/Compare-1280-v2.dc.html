@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Compare, 1280, v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.btn-p{background:#0b5c78;border-color:#0b5c78;color:#fff}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.ph{border:1px solid #d9d9d6;background:#fff;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:13px;text-align:center}
+.chipS{display:flex;align-items:center;gap:8px;border:1px solid #c9ccd0;background:#fff;border-radius:4px;padding:4px 6px 4px 10px;font-size:14px}
+.seg{display:inline-flex;border:1px solid #8c9299;border-radius:4px;overflow:hidden}
+.seg button{border:0;border-right:1px solid #c9ccd0;background:#fff;font:inherit;font-size:13px;padding:5px 10px}
+.seg button:last-child{border-right:0}
+.seg .on{background:#0b5c78;color:#fff}
+</style>
+</helmet>
+<div class="r" style="width:1280px;height:1400px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:13px;padding:6px 32px"><strong>Prototype release v0.0.1-prototype.</strong> No DOI; not yet for citation in publications. <a href="#">Disclaimer</a></div>
+  <header style="display:flex;align-items:center;gap:24px;padding:10px 32px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a>
+    <button style="flex:1;max-width:440px;display:flex;align-items:center;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:36px;background:#fff;font:inherit"><span class="mut" style="font-size:14px">Search series and documents</span></button>
+    <nav style="display:flex;gap:20px"><a href="#">Data</a><a href="#" style="font-weight:700;color:#1c1d1f">Compare</a><a href="#">Sources</a><a href="#">Methods</a><a href="#">About</a></nav>
+    <a href="#" class="mut" style="margin-left:auto;font-size:13px">Release v0.0.1-prototype</a>
+  </header>
+  <main style="padding:16px 32px 0">
+    <div style="display:flex;align-items:baseline;gap:14px"><h1 style="font-size:28px;margin:0">Compare series</h1><span class="mut">Every figure links to its receipt. The address of this page reproduces the view.</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px">
+      <span class="chipS"><svg width="28" height="10" aria-hidden="true"><line x1="0" y1="5" x2="28" y2="5" stroke="#0b5c78" stroke-width="2"></line><circle cx="14" cy="5" r="3.5" fill="#0b5c78"></circle></svg><a href="#">Health (current, revenue account)</a><button class="btn" style="min-height:28px;padding:0 8px;font-size:12px">Remove</button></span>
+      <span class="chipS"><svg width="28" height="10" aria-hidden="true"><line x1="0" y1="5" x2="28" y2="5" stroke="#b3470f" stroke-width="2" stroke-dasharray="6 4"></line><rect x="10.5" y="1.5" width="7" height="7" fill="#b3470f"></rect></svg><a href="#">Education affairs and services (current, revenue account)</a><button class="btn" style="min-height:28px;padding:0 8px;font-size:12px">Remove</button></span>
+      <label style="display:flex;align-items:center;border:1px solid #8c9299;border-radius:4px;height:36px;padding:0 10px;width:260px;background:#fff"><input type="search" placeholder="Add a series…" style="border:0;outline:0;font:inherit;flex:1;background:transparent"></label>
+      <span class="mut" style="font-size:13px"><span class="slot">n</span> of 6</span>
+    </div>
+    <div style="display:flex;gap:16px;align-items:center;margin:12px 0 8px;font-size:13px;flex-wrap:wrap">
+      <span>Layout <span class="seg"><button class="on">One chart</button><button>Small multiples</button></span></span>
+      <span>Kind of figure <span class="seg"><button class="on">Budget estimate</button><button>Revised estimate</button></span></span>
+      <span style="margin-left:auto;display:flex;gap:8px"><a class="btn btn-p" href="#">Combined CSV, with source and page columns</a><a class="btn" href="#">Copy link</a></span>
+    </div>
+    <div style="border-left:3px solid #9a5800;background:#f8eedc;padding:6px 12px;font-size:13px;margin-bottom:8px">
+      <strong>Read with care:</strong> both series have a break from 2011-12 (devolution); the lines stop there. <span class="mut">Other notices this box can show, each read from the series records: different units (then small multiples), 13th and 19th ICLS definitions, different CPI base years.</span>
+    </div>
+    <div class="ph" style="height:340px;flex-direction:column;gap:6px;position:relative">
+      <div style="position:absolute;left:36%;top:14px;bottom:40px;border-left:2px dashed #565b62"></div>
+      <strong>Chart area: both series in Rs million on one axis</strong>
+      <span>Colour, dash and marker differ per line, and each line is labelled at its end.</span>
+      <span>Each point links to its receipt.</span>
+    </div>
+  </main>
+  <div class="fold" style="top:800px"><span>first screen 1280x800</span></div>
+  <section style="padding:34px 32px 0">
+    <h2 style="font-size:20px;margin:0 0 8px">Every figure, aligned by period</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead><tr style="border-bottom:1px solid #8c9299;text-align:left"><th style="padding:6px 0">Period</th><th style="text-align:right">Health (current, revenue account)<br><span class="mut" style="font-weight:400">Rs million, budget estimate</span></th><th style="text-align:right">Education affairs and services (current, revenue account)<br><span class="mut" style="font-weight:400">Rs million, budget estimate</span></th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0"><span class="slot">period</span></td><td style="text-align:right"><a href="#"><span class="slot">value</span></a></td><td style="text-align:right"><a href="#"><span class="slot">value</span></a></td></tr>
+        <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0"><span class="slot">period</span></td><td style="text-align:right"><a href="#"><span class="slot">value</span></a></td><td style="text-align:right;background:radial-gradient(rgba(109,113,120,.38) .8px,transparent 1.1px) 0 0/6px 6px"><a href="#">Not yet verified by us</a></td></tr>
+      </tbody>
+    </table>
+    <p class="mut" style="font-size:13px">The combined CSV holds one row per figure with obs_id, series, period, kind of figure, value (checked figures only), status, document, official address, SHA-256, page and the printed text.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1400}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

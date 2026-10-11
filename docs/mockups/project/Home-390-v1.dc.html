@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home, 390, v1</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.btn-p{background:#0b5c78;border-color:#0b5c78;color:#fff}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.ph{border:1px solid #d9d9d6;background:#fff;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:12px;text-align:center}
+.h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#3d4248;margin:0}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2f6b4f}
+.tile{display:block;border-top:1px solid #d9d9d6;padding:12px 0;text-decoration:none;color:#1c1d1f}
+</style>
+</helmet>
+<div class="r" style="width:390px;height:2050px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:12px;padding:6px 16px;display:flex;gap:8px;align-items:center">
+    <span style="flex:1"><strong>Prototype v0.0.1-prototype.</strong> Not yet for citation. <a href="#">Disclaimer</a></span>
+    <button class="btn" style="min-height:28px;font-size:12px">Hide</button>
+  </div>
+  <header style="padding:8px 16px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a>
+      <button class="btn" aria-label="Menu">Menu</button>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:44px;background:#fff;margin-top:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#565b62" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <span class="mut" style="font-size:15px">Search series and documents</span>
+    </label>
+  </header>
+  <main style="padding:16px 16px 0">
+    <h1 style="font-size:22px;line-height:1.25;margin:0 0 8px">Pakistan&#39;s economic and fiscal statistics, every figure linked to the page it was printed on.</h1>
+    <p class="mut" style="margin:0 0 14px;font-size:14px">Try: <a href="#">health budget</a> · <a href="#">CPI food</a> · <a href="#">unemployment women</a></p>
+    <h2 class="h2" style="margin-bottom:4px">Data types</h2>
+    <a class="tile" href="#"><strong style="color:#0b5c78">Federal Annual Budget Statement</strong><br><span style="font-size:14px"><span class="slot">series</span> series · <span class="slot">checked values</span> checked</span></a>
+    <a class="tile" href="#"><strong style="color:#0b5c78">Consumer Price Index</strong><br><span style="font-size:14px"><span class="slot">series</span> series · <span class="slot">checked values</span> checked</span></a>
+    <a class="tile" href="#" style="border-bottom:1px solid #d9d9d6"><strong style="color:#0b5c78">Labour Force Survey</strong><br><span style="font-size:14px"><span class="slot">series</span> series · <span class="slot">checked values</span> checked</span></a>
+    <h2 class="h2" style="margin:18px 0 4px">Headline series</h2>
+    <div style="border-top:1px solid #d9d9d6;padding:10px 0;display:flex;gap:10px;align-items:center"><div style="flex:1"><a href="#" style="font-weight:600">Total federal expenditure</a><div style="font-size:20px;font-weight:600"><a href="#"><span class="slot">latest checked value</span></a> <span class="mut" style="font-size:12px">Rs million</span></div><div class="mut" style="font-size:12px"><span class="slot">period</span> · <span class="slot">estimate type</span></div></div><div class="ph" style="width:80px;height:34px;font-size:10px">sparkline</div></div>
+    <div style="border-top:1px solid #d9d9d6;padding:10px 0;display:flex;gap:10px;align-items:center"><div style="flex:1"><a href="#" style="font-weight:600">Tax revenue receipts</a><div style="font-size:20px;font-weight:600"><a href="#"><span class="slot">latest checked value</span></a> <span class="mut" style="font-size:12px">Rs million</span></div><div class="mut" style="font-size:12px"><span class="slot">period</span> · <span class="slot">estimate type</span></div></div><div class="ph" style="width:80px;height:34px;font-size:10px">sparkline</div></div>
+    <div style="border-top:1px solid #d9d9d6;padding:10px 0;display:flex;gap:10px;align-items:center"><div style="flex:1"><a href="#" style="font-weight:600">Health (current, revenue account)</a><div style="font-size:20px;font-weight:600"><a href="#"><span class="slot">latest checked value</span></a> <span class="mut" style="font-size:12px">Rs million</span></div><div class="mut" style="font-size:12px"><span class="slot">period</span> · <span class="slot">estimate type</span></div></div><div class="ph" style="width:80px;height:34px;font-size:10px">sparkline</div></div>
+    <div style="border-top:1px solid #d9d9d6;padding:10px 0;display:flex;gap:10px;align-items:center"><div style="flex:1"><a href="#" style="font-weight:600">CPI National: General (all groups), index (base 2015-16)</a><div style="font-size:20px;font-weight:600"><a href="#"><span class="slot">latest checked value</span></a> <span class="mut" style="font-size:12px">index points</span></div><div class="mut" style="font-size:12px"><span class="slot">month</span></div></div><div class="ph" style="width:80px;height:34px;font-size:10px">sparkline</div></div>
+    <div style="border-top:1px solid #d9d9d6;padding:10px 0;display:flex;gap:10px;align-items:center"><div style="flex:1"><a href="#" style="font-weight:600">Unemployment rate, both sexes, Pakistan</a><div style="font-size:20px;font-weight:600"><a href="#"><span class="slot">latest checked value</span></a> <span class="mut" style="font-size:12px">per cent</span></div><div class="mut" style="font-size:12px"><span class="slot">survey round</span></div></div><div class="ph" style="width:80px;height:34px;font-size:10px">sparkline</div></div>
+    <div style="border-top:1px solid #d9d9d6;border-bottom:1px solid #d9d9d6;padding:10px 0;display:flex;gap:10px;align-items:center"><div style="flex:1"><a href="#" style="font-weight:600">Civilian labour force, both sexes, Pakistan</a><div style="font-size:20px;font-weight:600"><a href="#"><span class="slot">latest checked value</span></a> <span class="mut" style="font-size:12px">million persons</span></div><div class="mut" style="font-size:12px"><span class="slot">survey round</span></div></div><div class="ph" style="width:80px;height:34px;font-size:10px">sparkline</div></div>
+    <p class="mut" style="font-size:12px;margin:10px 0">More data types: Coming: not in this release.</p>
+  </main>
+  <div class="fold" style="top:844px"><span>first screen 390x844</span></div>
+  <section style="padding:24px 16px 0">
+    <h2 style="font-size:19px;margin:0 0 8px">How a figure gets on this site</h2>
+    <ol style="padding-left:20px;margin:0;font-size:14px;line-height:1.6">
+      <li>Read from the official PDF by a table-extraction tool.</li>
+      <li>Checked by fixed rules: sums, identities, a second edition.</li>
+      <li>Published only if it passes; otherwise a labelled gap.</li>
+    </ol>
+    <h2 style="font-size:19px;margin:22px 0 8px">Quality of this release</h2>
+    <div style="font-size:14px;border-top:1px solid #d9d9d6;padding:8px 0"><strong>Budget statement</strong><br>Coverage <span class="slot">coverage</span> · Checks passed <span class="slot">pass rate</span> · Error rate Pending</div>
+    <div style="font-size:14px;border-top:1px solid #d9d9d6;padding:8px 0"><strong>Consumer prices</strong><br>Coverage <span class="slot">coverage</span> · Checks passed <span class="slot">pass rate</span> · Error rate Pending</div>
+    <div style="font-size:14px;border-top:1px solid #d9d9d6;border-bottom:1px solid #d9d9d6;padding:8px 0"><strong>Labour force</strong><br>Coverage <span class="slot">coverage</span> · Checks passed <span class="slot">pass rate</span> · Error rate Pending</div>
+    <p style="margin:18px 0 0"><a href="#" style="font-weight:600">Worked example: health and jobs</a></p>
+  </section>
+  <footer style="position:absolute;bottom:0;left:0;right:0;border-top:1px solid #d9d9d6;background:#f3f4f4;padding:20px 16px;font-size:13px;line-height:1.8">
+    <strong>LUMS DataLab Portal</strong><br>Unofficial research project, LUMS Department of Economics.<br>
+    <a href="#">Download and file formats</a><br><a href="#">Releases and errata</a><br><a href="#">API</a> <span class="mut">Coming: not in this release</span><br><a href="#">Report an error on this page</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2050}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

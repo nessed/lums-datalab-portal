@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Data type, 1280, v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.btn-p{background:#0b5c78;border-color:#0b5c78;color:#fff}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.ph{border:1px solid #d9d9d6;background:#fff;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:10px;text-align:center}
+.st{border-top:2px solid #1c1d1f;padding:8px 0}
+.st b{display:block;font-size:22px;font-weight:600}
+.q{border:1px solid #d9d9d6;background:#fff;padding:12px 14px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 110px 140px 90px 44px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid #e3e3e0;font-size:14px}
+.sub{display:block;font-size:12px;color:#565b62}
+</style>
+</helmet>
+<div class="r" style="width:1280px;height:1750px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:13px;padding:6px 32px"><strong>Prototype release v0.0.1-prototype.</strong> No DOI; not yet for citation in publications. <a href="#">Disclaimer</a></div>
+  <header style="display:flex;align-items:center;gap:24px;padding:10px 32px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a>
+    <button style="flex:1;max-width:440px;display:flex;align-items:center;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:36px;background:#fff;font:inherit"><span class="mut" style="font-size:14px">Search series and documents</span></button>
+    <nav style="display:flex;gap:20px"><a href="#" style="font-weight:700;color:#1c1d1f">Data</a><a href="#">Compare</a><a href="#">Sources</a><a href="#">Methods</a><a href="#">About</a></nav>
+    <a href="#" class="mut" style="margin-left:auto;font-size:13px">Release v0.0.1-prototype</a>
+  </header>
+  <main style="padding:12px 32px 0">
+    <nav class="mut" style="font-size:13px"><a href="#">Data</a> › Federal Annual Budget Statement</nav>
+    <div style="display:flex;align-items:flex-start;gap:24px;margin-top:4px">
+      <div style="flex:1">
+        <h1 style="font-size:28px;margin:0">Federal Annual Budget Statement</h1>
+        <p style="margin:2px 0 0" class="mut">Published by Finance Division, Government of Pakistan · <span class="slot">n</span> editions, fiscal years <span class="slot">first</span> to <span class="slot">last</span> · <a href="#">the documents</a></p>
+      </div>
+      <div style="display:flex;gap:8px"><a class="btn btn-p" href="#">Download this data type (CSV)</a><a class="btn" href="#">Browse its series</a></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:14px">
+      <div class="st"><b><span class="slot">n</span></b><span class="mut">series</span></div>
+      <div class="st"><b><span class="slot">n</span></b><span class="mut">checked values</span></div>
+      <div class="st"><b><span class="slot">n</span></b><span class="mut">labelled gaps (by kind below)</span></div>
+      <div class="st"><b><span class="slot">n</span></b><span class="mut">disputed figures</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;margin-top:20px">
+      <div>
+        <h2 style="font-size:20px;margin:0 0 6px">Main series</h2>
+        <div class="row" style="font-size:12px;font-weight:700;text-transform:uppercase;color:#3d4248;border-bottom:1px solid #8c9299"><span>Series</span><span style="text-align:right">Checked</span><span style="text-align:right">Latest</span><span>Trend</span><span></span></div>
+        <div class="row"><a href="#" style="font-weight:600">Total federal expenditure</a><span style="text-align:right"><span class="slot">n of m</span></span><span style="text-align:right"><a href="#"><span class="slot">latest</span></a><span class="sub">BE <span class="slot">period</span></span></span><div class="ph" style="height:24px">spark</div><a href="#" style="font-size:13px">CSV</a></div>
+        <div class="row"><a href="#" style="padding-left:16px">Current expenditure on revenue account</a><span style="text-align:right"><span class="slot">n of m</span></span><span style="text-align:right"><a href="#"><span class="slot">latest</span></a><span class="sub">BE <span class="slot">period</span></span></span><div class="ph" style="height:24px">spark</div><a href="#" style="font-size:13px">CSV</a></div>
+        <div class="row"><a href="#" style="font-weight:600">Total resources</a><span style="text-align:right"><span class="slot">n of m</span></span><span style="text-align:right"><a href="#"><span class="slot">latest</span></a><span class="sub">BE <span class="slot">period</span></span></span><div class="ph" style="height:24px">spark</div><a href="#" style="font-size:13px">CSV</a></div>
+        <div class="row"><a href="#" style="padding-left:16px">Total revenue receipts</a><span style="text-align:right"><span class="slot">n of m</span></span><span style="text-align:right"><a href="#"><span class="slot">latest</span></a><span class="sub">BE <span class="slot">period</span></span></span><div class="ph" style="height:24px">spark</div><a href="#" style="font-size:13px">CSV</a></div>
+        <a href="#" style="display:block;margin-top:8px;font-size:14px">All <span class="slot">n</span> series of this data type</a>
+      </div>
+      <aside>
+        <div style="border-left:3px solid #9a5800;background:#f8eedc;padding:10px 14px;font-size:14px">
+          <strong>Read before using</strong>
+          <p style="margin:4px 0 0">Series break from 2011-12 (devolution): 18th Amendment and 7th NFC Award: from 2011-12 many health, education and other functions moved largely to the provinces. Federal figures before and after are not comparable.</p>
+          <p class="mut" style="margin:6px 0 0;font-size:13px">Every distinct break and series note in this data type, read from the release.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div class="fold" style="top:800px"><span>first screen 1280x800</span></div>
+  <section style="padding:30px 32px 0">
+    <h2 style="font-size:20px;margin:0 0 4px">Quality, measured separately</h2>
+    <p class="mut" style="margin:0 0 10px;font-size:14px">Three different questions. They are never combined into one score. Thresholds were frozen before any result was seen.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+      <div class="q"><strong>Coverage</strong> <span class="mut" style="font-size:13px">how much of each printed table was captured</span><p style="margin:4px 0;font-size:22px"><span class="slot">coverage</span></p><p class="mut" style="margin:0;font-size:13px"><span class="slot">matched</span> of <span class="slot">printed</span> printed numbers over <span class="slot">n</span> tables · frozen minimum <span class="slot">threshold</span> · <span class="slot">meets / below</span></p></div>
+      <div class="q"><strong>Checks passed</strong> <span class="mut" style="font-size:13px">evidence that what was captured is right</span><p style="margin:4px 0;font-size:22px"><span class="slot">pass rate</span></p><p class="mut" style="margin:0;font-size:13px">of <span class="slot">n</span> checks that could run · frozen minimum <span class="slot">threshold</span> · <span class="slot">meets / below</span></p></div>
+      <div class="q"><strong>Cross-edition agreement</strong> <span class="mut" style="font-size:13px">the same figure in two editions</span><p style="margin:4px 0;font-size:22px"><span class="slot">agreement</span></p><p class="mut" style="margin:0;font-size:13px"><span class="slot">n</span> pairs, <span class="slot">n</span> disputed · frozen minimum <span class="slot">threshold</span> · <span class="slot">meets / below</span></p></div>
+    </div>
+    <p style="font-size:14px;margin:10px 0 0">Measured error rate: <strong>Pending</strong>. It needs the hand-labelled gold set. <a href="#">How each number is measured</a></p>
+  </section>
+  <section style="padding:28px 32px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px">
+    <div>
+      <h2 style="font-size:20px;margin:0 0 6px">Gaps and disputes</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px"><tbody>
+        <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0">Not published by the government</td><td style="text-align:right"><span class="slot">n</span></td></tr>
+        <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0">Not yet verified by us</td><td style="text-align:right"><span class="slot">n</span></td></tr>
+        <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0">Withheld (failed its checks)</td><td style="text-align:right"><span class="slot">n</span></td></tr>
+        <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0">Disputed: <a href="#">list every one with its receipt</a></td><td style="text-align:right"><span class="slot">n</span></td></tr>
+      </tbody></table>
+    </div>
+    <div>
+      <h2 style="font-size:20px;margin:0 0 6px">Tables as printed, by edition</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead><tr style="border-bottom:1px solid #8c9299;text-align:left"><th style="padding:6px 0">Edition</th><th>Tables (open one to see it as printed)</th><th style="text-align:right">Values from it</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0"><a href="#">Annual Budget Statement 2010-11</a></td><td><a href="#">p. <span class="slot">n</span></a> · <a href="#">p. <span class="slot">n</span></a> · <a href="#">p. <span class="slot">n</span></a></td><td style="text-align:right"><span class="slot">n</span></td></tr>
+          <tr style="border-bottom:1px solid #e3e3e0"><td style="padding:6px 0"><a href="#">Annual Budget Statement 2011-12</a></td><td><a href="#">p. <span class="slot">n</span></a> · <a href="#">p. <span class="slot">n</span></a> · <a href="#">p. <span class="slot">n</span></a></td><td style="text-align:right"><span class="slot">n</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <p class="mut" style="font-size:13px;padding:24px 32px 0;margin:0">Provincial budgets and district figures: Coming: not in this release.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1750}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

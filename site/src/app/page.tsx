@@ -1,224 +1,161 @@
-// Home: what this is in one sentence, the release's own numbers, the datasets,
-// and three ways in. No hero, no cards: the evidence is the pitch.
+// Home: find, see, take, check on the first screen. One line on what this is,
+// a search box, one tile per data type and the latest checked figure of a few
+// headline series (chosen by people in editorial.config.json; every value is
+// read from the release and links to its receipt). Text goes below the fold.
 import Link from "next/link";
-import SeriesChart from "@/components/SeriesChart";
-import { TableWrap } from "@/components/ui/Basics";
-import { DocCrop } from "@/components/ui/PageFrame";
-import { StatusBadge } from "@/components/ui/Status";
-import { buildChart } from "@/lib/chart";
-import {
-  cropGuides,
-  datasetKeys,
-  db,
-  isDatasetPublished,
-  obsHref,
-  pageImage,
-  publishedObs,
-  releaseMarkdown,
-  seriesHref,
-  type Observation,
-} from "@/lib/data";
-import { count, dateOnly, formatDecimalString, pct, periodWords, unitLabel, vintageWords } from "@/lib/format";
-import { statusOf } from "@/lib/status";
+import editorial from "../../editorial.config.json";
+import { FigureLine, KindAndPeriod } from "@/components/Figure";
+import Spark from "@/components/Spark";
+import DataTypeTile from "@/components/DataTypeTile";
+import { Count, Num } from "@/components/ui/Num";
+import { StatusLegend } from "@/components/ui/Status";
+import { datasetName, db, isDatasetPublished, seriesHref } from "@/lib/data";
+import { COMING } from "@/lib/features";
+import { dateOnly } from "@/lib/format";
+import { latestPublished, publishedDatasets, totalVisible } from "@/lib/stats";
 
-/** The featured series and receipt. Chosen by id from the release; if the
- * release names them differently the section is simply left out. */
-const FEATURED_SERIES = "fed.exp.current.function.health";
-
-function rateRange(values: (number | null | undefined)[]): string {
-  const v = values.filter((x): x is number => typeof x === "number" && Number.isFinite(x));
-  if (v.length === 0) return "not available";
-  const lo = Math.min(...v);
-  const hi = Math.max(...v);
-  return lo === hi ? pct(lo) : `${pct(lo)} to ${pct(hi)}`;
+function Headline({ id }: { id: string }) {
+  const d = db();
+  const s = d.seriesById.get(id);
+  if (!s || !isDatasetPublished(s.dataset)) return null;
+  const o = latestPublished(id);
+  if (!o) return null;
+  return (
+    <li className="hl">
+      <div className="hl-text">
+        <Link href={seriesHref(id)} className="hl-name">
+          {s.name}
+        </Link>
+        <FigureLine o={o} series={s} />
+        <span className="hl-kind">
+          <KindAndPeriod o={o} series={s} />
+        </span>
+      </div>
+      <Spark series={s} width={104} height={38} />
+    </li>
+  );
 }
 
 export default function Home() {
-  const d = db();
-  const r = d.release;
-  const keys = datasetKeys();
-  const published = keys.filter(isDatasetPublished);
-  const byDataset = r.counts?.observations_by_dataset ?? {};
-  const values = Object.values(byDataset).reduce((a, m) => a + (m.published ?? 0), 0);
-  const checksRun = Object.values(r.counts?.checks_by_result ?? {}).reduce((a, b) => a + b, 0);
-  const docsUsed = d.sources.filter((s) => (s.pages_used ?? []).length > 0).length;
-  const coverage = rateRange(published.map((k) => r.dataset_status[k]?.coverage?.coverage));
-  const passRate = rateRange(published.map((k) => r.dataset_status[k]?.check_pass_rate?.pass_rate));
-
-  const health = d.seriesById.get(FEATURED_SERIES);
-  const healthVisible = health && isDatasetPublished(health.dataset) && publishedObs(health.series_id).length > 1;
-  // Featured receipt: the latest budget estimate of the featured series that has a page render.
-  let featured: Observation | undefined;
-  if (healthVisible) {
-    featured = [...publishedObs(health.series_id)]
-      .filter((o) => o.tier === "A" && o.primary_cell_id && pageImage(d.cellById.get(o.primary_cell_id)!.source_id, d.cellById.get(o.primary_cell_id)!.page))
-      .sort((a, b) => b.period.localeCompare(a.period))[0];
-  }
-  const fCell = featured?.primary_cell_id ? d.cellById.get(featured.primary_cell_id) : undefined;
-  const fImg = fCell ? pageImage(fCell.source_id, fCell.page) : null;
-  const fSrc = fCell ? d.sourceById.get(fCell.source_id) : undefined;
-
-  const changelog = releaseMarkdown("CHANGELOG.md");
-  const firstEntry = changelog?.split("\n").find((l) => l.startsWith("## "))?.replace(/^##\s*/, "");
+  const r = db().release;
+  const keys = publishedDatasets();
+  const total = totalVisible();
+  const headline = editorial.headline.filter((id) => {
+    const s = db().seriesById.get(id);
+    return s && isDatasetPublished(s.dataset) && latestPublished(id);
+  });
 
   return (
-    <>
-      <header className="home-head">
-        <h1>Pakistan&rsquo;s economic and fiscal statistics, every figure traceable to the page it was printed on.</h1>
-        <p className="lede">
-          A research bank built at the LUMS Department of Economics. Each value links to a receipt: the government page with the figure boxed,
-          the arithmetic checks it passed, and a citation. Where we could not verify a figure, we show a labelled gap instead of a number.
-        </p>
-      </header>
-
-      <section aria-labelledby="numbers-h" className="home-numbers">
-        <h2 id="numbers-h" className="sr-only">
-          This release in numbers
-        </h2>
-        <div className="stat-row">
-          <Link href="/browse">
-            <span className="stat-v">{count(values)}</span>
-            <span className="stat-k">checked values published</span>
-          </Link>
-          <Link href="/sources">
-            <span className="stat-v">{count(docsUsed)}</span>
-            <span className="stat-k">government documents read</span>
-          </Link>
-          <Link href="/methods#checks">
-            <span className="stat-v">{count(checksRun)}</span>
-            <span className="stat-k">arithmetic checks run</span>
-          </Link>
-          <Link href="/methods#quality">
-            <span className="stat-v">{coverage}</span>
-            <span className="stat-k">of printed numbers captured (coverage)</span>
-          </Link>
-          <Link href="/methods#quality">
-            <span className="stat-v">{passRate}</span>
-            <span className="stat-k">of checks passed, by dataset</span>
-          </Link>
-          <Link href="/methods#error-rate">
-            <span className="stat-v is-pending">Pending</span>
-            <span className="stat-k">measured error rate: needs the hand-labelled gold set</span>
-          </Link>
-        </div>
-        <p className="small muted measure">
-          Release <Link href="/releases">{r.version}</Link>, built {dateOnly(r.created_at)}
-          {firstEntry ? <>. Latest change: {firstEntry}</> : null}. Coverage and the check pass rate answer different questions and are never
-          combined; <Link href="/methods#quality">see how each is measured</Link>.
+    <div className="home">
+      <section className="home-find" aria-labelledby="home-h">
+        <h1 id="home-h">Pakistan&rsquo;s economic and fiscal statistics, every figure linked to the government page it was printed on.</h1>
+        <form action="/browse" method="get" role="search" className="home-search" aria-label="Search the catalogue">
+          <label htmlFor="home-q" className="sr-only">
+            Search series
+          </label>
+          <input id="home-q" name="q" type="search" placeholder="Search series, e.g. health spending" autoComplete="off" />
+          <button type="submit" className="btn btn-primary">
+            Search
+          </button>
+        </form>
+        <p className="home-try">
+          Try:{" "}
+          {editorial.exampleSearches.map((q, i) => (
+            <span key={q}>
+              {i > 0 ? " · " : ""}
+              <Link href={`/browse?q=${encodeURIComponent(q)}`}>{q}</Link>
+            </span>
+          ))}{" "}
+          · or <Link href="/browse">browse all <Count k="series" n={total.series} /> series</Link>
         </p>
       </section>
 
-      <div className="home-grid">
-        <section aria-labelledby="start-h" className="home-start">
-          <h2 id="start-h">Start here</h2>
+      <section className="home-latest" aria-labelledby="latest-h">
+        <h2 id="latest-h" className="eyebrow">
+          Latest checked figures
+        </h2>
+        <ul className="hl-grid">
+          {headline.map((id) => (
+            <Headline key={id} id={id} />
+          ))}
+        </ul>
+      </section>
 
-          {healthVisible && health ? (
-            <article className="start-item">
-              <h3>
-                <span className="start-n">1</span> A series: <Link href={seriesHref(health.series_id)}>{health.name}</Link>
-              </h3>
-              <p className="small measure">
-                Federal spending on health as printed in each year&rsquo;s budget statement, budget and revised estimates. The dashed rule is the
-                18th Amendment devolution: figures either side are not comparable, so the lines stop there.
-              </p>
-              <SeriesChart amount={buildChart(health)} amountLabel="Amount" />
-            </article>
-          ) : null}
+      <section className="home-types" aria-labelledby="types-h">
+        <h2 id="types-h" className="eyebrow">
+          Data types
+        </h2>
+        <ul className="dt-grid">
+          {keys.map((k) => (
+            <DataTypeTile key={k} k={k} />
+          ))}
+        </ul>
+      </section>
 
-          {featured && fCell && fImg ? (
-            <article className="start-item">
-              <h3>
-                <span className="start-n">2</span> A receipt: how one number is verified
-              </h3>
-              <div className="start-receipt">
-                <div>
-                  <p className="small muted" style={{ margin: 0 }}>
-                    {health?.name}, {vintageWords(featured.vintage).toLowerCase()} for {periodWords(featured.period)}
-                  </p>
-                  <p className="start-fig tnum">
-                    {formatDecimalString(featured.value)} <span className="figure-u">{unitLabel(featured.unit, featured.scale_factor)}</span>
-                  </p>
-                  <StatusBadge info={statusOf(featured)} />
-                  <p className="small">
-                    Printed on page {fCell.page} of {fSrc?.title ?? fCell.source_id}. {featured.evidence_summary}
-                  </p>
-                  <p>
-                    <Link href={obsHref(featured.obs_id)} className="btn">
-                      Open the receipt
-                    </Link>
-                  </p>
-                </div>
-                <DocCrop image={fImg} cell={fCell} guides={cropGuides(fCell)} rows={2} alt={`Close-up of page ${fCell.page} of ${fSrc?.title ?? ""}: the row "${fCell.row_label_raw}" with ${fCell.value_raw} boxed.`} />
-              </div>
-            </article>
-          ) : null}
+      <p className="home-release">
+        Release <Link href="/releases"><Num kind="version">{r.version}</Num></Link>, built <Num kind="date">{dateOnly(r.created_at)}</Num> ·{" "}
+        <Link href="/data">Download the release</Link> · <Link href="/methods#statuses">What the marks mean</Link>
+      </p>
+      <StatusLegend label="Status marks used on this site" />
 
-          <article className="start-item">
-            <h3>
-              <span className="start-n">3</span> <Link href="/demo/health-and-jobs">A worked example: health and jobs</Link>
-            </h3>
-            <p className="small measure">A short piece of analysis in which every figure in the text links to its receipt, with the caveats stated where they apply.</p>
-          </article>
+      <div className="home-more">
+        <section aria-labelledby="how-h">
+          <h2 id="how-h">How a figure gets on this site</h2>
+          <ol>
+            <li>Read from the official PDF by a table-extraction tool. No language model writes a number or decides whether it passes.</li>
+            <li>Checked by fixed rules: sums, accounting identities, the same figure printed in another edition.</li>
+            <li>Published only if it passes. Otherwise the site shows a labelled gap that says why.</li>
+          </ol>
+          <p>
+            Every number is a link to its <strong>receipt</strong>: the printed page with the figure boxed, the checks it passed, and the official PDF.{" "}
+            <Link href="/methods">Methods</Link> · <Link href="/demo/health-and-jobs">A worked example</Link>
+          </p>
         </section>
-
-        <section aria-labelledby="ds-h" className="home-datasets">
-          <h2 id="ds-h">Datasets in this release</h2>
-          <TableWrap label="Datasets in this release">
+        <section aria-labelledby="quality-h">
+          <h2 id="quality-h">Quality of this release</h2>
+          <div className="table-wrap" role="region" aria-label="Quality of this release" tabIndex={0}>
             <table>
               <thead>
                 <tr>
-                  <th scope="col">Dataset</th>
-                  <th scope="col">Periods</th>
+                  <th scope="col">Data type</th>
                   <th scope="col" className="num">
-                    Values
+                    Coverage
                   </th>
-                  <th scope="col">State</th>
+                  <th scope="col" className="num">
+                    Checks passed
+                  </th>
+                  <th scope="col" className="num">
+                    Measured error rate
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {keys.map((k) => {
-                  const ds = r.dataset_status[k];
-                  const periods = r.scope?.periods?.[k] ?? [];
-                  const gaps = Object.entries(byDataset[k] ?? {})
-                    .filter(([g]) => g !== "published")
-                    .reduce((a, [, v]) => a + v, 0);
-                  return (
-                    <tr key={k}>
-                      <th scope="row">
-                        {isDatasetPublished(k) ? <Link href={`/browse?dataset=${k}`}>{ds?.name ?? k}</Link> : (ds?.name ?? k)}
-                      </th>
-                      <td className="small">{periods.length ? `${periods[0]} to ${periods[periods.length - 1]}` : "none yet"}</td>
-                      <td className="num">
-                        {count(byDataset[k]?.published ?? 0)}
-                        <span className="cell-sub">{count(gaps)} gaps</span>
-                      </td>
-                      <td className="small">
-                        {isDatasetPublished(k) ? "Published" : `Coming${ds?.reasons?.length ? `: ${ds.reasons.join("; ")}` : ""}`}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {keys.map((k) => (
+                  <tr key={k}>
+                    <th scope="row">
+                      <Link href={`/datasets/${k}#quality`}>{datasetName(k)}</Link>
+                    </th>
+                    <td className="num">
+                      <Count k={`release:dataset_status.${k}.coverage.coverage`} n={r.dataset_status[k]?.coverage?.coverage} rate />
+                    </td>
+                    <td className="num">
+                      <Count k={`release:dataset_status.${k}.check_pass_rate.pass_rate`} n={r.dataset_status[k]?.check_pass_rate?.pass_rate} rate />
+                    </td>
+                    <td className="num">Pending</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-          </TableWrap>
-          <p className="small">
-            <Link href="/browse">Browse every series</Link> · <Link href="/data">Download the files</Link> · <Link href="/sources">The documents</Link>
+          </div>
+          <p className="small muted">
+            Coverage: how much of each printed table was captured. Checks passed: evidence that what was captured is right. They answer different
+            questions and are never combined. The error rate needs the hand-labelled gold set.
           </p>
-          <h2>What the marks mean</h2>
-          <ul className="home-marks small">
-            {(["checked", "disputed", "gap-source", "gap-pending", "withheld"] as const).map((k) => {
-              const info = statusOf(k === "checked" ? { status: "checked", published: true, value: "1" } : k === "disputed" ? { status: "disputed" } : { gap_kind: k === "gap-source" ? "not_in_source" : k === "gap-pending" ? "not_yet_verified" : "failed_checks" });
-              return (
-                <li key={k}>
-                  <StatusBadge info={info} />
-                  <span className="muted">{info.meaning}</span>
-                </li>
-              );
-            })}
-          </ul>
-          <p className="small muted">No language model writes a published number or decides whether it passes a check.</p>
         </section>
       </div>
-    </>
+      <p className="coming home-coming">
+        More data types: {COMING}. <Link href="/releases#planned">What is planned</Link>
+      </p>
+    </div>
   );
 }

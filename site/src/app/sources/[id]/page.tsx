@@ -10,7 +10,9 @@ import { Bar, Breadcrumbs, Callout, ExternalLink, TableWrap, Toc } from "@/compo
 import CopyButton from "@/components/ui/CopyButton";
 import { VerifBadge } from "@/components/ui/Verif";
 import { DATA_BASE, db, obsHref, pageImage, runManifest, slugify, sourceHref } from "@/lib/data";
-import { bytes, count, dateOnly, DOC_TYPE_WORDS, pct, ROLE_WORDS } from "@/lib/format";
+import { bytes, dateOnly, DOC_TYPE_WORDS, ROLE_WORDS } from "@/lib/format";
+import { Count, Num } from "@/components/ui/Num";
+import { tablesOfSource } from "@/lib/tables";
 import { sourceCoverage, valuesFromSource, verifLong } from "@/lib/sources";
 
 export const dynamicParams = false;
@@ -89,7 +91,7 @@ export default async function SourcePage({ params }: Props) {
   const identity = typeof v.identity_route === "string" ? v.identity_route : null;
 
   return (
-    <article>
+    <article className="is-prose">
       <Breadcrumbs items={[{ href: "/sources", label: "Sources" }, { href: `/sources#t-${source.doc_type}`, label: DOC_TYPE_WORDS[source.doc_type] ?? source.doc_type }, { label: source.title }]} />
       <header className="page-head">
         <p className="kicker">{DOC_TYPE_WORDS[source.doc_type] ?? source.doc_type} · source document</p>
@@ -97,7 +99,11 @@ export default async function SourcePage({ params }: Props) {
         <p className="series-meta">
           <span>{source.publisher}</span>
           <span>Period {source.period}</span>
-          {source.page_count ? <span>{source.page_count} pages</span> : null}
+          {source.page_count ? (
+            <span>
+              <Count k={`src:${source.source_id}:page_count`} n={source.page_count} /> pages
+            </span>
+          ) : null}
           <span>{ROLE_WORDS[source.role]?.split(":")[0] ?? source.role}</span>
         </p>
         <p>
@@ -141,10 +147,18 @@ export default async function SourcePage({ params }: Props) {
             <ul className="vchecks">
               <Item ok={source.retrieved_via === "official"}>
                 Downloaded {source.retrieved_via === "official" ? "from the official address" : source.retrieved_via === "wayback" ? "from the Internet Archive, because the official address did not respond" : `via ${String(source.retrieved_via ?? "an unrecorded route").replaceAll("-", " ")}`} on{" "}
-                {dateOnly(source.retrieved_at)}
-                {response?.http_status ? ` (the server answered ${String(response.http_status)})` : ""}.
+                <Num kind="date">{dateOnly(source.retrieved_at)}</Num>
+                {response?.http_status ? (
+                  <>
+                    {" "}
+                    (the server answered <Num kind="id">{String(response.http_status)}</Num>)
+                  </>
+                ) : null}
+                .
                 {source.file_url ? (
-                  <span className="vcheck-url mono">{source.file_url}</span>
+                  <Num kind="id" className="vcheck-url mono">
+                    {source.file_url}
+                  </Num>
                 ) : null}
               </Item>
               {typeof v.landing_page_links_file === "boolean" ? (
@@ -163,11 +177,19 @@ export default async function SourcePage({ params }: Props) {
               ) : null}
               {wayback ? (
                 <Item ok={wayback.digest_matches_file === true ? true : wayback.digest_matches_file === false ? false : null}>
-                  {wayback.digest_matches_file === true
-                    ? `An Internet Archive snapshot from ${waybackDate(wayback.wayback_timestamp) ?? "an unrecorded date"} holds exactly the same bytes (the archive's own fingerprint matches).`
-                    : wayback.wayback_url
-                      ? `An Internet Archive snapshot exists (${waybackDate(wayback.wayback_timestamp) ?? "date not recorded"}), but its fingerprint was not matched to this file.`
-                      : "No Internet Archive snapshot was found."}
+                  {wayback.digest_matches_file === true ? (
+                    <>
+                      An Internet Archive snapshot from <Num kind="date">{waybackDate(wayback.wayback_timestamp) ?? "not recorded"}</Num> holds exactly the same bytes (the
+                      archive&rsquo;s own fingerprint matches).
+                    </>
+                  ) : wayback.wayback_url ? (
+                    <>
+                      An Internet Archive snapshot exists (<Num kind="date">{waybackDate(wayback.wayback_timestamp) ?? "not recorded"}</Num>), but its fingerprint was not
+                      matched to this file.
+                    </>
+                  ) : (
+                    "No Internet Archive snapshot was found."
+                  )}
                 </Item>
               ) : null}
               {inspection ? (
@@ -179,24 +201,37 @@ export default async function SourcePage({ params }: Props) {
               ) : null}
               {textFrac !== null ? (
                 <Item ok={v.text_layer_ok === true}>
-                  {pct(textFrac)} of its printed pages carry a text layer ({String(inspection?.pages_with_text_layer ?? "?")} of {String(inspection?.page_count ?? "?")}), so tables are read from text, not from a scan.
-                  {Array.isArray(inspection?.pages_without_text_layer) && (inspection!.pages_without_text_layer as unknown[]).length > 0
-                    ? ` Pages without text: ${(inspection!.pages_without_text_layer as number[]).join(", ")}.`
-                    : ""}
+                  <Count k={`src:${source.source_id}:verification.inspection.text_layer_fraction`} n={textFrac} rate /> of its printed pages carry a text layer (
+                  <Count k={`src:${source.source_id}:verification.inspection.pages_with_text_layer`} n={inspection?.pages_with_text_layer as number} /> of{" "}
+                  <Count k={`src:${source.source_id}:verification.inspection.page_count`} n={inspection?.page_count as number} />
+                  ), so tables are read from text, not from a scan.
+                  {Array.isArray(inspection?.pages_without_text_layer) && (inspection!.pages_without_text_layer as unknown[]).length > 0 ? (
+                    <>
+                      {" "}
+                      Pages without text: <Num kind="page">{(inspection!.pages_without_text_layer as number[]).join(", ")}</Num>.
+                    </>
+                  ) : null}
                 </Item>
               ) : null}
             </ul>
             <dl className="facts">
               <dt>File fingerprint (SHA-256)</dt>
               <dd>
-                <span className="hash">{source.sha256}</span> <CopyButton text={source.sha256} label="Copy" className="btn btn-text" />
+                <Num kind="id" className="hash">
+                  {source.sha256}
+                </Num>{" "}
+                <CopyButton text={source.sha256} label="Copy" className="btn btn-text" />
               </dd>
               <dt>Size</dt>
-              <dd>{bytes(source.size_bytes)}</dd>
+              <dd>
+                <Num kind="ui">{bytes(source.size_bytes)}</Num>
+              </dd>
               {created ? (
                 <>
                   <dt>Created (PDF metadata)</dt>
-                  <dd>{created}</dd>
+                  <dd>
+                    <Num kind="date">{created}</Num>
+                  </dd>
                 </>
               ) : null}
               <dt>Source id</dt>
@@ -211,8 +246,9 @@ export default async function SourcePage({ params }: Props) {
             ) : (
               <>
                 <p className="measure">
-                  {count(pages.length)} {pages.length === 1 ? "page" : "pages"} read; {count(values)} published {values === 1 ? "value has" : "values have"} this document as
-                  their main printing. Select a page to see a receipt from it.
+                  <Count k={`pages:source:${source.source_id}`} n={pages.length} /> {pages.length === 1 ? "page" : "pages"} read;{" "}
+                  <Count k={`values:source:${source.source_id}`} n={values} /> published {values === 1 ? "value has" : "values have"} this document as their main printing.
+                  Select a page to see a receipt from it, or open <a href="#printed">its tables as printed</a>.
                 </p>
                 <ul className="thumbs">
                   {pages.map((p) => {
@@ -229,7 +265,7 @@ export default async function SourcePage({ params }: Props) {
                             <span className="chart-empty" style={{ display: "block", aspectRatio: "0.77" }} />
                           )}
                           <span className="t-cap">
-                            Page {p}
+                            <Num kind="page">Page {p}</Num>
                             {o ? " · a receipt" : img ? " · the image" : ""}
                           </span>
                         </a>
@@ -249,7 +285,9 @@ export default async function SourcePage({ params }: Props) {
               <>
                 <p className="small measure">
                   Coverage counts the numbers printed in each table and how many our extraction captured. It says nothing about whether they are
-                  right; the checks on each receipt do that. Overall: {pct(cov.ratio)} ({count(cov.matched)} of {count(cov.printed)}).
+                  right; the checks on each receipt do that. Overall: <Count k={`coverage:source:${source.source_id}`} n={cov.ratio} rate /> (
+                  <Count k={`coverage:source:${source.source_id}:matched`} n={cov.matched} /> of <Count k={`coverage:source:${source.source_id}:printed`} n={cov.printed} />
+                  ).
                 </p>
                 <TableWrap label="Coverage per table">
                   <table>
@@ -268,9 +306,19 @@ export default async function SourcePage({ params }: Props) {
                           <th scope="row" style={{ fontWeight: 500 }}>
                             {c.table}
                           </th>
-                          <td className="num">{c.page}</td>
+                          <td className="num">
+                            <Num kind="page">{c.page}</Num>
+                          </td>
                           <td>
-                            <Bar ratio={c.coverage} label={`${pct(c.coverage)} (${count(c.matched)} of ${count(c.printed_numeric_tokens)})`} />
+                            <Bar
+                              ratio={c.coverage}
+                              label={
+                                <>
+                                  <Count k={`covrow:${source.source_id}:${i}:coverage`} n={c.coverage} rate /> (<Count k={`covrow:${source.source_id}:${i}:matched`} n={c.matched} /> of{" "}
+                                  <Count k={`covrow:${source.source_id}:${i}:printed_numeric_tokens`} n={c.printed_numeric_tokens} />)
+                                </>
+                              }
+                            />
                           </td>
                         </tr>
                       ))}
@@ -278,6 +326,26 @@ export default async function SourcePage({ params }: Props) {
                   </table>
                 </TableWrap>
               </>
+            )}
+          </section>
+
+          <section id="printed" aria-labelledby="printed-h">
+            <h2 id="printed-h">Tables as printed</h2>
+            {tablesOfSource(source.source_id).length ? (
+              <>
+                <p className="small measure">Each table drawn as the government printed it. Select any checked number to see where it sits on the page.</p>
+                <ul className="tp-links">
+                  {tablesOfSource(source.source_id).map((t) => (
+                    <li key={t.slug}>
+                      <Link href={`/tables/${t.slug}`}>
+                        {t.title}, <Num kind="page">p. {t.pageLabel ?? t.page}</Num>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p>No table of this document is read in this release.</p>
             )}
           </section>
 
@@ -303,14 +371,16 @@ export default async function SourcePage({ params }: Props) {
                     {runs.map(({ id: r, m }) => (
                       <tr key={r}>
                         <th scope="row" className="mono" style={{ fontWeight: 400 }}>
-                          <a href={`${DATA_BASE}/runs/${encodeURIComponent(r)}.manifest.json`}>{r}</a>
+                          <a href={`${DATA_BASE}/runs/${encodeURIComponent(r)}.manifest.json`}>
+                            <Num kind="id">{r}</Num>
+                          </a>
                         </th>
                         <td className="small">
-                          {m ? `${String(m.config?.extractor ?? "")} ${m.tool_versions?.[String(m.config?.extractor)] ?? ""}` : "manifest not in release"}
+                          {m ? <Num kind="id">{`${String(m.config?.extractor ?? "")} ${m.tool_versions?.[String(m.config?.extractor)] ?? ""}`}</Num> : "manifest not in release"}
                         </td>
                         <td className="small">{m?.run_mode ?? ""}</td>
-                        <td className="num small">{m ? `${m.pages_emitted ?? "?"} / ${m.tables_emitted ?? "?"}` : ""}</td>
-                        <td className="small">{m ? (m.validated ? `yes, ${m.errors?.count ?? 0} errors` : "no") : ""}</td>
+                        <td className="num small">{m ? <Num kind="ui">{`${m.pages_emitted ?? "?"} / ${m.tables_emitted ?? "?"}`}</Num> : ""}</td>
+                        <td className="small">{m ? m.validated ? <Num kind="ui">{`yes, ${m.errors?.count ?? 0} errors`}</Num> : "no" : ""}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -328,7 +398,8 @@ export default async function SourcePage({ params }: Props) {
           <Toc
             items={[
               { id: "genuine", label: "Is it genuine?" },
-              { id: "pages", label: `Pages read (${pages.length})` },
+              { id: "pages", label: <>Pages read (<Count k={`pages:source:${source.source_id}`} n={pages.length} />)</> },
+              { id: "printed", label: "Tables as printed" },
               { id: "tables", label: "Tables and coverage" },
               { id: "runs", label: "Extraction runs" },
               { id: "cite", label: "Cite" },
@@ -343,7 +414,15 @@ export default async function SourcePage({ params }: Props) {
                   <li key={s.source_id}>
                     <Link href={sourceHref(s.source_id)} className="nb">
                       <span className="nb-k">{s.period}</span>
-                      <span className="nb-v small">{(s.pages_used ?? []).length ? `${(s.pages_used ?? []).length} pp.` : "not read"}</span>
+                      <span className="nb-v small">
+                        {(s.pages_used ?? []).length ? (
+                          <>
+                            <Count k={`pages:source:${s.source_id}`} n={(s.pages_used ?? []).length} /> pp.
+                          </>
+                        ) : (
+                          "not read"
+                        )}
+                      </span>
                     </Link>
                   </li>
                 ))}

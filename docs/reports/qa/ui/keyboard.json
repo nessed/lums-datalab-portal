@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Skip link is the first Tab stop and moves focus to the content",
+    "ok": true,
+    "tag": "a",
+    "text": "Skip to content",
+    "visible": true
+  },
+  {
+    "name": "Search: '/' opens it, typing and Enter opens a series",
+    "ok": true,
+    "url": "/series/fed.exp.current.function.health"
+  },
+  {
+    "name": "Series: the tabs are reachable and arrow keys switch them",
+    "ok": true,
+    "presses": 23,
+    "tag": "button",
+    "text": "Chart",
+    "visible": true
+  },
+  {
+    "name": "Series: a chart point is a Tab stop and Enter opens its receipt",
+    "ok": true,
+    "presses": 33,
+    "tag": "a",
+    "text": "Budget estimate, 2009-10: 6,484 Rs million. Open the receipt",
+    "visible": true,
+    "url": "/o/fed.exp.current.function.health~2009-10~be"
+  },
+  {
+    "name": "Receipt: 'Copy citation' and 'Official PDF' are Tab stops",
+    "ok": true,
+    "presses": 28,
+    "tag": "button",
+    "text": "Copy citation (APA)",
+    "visible": true
+  },
+  {
+    "name": "Receipt: a check opens with the keyboard (Show the arithmetic)",
+    "ok": true,
+    "presses": 42,
+    "tag": "summary",
+    "text": "Show both printings2 printed figures",
+    "visible": true
+  },
+  {
+    "name": "Catalogue: a filter checkbox toggles with Space and filters the list",
+    "ok": true,
+    "presses": 19,
+    "tag": "input",
+    "text": "",
+    "visible": true,
+    "status": "259 of 925 series match"
+  },
+  {
+    "name": "Table as printed: Enter on a number selects it and shows its receipt link",
+    "ok": true,
+    "presses": 37,
+    "tag": "a",
+    "text": "17,203,391",
+    "visible": true
+  },
+  {
+    "name": "Compare: the series picker is reachable and Remove is a button",
+    "ok": true,
+    "presses": 14,
+    "tag": "button",
+    "text": "Remove Health (current, revenue account)",
+    "visible": true
+  },
+  {
+    "name": "Phone: the Menu opens with Enter and its links are Tab stops",
+    "ok": true,
+    "tag": "a",
+    "text": "Data",
+    "visible": true
+  }
+]

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Series, 390, v2</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b5c78}a:hover{color:#07465c}
+.r{font-family:'Source Sans 3',system-ui,sans-serif;color:#1c1d1f;background:#fbfbfa;font-size:15px;line-height:1.45;position:relative;overflow:hidden}
+.slot{display:inline-block;background:#e9f1f4;border:1px dashed #6f93a1;color:#0b4a60;border-radius:2px;padding:0 4px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:18px;white-space:nowrap}
+.mut{color:#565b62}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid #8c9299;border-radius:4px;background:#fff;color:#1c1d1f;font:inherit;font-size:14px;text-decoration:none;box-sizing:border-box}
+.btn-p{background:#0b5c78;border-color:#0b5c78;color:#fff}
+.fold{position:absolute;left:0;right:0;border-top:2px dashed #c2410c;z-index:5}
+.fold span{position:absolute;right:8px;top:-20px;background:#c2410c;color:#fff;font-size:11px;padding:1px 6px;border-radius:2px}
+.ph{border:1px solid #d9d9d6;background:#fff;display:flex;align-items:center;justify-content:center;color:#565b62;font-size:12px;text-align:center}
+.tab{padding:10px 12px;text-decoration:none;font-size:14px;white-space:nowrap}
+.tab.on{border-bottom:3px solid #0b5c78;font-weight:700;color:#1c1d1f}
+</style>
+</helmet>
+<div class="r" style="width:390px;height:2250px">
+  <div style="background:#eef0f1;border-bottom:1px solid #d9d9d6;font-size:12px;padding:6px 16px"><strong>Prototype v0.0.1-prototype.</strong> Not yet for citation. <a href="#">Disclaimer</a></div>
+  <header style="padding:8px 16px;border-bottom:1px solid #d9d9d6;background:#fff">
+    <div style="display:flex;align-items:center;justify-content:space-between"><a href="#" style="text-decoration:none;color:#1c1d1f;font-weight:700;font-size:18px">LUMS <span style="color:#0b5c78">DataLab</span></a><button class="btn">Menu</button></div>
+    <button style="width:100%;display:flex;align-items:center;border:1px solid #8c9299;border-radius:4px;padding:0 10px;height:44px;background:#fff;margin-top:8px;font:inherit"><span class="mut">Search series and documents</span></button>
+  </header>
+  <main style="padding:10px 16px 0">
+    <nav class="mut" style="font-size:12px"><a href="#">Data</a> › <a href="#">Budget statement</a> › <a href="#">Current expenditure on revenue account</a></nav>
+    <h1 style="font-size:22px;margin:4px 0 2px;line-height:1.2">Health (current, revenue account)</h1>
+    <p style="font-size:14px;margin:0">Latest <a href="#"><span class="slot">latest checked value</span></a> Rs million, <span class="slot">estimate type, period</span></p>
+    <p class="mut" style="font-size:13px;margin:2px 0 0"><span class="slot">n</span> of <span class="slot">m</span> figures checked · fiscal year</p>
+    <div style="display:flex;border-bottom:1px solid #d9d9d6;margin-top:8px;overflow:hidden">
+      <a class="tab on" href="#">Chart</a><a class="tab" href="#">Table</a><a class="tab" href="#">Sources</a><a class="tab" href="#">Download</a><a class="tab" href="#">Cite</a>
+    </div>
+    <p style="margin:8px 0 6px;font-size:13px;border-left:3px solid #9a5800;padding:2px 8px;background:#f8eedc"><strong>Break from 2011-12 (devolution):</strong> figures before and after are not comparable. <a href="#">Details</a></p>
+    <div class="ph" style="height:240px;flex-direction:column;gap:4px;position:relative">
+      <div style="position:absolute;left:40%;top:10px;bottom:30px;border-left:2px dashed #565b62"></div>
+      <strong>Chart area</strong><span>checked values only; tap a point for its value and receipt</span>
+    </div>
+    <p style="font-size:12px;margin:4px 0 0;display:flex;gap:12px;flex-wrap:wrap">
+      <span><svg width="22" height="10" aria-hidden="true"><line x1="0" y1="5" x2="22" y2="5" stroke="#0b5c78" stroke-width="2"></line><circle cx="11" cy="5" r="3" fill="#0b5c78"></circle></svg> Budget estimate</span>
+      <span><svg width="22" height="10" aria-hidden="true"><line x1="0" y1="5" x2="22" y2="5" stroke="#a2470e" stroke-width="2" stroke-dasharray="5 3"></line><rect x="8" y="2" width="6" height="6" fill="#a2470e"></rect></svg> Revised estimate</span>
+    </p>
+    <p style="margin:8px 0 0;font-size:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">Function 07. Federal current expenditure on revenue account for health. It excludes development spending on health and all provincial health spending.</p>
+  </main>
+  <div style="position:absolute;left:0;right:0;top:784px;height:60px;background:#fff;border-top:1px solid #8c9299;display:flex;gap:8px;padding:8px 16px;box-sizing:border-box;z-index:6">
+    <a class="btn btn-p" href="#" style="flex:2">Download CSV</a><a class="btn" href="#" style="flex:1">Cite</a><a class="btn" href="#" style="flex:1">Compare</a>
+  </div>
+  <div class="fold" style="top:844px"><span>first screen 390x844 (bar stays at the bottom)</span></div>
+  <section style="padding:24px 16px 0">
+    <p class="mut" style="font-size:12px;margin:0 0 12px">Real terms · % of GDP: Coming: not in this release</p>
+    <h2 style="font-size:18px;margin:0 0 6px">About this series</h2>
+    <dl style="display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:14px;margin:0">
+      <dt class="mut">Unit</dt><dd style="margin:0">Rs million</dd>
+      <dt class="mut">Geography</dt><dd style="margin:0">Pakistan (federal government)</dd>
+      <dt class="mut">Kinds of figure</dt><dd style="margin:0">Budget estimate, revised estimate</dd>
+      <dt class="mut">Printed in</dt><dd style="margin:0"><a href="#">Annual Budget Statement</a></dd>
+      <dt class="mut">Series id</dt><dd style="margin:0;font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all">fed.exp.current.function.health</dd>
+    </dl>
+    <h2 style="font-size:18px;margin:22px 0 4px">Related series</h2>
+    <a href="#" style="display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #e3e3e0;text-decoration:none;min-height:24px"><span>Current expenditure on revenue account</span><span style="text-align:right"><span class="slot">latest</span><br><small class="mut"><span class="slot">BE period</span></small></span></a>
+    <a href="#" style="display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #e3e3e0;text-decoration:none"><span>Education affairs and services</span><span style="text-align:right"><span class="slot">latest</span><br><small class="mut"><span class="slot">BE period</span></small></span></a>
+    <a href="#" style="display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #e3e3e0;border-bottom:1px solid #e3e3e0;text-decoration:none"><span>Social protection</span><span style="text-align:right"><span class="slot">latest</span><br><small class="mut"><span class="slot">BE period</span></small></span></a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2250}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

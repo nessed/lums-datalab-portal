@@ -48,6 +48,7 @@ class Resolved:
     slug: str = ""                 # function / sub-function slug
     part: str = ""                 # closing: part id
     series: str = ""               # closing / total: series of the line itself
+    not_in_parts: tuple[str, ...] = ()   # sub-function: parts in which this printed line is NOT that sub-function
 
 
 class DetailLabels:
@@ -72,7 +73,8 @@ class DetailLabels:
                 hits.add(Resolved("function", code=code, slug=self.functions[code][0]["slug"]))
             for entry, printed, pattern in self.subfunctions:
                 if code in printed and pattern.fullmatch(name):
-                    hits.add(Resolved("subfunction", code=entry["code"], slug=entry["slug"]))
+                    hits.add(Resolved("subfunction", code=entry["code"], slug=entry["slug"],
+                                      not_in_parts=tuple(entry.get("not_in_parts") or ())))
             if len(hits) == 1:
                 return hits.pop()
             return Resolved("unknown_code", code=code)
@@ -90,7 +92,7 @@ class Row:
     row: int
     label: str
     resolved: Resolved | None
-    label_source: str                               # docling | text_layer
+    label_source: str                               # docling | text_layer | two_rows_joined | two_text_lines_joined
     tcells: list[TCell]
     cells: dict[tuple[str, str], Cell] = field(default_factory=dict)   # (period, vintage) -> cell, once mapped
     series_id: str | None = None
@@ -145,6 +147,11 @@ def read_rows(table: Table, labels: DetailLabels, words: Words | None) -> list[R
             alt = labels.resolve(joined) if joined else None
             if alt is not None and alt.kind != "unknown_code":
                 got, label, source = alt, joined, "two_rows_joined"
+        if words is not None and (got is None or got.kind == "unknown_code"):
+            joined = text_layer_wrapped_label(table, grid, r, value_cols, words)
+            alt = labels.resolve(joined) if joined else None
+            if alt is not None and alt.kind != "unknown_code":
+                got, label, source = alt, joined, "two_text_lines_joined"
         out.append(Row(table=table, row=r, label=label, resolved=got, label_source=source, tcells=cells))
     return out
 
@@ -166,6 +173,42 @@ def _joined_with_line_above(table: Table, grid, r: int, value_cols: list[int], a
     if here and not up:
         return f"{here.group(1)} {above} {here.group(2)}"
     return ""
+
+
+def text_layer_wrapped_label(table: Table, grid, r: int, value_cols: list[int], words: Words) -> str:
+    """A label wrapped over two printed lines, read from the PDF text layer by position.
+
+    "011 Executive & Legislative Organs," / "Financial & Fiscal Affairs, External Affairs  1,234":
+    Docling sometimes drops the first line altogether (ABS 2014-15 p.13), so the row arrives with
+    no code, the block is summed without its largest member and the sum fails for no printed reason.
+    The two lines are joined only when all of these hold, and the result is used only if the
+    dictionary then matches it in full (the sum check validates it afterwards):
+    - the amount's own line carries no code;
+    - the nearest line above it, within one and a half line heights, starts with a 2 or 3 digit code;
+    - that line holds nothing in the amount columns (so it is not another row).
+    """
+    boxes = [grid[r][k].bbox for k in value_cols if grid[r][k] is not None and grid[r][k].row == r and grid[r][k].bbox]
+    if not boxes:
+        return ""
+    y0, y1 = min(b[1] for b in boxes), max(b[3] for b in boxes)
+    height = y1 - y0
+    if height <= 0:
+        return ""
+    left_edge = min(c.bbox[0] for c in table.cells if c.col in value_cols and c.bbox and not c.column_header)
+    own = text_layer_row_label(table, grid, r, value_cols, words)
+    if not own or CODED.match(clean_text(own)):
+        return ""
+    above = [w for w in words if y0 - 1.5 * height <= (w[1] + w[3]) / 2 < y0 - 0.15 * height and w[0] >= table.bbox[0] - 0.01]
+    if not above:
+        return ""
+    line_y = max((w[1] + w[3]) / 2 for w in above)                 # the nearest line above
+    line = [w for w in above if abs((w[1] + w[3]) / 2 - line_y) <= 0.3 * height]
+    if any(w[2] > left_edge + 0.002 for w in line):
+        return ""                                                   # something is printed in the amount columns
+    first = clean_text(" ".join(w[4] for w in sorted(line, key=lambda w: w[0])))
+    if not re.match(r"^\d{2,3}\s+\S", first):
+        return ""
+    return f"{first} {own}"
 
 
 def locate_detail(tables: list[Table], summary: Table, labels: DetailLabels, min_rows: int) -> list[Table]:
@@ -220,7 +263,8 @@ def walk(rows: list[Row]) -> Structure:
       blocks collected so far are dropped;
     - a sub-function row must sit under the function its code starts with, otherwise the part's
       sum is not evaluable (a function line was probably lost);
-    - a coded row the dictionary does not know makes its function's sum not evaluable;
+    - a coded row the dictionary does not know makes its function's sum not evaluable, and so does a
+      line the spec excludes from the part it turns out to be in (`not_in_parts`);
     - a total line printed twice in one edition closes nothing: the label cannot say which of the two
       lines a block belongs to, so the blocks above both occurrences are dropped.
     """
@@ -285,6 +329,12 @@ def walk(rows: list[Row]) -> Structure:
                 drop("its total line is printed twice in the edition")
                 continue
             seen_parts.add(got.part)
+            for b in blocks:
+                # A line that a sum check showed is not a sub-function in this part (spec `not_in_parts`)
+                # is left unmapped, and its block's sum is not evaluable rather than failed or passed.
+                for s in [s for s in b.subs if got.part in s.resolved.not_in_parts]:
+                    b.subs.remove(s)
+                    b.problems.append(f"the row '{s.label}' (p.{s.table.page}) is not read as a sub-function in this part")
             out.parts.append(Part(part_id=got.part, closing=row, blocks=blocks, problems=problems, tables=tables))
             reset()
         elif got.kind == "total":
@@ -385,6 +435,7 @@ def build_source(*, source, run, tables: list[Table], spec: dict[str, Any], abs_
             "rows_with_unknown_code": [r.label for r in table_rows if r.resolved is not None and r.resolved.kind == "unknown_code"],
             "labels_from_text_layer": [r.label for r in table_rows if r.label_source == "text_layer"],
             "labels_joined_from_two_rows": [r.label for r in table_rows if r.label_source == "two_rows_joined"],
+            "labels_joined_from_two_text_lines": [r.label for r in table_rows if r.label_source == "two_text_lines_joined"],
         })
 
     structure = walk(rows)
@@ -407,6 +458,8 @@ def build_source(*, source, run, tables: list[Table], spec: dict[str, Any], abs_
             flags.append("row_label_from_text_layer")
         if row.label_source == "two_rows_joined":
             flags.append("row_label_joined_from_two_rows")
+        if row.label_source == "two_text_lines_joined":
+            flags.append("row_label_joined_from_two_text_lines")
         for tc in row.tcells:
             if not tc.text.strip():
                 continue

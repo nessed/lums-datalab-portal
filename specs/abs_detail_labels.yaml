@@ -47,8 +47,12 @@ subfunctions:
   # Some editions print a line "19 Gen. Public Services not elsewhere defined" (two digits) under current
   # expenditure on capital account. Reading it as sub-function 019 was tried and the sum check
   # contradicted it (the function line equals the other sub-functions without it), so it is NOT mapped.
+  # ABS 2013-14 prints the same line there with three digits ("019"), and the sum check contradicts it in
+  # the same way (Budget 2013-14: '01' equals 011 + 014 without it). So under current expenditure on
+  # capital account this line is never read as sub-function 019, whatever its code looks like; under
+  # development expenditure, where it does add up under '01', it is.
   - {code: '019', slug: general_public_services_not_elsewhere_defined, name: "General public services not elsewhere defined",
-     pattern: 'gen(\.|eral) public services not elsewhere define?d'}
+     pattern: 'gen(\.|eral) public services not elsewhere define?d', not_in_parts: [current_capital]}
   # 02 Defence affairs and services
   - {code: '021', slug: military_defence, name: "Military defence (also printed as Defence Services, Defence Division)",
      pattern: 'military defence|defence services|defence division'}

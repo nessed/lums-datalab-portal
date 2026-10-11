@@ -1,7 +1,7 @@
 """ABS function-wise detail tables (D31): labels, structure, checks. Synthetic inputs only, no source files."""
 import yaml
 
-from conftest import docling_table, make_cell
+from conftest import PAGE_H, PAGE_W, docling_table, make_cell
 from datalab import config
 from datalab.datasets import abs_detail as ad
 from datalab.schema import RunManifest, Source
@@ -171,6 +171,28 @@ def test_a_total_line_printed_twice_closes_nothing(write_doc):
     assert all(c.series_id is None for c in got["cells"] if c.row_label_raw.startswith(("04", "045", "d.")))
 
 
+def test_a_line_excluded_from_a_part_is_not_mapped_there_and_its_block_is_not_evaluable(write_doc):
+    # "019 Gen. Public Services not Elsewhere Defined" under current expenditure on capital account is not
+    # sub-function 019 (ABS 2013-14 p.16: the '01' line equals the other lines without it). Under
+    # development expenditure the same label is a real sub-function.
+    capital = [HEADER,
+               row("01", "General Public Service", 50),
+               row("014", "Transfers", 50), row("019", "Gen. Public Services not Elsewhere Defined", 4),
+               row("", "b. Current Expenditure on Capital Account", 50)]
+    dev = [HEADER,
+           row("01", "General Public Service", 54),
+           row("014", "Transfers", 50), row("019", "Gen. Public Services not Elsewhere Defined", 4),
+           row("", "c. Dev. Exp. on Revenue Account", 54)]
+    got = build(load_tables(write_doc([docling_table(capital, page=1), docling_table(dev, page=2)], pages=2)))
+    assert got["parts_closed"] == ["current_capital", "development_revenue"]
+    mapped = {c.series_id for c in got["cells"] if c.series_id}
+    assert "fed.exp.development.revenue_account.function.general_public_services.general_public_services_not_elsewhere_defined" in mapped
+    assert not any(s.startswith("fed.exp.current.capital_account") and s.endswith("not_elsewhere_defined") for s in mapped)
+    results = sorted((c.result, c.not_evaluable_reason or "") for c in checks_for(got) if c.check_type == "hierarchy_sum")
+    assert [r for r, _ in results].count("not_evaluable") == 3 and [r for r, _ in results].count("pass") == 3
+    assert all("not read as a sub-function in this part" in why for r, why in results if r == "not_evaluable")
+
+
 def test_unknown_or_misplaced_coded_rows_make_sums_not_evaluable(write_doc):
     page = current_revenue_page()
     page.insert(4, row("075", "Some New Health Line", 0))           # a sub-function the dictionary does not know
@@ -207,6 +229,56 @@ def test_a_label_wrapped_over_two_rows_is_joined_and_must_then_match_in_full(wri
     joined = [c for c in got["cells"] if "row_label_joined_from_two_rows" in c.structural_flags]
     assert len(joined) == 3 and joined[0].series_id.endswith("education_not_elsewhere_classified")
     assert {c.result for c in checks_for(got)} == {"pass"}
+
+
+def _line(y, text, x=150.0):
+    """Words of one printed line (10 pt high, starting at page y) in the units `page_words` returns."""
+    out, pos = [], x
+    for token in text.split():
+        out.append((pos / PAGE_W, y / PAGE_H, (pos + 4.0) / PAGE_W, (y + 10.0) / PAGE_H, token))
+        pos += 5.0
+    return out
+
+
+def _wrapped_011_page():
+    # Docling dropped the first printed line of the wrapped label ("011 Executive & Legislative Organs,"):
+    # the amounts arrive on a row that carries only the second line and no code (ABS 2014-15 p.13).
+    return [HEADER, row("01", "General Public Service", 60),
+            row("", "Financial & Fiscal Affairs, External Affairs", 50),
+            row("014", "Transfers", 10),
+            row("", "a. Current Expenditure on Revenue Account", 60)]
+
+
+def test_a_label_wrapped_over_two_printed_lines_is_joined_from_the_text_layer(write_doc):
+    # table rows are 20 pt high from y = 100: row 2 (the amounts of sub-function 011) spans y = 140-160
+    words = SCALE_WORDS + _line(104, "01 General Public Service") + _line(127, "011 Executive & Legislative Organs,")         + _line(145, "Financial & Fiscal Affairs, External Affairs") + _line(145, "50 50 50", x=260.0)
+    got = build(load_tables(write_doc([docling_table(_wrapped_011_page())])), words=words)
+    joined = [c for c in got["cells"] if "row_label_joined_from_two_text_lines" in c.structural_flags]
+    assert len(joined) == 3
+    assert {c.series_id for c in joined} == {
+        "fed.exp.current.function.general_public_services.executive_legislative_financial_fiscal_external_affairs"}
+    assert joined[0].row_label_raw == "011 Executive & Legislative Organs, Financial & Fiscal Affairs, External Affairs"
+    assert {c.result for c in checks_for(got)} == {"pass"}
+
+
+def test_two_printed_lines_are_not_joined_when_the_upper_line_is_another_row_or_does_not_match(write_doc):
+    tables = lambda: load_tables(write_doc([docling_table(_wrapped_011_page())]))
+    own = _line(145, "Financial & Fiscal Affairs, External Affairs") + _line(145, "50 50 50", x=260.0)
+    # the line above carries an amount: it is a row of its own, not the first half of this label
+    words = SCALE_WORDS + _line(127, "011 Executive & Legislative Organs,") + _line(127, "7", x=260.0) + own
+    got = build(tables(), words=words)
+    assert all(c.series_id is None for c in got["cells"] if c.row_label_raw.startswith("Financial"))
+    # the line above has no code
+    got = build(tables(), words=SCALE_WORDS + _line(127, "Executive & Legislative Organs,") + own)
+    assert all(c.series_id is None for c in got["cells"] if c.row_label_raw.startswith("Financial"))
+    # the joined text is not a label the dictionary knows in full
+    got = build(tables(), words=SCALE_WORDS + _line(127, "011 Executive & Other Organs,") + own)
+    assert all(c.series_id is None for c in got["cells"] if c.row_label_raw.startswith("Financial"))
+    # the line above is too far away to be the same label
+    got = build(tables(), words=SCALE_WORDS + _line(95, "011 Executive & Legislative Organs,") + own)
+    assert all(c.series_id is None for c in got["cells"] if c.row_label_raw.startswith("Financial"))
+    # in every one of these cases the block is summed without the row, so its check must not pass
+    assert "pass" not in {c.result for c in checks_for(got) if c.check_type == "hierarchy_sum"}
 
 
 def test_a_first_data_row_flagged_as_header_is_still_read(write_doc):

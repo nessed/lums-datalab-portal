@@ -1,0 +1,790 @@
+{
+  "$comment": "Search concepts (DESIGN.md, section on search): what people ask for, mapped to the series that answer it. Editorial text only: no numbers anywhere in this file; every value a concept shows is read from the release when the search index is built (scripts/prebuild/search.mjs) and checked by scripts/checks/search-index.mjs. 'series' lists series ids, the headline series first; an id the release does not hold fails the build. A concept with no series has 'missing': one honest sentence, shown as a card. No link out is given anywhere, because no link out is health-checked at build yet (DESIGN.md, search and what we do not do). 'words' are word-level equivalences used for every query. PROVISIONAL: drafted by an agent for the November redesign preview; Ali and Ahmad review, edit or replace.",
+  "provisional": true,
+  "words": [
+    ["women", "woman", "female", "females", "girls"],
+    ["men", "man", "male", "males", "boys"],
+    ["spending", "expenditure", "expenditures", "spend", "spent", "outlay", "outlays", "allocation", "allocations"],
+    ["budget", "budgetary"],
+    ["revenue", "receipts", "income", "collection"],
+    ["taxes", "tax", "taxation"],
+    ["jobs", "employment", "employed", "work", "working"],
+    ["jobless", "unemployed", "unemployment"],
+    ["prices", "price", "inflation", "cpi"],
+    ["labour", "labor"],
+    ["defence", "defense", "military"],
+    ["federal", "centre", "center"],
+    ["development", "psdp"],
+    ["provinces", "provincial"],
+    ["kp", "kpk", "khyber", "pakhtunkhwa", "nwfp"],
+    ["balochistan", "baluchistan"],
+    ["electricity", "power"],
+    ["petrol", "fuel", "diesel", "oil"],
+    ["schools", "school", "education"],
+    ["universities", "university", "tertiary"],
+    ["hospitals", "hospital", "healthcare", "health"],
+    ["loans", "loan", "borrowing", "debt"],
+    ["privatisation", "privatization"],
+    ["programme", "program"],
+    ["percent", "percentage"],
+    ["salaries", "salary", "wages", "wage", "pay"]
+  ],
+  "concepts": [
+    {
+      "id": "inflation",
+      "name": "Inflation, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["inflation", "prices", "inflation rate", "headline inflation", "rising prices", "price rise", "cost of living", "mehngai", "cpi inflation", "year on year inflation", "consumer price inflation"],
+      "series": ["cpi.national.yoy.general", "cpi.national.mom.general", "cpi.national.general.b2015_16", "cpi.yoy.general.b2007_08"]
+    },
+    {
+      "id": "cpi",
+      "name": "Consumer price index, national (CPI National)",
+      "topic": "Prices and inflation",
+      "synonyms": ["cpi", "cpi national", "consumer price index", "price index", "price level", "cpi general"],
+      "series": ["cpi.national.general.b2015_16", "cpi.national.yoy.general", "cpi.general.b2007_08"]
+    },
+    {
+      "id": "inflation-month",
+      "name": "Inflation, national, over the previous month",
+      "topic": "Prices and inflation",
+      "synonyms": ["monthly inflation", "month on month inflation", "inflation over the previous month", "mom inflation"],
+      "series": ["cpi.national.mom.general", "cpi.urban.mom.general", "cpi.rural.mom.general"]
+    },
+    {
+      "id": "inflation-urban",
+      "name": "Inflation in cities (CPI Urban), year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["cpi urban", "urban inflation", "inflation in cities", "urban prices"],
+      "series": ["cpi.urban.yoy.general", "cpi.urban.general.b2015_16", "cpi.urban.mom.general"]
+    },
+    {
+      "id": "inflation-rural",
+      "name": "Inflation in rural areas (CPI Rural), year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["cpi rural", "rural inflation", "village prices", "rural prices"],
+      "series": ["cpi.rural.yoy.general", "cpi.rural.general.b2015_16", "cpi.rural.mom.general"]
+    },
+    {
+      "id": "food-inflation",
+      "name": "Food price inflation, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["food inflation", "food prices", "grocery prices", "price of food", "food and drink prices", "atta price", "flour prices"],
+      "series": ["cpi.national.yoy.group.food", "cpi.national.group.food.b2015_16", "cpi.urban.yoy.group.food", "cpi.rural.yoy.group.food"]
+    },
+    {
+      "id": "transport-prices",
+      "name": "Transport prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["transport prices", "fares", "travel costs", "transport inflation", "bus fares"],
+      "series": ["cpi.national.yoy.group.transport", "cpi.national.group.transport.b2015_16"]
+    },
+    {
+      "id": "petrol-prices",
+      "name": "Petrol and diesel prices",
+      "topic": "Prices and inflation",
+      "synonyms": ["petrol price", "petrol prices", "diesel price", "fuel prices", "oil prices", "pol prices", "price of petrol"],
+      "series": [],
+      "missing": "Petrol and diesel prices are not in this release as their own series. The transport group of the CPI includes motor fuel among other items.",
+      "related": ["cpi.national.yoy.group.transport"]
+    },
+    {
+      "id": "utility-prices",
+      "name": "Housing, water, electricity and gas prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["electricity prices", "electricity bills", "gas prices", "utility bills", "utility prices", "rent", "housing costs", "house rent"],
+      "series": ["cpi.national.yoy.group.housing_utilities", "cpi.national.group.housing_utilities.b2015_16"]
+    },
+    {
+      "id": "clothing-prices",
+      "name": "Clothing and footwear prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["clothing prices", "clothes prices", "shoe prices", "footwear prices"],
+      "series": ["cpi.national.yoy.group.clothing_footwear", "cpi.national.group.clothing_footwear.b2015_16"]
+    },
+    {
+      "id": "medicine-prices",
+      "name": "Health prices (medicines and doctors), national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["medicine prices", "drug prices", "doctor fees", "health prices", "cost of medicines"],
+      "series": ["cpi.national.yoy.group.health", "cpi.national.group.health.b2015_16"]
+    },
+    {
+      "id": "school-fees",
+      "name": "Education prices (school fees), national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["school fees", "tuition fees", "education prices", "cost of education"],
+      "series": ["cpi.national.yoy.group.education", "cpi.national.group.education.b2015_16"]
+    },
+    {
+      "id": "communication-prices",
+      "name": "Communication prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["mobile prices", "phone bills", "internet prices", "communication prices"],
+      "series": ["cpi.national.yoy.group.communication", "cpi.national.group.communication.b2015_16"]
+    },
+    {
+      "id": "restaurant-prices",
+      "name": "Restaurant and hotel prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["restaurant prices", "eating out", "hotel prices"],
+      "series": ["cpi.national.yoy.group.restaurants_hotels", "cpi.national.group.restaurants_hotels.b2015_16"]
+    },
+    {
+      "id": "tobacco-prices",
+      "name": "Tobacco prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["cigarette prices", "tobacco prices"],
+      "series": ["cpi.national.yoy.group.alcohol_tobacco", "cpi.national.group.alcohol_tobacco.b2015_16"]
+    },
+    {
+      "id": "furniture-prices",
+      "name": "Furnishing and household equipment prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["furniture prices", "appliance prices", "household goods prices"],
+      "series": ["cpi.national.yoy.group.furnishing_household", "cpi.national.group.furnishing_household.b2015_16"]
+    },
+    {
+      "id": "recreation-prices",
+      "name": "Recreation and culture prices, national, year on year",
+      "topic": "Prices and inflation",
+      "synonyms": ["recreation prices", "entertainment prices", "leisure prices"],
+      "series": ["cpi.national.yoy.group.recreation_culture", "cpi.national.group.recreation_culture.b2015_16"]
+    },
+    {
+      "id": "monthly-review",
+      "name": "Monthly Review of Price Indices (PBS)",
+      "topic": "Prices and inflation",
+      "synonyms": ["monthly review", "monthly review of price indices", "pbs monthly review", "price indices review"],
+      "series": ["cpi.national.yoy.general", "cpi.national.general.b2015_16"],
+      "doc": "cpi_monthly_review"
+    },
+    {
+      "id": "spi",
+      "name": "Sensitive Price Indicator (SPI)",
+      "topic": "Prices and inflation",
+      "synonyms": ["spi", "sensitive price indicator", "weekly inflation", "weekly prices", "weekly spi"],
+      "series": [],
+      "missing": "The Sensitive Price Indicator, the weekly price measure of the Pakistan Bureau of Statistics, is not in this release. It is planned here once checked.",
+      "related": ["cpi.national.yoy.general"]
+    },
+    {
+      "id": "wpi",
+      "name": "Wholesale Price Index (WPI)",
+      "topic": "Prices and inflation",
+      "synonyms": ["wpi", "wholesale price index", "wholesale prices", "producer prices"],
+      "series": [],
+      "missing": "The Wholesale Price Index is not in this release. It is planned here once checked.",
+      "related": ["cpi.national.yoy.general"]
+    },
+    {
+      "id": "core-inflation",
+      "name": "Core inflation",
+      "topic": "Prices and inflation",
+      "synonyms": ["core inflation", "non food non energy", "nfne", "trimmed mean inflation"],
+      "series": [],
+      "missing": "Core inflation is not in this release. Headline inflation and the price groups are.",
+      "related": ["cpi.national.yoy.general"]
+    },
+    {
+      "id": "policy-rate",
+      "name": "Interest rate (State Bank policy rate)",
+      "topic": "Money and markets",
+      "synonyms": ["interest rate", "policy rate", "discount rate", "markup rate", "sbp rate", "kibor"],
+      "series": [],
+      "missing": "Interest rates are not in this release. The State Bank of Pakistan publishes them; this site does not copy its data."
+    },
+    {
+      "id": "exchange-rate",
+      "name": "Exchange rate",
+      "topic": "Money and markets",
+      "synonyms": ["exchange rate", "dollar rate", "rupee dollar", "dollar price", "rupee value", "pkr usd"],
+      "series": [],
+      "missing": "Exchange rates are not in this release. The State Bank of Pakistan publishes them; this site does not copy its data."
+    },
+    {
+      "id": "money-supply",
+      "name": "Money supply",
+      "topic": "Money and markets",
+      "synonyms": ["money supply", "broad money", "credit to private sector"],
+      "series": [],
+      "missing": "Money and credit figures are not in this release. The State Bank of Pakistan publishes them; this site does not copy its data."
+    },
+    {
+      "id": "reserves",
+      "name": "Foreign exchange reserves",
+      "topic": "Money and markets",
+      "synonyms": ["foreign reserves", "forex reserves", "reserves", "sbp reserves", "foreign exchange reserves"],
+      "series": [],
+      "missing": "Foreign exchange reserves are not in this release. The State Bank of Pakistan publishes them; this site does not copy its data."
+    },
+    {
+      "id": "unemployment",
+      "name": "Unemployment rate, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["unemployment", "unemployment rate", "jobless rate", "joblessness", "berozgari", "out of work"],
+      "series": ["lfs.unemployment_rate.total.total", "lfs.unemployment_rate.female.total", "lfs.unemployment_rate.male.total", "lfs.unemployed.total.total"]
+    },
+    {
+      "id": "unemployment-women",
+      "name": "Unemployment rate among women, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["unemployment women", "female unemployment", "unemployment among women", "women unemployment rate", "jobless women", "unemployed women"],
+      "series": ["lfs.unemployment_rate.female.total", "lfs.unemployed.female.total"]
+    },
+    {
+      "id": "unemployment-men",
+      "name": "Unemployment rate among men, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["unemployment men", "male unemployment", "unemployment among men", "jobless men", "unemployed men"],
+      "series": ["lfs.unemployment_rate.male.total", "lfs.unemployed.male.total"]
+    },
+    {
+      "id": "unemployed-persons",
+      "name": "Unemployed persons, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["number of unemployed", "unemployed persons", "unemployed people", "how many unemployed"],
+      "series": ["lfs.unemployed.total.total", "lfs.unemployed.female.total", "lfs.unemployed.male.total"]
+    },
+    {
+      "id": "labour-force",
+      "name": "Civilian labour force, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["labour force", "labor force", "workforce", "working population", "size of the labour force"],
+      "series": ["lfs.labour_force.total.total", "lfs.labour_force.female.total", "lfs.labour_force.male.total"]
+    },
+    {
+      "id": "participation",
+      "name": "Labour force participation rate (refined), Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["participation rate", "labour force participation", "lfpr", "activity rate"],
+      "series": ["lfs.lfpr_refined.total.total", "lfs.lfpr_crude.total.total", "lfs.lfpr_refined.female.total", "lfs.lfpr_refined.male.total"]
+    },
+    {
+      "id": "women-work",
+      "name": "Labour force participation of women (refined rate), Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["female labour force participation", "women in work", "working women", "women workforce", "female lfpr", "women labour force", "female participation"],
+      "series": ["lfs.lfpr_refined.female.total", "lfs.labour_force.female.total", "lfs.employed.female.total"]
+    },
+    {
+      "id": "employment",
+      "name": "Employed persons, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["employment", "employed persons", "jobs", "number of jobs", "people in work", "how many people work"],
+      "series": ["lfs.employed.total.total", "lfs.employed.female.total", "lfs.employed.male.total"]
+    },
+    {
+      "id": "jobs-by-sector",
+      "name": "Employment by industry, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["employment by sector", "employment by industry", "jobs by sector", "sectoral employment", "where people work"],
+      "series": ["lfs.employment_share.industry.agriculture.total.total", "lfs.employment_share.industry.manufacturing.total.total", "lfs.employment_share.industry.construction.total.total", "lfs.employment_share.industry.wholesale_retail_trade.total.total", "lfs.employment_share.industry.community_social_personal_services.total.total", "lfs.employment_share.industry.transport_storage_communication.total.total"]
+    },
+    {
+      "id": "farm-jobs",
+      "name": "Share of employed persons in agriculture, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["agriculture employment", "farm jobs", "farming jobs", "agricultural workers", "jobs in agriculture"],
+      "series": ["lfs.employment_share.industry.agriculture.total.total", "lfs.employment_share.industry.agriculture.female.total"]
+    },
+    {
+      "id": "factory-jobs",
+      "name": "Share of employed persons in manufacturing, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["manufacturing employment", "factory jobs", "industrial jobs", "jobs in manufacturing"],
+      "series": ["lfs.employment_share.industry.manufacturing.total.total"]
+    },
+    {
+      "id": "construction-jobs",
+      "name": "Share of employed persons in construction, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["construction employment", "construction jobs", "building workers"],
+      "series": ["lfs.employment_share.industry.construction.total.total"]
+    },
+    {
+      "id": "trade-jobs",
+      "name": "Share of employed persons in wholesale and retail trade, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["retail jobs", "shop jobs", "trade employment", "wholesale and retail jobs"],
+      "series": ["lfs.employment_share.industry.wholesale_retail_trade.total.total"]
+    },
+    {
+      "id": "service-jobs",
+      "name": "Share of employed persons in community, social and personal services, Pakistan",
+      "topic": "Jobs and labour",
+      "synonyms": ["service jobs", "services employment", "social services jobs"],
+      "series": ["lfs.employment_share.industry.community_social_personal_services.total.total"]
+    },
+    {
+      "id": "labour-by-province",
+      "name": "Civilian labour force by province",
+      "topic": "Provinces",
+      "synonyms": ["labour force by province", "provincial labour force", "jobs by province", "employment by province"],
+      "series": ["lfs.labour_force.pb.total.total", "lfs.labour_force.sd.total.total", "lfs.labour_force.kp.total.total", "lfs.labour_force.ba.total.total"]
+    },
+    {
+      "id": "lfs",
+      "name": "Labour Force Survey (PBS)",
+      "topic": "Jobs and labour",
+      "synonyms": ["lfs", "labour force survey", "labor force survey", "pbs lfs", "labour survey"],
+      "series": ["lfs.unemployment_rate.total.total", "lfs.labour_force.total.total"],
+      "doc": "lfs_annual_report"
+    },
+    {
+      "id": "wages",
+      "name": "Wages and salaries",
+      "topic": "Jobs and labour",
+      "synonyms": ["wages", "salaries", "average wage", "minimum wage", "average salary", "earnings", "pay of government employees"],
+      "series": [],
+      "missing": "Wages and salaries are not in this release. The Labour Force Survey reports wages in tables we have not read yet; they are planned here once checked."
+    },
+    {
+      "id": "youth-unemployment",
+      "name": "Youth unemployment",
+      "topic": "Jobs and labour",
+      "synonyms": ["youth unemployment", "unemployment by age", "young people unemployed", "graduate unemployment"],
+      "series": [],
+      "missing": "Unemployment by age is not in this release. The overall rate, and the rates for women and men, are.",
+      "related": ["lfs.unemployment_rate.total.total"]
+    },
+    {
+      "id": "child-labour",
+      "name": "Child labour",
+      "topic": "Jobs and labour",
+      "synonyms": ["child labour", "child labor", "working children"],
+      "series": [],
+      "missing": "Child labour figures are not in this release."
+    },
+    {
+      "id": "federal-spending",
+      "name": "Total federal expenditure",
+      "topic": "Government spending",
+      "synonyms": ["government spending", "federal spending", "federal expenditure", "total expenditure", "federal budget", "budget size", "public spending", "government expenditure", "size of the budget"],
+      "series": ["fed.exp.total", "fed.exp.current.total", "fed.exp.development.total"]
+    },
+    {
+      "id": "current-spending",
+      "name": "Total current expenditure (federal)",
+      "topic": "Government spending",
+      "synonyms": ["current expenditure", "current spending", "running costs", "recurrent expenditure", "non development spending"],
+      "series": ["fed.exp.current.total", "fed.exp.current.revenue_account", "fed.exp.current.capital_account"]
+    },
+    {
+      "id": "development-spending",
+      "name": "Total development expenditure (federal)",
+      "topic": "Government spending",
+      "synonyms": ["development spending", "development expenditure", "development budget", "capital spending", "investment spending"],
+      "series": ["fed.exp.development.total", "fed.exp.development.psdp_total"]
+    },
+    {
+      "id": "psdp",
+      "name": "Public Sector Development Programme (PSDP), federal",
+      "topic": "Government spending",
+      "synonyms": ["psdp", "public sector development programme", "public sector development program", "development programme"],
+      "series": ["fed.exp.development.psdp_total", "fed.exp.development.revenue_account.psdp", "fed.exp.development.capital_account.psdp", "fed.exp.operational_shortfall"]
+    },
+    {
+      "id": "health-spending",
+      "name": "Federal health spending (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["health spending", "health", "health budget", "health expenditure", "spending on health", "healthcare budget", "hospital spending", "money for health"],
+      "series": ["fed.exp.current.function.health", "fed.exp.development.revenue_account.function.health", "fed.exp.current.function.health.share_of_total", "fed.exp.current.function.health.hospital_services"]
+    },
+    {
+      "id": "education-spending",
+      "name": "Federal education spending (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["education spending", "education", "education budget", "education expenditure", "spending on education", "schools budget", "money for education"],
+      "series": ["fed.exp.current.function.education_affairs_and_services", "fed.exp.development.revenue_account.function.education_affairs_and_services", "fed.exp.current.function.education_affairs_and_services.share_of_total"]
+    },
+    {
+      "id": "higher-education",
+      "name": "Federal spending on tertiary education (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["higher education", "universities budget", "hec budget", "hec", "tertiary education", "university spending"],
+      "series": ["fed.exp.current.function.education_affairs_and_services.tertiary_education"]
+    },
+    {
+      "id": "primary-education",
+      "name": "Federal spending on pre-primary and primary education (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["primary education", "primary schools", "pre primary education"],
+      "series": ["fed.exp.current.function.education_affairs_and_services.pre_primary_and_primary_education"]
+    },
+    {
+      "id": "secondary-education",
+      "name": "Federal spending on secondary education (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["secondary education", "secondary schools", "high schools"],
+      "series": ["fed.exp.current.function.education_affairs_and_services.secondary_education"]
+    },
+    {
+      "id": "defence-spending",
+      "name": "Federal defence spending (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["defence spending", "defence", "defence budget", "defense budget", "military spending", "military budget", "armed forces budget"],
+      "series": ["fed.exp.current.function.defence_affairs_and_services", "fed.exp.current.function.defence_affairs_and_services.military_defence", "fed.exp.development.revenue_account.function.defence_affairs_and_services"]
+    },
+    {
+      "id": "police",
+      "name": "Federal spending on public order and safety (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["police budget", "police spending", "law and order", "public order and safety", "security spending"],
+      "series": ["fed.exp.current.function.public_order_and_safety_affairs", "fed.exp.current.function.public_order_and_safety_affairs.police"]
+    },
+    {
+      "id": "courts",
+      "name": "Federal spending on law courts (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["courts", "judiciary", "law courts", "justice spending"],
+      "series": ["fed.exp.current.function.public_order_and_safety_affairs.law_courts"]
+    },
+    {
+      "id": "social-protection",
+      "name": "Federal social protection spending (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["social protection", "bisp", "benazir income support", "social safety net", "welfare spending", "cash transfers", "ehsaas"],
+      "series": ["fed.exp.current.function.social_protection", "fed.exp.development.revenue_account.function.social_protection"]
+    },
+    {
+      "id": "pensions",
+      "name": "Federal pensions",
+      "topic": "Government spending",
+      "synonyms": ["pensions", "pension bill", "pension spending", "pension expenditure"],
+      "series": [],
+      "missing": "Federal pension spending is not a separate series in this release. The functional lines it may fall under are listed below.",
+      "related": ["fed.exp.current.function.social_protection", "fed.exp.current.function.general_public_services"]
+    },
+    {
+      "id": "debt-interest",
+      "name": "Interest on public debt",
+      "topic": "Government spending",
+      "synonyms": ["debt servicing", "interest payments", "debt interest", "markup payments", "interest on debt", "interest bill", "debt service"],
+      "series": [],
+      "missing": "Interest on public debt is not a separate series in this release. In the Annual Budget Statement it is part of general public services, which is in this release.",
+      "related": ["fed.exp.current.function.general_public_services", "fed.exp.current.capital_account.foreign_loans_repayment"]
+    },
+    {
+      "id": "public-debt",
+      "name": "Public debt",
+      "topic": "Debt",
+      "synonyms": ["public debt", "debt", "government debt", "national debt", "external debt", "debt stock", "total debt", "imf loan"],
+      "series": [],
+      "missing": "The stock of public debt is not in this release. The Finance Division and the State Bank of Pakistan publish it; it is planned here once checked.",
+      "related": ["fed.rev.external.loans", "fed.exp.current.capital_account.foreign_loans_repayment"]
+    },
+    {
+      "id": "subsidies",
+      "name": "Subsidies",
+      "topic": "Government spending",
+      "synonyms": ["subsidies", "subsidy", "power subsidy", "electricity subsidy"],
+      "series": [],
+      "missing": "Subsidies are not a separate series in this release. Spending on economic affairs, which includes them, is.",
+      "related": ["fed.exp.current.function.economic_affairs", "fed.exp.current.function.economic_affairs.fuel_and_energy"]
+    },
+    {
+      "id": "general-public-services",
+      "name": "Federal spending on general public services (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["general public services", "administration", "running the government", "civil administration"],
+      "series": ["fed.exp.current.function.general_public_services"]
+    },
+    {
+      "id": "economic-affairs",
+      "name": "Federal spending on economic affairs (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["economic affairs", "economic spending"],
+      "series": ["fed.exp.current.function.economic_affairs", "fed.exp.development.revenue_account.function.economic_affairs"]
+    },
+    {
+      "id": "agriculture-spending",
+      "name": "Federal spending on agriculture, food, irrigation, forestry and fishing (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["agriculture spending", "agriculture budget", "irrigation spending", "farm support", "spending on agriculture"],
+      "series": ["fed.exp.current.function.economic_affairs.agriculture_food_irrigation_forestry_and_fishing"]
+    },
+    {
+      "id": "energy-spending",
+      "name": "Federal spending on fuel and energy (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["energy spending", "power sector spending", "energy budget", "fuel and energy"],
+      "series": ["fed.exp.current.function.economic_affairs.fuel_and_energy"]
+    },
+    {
+      "id": "infrastructure-spending",
+      "name": "Federal spending on construction and transport (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["roads spending", "infrastructure spending", "transport spending", "construction and transport"],
+      "series": ["fed.exp.current.function.economic_affairs.construction_and_transport"]
+    },
+    {
+      "id": "environment-spending",
+      "name": "Federal spending on environment protection (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["environment spending", "climate spending", "climate change budget", "environment budget"],
+      "series": ["fed.exp.current.function.environment_protection", "fed.exp.development.revenue_account.function.environment_protection"]
+    },
+    {
+      "id": "housing-spending",
+      "name": "Federal spending on housing and community amenities (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["housing spending", "housing budget", "community amenities"],
+      "series": ["fed.exp.current.function.housing_and_community_amenities"]
+    },
+    {
+      "id": "culture-spending",
+      "name": "Federal spending on recreation, culture and religion (current, revenue account)",
+      "topic": "Government spending",
+      "synonyms": ["culture spending", "religion spending", "sports spending", "religious affairs"],
+      "series": ["fed.exp.current.function.recreation_culture_and_religion"]
+    },
+    {
+      "id": "loan-repayment",
+      "name": "Foreign loans repayment (federal)",
+      "topic": "Debt",
+      "synonyms": ["loan repayment", "debt repayment", "foreign loan repayment", "principal repayment", "repayment of foreign loans"],
+      "series": ["fed.exp.current.capital_account.foreign_loans_repayment", "fed.exp.current.capital_account.short_term_foreign_credits_repayment"]
+    },
+    {
+      "id": "abs",
+      "name": "Annual Budget Statement (federal)",
+      "topic": "Government spending",
+      "synonyms": ["annual budget statement", "abs", "budget statement", "budget book", "federal budget document", "budget documents"],
+      "series": ["fed.exp.total", "fed.rev.tax"],
+      "doc": "abs"
+    },
+    {
+      "id": "demands-for-grants",
+      "name": "Demands for Grants",
+      "topic": "Government spending",
+      "synonyms": ["demands for grants", "dfg", "grants book", "demand for grants"],
+      "series": [],
+      "missing": "The Demands for Grants books are not in this release. They are planned here once checked."
+    },
+    {
+      "id": "deficit",
+      "name": "Fiscal deficit",
+      "topic": "Government spending",
+      "synonyms": ["fiscal deficit", "budget deficit", "deficit", "primary balance", "budget gap"],
+      "series": [],
+      "missing": "The fiscal deficit is not a series in this release. The totals of spending and resources it is drawn from are.",
+      "related": ["fed.exp.total", "fed.rev.total_resources"]
+    },
+    {
+      "id": "provincial-budgets",
+      "name": "Provincial budgets",
+      "topic": "Provinces",
+      "synonyms": ["provincial budget", "provincial budgets", "punjab budget", "sindh budget", "kp budget", "balochistan budget", "provincial spending"],
+      "series": [],
+      "missing": "Provincial budgets are not in this release. The federal transfers to provinces are.",
+      "related": ["fed.rev.provincial_share"]
+    },
+    {
+      "id": "nfc",
+      "name": "Provincial share in federal taxes (NFC transfers)",
+      "topic": "Provinces",
+      "synonyms": ["nfc", "nfc award", "provincial share", "divisible pool", "transfers to provinces", "federal transfers"],
+      "series": ["fed.rev.provincial_share"]
+    },
+    {
+      "id": "provincial-surplus",
+      "name": "Cash balance built up by the provinces",
+      "topic": "Provinces",
+      "synonyms": ["provincial surplus", "provincial cash surplus", "provincial cash balance"],
+      "series": ["fed.rev.provincial_cash_surplus"]
+    },
+    {
+      "id": "tax-revenue",
+      "name": "Federal tax revenue",
+      "topic": "Government revenue",
+      "synonyms": ["tax revenue", "taxes", "tax collection", "tax receipts", "tax income", "how much tax"],
+      "series": ["fed.rev.tax", "fed.rev.tax.fbr", "fed.rev.tax.direct", "fed.rev.tax.indirect"]
+    },
+    {
+      "id": "fbr",
+      "name": "FBR taxes",
+      "topic": "Government revenue",
+      "synonyms": ["fbr", "fbr collection", "federal board of revenue", "fbr taxes", "fbr revenue"],
+      "series": ["fed.rev.tax.fbr"]
+    },
+    {
+      "id": "income-tax",
+      "name": "Taxes on income (federal)",
+      "topic": "Government revenue",
+      "synonyms": ["income tax", "direct taxes", "direct tax", "corporate tax", "tax on income"],
+      "series": ["fed.rev.tax.direct.income", "fed.rev.tax.direct"]
+    },
+    {
+      "id": "sales-tax",
+      "name": "Sales tax (federal)",
+      "topic": "Government revenue",
+      "synonyms": ["sales tax", "gst", "general sales tax", "vat"],
+      "series": ["fed.rev.tax.indirect.sales_tax"]
+    },
+    {
+      "id": "customs",
+      "name": "Customs duties",
+      "topic": "Government revenue",
+      "synonyms": ["customs", "customs duty", "import duty", "tariffs", "import taxes"],
+      "series": ["fed.rev.tax.indirect.customs"]
+    },
+    {
+      "id": "excise",
+      "name": "Federal excise",
+      "topic": "Government revenue",
+      "synonyms": ["excise", "federal excise duty", "excise duty"],
+      "series": ["fed.rev.tax.indirect.federal_excise"]
+    },
+    {
+      "id": "indirect-taxes",
+      "name": "Indirect taxes (federal)",
+      "topic": "Government revenue",
+      "synonyms": ["indirect taxes", "indirect tax", "consumption taxes"],
+      "series": ["fed.rev.tax.indirect"]
+    },
+    {
+      "id": "petroleum-levy",
+      "name": "Petroleum levy",
+      "topic": "Government revenue",
+      "synonyms": ["petroleum levy", "pdl", "petrol levy", "fuel levy", "petroleum development levy"],
+      "series": ["fed.rev.tax.other.petroleum_levy", "fed.rev.tax.indirect.petroleum_levy"]
+    },
+    {
+      "id": "gidc",
+      "name": "Gas infrastructure development cess",
+      "topic": "Government revenue",
+      "synonyms": ["gidc", "gas cess", "gas infrastructure development cess"],
+      "series": ["fed.rev.tax.other.gas_infrastructure_development_cess"]
+    },
+    {
+      "id": "nontax-revenue",
+      "name": "Non-tax revenue receipts (federal)",
+      "topic": "Government revenue",
+      "synonyms": ["non tax revenue", "nontax revenue", "non-tax receipts", "sbp profit", "dividends"],
+      "series": ["fed.rev.nontax", "fed.rev.nontax.property_and_enterprise"]
+    },
+    {
+      "id": "total-revenue",
+      "name": "Total revenue receipts (federal)",
+      "topic": "Government revenue",
+      "synonyms": ["government revenue", "federal revenue", "total revenue", "revenue receipts", "government income", "how much the government earns"],
+      "series": ["fed.rev.revenue", "fed.rev.gross_federal_resources", "fed.rev.net_federal_resources"]
+    },
+    {
+      "id": "resources",
+      "name": "Total resources (federal budget)",
+      "topic": "Government revenue",
+      "synonyms": ["total resources", "net federal resources", "resources available", "financing the budget"],
+      "series": ["fed.rev.total_resources", "fed.rev.net_federal_resources"]
+    },
+    {
+      "id": "foreign-loans",
+      "name": "External receipts (foreign loans and grants)",
+      "topic": "Debt",
+      "synonyms": ["foreign loans", "external borrowing", "external receipts", "foreign aid", "foreign assistance", "external financing"],
+      "series": ["fed.rev.external", "fed.rev.external.loans", "fed.rev.external.grants"]
+    },
+    {
+      "id": "foreign-grants",
+      "name": "External grants",
+      "topic": "Debt",
+      "synonyms": ["foreign grants", "external grants", "grants from abroad"],
+      "series": ["fed.rev.external.grants"]
+    },
+    {
+      "id": "bank-borrowing",
+      "name": "Credit from the banking sector",
+      "topic": "Debt",
+      "synonyms": ["bank borrowing", "domestic borrowing", "government borrowing", "borrowing from banks"],
+      "series": ["fed.rev.credit_from_banking_sector", "fed.rev.domestic_debt_bank_net", "fed.rev.capital.domestic_debt_net"]
+    },
+    {
+      "id": "privatisation",
+      "name": "Privatisation proceeds",
+      "topic": "Government revenue",
+      "synonyms": ["privatisation", "privatization", "privatisation proceeds", "sale of state enterprises"],
+      "series": ["fed.rev.privatization_proceeds"]
+    },
+    {
+      "id": "capital-receipts",
+      "name": "Capital receipts (federal)",
+      "topic": "Government revenue",
+      "synonyms": ["capital receipts", "recovery of loans"],
+      "series": ["fed.rev.capital", "fed.rev.capital.recovery_of_loans_and_advances"]
+    },
+    {
+      "id": "gdp",
+      "name": "GDP",
+      "topic": "Growth",
+      "synonyms": ["gdp", "gross domestic product", "economic growth", "growth rate", "gdp growth", "national income", "gnp", "size of the economy", "national accounts"],
+      "series": [],
+      "missing": "GDP is not in this release. The Pakistan Bureau of Statistics publishes the national accounts; GDP is planned here once checked."
+    },
+    {
+      "id": "per-capita",
+      "name": "Income per person",
+      "topic": "Growth",
+      "synonyms": ["per capita income", "income per person", "gdp per capita", "average income"],
+      "series": [],
+      "missing": "Income per person is not in this release. It needs checked GDP and population series, which this release does not have."
+    },
+    {
+      "id": "lsm",
+      "name": "Large-scale manufacturing",
+      "topic": "Growth",
+      "synonyms": ["lsm", "large scale manufacturing", "industrial production", "industrial output"],
+      "series": [],
+      "missing": "Large-scale manufacturing output is not in this release. The Pakistan Bureau of Statistics publishes it."
+    },
+    {
+      "id": "trade",
+      "name": "Exports and imports",
+      "topic": "Trade",
+      "synonyms": ["exports", "imports", "trade deficit", "trade balance", "foreign trade"],
+      "series": [],
+      "missing": "Exports and imports are not in this release. The Pakistan Bureau of Statistics and the State Bank of Pakistan publish them."
+    },
+    {
+      "id": "current-account",
+      "name": "Current account balance",
+      "topic": "Trade",
+      "synonyms": ["current account", "current account deficit", "balance of payments", "bop"],
+      "series": [],
+      "missing": "The balance of payments is not in this release. The State Bank of Pakistan publishes it; this site does not copy its data."
+    },
+    {
+      "id": "remittances",
+      "name": "Remittances",
+      "topic": "Trade",
+      "synonyms": ["remittances", "workers remittances", "money sent home", "home remittances"],
+      "series": [],
+      "missing": "Remittances are not in this release. The State Bank of Pakistan publishes them; this site does not copy its data."
+    },
+    {
+      "id": "population",
+      "name": "Population",
+      "topic": "People",
+      "synonyms": ["population", "census", "how many people", "population growth"],
+      "series": [],
+      "missing": "Population is not in this release. The Pakistan Bureau of Statistics publishes the census."
+    },
+    {
+      "id": "poverty",
+      "name": "Poverty",
+      "topic": "People",
+      "synonyms": ["poverty", "poverty rate", "poor people", "poverty line", "hies", "pslm"],
+      "series": [],
+      "missing": "Poverty and household survey figures (HIES, PSLM) are not in this release. They are planned here once checked."
+    },
+    {
+      "id": "economic-survey",
+      "name": "Pakistan Economic Survey",
+      "topic": "Growth",
+      "synonyms": ["economic survey", "pakistan economic survey", "pes", "survey tables"],
+      "series": [],
+      "missing": "Economic Survey tables are not in this release as series; two of its chapters are used only to check other figures. They are planned here once checked.",
+      "doc": "pes_chapter"
+    }
+  ]
+}

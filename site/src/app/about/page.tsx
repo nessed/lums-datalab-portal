@@ -71,6 +71,24 @@ export default function AboutPage() {
           </p>
         </section>
 
+        <section aria-labelledby="kept-h">
+          <h2 id="kept-h">How long it will be kept</h2>
+          <p>
+            Every release is a frozen folder of files that can be served as plain files, so the site does not depend on a server that might go away.
+            Old releases stay citable at their own addresses, and source documents are linked both at their official address and at an archived copy.
+            Who owns the domain, where a mirror lives and where releases are deposited with a permanent identifier are still to be decided; until then
+            this is a prototype and should not be cited in publications.
+          </p>
+        </section>
+
+        <section aria-labelledby="contact-h">
+          <h2 id="contact-h">Contact</h2>
+          <p>
+            Questions and corrections go to the project&rsquo;s <a href={ISSUES_URL}>public issue list</a>, where every report and its answer stay on
+            the record.
+          </p>
+        </section>
+
         <section aria-labelledby="more-h">
           <h2 id="more-h">More</h2>
           <ul>
@@ -79,6 +97,9 @@ export default function AboutPage() {
             </li>
             <li>
               <Link href="/sources">Sources</Link>: every document, and how each file was verified.
+            </li>
+            <li>
+              <Link href="/topics">Topics</Link>: the figures by subject, and short answers to the questions people ask.
             </li>
             <li>
               <Link href="/data">Data access</Link>: the files, their columns, and code to load them.

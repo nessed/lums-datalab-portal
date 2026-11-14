@@ -1,0 +1,201 @@
+{
+  "$comment": "Topics (DESIGN.md 9.1, 9.3): the way in for readers who think in questions, not documents. Each topic names its series by id; everything shown for them is read from the release. A series id the release does not hold, or holds without a checked figure, is left out; a topic left with no checked series is not shown at all, never as an empty topic. Wording only, no numbers. PROVISIONAL (unattended run, 2026-11-15): drafted by the home agent for decision 17.5; Ali and Ahmad approve, edit or replace.",
+  "provisional": true,
+  "topics": [
+    {
+      "slug": "prices",
+      "name": "Prices and inflation",
+      "short": "Consumer prices: how fast they rise, for the country, towns and villages, and by group of goods.",
+      "definition": "How the prices people pay change over time, measured by the Consumer Price Index of the Pakistan Bureau of Statistics. Inflation here is the change in the index over the same month a year earlier, as PBS prints it.",
+      "headline": ["cpi.national.yoy.general", "cpi.national.yoy.group.food"],
+      "groups": [
+        {
+          "heading": "Inflation, change over the same month a year earlier",
+          "series": ["cpi.national.yoy.general", "cpi.urban.yoy.general", "cpi.rural.yoy.general", "cpi.national.yoy.group.food", "cpi.national.yoy.group.housing_utilities", "cpi.national.yoy.group.transport", "cpi.national.yoy.group.health", "cpi.national.yoy.group.education"]
+        },
+        {
+          "heading": "Price index levels",
+          "series": ["cpi.national.general.b2015_16", "cpi.national.group.food.b2015_16"]
+        },
+        {
+          "heading": "Weights in the price basket",
+          "series": ["cpi.national.weight.food.b2015_16"]
+        }
+      ],
+      "questions": ["inflation-now", "food-inflation", "inflation-towns-villages", "consumer-price-index", "food-weight"],
+      "limits": [
+        "This release reads the June issue of the Monthly Review of Price Indices in each year it covers, so the series show June and May figures only. The months in between are not missing data; they are in documents not read yet.",
+        "The index was rebased by PBS. Figures on the older base are kept as separate series and are never joined to the newer ones.",
+        "Inflation is printed by PBS as a change over the same month a year earlier. The site does not compute annual averages."
+      ],
+      "gaps": [
+        "Wholesale prices and the sensitive price indicator are not in this release.",
+        "Some June issues are not read, or one of their tables failed its checks; those months show as labelled gaps."
+      ]
+    },
+    {
+      "slug": "jobs",
+      "name": "Jobs and labour",
+      "short": "Unemployment, the labour force and who takes part in it, from the Labour Force Survey.",
+      "definition": "Who is working, who is looking for work and who is outside the labour force, as printed in the annual reports of the Labour Force Survey of the Pakistan Bureau of Statistics.",
+      "headline": ["lfs.unemployment_rate.total.total", "lfs.labour_force.total.total"],
+      "groups": [
+        {
+          "heading": "Unemployment rate",
+          "series": ["lfs.unemployment_rate.total.total", "lfs.unemployment_rate.male.total", "lfs.unemployment_rate.female.total"]
+        },
+        {
+          "heading": "Labour force participation rate (refined)",
+          "series": ["lfs.lfpr_refined.total.total", "lfs.lfpr_refined.male.total", "lfs.lfpr_refined.female.total"]
+        },
+        {
+          "heading": "Number of people",
+          "series": ["lfs.labour_force.total.total", "lfs.employed.total.total", "lfs.unemployed.total.total", "lfs.labour_force.female.total"]
+        }
+      ],
+      "questions": ["unemployment-rate", "unemployment-women", "unemployment-men", "labour-force-size", "people-employed", "women-labour-force-participation"],
+      "limits": [
+        "The figures follow the older international definitions of work that every round printed until the newest one. The newest round also prints tables on the newer definitions; those are kept as separate series.",
+        "The newest round uses a new sampling frame after the census, and PBS does not establish that it is comparable with earlier rounds. Charts and answers do not join or compare across that break.",
+        "Rates are as printed by PBS. The site does not recompute them from the counts of people."
+      ],
+      "gaps": [
+        "Several survey rounds are not checked yet for some groups, including the unemployment rate of women in the later rounds; they show as labelled gaps with the reason.",
+        "Wages, informal work and district figures are not in this release."
+      ]
+    },
+    {
+      "slug": "spending",
+      "name": "Government spending",
+      "short": "What the federal government plans and revises to spend, in total and by function.",
+      "definition": "Federal government expenditure as printed in the Annual Budget Statement: totals, current and development spending, and current spending by function, each as a budget estimate and as a revised estimate printed a year later.",
+      "headline": ["fed.exp.total", "fed.exp.current.function.health"],
+      "groups": [
+        {
+          "heading": "Totals",
+          "series": ["fed.exp.total", "fed.exp.current.total", "fed.exp.development.total"]
+        },
+        {
+          "heading": "Current spending by function (revenue account)",
+          "series": [
+            "fed.exp.current.function.general_public_services",
+            "fed.exp.current.function.defence_affairs_and_services",
+            "fed.exp.current.function.public_order_and_safety_affairs",
+            "fed.exp.current.function.economic_affairs",
+            "fed.exp.current.function.environment_protection",
+            "fed.exp.current.function.housing_and_community_amenities",
+            "fed.exp.current.function.health",
+            "fed.exp.current.function.recreation_culture_and_religion",
+            "fed.exp.current.function.education_affairs_and_services",
+            "fed.exp.current.function.social_protection"
+          ]
+        },
+        {
+          "heading": "Development spending by function (revenue account)",
+          "series": [
+            "fed.exp.development.revenue_account.function.health",
+            "fed.exp.development.revenue_account.function.education_affairs_and_services",
+            "fed.exp.development.revenue_account.function.social_protection",
+            "fed.exp.development.revenue_account.function.economic_affairs"
+          ]
+        }
+      ],
+      "revisions": {
+        "heading": "How much do budget estimates change?",
+        "series": [
+          "fed.exp.total",
+          "fed.exp.current.total",
+          "fed.exp.development.total",
+          "fed.exp.current.function.general_public_services",
+          "fed.exp.current.function.defence_affairs_and_services",
+          "fed.exp.current.function.public_order_and_safety_affairs",
+          "fed.exp.current.function.economic_affairs",
+          "fed.exp.current.function.environment_protection",
+          "fed.exp.current.function.housing_and_community_amenities",
+          "fed.exp.current.function.health",
+          "fed.exp.current.function.recreation_culture_and_religion",
+          "fed.exp.current.function.education_affairs_and_services",
+          "fed.exp.current.function.social_protection"
+        ]
+      },
+      "questions": ["federal-health-spending", "federal-education-spending", "federal-defence-spending", "federal-total-spending", "federal-development-spending", "federal-social-protection-spending"],
+      "limits": [
+        "Spending by function in the Summary of Expenditure is current spending on revenue account only. Development spending by function is printed separately, split by account, and only in some editions. The site shows each part on its own and never adds them unless the budget prints a checked total.",
+        "Federal figures only. After the eighteenth constitutional amendment and the seventh NFC award, much of health, education and other spending moved to the provinces; federal figures before and after that break are not comparable.",
+        "Amounts are in current rupees, not adjusted for inflation. The site does not show real terms, shares of GDP or amounts per person until a checked deflator, GDP and population series are in the release.",
+        "Actual spending, as opposed to budget and revised estimates, is not in this release."
+      ],
+      "gaps": [
+        "Some budget editions are not read yet, so some years have only a budget estimate or only a revised estimate.",
+        "Provincial budgets are not in this release.",
+        "Some figures did not pass their checks or are printed differently in two editions; they show as labelled gaps with the reason."
+      ]
+    },
+    {
+      "slug": "revenue",
+      "name": "Government revenue",
+      "short": "What the federal government expects to collect in taxes and other receipts, and what it passes to the provinces.",
+      "definition": "Federal receipts as printed in the Summary of Receipts of the Annual Budget Statement: tax and non-tax revenue, the provinces' share of federal taxes, capital and external receipts, each as a budget estimate and as a revised estimate printed a year later.",
+      "headline": ["fed.rev.tax", "fed.rev.provincial_share"],
+      "groups": [
+        {
+          "heading": "Revenue",
+          "series": ["fed.rev.revenue", "fed.rev.tax", "fed.rev.tax.direct", "fed.rev.tax.indirect", "fed.rev.tax.fbr", "fed.rev.nontax"]
+        },
+        {
+          "heading": "Resources and the provinces' share",
+          "series": ["fed.rev.gross_federal_resources", "fed.rev.provincial_share", "fed.rev.net_federal_resources"]
+        },
+        {
+          "heading": "Other receipts",
+          "series": ["fed.rev.capital", "fed.rev.external", "fed.rev.public_account"]
+        }
+      ],
+      "revisions": {
+        "heading": "How much do budget estimates change?",
+        "series": ["fed.rev.revenue", "fed.rev.tax", "fed.rev.tax.direct", "fed.rev.tax.indirect", "fed.rev.nontax", "fed.rev.provincial_share", "fed.rev.capital", "fed.rev.external"]
+      },
+      "questions": ["federal-tax-revenue", "direct-and-indirect-taxes", "provincial-share", "non-tax-revenue"],
+      "limits": [
+        "Lines do not mean the same thing in every edition. In some editions tax revenue includes other taxes such as the petroleum levy; in later editions those levies are non-tax receipts. Each series is as printed, and the definitions say so; the site never re-adds lines across editions.",
+        "Budget and revised estimates only; actual collections are not in this release.",
+        "Amounts are in current rupees, not adjusted for inflation."
+      ],
+      "gaps": [
+        "Provincial own revenue is not in this release.",
+        "Some editions re-split a total differently from the edition before; those figures are disputed and show no value."
+      ]
+    },
+    {
+      "slug": "provinces",
+      "name": "Provinces",
+      "short": "Labour force figures for Punjab, Sindh, Khyber Pakhtunkhwa and Balochistan.",
+      "definition": "Figures printed for each province. In this release they come from the provincial tables of the Labour Force Survey; provincial budgets are not in it yet.",
+      "headline": ["lfs.lfpr_refined.pb.total.total", "lfs.lfpr_refined.sd.total.total"],
+      "groups": [
+        {
+          "heading": "Labour force participation rate (refined)",
+          "series": ["lfs.lfpr_refined.pb.total.total", "lfs.lfpr_refined.sd.total.total", "lfs.lfpr_refined.kp.total.total", "lfs.lfpr_refined.ba.total.total"]
+        },
+        {
+          "heading": "Labour force",
+          "series": ["lfs.labour_force.pb.total.total", "lfs.labour_force.sd.total.total", "lfs.labour_force.kp.total.total", "lfs.labour_force.ba.total.total"]
+        },
+        {
+          "heading": "Unemployed people",
+          "series": ["lfs.unemployed.pb.total.total", "lfs.unemployed.sd.total.total", "lfs.unemployed.kp.total.total", "lfs.unemployed.ba.total.total"]
+        }
+      ],
+      "questions": ["labour-force-participation-by-province", "labour-force-by-province"],
+      "limits": [
+        "Only Labour Force Survey figures are split by province in this release.",
+        "A misprint in one provincial row of a survey report can hold back the national figure of the same column, because the provinces must add up to Pakistan; those figures show as held back with the reason.",
+        "The newest survey round uses a new sampling frame; it is not compared with earlier rounds."
+      ],
+      "gaps": [
+        "Provincial budgets, provincial accounts and district figures are not in this release.",
+        "The unemployment rate is not split by province in this release; the number of unemployed people is."
+      ]
+    }
+  ]
+}

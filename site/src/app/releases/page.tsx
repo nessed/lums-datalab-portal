@@ -168,15 +168,23 @@ export default function ReleasesPage() {
             {changelog ? <div className="prose md-small" data-num="md" data-file="CHANGELOG.md"><Markdown source={changelog} headingOffset={1} /></div> : <p className="muted">This release has no changelog file.</p>}
           </section>
 
-          <section id="planned" aria-labelledby="planned-h">
-            <h2 id="planned-h">Planned, not in this release</h2>
-            <p className="small">Each of these has a place on the site and switches on only when it is built and its data has passed the same checks.</p>
-            <ul className="planned">
+          <section id="coming" aria-labelledby="coming-h">
+            <span id="planned" />
+            <h2 id="coming-h">Coming</h2>
+            <p className="small">
+              Data and features that are planned but not in this release. Each has a place on the site and switches on only when it is built and its data
+              has passed the same checks. No topic is shown for data that is not here yet; there are no dates, because no release calendar has been agreed.
+            </p>
+            <ul className="planned coming-list">
               {(Object.keys(PLANNED) as FeatureKey[]).map((k) => (
                 <li key={k}>
                   <strong>{feature(k).label}</strong>: {PLANNED[k]} <span className="coming">{COMING}</span>
                 </li>
               ))}
+              <li>
+                <strong>More topics</strong>: public debt, growth and others become topics when a checked source for them is in a release.{" "}
+                <span className="coming">{COMING}</span>
+              </li>
             </ul>
           </section>
 
@@ -221,7 +229,7 @@ export default function ReleasesPage() {
             items={[
               { id: "contents", label: "What is in it" },
               { id: "changelog", label: "Changelog" },
-              { id: "planned", label: "Planned" },
+              { id: "coming", label: "Coming" },
               { id: "errata", label: "Errata" },
               { id: "versions", label: "Versions and citations" },
               { id: "reference", label: "Dataset card, reproduction" },

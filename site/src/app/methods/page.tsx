@@ -9,6 +9,7 @@ import { Bar, Breadcrumbs, Callout, TableWrap, Toc } from "@/components/ui/Basic
 import { StatusLegend } from "@/components/ui/Status";
 import { datasetKeys, db, frozenThresholds, isDatasetPublished, methodsMarkdown, type PassRate } from "@/lib/data";
 import { CHECK_TYPE_WORDS, pct } from "@/lib/format";
+import { KIND } from "@/lib/words";
 import { Count, Num } from "@/components/ui/Num";
 import { datasetStateWords } from "@/lib/status";
 
@@ -234,6 +235,24 @@ export default function MethodsPage() {
             </p>
           </section>
 
+          <section id="kinds" aria-labelledby="kinds-h">
+            <h2 id="kinds-h">Kinds of figure</h2>
+            <p className="small measure">
+              Every figure says what kind it is, beside the number. The full words are used the first time on a page and the short form after that.
+            </p>
+            <dl className="facts">
+              {(["be", "re", "actual", "provisional", "survey_round", "index", "change_yoy", "weight"] as const).map((k) => (
+                <div key={k}>
+                  <dt>
+                    {KIND[k].long.charAt(0).toUpperCase() + KIND[k].long.slice(1)}
+                    {KIND[k].short && KIND[k].short !== KIND[k].long ? ` (${KIND[k].short})` : ""}
+                  </dt>
+                  <dd>{KIND[k].explain}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
           <section id="checks" aria-labelledby="checks-h">
             <h2 id="checks-h">Checks run in this release</h2>
             <TableWrap label="Checks by type">
@@ -412,6 +431,7 @@ export default function MethodsPage() {
               { id: "quality", label: "Quality numbers" },
               { id: "pipeline", label: "From the PDF to a receipt" },
               { id: "statuses", label: "Statuses" },
+              { id: "kinds", label: "Kinds of figure" },
               { id: "checks", label: "Checks run" },
               { id: "thresholds", label: "Thresholds" },
               { id: "llm", label: "Language models" },

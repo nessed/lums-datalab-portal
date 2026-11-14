@@ -161,6 +161,12 @@ function countFor(key) {
       return pubIn((o) => dsOf(o) === b);
     case "obs":
       if (b === "series") return (obsBySeries.get(c) ?? []).length;
+      if (b === "source") {
+        // Per-document quality table (DESIGN.md 9.8): figures whose main printing is in this document, by reader status.
+        const inSrc = observations.filter((o) => primarySrc(o) === c);
+        const bucket = { all: () => true, checked: isPub, disputed: (o) => o.status === "disputed", held: (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "failed_checks", "not-printed": (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "not_in_source", "not-checked": (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "not_yet_verified" }[d ?? "all"];
+        return bucket ? inSrc.filter(bucket).length : undefined;
+      }
       break;
     case "docs": {
       const pred = b === "series" ? (o) => o.series_id === c : (o) => dsOf(o) === b;
@@ -385,6 +391,7 @@ function parseAttrs(s) {
 }
 
 const mdCache = new Map();
+const derived = [];
 const counters = { pages: 0, values: 0, counts: 0, labels: 0, nums: {} };
 const linkTargets = { o: new Set(), series: new Set(), tables: new Set(), datasets: new Set(), sources: new Set() };
 
@@ -504,6 +511,11 @@ function validateAnnotated(el, text, page) {
       for (const tok of t.match(/\d[\d,.]*\d|\d/g) ?? []) if (!src.includes(tok)) problem("md", page, `"${tok}" is not in ${f}`);
       break;
     }
+    case "derived":
+      // A derived figure (a change, an average): recomputed by a plug-in in
+      // scripts/checks/, which must claim it (section 4); unclaimed ones fail.
+      derived.push({ page, text: t, attrs: a, claimed: false });
+      break;
     case "id":
     case "ui":
     case "axis":
@@ -607,7 +619,7 @@ for (const id of linkTargets.sources) if (!exists("sources", id)) problem("link"
 // Each file exports a default function that receives the release and a
 // problem() reporter. Data the browser draws (JSON files) is checked here.
 const pluginDir = path.join(siteDir, "scripts", "checks");
-const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem };
+const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem, derived };
 if (fs.existsSync(pluginDir)) {
   for (const name of fs.readdirSync(pluginDir).filter((n) => n.endsWith(".mjs")).sort()) {
     const mod = await import(pathToFileURL(path.join(pluginDir, name)).href);
@@ -615,6 +627,8 @@ if (fs.existsSync(pluginDir)) {
     console.log(`check-build: plug-in ${name}: ${out ?? "ran"}`);
   }
 }
+
+for (const d of derived) if (!d.claimed) problem("derived", d.page, `derived figure "${d.text}" (${d.attrs["data-derived"] ?? "no formula"}) was not recomputed by any plug-in`);
 
 /* ------------------------------------------------------------------ */
 console.log(`check-build: ${values} value receipts, ${gaps} gap receipts, ${disputed} disputed receipts checked`);

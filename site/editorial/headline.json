@@ -1,0 +1,12 @@
+{
+  "$comment": "Headline cards for the home page (DESIGN.md 9.2), chosen by people. Each card names a series by id and the kind of figure it is read on; every value, change and source marker is read from the release at build time. Moved here from editorial.config.json. A card whose series is missing, not visible, from a dataset nobody signed off, or without a checked figure of that kind is left out, never filled in. No numbers in this file. PROVISIONAL (unattended run, 2026-11-15): drafted by the home agent; Ali and Ahmad confirm or replace.",
+  "provisional": true,
+  "cards": [
+    { "series": "cpi.national.yoy.general", "kind": "change_yoy", "name": "Inflation, national, year on year", "topic": "prices" },
+    { "series": "fed.exp.current.function.health", "kind": "be", "name": "Federal health spending (current, revenue account)", "topic": "spending" },
+    { "series": "fed.exp.total", "kind": "be", "name": "Total federal spending", "topic": "spending" },
+    { "series": "fed.rev.tax", "kind": "be", "name": "Federal tax revenue", "topic": "revenue" },
+    { "series": "lfs.unemployment_rate.total.total", "kind": "survey_round", "name": "Unemployment rate, Pakistan", "topic": "jobs" },
+    { "series": "lfs.labour_force.total.total", "kind": "survey_round", "name": "Labour force, Pakistan", "topic": "jobs" }
+  ]
+}

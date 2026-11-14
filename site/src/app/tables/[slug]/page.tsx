@@ -114,10 +114,9 @@ export default async function TablePage({ params }: Props) {
     <article className="table-page">
       <Breadcrumbs
         items={[
-          { href: "/browse", label: "Data" },
-          { href: `/datasets/${dataset}`, label: datasetName(dataset) },
-          { href: `/datasets/${dataset}#tables`, label: "Tables as printed" },
+          { href: "/sources", label: "Sources" },
           { href: sourceHref(t.sourceId), label: src?.title ?? t.sourceId },
+          { href: `/datasets/${dataset}#tables`, label: `${datasetName(dataset)}: tables as printed` },
           { label: t.title },
         ]}
       />
@@ -207,7 +206,8 @@ export default async function TablePage({ params }: Props) {
             </Link>
           </div>
           <p className="small muted">
-            A number is shown only where it is a checked figure. Gaps say why there is no number. Labels are printed text, as read from the page; they
+            All figures checked unless marked. A number is shown only where it is a checked figure; a gap says why there is no number (held back, not
+            checked yet, disputed, or not printed: the page prints a dash, which is never read as zero). Labels are printed text, as read from the page; they
             are not edited.
           </p>
         </div>

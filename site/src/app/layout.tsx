@@ -19,14 +19,10 @@ import "@/styles/downloads.css";
 import "@/styles/compare.css";
 
 // Self-hosted (OFL) so the build needs no network and there is no layout shift.
-const serif = localFont({
-  src: [
-    { path: "../fonts/source-serif-4-latin-opsz-normal.woff2", style: "normal", weight: "200 900" },
-  ],
-  variable: "--font-source-serif",
-  display: "swap",
-  fallback: ["Georgia", "Times New Roman", "serif"],
-});
+// Only the interface face is downloaded (29 KB). The serif for receipt figures and
+// long prose is the reader's system serif (Georgia, Noto Serif): Source Serif 4 was
+// 122 KB, over the 40 KB font budget of DESIGN.md 14.1, and could not be subset in
+// this run. --font-source-serif is defined in src/styles/base.css.
 const sans = localFont({
   src: [
     { path: "../fonts/source-sans-3-latin-wght-normal.woff2", style: "normal", weight: "200 900" },
@@ -57,7 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   // Runs before paint: hides the notice if this visitor dismissed it for this release.
   const noticeScript = `document.documentElement.classList.add("js");try{if(localStorage.getItem("proto-notice-dismissed")===${JSON.stringify(v)})document.documentElement.dataset.protoDismissed="true"}catch(e){}`;
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={sans.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noticeScript }} />
       </head>

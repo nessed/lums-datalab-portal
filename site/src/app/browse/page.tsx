@@ -6,13 +6,12 @@ import type { Metadata } from "next";
 import Link from "@/components/ui/Link";
 import CatalogueFilter, { CatalogueResults, type FacetGroup } from "@/components/CatalogueFilter";
 import { KindAndPeriod } from "@/components/Figure";
-import Spark from "@/components/Spark";
 import { Breadcrumbs } from "@/components/ui/Basics";
 import { Count, Num, V } from "@/components/ui/Num";
-import { datasetName, db, seriesCsvHref, seriesHref, sourceHref, visibleSeries, type Series } from "@/lib/data";
+import { datasetName, db, seriesCsvHref, seriesHref, visibleSeries, type Series } from "@/lib/data";
 import { FACETS, facetCounts, topicLabels, valueWords } from "@/lib/facets.mjs";
 import { COMING } from "@/lib/features";
-import { DOC_TYPE_WORDS, periodWords, unitLabel } from "@/lib/format";
+import { periodWords, unitLabel } from "@/lib/format";
 import { ancestors, baseYearOf, latestPublished, publishedDatasets, totalVisible } from "@/lib/stats";
 
 export const metadata: Metadata = {
@@ -68,9 +67,7 @@ function Row({ s, order }: { s: Series; order: number }) {
           <span className="muted">no checked value</span>
         )}
       </div>
-      <div className="cat-spark">
-        <Spark series={s} width={84} height={26} />
-      </div>
+      <div className="cat-spark" />
       <div className="cat-dl">
         <a href={seriesCsvHref(s.series_id)} download aria-label={`Download ${s.name} as CSV`}>
           CSV
@@ -104,13 +101,6 @@ export default function BrowsePage() {
   // (its parent's page) or loaded as JSON when the reader filters (DESIGN.md 14.1).
   const ids = new Set(d.series.map((x) => x.series_id));
   const roots = series.filter((s) => !s.parent_id || !ids.has(s.parent_id));
-  const docTypes = [...new Set(d.sources.map((s) => s.doc_type))];
-  const primaryCount = new Map<string, number>();
-  for (const o of d.observations) {
-    if (!o.published || !o.primary_cell_id) continue;
-    const src = d.cellById.get(o.primary_cell_id)?.source_id;
-    if (src) primaryCount.set(src, (primaryCount.get(src) ?? 0) + 1);
-  }
 
   return (
     <div className="catalogue">
@@ -129,7 +119,7 @@ export default function BrowsePage() {
         <a href="#series" aria-current="page">
           Series
         </a>
-        <a href="#by-document">By document</a>
+        <Link href="/sources">By document</Link>
         <Link href="/datasets">By data type</Link>
       </nav>
 
@@ -182,52 +172,6 @@ export default function BrowsePage() {
         </section>
       </div>
 
-      <section className="cat-docs" aria-labelledby="by-document">
-        <h2 id="by-document">By document</h2>
-        <p className="small muted">Each government document, how many checked values in this release are read from it, and its tables as printed.</p>
-        {docTypes.map((t) => (
-          <div key={t} className="cat-doctype">
-            <h3>{DOC_TYPE_WORDS[t] ?? t}</h3>
-            <div className="table-wrap" role="region" aria-label={`${DOC_TYPE_WORDS[t] ?? t} documents`} tabIndex={0}>
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">Document</th>
-                    <th scope="col">Period</th>
-                    <th scope="col" className="num">
-                      Pages read
-                    </th>
-                    <th scope="col" className="num">
-                      Values from it
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {d.sources
-                    .filter((s) => s.doc_type === t)
-                    .map((s) => (
-                      <tr key={s.source_id}>
-                        <th scope="row">
-                          <Link href={sourceHref(s.source_id)}>{s.title}</Link>
-                          {s.verification_status === "failed" ? <span className="tag">not used</span> : null}
-                        </th>
-                        <td>
-                          <Num kind="period">{s.period}</Num>
-                        </td>
-                        <td className="num">
-                          {(s.pages_used ?? []).length ? <Count k={`pages:source:${s.source_id}`} n={(s.pages_used ?? []).length} /> : "none"}
-                        </td>
-                        <td className="num">
-                          <Count k={`values:source:${s.source_id}`} n={primaryCount.get(s.source_id) ?? 0} />
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ))}
-      </section>
     </div>
   );
 }

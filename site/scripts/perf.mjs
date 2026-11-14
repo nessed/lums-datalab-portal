@@ -66,7 +66,7 @@ async function measure(browser, page, net) {
   }
   let visibleMs = null;
   try {
-    await p.locator(page.visible).first().waitFor({ state: "visible", timeout: 120000 });
+    await p.locator(`${page.visible} >> visible=true`).first().waitFor({ state: "visible", timeout: 120000 });
     visibleMs = Date.now() - t0;
   } catch {}
   await p.waitForLoadState("load", { timeout: 180000 }).catch(() => {});

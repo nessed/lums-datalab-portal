@@ -28,3 +28,8 @@ html.js .js-only {
 .st--dash-or-zero {
   color: var(--st-gap);
 }
+
+/* The serif is the reader's own (DESIGN.md 14.1 font budget; see layout.tsx). */
+:root {
+  --font-source-serif: Georgia, "Noto Serif", "Droid Serif", "Times New Roman", serif;
+}

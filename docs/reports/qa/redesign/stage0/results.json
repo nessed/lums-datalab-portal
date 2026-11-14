@@ -1,0 +1,42 @@
+[
+ {
+  "name": "search box at 360 px",
+  "pass": true,
+  "detail": "input 217 px wide, 60 results for \"health\""
+ },
+ {
+  "name": "search box at 320 px",
+  "pass": false,
+  "detail": "input 177 px wide, 60 results for \"health\""
+ },
+ {
+  "name": "home: no background downloads after scrolling",
+  "pass": true,
+  "detail": "0 requests after load and scroll (0 images)"
+ },
+ {
+  "name": "catalogue at 360 px: element count",
+  "pass": false,
+  "detail": "3032 elements"
+ },
+ {
+  "name": "catalogue at 360 px: filter finds a deep series",
+  "pass": true,
+  "detail": "16 rows for \"clothing\""
+ },
+ {
+  "name": "catalogue at 1280 px: element count",
+  "pass": false,
+  "detail": "3032 elements"
+ },
+ {
+  "name": "catalogue at 1280 px: filter finds a deep series",
+  "pass": true,
+  "detail": "16 rows for \"clothing\""
+ },
+ {
+  "name": "catalogue without JavaScript lists the top-level series",
+  "pass": true,
+  "detail": "79 rows"
+ }
+]

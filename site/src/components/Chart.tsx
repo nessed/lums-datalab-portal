@@ -64,7 +64,8 @@ function tickText(v: number, unitCode: string, scale: number): string {
 }
 
 function Marker({ style, cx, cy, r = 4.5 }: { style: LineStyle; cx: number; cy: number; r?: number }) {
-  const common = { fill: style.color, stroke: "#fff", strokeWidth: 1.5 };
+  // Estimates hollow, actuals solid (DESIGN.md 11): a not-final figure looks not final.
+  const common = style.hollow ? { fill: "#fff", stroke: style.color, strokeWidth: 2 } : { fill: style.color, stroke: "#fff", strokeWidth: 1.5 };
   if (style.marker === "square") return <rect x={cx - r} y={cy - r} width={r * 2} height={r * 2} {...common} />;
   if (style.marker === "diamond") return <rect x={cx - r} y={cy - r} width={r * 2} height={r * 2} transform={`rotate(45 ${cx} ${cy})`} {...common} />;
   return <circle cx={cx} cy={cy} r={r} {...common} />;
@@ -93,7 +94,7 @@ export function LineKey({ line }: { line: Pick<ChartLine, "style" | "label"> }) 
   );
 }
 
-type Tip = { x: number; px: number; period: string; rows: { label: string; value: string; color: string }[]; marks: ChartMark[] };
+type Tip = { x: number; px: number; period: string; rows: { label: string; value: string; color: string; note?: string[] }[]; marks: ChartMark[] };
 
 export default function Chart({ model, options = {}, idBase = "chart", caption }: { model: ChartModel; options?: ChartOptions; idBase?: string; caption?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -109,7 +110,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   }, []);
 
   const narrow = W < 520;
-  const H = options.height ?? (narrow ? 280 : DEFAULT_H);
+  const H = options.height ?? (narrow ? 260 : DEFAULT_H);
   const view = useMemo(() => {
     const inRange = (p: string) => (!options.from || p >= options.from) && (!options.to || p <= options.to);
     const periods = model.periods.filter((p) => inRange(p.p));
@@ -193,7 +194,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
     const rows = view.lines
       .map((l) => {
         const pt = l.points.find((q) => q.period === bp.p);
-        return pt ? { label: l.label, value: pt.valueText, color: l.style.color } : null;
+        return pt ? { label: pt.kindLabel && !multi ? pt.kindLabel : l.label, value: pt.valueText, color: (pt.style ?? l.style).color, note: pt.note } : null;
       })
       .filter((x): x is NonNullable<typeof x> => !!x);
     const marks = view.marks.filter((m) => m.period === bp.p);
@@ -230,7 +231,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           <desc id={descId}>
             {`Line chart of ${view.lines.length === 1 ? "one line" : `${view.lines.length} lines (${view.lines.map((l) => l.label).join(", ")})`}. Each point is a link to its receipt. The table below the chart lists every value.`}
           </desc>
-          <text x={M.left - 6} y={14} textAnchor="end" className="c-unit">
+          <text x={4} y={14} textAnchor="start" className="c-unit">
             {model.unitCode === "PKR" ? "Rupees" : model.unit}
             {log ? " (log scale)" : ""}
           </text>
@@ -267,9 +268,19 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
             );
           })}
           {tip ? <line x1={tip.px} x2={tip.px} y1={M.top} y2={baseY} className="c-hover-rule" /> : null}
+          {model.bars
+            ? view.lines.map((l) =>
+                l.points.map((p) => {
+                  const bw = Math.max(4, Math.min(28, (plotW / Math.max(1, (xMax - xMin) / model.step)) * 0.55));
+                  const y0 = sy(0);
+                  const y1 = sy(p.y);
+                  return <rect key={`bar-${l.key}-${p.period}`} x={sx(p.x) - bw / 2} y={Math.min(y0, y1)} width={bw} height={Math.max(1, Math.abs(y1 - y0))} fill={l.style.color} opacity={0.85} />;
+                }),
+              )
+            : null}
           {view.lines.map((l) => (
             <g key={l.key}>
-              {l.points.slice(1).map((p, i) => {
+              {model.bars ? null : l.points.slice(1).map((p, i) => {
                 const a = l.points[i];
                 if (!canConnect(a, p, model)) return null;
                 return (
@@ -291,10 +302,16 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           {view.lines.map((l) => (
             <g key={l.key}>
               {l.points.map((p) => (
-                <a key={p.period} href={p.href} className="c-pt" aria-label={`${multi ? `${l.label}, ` : ""}${p.periodLabel}: ${p.valueText} ${model.unit}. Open the receipt.`}>
-                  <circle cx={sx(p.x)} cy={sy(p.y)} r={11} className="c-hit" fill="transparent" />
+                <a
+                  key={p.period}
+                  href={p.href}
+                  className="c-pt"
+                  {...(p.sheet ? { "data-sheet": p.sheet } : {})}
+                  aria-label={`${multi ? `${l.label}, ` : p.kindLabel ? `${p.kindLabel}, ` : ""}${p.periodLabel}: ${p.valueText} ${model.unit}. ${p.note?.length ? `${p.note.join(". ")}. ` : ""}Open the receipt.`}
+                >
+                  <circle cx={sx(p.x)} cy={sy(p.y)} r={12} className="c-hit" fill="transparent" />
                   {options.highlight === p.period ? <circle cx={sx(p.x)} cy={sy(p.y)} r={9} className="c-hl" /> : null}
-                  <Marker style={l.style} cx={sx(p.x)} cy={sy(p.y)} r={tip && tip.x === p.x ? 5.5 : options.highlight === p.period ? 5.5 : 4} />
+                  {model.bars ? null : <Marker style={p.style ?? l.style} cx={sx(p.x)} cy={sy(p.y)} r={tip && tip.x === p.x ? 5.5 : options.highlight === p.period ? 5.5 : 4} />}
                 </a>
               ))}
             </g>
@@ -312,7 +329,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
                 no value
               </text>
               {view.marks.map((m) => (
-                <a key={`${m.period}-${m.vintage}`} href={m.href} className="c-pt" aria-label={`${m.periodLabel}, ${m.vintageLabel}: ${m.statusLabel}. Open the receipt.`}>
+                <a key={`${m.period}-${m.vintage}`} href={m.href} className="c-pt" {...(m.sheet ? { "data-sheet": m.sheet } : {})} aria-label={`${m.periodLabel}, ${m.vintageLabel}: ${m.statusLabel}. Open the receipt.`}>
                   <circle cx={sx(m.x)} cy={markRow} r={9} className="c-hit" fill="transparent" />
                   <GapMark status={m.status} cx={sx(m.x) + (multi ? (m.vintage === "re" ? 5 : m.vintage === "be" ? -5 : 0) : 0)} cy={markRow} />
                 </a>
@@ -326,6 +343,12 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
             {tip.rows.map((r) => (
               <div key={r.label}>
                 <span className="tip-v">{r.value}</span> <span className="tip-m">{multi ? r.label : model.unit}</span>
+                {!multi && r.label !== model.title && r.label !== "Best available figure" ? <div className="tip-m">{r.label}</div> : null}
+                {r.note?.map((n) => (
+                  <div key={n} className="tip-m">
+                    {n}
+                  </div>
+                ))}
               </div>
             ))}
             {tip.marks.map((m) => (
@@ -334,7 +357,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
                 {m.statusLabel}
               </div>
             ))}
-            <div className="tip-m">Click a point for its receipt</div>
+            <div className="tip-m">Tap or click a point for where it is printed</div>
           </div>
         ) : null}
       </div>

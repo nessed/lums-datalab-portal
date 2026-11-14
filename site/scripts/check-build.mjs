@@ -385,6 +385,9 @@ function parseAttrs(s) {
 }
 
 const mdCache = new Map();
+// Derived figures (data-num="derived": a change, a share, an index) are collected
+// here and recomputed from the release by the plug-in scripts/checks/series-derived.mjs.
+const derivedSeen = [];
 const counters = { pages: 0, values: 0, counts: 0, labels: 0, nums: {} };
 const linkTargets = { o: new Set(), series: new Set(), tables: new Set(), datasets: new Set(), sources: new Set() };
 
@@ -504,6 +507,9 @@ function validateAnnotated(el, text, page) {
       for (const tok of t.match(/\d[\d,.]*\d|\d/g) ?? []) if (!src.includes(tok)) problem("md", page, `"${tok}" is not in ${f}`);
       break;
     }
+    case "derived":
+      derivedSeen.push({ page, attrs: a, text: t });
+      break;
     case "id":
     case "ui":
     case "axis":
@@ -607,7 +613,7 @@ for (const id of linkTargets.sources) if (!exists("sources", id)) problem("link"
 // Each file exports a default function that receives the release and a
 // problem() reporter. Data the browser draws (JSON files) is checked here.
 const pluginDir = path.join(siteDir, "scripts", "checks");
-const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem };
+const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem, derived: derivedSeen };
 if (fs.existsSync(pluginDir)) {
   for (const name of fs.readdirSync(pluginDir).filter((n) => n.endsWith(".mjs")).sort()) {
     const mod = await import(pathToFileURL(path.join(pluginDir, name)).href);

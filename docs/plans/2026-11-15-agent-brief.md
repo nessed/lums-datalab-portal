@@ -75,6 +75,10 @@ or get a CSV; no new web fonts; no client chart library; no new runtime dependen
 - Iterate with `npx next dev -p <your port>` from `site/` and the pages you are changing.
 - Before you finish, all of these must pass in your worktree, in this order: `npm run lint`,
   `npm run test:contract`, `npm run build` (about 10 minutes; run it at most twice), `node scripts/check-build.mjs`.
+- **Slow disk on first read:** on this machine the first `node scripts/check-build.mjs` after a build waits on disk
+  for every freshly built file (about 0.2 s a file, 20 to 40 minutes in all; CPU stays idle). It is not hung. Run it
+  in the background and do other work; a second run over the same build is fast. Do not change any system or
+  security setting to speed it up.
 - Look at your pages in a real browser (Playwright from `site/node_modules`) at **360 px** and **1280 px**, including
   with JavaScript off for anything that must work without it. Save screenshots (PNG, ≤ 6,000 px high) to
   `docs/reports/qa/redesign/<your-area>/`.

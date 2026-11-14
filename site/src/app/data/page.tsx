@@ -1,7 +1,7 @@
 // Data access: what a release contains, what each column means, how to load
 // it, the permalink and receipt patterns, and how to cite.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import fs from "node:fs";
 import path from "node:path";
 import { Breadcrumbs, Callout, TableWrap, Toc } from "@/components/ui/Basics";

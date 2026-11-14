@@ -2,7 +2,7 @@
 // its receipt and every caveat is stated where it applies. All numbers are
 // read from the release; the sentences adapt to what the release holds.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { ReactNode } from "react";
 import Cite from "@/components/Cite";
 import SeriesChart from "@/components/SeriesChart";

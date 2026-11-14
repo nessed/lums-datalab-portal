@@ -21,7 +21,7 @@
 // 3. Every internal link to a receipt, series, table, data type or document exists.
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { facetCounts } from "../src/lib/facets.mjs";
 
 const siteDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -146,6 +146,10 @@ function countFor(key) {
   const [a, b, c, d, e] = p;
   switch (a) {
     case "series":
+      if (b === "roots") {
+        const ids = new Set(seriesList.map((x) => x.series_id));
+        return visibleSeries.filter((x) => !x.parent_id || !ids.has(x.parent_id)).length;
+      }
       return b ? visibleSeries.filter((s) => s.dataset === b).length : visibleSeries.length;
     case "values":
       if (!b) return pubIn(() => true);
@@ -562,6 +566,21 @@ for (const id of linkTargets.series) if (!exists("series", id)) problem("link", 
 for (const id of linkTargets.tables) if (!exists("tables", id)) problem("link", `/tables/${id}`, "linked table page does not exist");
 for (const id of linkTargets.datasets) if (!exists("datasets", id)) problem("link", `/datasets/${id}`, "linked data type page does not exist");
 for (const id of linkTargets.sources) if (!exists("sources", id)) problem("link", `/sources/${id}`, "linked document page does not exist");
+
+/* ------------------------------------------------------------------ */
+/* 4. plug-in checks: scripts/checks/*.mjs                             */
+/* ------------------------------------------------------------------ */
+// Each file exports a default function that receives the release and a
+// problem() reporter. Data the browser draws (JSON files) is checked here.
+const pluginDir = path.join(siteDir, "scripts", "checks");
+const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem };
+if (fs.existsSync(pluginDir)) {
+  for (const name of fs.readdirSync(pluginDir).filter((n) => n.endsWith(".mjs")).sort()) {
+    const mod = await import(pathToFileURL(path.join(pluginDir, name)).href);
+    const out = await mod.default(pluginCtx);
+    console.log(`check-build: plug-in ${name}: ${out ?? "ran"}`);
+  }
+}
 
 /* ------------------------------------------------------------------ */
 console.log(`check-build: ${values} value receipts, ${gaps} gap receipts, ${disputed} disputed receipts checked`);

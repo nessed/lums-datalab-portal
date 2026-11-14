@@ -1,7 +1,7 @@
 "use client";
 // Small client pieces of the page chrome: the active nav item, the dismissible
 // prototype notice, and the "Report an error" link that names the current page.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 

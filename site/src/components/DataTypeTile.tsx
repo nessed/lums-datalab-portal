@@ -1,6 +1,6 @@
 // One data type as a tile: name, publisher, counts and span, all read from
 // the release. Used on the home page and the data types index.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Count, Num } from "@/components/ui/Num";
 import { datasetName } from "@/lib/data";
 import { periodWords } from "@/lib/format";

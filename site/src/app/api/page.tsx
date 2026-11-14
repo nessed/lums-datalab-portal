@@ -2,7 +2,7 @@
 // the page says so and points to what already works: every release file is a
 // static download with a stable address.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Breadcrumbs } from "@/components/ui/Basics";
 import { Num } from "@/components/ui/Num";
 import { DATA_BASE, RELEASE_VERSION } from "@/lib/data";

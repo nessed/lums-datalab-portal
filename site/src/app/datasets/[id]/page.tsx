@@ -2,7 +2,7 @@
 // apply to all of it, its quality as three separate numbers against their
 // frozen thresholds, its gaps and disputes, and its tables as printed.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import { KindAndPeriod } from "@/components/Figure";
 import Spark from "@/components/Spark";

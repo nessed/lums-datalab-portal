@@ -2,7 +2,7 @@
 // component with tabs (Chart | Table | Sources | Download | Cite) on the first
 // screen; related series in the rail. Every value links to its receipt.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import Cite from "@/components/Cite";
 import { KindAndPeriod } from "@/components/Figure";

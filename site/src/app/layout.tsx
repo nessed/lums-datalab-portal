@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import localFont from "next/font/local";
 import { NavLinks, DismissNotice, ReportLink, MobileMenu } from "@/components/chrome/Chrome";
 import { Num } from "@/components/ui/Num";
@@ -9,6 +9,13 @@ import SearchDialog from "@/components/chrome/SearchDialog";
 import { DATA_BASE, db, ISSUES_URL, REPO_URL, SITE_URL } from "@/lib/data";
 import { dateOnly } from "@/lib/format";
 import "./globals.css";
+import "@/styles/base.css";
+import "@/styles/evidence.css";
+import "@/styles/series.css";
+import "@/styles/search.css";
+import "@/styles/home.css";
+import "@/styles/downloads.css";
+import "@/styles/compare.css";
 
 // Self-hosted (OFL) so the build needs no network and there is no layout shift.
 const serif = localFont({

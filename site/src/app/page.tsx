@@ -2,7 +2,7 @@
 // a search box, one tile per data type and the latest checked figure of a few
 // headline series (chosen by people in editorial.config.json; every value is
 // read from the release and links to its receipt). Text goes below the fold.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import editorial from "../../editorial.config.json";
 import { FigureLine, KindAndPeriod } from "@/components/Figure";
 import Spark from "@/components/Spark";

@@ -1,7 +1,7 @@
 // The receipt: one figure, where it is printed, how it was checked, and how to
 // take it away. The flagship page of the site.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import Cite from "@/components/Cite";

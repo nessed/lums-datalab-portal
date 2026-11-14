@@ -1,6 +1,6 @@
 // About: who makes this, what it is not, the licence, how to report an error.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Breadcrumbs, Callout } from "@/components/ui/Basics";
 import { db, ISSUES_URL, REPO_URL } from "@/lib/data";
 

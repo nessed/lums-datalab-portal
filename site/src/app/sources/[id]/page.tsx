@@ -2,7 +2,7 @@
 // sentence), the pages this release reads from it, the tables located on
 // them with their coverage, and the extraction runs.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import Cite from "@/components/Cite";

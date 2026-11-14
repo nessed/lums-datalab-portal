@@ -5,7 +5,7 @@
 //   <Num>     anything else with digits: a period, a date, a page number, an id,
 //             an axis tick, a printed reading on a receipt (data-num="kind")
 // A digit outside all three fails the build check.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { ReactNode } from "react";
 import { obsHref, type Observation } from "@/lib/data";
 import { count, formatDecimalString, pct } from "@/lib/format";

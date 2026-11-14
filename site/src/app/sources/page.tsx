@@ -1,7 +1,7 @@
 // Every source document, how we know each file is genuine, and what this
 // release reads from it.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Bar, Breadcrumbs, TableWrap } from "@/components/ui/Basics";
 import { db, sourceHref } from "@/lib/data";
 import { DOC_TYPE_WORDS, ROLE_WORDS } from "@/lib/format";

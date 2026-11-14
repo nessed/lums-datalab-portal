@@ -2,7 +2,7 @@
 // statuses, the checks, the frozen thresholds, what language models did and
 // did not do, then docs/METHODS.md in full.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import Cite from "@/components/Cite";
 import Markdown, { markdownHeadings } from "@/components/Markdown";
 import { Bar, Breadcrumbs, Callout, TableWrap, Toc } from "@/components/ui/Basics";

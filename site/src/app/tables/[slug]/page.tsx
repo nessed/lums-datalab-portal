@@ -2,7 +2,7 @@
 // table with its printed labels, beside the page it was read from. Pick an
 // edition, pick a table; select any number to see where it sits on the page.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import TableView, { type TVCell } from "@/components/TableView";
 import { Breadcrumbs, ExternalLink } from "@/components/ui/Basics";

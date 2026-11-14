@@ -2,7 +2,7 @@
 // no axes. The line breaks at gaps and at series breaks, exactly as the full
 // chart does (canConnect). The whole sparkline links to the series; the
 // printed last value beside it (rendered by the caller) links to its receipt.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { canConnect, chartModelFrom } from "@/lib/chart-model";
 import { db, seriesHref, type Series } from "@/lib/data";
 import { mainVintage } from "@/lib/stats";

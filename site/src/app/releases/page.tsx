@@ -2,7 +2,7 @@
 // work, the changelog and errata; the dataset card and the reproduction steps
 // on request.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import Cite from "@/components/Cite";
 import Markdown from "@/components/Markdown";
 import { Breadcrumbs, Callout, Disclosure, TableWrap, Toc } from "@/components/ui/Basics";

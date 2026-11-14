@@ -1,0 +1,22 @@
+/* Shared additions of the 2026-11 redesign (DESIGN.md). globals.css stays as it was;
+   area files (evidence, series, search, home, downloads, compare) hold the rest. */
+
+/* Shown only when JavaScript runs (html.js is set before paint in layout.tsx). */
+.js-only {
+  display: none;
+}
+html.js .js-only {
+  display: inline;
+}
+
+/* Catalogue: only top-level series are in the HTML (S0). */
+.cat-roots {
+  margin: var(--s-3) 0 0;
+  color: var(--ink-2);
+}
+.cat-roots a {
+  margin-left: 0.25em;
+}
+.cat-more {
+  margin-top: var(--s-3);
+}

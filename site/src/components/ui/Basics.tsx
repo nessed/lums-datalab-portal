@@ -1,5 +1,5 @@
 // Small server-side building blocks. Class names are defined in globals.css.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { ReactNode } from "react";
 import { IconDownload, IconExternal } from "./Icons";
 

@@ -2,7 +2,7 @@
 // status, and where it is printed. Gaps are rows too, with their reason.
 // Values are plain when checked (the legend says so); anything else carries
 // its status shape and a patterned cell, so the table reads in greyscale.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { TableWrap } from "@/components/ui/Basics";
 import { StatusBadge, cellFillClass } from "@/components/ui/Status";
 import SortToggle from "@/components/SortToggle";

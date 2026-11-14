@@ -42,7 +42,7 @@ export const STATUS: Record<Exclude<StatusKey, "unknown">, StatusInfo> = {
   "dash-or-zero": {
     key: "dash-or-zero",
     label: "Dash or zero",
-    meaning: "The source stored 0 for a printed dash or zero and does not say which, so no number is shown and it is never used in a sum.",
+    meaning: "The source stored a zero for a printed dash or zero and does not say which, so no number is shown and it is never used in a sum.",
   },
   "gap-pending": {
     key: "gap-pending",

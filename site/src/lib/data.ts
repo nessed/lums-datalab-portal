@@ -267,6 +267,7 @@ let cache: Db | null = null;
 export function db(): Db {
   if (cache) return cache;
   const name = ((config as { adapter?: string }).adapter ?? "datalab") as AdapterName;
+  // golden (not switched on, DESIGN.md 17.7): if (name === "golden") { cache = loadGolden(GOLDEN_DIR, { tag: config.goldenTag }); return cache; }
   if (name !== "datalab") throw new Error(`Adapter "${name}" is not switched on in this build (DESIGN.md 17.7). Use "datalab".`);
   cache = loadDatalab(RELEASE_DIR);
   return cache;

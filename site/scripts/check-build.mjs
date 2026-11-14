@@ -43,7 +43,9 @@ const sources = read("sources.json");
 const sourceById = new Map(sources.map((s) => [s.source_id, s]));
 const coverage = read("coverage.json");
 const allObs = read("observations.json");
-const published = (ds) => release.dataset_status?.[ds]?.state === "published";
+// Visible datasets: published, and candidates (decision 17.1: shown, always marked "not signed off").
+const published = (ds) => ["published", "candidate"].includes(release.dataset_status?.[ds]?.state);
+const isCandidateObs = (o) => release.dataset_status?.[series.get(o.series_id)?.dataset]?.state === "candidate";
 const observations = allObs.filter((o) => published(series.get(o.series_id)?.dataset));
 const obsBySlug = new Map(allObs.map((o) => [slugify(o.obs_id), o]));
 const isPub = (o) => !!o && o.published && o.value !== null && o.value !== undefined;
@@ -247,6 +249,33 @@ const fmtPct = (r) => {
   return `${Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)}%`;
 };
 
+// Headline short scale (DESIGN.md 6.3), written independently of src/lib/words.ts:
+// rupees and persons in trillion / billion / million to one decimal, half up on
+// the hundredths; per cent with "%"; anything else as stored.
+function shortIndep(v, unit, scale) {
+  const str = String(v).trim();
+  if (unit === "PKR" || unit === "persons") {
+    const neg = str.startsWith("-");
+    const [ip, fp = ""] = str.replace(/^[+-]/, "").split(".");
+    const k = Math.round(Math.log10(Number(scale ?? 1)));
+    if (10 ** k !== Number(scale ?? 1)) return str;
+    const num = BigInt(ip + fp) * 10n ** BigInt(k);
+    const den = 10n ** BigInt(fp.length);
+    const whole = num / den;
+    const digits = whole.toString().length;
+    const pick = [[12, "trillion"], [9, "billion"], [6, "million"]].find(([e]) => digits > e);
+    let text;
+    if (pick) {
+      const hundredths = (num * 100n) / (den * 10n ** BigInt(pick[0]));
+      const tenths = (hundredths + 5n) / 10n;
+      const r = tenths % 10n;
+      text = `${tenths / 10n}${r ? `.${r}` : ""} ${pick[1]}`;
+    } else text = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return unit === "PKR" ? `${neg ? "−" : ""}Rs ${text}` : `${neg ? "−" : ""}${text} persons`;
+  }
+  return unit === "percent" ? `${fmtDec(str)}%` : fmtDec(str);
+}
+
 /* ------------------------------------------------------------------ */
 /* Text that may carry digits without an annotation: release labels    */
 /* ------------------------------------------------------------------ */
@@ -375,7 +404,12 @@ function validateAnnotated(el, text, page) {
       const own = [o.primary_cell_id, ...(o.supporting_cell_ids ?? [])];
       if (!c || !own.includes(c.cell_id)) return problem("value-text", page, `value "${t}" names cell ${a["data-v-cell"]}, which is not a printing of ${o.obs_id}`);
       if (norm(c.value_raw ?? "") !== t) return problem("value-text", page, `value "${t}" differs from the printed text "${c.value_raw}" of ${c.cell_id}`);
+    } else if (a["data-v-fmt"] === "short") {
+      const sr = series.get(o.series_id);
+      const want = shortIndep(o.value, sr?.unit, sr?.scale_factor);
+      if (t !== want) return problem("value-short", page, `headline "${t}" is not the short form "${want}" of ${o.value} (${o.obs_id})`);
     } else if (t !== fmtDec(o.value)) return problem("value-text", page, `value "${t}" differs from the release value ${o.value} of ${o.obs_id}`);
+    if (isCandidateObs(o) && !("data-candidate" in a)) return problem("value-candidate", page, `value "${t}" (${o.obs_id}) is from a dataset nobody signed off and is not marked`);
     return;
   }
   if ("data-v-self" in a) {

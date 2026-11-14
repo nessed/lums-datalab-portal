@@ -20,3 +20,11 @@ html.js .js-only {
 .cat-more {
   margin-top: var(--s-3);
 }
+
+/* Statuses added by the redesign (DESIGN.md 6.1): each with its own shape (Status.tsx). */
+.st--candidate {
+  color: var(--ink-2);
+}
+.st--dash-or-zero {
+  color: var(--st-gap);
+}

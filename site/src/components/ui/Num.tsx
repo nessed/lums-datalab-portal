@@ -7,19 +7,58 @@
 // A digit outside all three fails the build check.
 import Link from "@/components/ui/Link";
 import type { ReactNode } from "react";
-import { obsHref, type Observation } from "@/lib/data";
+import { obsHref, slugify, type Observation } from "@/lib/data";
 import { count, formatDecimalString, pct } from "@/lib/format";
+import { shortScale } from "@/lib/words";
 
-/** A checked value, linked to its receipt. Never call it for an unpublished figure. */
-export function V({ o, className = "v-link", label, cell }: { o: Pick<Observation, "obs_id" | "value" | "published">; className?: string; label?: string; cell?: { cell_id: string; value_raw: string | null } }) {
+/**
+ * A shown value, linked to its receipt. Never call it for a figure whose status
+ * shows no value. `short` gives the headline form ("Rs 37.4 billion",
+ * DESIGN.md 6.3), marked data-v-fmt="short" so check-build recomputes it.
+ * A figure from a dataset nobody has signed off carries the words
+ * "not signed off" beside it, always (decision 17.1).
+ */
+export function V({
+  o,
+  className = "v-link",
+  label,
+  cell,
+  short,
+  sheet,
+}: {
+  o: Pick<Observation, "obs_id" | "value" | "published"> & Partial<Pick<Observation, "reader" | "unit" | "scale_factor">>;
+  className?: string;
+  label?: string;
+  cell?: { cell_id: string; value_raw: string | null };
+  short?: boolean;
+  /** Tapping opens the one-tap evidence sheet (components/evidence/EvidenceSheet) instead of leaving the page; without JavaScript it is a plain link to the receipt. */
+  sheet?: boolean;
+}) {
   if (!o.published || o.value === null) throw new Error(`V: ${o.obs_id} is not a published value`);
+  if (o.reader && !o.reader.showsValue) throw new Error(`V: ${o.obs_id} has status ${o.reader.key}, which shows no value`);
   // In a table as printed the printed text is shown (data-v-cell names the cell);
-  // everywhere else the stored value with thousands separators.
-  const text = cell ? (cell.value_raw ?? "").trim() : formatDecimalString(o.value);
-  return (
-    <Link href={obsHref(o.obs_id)} className={className} data-v="" {...(cell ? { "data-v-cell": cell.cell_id } : {})} aria-label={label}>
+  // everywhere else the stored value with thousands separators, or its short form.
+  const text = cell ? (cell.value_raw ?? "").trim() : short ? shortScale(o.value, o.unit, o.scale_factor) : formatDecimalString(o.value);
+  const candidate = o.reader?.key === "candidate";
+  const link = (
+    <Link
+      href={obsHref(o.obs_id)}
+      className={className}
+      data-v=""
+      {...(cell ? { "data-v-cell": cell.cell_id } : {})}
+      {...(short && !cell ? { "data-v-fmt": "short" } : {})}
+      {...(candidate ? { "data-candidate": "" } : {})}
+      {...(sheet ? { "data-sheet": slugify(o.obs_id) } : {})}
+      aria-label={label ?? (candidate ? `${text}, not signed off` : undefined)}
+    >
       {text}
     </Link>
+  );
+  if (!candidate) return link;
+  return (
+    <span className="v-candidate">
+      {link} <span className="v-mark">not signed off</span>
+    </span>
   );
 }
 

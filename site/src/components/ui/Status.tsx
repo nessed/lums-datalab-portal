@@ -41,6 +41,24 @@ export function StatusMark({ k, title }: { k: StatusKey; title?: string }) {
           <rect x="0.6" y="0.6" width="8.8" height="8.8" fill="none" stroke="currentColor" strokeWidth="1.1" strokeDasharray="1.2 1.4" />
         </svg>
       );
+    case "candidate":
+      // Half-filled disc: a checked figure nobody has signed off yet.
+      return (
+        <svg {...common}>
+          {t}
+          <circle cx="5" cy="5" r="3.9" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <path d="M5 1.1 A3.9 3.9 0 0 0 5 8.9 Z" fill="currentColor" />
+        </svg>
+      );
+    case "dash-or-zero":
+      // Square with a short bar: a stored 0 that may be a printed dash.
+      return (
+        <svg {...common}>
+          {t}
+          <rect x="0.6" y="0.6" width="8.8" height="8.8" fill="none" stroke="currentColor" strokeWidth="1.1" />
+          <path d="M2.8 5 L7.2 5" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+      );
     case "withheld":
       return (
         <svg {...common}>
@@ -61,7 +79,7 @@ export function StatusMark({ k, title }: { k: StatusKey; title?: string }) {
 
 /** Mark + label. `detail` adds a short phrase (for example the evidence) after the label. */
 export function StatusBadge({ info, detail, short }: { info: StatusInfo; detail?: string | null; short?: boolean }) {
-  const label = short && info.key.startsWith("gap") ? "Gap" : info.label;
+  const label = short && (info.key.startsWith("gap") || info.key === "dash-or-zero") ? "Gap" : info.label;
   return (
     <span className={`st st--${info.key}`} title={info.meaning}>
       <StatusMark k={info.key} />

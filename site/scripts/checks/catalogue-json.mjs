@@ -22,7 +22,7 @@ export default function check({ appDir, release, seriesList, allObs, isPub, slug
   }
   const j = JSON.parse(fs.readFileSync(file, "utf8"));
   if (j.release !== release.version) problem("catalogue-json", "/catalogue.json", `release ${j.release}, built from ${release.version}`);
-  const visible = seriesList.filter((s) => release.dataset_status?.[s.dataset]?.state === "published");
+  const visible = seriesList.filter((s) => ["published", "candidate"].includes(release.dataset_status?.[s.dataset]?.state));
   const byId = new Map(visible.map((s) => [s.series_id, s]));
   if (j.rows.length !== visible.length) problem("catalogue-json", "/catalogue.json", `${j.rows.length} rows, ${visible.length} visible series`);
   const obsById = new Map(allObs.map((o) => [o.obs_id, o]));

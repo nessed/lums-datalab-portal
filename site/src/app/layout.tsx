@@ -6,6 +6,7 @@ import { NavLinks, DismissNotice, ReportLink, MobileMenu } from "@/components/ch
 import { Num } from "@/components/ui/Num";
 import { COMING } from "@/lib/features";
 import SearchDialog from "@/components/chrome/SearchDialog";
+import EvidenceSheet from "@/components/evidence/EvidenceSheet";
 import { DATA_BASE, db, ISSUES_URL, REPO_URL, SITE_URL } from "@/lib/data";
 import { dateOnly } from "@/lib/format";
 import "./globals.css";
@@ -97,6 +98,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main" tabIndex={-1}>
           <div className="wrap">{children}</div>
         </main>
+        <EvidenceSheet />
         <footer className="site-footer">
           <div className="wrap footer-grid">
             <section aria-labelledby="ft-what">

@@ -172,3 +172,17 @@ for (const src of sources) {
 fs.writeFileSync(path.join(dest, "search.json"), JSON.stringify(index));
 
 console.log(`prebuild: copied release ${version} -> public/data/${version} (${observations.length} receipts, ${series.length} series CSVs)`);
+
+// Area steps of the redesign (one file each, so areas do not edit one file):
+// every scripts/prebuild/*.mjs default-exports a function that receives the
+// release and the public/data/<version> folder, and writes what its area serves.
+const stepDir = path.join(siteDir, "scripts", "prebuild");
+if (fs.existsSync(stepDir)) {
+  const { pathToFileURL } = await import("node:url");
+  const ctx = { siteDir, version, src, dest, slugify, readJson, release, series, observations, cells, checks, sources };
+  for (const name of fs.readdirSync(stepDir).filter((n) => n.endsWith(".mjs")).sort()) {
+    const mod = await import(pathToFileURL(path.join(stepDir, name)).href);
+    const out = await mod.default(ctx);
+    console.log(`prebuild: step ${name}: ${out ?? "done"}`);
+  }
+}

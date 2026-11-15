@@ -509,6 +509,11 @@ function validateAnnotated(el, text, page) {
     case "axis":
     case "cite":
       break;
+    case "derived":
+      // A value computed at build time (a change, a share). It must say what it is;
+      // the plug-in of its area recomputes it (pct-change: checks/evidence-sheet.mjs).
+      if (!a["data-derived"]) problem("derived", page, `derived value "${t}" does not say what it is (data-derived)`);
+      break;
     default:
       problem("annotation", page, `unknown data-num kind "${kind}"`);
   }

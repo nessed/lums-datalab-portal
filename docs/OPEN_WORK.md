@@ -549,7 +549,7 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
 
 ### S18 Redesign preview: what the run left open
 - **State:** partial. The redesign preview is built on `proto/redesign-2026-11` (draft PR #13); the brief is still a
-  draft. Story and full list: `docs/reports/2026-11-16-redesign-preview-report.md`, section "What failed or is unfinished".
+  draft. Story and full list: `docs/reports/2026-11-15-redesign-preview-report.md`, section "What failed or is unfinished".
 - **Left to do:**
   1. JavaScript budget (100 KB): every page loads 144-160 KB, mostly the framework.
   2. Catalogue: 2,039 elements against 1,500; make the rows lighter.

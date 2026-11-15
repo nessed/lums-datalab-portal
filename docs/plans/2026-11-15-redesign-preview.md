@@ -43,5 +43,5 @@ only. Phone first: a 360 px Android on slow 4G.
 
 ## Report
 
-`docs/reports/2026-11-16-redesign-preview-report.md`: what is built, the preview link, what to look at first on a
+`docs/reports/2026-11-15-redesign-preview-report.md`: what is built, the preview link, what to look at first on a
 phone, every judgement call, what failed or is unfinished, and the section 17 assumptions.

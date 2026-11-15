@@ -60,7 +60,7 @@ into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Si
 **Redesign preview build, 2026-11-15 (unattended; the brief is still a draft).** Branch `proto/redesign-2026-11`, draft
 PR #13, not merged. DESIGN.md stages 0-9 built; the site reads release `v0.0.1-prototype` through `site/src/lib/adapter/`
 (datalab adapter on; golden adapter tested against `golden-2026.11.11`, off). Report:
-`docs/reports/2026-11-16-redesign-preview-report.md`; what is left: `docs/OPEN_WORK.md` S18.
+`docs/reports/2026-11-15-redesign-preview-report.md`; what is left: `docs/OPEN_WORK.md` S18.
 
 **Redesign brief, 2026-11-15: DRAFT, not approved.** `docs/DESIGN.md` now holds a new brief (the S16 draft is in git
 history at `d5897ca`). It plans for Ahmad's tagged golden releases (`ahm3d-karim/pak-econ-golden-data`) to become the

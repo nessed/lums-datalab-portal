@@ -199,7 +199,13 @@ export default function SeriesView(p: SeriesViewProps) {
           <span className="seg sv-seg" role="group" aria-labelledby="sv-range">
             {ranges.map((x) => (
               <button key={x.id} type="button" aria-pressed={r.id === x.id} aria-label={x.aria} onClick={() => setQuery({ range: x.id === "all" ? null : x.id })}>
-                <span data-num={x.id === "break" ? "period" : "ui"}>{x.label}</span>
+                {x.id === "break" ? (
+                  <>
+                    From <span data-num="period">{p.breakFrom!.label}</span>
+                  </>
+                ) : (
+                  <span data-num="ui">{x.label}</span>
+                )}
               </button>
             ))}
           </span>

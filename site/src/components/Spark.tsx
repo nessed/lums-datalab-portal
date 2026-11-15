@@ -3,6 +3,7 @@
 // chart does (canConnect). The whole sparkline links to the series; the
 // printed last value beside it (rendered by the caller) links to its receipt.
 import Link from "@/components/ui/Link";
+import { seriesTitle } from "@/lib/titles";
 import { canConnect, chartModelFrom } from "@/lib/chart-model";
 import { db, seriesHref, type Series } from "@/lib/data";
 import { mainVintage } from "@/lib/stats";
@@ -40,7 +41,7 @@ export default function Spark({ series, width = 96, height = 30, link = true }: 
   );
   if (!link) return svg;
   return (
-    <Link href={seriesHref(series.series_id)} className="spark-link" aria-label={`Chart of ${series.name}`} tabIndex={-1}>
+    <Link href={seriesHref(series.series_id)} className="spark-link" aria-label={`Chart of ${seriesTitle(series)}`} tabIndex={-1}>
       {svg}
     </Link>
   );

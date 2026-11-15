@@ -5,6 +5,7 @@
 // estimates change. Topics and wording come from editorial/topics.json; every
 // number from the release.
 import type { Metadata } from "next";
+import { seriesTitle } from "@/lib/titles";
 import { notFound } from "next/navigation";
 import Link from "@/components/ui/Link";
 import { Breadcrumbs } from "@/components/ui/Basics";
@@ -31,7 +32,7 @@ export default async function TopicPage({ params }: Props) {
   if (!t) notFound();
   const words = new PageWords();
   const notes = new DerivedNotes();
-  const cards = t.headline.map((s) => headlineCard({ series: s, kind: mainKind(s), name: s.name }, words, notes));
+  const cards = t.headline.map((s) => headlineCard({ series: s, kind: mainKind(s), name: seriesTitle(s) }, words, notes));
   const tree = seriesTree(t.groups, words);
   const rev = t.revisions && t.revisions.series.length ? revisionTable(t.revisions.series, words, notes) : null;
   const allSeries = t.groups.flatMap((g) => g.series);

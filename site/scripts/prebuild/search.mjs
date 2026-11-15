@@ -5,7 +5,8 @@
 // scripts/checks/search-index.mjs checks every value here against the release.
 //
 // What goes in, kept small (budget: 40 KB compressed, loaded on first focus):
-//   s  every visible series: name, synonyms, printed label, unit, periods,
+//   s  every visible series: plain title (n, editorial/titles.json, through the
+//      adapter), printed name (pn, when it differs), synonyms, printed row label, unit, periods,
 //      geography, and its latest checked value (short form, kind, period,
 //      receipt). A candidate's value is marked; it never enters the headline
 //      layer or an answer card (decision 17.1).
@@ -92,7 +93,7 @@ export default async function searchIndex(ctx) {
     const e = {
       k: "s",
       id: s.series_id,
-      n: s.name,
+      n: s.title,
       d: d.release.dataset_status?.[s.dataset]?.name ?? s.dataset,
       u: unitLabel(s.unit, s.scale_factor),
       f: s.frequency,
@@ -105,7 +106,13 @@ export default async function searchIndex(ctx) {
     const y = [...(s.synonyms ?? []), extraWords(s)].filter(Boolean).join(" ");
     if (y) e.y = y;
     if (s.derived) e.x = 1;
-    if (label && words(label) !== words(s.name) && !words(s.name).includes(words(label))) e.l = label;
+    // The printed name stays searchable (official names people know: "CPI National ...").
+    if (words(s.name) !== words(s.title)) e.pn = s.name;
+    // The printed row label ("6. Health") only when it adds a word the title, printed name and synonyms do not
+    // already make searchable (keeps the index within its 40 KB budget once printed names are in it).
+    const letters = (x) => (x ?? "").toLowerCase().replace(/[^a-z]+/g, " ").trim().split(" ").filter(Boolean);
+    const have = new Set([...letters(s.title), ...letters(s.name), ...letters(y)]);
+    if (label && letters(label).some((w) => !have.has(w))) e.l = label;
     if (s.geo && s.geo !== "pk") e.g = s.geo;
     if (headline.has(s.series_id) && !cand) e.hl = 1;
     if (cand) e.cand = 1;
@@ -166,7 +173,8 @@ export default async function searchIndex(ctx) {
         // the series id, period and vintage (/o/<series>~<period>~<vintage>).
         e.a = {
           s: head.series_id,
-          n: head.name,
+          n: head.title,
+          pn: head.name,
           u: unitLabel(head.unit, head.scale_factor),
           f: head.frequency,
           vals: vals.map((o) => [o.period, o.vintage, shortScale(o.value, head.unit, head.scale_factor), marker(o), kindWord(o)]),

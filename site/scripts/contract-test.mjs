@@ -188,6 +188,64 @@ test("short scale", () => {
   assert.equal(shortScale("312.64", "index", 1), "312.64");
 });
 
+/* ---------- plain titles (DESIGN.md 6.4, round 2): editorial, never data ---------- */
+const titlesFile = path.join(siteDir, "editorial", "titles.json");
+const titlesJson = JSON.parse(fs.readFileSync(titlesFile, "utf8"));
+test("titles: a release folder without a titles file keeps the printed name as the title, and says so", () => {
+  // The temporary release lives outside site/, so the default file next to it does not exist.
+  for (const s of d.series) {
+    assert.equal(s.title, s.name);
+    assert.equal(s.summary, null);
+    assert.equal(s.titleStatus, "printed");
+  }
+});
+const dt = loadDatalab(path.join(tmp, "main"), { titlesFile });
+test("titles: with the editorial file, every series gets its title, summary and draft status; the printed name is unchanged", () => {
+  for (const s of dt.series) {
+    const e = titlesJson.series[s.series_id];
+    assert.ok(e, `no entry for ${s.series_id}`);
+    assert.equal(s.title, e.title);
+    assert.equal(s.summary, e.summary);
+    assert.equal(s.titleStatus, e.status === "approved" ? "approved" : "draft");
+    assert.equal(s.name, series.find((x) => x.series_id === s.series_id).name, "printed name changed");
+  }
+});
+test("titles: the editorial file changes no figure, id or status", () => {
+  assert.equal(dt.observations.length, d.observations.length);
+  for (const o of d.observations) {
+    const t = dt.obsById.get(o.obs_id);
+    assert.equal(t.value, o.value);
+    assert.equal(t.reader.key, o.reader.key);
+  }
+  assert.deepEqual(dt.series.map((s) => s.series_id), d.series.map((s) => s.series_id));
+});
+test("titles: the real release loads with the default editorial file next to it", () => {
+  const real = loadDatalab(relDir);
+  const inflation = real.seriesById.get("cpi.national.yoy.general");
+  assert.equal(inflation.title, titlesJson.series["cpi.national.yoy.general"].title);
+  assert.equal(inflation.name, series.find((x) => x.series_id === "cpi.national.yoy.general").name);
+  assert.ok(real.series.every((s) => s.titleStatus !== "printed"), "a series of the release has no title");
+});
+test("titles: a missing entry falls back to the printed name; titlesFile null reads nothing", () => {
+  const none = loadDatalab(path.join(tmp, "main"), { titlesFile: null });
+  assert.ok(none.series.every((s) => s.titleStatus === "printed" && s.title === s.name));
+  const partial = path.join(tmp, "titles-partial.json");
+  const first = dt.series[0].series_id;
+  fs.writeFileSync(partial, JSON.stringify({ provisional: true, series: { [first]: { title: "A plain title", summary: "One sentence.", status: "approved" } } }));
+  const p = loadDatalab(path.join(tmp, "main"), { titlesFile: partial });
+  assert.equal(p.seriesById.get(first).title, "A plain title");
+  assert.equal(p.seriesById.get(first).titleStatus, "approved");
+  for (const s of p.series.filter((x) => x.series_id !== first)) assert.equal(s.titleStatus, "printed");
+});
+const { seriesTitle, printedLine, seriesSummary } = await import(pathToFileURL(path.join(siteDir, "src/lib/titles.ts")).href);
+test("titles: helpers name a series by its title and give the printed line only when it differs", () => {
+  assert.equal(seriesTitle({ name: "CPI National: General", title: "Inflation" }), "Inflation");
+  assert.equal(printedLine({ name: "CPI National: General", title: "Inflation" }), "CPI National: General");
+  assert.equal(seriesTitle({ name: "Sales tax", title: "" }), "Sales tax");
+  assert.equal(printedLine({ name: "Sales tax", title: "sales tax" }), null);
+  assert.equal(seriesSummary({ name: "x", summary: null }), null);
+});
+
 fs.rmSync(tmp, { recursive: true, force: true });
 
 /* ---------- golden adapter (DESIGN.md 5.2, 5.3; task A8) ----------
@@ -300,6 +358,13 @@ if (goldenSkip) {
   const gev = (f) => g.evidence.get(g.rowObs.get(`${f.ds}#${f.i}`));
 
   if (g) {
+    test("golden: without an editorial titles file every series keeps its printed name as its title, marked printed", () => {
+      for (const s of g.series) {
+        assert.equal(s.title, s.name);
+        assert.equal(s.titleStatus, "printed");
+        assert.equal(s.summary, null);
+      }
+    });
     test("golden: every row of every released dataset is read, once", () => {
       let total = 0;
       for (const [ds, v] of Object.entries(grel.datasets)) {

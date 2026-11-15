@@ -8,6 +8,7 @@
 //   Share:    "this release" (pinned) and "always the latest" (13.3).
 // Place each button once per page: the sheet ids come from the series or path.
 import Link from "@/components/ui/Link";
+import { seriesTitle } from "@/lib/titles";
 import { Num } from "@/components/ui/Num";
 import { db, RELEASE_VERSION } from "@/lib/data";
 import { VERSION_FILES } from "@/lib/take-columns";
@@ -38,7 +39,7 @@ export function DownloadButton({ seriesId, primary = true }: { seriesId: string;
       </a>
       <Sheet id={id} title="Download this series">
         <p className="sheet-lede">
-          <strong>{s?.name ?? seriesId}</strong>: every period and kind of figure, one row each. Figures without a value are rows with their status, never zeros.
+          <strong>{s ? seriesTitle(s) : seriesId}</strong>: every period and kind of figure, one row each. Figures without a value are rows with their status, never zeros.
         </p>
         <ul className="dl-list">
           {f.main.map((m) => (

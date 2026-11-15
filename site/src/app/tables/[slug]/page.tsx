@@ -2,6 +2,7 @@
 // table with its printed labels, beside the page it was read from. Pick an
 // edition, pick a table; select any number to see where it sits on the page.
 import type { Metadata } from "next";
+import { seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import TableView, { type TVCell } from "@/components/TableView";
@@ -91,7 +92,7 @@ export default async function TablePage({ params }: Props) {
       label: isValue ? null : info.label,
       href: obsHref(o.obs_id),
       box: boxOk ? c.cell_bbox_norm : null,
-      series: s?.name ?? null,
+      series: s ? seriesTitle(s) : null,
       seriesHref: s ? seriesHref(s.series_id) : null,
       unit: s ? unitLabel(s.unit, s.scale_factor) : null,
     };

@@ -14,6 +14,7 @@
 // every figure it names is checked (descriptionVisible); every subtracted
 // member of a sum is marked; every printing of a disputed figure is listed.
 import type { Metadata } from "next";
+import { printedLine, seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
@@ -79,9 +80,9 @@ function find(id: string): Observation | undefined {
   return d.obsBySlug.get(id) ?? d.obsBySlug.get(decodeURIComponent(id));
 }
 
-/** "Health (current, revenue account), 2025-26, budget estimate" */
+/** "Federal health spending (current), 2025-26, budget estimate" (the plain title; the printed name is on the page). */
 function obsTitle(o: Observation, s: Series | undefined): string {
-  return `${s?.name ?? o.series_id}, ${periodWords(o.period, s?.frequency)}${o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}`;
+  return `${s ? seriesTitle(s) : o.series_id}, ${periodWords(o.period, s?.frequency)}${o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}`;
 }
 
 const shows = (o: Observation) => o.reader.showsValue && o.published && o.value !== null;
@@ -520,8 +521,8 @@ export default async function ReceiptPage({ params }: Props) {
         items={[
           { href: "/browse", label: "Data" },
           { href: `/datasets/${series.dataset}`, label: datasetName(series.dataset) },
-          ...(parent ? [{ href: seriesHref(parent.series_id), label: parent.name }] : []),
-          { href: seriesHref(series.series_id), label: series.name },
+          ...(parent ? [{ href: seriesHref(parent.series_id), label: seriesTitle(parent) }] : []),
+          { href: seriesHref(series.series_id), label: seriesTitle(series) },
           {
             label: (
               <>
@@ -540,7 +541,13 @@ export default async function ReceiptPage({ params }: Props) {
       <div className={`rc-top${ev || readings.length ? " has-proof" : ""}`}>
         {/* ---------------- the figure, its kind and period, the verdict ---------------- */}
         <header className="rc-id">
-          <h1 className="receipt-title rc-title">{series.name}</h1>
+          <h1 className="receipt-title rc-title">{seriesTitle(series)}</h1>
+          {printedLine(series) ? (
+            <p className="small muted rc-printed">
+              <span className="sr-only">Printed name: </span>
+              <span>{series.name}</span>
+            </p>
+          ) : null}
           <p className="receipt-when">
             {datasetName(series.dataset)} · <Link href={seriesHref(series.series_id)}>the whole series</Link>
           </p>
@@ -787,7 +794,7 @@ export default async function ReceiptPage({ params }: Props) {
                           return (
                             <tr key={i.obs_id}>
                               <th scope="row">
-                                {s?.name ?? i.series_id}, <Num kind="period">{periodWords(i.period, s?.frequency)}</Num>
+                                {s ? seriesTitle(s) : i.series_id}, <Num kind="period">{periodWords(i.period, s?.frequency)}</Num>
                                 {i.vintage !== "na" ? `, ${vintageWords(i.vintage).toLowerCase()}` : ""}
                               </th>
                               <td className="num">
@@ -1035,7 +1042,7 @@ export default async function ReceiptPage({ params }: Props) {
               {nb.prev ? <NbItem o={nb.prev} s={series} label={breakBetween(nb.prev.period, obs.period) ? "Previous (before the break)" : "Previous in this release"} /> : null}
               {nb.next ? <NbItem o={nb.next} s={series} label={breakBetween(obs.period, nb.next.period) ? "Next (after the break)" : "Next in this release"} /> : null}
               <li>
-                <Link href={seriesHref(series.series_id)}>All of {series.name}</Link>
+                <Link href={seriesHref(series.series_id)}>All of {seriesTitle(series)}</Link>
               </li>
             </ul>
           </section>
@@ -1064,7 +1071,7 @@ function NbItem({ o, s, label, name }: { o: Observation; s: Series; label?: stri
         <span className="nb-k">
           {label ? <span className="muted">{label}: </span> : null}
           {name ? (
-            s.name
+            seriesTitle(s)
           ) : (
             <>
               <Num kind="period">{periodWords(o.period, s.frequency)}</Num>

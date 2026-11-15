@@ -75,6 +75,10 @@ function webpSize(buf) {
 }
 
 export default function check({ siteDir, appDir, cfg, release, series, allObs, observations, cells, sourceById, isPub, slugify, problem, derived }) {
+  const titlesFile = path.join(siteDir, "editorial", "titles.json");
+  const plainTitles = fs.existsSync(titlesFile)
+    ? Object.fromEntries(Object.entries(JSON.parse(fs.readFileSync(titlesFile, "utf8")).series ?? {}).map(([id, e]) => [id, e?.title]).filter(([, t]) => typeof t === "string" && t.trim()).map(([id, t]) => [id, t.trim()]))
+    : {};
   const base = path.join(siteDir, "public", "data", cfg.version, "evidence");
   const sheetDir = path.join(base, "sheet");
   const cropDir = path.join(base, "crops");
@@ -131,7 +135,9 @@ export default function check({ siteDir, appDir, cfg, release, series, allObs, o
     const src = cell ? sourceById.get(cell.source_id) : null;
     if (j.release !== release.version) problem("evidence-sheet", where, `release ${j.release}`);
     if (j.obs !== o.obs_id || j.href !== `/o/${slugify(o.obs_id)}`) problem("evidence-sheet", where, `names ${j.obs} / ${j.href}`);
-    if (j.title !== s?.name) problem("evidence-sheet", where, `title "${j.title}" is not the series name`);
+    // The sheet is headed by the series' plain title (editorial/titles.json, round 2), or its printed name when it has none.
+    const wantTitle = plainTitles[o.series_id] ?? s?.name;
+    if (j.title !== wantTitle) problem("evidence-sheet", where, `title "${j.title}" is not the series title "${wantTitle}"`);
     if (j.value !== fmt(o.value)) problem("evidence-sheet", where, `value ${j.value}, release stores ${o.value}`);
     if (j.unit !== unitOf(o.unit, o.scale_factor)) problem("evidence-sheet", where, `unit "${j.unit}"`);
     if (cell) {

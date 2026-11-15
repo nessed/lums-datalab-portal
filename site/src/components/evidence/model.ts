@@ -6,6 +6,7 @@
 // Plain TypeScript only: relative imports with .ts extensions, type-only
 // imports from data.ts and the contract (erased by Node), no JSX, no fs.
 import type { Cell, Check, Db, Observation, Series, Source } from "../../lib/data";
+import { seriesTitle } from "../../lib/titles.ts";
 import type { Evidence } from "../../lib/adapter/contract";
 import { formatDecimalString, periodWords, unitLabel } from "../../lib/format.ts";
 import { slugify } from "../../lib/ids.ts";
@@ -589,7 +590,8 @@ export function sheetData(db: Db, o: Observation, opts: { dataBase: string; crop
     slug,
     href: `/o/${slug}`,
     cite: `/o/${slug}#cite`,
-    title: s?.name ?? o.series_id,
+    // The plain title (editorial/titles.json); the printed name is on the receipt one tap further.
+    title: s ? seriesTitle(s) : o.series_id,
     kind: kindWord(o),
     period: periodWords(o.period, s?.frequency),
     value: shows ? formatDecimalString(o.value) : null,

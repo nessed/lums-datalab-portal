@@ -3,6 +3,7 @@
 // kind of figure), the comparison with the like figure, the revision as its
 // own labelled sentence, the source marker and the chart. Nothing is added up.
 import type { ReactNode } from "react";
+import { seriesTitle } from "@/lib/titles";
 import Chart from "@/components/Chart";
 import Link from "@/components/ui/Link";
 import { Num } from "@/components/ui/Num";
@@ -167,7 +168,7 @@ export function answerPart(part: QuestionPart, words: PageWords, notes: DerivedN
         Source: <SourceMarker o={latest} /> · <Link href={seriesHref(s.series_id)}>the whole series: table, every figure, downloads</Link>
       </p>
       <figure className="ans-chart">
-        <Chart model={model} idBase={`ans-${s.series_id.replace(/[^a-z0-9]/gi, "-")}`} caption={s.name} />
+        <Chart model={model} idBase={`ans-${s.series_id.replace(/[^a-z0-9]/gi, "-")}`} caption={seriesTitle(s)} />
         <figcaption className="small muted">
           Every point links to its receipt: the printed page it was read from.
         </figcaption>

@@ -3,6 +3,7 @@
 // server, so the whole list works without JavaScript; the filter narrows and
 // sorts them in place and keeps its state in the URL.
 import type { Metadata } from "next";
+import { printedLine, seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
 import CatalogueFilter, { CatalogueResults, type FacetGroup } from "@/components/CatalogueFilter";
 import { KindAndPeriod } from "@/components/Figure";
@@ -30,7 +31,7 @@ function Row({ s, order }: { s: Series; order: number }) {
   return (
     <li className="cat-row" data-cat-row="" data-order={order}>
       <div className="cat-name">
-        <Link href={seriesHref(s.series_id)}>{s.name}</Link>
+        <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
         {s.dims?.definition ? <span className={`tag${s.dims.definition === "19th ICLS" ? " tag-warn" : ""}`}><Num kind="ui">{s.dims.definition}</Num></span> : null}
         {base ? (
           <span className="tag">
@@ -39,7 +40,8 @@ function Row({ s, order }: { s: Series; order: number }) {
         ) : null}
         {s.dims?.area_as_printed === "none stated" ? <span className="tag">no area stated</span> : null}
         {s.derived ? <span className="tag">computed</span> : null}
-        {parents.length ? <span className="cat-path">in {parents[0].name}</span> : null}
+        {printedLine(s) ? <span className="cat-path">{s.name}</span> : null}
+        {parents.length ? <span className="cat-path">in {seriesTitle(parents[0])}</span> : null}
       </div>
       <div className="cat-unit">{unitLabel(s.unit, s.scale_factor)}</div>
       <div className="cat-periods">
@@ -69,7 +71,7 @@ function Row({ s, order }: { s: Series; order: number }) {
       </div>
       <div className="cat-spark" />
       <div className="cat-dl">
-        <a href={seriesCsvHref(s.series_id)} download aria-label={`Download ${s.name} as CSV`}>
+        <a href={seriesCsvHref(s.series_id)} download aria-label={`Download ${seriesTitle(s)} as CSV`}>
           CSV
         </a>
       </div>

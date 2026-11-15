@@ -90,6 +90,7 @@ import path from "node:path";
 import type { Cell, Db, Observation, Release, Series, Source } from "../data";
 import { slugify } from "../ids.ts";
 import { readerStatus } from "../words.ts";
+import { readTitles, titleFields } from "./titles.ts";
 import type { BatchGap, Evidence, KindKey, ReaderStatus, ReaderStatusKey, ReleaseInfo, SeriesBreak } from "./contract";
 
 /* ---------- options and the extra things this adapter returns ---------- */
@@ -106,6 +107,12 @@ export type GoldenOptions = {
   /** The commit the tag points to, if the caller knows it (the extracted folder does not say). */
   commit?: string;
   isLatest?: boolean;
+  /**
+   * Plain titles (site/editorial/titles.json, DESIGN.md 6.4), keyed by series id. Default: none. Golden series ids
+   * are not ours, so today no golden series has an entry: each keeps its printed name as its title, with
+   * titleStatus "printed", and pages say the title is the printed label.
+   */
+  titlesFile?: string | null;
 };
 
 export type GoldenEvidence = Evidence & {
@@ -571,6 +578,10 @@ export function loadGolden(dir: string, opts: GoldenOptions): GoldenDb {
           notes: null,
           geo: geoOf(d.id, r),
           source_doc_types: [d.id],
+          // Set from the editorial file once the printed name is known (below).
+          title: "",
+          summary: null,
+          titleStatus: "printed",
         });
       }
       const s = series.get(sid)!;
@@ -791,6 +802,9 @@ export function loadGolden(dir: string, opts: GoldenOptions): GoldenDb {
   const signoffs = signoffFile && fs.existsSync(signoffFile) ? (parseCsv(fs.readFileSync(signoffFile, "utf8")) as SignoffRow[]) : [];
 
   const seriesList = [...series.values()];
+  // Plain titles: an entry of the editorial file, or the printed name (the latest printing's), said so.
+  const titles = readTitles(opts.titlesFile ?? null);
+  for (const s of seriesList) Object.assign(s, titleFields(s.series_id, s.name, titles));
   const seriesBySlug = new Map<string, Series>();
   for (const s of seriesList) {
     const slug = slugify(s.series_id);
@@ -951,6 +965,10 @@ export function mapBudgetCredibilityRow(
       notes: null,
       geo: "pk",
       source_doc_types: ["abs_federal_functional"],
+      // No editorial title for a derived golden row: the printed name, said so.
+      title: `${r.printed_name} (revised minus budget estimate)`,
+      summary: null,
+      titleStatus: "printed",
     },
     obs: {
       obs_id: obsId,

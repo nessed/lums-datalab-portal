@@ -67,7 +67,7 @@ export function AnswerCard({ c, res, eng, compact }: { c: SearchEntry; res: Sear
     return (
       <section className="sr-card" aria-label={c.n}>
         <p className="sr-kicker">{c.t}</p>
-        <h2 className="sr-card-h">{head ? <a href={head.h}>{c.n}</a> : c.n}</h2>
+        <h2 className="sr-card-h">{head ? <a href={head.h}>{head.n}</a> : c.n}</h2>
         <p className="sr-card-p">
           {head?.cand ? "Its figures are not yet signed off, so no figure is shown here." : "No checked figure of this series yet."}{" "}
           {head ? <a href={head.h}>Open the series</a> : null}
@@ -82,7 +82,7 @@ export function AnswerCard({ c, res, eng, compact }: { c: SearchEntry; res: Sear
     <section className="sr-card" aria-labelledby={`sr-card-${c.id}`}>
       <p className="sr-kicker">{c.t}</p>
       <h2 className="sr-card-h" id={`sr-card-${c.id}`}>
-        <a href={seriesHrefOf(a.s)}>{c.n}</a>
+        <a href={seriesHrefOf(a.s)}>{a.n}</a>
       </h2>
       {asked && !forYears ? <p className="sr-card-note">No checked figure for the year you asked; the latest is shown.</p> : null}
       <ul className="sr-card-vals">
@@ -101,7 +101,7 @@ export function AnswerCard({ c, res, eng, compact }: { c: SearchEntry; res: Sear
         ))}
       </ul>
       <p className="sr-card-series">
-        {a.n} · {a.u}
+        {a.pn ?? a.n} · {a.u}
       </p>
       <p className="sr-card-links">
         <a href={seriesHrefOf(a.s)}>Open the series</a>
@@ -174,6 +174,7 @@ export function SearchView({
           <span className="r-title">
             <Highlight text={e.n} words={res.words} />
           </span>
+          {e.pn ? <span className="r-meta r-printed">{e.pn}</span> : null}
           {dialog ? <SeriesAnswer e={e} /> : null}
           <span className="r-meta">
             {e.u} · {e.d}

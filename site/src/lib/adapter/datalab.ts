@@ -19,6 +19,7 @@ import type { Cell, Check, CoverageRow, Db, Observation, Release, Series, Source
 import { slugify } from "../ids.ts";
 import { readerStatus } from "../words.ts";
 import type { KindKey, ReaderStatus, ReaderStatusKey, ReleaseInfo, SignOff } from "./contract";
+import { defaultTitlesFile, readTitles, titleFields } from "./titles.ts";
 
 type RawObservation = Omit<Observation, "kind" | "reader" | "printed_text" | "signoff">;
 
@@ -89,12 +90,22 @@ function signoffOf(state: string | undefined): SignOff {
   return "not-applicable";
 }
 
-export function loadDatalab(dir: string): Db {
+export type DatalabOptions = {
+  /** site/editorial/titles.json; default: the one next to the release folder (releases/<v> -> site/editorial). null: none. */
+  titlesFile?: string | null;
+};
+
+type RawSeries = Omit<Series, "title" | "summary" | "titleStatus">;
+
+export function loadDatalab(dir: string, opts: DatalabOptions = {}): Db {
   if (!fs.existsSync(path.join(dir, "release.json"))) {
     throw new Error(`Release folder not found or incomplete: ${dir}`);
   }
   const release = readJson<Release>(dir, "release.json", {} as Release);
-  const series = readJson<Series[]>(dir, "series.json", []).map((s) => ({ ...s, breaks: s.breaks ?? [] }));
+  // Plain titles are editorial (DESIGN.md 6.4): added here, never written into the release. A series without
+  // an entry keeps its printed name as its title (titleStatus "printed"); the printed name stays as `name`.
+  const titles = readTitles(opts.titlesFile === undefined ? defaultTitlesFile(dir) : opts.titlesFile);
+  const series: Series[] = readJson<RawSeries[]>(dir, "series.json", []).map((s) => ({ ...s, breaks: s.breaks ?? [], ...titleFields(s.series_id, s.name, titles) }));
   const cells = readJson<Cell[]>(dir, "cells.json", []);
   const checks = readJson<Check[]>(dir, "checks.json", []);
   const sources = readJson<Source[]>(dir, "sources.json", []);

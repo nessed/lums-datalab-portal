@@ -5,6 +5,7 @@
 // ever filled in. scripts/checks/home-editorial.mjs checks the files
 // themselves (provisional flag, no numbers, ids that exist).
 import topicsFile from "../../../editorial/topics.json";
+import { seriesTitle } from "@/lib/titles";
 import questionsFile from "../../../editorial/questions.json";
 import headlineFile from "../../../editorial/headline.json";
 import { db, isDatasetPublished, type Series } from "@/lib/data";
@@ -103,7 +104,8 @@ export function headlineCards(): HeadlineCard[] {
   return headlineFile.cards
     .map((c) => {
       const s = seriesWithKind(c.series, c.kind);
-      return s ? { series: s, kind: c.kind as KindKey, name: c.name, topic: c.topic } : undefined;
+      // The card keeps its editorial name only where it is the series' plain title; otherwise the title (round 2).
+      return s ? { series: s, kind: c.kind as KindKey, name: c.name === seriesTitle(s) ? c.name : seriesTitle(s), topic: c.topic } : undefined;
     })
     .filter(keep)
     .slice(0, 6);

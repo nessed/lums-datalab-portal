@@ -157,7 +157,7 @@ export function PinnedLine() {
   const js = `(function(){var p=${JSON.stringify(prefix)};var l=location.pathname;if(l.indexOf(p)!==0)return;document.documentElement.setAttribute("data-pinned","");var me=document.currentScript&&document.currentScript.previousElementSibling;if(me&&!document.querySelector(".pinned-line.on"))me.classList.add("on");var a=document.querySelectorAll("a[data-pinned-latest]");for(var i=0;i<a.length;i++)a[i].setAttribute("href",l.slice(p.length-1)+location.search);})();`;
   return (
     <>
-      <p className="pinned-line">
+      <p className="pinned-line" suppressHydrationWarning>
         <strong>This link will keep showing these numbers.</strong> It is pinned to release <Num kind="version">{RELEASE_VERSION}</Num>.{" "}
         {/* A plain link: the script after this line rewrites its address before the page is shown. */}
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}

@@ -180,11 +180,13 @@ export default function Compare({
       .filter((p) => Number.isFinite(p.t)),
   });
   const breaksOf = (list: SeriesData[]) =>
-    list.flatMap((sd) =>
-      sd.br
-        .map((b) => ({ t: (timeOf(b.p, sd.f) ?? NaN) - (STEP[sd.f] ?? 1) / 2, label: "break" }))
-        .filter((b) => Number.isFinite(b.t) && b.t > xDomain[0] && b.t < xDomain[1]),
-    );
+    list
+      .flatMap((sd) =>
+        sd.br
+          .map((b) => ({ t: (timeOf(b.p, sd.f) ?? NaN) - (STEP[sd.f] ?? 1) / 2, label: "break" }))
+          .filter((b) => Number.isFinite(b.t) && b.t > xDomain[0] && b.t < xDomain[1]),
+      )
+      .filter((b, i, all) => all.findIndex((x) => Math.abs(x.t - b.t) < 1e-9) === i);
   const groups: { key: string; list: SeriesData[] }[] = [];
   if (show === "printed") {
     for (const sd of charted) {
@@ -194,10 +196,10 @@ export default function Compare({
       else groups.push({ key, list: [sd] });
     }
   } else if (charted.length) groups.push({ key: show, list: charted });
-  const kindsShown = [...new Set(charted.map((sd) => kinds.get(sd.id) ?? ""))].filter((k) => k && k !== "as_printed");
   const derivedNote = "Derived from checked figures only; a value that would use any other figure is left out, and the table says why.";
   const subtitle = (list: SeriesData[]) => {
-    const ks = kindsShown.length ? `; ${kindsShown.map(kindWords).join(" and ")}` : "";
+    const mine = [...new Set(list.map((sd) => kinds.get(sd.id) ?? ""))].filter((k) => k && k !== "as_printed");
+    const ks = mine.length ? `; ${mine.map(kindWords).join(" and ")}` : "";
     if (show === "printed") return <>{list[0].uw}, as printed{ks}.</>;
     if (show === "index")
       return (
@@ -228,7 +230,17 @@ export default function Compare({
 
   /* ---------- words above the chart ---------- */
   const clauses = ready ? notComparable(loaded, kinds, show) : [];
-  const breakNotes = ready ? loaded.flatMap((sd) => sd.br.map((b) => ({ id: sd.id, name: sd.n, p: periodLabel(b.p, sd.f), kind: b.k.replaceAll("_", " ") }))) : [];
+  // One sentence per break (period and kind), naming every series it touches.
+  const breakNotes: { key: string; names: string[]; p: string; kind: string }[] = [];
+  if (ready)
+    for (const sd of loaded)
+      for (const b of sd.br) {
+        const p = periodLabel(b.p, sd.f);
+        const kind = b.k.replaceAll("_", " ");
+        const hit = breakNotes.find((n) => n.p === p && n.kind === kind);
+        if (hit) hit.names.push(sd.n);
+        else breakNotes.push({ key: `${p}|${kind}`, names: [sd.n], p, kind });
+      }
   const exclNotes = ready ? loaded.filter((sd) => why.get(sd.id)).map((sd) => ({ id: sd.id, name: sd.n, why: why.get(sd.id)! })) : [];
   const hasStages = loaded.some((sd) => sd.pts.some((x) => x.k === "be") && sd.pts.some((x) => x.k === "re"));
 
@@ -493,8 +505,15 @@ export default function Compare({
               </p>
             ))}
             {breakNotes.map((n) => (
-              <p key={n.id + n.p}>
-                <strong>{n.name}</strong> has a series break from <span data-num="period">{n.p}</span> ({n.kind}); its line stops there.
+              <p key={n.key}>
+                {n.names.map((name, i) => (
+                  <span key={name}>
+                    {i ? (i === n.names.length - 1 ? " and " : ", ") : ""}
+                    <strong>{name}</strong>
+                  </span>
+                ))}{" "}
+                {n.names.length > 1 ? "have" : "has"} a series break from <span data-num="period">{n.p}</span> ({n.kind}): figures before and after it are not comparable, and
+                {n.names.length > 1 ? " the lines stop" : " its line stops"} there.
               </p>
             ))}
           </div>

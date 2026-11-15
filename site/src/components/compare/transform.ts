@@ -287,6 +287,10 @@ export function defaultBase(list: { sd: SeriesData; pts: Pt[] }[]): string | nul
   if (!list.length) return null;
   const sets = list.map((l) => new Set(l.pts.filter((x) => x.d === 1).map((x) => x.p)));
   const common = [...sets[0]].filter((p) => sets.every((s) => s.has(p))).sort();
+  // Never index across a break by default: start at or after the latest break of any series.
+  const lastBreak = list.flatMap((l) => l.sd.br.map((b) => b.p)).sort().at(-1);
+  const after = lastBreak ? common.filter((p) => p >= lastBreak) : common;
+  if (after.length) return after[0];
   if (common.length) return common[0];
   return list[0].pts.find((x) => x.d === 1)?.p ?? null;
 }

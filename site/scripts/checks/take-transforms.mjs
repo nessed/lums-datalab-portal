@@ -99,6 +99,12 @@ export default async function check({ siteDir, cfg, problem }) {
     assert.equal(T.excluded(amt, "share", { ...amt, n: "T" }), null);
     assert.match(T.excluded(amt, "share", { ...amt, sf: 1000, uw: "Rs thousand", n: "T" }), /Rs thousand/);
   });
+  test("default base period: common, checked, and not across a break", () => {
+    const a = { sd: { br: [{ p: "2011-12" }] }, pts: [pt("2009-10", "1"), pt("2011-12", "2"), pt("2015-16", "3")] };
+    const b = { sd: { br: [] }, pts: [pt("2009-10", "1"), pt("2011-12", "2", 0, "held"), pt("2015-16", "3")] };
+    assert.equal(T.defaultBase([a, b]), "2015-16");
+    assert.equal(T.defaultBase([{ sd: { br: [] }, pts: [pt("2009-10", "1")] }]), "2009-10");
+  });
   test("comparability sentence", () => {
     const a = { id: "a", u: "PKR", sf: 1, f: "fiscal_year", def: null, base: null };
     const b = { id: "b", u: "index", sf: 1, f: "month", def: null, base: "2015-16" };

@@ -22,6 +22,8 @@ export type ChartSpec = {
   xDomain: [number, number];
   xTicks: { t: number; label: string }[];
   breaks: { t: number; label: string }[];
+  /** Runs of periods no chosen series has in this release: drawn as labelled bands. */
+  gaps?: { from: number; to: number; fromLabel: string; toLabel: string; years: number }[];
   show: ShowAs;
   unit: string;
   scale: number;
@@ -84,7 +86,24 @@ export default function CompareChart({ spec }: { spec: ChartSpec }) {
 
   return (
     <div className="cc" style={{ height: spec.height }}>
-      <div className="cc-area" role="img" aria-label={spec.label}>
+      <div className="cc-area" role="group" aria-label={spec.label}>
+        {(spec.gaps ?? []).map((g) => (
+          <div
+            key={`gap${g.from}`}
+            className={`cc-gap${g.years <= 2 ? " cc-gap--narrow" : ""}`}
+            style={{ left: pct(sx(g.from - 0.5), W), width: pct(sx(g.to + 0.5) - sx(g.from - 0.5), W) }}
+          >
+            <span className="cc-gaptext">
+              <span data-num="period">{g.fromLabel}</span>
+              {g.from === g.to ? null : (
+                <>
+                  {" "}to <span data-num="period">{g.toLabel}</span>
+                </>
+              )}
+              : not in this release
+            </span>
+          </div>
+        ))}
         <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="cc-svg" aria-hidden="true" focusable="false">
           {ticks.map((t) => (
             <line key={t} x1={0} x2={W} y1={sy(t)} y2={sy(t)} className={t === refLine ? "cc-ref" : "cc-grid"} vectorEffect="non-scaling-stroke" />
@@ -120,6 +139,14 @@ export default function CompareChart({ spec }: { spec: ChartSpec }) {
               />
             )),
         )}
+        {[...new Map(spec.lines.flatMap((l) => l.pts.filter((p) => p.y === null && Number.isFinite(p.t)).map((p) => [p.t, p] as const))).values()].map((p) => {
+          const words = [...new Set(spec.lines.flatMap((l) => l.pts.filter((q) => q.t === p.t && q.y === null).map((q) => q.text)))].join(", ");
+          return (
+            <span key={`gw${p.t}`} className="cc-gapw" style={{ left: pct(sx(p.t), W) }}>
+              {words}
+            </span>
+          );
+        })}
         {ticks.map((t) => (
           <span key={t} className="cc-yt" style={{ top: pct(sy(t), H) }} data-num="axis">
             {tickText(t, spec.show, spec.unit, spec.scale)}

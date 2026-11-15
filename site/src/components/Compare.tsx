@@ -92,6 +92,7 @@ export default function Compare({
   const [data, setData] = useState<Record<string, SeriesData | "error">>(initialData);
   const [index, setIndex] = useState<SearchEntry[] | null>(null);
   const [text, setText] = useState("");
+  const [active, setActive] = useState(-1);
   const input = useRef<HTMLInputElement>(null);
 
   const loaded = ids.map((id) => data[id]).filter(isSD);
@@ -123,6 +124,12 @@ export default function Compare({
   };
   const results = index && text.trim() ? search(index, text, 8).filter((e) => !ids.includes(e.id)) : [];
   const setIds = (next: string[]) => setQuery({ s: next.length ? next.join(",") : "none" });
+  const choose = (id: string) => {
+    setIds([...ids, id]);
+    setText("");
+    setActive(-1);
+    input.current?.focus();
+  };
 
   const styleOf = (id: string) => STYLES[Math.max(0, ids.indexOf(id)) % STYLES.length];
   const failed = ids.filter((id) => data[id] === "error");
@@ -187,6 +194,26 @@ export default function Compare({
           .filter((b) => Number.isFinite(b.t) && b.t > xDomain[0] && b.t < xDomain[1]),
       )
       .filter((b, i, all) => all.findIndex((x) => Math.abs(x.t - b.t) < 1e-9) === i);
+  // Periods no chosen series has in this release, labelled on the chart like a break (yearly series only).
+  const gapsOf = (list: SeriesData[]) => {
+    if (!annualOnly) return [];
+    const have = new Set(list.flatMap((sd) => ptsOf(sd).map((x) => timeOf(x.p, sd.f)).filter((t): t is number => t !== null)));
+    if (have.size < 2) return [];
+    const lo = Math.min(...have);
+    const hi = Math.max(...have);
+    const fy = (n: number) => `${n - 1}-${String(n % 100).padStart(2, "0")}`;
+    const out: { from: number; to: number; fromLabel: string; toLabel: string; years: number }[] = [];
+    for (let t = lo; t <= hi; t++) {
+      if (have.has(t)) continue;
+      const last = out[out.length - 1];
+      if (last && last.to === t - 1) {
+        last.to = t;
+        last.toLabel = fy(t);
+        last.years++;
+      } else out.push({ from: t, to: t, fromLabel: fy(t), toLabel: fy(t), years: 1 });
+    }
+    return out;
+  };
   const groups: { key: string; list: SeriesData[] }[] = [];
   if (show === "printed") {
     for (const sd of charted) {
@@ -221,6 +248,7 @@ export default function Compare({
     xDomain,
     xTicks,
     breaks: breaksOf(list),
+    gaps: gapsOf(list),
     show,
     unit: list[0].u,
     scale: list[0].sf,
@@ -390,6 +418,11 @@ export default function Compare({
               id="cmp-q"
               className="input"
               type="search"
+              role="combobox"
+              aria-expanded={results.length > 0}
+              aria-controls="cmp-listbox"
+              aria-autocomplete="list"
+              aria-activedescendant={results.length && active >= 0 && active < results.length ? `cmp-opt-${active}` : undefined}
               value={text}
               autoComplete="off"
               placeholder="Search: health, CPI food, unemployment…"
@@ -397,30 +430,44 @@ export default function Compare({
               onChange={(e) => {
                 loadIndex();
                 setText(e.target.value);
+                setActive(-1);
+              }}
+              onKeyDown={(e) => {
+                if (!results.length) return;
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setActive((a) => (a + 1) % results.length);
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setActive((a) => (a <= 0 ? results.length - 1 : a - 1));
+                } else if (e.key === "Enter" && active >= 0 && active < results.length) {
+                  e.preventDefault();
+                  choose(results[active].id);
+                } else if (e.key === "Escape") {
+                  setText("");
+                  setActive(-1);
+                }
               }}
             />
-            {results.length > 0 ? (
-              <ul className="cmp-results">
-                {results.map((r) => (
-                  <li key={r.id}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIds([...ids, r.id]);
-                        setText("");
-                        input.current?.focus();
-                      }}
-                    >
-                      <span className="r-title">{r.n}</span>
-                      <span className="r-meta">
-                        {r.d} · {r.u}
-                        {r.c ? ` · ${r.p}` : " · no checked values"}
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            <ul id="cmp-listbox" className="cmp-results" role="listbox" aria-label="Matching series" hidden={results.length === 0}>
+              {results.map((r, i) => (
+                <li
+                  key={r.id}
+                  id={`cmp-opt-${i}`}
+                  role="option"
+                  aria-selected={i === active}
+                  className={i === active ? "is-active" : undefined}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => choose(r.id)}
+                >
+                  <span className="r-title">{r.n}</span>
+                  <span className="r-meta">
+                    {r.d} · {r.u}
+                    {r.c ? ` · ${r.p}` : " · no checked values"}
+                  </span>
+                </li>
+              ))}
+            </ul>
             <noscript>
               <p className="small">Adding series needs JavaScript. Without it, open a series page and use its Compare button.</p>
             </noscript>

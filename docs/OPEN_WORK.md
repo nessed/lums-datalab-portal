@@ -562,6 +562,9 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
   7. Stage 10: wire `scripts/perf.mjs --budget` into the build.
 - **Done when:** each item passes its check; the report's list is empty.
 - **Needs from a human:** approval of the brief and the section 17 decisions; review of `site/editorial/*.json`.
+- **Parked in round 2 (Ali, 2026-11-15, to save time):** item 3 (rewrite `site/scripts/keyboard.mjs` for the new
+  pages; do not loosen it) and item 5 (no-JavaScript: series view state from the URL, catalogue filters as a form,
+  and a build check that loads key pages with JavaScript off). Both still open.
 
 ### S2 Look at the new release content on the site
 - **State:** partial (S16 PR): the catalogue tags every series with its definition (13th / 19th ICLS), base year and "no area", and has definition and side facets; compare says in a sentence when chosen series differ in definition. Steps 3 to 5 are not verified. Before S16: Since the site pages were built, the release gained ABS receipts series (`fed.rev.*`,

@@ -138,23 +138,23 @@
 }
 
 /* ---------- related series with sparklines (World Bank style rail) ---------- */
-.rail {
+.srail {
   background: var(--card);
   border: var(--card-border);
   border-radius: var(--r-3);
   box-shadow: var(--shadow-card);
   padding: var(--s-3) var(--s-3) var(--s-2);
 }
-.rail-h {
+.srail-h {
   font-size: var(--step-0);
   margin: 0 0 2px;
 }
-.rail-note {
+.srail-note {
   font-size: var(--step--2);
   color: var(--ink-3);
   margin: 0 0 var(--s-2);
 }
-.rail-gh {
+.srail-gh {
   font-size: var(--step--2);
   font-weight: 650;
   letter-spacing: 0.03em;
@@ -162,12 +162,12 @@
   color: var(--ink-3);
   margin: var(--s-2) 0 var(--s-1);
 }
-.rail-list {
+.srail-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.rail-item {
+.srail-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas: "title spark" "fig spark";
@@ -176,33 +176,33 @@
   padding: 6px 0;
   border-top: var(--hair);
 }
-.rail-title {
+.srail-title {
   grid-area: title;
   font-size: var(--step--1);
   line-height: 1.3;
 }
-.rail-fig {
+.srail-fig {
   grid-area: fig;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0 var(--s-2);
 }
-.rail-v {
+.srail-v {
   font-size: var(--step--1);
   font-weight: 700;
 }
-.rail-v a[data-v] {
+.srail-v a[data-v] {
   color: var(--num);
 }
-.rail-when {
+.srail-when {
   font-size: var(--step--2);
   color: var(--ink-3);
 }
-.rail-spark {
+.srail-spark {
   grid-area: spark;
 }
-.rail-more {
+.srail-more {
   font-size: var(--step--2);
   margin: var(--s-1) 0 0;
 }

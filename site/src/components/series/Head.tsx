@@ -324,26 +324,26 @@ function RailItem({ s }: { s: Series }) {
   const o = latestPublished(s.series_id);
   const kind = o ? kindLong(o) : "";
   return (
-    <li className="rail-item">
-      <Link href={seriesHref(s.series_id)} className="rail-title">
+    <li className="srail-item">
+      <Link href={seriesHref(s.series_id)} className="srail-title">
         {seriesTitle(s)}
       </Link>
-      <span className="rail-fig">
+      <span className="srail-fig">
         {o && o.reader.showsValue ? (
           <>
-            <span className="rail-v">
+            <span className="srail-v">
               <V o={o} short sheet label={`${seriesTitle(s)}: ${kind ? `${kind} ` : ""}${periodWords(o.period, s.frequency)}, see where it is printed`} />
             </span>
-            <span className="rail-when">
+            <span className="srail-when">
               {kind && isStage(o) ? `${KIND[o.kind]?.short ?? kind} ` : ""}
               <Num kind="period">{periodWords(o.period, s.frequency)}</Num>
             </span>
           </>
         ) : (
-          <span className="rail-when">no checked figure</span>
+          <span className="srail-when">no checked figure</span>
         )}
       </span>
-      <span className="rail-spark">
+      <span className="srail-spark">
         <Spark series={s} width={88} height={26} link={false} />
       </span>
     </li>
@@ -365,21 +365,21 @@ export function RelatedRail({ series }: { series: Series }) {
   if (!groups.length && parent) groups.push({ label: "Part of", items: [parent], more: null });
   if (!groups.length) return null;
   return (
-    <section className="rail" aria-labelledby="h-rail">
-      <h2 id="h-rail" className="rail-h">
+    <section className="srail" aria-labelledby="h-rail">
+      <h2 id="h-rail" className="srail-h">
         Related series
       </h2>
-      <p className="rail-note">Latest checked figure of each; the small chart shows its checked figures, with gaps left open.</p>
+      <p className="srail-note">Latest checked figure of each; the small chart shows its checked figures, with gaps left open.</p>
       {groups.map((g) => (
-        <div key={g.label} className="rail-group">
-          <h3 className="rail-gh">{g.label}</h3>
-          <ul className="rail-list">
+        <div key={g.label} className="srail-group">
+          <h3 className="srail-gh">{g.label}</h3>
+          <ul className="srail-list">
             {g.items.map((s) => (
               <RailItem key={s.series_id} s={s} />
             ))}
           </ul>
           {g.more ? (
-            <p className="rail-more">
+            <p className="srail-more">
               <Link href={seriesHref(g.more.series_id)}>Every line under {seriesTitle(g.more)}</Link>
             </p>
           ) : null}

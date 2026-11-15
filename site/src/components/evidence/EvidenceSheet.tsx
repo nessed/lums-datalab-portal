@@ -336,7 +336,7 @@ export default function EvidenceSheet() {
                 ) : null}
               </dl>
             ) : null}
-            <p className="ev-sheet-verdict">{d.verdict}</p>
+            <p className={`ev-sheet-verdict${d.value ? "" : " is-gap"}`}>{d.verdict}</p>
             <SheetVersions d={d} />
             <div className="ev-sheet-actions">
               <a className="btn btn-primary" href={d.href}>

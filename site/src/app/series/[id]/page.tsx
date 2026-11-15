@@ -1,30 +1,33 @@
-// A series (DESIGN.md 9.5), one skeleton for every series. Phone order:
-//   1 title (the plain title, editorial/titles.json), the printed name as a grey
-//     second line, a one-sentence summary (the definition and the printed row labels are in About)
-//   2 the answer line: latest checked value, kind, period, the change against
-//     the comparable figure, the source marker
-//   3 the chart, with the view switch, Units and range chips above it and the
-//     source lines inside its frame (components/series/SeriesView)
-//   4 the action bar (Download, Cite, Compare, Share)
-//   5 the table, wide by kind of figure, newest first
-//   6 About this series, 7 Where it sits (a side column on wide screens)
-// Every value links to its receipt; every derived figure is recomputed by
-// scripts/checks/series-derived.mjs. The number, chart, table and CSV link
-// work without JavaScript.
+// A series (DESIGN.md 9.5, round 2), one skeleton for every series. Phone order:
+//   1 title (the plain title, editorial/titles.json) with the series id beside it,
+//     a one-sentence summary, the fact pills (period covered, how often it is
+//     published, latest figure, next expected, source, checked, release)
+//   2 the headline block: the latest checked figure big, a plain sentence, the
+//     change in words with an arrow, "See it on the printed page"
+//   3 the chart, with its controls and the source lines inside its frame
+//   4 related series with sparklines (a rail beside the chart on wide screens)
+//   5 the action bar, the table by kind of figure, where it sits, citation
+//   6 About this series (the printed name, definition, labels as printed, id)
+// Every value links to its receipt; derived figures are recomputed by
+// scripts/checks/series-derived.mjs (data-op) and home-derived.mjs (the change
+// in words). The number, chart, table and CSV link work without JavaScript.
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/ui/Link";
 import Cite from "@/components/Cite";
 import { ActionBar, CiteButton, CompareButton, DownloadButton, ShareButton } from "@/components/actions/Actions";
 import { Breadcrumbs, Callout } from "@/components/ui/Basics";
+import { Panel } from "@/components/ui/Card";
+import SeriesId from "@/components/ui/SeriesId";
 import SeriesView from "@/components/series/SeriesView";
-import { About, AnswerLine, KindTable, SourceLines, WhereItSits } from "@/components/series/Parts";
+import { About, KindTable, SourceLines, WhereItSits } from "@/components/series/Parts";
+import { Headline, publishedSentence, RelatedRail, SeriesFacts } from "@/components/series/Head";
 import { answerOf, kindWordsOf, parentForShare, printedModels, unitOptions } from "@/components/series/model";
 import { datasetName, db, seriesCsvHref, seriesHref, slugify, visibleSeries } from "@/lib/data";
-import { COMING, feature, isOn, type FeatureKey } from "@/lib/features";
+import { feature, isOn, type FeatureKey } from "@/lib/features";
 import { periodWords, unitLabel } from "@/lib/format";
 import { ancestors } from "@/lib/stats";
-import { printedLine, seriesSummary, seriesTitle } from "@/lib/titles";
+import { seriesSummary, seriesTitle } from "@/lib/titles";
 
 export const dynamicParams = false;
 
@@ -54,7 +57,6 @@ export default async function SeriesPage({ params }: Props) {
   const parents = ancestors(series);
   const answer = answerOf(series);
   const printed = printedModels(series);
-  const printedName = printedLine(series);
   const summary = seriesSummary(series);
   const all = d.obsBySeries.get(series.series_id) ?? [];
   const periods = [...new Set(all.map((o) => o.period))].sort();
@@ -75,18 +77,19 @@ export default async function SeriesPage({ params }: Props) {
         ]}
       />
       <header className="sp-head">
-        <h1>{seriesTitle(series)}</h1>
-        {printedName ? (
-          <p className="sp-printed">
-            <span className="sr-only">Printed name: </span>
-            <span>{printedName}</span>
-          </p>
-        ) : null}
-        {summary ? <p className="sp-def sp-summary">{summary}</p> : null}
+        <div className="sp-titlerow">
+          <h1>{seriesTitle(series)}</h1>
+          <SeriesId id={series.series_id} className="sp-id" />
+        </div>
+        {summary ? <p className="sp-summary">{summary}</p> : null}
+        <SeriesFacts series={series} latest={answer.latest} />
       </header>
 
       <div className="sp-top">
-          <AnswerLine series={series} answer={answer} />
+        <div className="sp-numcol">
+          <Headline series={series} answer={answer} />
+        </div>
+        <Panel className="sp-chart" label="Chart">
           <SeriesView
             slug={slugify(series.series_id)}
             series={{ series_id: series.series_id, name: seriesTitle(series), frequency: series.frequency, unit: series.unit, scale_factor: series.scale_factor, breaks: series.breaks }}
@@ -99,24 +102,25 @@ export default async function SeriesPage({ params }: Props) {
             breakFrom={inside ? { at: inside.at_period, label: periodWords(inside.at_period, series.frequency) } : null}
             frame={<SourceLines series={series} path={path} />}
           />
-          {coming.length ? (
-            <p className="coming sp-coming">
-              {coming.join(", ")}: {COMING}
-            </p>
-          ) : null}
-          {series.dataset === "cpi" && !isOn("monthlyData") ? <p className="coming sp-coming">This release holds the June issue of each year. Every month: {COMING}</p> : null}
+          <p className="sp-release-note small">
+            {publishedSentence(series)}
+            {coming.length ? ` Not in this release yet: ${coming.join(", ").toLowerCase().replace("% of gdp", "% of GDP")}.` : ""}
+          </p>
+        </Panel>
+        <aside className="sp-railcol" aria-label="Related series">
+          <RelatedRail series={series} />
+        </aside>
       </div>
 
-      <div className="sp-grid">
+      <ActionBar label="Take this series">
+        <DownloadButton seriesId={series.series_id} />
+        <CiteButton path={path} />
+        <CompareButton seriesId={series.series_id} />
+        <ShareButton path={path} />
+      </ActionBar>
+
+      <div className="sp-lower">
         <div className="sp-main">
-
-          <ActionBar label="Take this series">
-            <DownloadButton seriesId={series.series_id} />
-            <CiteButton path={path} />
-            <CompareButton seriesId={series.series_id} />
-            <ShareButton path={path} />
-          </ActionBar>
-
           <KindTable series={series} />
 
           {series.derived && series.derivation ? (
@@ -135,16 +139,19 @@ export default async function SeriesPage({ params }: Props) {
             </Callout>
           ) : null}
 
-          <section className="sp-cite" id="cite" aria-labelledby="h-cite">
-            <h2 id="h-cite">Cite this series</h2>
+          <WhereItSits series={series} />
+
+          <details className="sp-cite" id="cite">
+            <summary>
+              <h2 id="h-cite">Cite this series</h2>
+            </summary>
             <Cite path={path} what={`Series ${series.series_id}, ${series.name}`} heading={false} />
-          </section>
+          </details>
         </div>
 
-        <aside className="sp-side" aria-label="About this series and where it sits">
+        <div className="sp-side">
           <About series={series} csv={seriesCsvHref(series.series_id)} />
-          <WhereItSits series={series} />
-        </aside>
+        </div>
       </div>
     </article>
   );

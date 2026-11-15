@@ -2,12 +2,12 @@
  {
   "name": "search box at 360 px",
   "pass": true,
-  "detail": "input 217 px wide, 60 results for \"health\""
+  "detail": "input 239 px wide, 17 results for \"health\""
  },
  {
   "name": "search box at 320 px",
-  "pass": false,
-  "detail": "input 177 px wide, 60 results for \"health\""
+  "pass": true,
+  "detail": "input 199 px wide, 17 results for \"health\""
  },
  {
   "name": "home: no background downloads after scrolling",
@@ -17,7 +17,7 @@
  {
   "name": "catalogue at 360 px: element count",
   "pass": false,
-  "detail": "3032 elements"
+  "detail": "2039 elements"
  },
  {
   "name": "catalogue at 360 px: filter finds a deep series",
@@ -27,7 +27,7 @@
  {
   "name": "catalogue at 1280 px: element count",
   "pass": false,
-  "detail": "3032 elements"
+  "detail": "2039 elements"
  },
  {
   "name": "catalogue at 1280 px: filter finds a deep series",

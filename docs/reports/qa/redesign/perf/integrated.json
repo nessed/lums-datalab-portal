@@ -1,0 +1,155 @@
+{
+ "base": "http://localhost:3100",
+ "measuredAt": "2026-11-15T07:48:37.286Z",
+ "results": [
+  {
+   "page": "home",
+   "path": "/",
+   "status": 200,
+   "visibleMs": 2136,
+   "loadMs": 3466,
+   "first": {
+    "total": 207509,
+    "doc": 10375,
+    "js": 147282,
+    "font": 29040,
+    "img": 0
+   },
+   "afterIdle": 207509,
+   "dom": {
+    "elements": 340,
+    "html": 56458
+   },
+   "visibleMs400": 3141,
+   "loadMs400": 5810,
+   "fails": [
+    "first load 203 KB > 200 KB",
+    "JavaScript 144 KB > 100 KB"
+   ]
+  },
+  {
+   "page": "series",
+   "path": "/series/fed.exp.current.function.health",
+   "status": 200,
+   "visibleMs": 2472,
+   "loadMs": 3533,
+   "first": {
+    "total": 230355,
+    "doc": 22924,
+    "js": 157579,
+    "font": 29040,
+    "img": 0
+   },
+   "afterIdle": 230355,
+   "dom": {
+    "elements": 860,
+    "html": 158760
+   },
+   "visibleMs400": 2669,
+   "loadMs400": 5833,
+   "fails": [
+    "first load 225 KB > 200 KB",
+    "JavaScript 154 KB > 100 KB",
+    "series visible 2472 ms on Fast 3G > 2,000 ms"
+   ]
+  },
+  {
+   "page": "receipt",
+   "path": "/o/fed.exp.current.function.health~2026-27~be",
+   "status": 200,
+   "visibleMs": 2384,
+   "loadMs": 3512,
+   "first": {
+    "total": 243378,
+    "doc": 25942,
+    "js": 149135,
+    "font": 29040,
+    "img": 18449
+   },
+   "afterIdle": 243378,
+   "dom": {
+    "elements": 952,
+    "html": 175121
+   },
+   "visibleMs400": 3116,
+   "loadMs400": 6289,
+   "fails": [
+    "JavaScript 146 KB > 100 KB"
+   ]
+  },
+  {
+   "page": "catalogue",
+   "path": "/browse",
+   "status": 200,
+   "visibleMs": 2221,
+   "loadMs": 3432,
+   "first": {
+    "total": 227202,
+    "doc": 22533,
+    "js": 154817,
+    "font": 29040,
+    "img": 0
+   },
+   "afterIdle": 227202,
+   "dom": {
+    "elements": 2039,
+    "html": 312378
+   },
+   "visibleMs400": 2685,
+   "loadMs400": 5934,
+   "fails": [
+    "JavaScript 151 KB > 100 KB",
+    "2039 elements > 1500"
+   ]
+  },
+  {
+   "page": "compare",
+   "path": "/compare",
+   "status": 200,
+   "visibleMs": 1863,
+   "loadMs": 3444,
+   "first": {
+    "total": 225894,
+    "doc": 11928,
+    "js": 164114,
+    "font": 29040,
+    "img": 0
+   },
+   "afterIdle": 225894,
+   "dom": {
+    "elements": 473,
+    "html": 63536
+   },
+   "visibleMs400": 2439,
+   "loadMs400": 5899,
+   "fails": [
+    "first load 221 KB > 200 KB",
+    "JavaScript 160 KB > 100 KB"
+   ]
+  },
+  {
+   "page": "search",
+   "path": "/search?q=health",
+   "status": 200,
+   "visibleMs": 1723,
+   "loadMs": 3174,
+   "first": {
+    "total": 248272,
+    "doc": 5472,
+    "js": 155422,
+    "font": 29040,
+    "img": 0
+   },
+   "afterIdle": 248272,
+   "dom": {
+    "elements": 461,
+    "html": 39415
+   },
+   "visibleMs400": 2638,
+   "loadMs400": 5636,
+   "fails": [
+    "JavaScript 152 KB > 100 KB"
+   ]
+  }
+ ]
+}

@@ -547,6 +547,22 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
 - **Needs from a human:** nothing.
 - **Traps:** the dialog only opens on click, so a page screenshot without opening it misses the bug.
 
+### S18 Redesign preview: what the run left open
+- **State:** partial. The redesign preview is built on `proto/redesign-2026-11` (draft PR #13); the brief is still a
+  draft. Story and full list: `docs/reports/2026-11-16-redesign-preview-report.md`, section "What failed or is unfinished".
+- **Left to do:**
+  1. JavaScript budget (100 KB): every page loads 144-160 KB, mostly the framework.
+  2. Catalogue: 2,039 elements against 1,500; make the rows lighter.
+  3. Rewrite `site/scripts/keyboard.mjs` for the new pages (5 of 10 steps target old markup).
+  4. axe `nested-interactive` on `/compare`.
+  5. Without JavaScript: series view state from the URL; catalogue filters as a form.
+  6. Tester findings not fixed (listed in the report): stale answer cards, the year chip, BE/RE explained, the
+     derived-share file columns, absolute links in files (`siteUrl`), compare table overflow at 360 px, compare
+     picker roles, tap targets on chart points, present-mode text size, one rounding rule for derived percentages.
+  7. Stage 10: wire `scripts/perf.mjs --budget` into the build.
+- **Done when:** each item passes its check; the report's list is empty.
+- **Needs from a human:** approval of the brief and the section 17 decisions; review of `site/editorial/*.json`.
+
 ### S2 Look at the new release content on the site
 - **State:** partial (S16 PR): the catalogue tags every series with its definition (13th / 19th ICLS), base year and "no area", and has definition and side facets; compare says in a sentence when chosen series differ in definition. Steps 3 to 5 are not verified. Before S16: Since the site pages were built, the release gained ABS receipts series (`fed.rev.*`,
   48), LFS provincial series (`lfs.<measure>.<pb|sd|kp|ba>.*`), 19th ICLS series (`*.icls19`), cross-source checks

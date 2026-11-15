@@ -240,6 +240,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           width={W}
           height={H}
           className="chart-svg"
+          style={{ maxWidth: `${W}px` }}
           role="group"
           aria-labelledby={titleId}
           aria-describedby={descId}
@@ -266,10 +267,10 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
             const one = g.fromPeriod === g.toPeriod;
             const what = (
               <>
-                <tspan data-num="period">{g.fromLabel}</tspan>
+                <tspan data-num="axis">{g.fromLabel}</tspan>
                 {one ? null : (
                   <>
-                    {" "}to <tspan data-num="period">{g.toLabel}</tspan>
+                    {" "}to <tspan data-num="axis">{g.toLabel}</tspan>
                   </>
                 )}
               </>
@@ -404,7 +405,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           ) : null}
         </svg>
         {tip ? (
-          <div className="chart-tip" style={{ left: `${(tip.px / W) * 100}%`, top: M.top }} role="status">
+          <div className="chart-tip" style={{ left: `${tip.px}px`, top: M.top }} role="status">
             <div className="tip-m">{tip.period}</div>
             {tip.rows.map((r) => (
               <div key={r.label}>

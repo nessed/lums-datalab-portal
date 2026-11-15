@@ -94,10 +94,10 @@ export default function CompareChart({ spec }: { spec: ChartSpec }) {
             style={{ left: pct(sx(g.from - 0.5), W), width: pct(sx(g.to + 0.5) - sx(g.from - 0.5), W) }}
           >
             <span className="cc-gaptext">
-              <span data-num="period">{g.fromLabel}</span>
+              <span data-num="axis">{g.fromLabel}</span>
               {g.from === g.to ? null : (
                 <>
-                  {" "}to <span data-num="period">{g.toLabel}</span>
+                  {" "}to <span data-num="axis">{g.toLabel}</span>
                 </>
               )}
               : not in this release

@@ -64,6 +64,8 @@ export type Answer = {
   vals: AnswerTuple[];
   /** Index into vals of the latest checked value (latest period, most final kind). */
   latest: number;
+  /** One-sentence plain summary of the series (editorial, no digits). */
+  sm?: string;
 };
 
 /**
@@ -124,9 +126,10 @@ export type SearchEntry = {
   rel?: string[];
   doc?: string;
   a?: Answer;
-  /** Meta: release id and word equivalences. */
+  /** Meta: release id, word equivalences and data type names (a series' d is a position in ds; the engine puts the name back). */
   r?: string;
   w?: string[][];
+  ds?: string[];
 };
 
 /* ---------- words ---------- */
@@ -324,10 +327,12 @@ export function buildEngine(index: SearchEntry[]): Engine {
     equiv: new Map(),
     latestOf: new Map(),
   };
+  const dsNames = index.find((e) => e.k === "m")?.ds ?? [];
   for (const e of index) {
     // Links and words the file leaves out, rebuilt here.
     if (e.k === "s") {
       e.h = seriesHrefOf(e.id);
+      if (typeof (e.d as unknown) === "number") e.d = dsNames[e.d as unknown as number];
       e.p = e.fr && e.to ? `${periodText(e.fr, e.f)} to ${periodText(e.to, e.f)}` : "";
       if (e.lpr && e.lvt) {
         e.lp = periodText(e.lpr, e.f);

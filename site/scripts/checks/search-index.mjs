@@ -168,6 +168,8 @@ export default function check({ siteDir, appDir, cfg, release, seriesList, serie
   };
   digits(editorial, "");
   const byId = new Map(editorial.concepts.map((c) => [c.id, c]));
+  const titlesFile = path.join(siteDir, "editorial", "titles.json");
+  const titles = fs.existsSync(titlesFile) ? JSON.parse(fs.readFileSync(titlesFile, "utf8")).series ?? {} : {};
   let answers = 0;
   for (const e of index.filter((x) => x.k === "c")) {
     const c = byId.get(e.id);
@@ -190,6 +192,9 @@ export default function check({ siteDir, appDir, cfg, release, seriesList, serie
       continue;
     }
     if (state(s.dataset) !== "published") problem("search-index", who, `answer card from ${s.dataset}, which is not signed off`);
+    const sm = titles[s.series_id]?.summary;
+    if ((e.a.sm ?? null) !== (sm && sm.trim() ? sm : null)) problem("search-index", who, `answer sentence "${e.a.sm}" is not the editorial summary of ${s.series_id}`);
+    if (e.a.sm && /\d/.test(e.a.sm)) problem("search-index", who, "answer sentence holds a digit");
     const pub = pubOf.get(s.series_id) ?? [];
     if (e.a.vals.length !== pub.length) problem("search-index", who, `${e.a.vals.length} answer values, release has ${pub.length} checked`);
     const latest = latestOf(s.series_id);

@@ -86,7 +86,12 @@ export default async function searchIndex(ctx) {
   };
 
   const index = [];
-  index.push({ k: "m", id: "meta", n: "meta", r: d.release.version, w: concepts.words });
+  // Data type names once, in the meta row; each series names its data type by position (d), and the engine puts
+  // the name back. Keeps room in the 40 KB budget for the answer card's sentence.
+  const dsNames = [];
+  const dsCode = (name) => (dsNames.includes(name) ? dsNames.indexOf(name) : dsNames.push(name) - 1);
+  const meta = { k: "m", id: "meta", n: "meta", r: d.release.version, w: concepts.words, ds: dsNames };
+  index.push(meta);
 
   const visibleSeries = d.series.filter((s) => visible(s.dataset));
   // The latest base year of each data type (CPI: 2015-16). A series on an earlier base is marked (ob), so search
@@ -107,7 +112,7 @@ export default async function searchIndex(ctx) {
       k: "s",
       id: s.series_id,
       n: s.title,
-      d: d.release.dataset_status?.[s.dataset]?.name ?? s.dataset,
+      d: dsCode(d.release.dataset_status?.[s.dataset]?.name ?? s.dataset),
       u: unitLabel(s.unit, s.scale_factor),
       f: s.frequency,
       c: pub.length,
@@ -191,6 +196,9 @@ export default async function searchIndex(ctx) {
           s: head.series_id,
           n: head.title,
           pn: head.name,
+          // The one-sentence plain summary of the headline series (editorial/titles.json, no digits), the answer
+          // card's sentence.
+          ...(head.summary ? { sm: head.summary } : {}),
           u: unitLabel(head.unit, head.scale_factor),
           f: head.frequency,
           vals: vals.map((o) => [o.period, o.vintage, shortScale(o.value, head.unit, head.scale_factor), marker(o), kindWord(o)]),

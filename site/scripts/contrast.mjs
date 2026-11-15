@@ -203,8 +203,7 @@ for (let i = 0; i < CAT.length; i++) {
     const neighbours = j === i + 1;
     const ok = cvd >= (neighbours ? NEIGHBOUR_CVD : ANY_CVD) && (!neighbours || normal >= NEIGHBOUR_NORMAL);
     if (!ok) fails++;
-    if (neighbours || !ok || process.argv.includes("--table"))
-      rows.push([ok ? "pass" : "FAIL", CAT[i], CAT[j], `CVD dE ${cvd.toFixed(1)}, normal dE ${normal.toFixed(1)}`, neighbours ? "neighbouring compare lines" : "any two compare lines (floor; dashes and markers also differ)"]);
+    rows.push([ok ? "pass" : "FAIL", CAT[i], CAT[j], `CVD dE ${cvd.toFixed(1)}, normal dE ${normal.toFixed(1)}`, neighbours ? "neighbouring compare lines" : "any two compare lines (floor; dashes and markers also differ)"]);
   }
 }
 

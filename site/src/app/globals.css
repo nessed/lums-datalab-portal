@@ -1293,7 +1293,7 @@ mark {
 }
 .doc-band {
   position: absolute;
-  background: rgb(11 92 120 / 0.06);
+  background: var(--evidence-band);
   pointer-events: none;
 }
 .doc-crop-note {
@@ -3682,10 +3682,10 @@ html.js .tabset[data-ready] .panel-h {
 }
 @keyframes tv-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgb(11 92 120 / 0.5);
+    box-shadow: 0 0 0 0 var(--evidence-rule-soft);
   }
   100% {
-    box-shadow: 0 0 0 10px rgb(11 92 120 / 0);
+    box-shadow: 0 0 0 10px transparent;
   }
 }
 .tv-page-ctl {

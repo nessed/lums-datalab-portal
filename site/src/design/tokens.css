@@ -124,6 +124,7 @@
   --evidence-box: var(--lums-blue);
   --evidence-tint: rgb(46 49 146 / 0.1);
   --evidence-rule-soft: rgb(46 49 146 / 0.45);
+  --evidence-band: rgb(46 49 146 / 0.06); /* the row and column bands that lead the eye to the cell */
 
   /* Header and footer: navy bar, white text, thin gold rule under the header */
   --header-bg: var(--navy);

@@ -23,19 +23,24 @@ export default function ApiPage() {
       </p>
       <ul>
         <li>
-          the whole release: <code><Num kind="id">{`${DATA_BASE}/observations.csv`}</Num></code> and the other files listed on{" "}
+          the whole release: <code><Num kind="id">{`${DATA_BASE}/all.csv`}</Num></code> (also <code>all.xlsx</code> and <code>all.zip</code>) and the other files listed on{" "}
           <Link href="/data">Download and file formats</Link>;
         </li>
         <li>
-          one series: <code><Num kind="id">{`${DATA_BASE}/series/<series_id>.json`}</Num></code> or <code>.csv</code>;
+          one series: <code><Num kind="id">{`${DATA_BASE}/series/<series_id>.csv`}</Num></code> (one row per figure, status in its own column), <code>.xlsx</code>{" "}
+          or <code>.zip</code> (a data package);
+        </li>
+        <li>
+          the same files for whichever release is newest: <code>/data/latest/series/&lt;series_id&gt;.csv</code>, which a spreadsheet can load with{" "}
+          <code>=IMPORTDATA()</code>;
         </li>
         <li>
           one figure with its evidence: <code><Num kind="id">{`${DATA_BASE}/receipts/<obs_id>.json`}</Num></code> (colons in the id written as <code>~</code>).
         </li>
       </ul>
       <p>
-        These addresses belong to release <Num kind="version">{RELEASE_VERSION}</Num>. A later release gets its own folder, so a script written against
-        one release keeps working.
+        The <code>/data/{"<release>"}/</code> addresses belong to release <Num kind="version">{RELEASE_VERSION}</Num> and never change; a later release gets its own
+        folder, so a script written against one release keeps working. The <code>/data/latest/</code> addresses follow new releases.
       </p>
     </article>
   );

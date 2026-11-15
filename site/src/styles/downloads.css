@@ -1,1 +1,290 @@
-/* downloads: styles for this area of the redesign (DESIGN.md). One file per area so parallel work does not collide. */
+/* downloads: the Download, Cite and Share sheets, the pinned-link line and the
+ * Data page (DESIGN.md 13). One file per area so parallel work does not collide. */
+
+/* ---- sheets: shown while they are the :target, so they work without JavaScript ---- */
+.sheet {
+  display: none;
+}
+.sheet:target {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+html:has(.sheet:target) {
+  overflow: hidden;
+}
+.sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgb(28 29 31 / 0.38);
+}
+.sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 88vh;
+  max-height: 88dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--card);
+  border-top: 1px solid var(--rule-strong);
+  border-radius: var(--r-2) var(--r-2) 0 0;
+  padding: 0 var(--gutter) var(--s-5);
+  box-shadow: 0 -2px 12px rgb(0 0 0 / 0.12);
+  text-align: left;
+  white-space: normal;
+  font-weight: 400;
+  color: var(--ink);
+}
+.sheet-panel:focus {
+  outline: none;
+}
+.sheet-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3) 0 var(--s-2);
+  background: var(--card);
+  border-bottom: var(--hair);
+  z-index: 1;
+}
+.sheet-head h2 {
+  margin: 0;
+  border-top: 0;
+  padding-top: 0;
+  font-size: var(--step-1);
+  line-height: var(--leading-tight);
+}
+.sheet-close {
+  flex: none;
+}
+.sheet-note {
+  margin-top: var(--s-3);
+}
+.sheet-body {
+  padding-top: var(--s-3);
+  overflow-wrap: anywhere;
+  font-size: var(--step-0);
+}
+.sheet-lede {
+  margin: 0 0 var(--s-3);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+@media (min-width: 720px) {
+  .sheet-panel {
+    left: auto;
+    top: 0;
+    bottom: 0;
+    width: min(36rem, 92vw);
+    max-height: none;
+    border-top: 0;
+    border-left: 1px solid var(--rule-strong);
+    border-radius: 0;
+    box-shadow: -2px 0 12px rgb(0 0 0 / 0.12);
+    padding: 0 var(--s-5) var(--s-6);
+  }
+}
+@media print {
+  .sheet,
+  .pinned-line {
+    display: none !important;
+  }
+}
+
+/* ---- the download list: what each file is for and how big it is ---- */
+.dl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--hair);
+}
+.dl-list li {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-3) 0;
+  border-bottom: var(--hair);
+}
+.dl-file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-3);
+  font-weight: 650;
+  min-height: 2.5rem;
+}
+.dl-size {
+  font-weight: 400;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.dl-what {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.dl-list--compact li {
+  padding: var(--s-2) 0;
+}
+.dl-list--compact .dl-file {
+  min-height: 2.25rem;
+  font-weight: 600;
+}
+.dl-h3 {
+  font-size: var(--step-0);
+  margin: var(--s-5) 0 var(--s-1);
+}
+.dl-foot {
+  margin-top: var(--s-4);
+  color: var(--ink-2);
+}
+.dl-more {
+  margin-top: var(--s-3);
+  font-size: var(--step--1);
+}
+.dl-more summary {
+  cursor: pointer;
+  color: var(--accent);
+  min-height: 2.25rem;
+  display: flex;
+  align-items: center;
+}
+.share-url {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: var(--step--1);
+  background: var(--paper-2);
+  padding: 4px 8px;
+  border-radius: var(--r-1);
+}
+
+/* ---- citations ---- */
+.cite-proto {
+  margin: 0 0 var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  background: var(--paper-2);
+  border-left: 3px solid var(--st-disputed);
+  font-size: var(--step--1);
+}
+.cite-main {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+}
+.cite-sentence {
+  margin: 0;
+  padding: var(--s-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-2);
+  background: var(--paper);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.cite-both {
+  font-size: var(--step--1);
+  font-weight: 600;
+  margin: var(--s-3) 0 var(--s-2);
+}
+.cite-styles {
+  border-top: var(--hair);
+  margin-top: var(--s-3);
+}
+.cite-style {
+  border-bottom: var(--hair);
+}
+.cite-style > summary {
+  cursor: pointer;
+  padding: var(--s-2) 0;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+.cite-style pre.code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--step--2);
+  margin: 0 0 var(--s-1);
+}
+.cite-block {
+  margin: var(--s-3) 0;
+}
+
+/* ---- share ---- */
+.share-links {
+  margin: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.share-links dt {
+  font-weight: 650;
+}
+.share-links dd {
+  margin: 0;
+}
+.share-links .small {
+  margin: 2px 0 var(--s-1);
+  color: var(--ink-2);
+}
+
+/* ---- the line on a release-pinned address ---- */
+.pinned-line {
+  display: none;
+  margin: var(--s-2) 0;
+  padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  font-size: var(--step--1);
+}
+/* Only the first one on a page (set by its script). */
+html[data-pinned] .pinned-line.on {
+  display: block;
+}
+
+/* ---- the Data page ---- */
+.take-files {
+  display: grid;
+  gap: var(--s-4);
+  margin: var(--s-3) 0 var(--s-5);
+}
+.take-group h3 {
+  margin: 0 0 var(--s-1);
+  font-size: var(--step-0);
+}
+.take-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-4);
+  align-items: baseline;
+}
+.take-row a {
+  font-weight: 600;
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+@media (min-width: 720px) {
+  .take-files {
+    grid-template-columns: 1fr 1fr;
+  }
+  .take-files .take-group--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+/* The example action rows on the Data page. */
+#one .action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: var(--s-2) 0 var(--s-4);
+}

@@ -1,26 +1,31 @@
-// Data access: what a release contains, what each column means, how to load
-// it, the permalink and receipt patterns, and how to cite.
+// Data and downloads (DESIGN.md 13): the whole release and each data type as
+// Excel, CSV and a data package, with their sizes; what every column means;
+// stable addresses for scripts and spreadsheets; release-pinned and latest
+// links; the raw release files; how to load and cite. Every file listed here is
+// written at build time from the release (scripts/prebuild/take.mjs).
 import type { Metadata } from "next";
 import Link from "@/components/ui/Link";
 import fs from "node:fs";
 import path from "node:path";
-import { Breadcrumbs, Callout, TableWrap, Toc } from "@/components/ui/Basics";
+import { Breadcrumbs, TableWrap, Toc } from "@/components/ui/Basics";
 import Code from "@/components/ui/Code";
+import Cite from "@/components/Cite";
 import { Num } from "@/components/ui/Num";
-import { DATA_BASE, db, publishedObs, RELEASE_VERSION, releaseFileExists, REPO_URL, slugify } from "@/lib/data";
+import { ActionBar, CiteButton, CompareButton, DownloadButton, PinnedLine, ShareButton } from "@/components/actions/Actions";
+import { DATA_BASE, datasetName, db, isDatasetPublished, obsHref, publishedObs, RELEASE_VERSION, releaseFileExists, REPO_URL, seriesHref, slugify } from "@/lib/data";
+import { LONG_COLUMNS, VERSION_FILES } from "@/lib/take-columns";
+import { fileHref, fileSize, latestFileHref, pinnedPath, sizeText } from "@/lib/take";
 
 export const metadata: Metadata = {
-  title: "Data access",
-  description: "Download a release: file layout, column meanings, Python and R snippets, permalinks, JSON receipts and how to cite.",
+  title: "Data and downloads",
+  description: "The whole release, each data type and each series as Excel, CSV or a data package, with sizes; column meanings; stable addresses; how to load and cite.",
 };
 
-const FILES: { file: string; what: string }[] = [
-  { file: "observations.csv", what: "Every figure: one row per series, period and estimate type, with status, gap reason and provenance columns. Start here." },
-  { file: "observations.parquet", what: "The same as a Parquet file. Numeric columns named *_num are floats for convenience; the value column stays a decimal string." },
-  { file: "observations.json", what: "The same as JSON, with the lists (check ids, supporting cells, disputed readings) as arrays." },
+const RAW: { file: string; what: string }[] = [
+  { file: "observations.csv", what: "Every figure in the pipeline's own layout, with tier and gap codes." },
+  { file: "observations.parquet", what: "The same as a Parquet file." },
   { file: "series.json", what: "What each series measures: name, unit, scale, frequency, dimensions, definition, breaks, parent." },
   { file: "cells.csv", what: "Every printed number read from a page: document, page, box on the page, the text as printed, the row and column labels as printed." },
-  { file: "cells.json", what: "The same as JSON." },
   { file: "checks.json", what: "Every arithmetic and cross-edition check: the rule, the cells it used, the result and the residual." },
   { file: "sources.json", what: "Every source document: where it came from, its SHA-256 fingerprint and its verification record." },
   { file: "coverage.json", what: "For each table read: how many printed numbers there were and how many were captured." },
@@ -31,90 +36,239 @@ const FILES: { file: string; what: string }[] = [
   { file: "ERRATA.md", what: "Corrections to published figures." },
 ];
 
-const COLUMNS: [string, React.ReactNode][] = [
-  ["obs_id", "Permanent id of the figure: series_id:period:vintage. Survives re-extraction."],
-  ["series_id, series_name, dataset", "Which series it belongs to (see series.json)."],
-  [
-    "period",
-    <>
-      Fiscal year (<Num kind="period">2025-26</Num>), month (<Num kind="period">2026-06</Num>) or survey round, as the document labels it.
-    </>,
-  ],
-  ["vintage", "Kind of figure: be (budget estimate), re (revised estimate), actual, provisional, na (no such distinction)."],
-  ["value", "The figure as a decimal string, present only when published. Multiply by scale_factor for the full amount."],
-  [
-    "unit, scale_factor",
-    <>
-      PKR with <Num kind="ui">1000000</Num> means rupees in millions; percent; index; persons.
-    </>,
-  ],
-  ["status", "checked, unchecked or disputed. Only checked figures carry a value."],
-  ["tier", "Internal evidence tier: A (a check and a second printing), B (one of the two)."],
-  ["published", "true when the value is shown on the site."],
-  ["gap_kind, gap_reason", "For a row without a value: not_in_source, not_yet_verified, failed_checks or disputed, and why."],
-  ["source_id … page, cell_id", "Where the figure is printed: the document, its official address and fingerprint, the page of the PDF file, the cell."],
-  ["value_as_printed", "The printed text exactly as it appears on the page: digits, separators and signs as printed."],
-  ["disputed_readings", "For disputed rows: every printing, as value (source p.N), separated by |."],
-  ["evidence_summary", "The checks behind the figure, in one sentence."],
-  ["release", "The release the row comes from."],
-];
+const FORMATS = [
+  { ext: "xlsx", label: "Excel (.xlsx)" },
+  { ext: "csv", label: "CSV, long" },
+  { ext: "zip", label: "Data package (.zip)" },
+] as const;
 
-function size(file: string): string {
+function rawSize(file: string): number | null {
   const p = path.resolve(process.cwd(), "..", "releases", RELEASE_VERSION, file);
-  if (!fs.existsSync(p)) return "";
-  const b = fs.statSync(p).size;
-  return b > 1024 * 1024 ? `${(b / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`;
+  return fs.existsSync(p) ? fs.statSync(p).size : null;
+}
+
+function FileRow({ stem }: { stem: string }) {
+  return (
+    <div className="take-row">
+      {FORMATS.map((f) => {
+        const rel = `${stem}.${f.ext}`;
+        const n = fileSize(rel);
+        if (n === null) return null;
+        return (
+          <a key={f.ext} href={fileHref(rel)} download>
+            {f.label}{" "}
+            <span className="dl-size">
+              <Num kind="ui">{sizeText(n)}</Num>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  );
 }
 
 export default function DataPage() {
   const d = db();
+  const datasets = Object.keys(d.release.dataset_status ?? {}).filter(isDatasetPublished);
   const example = d.seriesById.get("fed.exp.current.function.health") ?? d.series.find((s) => publishedObs(s.series_id).length > 0);
+  const exSlug = example ? slugify(example.series_id) : "fed.exp.current.function.health";
   const exObs = example ? publishedObs(example.series_id)[0] : undefined;
-  const csv = `{{ORIGIN}}${DATA_BASE}/observations.csv`;
+  const exLatest = example ? publishedObs(example.series_id).at(-1) : undefined;
   const sid = example?.series_id ?? "fed.exp.current.function.health";
+  const latestAll = `{{ORIGIN}}${latestFileHref("all.csv")}`;
+  const latestSeries = `{{ORIGIN}}${latestFileHref(`series/${exSlug}.csv`)}`;
   const py = `import pandas as pd
-from decimal import Decimal
 
-url = "${csv}"
-# Keep values as text: they are exact decimals, not floats.
-obs = pd.read_csv(url, dtype={"value": str, "period": str})
+url = "${latestAll}"
+# Keep values as text: they are exact decimals. A figure without a value
+# (held back, disputed, not printed...) has an empty value and its status.
+obs = pd.read_csv(url, dtype={"value": str, "value_as_printed": str, "period": str})
 
-s = obs[(obs.series_id == "${sid}") & (obs.published == True)]
-s = s.assign(value=s.value.map(Decimal))
-print(s[["period", "vintage", "value", "unit", "scale_factor", "source_title", "page"]])`;
+s = obs[obs.series_id == "${sid}"]
+print(s[["period", "kind", "value", "unit", "status", "printed_in", "page"]])`;
   const r = `library(readr)
 library(dplyr)
 
-url <- "${csv}"
-# Keep values as text: they are exact decimals, not floats.
-obs <- read_csv(url, col_types = cols(value = col_character(), period = col_character()))
+url <- "${latestAll}"
+# Keep values as text: they are exact decimals. A figure without a value
+# (held back, disputed, not printed...) has an empty value and its status.
+obs <- read_csv(url, col_types = cols(.default = col_character()))
 
 s <- obs |>
-  filter(series_id == "${sid}", published) |>
+  filter(series_id == "${sid}") |>
   mutate(value_num = as.numeric(value))
-s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
+s |> select(period, kind, value, unit, status, printed_in, page)`;
+  const sheets = `=IMPORTDATA("${latestSeries}")`;
 
   return (
     <div className="is-prose">
-      <Breadcrumbs items={[{ label: "Data access" }]} />
+      <Breadcrumbs items={[{ label: "Data and downloads" }]} />
+      <PinnedLine />
       <header className="page-head">
-        <h1>Data access</h1>
+        <h1>Data and downloads</h1>
         <p className="lede">
-          Everything on this site comes from one frozen release, <Num kind="version">{RELEASE_VERSION}</Num>, and every file of it can be downloaded. The CSV is the place to
-          start; the receipt of any figure is also a JSON file.
+          Every figure on this site, as Excel, CSV or a data package, from release <Num kind="version">{RELEASE_VERSION}</Num>. Each file says what it is, which release it
+          comes from, how to cite it and where to check that it is still current.
         </p>
       </header>
-      <Callout kind="caveat" title="Prototype release">
-        <p>
-          {d.release.doi ? <Num kind="id">{`DOI ${d.release.doi}.`}</Num> : "No DOI yet."} Not yet for citation in publications. Data CC BY 4.0. Values are decimal strings:
-          read them as text and convert deliberately, or rounding errors creep in.
+      {d.info.isPrototype ? (
+        <p className="cite-proto">
+          <strong>Prototype release.</strong> Not yet for citation in publications; no DOI. Data CC BY 4.0. Values are exact decimals: read them as text and convert
+          deliberately.
         </p>
-      </Callout>
+      ) : null}
 
       <div className="with-rail">
         <div className="measure-wide">
           <section id="files" aria-labelledby="files-h">
-            <h2 id="files-h">The files of a release</h2>
+            <h2 id="files-h">Download</h2>
+            <div className="take-files">
+              <div className="take-group take-group--wide">
+                <h3>The whole release</h3>
+                <p className="small muted">Every series of every published data type, every period and kind of figure, one row each.</p>
+                <FileRow stem="all" />
+              </div>
+              {datasets.map((ds) => (
+                <div key={ds} className="take-group">
+                  <h3>{datasetName(ds)}</h3>
+                  <FileRow stem={`datasets/${ds}`} />
+                </div>
+              ))}
+            </div>
+            <dl className="facts">
+              <dt>Excel (.xlsx)</dt>
+              <dd>A Data sheet (one row per figure), a README sheet (what the file is, the release, the date it was made, the licence, the statuses and every column), a Sources sheet (each document, its official address and fingerprint) and a Citation sheet.</dd>
+              <dt>CSV, long</dt>
+              <dd>One row per figure. Status is always its own column. A figure that has not passed its checks is a row with an empty value and its status, never a missing row and never a zero.</dd>
+              <dt>Data package (.zip)</dt>
+              <dd>
+                The CSV with <code>datapackage.json</code> (a Frictionless Data description of every column), a README, the licence and <code>CITATION.cff</code>.
+              </dd>
+              <dt>One series</dt>
+              <dd>
+                The Download button on every series page gives the same three files for that series, and, where its figures are printed in more than one edition, four more:{" "}
+                {VERSION_FILES.map((v) => v.label.toLowerCase()).join(", ")}.
+              </dd>
+            </dl>
+            <p className="small">
+              Every file carries the release id, the date it was generated, the licence (CC BY 4.0), the citation and an &ldquo;Is this file still current?&rdquo; link to the{" "}
+              <Link href="/releases">releases page</Link>, which lists every correction made since.
+            </p>
+          </section>
+
+          {example ? (
+            <section id="one" aria-labelledby="one-h">
+              <h2 id="one-h">One series or one figure</h2>
+              <p className="measure">
+                Every series page and every receipt has these buttons. For example, <Link href={seriesHref(example.series_id)}>{example.name}</Link>:
+              </p>
+              <ActionBar label="Actions for one series">
+                <DownloadButton seriesId={example.series_id} />
+                <CiteButton path={seriesHref(example.series_id)} />
+                <CompareButton seriesId={example.series_id} />
+                <ShareButton path={seriesHref(example.series_id)} />
+              </ActionBar>
+              {exLatest ? (
+                <>
+                  <p className="small">
+                    And one figure of it, <Link href={obsHref(exLatest.obs_id)}>its newest checked figure</Link>, cited with its document, page and kind of figure:
+                  </p>
+                  <ActionBar label="Actions for one figure">
+                    <CiteButton path={obsHref(exLatest.obs_id)} />
+                    <ShareButton path={obsHref(exLatest.obs_id)} />
+                  </ActionBar>
+                </>
+              ) : null}
+            </section>
+          ) : null}
+
+          <section id="stable" aria-labelledby="stable-h">
+            <h2 id="stable-h">Stable addresses for scripts and spreadsheets</h2>
+            <dl className="facts">
+              <dt>Always the latest</dt>
+              <dd>
+                <code data-num="id">{latestFileHref("<file>")}</code>, for example <code data-num="id">{latestFileHref(`series/${exSlug}.csv`)}</code>. A script or spreadsheet
+                that reads it gets the newest release.
+              </dd>
+              <dt>This release only</dt>
+              <dd>
+                <code data-num="id">{fileHref("<file>")}</code>. Its numbers never change.
+              </dd>
+            </dl>
+            <p className="small">In Google Sheets, paste this into a cell to load a series and keep it up to date:</p>
+            <Code label="Google Sheets" code={sheets} />
+          </section>
+
+          <section id="columns" aria-labelledby="columns-h">
+            <h2 id="columns-h">Columns of the CSV and the Data sheet</h2>
+            <dl className="facts">
+              {LONG_COLUMNS.map(([k, v]) => (
+                <div key={k} style={{ display: "contents" }}>
+                  <dt className="mono">
+                    <Num kind="id">{k}</Num>
+                  </dt>
+                  {/* Typed explanations with example digits (a period format, a scale), not figures. */}
+                  <dd>{/\d/.test(v) ? <Num kind="ui">{v}</Num> : v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="small">The version files of a multi-printing series:</p>
+            <dl className="facts">
+              {VERSION_FILES.map((v) => (
+                <div key={v.key} style={{ display: "contents" }}>
+                  <dt>{v.label}</dt>
+                  <dd>{v.what}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          <section id="load" aria-labelledby="load-h">
+            <h2 id="load-h">Load it</h2>
+            <Code label="Python (pandas)" code={py} />
+            <Code label="R (readr, dplyr)" code={r} />
+          </section>
+
+          <section id="links" aria-labelledby="links-h">
+            <h2 id="links-h">Links</h2>
+            <p className="measure">
+              Everything citable has two addresses. <strong>This release</strong> starts with the release id and will keep showing these numbers; <strong>always the latest</strong>{" "}
+              is the ordinary address and follows new releases. Cite uses the first; Share offers both.
+            </p>
+            <dl className="facts">
+              <dt>A figure</dt>
+              <dd>
+                <code data-num="id">{pinnedPath("/o/<obs_id>")}</code> (this release) or <code>/o/&lt;obs_id&gt;</code> (latest), with the colons written as <code>~</code>
+                {exObs ? (
+                  <>
+                    , for example{" "}
+                    <a href={pinnedPath(`/o/${slugify(exObs.obs_id)}`)}>
+                      <Num kind="id">{pinnedPath(`/o/${slugify(exObs.obs_id)}`)}</Num>
+                    </a>
+                  </>
+                ) : null}
+              </dd>
+              <dt>A series</dt>
+              <dd>
+                <code data-num="id">{pinnedPath("/series/<series_id>")}</code>; chart settings stay in the address.
+              </dd>
+              <dt>A comparison</dt>
+              <dd>
+                <code data-num="id">{pinnedPath("/compare?s=<id>,<id>&show=index&base=<period>")}</code>
+              </dd>
+              <dt>A figure as data</dt>
+              <dd>
+                <code data-num="id">{`${DATA_BASE}/receipts/<obs_id>.json`}</code>: the figure, its cells with page boxes, its checks and its documents.
+              </dd>
+            </dl>
+            <p className="small measure">
+              Only this release&rsquo;s id is served; any other release id in an address answers &ldquo;not found&rdquo;. When a later release ships, this one&rsquo;s build stays
+              online under its id.
+            </p>
+          </section>
+
+          <section id="raw" aria-labelledby="raw-h">
+            <h2 id="raw-h">The release as the pipeline wrote it</h2>
             <TableWrap label="Release files">
               <table>
                 <thead>
@@ -127,7 +281,7 @@ s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
                   </tr>
                 </thead>
                 <tbody>
-                  {FILES.filter((f) => releaseFileExists(f.file)).map((f) => (
+                  {RAW.filter((f) => releaseFileExists(f.file)).map((f) => (
                     <tr key={f.file}>
                       <th scope="row">
                         <a href={`${DATA_BASE}/${f.file}`} download className="mono nowrap">
@@ -136,7 +290,7 @@ s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
                       </th>
                       <td className="small">{f.what}</td>
                       <td className="num small">
-                        <Num kind="ui">{size(f.file)}</Num>
+                        <Num kind="ui">{sizeText(rawSize(f.file))}</Num>
                       </td>
                     </tr>
                   ))}
@@ -144,84 +298,29 @@ s |> select(period, vintage, value, unit, scale_factor, source_title, page)`;
               </table>
             </TableWrap>
             <p className="small">
-              Also: one CSV and one JSON per series at <code data-num="id">{`${DATA_BASE}/series/<series_id>.csv`}</code>, one CSV per data type at{" "}
-              <code data-num="id">{`${DATA_BASE}/datasets/<data type>.csv`}</code>, page images at <code data-num="id">{`${DATA_BASE}/pages/<source_id>/p<NNN>.png`}</code>, and
-              the extraction run records at <code data-num="id">{`${DATA_BASE}/runs/`}</code>.
-            </p>
-          </section>
-
-          <section id="columns" aria-labelledby="columns-h">
-            <h2 id="columns-h">Columns of observations.csv</h2>
-            <dl className="facts">
-              {COLUMNS.map(([k, v]) => (
-                <div key={k} style={{ display: "contents" }}>
-                  <dt className="mono">{k}</dt>
-                  <dd>{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="small">
               The full data model is in <a href={`${REPO_URL}/blob/proto/v0/docs/SCHEMA.md`}>docs/SCHEMA.md</a> in the repository.
-            </p>
-          </section>
-
-          <section id="load" aria-labelledby="load-h">
-            <h2 id="load-h">Load it</h2>
-            <Code label="Python (pandas)" code={py} />
-            <Code label="R (readr, dplyr)" code={r} />
-          </section>
-
-          <section id="links" aria-labelledby="links-h">
-            <h2 id="links-h">Permalinks and receipts</h2>
-            <dl className="facts">
-              <dt>A figure</dt>
-              <dd>
-                <code>/o/&lt;obs_id&gt;</code> with the colons written as <code>~</code>
-                {exObs ? (
-                  <>
-                    , for example{" "}
-                    <Link href={`/o/${slugify(exObs.obs_id)}`}>
-                      <Num kind="id">{`/o/${slugify(exObs.obs_id)}`}</Num>
-                    </Link>
-                  </>
-                ) : null}
-              </dd>
-              <dt>Its receipt as data</dt>
-              <dd>
-                <code data-num="id">{`${DATA_BASE}/receipts/<same id>.json`}</code>: the observation, its cells with page boxes, its checks and its source documents.
-                One CSV row with provenance columns at the same address ending <code>.csv</code>.
-              </dd>
-              <dt>A series</dt>
-              <dd>
-                <code>/series/&lt;series_id&gt;</code>; chart settings stay in the address (<code data-num="id">?scale=log&amp;from=2015-16</code>).
-              </dd>
-              <dt>A document</dt>
-              <dd>
-                <code>/sources/&lt;source_id&gt;</code>
-              </dd>
-            </dl>
-            <p className="small measure">
-              Links are to a release. A later release keeps the same ids; if a figure changes, the change is listed in the errata and the old release
-              stays available, so a citation never breaks.
             </p>
           </section>
 
           <section id="cite" aria-labelledby="cite-h">
             <h2 id="cite-h">How to cite</h2>
             <p className="measure">
-              Cite two things: the government document, which is the authority for the figure, and the portal release, which records where it was
-              read and how it was checked. Every receipt gives both, in APA, BibTeX and RIS, with the page. This release has no DOI yet and is not for
-              citation in publications.
+              Cite the government document named in each row as well as the release: every receipt and series page has a Cite button that gives both, with the page and the
+              kind of figure. For the whole release:
             </p>
+            <Cite path="/data" what={`Release ${RELEASE_VERSION}`} heading={false} />
           </section>
         </div>
         <aside className="rail">
           <Toc
             items={[
-              { id: "files", label: "Files" },
+              { id: "files", label: "Download" },
+              { id: "one", label: "One series or figure" },
+              { id: "stable", label: "Stable addresses" },
               { id: "columns", label: "Columns" },
               { id: "load", label: "Load it" },
-              { id: "links", label: "Permalinks and receipts" },
+              { id: "links", label: "Links" },
+              { id: "raw", label: "Pipeline files" },
               { id: "cite", label: "How to cite" },
             ]}
           />

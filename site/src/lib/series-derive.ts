@@ -219,7 +219,11 @@ export function changeView(op: "pct" | "chg", meta: DMeta, recs: DInput[]): DVie
     const pp = previousPeriod(a.period, meta.frequency, periods);
     const b = pp ? at.get(`${pp}|${a.kind}`) : undefined;
     const br = pp && b ? breakBetween(pp, a.period, meta.breaks) : null;
-    const missing = pp ? `No ${kw(meta, a.kind)} for ${periodLabel(pp, meta.frequency)} in this release to compare with.` : "This is the first figure of the series.";
+    // The earlier period is named only when the release holds it (check-build allows
+    // only periods of the release); otherwise "the period before".
+    const missing = pp
+      ? `No ${kw(meta, a.kind)} for ${periods.includes(pp) ? periodLabel(pp, meta.frequency) : "the period before"} in this release to compare with.`
+      : "This is the first figure of the series.";
     points.push(derivePoint(op, meta, a, b, missing, br));
   }
   return { id: op, op, dp: DP[op], points };

@@ -12,6 +12,7 @@ import { CHECK_TYPE_WORDS, pct } from "@/lib/format";
 import { KIND } from "@/lib/words";
 import { Count, Num } from "@/components/ui/Num";
 import { datasetStateWords } from "@/lib/status";
+import { HomeFormulas, HowWeCheckShort, ThisRelease } from "@/components/home/Moved";
 
 export const metadata: Metadata = {
   title: "Methods",
@@ -111,6 +112,8 @@ export default function MethodsPage() {
 
       <div className="with-rail">
         <div className="prose-wide">
+          <HowWeCheckShort />
+
           <section id="quality" aria-labelledby="quality-h">
             <h2 id="quality-h">Quality numbers for this release</h2>
             <h3>Coverage: how much of the printed tables we captured</h3>
@@ -379,6 +382,8 @@ export default function MethodsPage() {
             </div>
           </section>
 
+          <ThisRelease />
+
           <section id="built" aria-labelledby="built-h">
             <h2 id="built-h">What this release was built with</h2>
             <dl className="facts">
@@ -409,6 +414,8 @@ export default function MethodsPage() {
             </dl>
           </section>
 
+          <HomeFormulas />
+
           <section id="full" aria-labelledby="full-h" className="prose">
             <h2 id="full-h">The method in full</h2>
             {md ? (
@@ -428,6 +435,7 @@ export default function MethodsPage() {
         <aside className="rail">
           <Toc
             items={[
+              { id: "how", label: "How we check, in short" },
               { id: "quality", label: "Quality numbers" },
               { id: "pipeline", label: "From the PDF to a receipt" },
               { id: "statuses", label: "Statuses" },
@@ -435,7 +443,9 @@ export default function MethodsPage() {
               { id: "checks", label: "Checks run" },
               { id: "thresholds", label: "Thresholds" },
               { id: "llm", label: "Language models" },
+              { id: "release", label: "This release" },
               { id: "built", label: "Built with" },
+              { id: "home-drv", label: "Changes on the home page" },
               { id: "full", label: "The method in full" },
               ...mdHeads.map((h) => ({ id: h.id, label: h.label, sub: true })),
             ]}

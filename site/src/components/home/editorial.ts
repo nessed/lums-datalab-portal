@@ -111,5 +111,12 @@ export function headlineCards(): HeadlineCard[] {
     .slice(0, 6);
 }
 
+/** The figure the home page shows beside the crop of its printed page (round 2 item 19), if the release can show it. */
+export function evidenceExample(): { series: Series; kind: KindKey } | null {
+  const e = (headlineFile as { evidence?: { series: string; kind: string } }).evidence;
+  const s = e ? seriesWithKind(e.series, e.kind) : undefined;
+  return s && e ? { series: s, kind: e.kind as KindKey } : null;
+}
+
 export const answerHref = (slug: string) => `/answers/${slug}`;
 export const topicHref = (slug: string) => `/topics/${slug}`;

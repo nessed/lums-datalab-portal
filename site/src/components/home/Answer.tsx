@@ -6,12 +6,14 @@ import type { ReactNode } from "react";
 import { seriesTitle } from "@/lib/titles";
 import Chart from "@/components/Chart";
 import Link from "@/components/ui/Link";
+import Arrow from "@/components/ui/Arrow";
+import PrintedPagePill from "@/components/ui/PrintedPagePill";
 import { Num } from "@/components/ui/Num";
-import { chartModelFrom } from "@/lib/chart-model";
-import { datasetName, db, seriesHref, type Observation, type Series } from "@/lib/data";
+import { chartModelFrom, obsSlug } from "@/lib/chart-model";
+import { datasetName, db, obsHref, seriesHref, type Observation, type Series } from "@/lib/data";
 import { periodWords } from "@/lib/format";
-import { DerivedInline, DerivedNotes, NotShownList, PageWords, ShortValue, SourceMarker } from "./Bits";
-import { baseWords } from "./Cards";
+import { DerivedInline, DerivedNotes, kindPeriod, NotShownList, PageWords, ShortValue, SourceMarker } from "./Bits";
+import { baseWords, dirOf } from "./Cards";
 import { change, compare, latestRevision, latestShown, showable } from "./derive";
 import type { QuestionPart } from "./editorial";
 
@@ -76,6 +78,7 @@ function comparisonSentence(s: Series, o: Observation, all: Observation[], words
     const id = notes.add(cmp.derived, what);
     return (
       <>
+        <Arrow dir={dirOf(cmp.derived)} label={false} />
         Compared with {base}
         {baseV}, that is <DerivedInline d={cmp.derived} id={id} />.
       </>
@@ -147,25 +150,41 @@ export function answerPart(part: QuestionPart, words: PageWords, notes: DerivedN
   const cmp = comparisonSentence(s, latest, all, words, notes, `${part.subject}: change on the comparable figure`);
   const rev = latest.kind === "be" ? revisionSentence(s, all, words, notes, `${part.subject}: change from budget to revised estimate`) : null;
   const model = chartModelFrom(s, all);
+  // The label is in full words on its own (a fresh PageWords), so the answer sentence below still introduces BE and RE.
+  const label = kindPeriod(latest, s, new PageWords(), true);
   return (
     <section className="ans-part" key={s.series_id} aria-label={part.heading ?? part.subject}>
       {opts.multi && !opts.first && part.heading ? <h2>{part.heading}</h2> : null}
-      <p className={opts.first ? "ans-first" : "ans-sentence"} data-answer-part={s.series_id} data-answer-kind={part.kind}>
-        {first}
-      </p>
+      <div className={`numblock numblock--${opts.first ? "xl" : "l"} ans-block`}>
+        <p className="numblock-label">
+          {seriesTitle(s)} · {label}
+        </p>
+        <p className="numblock-value">
+          <ShortValue o={latest} series={s} />
+        </p>
+        <p className={opts.first ? "ans-first" : "ans-sentence"} data-answer-part={s.series_id} data-answer-kind={part.kind}>
+          <span>{first}</span>
+        </p>
+        <p className="numblock-change ans-cmp">{cmp}</p>
+        {rev ? (
+          <p className="ans-rev">
+            <strong>Revision.</strong> {rev}
+          </p>
+        ) : null}
+        <p className="ans-act">
+          <PrintedPagePill href={obsHref(latest.obs_id)} sheet={obsSlug(latest.obs_id)} />
+          <span className="ans-src">
+            <SourceMarker o={latest} />
+          </span>
+        </p>
+      </div>
       {newer.length ? (
         <p className="ans-newer">
           This is the latest checked figure. Newer figures of this kind are in the release but not shown: <NotShownList list={newer} series={s} />. {newer[newer.length - 1].reader.reason}
         </p>
       ) : null}
-      <p className="ans-cmp">{cmp}</p>
-      {rev ? (
-        <p className="ans-rev">
-          <strong>Revision.</strong> {rev}
-        </p>
-      ) : null}
-      <p className="ans-src small">
-        Source: <SourceMarker o={latest} /> · <Link href={seriesHref(s.series_id)}>the whole series: table, every figure, downloads</Link>
+      <p className="ans-more small">
+        <Link href={seriesHref(s.series_id)}>The whole series: table, every figure, downloads</Link>
       </p>
       <figure className="ans-chart">
         <Chart model={model} idBase={`ans-${s.series_id.replace(/[^a-z0-9]/gi, "-")}`} caption={seriesTitle(s)} />

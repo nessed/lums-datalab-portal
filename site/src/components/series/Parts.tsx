@@ -104,7 +104,7 @@ export function AnswerLine({ series, answer }: { series: Series; answer: Answer 
         {!change && noChange ? (
           <>
             {" "}
-            No change shown: <Num kind="period">{noChange}</Num>
+            No change shown: <PeriodsIn text={noChange} />
           </>
         ) : null}
       </p>
@@ -487,4 +487,10 @@ function Others({ label, items, at, ref0, series, more }: { label: string; items
       ) : null}
     </>
   );
+}
+
+/** A sentence with the periods in it marked (each "2019-20", "June 2025" is a period of the release; the words around it are not). */
+function PeriodsIn({ text }: { text: string }) {
+  const parts = text.split(/((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4}|\d{4}-\d{2}|\d{4})/);
+  return <>{parts.map((x, i) => (i % 2 === 1 ? <Num key={i} kind="period">{x}</Num> : x))}</>;
 }

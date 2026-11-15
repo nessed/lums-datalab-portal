@@ -534,6 +534,38 @@ receipt must never misstate a sum, and new release content must not mislead. S3 
   receipt unless every figure they name is checked (AGENTS.md section 7). A `next start` left running across a
   rebuild serves pages without CSS; restart it before screenshots.
 
+### S17 Phone header search: the text box is 0 px wide
+- **State:** not started on `main`. Found by the design research on 2026-11-15 (`docs/DESIGN_REFERENCE.md`, section 1).
+  On a 390 px phone, opening search from the header shows a dialog whose input renders 0 px wide, so nobody can
+  type a query. Cause: the magnifier SVG inside the dialog's input row has no width or height, so it grows and
+  squeezes the input to nothing.
+- **Where:** the header search dialog component in `site/src/components/` and its styles.
+- **Left to do:** 1. Give the icon a fixed size and the input `flex: 1; min-width: 0`. 2. Screenshot the open
+  dialog at 360 px and 390 px. 3. Add a check that the input is at least 200 px wide at 360 px.
+- **Done when:** at 360 px the open search box accepts typing and shows results; the screenshot is in the PR.
+- **Effort:** under an hour.
+- **Needs from a human:** nothing.
+- **Traps:** the dialog only opens on click, so a page screenshot without opening it misses the bug.
+
+### S18 Redesign preview: what the run left open
+- **State:** partial. The redesign preview is built on `proto/redesign-2026-11` (draft PR #13); the brief is still a
+  draft. Story and full list: `docs/reports/2026-11-15-redesign-preview-report.md`, section "What failed or is unfinished".
+- **Left to do:**
+  1. JavaScript budget (100 KB): every page loads 144-160 KB, mostly the framework.
+  2. Catalogue: 2,039 elements against 1,500; make the rows lighter.
+  3. Rewrite `site/scripts/keyboard.mjs` for the new pages (5 of 10 steps target old markup).
+  4. axe `nested-interactive` on `/compare`.
+  5. Without JavaScript: series view state from the URL; catalogue filters as a form.
+  6. Tester findings not fixed (listed in the report): stale answer cards, the year chip, BE/RE explained, the
+     derived-share file columns, absolute links in files (`siteUrl`), compare table overflow at 360 px, compare
+     picker roles, tap targets on chart points, present-mode text size, one rounding rule for derived percentages.
+  7. Stage 10: wire `scripts/perf.mjs --budget` into the build.
+- **Done when:** each item passes its check; the report's list is empty.
+- **Needs from a human:** approval of the brief and the section 17 decisions; review of `site/editorial/*.json`.
+- **Parked in round 2 (Ali, 2026-11-15, to save time):** item 3 (rewrite `site/scripts/keyboard.mjs` for the new
+  pages; do not loosen it) and item 5 (no-JavaScript: series view state from the URL, catalogue filters as a form,
+  and a build check that loads key pages with JavaScript off). Both still open.
+
 ### S2 Look at the new release content on the site
 - **State:** partial (S16 PR): the catalogue tags every series with its definition (13th / 19th ICLS), base year and "no area", and has definition and side facets; compare says in a sentence when chosen series differ in definition. Steps 3 to 5 are not verified. Before S16: Since the site pages were built, the release gained ABS receipts series (`fed.rev.*`,
   48), LFS provincial series (`lfs.<measure>.<pb|sd|kp|ba>.*`), 19th ICLS series (`*.icls19`), cross-source checks

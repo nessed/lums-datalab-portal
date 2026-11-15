@@ -5,12 +5,14 @@ import { useState } from "react";
 import { IconCopy } from "./Icons";
 
 /** `origin`: prefix the text with the current site address (for permalinks). */
-export default function CopyButton({ text, label, className = "btn", origin }: { text: string; label: string; className?: string; origin?: boolean }) {
+/** `name`: a fuller accessible name than the visible label ("Copy series id"). */
+export default function CopyButton({ text, label, className = "btn", origin, name }: { text: string; label: string; className?: string; origin?: boolean; name?: string }) {
   const [done, setDone] = useState(false);
   return (
     <button
       type="button"
       className={className}
+      aria-label={name ? (done ? `${name}: copied` : name) : undefined}
       data-copied={done ? "true" : undefined}
       onClick={async () => {
         const value = origin ? `${window.location.origin}${text}` : text;

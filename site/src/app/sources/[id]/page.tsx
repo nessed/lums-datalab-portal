@@ -2,17 +2,19 @@
 // sentence), the pages this release reads from it, the tables located on
 // them with their coverage, and the extraction runs.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import Cite from "@/components/Cite";
 import { Bar, Breadcrumbs, Callout, ExternalLink, TableWrap, Toc } from "@/components/ui/Basics";
 import CopyButton from "@/components/ui/CopyButton";
 import { VerifBadge } from "@/components/ui/Verif";
-import { DATA_BASE, db, obsHref, pageImage, runManifest, slugify, sourceHref } from "@/lib/data";
+import { DATA_BASE, db, isDatasetPublished, obsHref, pageImage, runManifest, slugify, sourceHref } from "@/lib/data";
 import { bytes, dateOnly, DOC_TYPE_WORDS, ROLE_WORDS } from "@/lib/format";
 import { Count, Num } from "@/components/ui/Num";
 import { tablesOfSource } from "@/lib/tables";
+import { StatusMark } from "@/components/ui/Status";
+import { STATUS, type StatusKey } from "@/lib/status";
 import { sourceCoverage, valuesFromSource, verifLong } from "@/lib/sources";
 
 export const dynamicParams = false;
@@ -45,6 +47,21 @@ function pdfDate(v: unknown): string | null {
 function waybackDate(v: unknown): string | null {
   const m = typeof v === "string" ? /^(\d{4})(\d{2})(\d{2})/.exec(v) : null;
   return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
+}
+
+/** Reader statuses in the per-document quality table (DESIGN.md 9.8), with the count key check-build recomputes. */
+const QUALITY_ROWS: { bucket: string; k: StatusKey }[] = [
+  { bucket: "checked", k: "checked" },
+  { bucket: "held", k: "withheld" },
+  { bucket: "disputed", k: "disputed" },
+  { bucket: "not-printed", k: "gap-source" },
+  { bucket: "not-checked", k: "gap-pending" },
+];
+
+function bucketOf(o: { published: boolean; status: string; gap_kind: string | null }): string {
+  if (o.published) return "checked";
+  if (o.status === "disputed") return "disputed";
+  return { failed_checks: "held", not_in_source: "not-printed", not_yet_verified: "not-checked" }[o.gap_kind ?? ""] ?? "other";
 }
 
 function Item({ ok, children }: { ok: boolean | null; children: ReactNode }) {
@@ -89,6 +106,15 @@ export default async function SourcePage({ params }: Props) {
     d.observations.find((o) => o.published && o.primary_cell_id && d.cellById.get(o.primary_cell_id)?.source_id === source.source_id && d.cellById.get(o.primary_cell_id)?.page === p);
   const textFrac = typeof inspection?.text_layer_fraction === "number" ? (inspection.text_layer_fraction as number) : null;
   const identity = typeof v.identity_route === "string" ? v.identity_route : null;
+  // Per-document quality (DESIGN.md 9.8): figures of visible datasets whose main printing is here.
+  const quality: Record<string, number> = { all: 0 };
+  for (const o of d.observations) {
+    const s = d.seriesById.get(o.series_id);
+    if (!s || !isDatasetPublished(s.dataset) || !o.primary_cell_id || d.cellById.get(o.primary_cell_id)?.source_id !== source.source_id) continue;
+    quality.all++;
+    const b = bucketOf(o);
+    quality[b] = (quality[b] ?? 0) + 1;
+  }
 
   return (
     <article className="is-prose">
@@ -142,6 +168,55 @@ export default async function SourcePage({ params }: Props) {
 
       <div className="with-rail">
         <div>
+          <section id="quality" aria-labelledby="quality-h">
+            <h2 id="quality-h">What we read from it</h2>
+            {quality.all === 0 ? (
+              <p className="measure">No figure in this release has this document as its main printing.</p>
+            ) : (
+              <>
+                <p className="measure small">
+                  Figures whose main printing is in this document, by what the site shows for them. A figure printed in several documents is counted once, under
+                  the document it is read from.
+                </p>
+                <TableWrap label="Figures read from this document, by status">
+                  <table className="dq-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Status</th>
+                        <th scope="col" className="num">
+                          Figures
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {QUALITY_ROWS.map(({ bucket, k }) => (
+                        <tr key={bucket}>
+                          <th scope="row" style={{ fontWeight: 400 }}>
+                            <StatusMark k={k} /> {STATUS[k as Exclude<StatusKey, "unknown">].label}
+                          </th>
+                          <td className="num">
+                            <Count k={`obs:source:${source.source_id}:${bucket}`} n={quality[bucket] ?? 0} />
+                          </td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <th scope="row">Figures read</th>
+                        <td className="num">
+                          <strong>
+                            <Count k={`obs:source:${source.source_id}`} n={quality.all} />
+                          </strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </TableWrap>
+                <p className="small">
+                  <Link href="/methods#statuses">What each status means</Link>
+                </p>
+              </>
+            )}
+          </section>
+
           <section id="genuine" aria-labelledby="genuine-h">
             <h2 id="genuine-h">How we know this is the genuine file</h2>
             <ul className="vchecks">
@@ -397,6 +472,7 @@ export default async function SourcePage({ params }: Props) {
         <aside className="rail" aria-label="On this page">
           <Toc
             items={[
+              { id: "quality", label: "What we read from it" },
               { id: "genuine", label: "Is it genuine?" },
               { id: "pages", label: <>Pages read (<Count k={`pages:source:${source.source_id}`} n={pages.length} />)</> },
               { id: "printed", label: "Tables as printed" },

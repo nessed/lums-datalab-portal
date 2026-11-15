@@ -5,6 +5,8 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import config from "../../release.config.json";
+import type { AdapterName, BatchGap, KindKey, ReaderStatus, ReleaseInfo, SignOff, TitleStatus } from "./adapter/contract";
+import { loadDatalab } from "./adapter/datalab";
 
 export const RELEASE_VERSION: string = config.version;
 export const REPO_URL: string = config.repoUrl;
@@ -88,6 +90,13 @@ export type Series = {
   notes?: string | null;
   geo?: string | null;
   source_doc_types?: string[];
+  /* ----- contract fields, set by the adapter from editorial/titles.json (DESIGN.md 6.4); never read from the release ----- */
+  /** Short plain title for readers; the printed name when the editorial file has no entry. `name` stays the printed label. */
+  title: string;
+  /** One-sentence plain summary, no digits; null when there is none (the definition is shown instead). */
+  summary: string | null;
+  /** "approved" / "draft" (from the editorial file) or "printed" (no entry: the title is the printed name). */
+  titleStatus: TitleStatus;
 };
 
 export type Observation = {
@@ -113,6 +122,15 @@ export type Observation = {
   last_changed_release?: string | null;
   /** Added by the pipeline for status "disputed"; shape tolerated loosely. */
   disputed_readings?: unknown;
+  /* ----- contract fields, set by the adapter (DESIGN.md 5.1); never read from the files ----- */
+  /** Kind of figure (6.2). */
+  kind: KindKey;
+  /** Reader status and its one-sentence reason (6.1). Decided by the adapter only. */
+  reader: ReaderStatus;
+  /** The value exactly as printed, when the source keeps it. */
+  printed_text: string | null;
+  /** Whether a person has signed off the dataset (decision 17.1). */
+  signoff: SignOff;
 };
 
 export type Cell = {
@@ -220,22 +238,17 @@ export type RunManifest = {
   validated?: boolean;
 };
 
-/* ---------- loading ---------- */
+/* ---------- loading: through the adapter only (DESIGN.md 5) ---------- */
 
-function readJson<T>(name: string, fallback: T): T {
-  const p = path.join(RELEASE_DIR, name);
-  if (!fs.existsSync(p)) return fallback;
-  return JSON.parse(fs.readFileSync(p, "utf8")) as T;
-}
+export { slugify } from "./ids";
+import { slugify } from "./ids";
 
-/** URL-safe slug for ids. Colons (in observation ids) are not safe in file
- * names on Windows, so ":" becomes "~". Must match scripts/prebuild.mjs. */
-export function slugify(id: string): string {
-  return id.replaceAll(":", "~").replace(/[^A-Za-z0-9._~-]/g, "_");
-}
-
-type Db = {
+export type Db = {
   release: Release;
+  /** The release as the contract describes it: id, source, whether a prototype. */
+  info: ReleaseInfo;
+  /** Whole batches with no rows (held budget years, survey rounds). */
+  batchGaps: BatchGap[];
   series: Series[];
   observations: Observation[];
   cells: Cell[];
@@ -257,72 +270,13 @@ type Db = {
 
 let cache: Db | null = null;
 
+/** The one release this build reads, through the adapter named in release.config.json. */
 export function db(): Db {
   if (cache) return cache;
-  if (!fs.existsSync(path.join(RELEASE_DIR, "release.json"))) {
-    throw new Error(`Release folder not found or incomplete: ${RELEASE_DIR}`);
-  }
-  const release = readJson<Release>("release.json", {} as Release);
-  const series = readJson<Series[]>("series.json", []).map((s) => ({ ...s, breaks: s.breaks ?? [] }));
-  const observations = readJson<Observation[]>("observations.json", []).map((o) => ({
-    ...o,
-    supporting_cell_ids: o.supporting_cell_ids ?? [],
-    check_ids: o.check_ids ?? [],
-    derived_from: o.derived_from ?? [],
-    // Belt and braces: an unpublished observation never carries a value on the site.
-    value: o.published ? o.value : null,
-  }));
-  const cells = readJson<Cell[]>("cells.json", []);
-  const checks = readJson<Check[]>("checks.json", []);
-  const sources = readJson<Source[]>("sources.json", []);
-  const coverage = readJson<CoverageRow[]>("coverage.json", []);
-
-  series.sort((a, b) => a.sort_key - b.sort_key || a.series_id.localeCompare(b.series_id));
-  sources.sort((a, b) => a.doc_type.localeCompare(b.doc_type) || a.period.localeCompare(b.period));
-
-  const obsBySeries = new Map<string, Observation[]>();
-  for (const o of observations) {
-    const list = obsBySeries.get(o.series_id) ?? [];
-    list.push(o);
-    obsBySeries.set(o.series_id, list);
-  }
-  for (const list of obsBySeries.values()) {
-    list.sort((a, b) => a.period.localeCompare(b.period) || a.vintage.localeCompare(b.vintage));
-  }
-  const childrenOf = new Map<string, Series[]>();
-  const ids = new Set(series.map((s) => s.series_id));
-  for (const s of series) {
-    const key = s.parent_id && ids.has(s.parent_id) ? s.parent_id : "";
-    const list = childrenOf.get(key) ?? [];
-    list.push(s);
-    childrenOf.set(key, list);
-  }
-  const cellsBySource = new Map<string, Cell[]>();
-  for (const c of cells) {
-    const list = cellsBySource.get(c.source_id) ?? [];
-    list.push(c);
-    cellsBySource.set(c.source_id, list);
-  }
-  cache = {
-    release,
-    series,
-    observations,
-    cells,
-    checks,
-    sources,
-    coverage,
-    seriesById: new Map(series.map((s) => [s.series_id, s])),
-    obsById: new Map(observations.map((o) => [o.obs_id, o])),
-    cellById: new Map(cells.map((c) => [c.cell_id, c])),
-    checkById: new Map(checks.map((c) => [c.check_id, c])),
-    sourceById: new Map(sources.map((s) => [s.source_id, s])),
-    obsBySeries,
-    childrenOf,
-    obsBySlug: new Map(observations.map((o) => [slugify(o.obs_id), o])),
-    seriesBySlug: new Map(series.map((s) => [slugify(s.series_id), s])),
-    sourceBySlug: new Map(sources.map((s) => [slugify(s.source_id), s])),
-    cellsBySource,
-  };
+  const name = ((config as { adapter?: string }).adapter ?? "datalab") as AdapterName;
+  // golden (not switched on, DESIGN.md 17.7): if (name === "golden") { cache = loadGolden(GOLDEN_DIR, { tag: config.goldenTag }); return cache; }
+  if (name !== "datalab") throw new Error(`Adapter "${name}" is not switched on in this build (DESIGN.md 17.7). Use "datalab".`);
+  cache = loadDatalab(RELEASE_DIR);
   return cache;
 }
 
@@ -348,7 +302,8 @@ export function datasetName(key: string): string {
 }
 
 export function isDatasetPublished(key: string): boolean {
-  return db().release.dataset_status?.[key]?.state === "published";
+  // Candidates are visible too, always marked "not signed off" (decision 17.1).
+  return ["published", "candidate"].includes(db().release.dataset_status?.[key]?.state ?? "");
 }
 
 /** Series the site may show values for: only datasets whose state is "published". */

@@ -1,7 +1,7 @@
 // Every source document, how we know each file is genuine, and what this
 // release reads from it.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Bar, Breadcrumbs, TableWrap } from "@/components/ui/Basics";
 import { db, sourceHref } from "@/lib/data";
 import { DOC_TYPE_WORDS, ROLE_WORDS } from "@/lib/format";
@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "Source documents",
   description: "The government documents behind every figure: where each file came from, how it was verified, which pages were read and how much of each table was captured.",
 };
+
+/** The data type each kind of document feeds, where there is one. */
+const DATASET_OF_TYPE: Record<string, string> = { abs: "abs", cpi_monthly_review: "cpi", lfs_annual_report: "lfs" };
 
 export default function SourcesPage() {
   const d = db();
@@ -26,7 +29,12 @@ export default function SourcesPage() {
         <h1>Source documents</h1>
         <p className="lede">
           Every figure on this site is read from one of these <Count k="sources:all" n={d.sources.length} /> government files. For each one we record where it was downloaded,
-          its SHA-256 fingerprint, and how we confirmed it is the genuine document. Files are never edited.
+          its SHA-256 fingerprint, and how we confirmed it is the genuine document. Files are never edited. Grouped by kind of document; each document&rsquo;s
+          page says what we read from it and what became of each figure (checked, held back, disputed, not printed).
+        </p>
+        <p className="small">
+          Looking for a subject rather than a publication? Start from the <Link href="/topics">topics</Link>. Each kind of document also has a{" "}
+          <Link href="/datasets">data type page</Link> with its series and quality numbers, and its tables as the government printed them.
         </p>
       </header>
 
@@ -57,7 +65,8 @@ export default function SourcesPage() {
           <section key={t} aria-labelledby={`t-${t}`}>
             <h2 id={`t-${t}`}>{DOC_TYPE_WORDS[t] ?? t.replaceAll("_", " ")}</h2>
             <p className="small muted">
-              {list[0]?.publisher}. <Count k={`sources:type:${t}`} n={list.length} /> {list.length === 1 ? "file" : "files"}.
+              {list[0]?.publisher}. <Count k={`sources:type:${t}`} n={list.length} /> {list.length === 1 ? "file" : "files"}.{" "}
+              {d.series.some((x) => x.dataset === DATASET_OF_TYPE[t]) ? <Link href={`/datasets/${DATASET_OF_TYPE[t]}`}>Data type page</Link> : null}
             </p>
             <TableWrap label={`${DOC_TYPE_WORDS[t] ?? t} files`} sticky>
               <table className="src-table">
@@ -71,7 +80,7 @@ export default function SourcesPage() {
                     </th>
                     <th scope="col">Coverage of tables read</th>
                     <th scope="col" className="num">
-                      Values
+                      Checked figures
                     </th>
                   </tr>
                 </thead>

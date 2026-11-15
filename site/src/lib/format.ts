@@ -235,3 +235,89 @@ export function figureWords(value: string | null | undefined, unit: string | nul
 
 const DATASET_UNIT_HINT: Record<string, string> = { index: "index", percent: "%", PKR: "Rs" };
 export const unitShort = (unit: string | null | undefined) => (unit ? (DATASET_UNIT_HINT[unit] ?? unit) : "");
+
+/* ---------- the one rounding rule for derived figures ---------- */
+// DECISIONS.md (round 2, Ali to confirm): every derived percentage and every
+// derived percentage-point change (changes, budget-to-revised revisions,
+// shares, indexes, average revisions) is shown to one decimal place; a figure
+// whose magnitude is below 1 to two decimal places, so a small share never
+// reads as 0.0; and a figure that is not zero but would still read 0.00 to the
+// first digit that is not zero (one significant figure), so it never reads as
+// zero. Rounding is half away from zero on the exact value (BigInt, never
+// floating point). Printed figures are never re-rounded, and downloaded files
+// keep full precision. Every page, the JSON the browser draws and the check
+// plug-ins (each with its own implementation) follow this one rule.
+
+const B0 = BigInt(0);
+const B1 = BigInt(1);
+const B2 = BigInt(2);
+const B10 = BigInt(10);
+const B100 = BigInt(100);
+
+/** a / b to the nearest integer, halves away from zero; a >= 0, b > 0. */
+function nearest(a: bigint, b: bigint): bigint {
+  return (a * B2 + b) / (b * B2);
+}
+
+/** A non-negative integer of units of 10^-dp as a decimal string: (171, 1) -> "17.1". */
+function scaled(n: bigint, dp: number): string {
+  const s = n.toString().padStart(dp + 1, "0");
+  return dp ? `${s.slice(0, s.length - dp)}.${s.slice(s.length - dp)}` : s;
+}
+
+/**
+ * The rule, on the exact figure num / den (already in per cent or percentage
+ * points): "17.1", "-0.42", "0.00", "0.001". A plain decimal string with an
+ * ASCII minus, for JSON and for derivedDisplay. Throws if den is zero.
+ */
+export function roundDerived(num: bigint, den: bigint): string {
+  if (den === B0) throw new Error("roundDerived: division by zero");
+  if (den < B0) {
+    num = -num;
+    den = -den;
+  }
+  if (num === B0) return "0.00";
+  const neg = num < B0;
+  const a = neg ? -num : num;
+  const sign = neg ? "-" : "";
+  const hundredths = nearest(a * B100, den);
+  if (hundredths >= B100) return sign + scaled(nearest(a * B10, den), 1);
+  if (hundredths > B0) return sign + scaled(hundredths, 2);
+  // Not zero, but under 0.005: to its first significant digit.
+  let k = 3;
+  let p = BigInt(1000);
+  while (a * p < den) {
+    k++;
+    p *= B10;
+  }
+  let d = nearest(a * p, den);
+  if (d === B10) {
+    d = B1;
+    k--;
+  }
+  return sign + scaled(d, k);
+}
+
+/** A stored decimal string as an exact fraction [numerator, denominator]; null if it is not a plain decimal. */
+export function decimalFraction(v: string): [bigint, bigint] | null {
+  const m = /^([+-]?)(\d+)(?:\.(\d+))?$/.exec(String(v).trim());
+  if (!m) return null;
+  const frac = m[3] ?? "";
+  const n = BigInt(m[2] + frac);
+  return [m[1] === "-" ? -n : n, B10 ** BigInt(frac.length)];
+}
+
+/**
+ * A rounded derived figure as the reader sees it: thousands separators, the
+ * true minus sign, and with `signed` (a change, never a share) a plus sign on a
+ * figure above zero. "+17.1", "−0.42", "0.00", "1,234.5". Add the unit ("%",
+ * " percentage points") after it.
+ */
+export function derivedDisplay(v: string, signed: boolean): string {
+  const neg = v.startsWith("-");
+  const abs = v.replace(/^[+-]/, "");
+  const [i, f] = abs.split(".");
+  const body = `${i.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${f !== undefined ? `.${f}` : ""}`;
+  if (/^0*(\.0*)?$/.test(abs)) return body;
+  return `${neg ? "−" : signed ? "+" : ""}${body}`;
+}

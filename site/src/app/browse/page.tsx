@@ -3,16 +3,16 @@
 // server, so the whole list works without JavaScript; the filter narrows and
 // sorts them in place and keeps its state in the URL.
 import type { Metadata } from "next";
-import Link from "next/link";
-import CatalogueFilter, { type FacetGroup, type RowData } from "@/components/CatalogueFilter";
+import { printedLine, seriesTitle } from "@/lib/titles";
+import Link from "@/components/ui/Link";
+import CatalogueFilter, { CatalogueResults, type FacetGroup } from "@/components/CatalogueFilter";
 import { KindAndPeriod } from "@/components/Figure";
-import Spark from "@/components/Spark";
 import { Breadcrumbs } from "@/components/ui/Basics";
 import { Count, Num, V } from "@/components/ui/Num";
-import { datasetName, db, seriesCsvHref, seriesHref, sourceHref, visibleSeries, type Series } from "@/lib/data";
-import { FACETS, facetCounts, facetValuesOf, topicLabels, valueWords } from "@/lib/facets.mjs";
+import { DATA_BASE, datasetName, db, seriesCsvHref, seriesHref, visibleSeries, type Series } from "@/lib/data";
+import { FACETS, facetCounts, topicLabels, valueWords } from "@/lib/facets.mjs";
 import { COMING } from "@/lib/features";
-import { DOC_TYPE_WORDS, periodWords, unitLabel } from "@/lib/format";
+import { periodWords, unitLabel } from "@/lib/format";
 import { ancestors, baseYearOf, latestPublished, publishedDatasets, totalVisible } from "@/lib/stats";
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ function Row({ s, order }: { s: Series; order: number }) {
   return (
     <li className="cat-row" data-cat-row="" data-order={order}>
       <div className="cat-name">
-        <Link href={seriesHref(s.series_id)}>{s.name}</Link>
+        <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
         {s.dims?.definition ? <span className={`tag${s.dims.definition === "19th ICLS" ? " tag-warn" : ""}`}><Num kind="ui">{s.dims.definition}</Num></span> : null}
         {base ? (
           <span className="tag">
@@ -40,7 +40,8 @@ function Row({ s, order }: { s: Series; order: number }) {
         ) : null}
         {s.dims?.area_as_printed === "none stated" ? <span className="tag">no area stated</span> : null}
         {s.derived ? <span className="tag">computed</span> : null}
-        {parents.length ? <span className="cat-path">in {parents[0].name}</span> : null}
+        {printedLine(s) ? <span className="cat-path">{s.name}</span> : null}
+        {parents.length ? <span className="cat-path">in {seriesTitle(parents[0])}</span> : null}
       </div>
       <div className="cat-unit">{unitLabel(s.unit, s.scale_factor)}</div>
       <div className="cat-periods">
@@ -68,11 +69,9 @@ function Row({ s, order }: { s: Series; order: number }) {
           <span className="muted">no checked value</span>
         )}
       </div>
-      <div className="cat-spark">
-        <Spark series={s} width={84} height={26} />
-      </div>
+      <div className="cat-spark" />
       <div className="cat-dl">
-        <a href={seriesCsvHref(s.series_id)} download aria-label={`Download ${s.name} as CSV`}>
+        <a href={seriesCsvHref(s.series_id)} download aria-label={`Download ${seriesTitle(s)} as CSV`}>
           CSV
         </a>
       </div>
@@ -100,25 +99,10 @@ export default function BrowsePage() {
       note: f.key === "geo" ? `Districts: ${COMING}` : undefined,
     };
   }).filter((g) => g.values.length > 0);
-  const rowData: RowData[] = series.map((s) => {
-    const f = facetValuesOf(s);
-    const latest = latestPublished(s.series_id);
-    return {
-      f: Object.fromEntries(Object.entries(f).filter(([, v]) => v)) as Record<string, string>,
-      search: [s.name, s.series_id, ...(s.synonyms ?? []), datasetName(s.dataset), ...ancestors(s).map((p) => p.name)].join(" ").toLowerCase(),
-      values: (d.obsBySeries.get(s.series_id) ?? []).some((o) => o.published && o.value !== null),
-      name: s.name.toLowerCase(),
-      latest: latest?.period ?? "",
-      n: (d.obsBySeries.get(s.series_id) ?? []).filter((o) => o.published && o.value !== null).length,
-    };
-  });
-  const docTypes = [...new Set(d.sources.map((s) => s.doc_type))];
-  const primaryCount = new Map<string, number>();
-  for (const o of d.observations) {
-    if (!o.published || !o.primary_cell_id) continue;
-    const src = d.cellById.get(o.primary_cell_id)?.source_id;
-    if (src) primaryCount.set(src, (primaryCount.get(src) ?? 0) + 1);
-  }
+  // Only the top-level series are in the HTML; everything else is one tap away
+  // (its parent's page) or loaded as JSON when the reader filters (DESIGN.md 14.1).
+  const ids = new Set(d.series.map((x) => x.series_id));
+  const roots = series.filter((s) => !s.parent_id || !ids.has(s.parent_id));
 
   return (
     <div className="catalogue">
@@ -137,25 +121,25 @@ export default function BrowsePage() {
         <a href="#series" aria-current="page">
           Series
         </a>
-        <a href="#by-document">By document</a>
+        <Link href="/sources">By document</Link>
         <Link href="/datasets">By data type</Link>
       </nav>
 
       <div className="cat-layout" id="series">
-        <CatalogueFilter groups={groups} total={total.series} rows={rowData} />
+        <CatalogueFilter groups={groups} indexUrl={`${DATA_BASE}/search.json`} />
         <section className="cat-results" aria-labelledby="cat-results-h">
           <h2 id="cat-results-h" className="sr-only">
             Series
           </h2>
           <div className="cat-tools">
             <p className="cat-status" id="cat-status" aria-live="polite">
-              <Count k="series" n={total.series} /> series
+              <Count k="series:roots" n={roots.length} /> top-level series of <Count k="series" n={total.series} />
             </p>
             <div className="cat-active" id="cat-active" />
             <label className="cat-sort">
               Sort{" "}
               <select id="cat-sort" className="input" defaultValue="order">
-                <option value="order">Document order</option>
+                <option value="order">Document order (relevance when searching)</option>
                 <option value="name">Name</option>
                 <option value="latest">Latest period</option>
                 <option value="n">Most checked values</option>
@@ -172,13 +156,17 @@ export default function BrowsePage() {
             <span />
           </div>
           <ul className="cat-list" id="cat-list">
-            {series.map((s, i) => (
+            {roots.map((s, i) => (
               <Row key={s.series_id} s={s} order={i} />
             ))}
           </ul>
-          <p className="cat-empty" data-cat-empty hidden>
-            No series matches. Try fewer words or fewer filters, or <a href="/browse">clear them all</a>.
+          <p className="small cat-roots" id="cat-roots-note">
+            The other series sit under these: open one to see its parts, or filter the list.{" "}
+            <a href="/browse?all=1" className="js-only">
+              Show every series
+            </a>
           </p>
+          <CatalogueResults groups={groups} total={total.series} indexUrl={`${DATA_BASE}/search.json`} />
           <p className="small muted cat-foot">
             Checked: checked values out of all figures of the series; the rest are labelled gaps that say why. Latest: the most recent checked value,
             linked to its receipt; <abbr title="budget estimate">BE</abbr> budget estimate, <abbr title="revised estimate">RE</abbr> revised estimate.
@@ -186,52 +174,6 @@ export default function BrowsePage() {
         </section>
       </div>
 
-      <section className="cat-docs" aria-labelledby="by-document">
-        <h2 id="by-document">By document</h2>
-        <p className="small muted">Each government document, how many checked values in this release are read from it, and its tables as printed.</p>
-        {docTypes.map((t) => (
-          <div key={t} className="cat-doctype">
-            <h3>{DOC_TYPE_WORDS[t] ?? t}</h3>
-            <div className="table-wrap" role="region" aria-label={`${DOC_TYPE_WORDS[t] ?? t} documents`} tabIndex={0}>
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">Document</th>
-                    <th scope="col">Period</th>
-                    <th scope="col" className="num">
-                      Pages read
-                    </th>
-                    <th scope="col" className="num">
-                      Values from it
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {d.sources
-                    .filter((s) => s.doc_type === t)
-                    .map((s) => (
-                      <tr key={s.source_id}>
-                        <th scope="row">
-                          <Link href={sourceHref(s.source_id)}>{s.title}</Link>
-                          {s.verification_status === "failed" ? <span className="tag">not used</span> : null}
-                        </th>
-                        <td>
-                          <Num kind="period">{s.period}</Num>
-                        </td>
-                        <td className="num">
-                          {(s.pages_used ?? []).length ? <Count k={`pages:source:${s.source_id}`} n={(s.pages_used ?? []).length} /> : "none"}
-                        </td>
-                        <td className="num">
-                          <Count k={`values:source:${s.source_id}`} n={primaryCount.get(s.source_id) ?? 0} />
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        ))}
-      </section>
     </div>
   );
 }

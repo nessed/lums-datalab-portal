@@ -1,0 +1,137 @@
+{
+ "base": "http://localhost:3100",
+ "measuredAt": "2026-11-14T23:41:59.092Z",
+ "results": [
+  {
+   "page": "home",
+   "path": "/",
+   "status": 200,
+   "visibleMs": 2602,
+   "loadMs": 4049,
+   "first": {
+    "total": 322285,
+    "doc": 12705,
+    "js": 143623,
+    "font": 151702,
+    "img": 0
+   },
+   "afterIdle": 322285,
+   "dom": {
+    "elements": 439,
+    "html": 68184
+   },
+   "visibleMs400": 2756,
+   "loadMs400": 7274,
+   "fails": [
+    "first load 315 KB > 200 KB",
+    "after idle 315 KB > 250 KB",
+    "JavaScript 140 KB > 100 KB",
+    "fonts 148 KB > 40 KB"
+   ]
+  },
+  {
+   "page": "series",
+   "path": "/series/fed.exp.current.function.health",
+   "status": 200,
+   "visibleMs": null,
+   "loadMs": 120681,
+   "first": {
+    "total": 337801,
+    "doc": 20216,
+    "js": 151628,
+    "font": 151702,
+    "img": 0
+   },
+   "afterIdle": 337801,
+   "dom": {
+    "elements": 972,
+    "html": 147804
+   },
+   "visibleMs400": null,
+   "loadMs400": 120520,
+   "fails": [
+    "first load 330 KB > 200 KB",
+    "JavaScript 148 KB > 100 KB",
+    "fonts 148 KB > 40 KB"
+   ]
+  },
+  {
+   "page": "receipt",
+   "path": "/o/fed.exp.current.function.health~2026-27~be",
+   "status": 200,
+   "visibleMs": 3122,
+   "loadMs": 4728,
+   "first": {
+    "total": 719318,
+    "doc": 23269,
+    "js": 144781,
+    "font": 151702,
+    "img": 385311
+   },
+   "afterIdle": 719318,
+   "dom": {
+    "elements": 861,
+    "html": 152658
+   },
+   "visibleMs400": 3110,
+   "loadMs400": 14712,
+   "fails": [
+    "first load 702 KB > 250 KB",
+    "JavaScript 141 KB > 100 KB",
+    "fonts 148 KB > 40 KB"
+   ]
+  },
+  {
+   "page": "catalogue",
+   "path": "/browse",
+   "status": 200,
+   "visibleMs": 3247,
+   "loadMs": 3566,
+   "first": {
+    "total": 346253,
+    "doc": 33354,
+    "js": 146942,
+    "font": 151702,
+    "img": 0
+   },
+   "afterIdle": 346253,
+   "dom": {
+    "elements": 3032,
+    "html": 474997
+   },
+   "visibleMs400": 2656,
+   "loadMs400": 7679,
+   "fails": [
+    "JavaScript 143 KB > 100 KB",
+    "fonts 148 KB > 40 KB",
+    "3032 elements > 1500"
+   ]
+  },
+  {
+   "page": "compare",
+   "path": "/compare",
+   "status": 200,
+   "visibleMs": 3232,
+   "loadMs": 3910,
+   "first": {
+    "total": 334289,
+    "doc": 14910,
+    "js": 153422,
+    "font": 151702,
+    "img": 0
+   },
+   "afterIdle": 334289,
+   "dom": {
+    "elements": 435,
+    "html": 98036
+   },
+   "visibleMs400": 2749,
+   "loadMs400": 7543,
+   "fails": [
+    "first load 326 KB > 200 KB",
+    "JavaScript 150 KB > 100 KB",
+    "fonts 148 KB > 40 KB"
+   ]
+  }
+ ]
+}

@@ -2,7 +2,8 @@
 // apply to all of it, its quality as three separate numbers against their
 // frozen thresholds, its gaps and disputes, and its tables as printed.
 import type { Metadata } from "next";
-import Link from "next/link";
+import { seriesTitle } from "@/lib/titles";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import { KindAndPeriod } from "@/components/Figure";
 import Spark from "@/components/Spark";
@@ -13,6 +14,13 @@ import { COMING, isOn } from "@/lib/features";
 import { GAP_WORDS, pct, periodWords } from "@/lib/format";
 import { datasetStats, latestPublished, publishedDatasets } from "@/lib/stats";
 import { tablesOfSource } from "@/lib/tables";
+
+/** Gap kinds in the reader status words of DESIGN.md 6.1. */
+const READER_GAP: Record<string, string> = {
+  failed_checks: "Held back: did not pass its checks",
+  not_yet_verified: "Not checked yet",
+  not_in_source: "Not printed: the document prints a dash or a blank",
+};
 
 export const dynamicParams = false;
 
@@ -82,7 +90,7 @@ export default async function DatasetPage({ params }: Props) {
 
   return (
     <article className="dataset-page">
-      <Breadcrumbs items={[{ href: "/browse", label: "Data" }, { href: "/datasets", label: "Data types" }, { label: datasetName(id) }]} />
+      <Breadcrumbs items={[{ href: "/sources", label: "Sources" }, { href: "/datasets", label: "Data types" }, { label: datasetName(id) }]} />
       <header className="ds-head">
         <div>
           <h1>{datasetName(id)}</h1>
@@ -143,7 +151,7 @@ export default async function DatasetPage({ params }: Props) {
               return (
                 <li key={s.series_id}>
                   <Link href={seriesHref(s.series_id)} className="ds-s-name">
-                    {s.name}
+                    {seriesTitle(s)}
                   </Link>
                   <span className="ds-s-v">
                     {o ? (
@@ -156,7 +164,7 @@ export default async function DatasetPage({ params }: Props) {
                     ) : null}
                   </span>
                   <Spark series={s} width={84} height={26} />
-                  <a href={seriesCsvHref(s.series_id)} download className="ds-s-dl" aria-label={`Download ${s.name} as CSV`}>
+                  <a href={seriesCsvHref(s.series_id)} download className="ds-s-dl" aria-label={`Download ${seriesTitle(s)} as CSV`}>
                     CSV
                   </a>
                 </li>
@@ -253,7 +261,7 @@ export default async function DatasetPage({ params }: Props) {
               <tbody>
                 {GAP_ORDER.filter((k) => st.gaps[k]).map((k) => (
                   <tr key={k}>
-                    <th scope="row">{k === "disputed" ? "Disputed: official printings disagree" : (GAP_WORDS[k] ?? k)}</th>
+                    <th scope="row">{k === "disputed" ? "Disputed: official printings disagree" : (READER_GAP[k] ?? GAP_WORDS[k] ?? k)}</th>
                     <td className="num">
                       <Count k={`gaps:${id}:${k}`} n={st.gaps[k]} />
                     </td>
@@ -271,7 +279,7 @@ export default async function DatasetPage({ params }: Props) {
                   return (
                     <li key={o.obs_id}>
                       <Link href={obsHref(o.obs_id)}>
-                        {s.name}, <KindAndPeriod o={o} series={s} />
+                        {seriesTitle(s)}, <KindAndPeriod o={o} series={s} />
                       </Link>
                     </li>
                   );

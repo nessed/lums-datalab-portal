@@ -1,0 +1,523 @@
+/* search: styles for this area of the redesign (DESIGN.md 9.1, 9.9, 10). One file per area so parallel work does not collide.
+   Loaded after globals.css, so the header rules here replace the older ones for the search field. */
+
+/* ---------- the header field (9.1) ---------- */
+.hs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+.hs > svg {
+  position: absolute;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.hs-input {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0; /* never squeezed to nothing (S17), never wider than its slot */
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 0 4.5rem 0 32px;
+  font: inherit;
+  font-size: var(--step--1);
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-2);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.hs-input::placeholder {
+  color: var(--ink-3);
+}
+.hs-input:hover {
+  border-color: var(--ink-2);
+}
+.hs-input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+.hs-hint {
+  position: absolute;
+  right: 8px;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.hs-hint kbd,
+.search-foot kbd {
+  font-family: var(--font-sans);
+  font-size: 0.75em;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--r-1);
+  padding: 0 4px;
+  background: var(--card);
+}
+
+/* Phones: wordmark, search field, Menu on one row (9.1). */
+@media (max-width: 719px) {
+  .site-header .bar {
+    flex-wrap: nowrap;
+  }
+  .brand {
+    order: 1;
+    flex: none;
+  }
+  .header-search {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+  }
+  .nav-menu {
+    order: 3;
+    margin-left: 0;
+    flex: none;
+  }
+  .hs-input {
+    min-height: 44px;
+    padding-right: 8px;
+    font-size: 16px; /* 16 px or more: phones do not zoom into the field */
+  }
+  .hs-hint {
+    display: none;
+  }
+}
+/* The narrowest phones: the "Prototype" mark gives its room to the field; the
+   notice line above, the wordmark's accessible name and the footer still say it. */
+@media (max-width: 479px) {
+  .site-header .proto-mark {
+    display: none;
+  }
+}
+
+/* ---------- the dialog ---------- */
+dialog.search-dialog {
+  display: none;
+  flex-direction: column;
+  margin: 8vh auto auto;
+  width: min(44rem, calc(100vw - 2 * var(--gutter)));
+  max-height: 84vh;
+  overflow: hidden;
+}
+dialog.search-dialog[open] {
+  display: flex;
+}
+@media (max-width: 719px) {
+  dialog.search-dialog {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+}
+.search-box {
+  flex: none;
+  padding: var(--s-2) var(--s-3) var(--s-2) var(--s-4);
+}
+.search-box input {
+  min-height: 44px;
+  font-size: max(16px, var(--step-1));
+}
+.search-box input::-webkit-search-cancel-button {
+  display: none;
+}
+.search-close {
+  min-height: 44px;
+  flex: none;
+}
+.search-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.search-foot {
+  flex: none;
+}
+@media (max-width: 719px) {
+  .search-foot {
+    display: none;
+  }
+}
+.search-msg {
+  padding: var(--s-3) var(--s-4);
+  margin: 0;
+  font-size: var(--step--1);
+}
+.search-msg p {
+  margin: 0 0 var(--s-3);
+}
+.search-all {
+  margin: 0;
+  padding: var(--s-2) var(--s-4) var(--s-3);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+.search-all a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ---------- results, shared by the dialog and /search ---------- */
+.sr--dialog {
+  padding: var(--s-3) 0 0;
+}
+.sr--dialog > :where(.sr-chips, .sr-did, .sr-card, .sr-note, .sr-zero, .sr-related) {
+  margin-left: var(--s-4);
+  margin-right: var(--s-4);
+}
+.sr-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-3);
+}
+.sr-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--step--1);
+  font-weight: 600;
+  padding-left: var(--s-3);
+  border: 1px solid var(--select-rule);
+  border-radius: 999px;
+  background: var(--select-wash);
+  color: var(--link-hover);
+}
+.sr-chip-x {
+  min-width: 44px;
+  min-height: 44px;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 999px;
+}
+.sr-chip-x:hover {
+  background: var(--select-tint);
+}
+.sr-every {
+  min-height: 44px;
+  font-size: var(--step--1);
+}
+.sr-did,
+.sr-note {
+  font-size: var(--step--1);
+  margin: 0 0 var(--s-3);
+}
+.sr-did a {
+  font-weight: 600;
+}
+
+/* The answer card (10.2): reader name, value, kind and period, source, links. */
+.sr-card {
+  border: var(--hair-strong);
+  border-left: 3px solid var(--select-rule);
+  border-radius: var(--r-2);
+  background: var(--card);
+  padding: var(--s-3) var(--s-4);
+  margin: 0 0 var(--s-4);
+}
+.sr-card--miss {
+  border-left-color: var(--st-gap);
+  background: var(--surface-2);
+}
+.sr-kicker {
+  margin: 0;
+  font-size: var(--step--2);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.sr-card-h {
+  margin: 2px 0 var(--s-2);
+  font-size: var(--step-1);
+  line-height: var(--leading-tight);
+}
+.sr-card-h a {
+  color: var(--ink);
+}
+.sr-card-p,
+.sr-card-note {
+  margin: 0 0 var(--s-2);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.sr-card-vals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sr-card-vals li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--s-3);
+  margin: 0 0 var(--s-1);
+}
+.sr-card-v {
+  font-size: var(--step-2);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+}
+.sr-card-kp {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.sr-src {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  border: var(--hair);
+  border-radius: var(--r-1);
+  padding: 0 5px;
+  white-space: nowrap;
+}
+.sr-card-series {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.sr-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-4);
+  margin: var(--s-1) 0 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+.sr-card-links a,
+.sr-card-rel a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.sr-card-rel {
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: var(--step--1);
+}
+
+/* Groups and rows */
+.sr-group + .sr-group {
+  margin-top: var(--s-3);
+}
+.sr-group-h {
+  margin: 0;
+  padding: var(--s-1) var(--s-4);
+  font-size: var(--step--2);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.sr-group-n {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.sr-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sr-opt a {
+  display: block;
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  color: var(--ink);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+}
+.sr-opt[aria-selected="true"] a,
+.sr-opt a:hover {
+  background: var(--select-wash);
+  border-left-color: var(--select-rule);
+}
+.sr .r-title {
+  display: block;
+  font-weight: 600;
+}
+.sr .r-meta {
+  display: block;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.sr-ans {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.sr-v {
+  font-weight: 650;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.sr .v-mark {
+  font-size: var(--step--2);
+  color: var(--ink-2);
+}
+.sr-none {
+  display: block;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.sr-related {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin: var(--s-3) 0;
+  font-size: var(--step--1);
+}
+.sr-related-h {
+  color: var(--ink-3);
+  font-weight: 600;
+}
+.sr-topic {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border: var(--hair-strong);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  text-decoration: none;
+}
+.sr-topic:hover {
+  border-color: var(--select-rule);
+  color: var(--link-hover);
+}
+.sr-zero {
+  padding: var(--s-2) 0;
+}
+.sr-zero p {
+  margin: 0 0 var(--s-3);
+}
+
+/* ---------- the results page, /search (9.9) ---------- */
+.search-page {
+  max-width: 52rem;
+}
+.search-page h1 {
+  margin: 0 0 var(--s-3);
+}
+.sp-label {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: 600;
+  margin-bottom: var(--s-1);
+}
+.sp-box {
+  position: relative;
+  display: flex;
+  gap: var(--s-2);
+  align-items: center;
+}
+.sp-box > svg {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.sp-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 var(--s-3) 0 38px;
+  font: inherit;
+  font-size: max(16px, var(--step-0));
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-2);
+  background: var(--card);
+  color: var(--ink);
+}
+.sp-go {
+  min-height: 48px;
+  flex: none;
+}
+.sp-status {
+  margin: var(--s-3) 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.sp-nojs {
+  padding: var(--s-3);
+  border: var(--hair-strong);
+  background: var(--surface-2);
+}
+.sr--page .sr-group-h {
+  padding: var(--s-2) 0 var(--s-1);
+  border-bottom: var(--hair);
+}
+.sr-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-4);
+  padding: var(--s-3) 0;
+  border-bottom: var(--hair);
+}
+.sr-row-a {
+  flex: 1 1 18rem;
+  min-width: 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.sr-row-a:hover .r-title {
+  color: var(--link);
+  text-decoration: underline;
+}
+.sr-row-ans {
+  flex: 0 1 auto;
+  text-align: right;
+  font-size: var(--step--1);
+}
+.sr-row-ans .sr-ans {
+  display: inline;
+}
+.sr-row-ans .sr-v {
+  font-size: var(--step-0);
+}
+.sr-u {
+  color: var(--ink-3);
+}
+@media (max-width: 719px) {
+  .sr-row-ans {
+    text-align: left;
+    flex-basis: 100%;
+  }
+}
+.sp-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-5);
+  margin: var(--s-4) 0;
+  font-size: var(--step--1);
+}
+.sp-foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}

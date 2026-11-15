@@ -1,0 +1,452 @@
+/* home: styles for this area of the redesign (DESIGN.md 9.2 to 9.4). One file per area so parallel work does not collide.
+ * Home, topic pages, answer pages. Phone first (360 px); restrained (DESIGN.md 15). */
+
+/* ---------- home: first screen ---------- */
+.h2-find h1 {
+  font-size: clamp(1.3rem, 1.05rem + 1.2vw, 1.85rem);
+  line-height: 1.25;
+  max-width: 44rem;
+  margin: var(--s-3) 0 var(--s-3);
+}
+.h2-search {
+  display: flex;
+  gap: var(--s-2);
+  max-width: 40rem;
+}
+.h2-search input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: var(--step-0);
+  padding: 0 var(--s-3);
+  min-height: 46px;
+  border: 2px solid var(--select-rule);
+  border-radius: var(--r-2);
+  background: var(--card);
+}
+.h2-search input:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.h2-search .btn {
+  min-height: 46px;
+  padding: 0 var(--s-4);
+}
+.h2-try {
+  color: var(--ink-3);
+  font-size: var(--step--1);
+  margin: var(--s-2) 0 var(--s-4);
+}
+.h2-try a {
+  display: inline-block;
+  padding: 4px 0;
+}
+
+/* ---------- headline cards (home and topic pages) ---------- */
+.hc-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--s-2);
+  display: grid;
+  gap: var(--s-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 720px) {
+  .hc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-3);
+  }
+}
+.hc {
+  position: relative;
+  margin: 0;
+  padding: var(--s-2) var(--s-3) var(--s-2);
+  border: var(--hair);
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.hc:hover {
+  border-color: var(--rule-strong);
+}
+.hc-name {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.hc-link {
+  color: var(--ink);
+  text-decoration: none;
+}
+/* The whole card links to the series; the value, the "how" and the source sit above that link. */
+.hc-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.hc-link:focus-visible {
+  outline: none;
+}
+.hc:has(.hc-link:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+.hc-kind,
+.hc-chg,
+.hc-src {
+  margin: 0;
+  font-size: var(--step--2);
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.hc-kind {
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.hc-v {
+  margin: 2px 0 1px;
+  font-size: clamp(1.15rem, 1rem + 0.9vw, 1.55rem);
+  font-weight: 650;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.hc-v .v-link,
+.hc-chg a,
+.hc-src a {
+  position: relative;
+  z-index: 1;
+}
+.hc-v .v-unit {
+  font-size: var(--step--2);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.hc-chg {
+  color: var(--ink-2);
+}
+.hc-src {
+  margin-top: auto;
+  padding-top: 2px;
+}
+.h2-cards-note {
+  margin: 0 0 var(--s-5);
+}
+
+/* derived figures: the value and a small "how" link */
+.drv-v {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.drv-how {
+  font-size: 0.8em;
+  margin-left: 0.25em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.drv-how::before {
+  content: "(";
+}
+.drv-how::after {
+  content: ")";
+}
+.drv-list {
+  margin-top: var(--s-6);
+  border-top: var(--hair);
+  padding-top: var(--s-2);
+  font-size: var(--step--1);
+}
+.drv-list h2 {
+  font-size: var(--step-0);
+}
+.drv-list ol {
+  padding-left: 1.4em;
+}
+.drv-list li {
+  margin: 0 0 var(--s-2);
+}
+.drv-list li:target {
+  background: var(--select-wash);
+}
+
+/* ---------- home: below the first screen ---------- */
+.h2-topics h2,
+.h2-foot h2 {
+  font-size: var(--step-1);
+  margin: var(--s-4) 0 var(--s-2);
+}
+.tp-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--s-2);
+  display: grid;
+  gap: var(--s-2);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 640px) {
+  .tp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .tp-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.tp-tile {
+  position: relative;
+  margin: 0;
+  border: var(--hair);
+  background: var(--card);
+  padding: var(--s-2) var(--s-3);
+}
+.tp-link {
+  font-weight: 600;
+}
+.tp-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.tp-tile p {
+  margin: 2px 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.h2-foot {
+  display: grid;
+  gap: 0 var(--s-6);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  border-top: var(--hair);
+  margin-top: var(--s-5);
+}
+.h2-foot p {
+  font-size: var(--step--1);
+}
+.h2-recent {
+  padding-left: 1.2em;
+  margin: var(--s-1) 0;
+  font-size: var(--step--1);
+}
+
+/* ---------- topic pages ---------- */
+.tp-cards {
+  margin-bottom: var(--s-4);
+}
+.tp-section {
+  margin-top: var(--s-5);
+}
+.tp-questions {
+  padding-left: 1.2em;
+}
+.tp-questions li {
+  margin: 0 0 var(--s-1);
+}
+.tp-questions a {
+  display: inline-block;
+  padding: 3px 0;
+}
+.st-group h3 {
+  font-size: var(--step-0);
+  margin: var(--s-4) 0 var(--s-1);
+}
+.st-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: var(--hair);
+}
+.st-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name latest"
+    "name spark";
+  gap: 0 var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: var(--hair);
+  margin: 0;
+  font-size: var(--step--1);
+}
+@media (min-width: 720px) {
+  .st-row {
+    grid-template-columns: minmax(0, 1fr) 96px minmax(12rem, auto);
+    grid-template-areas: "name spark latest";
+    align-items: center;
+  }
+}
+.st-name {
+  grid-area: name;
+  min-width: 0;
+}
+.st-parent {
+  display: block;
+}
+.st-spark {
+  grid-area: spark;
+  justify-self: end;
+}
+.st-spark .spark {
+  display: block;
+}
+.st-latest {
+  grid-area: latest;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.st-latest .v-link {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.st-kind {
+  font-size: var(--step--2);
+}
+.tp-notes {
+  padding-left: 1.2em;
+  max-width: var(--measure);
+}
+.tp-notes li {
+  margin-bottom: var(--s-2);
+}
+.tp-src h3 {
+  font-size: var(--step-0);
+  margin: var(--s-3) 0 var(--s-1);
+}
+.tp-src-list {
+  padding-left: 1.2em;
+  margin: 0;
+  font-size: var(--step--1);
+  columns: 2 14rem;
+}
+.rev-table .drv-how {
+  font-size: 0.7em;
+}
+.rev-table td.num {
+  white-space: nowrap;
+}
+
+/* topics index */
+.ti-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ti-item {
+  border-top: var(--hair);
+  padding: var(--s-3) 0;
+  margin: 0;
+}
+.ti-item h2 {
+  margin: 0;
+  font-size: var(--step-1);
+}
+.ti-item p {
+  margin: var(--s-1) 0;
+  max-width: var(--measure);
+}
+.ti-q {
+  padding-left: 1.2em;
+  margin: 0;
+}
+
+/* ---------- answer pages ---------- */
+.answer {
+  max-width: 52rem;
+}
+.ans-head h1 {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+  margin-bottom: var(--s-1);
+}
+.ans-title {
+  margin: 0;
+}
+.ans-first {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  margin: var(--s-3) 0 var(--s-2);
+}
+.ans-sentence {
+  font-size: var(--step-0);
+  margin: var(--s-2) 0;
+}
+.ans-v .v-link {
+  font-weight: 650;
+}
+.ans-part h2 {
+  font-size: var(--step-1);
+  margin: var(--s-5) 0 var(--s-1);
+}
+.ans-cmp,
+.ans-rev,
+.ans-newer {
+  margin: var(--s-2) 0;
+  max-width: var(--measure);
+}
+.ans-newer {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ans-src {
+  margin: var(--s-1) 0 var(--s-2);
+}
+.ans-chart {
+  margin: var(--s-2) 0 var(--s-4);
+}
+.ans-parts-note {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  border-left: 3px solid var(--rule-strong);
+  padding-left: var(--s-2);
+}
+.ans-covers,
+.ans-links {
+  margin-top: var(--s-5);
+  border-top: var(--hair);
+}
+.ans-covers h2,
+.ans-links h2 {
+  font-size: var(--step-1);
+}
+.ans-cover h3 {
+  font-size: var(--step-0);
+  margin: var(--s-3) 0 var(--s-1);
+}
+.ans-cover p {
+  max-width: var(--measure);
+}
+
+/* ---------- per-document quality table (sources) ---------- */
+.dq-table td.num,
+.dq-table th.num {
+  white-space: nowrap;
+}
+
+/* ---------- coming list (releases) ---------- */
+.coming-list li {
+  margin-bottom: var(--s-2);
+}
+
+@media print {
+  .drv-how {
+    display: none;
+  }
+}
+
+/* revision table on phones: keep the line names readable */
+.rev-table th[scope="row"] {
+  min-width: 11rem;
+}
+.rev-table thead th {
+  white-space: normal;
+  min-width: 6rem;
+}
+
+/* The later revision of the year a card compares with (tester finding). */
+.hc-rev {
+  margin: 0.25rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}

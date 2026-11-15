@@ -1,6 +1,6 @@
 // About: who makes this, what it is not, the licence, how to report an error.
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { Breadcrumbs, Callout } from "@/components/ui/Basics";
 import { db, ISSUES_URL, REPO_URL } from "@/lib/data";
 
@@ -58,7 +58,7 @@ export default function AboutPage() {
               Code: MIT, in the <a href={REPO_URL}>project repository</a>.
             </li>
             <li>The original documents remain the work of their government publishers. This site links to them and does not host them.</li>
-            <li>Typefaces: Source Serif 4 and Source Sans 3, SIL Open Font License.</li>
+            <li>Typefaces: Noto Sans and Noto Sans Display, SIL Open Font License.</li>
           </ul>
         </section>
 
@@ -71,6 +71,24 @@ export default function AboutPage() {
           </p>
         </section>
 
+        <section aria-labelledby="kept-h">
+          <h2 id="kept-h">How long it will be kept</h2>
+          <p>
+            Every release is a frozen folder of files that can be served as plain files, so the site does not depend on a server that might go away.
+            Old releases stay citable at their own addresses, and source documents are linked both at their official address and at an archived copy.
+            Who owns the domain, where a mirror lives and where releases are deposited with a permanent identifier are still to be decided; until then
+            this is a prototype and should not be cited in publications.
+          </p>
+        </section>
+
+        <section aria-labelledby="contact-h">
+          <h2 id="contact-h">Contact</h2>
+          <p>
+            Questions and corrections go to the project&rsquo;s <a href={ISSUES_URL}>public issue list</a>, where every report and its answer stay on
+            the record.
+          </p>
+        </section>
+
         <section aria-labelledby="more-h">
           <h2 id="more-h">More</h2>
           <ul>
@@ -79,6 +97,9 @@ export default function AboutPage() {
             </li>
             <li>
               <Link href="/sources">Sources</Link>: every document, and how each file was verified.
+            </li>
+            <li>
+              <Link href="/topics">Topics</Link>: the figures by subject, and short answers to the questions people ask.
             </li>
             <li>
               <Link href="/data">Data access</Link>: the files, their columns, and code to load them.

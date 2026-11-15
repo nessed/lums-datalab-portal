@@ -1,0 +1,600 @@
+/* series: the series page of the 2026-11 redesign (DESIGN.md 9.5, 11, 12).
+   Phone first (360 px). One column on phones; two on wide screens, with About
+   and Where it sits in the side column. Present mode hides the site chrome. */
+
+/* ---------- 1. title, printed label, definition ---------- */
+.sp .crumbs {
+  margin-bottom: var(--s-2);
+}
+.sp-head h1 {
+  font-size: var(--step-2);
+  margin: 0;
+}
+.sp-printed {
+  margin: 2px 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.sp-printed q {
+  quotes: "\201C" "\201D";
+}
+.sp-def {
+  margin: var(--s-1) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  max-width: 72ch;
+}
+.sp-def > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.sp-def > summary::-webkit-details-marker {
+  display: none;
+}
+.sp-def:not([open]) .sp-def-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sp-def > summary::after {
+  content: "more";
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+.sp-def[open] > summary::after {
+  content: " less";
+}
+.sp-def > summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.sp-def .draft-mark {
+  margin: var(--s-1) 0 0;
+}
+
+/* ---------- layout ---------- */
+.sp-top {
+  margin-top: var(--s-3);
+}
+.sp-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 var(--s-5);
+}
+@media (min-width: 1020px) {
+  .sp-grid {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    gap: var(--s-7);
+  }
+  .sp-side {
+    border-left: var(--hair);
+    padding-left: var(--s-5);
+  }
+  .sp-side h2:first-child {
+    margin-top: 0;
+  }
+}
+
+/* ---------- 2. the answer line ---------- */
+.answer {
+  margin: 0 0 var(--s-3);
+}
+.answer-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px var(--s-3);
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.answer-v {
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.answer-v .v-link {
+  color: var(--ink);
+  text-decoration-color: var(--rule-strong);
+}
+.answer-k {
+  font-weight: 600;
+  color: var(--ink);
+}
+.answer-c .d-val {
+  font-weight: 700;
+  color: var(--ink);
+}
+.answer-src {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-1);
+  padding: 0 6px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.answer-src:hover {
+  border-color: var(--select-rule);
+  color: var(--link);
+}
+.answer-exact,
+.answer-newer {
+  margin: 2px 0 0;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.answer-newer .st-mark {
+  width: 10px;
+  height: 10px;
+  vertical-align: -1px;
+  color: var(--st-withheld);
+}
+.answer-none .answer-line {
+  display: block;
+  font-size: var(--step--1);
+}
+
+/* ---------- 3. chart block ---------- */
+.sv-controls {
+  display: none;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-2);
+}
+html.js .sv-controls {
+  display: flex;
+}
+.sv-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+.w-narrow {
+  display: none;
+}
+@media (max-width: 719px) {
+  .w-wide {
+    display: none;
+  }
+  .w-narrow {
+    display: inline;
+  }
+  .sv-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .sv-seg button {
+    padding: 4px 9px;
+  }
+  .sp .crumbs {
+    display: none;
+  }
+}
+.sv-label {
+  font-size: var(--step--2);
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  min-width: 3.4rem;
+}
+.sv-seg {
+  flex-wrap: wrap;
+  font-size: var(--step--1);
+}
+.sv-seg button {
+  min-height: 44px;
+  padding: 4px 12px;
+}
+.sv-seg button span {
+  padding: 0;
+  border: 0;
+  color: inherit;
+}
+.sv-select {
+  min-height: 44px;
+  max-width: 100%;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+@media (max-width: 719px) {
+  #sv-units {
+    flex: 1 1 0;
+  }
+}
+.sv-present {
+  min-height: 44px;
+  margin-left: auto;
+}
+.sv-note {
+  margin: 0;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.sv-frame {
+  margin: 0;
+  border: var(--hair);
+  border-radius: var(--r-2);
+  background: var(--card);
+  padding: var(--s-2) var(--s-2) 0;
+}
+.sv-sub {
+  font-size: var(--step--2);
+  color: var(--ink-2);
+  margin: 0 0 2px;
+  padding: 0 var(--s-1);
+}
+.sv-frame figure.chart {
+  margin: 0;
+}
+.sv-legend {
+  padding: 0 var(--s-1);
+  font-size: var(--step--2);
+  color: var(--ink-2);
+}
+.sv-legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--s-1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--s-4);
+}
+.sv-legend li {
+  margin: 0;
+}
+.sv-legend svg {
+  display: inline-block;
+  vertical-align: -2px;
+}
+.sv-gapkey {
+  margin: 0 0 var(--s-1);
+}
+.sv-gapkey .st {
+  margin-right: var(--s-2);
+}
+.sv-src {
+  border-top: var(--hair);
+  margin: var(--s-1) calc(-1 * var(--s-2)) 0;
+  padding: var(--s-2) var(--s-3);
+  background: var(--card);
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+.sv-src p {
+  margin: 0 0 2px;
+  overflow-wrap: anywhere;
+}
+.sp .st-mark {
+  display: inline-block;
+}
+.sv-src-h {
+  font-weight: 650;
+  color: var(--ink-2);
+}
+.sv-caveat {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.sv-dtable {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+}
+.sv-dtable > summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+.sp-coming {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--2);
+}
+
+/* ---------- 4. action bar: a fixed bottom bar on phones ---------- */
+.sp .action-bar {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  margin: var(--s-4) 0;
+}
+.sp .action-bar .btn {
+  min-height: 44px;
+  justify-content: center;
+}
+@media (max-width: 719px) {
+  .sp {
+    padding-bottom: 64px;
+  }
+  .sp .action-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    margin: 0;
+    padding: 6px var(--s-3) calc(6px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: var(--hair-strong);
+    flex-wrap: nowrap;
+  }
+  .sp .action-bar .btn {
+    flex: 1 1 0;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+/* ---------- 5. the table by kind of figure (DESIGN.md 12) ---------- */
+.kt-section h2 {
+  margin-top: var(--s-5);
+}
+.kt-intro {
+  margin: 0 0 var(--s-2);
+  color: var(--ink-2);
+}
+.kt-wrap {
+  max-height: 75vh;
+  overflow: auto;
+}
+table.kt {
+  width: auto;
+  min-width: 100%;
+}
+.kt th,
+.kt td {
+  padding: 4px 8px;
+  border-bottom: var(--hair);
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+.kt thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-2);
+  font-weight: 650;
+  font-size: var(--step--2);
+  text-align: left;
+}
+.kt thead th.num {
+  text-align: right;
+}
+.kt tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--card);
+  font-weight: 600;
+  text-align: left;
+}
+.kt thead th:first-child {
+  left: 0;
+  z-index: 3;
+}
+.kt td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.kt-gap {
+  color: var(--ink-3);
+  font-size: var(--step--2);
+}
+.kt-gaplink {
+  color: var(--ink-3);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.kt-gaplink:hover .kt-word {
+  text-decoration: underline;
+}
+.kt-gap .st-mark {
+  width: 10px;
+  height: 10px;
+}
+.kt-withheld .st-mark {
+  color: var(--st-withheld);
+}
+.kt-disputed .st-mark {
+  color: var(--st-disputed);
+}
+.kt-gap-source .st-mark,
+.kt-gap-pending .st-mark {
+  color: var(--st-gap);
+}
+.kt-mark {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  border-bottom: 1px dotted var(--ink-3);
+}
+.kt-v {
+  font-weight: 600;
+}
+.kt-in {
+  display: block;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.kt-break td {
+  font-size: var(--step--2);
+  color: var(--ink-2);
+  background: var(--surface-2);
+  white-space: normal;
+  border-top: 2px solid var(--rule-strong);
+}
+.kt-legend {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--2);
+  color: var(--ink-2);
+}
+.kt-legend li {
+  margin: 0 0 2px;
+}
+.kt-legend .st-mark {
+  width: 10px;
+  height: 10px;
+}
+
+/* ---------- About, Where it sits, Cite ---------- */
+dl.facts.about-facts {
+  grid-template-columns: 1fr;
+}
+dl.facts.about-facts dt {
+  border-bottom: 0;
+  padding-bottom: 0;
+  font-size: var(--step--2);
+  font-weight: 650;
+  letter-spacing: 0.03em;
+}
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.about-list li {
+  margin: 0 0 4px;
+}
+.about-id {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-1) 0 0;
+  font-size: var(--step--2);
+  color: var(--ink-2);
+}
+.about-id li {
+  margin: 0;
+}
+.about-id code {
+  color: var(--ink);
+}
+.btn-tiny {
+  padding: 2px 8px;
+  min-height: 32px;
+  font-size: var(--step--2);
+}
+.trail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--step--1);
+}
+.trail-list li {
+  margin: 0;
+  padding: 4px 0 4px 14px;
+  border-left: 2px solid var(--rule);
+  position: relative;
+}
+.trail-list li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule-strong);
+}
+.trail-list li[aria-current] {
+  border-left-color: var(--select-rule);
+}
+.trail-list .v-link,
+.trail-others .v-link {
+  font-weight: 650;
+  white-space: nowrap;
+}
+.trail-why {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.trail-why .st-mark {
+  width: 10px;
+  height: 10px;
+}
+.trail-others {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--step--1);
+}
+.trail-others li {
+  margin: 0;
+  padding: 3px 0;
+  border-bottom: var(--hair);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+.trail h3 {
+  font-size: var(--step--1);
+  margin: var(--s-4) 0 var(--s-1);
+}
+.sp-cite h2 {
+  margin-top: var(--s-6);
+}
+
+/* ---------- present mode (DESIGN.md 11): for projectors ---------- */
+html.present {
+  font-size: 125%;
+}
+html.present .proto-notice,
+html.present .site-header,
+html.present .site-footer,
+html.present .skip-link,
+html.present .sp .crumbs,
+html.present .sp-def,
+html.present .sp-printed,
+html.present .answer-exact,
+html.present .sp .action-bar,
+html.present .kt-section,
+html.present .sp-cite,
+html.present .sp-side,
+html.present .sp-coming,
+html.present .sp .callout,
+html.present .sv-note,
+html.present .sv-dtable {
+  display: none !important;
+}
+html.present .sp {
+  padding-bottom: 0;
+}
+html.present .sp-grid {
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: var(--s-2);
+}
+html.present main {
+  padding-top: var(--s-3);
+}
+html.present .sv-frame .chart-svg text {
+  font-size: 18px;
+}
+/* Present mode keeps only the exit button of the controls, so the chart and its
+   source lines fit on one screen (tester finding: the source fell below the fold). */
+html.present .sv-controls > :not(:has(.sv-present)),
+html.present .sv-controls :has(> .sv-present) > :not(.sv-present) {
+  display: none !important;
+}
+html.present .sv-src,
+html.present .sv-sub {
+  font-size: var(--step--1);
+}
+
+@media print {
+  .sv-controls,
+  .sp .action-bar {
+    display: none !important;
+  }
+}

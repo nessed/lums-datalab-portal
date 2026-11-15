@@ -2,7 +2,8 @@
 // status, and where it is printed. Gaps are rows too, with their reason.
 // Values are plain when checked (the legend says so); anything else carries
 // its status shape and a patterned cell, so the table reads in greyscale.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
+import { seriesTitle } from "@/lib/titles";
 import { TableWrap } from "@/components/ui/Basics";
 import { StatusBadge, cellFillClass } from "@/components/ui/Status";
 import SortToggle from "@/components/SortToggle";
@@ -29,10 +30,10 @@ export default function SeriesTable({ series, id = "data" }: { series: Series; i
         </span>
         <SortToggle target={tbodyId} />
       </div>
-      <TableWrap label={`Every figure of ${series.name}`} sticky tall={all.length > 30}>
+      <TableWrap label={`Every figure of ${seriesTitle(series)}`} sticky tall={all.length > 30}>
         <table className="obs-table">
           <caption className="sr-only">
-            {series.name}: every figure in this release, {unit}, with its status and where it is printed.
+            {seriesTitle(series)}: every figure in this release, {unit}, with its status and where it is printed.
           </caption>
           <thead>
             <tr>

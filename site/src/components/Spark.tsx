@@ -1,8 +1,10 @@
 // Sparkline: checked values only, one kind of figure (the series' main one),
-// no axes. The line breaks at gaps and at series breaks, exactly as the full
+// no axes. Round 2 look: a thin LUMS-blue line (--chart-be), the last point
+// marked, lone points (no neighbour to join) dotted; styles .spark in globals.css. The line breaks at gaps and at series breaks, exactly as the full
 // chart does (canConnect). The whole sparkline links to the series; the
 // printed last value beside it (rendered by the caller) links to its receipt.
-import Link from "next/link";
+import Link from "@/components/ui/Link";
+import { seriesTitle } from "@/lib/titles";
 import { canConnect, chartModelFrom } from "@/lib/chart-model";
 import { db, seriesHref, type Series } from "@/lib/data";
 import { mainVintage } from "@/lib/stats";
@@ -32,15 +34,17 @@ export default function Spark({ series, width = 96, height = 30, link = true }: 
   const svg = (
     <svg className="spark" width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true" focusable="false">
       <path d={d} />
-      {pts.map((p) => (
-        <circle key={p.period} cx={px(p.x)} cy={py(p.y)} r={lone.includes(p) ? 1.8 : 1.2} className={lone.includes(p) ? "spark-lone" : "spark-pt"} />
-      ))}
-      <circle cx={px(last.x)} cy={py(last.y)} r={2.4} />
+      {lone
+        .filter((p) => p !== last)
+        .map((p) => (
+          <circle key={p.period} cx={px(p.x)} cy={py(p.y)} r={1.6} className="spark-lone" />
+        ))}
+      <circle cx={px(last.x)} cy={py(last.y)} r={2.6} className="spark-last" />
     </svg>
   );
   if (!link) return svg;
   return (
-    <Link href={seriesHref(series.series_id)} className="spark-link" aria-label={`Chart of ${series.name}`} tabIndex={-1}>
+    <Link href={seriesHref(series.series_id)} className="spark-link" aria-label={`Chart of ${seriesTitle(series)}`} tabIndex={-1}>
       {svg}
     </Link>
   );

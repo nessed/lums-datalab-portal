@@ -1,31 +1,39 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import localFont from "next/font/local";
 import { NavLinks, DismissNotice, ReportLink, MobileMenu } from "@/components/chrome/Chrome";
 import { Num } from "@/components/ui/Num";
 import { COMING } from "@/lib/features";
 import SearchDialog from "@/components/chrome/SearchDialog";
+import EvidenceSheet from "@/components/evidence/EvidenceSheet";
 import { DATA_BASE, db, ISSUES_URL, REPO_URL, SITE_URL } from "@/lib/data";
 import { dateOnly } from "@/lib/format";
 import "./globals.css";
+import "@/styles/base.css";
+import "@/styles/evidence.css";
+import "@/styles/series.css";
+import "@/styles/search.css";
+import "@/styles/home.css";
+import "@/styles/downloads.css";
+import "@/styles/compare.css";
 
-// Self-hosted (OFL) so the build needs no network and there is no layout shift.
-const serif = localFont({
-  src: [
-    { path: "../fonts/source-serif-4-latin-opsz-normal.woff2", style: "normal", weight: "200 900" },
-  ],
-  variable: "--font-source-serif",
-  display: "swap",
-  fallback: ["Georgia", "Times New Roman", "serif"],
-});
+// Self-hosted (OFL, licences beside the files in src/fonts) so the build needs no
+// network. Subset to Latin by scripts/subset-fonts.py: Noto Sans as one variable
+// font (wght 400-700, 19 KB) for body, labels and metadata; Noto Sans Display Bold
+// (11 KB) for titles and headline figures. No serif anywhere. The CSS variables
+// are used by --font-sans and --font-display in src/design/tokens.css.
 const sans = localFont({
-  src: [
-    { path: "../fonts/source-sans-3-latin-wght-normal.woff2", style: "normal", weight: "200 900" },
-  ],
-  variable: "--font-source-sans",
+  src: [{ path: "../fonts/noto-sans-latin-wght-400-700.woff2", style: "normal", weight: "400 700" }],
+  variable: "--font-noto-sans",
   display: "swap",
-  fallback: ["Segoe UI", "system-ui", "sans-serif"],
+  fallback: ["Segoe UI", "system-ui", "Arial", "sans-serif"],
+});
+const display = localFont({
+  src: [{ path: "../fonts/noto-sans-display-latin-700.woff2", style: "normal", weight: "700" }],
+  variable: "--font-noto-display",
+  display: "swap",
+  fallback: ["Segoe UI", "system-ui", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -36,9 +44,9 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  { href: "/browse", label: "Data", also: ["/series", "/o", "/datasets", "/tables"] },
+  { href: "/topics", label: "Topics", also: ["/answers"] },
   { href: "/compare", label: "Compare" },
-  { href: "/sources", label: "Sources" },
+  { href: "/sources", label: "Sources", also: ["/datasets", "/tables"] },
   { href: "/methods", label: "Methods" },
   { href: "/about", label: "About" },
 ];
@@ -49,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   // Runs before paint: hides the notice if this visitor dismissed it for this release.
   const noticeScript = `document.documentElement.classList.add("js");try{if(localStorage.getItem("proto-notice-dismissed")===${JSON.stringify(v)})document.documentElement.dataset.protoDismissed="true"}catch(e){}`;
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${display.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noticeScript }} />
       </head>
@@ -90,6 +98,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main" tabIndex={-1}>
           <div className="wrap">{children}</div>
         </main>
+        <EvidenceSheet />
         <footer className="site-footer">
           <div className="wrap footer-grid">
             <section aria-labelledby="ft-what">

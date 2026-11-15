@@ -1,6 +1,6 @@
 # STATUS
 
-Last updated: 2026-10-12, by Claude Code at Ali's request: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
+Last updated: 2026-11-15, by Claude Code at Ali's request: new design brief (`docs/DESIGN.md`, DRAFT for approval) and design research (`docs/DESIGN_REFERENCE.md`) on branch `docs/design-research-2026-11`; no code changed. Before that, 2026-10-12: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
 
 ## State in one paragraph
 The pipeline works end to end for three data types and the release `releases/v0.0.1-prototype/`
@@ -22,6 +22,7 @@ site) stopped early; their work is merged into `main`. What they left unfinished
 | Report of this run | `docs/reports/2026-10-12-continuation-report.md` | written as the run goes; ends with the backlog ledger |
 | Site plan and report | `docs/plans/2026-10-12-ui.md`, `docs/reports/2026-10-12-ui-report.md`, `docs/DESIGN.md` | the UI agent's |
 | Site mockups (S16) | `docs/mockups/project/`, `docs/mockups/REVIEW.md` | Design canvas boards and the self-review the build follows |
+| Design brief and research (2026-11-15) | `docs/DESIGN.md`, `docs/DESIGN_REFERENCE.md`, `docs/design-reference/img/` | DRAFT brief replacing the S16 draft; needs approval in `DECISIONS.md` and answers to its section 17 before any site code changes. The research covers about forty peer sites, with screenshots and speed measurements |
 | Site config | `site/features.config.json`, `site/editorial.config.json` | planned-feature flags (all off); human-chosen headline series |
 | First run | `docs/plans/2026-10-11-overnight-prototype.md`, `docs/reports/2026-10-11-overnight-report.md` | |
 | Review notes | `docs/reports/review_cpi.md`, `review_lfs.md`, `fix_lfs.md` | adversarial reviews with failing tests |
@@ -56,7 +57,19 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
 into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
 
-**S16 data lab rebuild: done on branch `claude/epic-mccarthy-ose3yj` (PR against `docs/open-work-ux-redesign`), not merged.**
+**Redesign preview build, 2026-11-15 (unattended; the brief is still a draft).** Branch `proto/redesign-2026-11`, draft
+PR #13, not merged. DESIGN.md stages 0-9 built; the site reads release `v0.0.1-prototype` through `site/src/lib/adapter/`
+(datalab adapter on; golden adapter tested against `golden-2026.11.11`, off). Report:
+`docs/reports/2026-11-15-redesign-preview-report.md`; what is left: `docs/OPEN_WORK.md` S18.
+
+**Redesign brief, 2026-11-15: DRAFT, not approved.** `docs/DESIGN.md` now holds a new brief (the S16 draft is in git
+history at `d5897ca`). It plans for Ahmad's tagged golden releases (`ahm3d-karim/pak-econ-golden-data`) to become the
+site's only data source through one adapter, with receipts built from his page proofs; section 5.3 lists what a switch
+would lose today (CPI; LFS after 2018-19). Found while researching, not fixed: the header search dialog on the live
+site has a 0 px wide input (nothing can be typed); link prefetching downloads about 1.7 MB of page images in the
+background on the home page; the catalogue renders all 925 series at once (brief section 18.1, step 0).
+
+**S16 data lab rebuild: merged into `main` (PR #6, `d5897ca`).** The notes below are from that build.
 `docs/DESIGN.md` is still marked DRAFT; the build follows it, with the answers to its questions recorded as
 provisional decisions in `DECISIONS.md` (UI, 2026-10-12, S16). Ali and Ahmad confirm or overturn them in review.
 

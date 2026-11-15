@@ -2,7 +2,8 @@
 // table with its printed labels, beside the page it was read from. Pick an
 // edition, pick a table; select any number to see where it sits on the page.
 import type { Metadata } from "next";
-import Link from "next/link";
+import { seriesTitle } from "@/lib/titles";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import TableView, { type TVCell } from "@/components/TableView";
 import { Breadcrumbs, ExternalLink } from "@/components/ui/Basics";
@@ -91,7 +92,7 @@ export default async function TablePage({ params }: Props) {
       label: isValue ? null : info.label,
       href: obsHref(o.obs_id),
       box: boxOk ? c.cell_bbox_norm : null,
-      series: s?.name ?? null,
+      series: s ? seriesTitle(s) : null,
       seriesHref: s ? seriesHref(s.series_id) : null,
       unit: s ? unitLabel(s.unit, s.scale_factor) : null,
     };
@@ -114,10 +115,9 @@ export default async function TablePage({ params }: Props) {
     <article className="table-page">
       <Breadcrumbs
         items={[
-          { href: "/browse", label: "Data" },
-          { href: `/datasets/${dataset}`, label: datasetName(dataset) },
-          { href: `/datasets/${dataset}#tables`, label: "Tables as printed" },
+          { href: "/sources", label: "Sources" },
           { href: sourceHref(t.sourceId), label: src?.title ?? t.sourceId },
+          { href: `/datasets/${dataset}#tables`, label: `${datasetName(dataset)}: tables as printed` },
           { label: t.title },
         ]}
       />
@@ -207,7 +207,8 @@ export default async function TablePage({ params }: Props) {
             </Link>
           </div>
           <p className="small muted">
-            A number is shown only where it is a checked figure. Gaps say why there is no number. Labels are printed text, as read from the page; they
+            All figures checked unless marked. A number is shown only where it is a checked figure; a gap says why there is no number (held back, not
+            checked yet, disputed, or not printed: the page prints a dash, which is never read as zero). Labels are printed text, as read from the page; they
             are not edited.
           </p>
         </div>

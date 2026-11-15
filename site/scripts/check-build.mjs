@@ -21,7 +21,7 @@
 // 3. Every internal link to a receipt, series, table, data type or document exists.
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { facetCounts } from "../src/lib/facets.mjs";
 
 const siteDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -43,7 +43,9 @@ const sources = read("sources.json");
 const sourceById = new Map(sources.map((s) => [s.source_id, s]));
 const coverage = read("coverage.json");
 const allObs = read("observations.json");
-const published = (ds) => release.dataset_status?.[ds]?.state === "published";
+// Visible datasets: published, and candidates (decision 17.1: shown, always marked "not signed off").
+const published = (ds) => ["published", "candidate"].includes(release.dataset_status?.[ds]?.state);
+const isCandidateObs = (o) => release.dataset_status?.[series.get(o.series_id)?.dataset]?.state === "candidate";
 const observations = allObs.filter((o) => published(series.get(o.series_id)?.dataset));
 const obsBySlug = new Map(allObs.map((o) => [slugify(o.obs_id), o]));
 const isPub = (o) => !!o && o.published && o.value !== null && o.value !== undefined;
@@ -146,6 +148,10 @@ function countFor(key) {
   const [a, b, c, d, e] = p;
   switch (a) {
     case "series":
+      if (b === "roots") {
+        const ids = new Set(seriesList.map((x) => x.series_id));
+        return visibleSeries.filter((x) => !x.parent_id || !ids.has(x.parent_id)).length;
+      }
       return b ? visibleSeries.filter((s) => s.dataset === b).length : visibleSeries.length;
     case "values":
       if (!b) return pubIn(() => true);
@@ -155,6 +161,12 @@ function countFor(key) {
       return pubIn((o) => dsOf(o) === b);
     case "obs":
       if (b === "series") return (obsBySeries.get(c) ?? []).length;
+      if (b === "source") {
+        // Per-document quality table (DESIGN.md 9.8): figures whose main printing is in this document, by reader status.
+        const inSrc = observations.filter((o) => primarySrc(o) === c);
+        const bucket = { all: () => true, checked: isPub, disputed: (o) => o.status === "disputed", held: (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "failed_checks", "not-printed": (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "not_in_source", "not-checked": (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "not_yet_verified" }[d ?? "all"];
+        return bucket ? inSrc.filter(bucket).length : undefined;
+      }
       break;
     case "docs": {
       const pred = b === "series" ? (o) => o.series_id === c : (o) => dsOf(o) === b;
@@ -242,6 +254,33 @@ const fmtPct = (r) => {
   const v = r * 100;
   return `${Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)}%`;
 };
+
+// Headline short scale (DESIGN.md 6.3), written independently of src/lib/words.ts:
+// rupees and persons in trillion / billion / million to one decimal, half up on
+// the hundredths; per cent with "%"; anything else as stored.
+function shortIndep(v, unit, scale) {
+  const str = String(v).trim();
+  if (unit === "PKR" || unit === "persons") {
+    const neg = str.startsWith("-");
+    const [ip, fp = ""] = str.replace(/^[+-]/, "").split(".");
+    const k = Math.round(Math.log10(Number(scale ?? 1)));
+    if (10 ** k !== Number(scale ?? 1)) return str;
+    const num = BigInt(ip + fp) * 10n ** BigInt(k);
+    const den = 10n ** BigInt(fp.length);
+    const whole = num / den;
+    const digits = whole.toString().length;
+    const pick = [[12, "trillion"], [9, "billion"], [6, "million"]].find(([e]) => digits > e);
+    let text;
+    if (pick) {
+      const hundredths = (num * 100n) / (den * 10n ** BigInt(pick[0]));
+      const tenths = (hundredths + 5n) / 10n;
+      const r = tenths % 10n;
+      text = `${tenths / 10n}${r ? `.${r}` : ""} ${pick[1]}`;
+    } else text = whole.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return unit === "PKR" ? `${neg ? "−" : ""}Rs ${text}` : `${neg ? "−" : ""}${text} persons`;
+  }
+  return unit === "percent" ? `${fmtDec(str)}%` : fmtDec(str);
+}
 
 /* ------------------------------------------------------------------ */
 /* Text that may carry digits without an annotation: release labels    */
@@ -352,6 +391,10 @@ function parseAttrs(s) {
 }
 
 const mdCache = new Map();
+// Derived figures (data-num="derived": a change, a share, an index, an average) are
+// collected here. Each must be claimed and recomputed from the release by the plug-in
+// of its area (series-derived, home-derived, evidence-sheet); an unclaimed one fails.
+const derived = [];
 const counters = { pages: 0, values: 0, counts: 0, labels: 0, nums: {} };
 const linkTargets = { o: new Set(), series: new Set(), tables: new Set(), datasets: new Set(), sources: new Set() };
 
@@ -371,7 +414,12 @@ function validateAnnotated(el, text, page) {
       const own = [o.primary_cell_id, ...(o.supporting_cell_ids ?? [])];
       if (!c || !own.includes(c.cell_id)) return problem("value-text", page, `value "${t}" names cell ${a["data-v-cell"]}, which is not a printing of ${o.obs_id}`);
       if (norm(c.value_raw ?? "") !== t) return problem("value-text", page, `value "${t}" differs from the printed text "${c.value_raw}" of ${c.cell_id}`);
+    } else if (a["data-v-fmt"] === "short") {
+      const sr = series.get(o.series_id);
+      const want = shortIndep(o.value, sr?.unit, sr?.scale_factor);
+      if (t !== want) return problem("value-short", page, `headline "${t}" is not the short form "${want}" of ${o.value} (${o.obs_id})`);
     } else if (t !== fmtDec(o.value)) return problem("value-text", page, `value "${t}" differs from the release value ${o.value} of ${o.obs_id}`);
+    if (isCandidateObs(o) && !("data-candidate" in a)) return problem("value-candidate", page, `value "${t}" (${o.obs_id}) is from a dataset nobody signed off and is not marked`);
     return;
   }
   if ("data-v-self" in a) {
@@ -466,6 +514,12 @@ function validateAnnotated(el, text, page) {
       for (const tok of t.match(/\d[\d,.]*\d|\d/g) ?? []) if (!src.includes(tok)) problem("md", page, `"${tok}" is not in ${f}`);
       break;
     }
+    case "derived":
+      // A derived figure: it must say what it is (data-derived or data-op), and a
+      // plug-in in scripts/checks/ must claim and recompute it (section 4).
+      if (!a["data-derived"] && !a["data-op"]) problem("derived", page, `derived value "${t}" does not say what it is (data-derived or data-op)`);
+      derived.push({ page, text: t, attrs: a, claimed: false });
+      break;
     case "id":
     case "ui":
     case "axis":
@@ -562,6 +616,23 @@ for (const id of linkTargets.series) if (!exists("series", id)) problem("link", 
 for (const id of linkTargets.tables) if (!exists("tables", id)) problem("link", `/tables/${id}`, "linked table page does not exist");
 for (const id of linkTargets.datasets) if (!exists("datasets", id)) problem("link", `/datasets/${id}`, "linked data type page does not exist");
 for (const id of linkTargets.sources) if (!exists("sources", id)) problem("link", `/sources/${id}`, "linked document page does not exist");
+
+/* ------------------------------------------------------------------ */
+/* 4. plug-in checks: scripts/checks/*.mjs                             */
+/* ------------------------------------------------------------------ */
+// Each file exports a default function that receives the release and a
+// problem() reporter. Data the browser draws (JSON files) is checked here.
+const pluginDir = path.join(siteDir, "scripts", "checks");
+const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem, derived };
+if (fs.existsSync(pluginDir)) {
+  for (const name of fs.readdirSync(pluginDir).filter((n) => n.endsWith(".mjs")).sort()) {
+    const mod = await import(pathToFileURL(path.join(pluginDir, name)).href);
+    const out = await mod.default(pluginCtx);
+    console.log(`check-build: plug-in ${name}: ${out ?? "ran"}`);
+  }
+}
+
+for (const d of derived) if (!d.claimed) problem("derived", d.page, `derived figure "${d.text}" (${d.attrs["data-derived"] ?? "no formula"}) was not recomputed by any plug-in`);
 
 /* ------------------------------------------------------------------ */
 console.log(`check-build: ${values} value receipts, ${gaps} gap receipts, ${disputed} disputed receipts checked`);

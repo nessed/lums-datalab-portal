@@ -1,13 +1,22 @@
 "use client";
-// Facets for the catalogue. The rows are server-rendered (each carries its
-// facet values as data-f-* attributes); this narrows and sorts them in place.
+// Facets and results for the catalogue. The server renders only the top-level
+// series (DESIGN.md 14.1: at most 1,500 elements). The full list of rows is one
+// static JSON file (/catalogue.json), fetched the first time a reader filters
+// or asks for every series; matching rows are then drawn here, 50 at a time.
 // Within a facet the choices are OR, across facets AND. Each choice shows how
 // many series it would leave given the other active filters. State lives in
-// the URL (?q=&dataset=abs,cpi&topic=...&values=1&sort=name), so a link
-// reproduces the view. Without JavaScript every row is shown.
+// the URL (?q=&dataset=abs,cpi&topic=...&values=1&sort=name&all=1), so a link
+// reproduces the view. Without JavaScript the top-level series are listed and
+// every other series is reached from its parent's page.
+// A text query (?q=) uses the site search's index and ranking (src/lib/search.ts,
+// DESIGN.md 10.8): typos, synonyms and concepts are forgiven the same way, and
+// rows are sorted by relevance unless another order is chosen. The catalogue
+// infers no filter from the words (its filters are the facets on the left).
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import Link from "@/components/ui/Link";
 import { setQuery, useQuery } from "@/lib/url-state";
-import { tokens } from "@/lib/search";
+import { loadEngine, runSearch, tokens } from "@/lib/search";
+import type { CatalogueRow } from "@/app/catalogue.json/route";
 
 export type FacetGroup = {
   key: string;
@@ -18,14 +27,51 @@ export type FacetGroup = {
   values: { value: string; label: string; count: number }[];
 };
 
-/** What the filter needs to know about each row (rendered by the server in the same order). */
-export type RowData = { f: Record<string, string>; search: string; values: boolean; name: string; latest: string; n: number };
+let rowsPromise: Promise<CatalogueRow[]> | null = null;
+function loadRows(): Promise<CatalogueRow[]> {
+  rowsPromise ??= fetch("/catalogue.json")
+    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then((j: { rows: CatalogueRow[] }) => j.rows)
+    .catch((e) => {
+      rowsPromise = null;
+      throw e;
+    });
+  return rowsPromise;
+}
 
-export default function CatalogueFilter({ groups, total, rows }: { groups: FacetGroup[]; total: number; rows: RowData[] }) {
+type Filter = { ts: string[]; rank: Map<string, number> | null; onlyValues: boolean; selected: Record<string, Set<string>>; groups: FacetGroup[] };
+const passes = (r: CatalogueRow, x: Filter, except?: string) =>
+  (!x.onlyValues || r.n > 0) &&
+  (x.rank ? x.rank.has(r.id) : x.ts.every((t) => r.search.includes(t))) &&
+  x.groups.every((g) => g.key === except || x.selected[g.key].size === 0 || x.selected[g.key].has(r.f[g.key] ?? ""));
+
+/** Series ids in search order for a query, from the site search; null until loaded or if it fails (plain word match then). */
+function useRank(text: string, indexUrl: string): Map<string, number> | null {
+  const [got, setGot] = useState<{ text: string; rank: Map<string, number> } | null>(null);
+  useEffect(() => {
+    if (!text.trim()) return;
+    let live = true;
+    loadEngine(indexUrl).then(
+      (eng) => {
+        if (!live) return;
+        const r = runSearch(eng, text, { infer: false });
+        setGot({ text, rank: new Map(r.series.map((h, i) => [h.e.id, i])) });
+      },
+      () => {},
+    );
+    return () => {
+      live = false;
+    };
+  }, [text, indexUrl]);
+  return text.trim() && got?.text === text ? got.rank : null;
+}
+
+function useCatalogue(groups: FacetGroup[], indexUrl: string) {
   const q = useQuery();
   const text = q.get("q") ?? "";
   const onlyValues = q.get("values") === "1";
   const sort = q.get("sort") ?? "order";
+  const wantAll = q.get("all") === "1";
   const qs = q.toString();
   const selected = useMemo(() => {
     const p = new URLSearchParams(qs);
@@ -33,6 +79,129 @@ export default function CatalogueFilter({ groups, total, rows }: { groups: Facet
     for (const g of groups) m[g.key] = new Set((p.get(g.key) ?? "").split(",").filter(Boolean));
     return m;
   }, [qs, groups]);
+  const ts = useMemo(() => tokens(text), [text]);
+  const rank = useRank(text, indexUrl);
+  const filtering = ts.length > 0 || onlyValues || groups.some((g) => selected[g.key].size > 0);
+  const [rows, setRows] = useState<CatalogueRow[] | null>(null);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    if ((filtering || wantAll) && !rows) loadRows().then(setRows, () => setFailed(true));
+  }, [filtering, wantAll, rows]);
+  const filter = useMemo<Filter>(() => ({ ts, rank, onlyValues, selected, groups }), [ts, rank, onlyValues, selected, groups]);
+  return { text, onlyValues, sort, wantAll, selected, ts, filtering, rows, failed, filter };
+}
+
+/** Rows that match, drawn in the browser. Shows nothing (the server list stays) while nothing is filtered. */
+export function CatalogueResults({ groups, total, indexUrl }: { groups: FacetGroup[]; total: number; indexUrl: string }) {
+  const c = useCatalogue(groups, indexUrl);
+  const [limit, setLimit] = useState(50);
+  const active = c.filtering || c.wantAll;
+  const resetKey = `${c.text}|${c.filtering}|${c.wantAll}`;
+  const [seenKey, setSeenKey] = useState(resetKey);
+  if (seenKey !== resetKey) {
+    setSeenKey(resetKey);
+    setLimit(50);
+  }
+  const matches = useMemo(() => {
+    if (!c.rows) return [];
+    const m = c.rows.filter((r) => passes(r, c.filter));
+    const s = c.sort;
+    const rank = c.filter.rank;
+    m.sort((a, b) =>
+      rank && s === "order"
+        ? (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0)
+        : s === "name"
+        ? a.name.localeCompare(b.name)
+        : s === "latest"
+          ? (b.latest?.latestPeriod ?? "").localeCompare(a.latest?.latestPeriod ?? "") || a.order - b.order
+          : s === "n"
+            ? b.n - a.n || a.order - b.order
+            : a.order - b.order,
+    );
+    return m;
+  }, [c.rows, c.filter, c.sort]);
+  useEffect(() => {
+    const server = document.getElementById("cat-list");
+    if (server) server.hidden = active;
+    const more = document.getElementById("cat-roots-note");
+    if (more) more.hidden = active;
+    const status = document.getElementById("cat-status");
+    if (status && active && c.rows) status.textContent = c.filtering ? `${matches.length} of ${total} series match` : `All ${total} series`;
+    const sel = document.getElementById("cat-sort") as HTMLSelectElement | null;
+    if (sel) {
+      sel.value = c.sort;
+      sel.onchange = () => setQuery({ sort: sel.value === "order" ? null : sel.value }, "replace");
+    }
+  }, [active, c.rows, c.filtering, matches.length, total, c.sort]);
+  if (!active) return null;
+  if (c.failed) return <p className="cat-empty">The list of series could not be loaded. Reload the page, or open a series from the list.</p>;
+  if (!c.rows) return <p className="cat-status">Loading every series…</p>;
+  return (
+    <>
+      <ul className="cat-list" aria-label="Matching series">
+        {matches.slice(0, limit).map((r) => (
+          <li key={r.id} className="cat-row">
+            <div className="cat-name">
+              <Link href={r.href}>{r.name}</Link>
+              {r.printed ? <span className="cat-path">{r.printed}</span> : null}
+              {r.tags.map((t) => (
+                <span key={t} className={`tag${t === "19th ICLS" ? " tag-warn" : ""}`}>
+                  {t}
+                </span>
+              ))}
+              {r.parent ? <span className="cat-path">in {r.parent}</span> : null}
+            </div>
+            <div className="cat-unit">{r.unit}</div>
+            <div className="cat-periods">{r.from ? `${r.from} to ${r.to}` : "no periods"}</div>
+            <div className="cat-count num">
+              {r.n} <span className="muted">of</span> {r.all}
+              <span className="cat-count-w"> checked</span>
+            </div>
+            <div className="cat-latest num">
+              {r.latest ? (
+                <>
+                  <Link
+                    href={r.latest.href}
+                    className="v-link"
+                    aria-label={`${r.latest.v}, ${r.latest.kind ? `${r.latest.kind} ` : ""}${r.latest.period}: see where it is printed`}
+                  >
+                    {r.latest.v}
+                  </Link>
+                  <span className="cat-kind">
+                    {r.latest.kind ? `${r.latest.kind} ` : ""}
+                    {r.latest.period}
+                  </span>
+                </>
+              ) : (
+                <span className="muted">no checked value</span>
+              )}
+            </div>
+            <div className="cat-spark" />
+            <div className="cat-dl">
+              <a href={r.csv} download aria-label={`Download ${r.name} as CSV`}>
+                CSV
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {matches.length === 0 ? (
+        <p className="cat-empty">
+          No series matches. Try fewer words or fewer filters, or <a href="/browse">clear them all</a>.
+        </p>
+      ) : null}
+      {matches.length > limit ? (
+        <button type="button" className="btn cat-more" onClick={() => setLimit((l) => l + 50)}>
+          Show {Math.min(50, matches.length - limit)} more of {matches.length - limit}
+        </button>
+      ) : null}
+    </>
+  );
+}
+
+export default function CatalogueFilter({ groups, indexUrl }: { groups: FacetGroup[]; indexUrl: string }) {
+  const c = useCatalogue(groups, indexUrl);
+  const { text, onlyValues, selected, ts, filtering, rows } = c;
   const [drawer, setDrawer] = useState(false);
   const [showAll, setShowAll] = useState<Record<string, boolean>>({});
   const [draft, setDraft] = useState<string | null>(null);
@@ -42,50 +211,18 @@ export default function CatalogueFilter({ groups, total, rows }: { groups: Facet
     () => false,
   );
 
-  const ts = tokens(text);
-  const passes = (r: RowData, except?: string) =>
-    (!onlyValues || r.values) &&
-    ts.every((t) => r.search.includes(t)) &&
-    groups.every((g) => g.key === except || selected[g.key].size === 0 || selected[g.key].has(r.f[g.key] ?? ""));
-
-  // Live counts per facet value, given every other active filter.
-  const live: Record<string, Map<string, number>> | null = ready
-    ? Object.fromEntries(
-        groups.map((g) => {
-          const m = new Map<string, number>();
-          for (const r of rows) if (passes(r, g.key)) m.set(r.f[g.key] ?? "", (m.get(r.f[g.key] ?? "") ?? 0) + 1);
-          return [g.key, m];
-        }),
-      )
-    : null;
-  const shown = rows.filter((r) => passes(r)).length;
-  const filtering = ts.length > 0 || onlyValues || groups.some((g) => selected[g.key].size > 0);
-  const visible = rows.map((r) => passes(r));
-  const visibleKey = visible.map((v) => (v ? "1" : "0")).join("");
-
-  // Apply to the server-rendered list: hide, then reorder. DOM only, no state.
-  useEffect(() => {
-    const list = document.getElementById("cat-list");
-    const els = [...document.querySelectorAll<HTMLElement>("[data-cat-row]")];
-    els.forEach((el) => {
-      el.hidden = visibleKey[Number(el.dataset.order ?? 0)] !== "1";
-    });
-    const order = rows.map((r, i) => ({ r, i }));
-    order.sort((a, b) =>
-      sort === "name" ? a.r.name.localeCompare(b.r.name) : sort === "latest" ? b.r.latest.localeCompare(a.r.latest) || a.i - b.i : sort === "n" ? b.r.n - a.r.n || a.i - b.i : a.i - b.i,
-    );
-    const byOrder = new Map(els.map((el) => [Number(el.dataset.order ?? 0), el]));
-    if (list) for (const { i } of order) list.appendChild(byOrder.get(i)!);
-    const empty = document.querySelector<HTMLElement>("[data-cat-empty]");
-    if (empty) empty.hidden = shown > 0;
-    const status = document.getElementById("cat-status");
-    if (status) status.textContent = filtering ? `${shown} of ${total} series match` : `${total} series`;
-    const sel = document.getElementById("cat-sort") as HTMLSelectElement | null;
-    if (sel) {
-      sel.value = sort;
-      sel.onchange = () => setQuery({ sort: sel.value === "order" ? null : sel.value }, "replace");
-    }
-  }, [visibleKey, sort, rows, shown, filtering, total]);
+  // Live counts per facet value, given every other active filter (once the rows are loaded).
+  const live: Record<string, Map<string, number>> | null =
+    ready && rows
+      ? Object.fromEntries(
+          groups.map((g) => {
+            const m = new Map<string, number>();
+            for (const r of rows) if (passes(r, c.filter, g.key)) m.set(r.f[g.key] ?? "", (m.get(r.f[g.key] ?? "") ?? 0) + 1);
+            return [g.key, m];
+          }),
+        )
+      : null;
+  const shown = rows ? rows.filter((r) => passes(r, c.filter)).length : null;
 
   const toggle = (key: string, value: string) => {
     const next = new Set(selected[key]);
@@ -182,7 +319,7 @@ export default function CatalogueFilter({ groups, total, rows }: { groups: Facet
         </form>
         <div className="cat-drawer-foot">
           <button type="button" className="btn btn-primary" onClick={() => setDrawer(false)}>
-            Show <span data-count="series">{shown}</span> series
+            {shown === null ? "Show series" : `Show ${shown} series`}
           </button>
         </div>
       </aside>

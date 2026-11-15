@@ -1,16 +1,33 @@
 // Chart model types and pure helpers. No server imports: the client chart
 // uses this module, so it must never pull in the data layer (node:fs).
-import { formatDecimalString, periodShort, periodWords, unitLabel, vintageWords } from "./format";
+import { derivedDisplay, formatDecimalString, periodShort, periodWords, unitLabel, vintageWords } from "./format";
 import { statusOf, type StatusKey } from "./status";
+import { seriesTitle } from "./titles";
 
-export type ChartPoint = { x: number; y: number; period: string; periodLabel: string; valueText: string; href: string };
+export type ChartPoint = {
+  x: number;
+  y: number;
+  period: string;
+  periodLabel: string;
+  valueText: string;
+  href: string;
+  /** This point's own marker (best-available view: each point marks its kind of figure). */
+  style?: LineStyle;
+  /** Kind of figure in words, when the line mixes or names kinds. */
+  kindLabel?: string;
+  /** Slug for the one-tap evidence sheet (a[data-sheet]); set on receipt links. */
+  sheet?: string;
+  /** Extra tooltip lines: a derived point's inputs and formula. */
+  note?: string[];
+};
 
-export type LineStyle = { color: string; dash: string | null; marker: "circle" | "square" | "diamond" };
+/** `hollow`: estimates are drawn hollow, actuals solid (DESIGN.md 11). */
+export type LineStyle = { color: string; dash: string | null; marker: "circle" | "square" | "diamond"; hollow?: boolean };
 
 export type ChartLine = { key: string; label: string; style: LineStyle; points: ChartPoint[] };
 
 /** A period with no published value: drawn under the axis, never as a point. */
-export type ChartMark = { x: number; period: string; periodLabel: string; vintage: string; vintageLabel: string; status: StatusKey; statusLabel: string; href: string };
+export type ChartMark = { x: number; period: string; periodLabel: string; vintage: string; vintageLabel: string; status: StatusKey; statusLabel: string; href: string; sheet?: string };
 
 export type ChartBreak = { x: number; label: string; note: string; atPeriod: string; atLabel: string; inView: boolean };
 
@@ -26,6 +43,8 @@ export type ChartModel = {
   lines: ChartLine[];
   marks: ChartMark[];
   breaks: ChartBreak[];
+  /** Draw bars from zero instead of lines (a change, where zero means something). */
+  bars?: boolean;
 };
 
 /** Two neighbouring points are joined only if they are exactly one step apart
@@ -47,21 +66,24 @@ export function periodOrdinal(period: string, frequency: string): number | null 
 
 // Fixed style per estimate type. Colour, dash and marker all differ, so the
 // distinction never rests on colour alone. Unknown types get a neutral style.
+// Colours are the chart tokens of src/design/tokens.css (inline SVG resolves them).
 export const VINTAGE_STYLE: Record<string, LineStyle> = {
-  be: { color: "#0b5c78", dash: null, marker: "circle" },
-  na: { color: "#0b5c78", dash: null, marker: "circle" },
-  re: { color: "#a2470e", dash: "6 4", marker: "square" },
-  actual: { color: "#2f6b4f", dash: "2 3", marker: "diamond" },
-  provisional: { color: "#5d5146", dash: "2 3", marker: "diamond" },
+  be: { color: "var(--chart-be)", dash: null, marker: "circle", hollow: true },
+  na: { color: "var(--chart-be)", dash: null, marker: "circle" },
+  re: { color: "var(--chart-re)", dash: "6 4", marker: "square", hollow: true },
+  actual: { color: "var(--chart-actual)", dash: "2 3", marker: "diamond" },
+  ac: { color: "var(--chart-actual)", dash: "2 3", marker: "diamond" },
+  provisional: { color: "var(--chart-prov)", dash: "2 3", marker: "diamond", hollow: true },
 };
-const OTHER_STYLE: LineStyle = { color: "#4b5563", dash: "2 3", marker: "diamond" };
+const OTHER_STYLE: LineStyle = { color: "var(--chart-other)", dash: "2 3", marker: "diamond" };
 
 /** Minimal shapes, so this runs in the browser too (compare page). */
-export type ChartSeries = { series_id: string; name: string; frequency: string; unit: string; scale_factor: number | null; breaks: { at_period: string; kind: string; note: string }[] };
+export type ChartSeries = { series_id: string; name: string; title?: string | null; frequency: string; unit: string; scale_factor: number | null; breaks: { at_period: string; kind: string; note: string }[] };
 export type ChartObs = { obs_id: string; period: string; vintage: string; value: string | null; published: boolean; status?: string | null; gap_kind?: string | null };
 
 // Must match slugify() in data.ts.
-const obsHref = (id: string) => `/o/${id.replaceAll(":", "~").replace(/[^A-Za-z0-9._~-]/g, "_")}`;
+export const obsSlug = (id: string) => id.replaceAll(":", "~").replace(/[^A-Za-z0-9._~-]/g, "_");
+const obsHref = (id: string) => `/o/${obsSlug(id)}`;
 
 /** The chart model of one series from its observations. Pure: no data access. */
 export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel {
@@ -111,7 +133,7 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
   const single = vintages.length === 1;
   const lines: ChartLine[] = vintages.map((v) => ({
     key: v,
-    label: single && v === "na" ? series.name : vintageWords(v),
+    label: single && v === "na" ? seriesTitle(series) : vintageWords(v),
     style: VINTAGE_STYLE[v] ?? OTHER_STYLE,
     points: published
       .filter((o) => o.vintage === v && ord.has(o.period))
@@ -122,6 +144,8 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
         periodLabel: periodWords(o.period, series.frequency),
         valueText: formatDecimalString(o.value),
         href: obsHref(o.obs_id),
+        sheet: obsSlug(o.obs_id),
+        kindLabel: v === "na" ? undefined : vintageWords(v),
       }))
       .sort((a, b) => a.x - b.x),
   }));
@@ -139,11 +163,12 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
         status: info.key,
         statusLabel: info.label,
         href: obsHref(o.obs_id),
+        sheet: obsSlug(o.obs_id),
       };
     });
 
   return {
-    title: series.name,
+    title: seriesTitle(series),
     unit: unitLabel(series.unit, series.scale_factor),
     unitCode: series.unit,
     scale: series.scale_factor ?? 1,
@@ -157,3 +182,134 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
   };
 }
 
+/* ---------- series page views (DESIGN.md 8.2, 11) ---------- */
+
+const RANK: Record<string, number> = { actual: 5, ac: 5, final: 4, re: 3, provisional: 2, be: 1 };
+const NEUTRAL: LineStyle = { color: "var(--chart-neutral)", dash: null, marker: "circle" };
+
+/**
+ * "Best available figure per year": per period, the most final kind of figure
+ * that shows a value (actual or accounts, else revised, else budget estimate).
+ * One line, but every point carries the marker of its own kind, so the line
+ * never mixes kinds unmarked. A period whose most final printing is a gap keeps
+ * its gap mark under the axis even when an earlier kind is drawn.
+ */
+export function bestModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel {
+  const base = chartModelFrom(series, all);
+  const by = new Map<string, ChartObs[]>();
+  for (const o of all) by.set(o.period, [...(by.get(o.period) ?? []), o]);
+  const ord = new Map(base.periods.map((p) => [p.p, p.x]));
+  const points: ChartPoint[] = [];
+  const marks: ChartMark[] = [];
+  for (const [period, rs] of [...by.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+    const sorted = [...rs].sort((a, b) => (RANK[b.vintage] ?? 0) - (RANK[a.vintage] ?? 0));
+    const top = sorted[0];
+    const best = sorted.find((o) => o.published && o.value !== null && Number.isFinite(Number(o.value)));
+    if (best && ord.has(period))
+      points.push({
+        x: ord.get(period)!,
+        y: Number(best.value),
+        period,
+        periodLabel: periodWords(period, series.frequency),
+        valueText: formatDecimalString(best.value),
+        href: obsHref(best.obs_id),
+        sheet: obsSlug(best.obs_id),
+        style: VINTAGE_STYLE[best.vintage] ?? OTHER_STYLE,
+        kindLabel: vintageWords(best.vintage),
+      });
+    if (top !== best) {
+      const m = base.marks.find((x) => x.period === period && x.vintage === top.vintage);
+      if (m) marks.push(m);
+    }
+  }
+  return { ...base, lines: points.length ? [{ key: "best", label: "Best available figure", style: NEUTRAL, points }] : [], marks };
+}
+
+/** A derived view as the series page's views.json carries it (src/lib/series-derive.ts). */
+export type DerivedPointJson = { p: string; k: string; v: string | null; in: string[]; iv?: string[]; gap?: string; why?: string; st?: string; bad?: string; diff?: string };
+export type DerivedViewJson = { id: string; op: "pct" | "chg" | "idx" | "share" | "rev"; base?: string; points: DerivedPointJson[] };
+
+const periodOfId = (id: string) => id.split(":")[1] ?? "";
+const signedText = (v: string) => derivedDisplay(v, true);
+
+/** Unit words of a derived view. */
+export function derivedUnit(op: DerivedViewJson["op"], series: Pick<ChartSeries, "unit" | "scale_factor" | "frequency">, base?: string): string {
+  if (op === "pct" || op === "rev") return "per cent";
+  if (op === "share") return "per cent of the parent total";
+  if (op === "idx") return `index, ${periodWords(base ?? "", series.frequency)} = 100`;
+  return series.unit === "percent" ? "percentage points" : unitLabel(series.unit, series.scale_factor);
+}
+
+/** The text of one derived value as shown: "+17.1%", "−7.8", "+5,463", "416.1", "0.21%". v is already rounded by the rule (lib/series-derive.ts). */
+export function derivedText(op: DerivedViewJson["op"], v: string): string {
+  if (op === "pct" || op === "rev") return `${derivedDisplay(v, true)}%`;
+  if (op === "chg") return derivedDisplay(v, true);
+  if (op === "share") return `${derivedDisplay(v, false)}%`;
+  return derivedDisplay(v, false);
+}
+
+/** Chart model of a derived view: one line per kind of figure (bars for the revision view); travelled gaps under the axis. */
+export function derivedModelFrom(series: ChartSeries, base: ChartModel, view: DerivedViewJson, kindWords: Record<string, string>): ChartModel {
+  const ord = new Map(base.periods.map((p) => [p.p, p.x]));
+  const kinds = [...new Set(view.points.map((p) => p.k))].sort((a, b) => (a === "be" ? -1 : b === "be" ? 1 : a.localeCompare(b)));
+  const bars = view.op === "rev";
+  const fu = (v: string) => formatDecimalString(v);
+  const lines: ChartLine[] = kinds
+    .map((k) => ({
+      key: k,
+      label: bars ? "Budget to revised" : k === "na" ? seriesTitle(series) : (kindWords[k] ?? vintageWords(k)),
+      style: bars ? { color: "var(--chart-be)", dash: null, marker: "square" as const } : (VINTAGE_STYLE[k] ?? OTHER_STYLE),
+      points: view.points
+        .filter((p) => p.k === k && p.v !== null && ord.has(p.p))
+        .map((p) => {
+          const pl = periodWords(p.p, series.frequency);
+          const note: string[] = [];
+          if (p.iv && p.iv.length === 2) {
+            const bp = periodWords(periodOfId(p.in[1]), series.frequency);
+            if (view.op === "rev") note.push(`Revised ${fu(p.iv[0])} against budget ${fu(p.iv[1])}`, `Difference ${signedText(p.diff ?? "")} ${unitLabel(series.unit, series.scale_factor)}`);
+            else if (view.op === "share") note.push(`${fu(p.iv[0])} of ${fu(p.iv[1])}, ${unitLabel(series.unit, series.scale_factor)}`);
+            else if (view.op === "idx") note.push(`${fu(p.iv[0])} against ${fu(p.iv[1])} in ${bp}`);
+            else note.push(`${fu(p.iv[0])} in ${pl} against ${fu(p.iv[1])} in ${bp}`);
+            note.push("Derived from checked figures");
+          }
+          return {
+            x: ord.get(p.p)!,
+            y: Number(p.v),
+            period: p.p,
+            periodLabel: pl,
+            valueText: derivedText(view.op, p.v!),
+            href: obsHref(p.in[0]),
+            sheet: obsSlug(p.in[0]),
+            kindLabel: kindWords[k],
+            note,
+          };
+        })
+        .sort((a, b) => a.x - b.x),
+    }))
+    .filter((l) => l.points.length > 0);
+  const marks: ChartMark[] = view.points
+    .filter((p) => p.v === null && p.gap === "travel" && ord.has(p.p))
+    .map((p) => {
+      const failed = p.bad ?? p.in[0];
+      return {
+        x: ord.get(p.p)!,
+        period: p.p,
+        periodLabel: periodWords(p.p, series.frequency),
+        vintage: p.k,
+        vintageLabel: kindWords[p.k] ?? vintageWords(p.k),
+        status: (p.st as StatusKey) ?? "unknown",
+        statusLabel: p.why ?? "No value",
+        href: obsHref(failed),
+        sheet: obsSlug(failed),
+      };
+    });
+  return {
+    ...base,
+    unit: derivedUnit(view.op, series, view.base),
+    unitCode: view.op === "chg" ? series.unit : "percent",
+    zeroBased: view.op !== "idx",
+    lines,
+    marks,
+    bars,
+  };
+}

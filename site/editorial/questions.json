@@ -1,0 +1,195 @@
+{
+  "$comment": "Answer pages (DESIGN.md 9.4, decision 17.9): the questions people ask, each with a takeaway title and the series and kind of figure it answers from. The answer sentence is a template filled from the release at build time; nothing here is a number. 'subject' starts the sentence, 'label' says what the figure covers. Where a question has several parts (current and development spending), each is shown on its own and never added up unless 'total' names a series the release holds as a checked total. A part whose series is missing or has no checked figure of that kind is dropped; a question left with no part is not published. PROVISIONAL (unattended run, 2026-11-15): drafted by the home agent; Ali and Ahmad approve the questions and the wording.",
+  "provisional": true,
+  "questions": [
+    {
+      "slug": "inflation-now",
+      "topic": "prices",
+      "question": "What is inflation in Pakistan right now?",
+      "title": "Inflation: the latest change in consumer prices over a year",
+      "parts": [{ "series": "cpi.national.yoy.general", "kind": "change_yoy", "subject": "Inflation", "label": "the national Consumer Price Index (all items)" }]
+    },
+    {
+      "slug": "food-inflation",
+      "topic": "prices",
+      "question": "How fast are food prices rising?",
+      "title": "Food prices: the latest change over a year",
+      "parts": [{ "series": "cpi.national.yoy.group.food", "kind": "change_yoy", "subject": "Food inflation", "label": "the national price index for food and non-alcoholic beverages" }]
+    },
+    {
+      "slug": "inflation-towns-villages",
+      "topic": "prices",
+      "question": "Is inflation higher in towns or in villages?",
+      "title": "Inflation in towns and in villages, side by side",
+      "parts": [
+        { "series": "cpi.urban.yoy.general", "kind": "change_yoy", "subject": "Urban inflation", "label": "the urban Consumer Price Index (all items)", "heading": "Towns (urban)" },
+        { "series": "cpi.rural.yoy.general", "kind": "change_yoy", "subject": "Rural inflation", "label": "the rural Consumer Price Index (all items)", "heading": "Villages (rural)" }
+      ]
+    },
+    {
+      "slug": "consumer-price-index",
+      "topic": "prices",
+      "question": "What is the level of the consumer price index?",
+      "title": "The national consumer price index, as printed",
+      "parts": [{ "series": "cpi.national.general.b2015_16", "kind": "index", "subject": "The national Consumer Price Index (all items)", "label": "the index level" }]
+    },
+    {
+      "slug": "food-weight",
+      "topic": "prices",
+      "question": "How much of the price basket is food?",
+      "title": "The weight of food in the price basket",
+      "parts": [{ "series": "cpi.national.weight.food.b2015_16", "kind": "weight", "subject": "Food and non-alcoholic beverages", "label": "their weight in the national price basket" }]
+    },
+    {
+      "slug": "unemployment-rate",
+      "topic": "jobs",
+      "question": "What is the unemployment rate in Pakistan?",
+      "title": "Unemployment in Pakistan, from the latest checked survey round",
+      "parts": [{ "series": "lfs.unemployment_rate.total.total", "kind": "survey_round", "subject": "The unemployment rate", "label": "unemployed people as a share of the labour force, both sexes" }]
+    },
+    {
+      "slug": "unemployment-women",
+      "topic": "jobs",
+      "question": "What is unemployment among women?",
+      "title": "Unemployment among women, from the latest checked survey round",
+      "parts": [{ "series": "lfs.unemployment_rate.female.total", "kind": "survey_round", "subject": "The unemployment rate for women", "label": "unemployed women as a share of women in the labour force" }]
+    },
+    {
+      "slug": "unemployment-men",
+      "topic": "jobs",
+      "question": "What is unemployment among men?",
+      "title": "Unemployment among men, from the latest checked survey round",
+      "parts": [{ "series": "lfs.unemployment_rate.male.total", "kind": "survey_round", "subject": "The unemployment rate for men", "label": "unemployed men as a share of men in the labour force" }]
+    },
+    {
+      "slug": "labour-force-size",
+      "topic": "jobs",
+      "question": "How many people are in the labour force?",
+      "title": "The size of the labour force",
+      "parts": [{ "series": "lfs.labour_force.total.total", "kind": "survey_round", "subject": "The civilian labour force", "label": "people working or looking for work, both sexes" }]
+    },
+    {
+      "slug": "people-employed",
+      "topic": "jobs",
+      "question": "How many people have a job?",
+      "title": "The number of employed people",
+      "parts": [{ "series": "lfs.employed.total.total", "kind": "survey_round", "subject": "The number of employed people", "label": "employed persons, both sexes" }]
+    },
+    {
+      "slug": "women-labour-force-participation",
+      "topic": "jobs",
+      "question": "How many women take part in the labour force?",
+      "title": "Women's labour force participation",
+      "parts": [{ "series": "lfs.lfpr_refined.female.total", "kind": "survey_round", "subject": "The labour force participation rate of women", "label": "the refined rate: women in the labour force as a share of women of working age" }]
+    },
+    {
+      "slug": "federal-health-spending",
+      "topic": "spending",
+      "question": "How much does the federal government spend on health?",
+      "title": "Federal health spending: the budget estimate, and how it was revised",
+      "parts": [
+        { "series": "fed.exp.current.function.health", "kind": "be", "subject": "Current spending on health", "label": "current spending on health (revenue account)", "heading": "Current spending (revenue account)" },
+        { "series": "fed.exp.development.revenue_account.function.health", "kind": "be", "subject": "Development spending on health", "label": "development spending on health (revenue account)", "heading": "Development spending (revenue account)" }
+      ]
+    },
+    {
+      "slug": "federal-education-spending",
+      "topic": "spending",
+      "question": "How much does the federal government spend on education?",
+      "title": "Federal education spending: the budget estimate, and how it was revised",
+      "parts": [
+        { "series": "fed.exp.current.function.education_affairs_and_services", "kind": "be", "subject": "Current spending on education", "label": "current spending on education affairs and services (revenue account)", "heading": "Current spending (revenue account)" },
+        { "series": "fed.exp.development.revenue_account.function.education_affairs_and_services", "kind": "be", "subject": "Development spending on education", "label": "development spending on education affairs and services (revenue account)", "heading": "Development spending (revenue account)" }
+      ]
+    },
+    {
+      "slug": "federal-defence-spending",
+      "topic": "spending",
+      "question": "How much does the federal government spend on defence?",
+      "title": "Federal defence spending: the budget estimate, and how it was revised",
+      "parts": [
+        { "series": "fed.exp.current.function.defence_affairs_and_services", "kind": "be", "subject": "Current spending on defence", "label": "current spending on defence affairs and services (revenue account)", "heading": "Current spending (revenue account)" },
+        { "series": "fed.exp.development.revenue_account.function.defence_affairs_and_services", "kind": "be", "subject": "Development spending on defence", "label": "development spending on defence affairs and services (revenue account)", "heading": "Development spending (revenue account)" }
+      ]
+    },
+    {
+      "slug": "federal-total-spending",
+      "topic": "spending",
+      "question": "How much does the federal government spend in total?",
+      "title": "Total federal spending: the budget estimate, and how it was revised",
+      "parts": [{ "series": "fed.exp.total", "kind": "be", "subject": "Total federal expenditure", "label": "total federal expenditure" }]
+    },
+    {
+      "slug": "federal-development-spending",
+      "topic": "spending",
+      "question": "How big is the federal development budget?",
+      "title": "Federal development spending: the budget estimate, and how it was revised",
+      "parts": [{ "series": "fed.exp.development.total", "kind": "be", "subject": "Federal development expenditure", "label": "total development expenditure" }]
+    },
+    {
+      "slug": "federal-social-protection-spending",
+      "topic": "spending",
+      "question": "How much does the federal government spend on social protection?",
+      "title": "Federal social protection spending: the budget estimate, and how it was revised",
+      "parts": [
+        { "series": "fed.exp.current.function.social_protection", "kind": "be", "subject": "Current spending on social protection", "label": "current spending on social protection (revenue account)", "heading": "Current spending (revenue account)" },
+        { "series": "fed.exp.development.revenue_account.function.social_protection", "kind": "be", "subject": "Development spending on social protection", "label": "development spending on social protection (revenue account)", "heading": "Development spending (revenue account)" }
+      ]
+    },
+    {
+      "slug": "federal-tax-revenue",
+      "topic": "revenue",
+      "question": "How much tax does the federal government expect to collect?",
+      "title": "Federal tax revenue: the budget estimate, and how it was revised",
+      "parts": [{ "series": "fed.rev.tax", "kind": "be", "subject": "Federal tax revenue", "label": "tax revenue receipts" }]
+    },
+    {
+      "slug": "direct-and-indirect-taxes",
+      "topic": "revenue",
+      "question": "How much federal tax is direct and how much indirect?",
+      "title": "Direct and indirect federal taxes, side by side",
+      "parts": [
+        { "series": "fed.rev.tax.direct", "kind": "be", "subject": "Direct taxes", "label": "direct taxes", "heading": "Direct taxes" },
+        { "series": "fed.rev.tax.indirect", "kind": "be", "subject": "Indirect taxes", "label": "indirect taxes", "heading": "Indirect taxes" }
+      ]
+    },
+    {
+      "slug": "provincial-share",
+      "topic": "revenue",
+      "question": "How much of federal tax goes to the provinces?",
+      "title": "The provinces' share of federal taxes",
+      "parts": [{ "series": "fed.rev.provincial_share", "kind": "be", "subject": "The provinces' share of federal taxes", "label": "the provincial share in federal taxes" }]
+    },
+    {
+      "slug": "non-tax-revenue",
+      "topic": "revenue",
+      "question": "How much does the federal government collect apart from taxes?",
+      "title": "Federal non-tax revenue: the budget estimate, and how it was revised",
+      "parts": [{ "series": "fed.rev.nontax", "kind": "be", "subject": "Federal non-tax revenue", "label": "non-tax revenue receipts" }]
+    },
+    {
+      "slug": "labour-force-participation-by-province",
+      "topic": "provinces",
+      "question": "Which province has the highest labour force participation?",
+      "title": "Labour force participation in each province",
+      "parts": [
+        { "series": "lfs.lfpr_refined.pb.total.total", "kind": "survey_round", "subject": "The participation rate in Punjab", "label": "the refined labour force participation rate", "heading": "Punjab" },
+        { "series": "lfs.lfpr_refined.sd.total.total", "kind": "survey_round", "subject": "The participation rate in Sindh", "label": "the refined labour force participation rate", "heading": "Sindh" },
+        { "series": "lfs.lfpr_refined.kp.total.total", "kind": "survey_round", "subject": "The participation rate in Khyber Pakhtunkhwa", "label": "the refined labour force participation rate", "heading": "Khyber Pakhtunkhwa" },
+        { "series": "lfs.lfpr_refined.ba.total.total", "kind": "survey_round", "subject": "The participation rate in Balochistan", "label": "the refined labour force participation rate", "heading": "Balochistan" }
+      ]
+    },
+    {
+      "slug": "labour-force-by-province",
+      "topic": "provinces",
+      "question": "How many people are in the labour force in each province?",
+      "title": "The labour force in each province",
+      "parts": [
+        { "series": "lfs.labour_force.pb.total.total", "kind": "survey_round", "subject": "The labour force of Punjab", "label": "civilian labour force, both sexes", "heading": "Punjab" },
+        { "series": "lfs.labour_force.sd.total.total", "kind": "survey_round", "subject": "The labour force of Sindh", "label": "civilian labour force, both sexes", "heading": "Sindh" },
+        { "series": "lfs.labour_force.kp.total.total", "kind": "survey_round", "subject": "The labour force of Khyber Pakhtunkhwa", "label": "civilian labour force, both sexes", "heading": "Khyber Pakhtunkhwa" },
+        { "series": "lfs.labour_force.ba.total.total", "kind": "survey_round", "subject": "The labour force of Balochistan", "label": "civilian labour force, both sexes", "heading": "Balochistan" }
+      ]
+    }
+  ]
+}

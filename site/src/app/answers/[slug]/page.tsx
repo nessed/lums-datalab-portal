@@ -6,6 +6,7 @@
 // links to the series and receipts. Where the release holds several parts of
 // the answer, each is shown, labelled, and never added up. URL: /answers/<slug>.
 import type { Metadata } from "next";
+import { seriesTitle } from "@/lib/titles";
 import { notFound } from "next/navigation";
 import Link from "@/components/ui/Link";
 import { Breadcrumbs } from "@/components/ui/Basics";
@@ -65,7 +66,7 @@ export default async function AnswerPage({ params }: Props) {
           <div key={s.series_id} className="ans-cover">
             {covered.length > 1 ? (
               <h3>
-                <Link href={seriesHref(s.series_id)}>{s.name}</Link>
+                <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
               </h3>
             ) : null}
             {s.definition ? (
@@ -93,7 +94,7 @@ export default async function AnswerPage({ params }: Props) {
         <ul>
           {covered.map((s) => (
             <li key={s.series_id}>
-              <Link href={seriesHref(s.series_id)}>{s.name}</Link>: chart, every figure with its status, and downloads
+              <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>: chart, every figure with its status, and downloads
             </li>
           ))}
           <li>Every figure on this page links to its receipt: the government page it was printed on, with the figure boxed, and the checks it passed.</li>

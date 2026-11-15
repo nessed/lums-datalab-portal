@@ -2,6 +2,7 @@
 // uses this module, so it must never pull in the data layer (node:fs).
 import { formatDecimalString, periodShort, periodWords, unitLabel, vintageWords } from "./format";
 import { statusOf, type StatusKey } from "./status";
+import { seriesTitle } from "./titles";
 
 export type ChartPoint = {
   x: number;
@@ -77,7 +78,7 @@ export const VINTAGE_STYLE: Record<string, LineStyle> = {
 const OTHER_STYLE: LineStyle = { color: "var(--chart-other)", dash: "2 3", marker: "diamond" };
 
 /** Minimal shapes, so this runs in the browser too (compare page). */
-export type ChartSeries = { series_id: string; name: string; frequency: string; unit: string; scale_factor: number | null; breaks: { at_period: string; kind: string; note: string }[] };
+export type ChartSeries = { series_id: string; name: string; title?: string | null; frequency: string; unit: string; scale_factor: number | null; breaks: { at_period: string; kind: string; note: string }[] };
 export type ChartObs = { obs_id: string; period: string; vintage: string; value: string | null; published: boolean; status?: string | null; gap_kind?: string | null };
 
 // Must match slugify() in data.ts.
@@ -132,7 +133,7 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
   const single = vintages.length === 1;
   const lines: ChartLine[] = vintages.map((v) => ({
     key: v,
-    label: single && v === "na" ? series.name : vintageWords(v),
+    label: single && v === "na" ? seriesTitle(series) : vintageWords(v),
     style: VINTAGE_STYLE[v] ?? OTHER_STYLE,
     points: published
       .filter((o) => o.vintage === v && ord.has(o.period))
@@ -167,7 +168,7 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
     });
 
   return {
-    title: series.name,
+    title: seriesTitle(series),
     unit: unitLabel(series.unit, series.scale_factor),
     unitCode: series.unit,
     scale: series.scale_factor ?? 1,
@@ -261,7 +262,7 @@ export function derivedModelFrom(series: ChartSeries, base: ChartModel, view: De
   const lines: ChartLine[] = kinds
     .map((k) => ({
       key: k,
-      label: bars ? "Budget to revised" : k === "na" ? series.name : (kindWords[k] ?? vintageWords(k)),
+      label: bars ? "Budget to revised" : k === "na" ? seriesTitle(series) : (kindWords[k] ?? vintageWords(k)),
       style: bars ? { color: "var(--chart-be)", dash: null, marker: "square" as const } : (VINTAGE_STYLE[k] ?? OTHER_STYLE),
       points: view.points
         .filter((p) => p.k === k && p.v !== null && ord.has(p.p))

@@ -2,6 +2,7 @@
 // its receipt and every caveat is stated where it applies. All numbers are
 // read from the release; the sentences adapt to what the release holds.
 import type { Metadata } from "next";
+import { seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
 import type { ReactNode } from "react";
 import Cite from "@/components/Cite";
@@ -50,7 +51,7 @@ function mainLine(s: Series, vintage?: string): Observation[] {
 
 /** A figure in the text: the value with its unit in words, linked to its receipt. */
 function Fig({ o, s, human }: { o: Observation; s: Series; human?: boolean }) {
-  const label = `${s.name}, ${periodWords(o.period, s.frequency)}${o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}: open the receipt`;
+  const label = `${seriesTitle(s)}, ${periodWords(o.period, s.frequency)}${o.vintage !== "na" ? `, ${vintageWords(o.vintage).toLowerCase()}` : ""}: open the receipt`;
   const unit = unitLabel(o.unit, o.scale_factor);
   const v = <V o={o} className="v-link fig-link" label={label} />;
   return (

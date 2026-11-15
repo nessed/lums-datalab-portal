@@ -4,6 +4,7 @@
 // (DESIGN.md 14.1: catalogue HTML at most 100 KB and 1,500 elements).
 // scripts/check-build.mjs checks every value in it against the release.
 import { datasetName, db, obsHref, seriesCsvHref, seriesHref, visibleSeries } from "@/lib/data";
+import { printedLine, seriesTitle } from "@/lib/titles";
 import { facetValuesOf } from "@/lib/facets.mjs";
 import { kindWords } from "@/components/Figure";
 import { formatDecimalString, periodWords, unitLabel } from "@/lib/format";
@@ -13,7 +14,10 @@ export const dynamic = "force-static";
 
 export type CatalogueRow = {
   id: string;
+  /** The plain title (editorial/titles.json); the printed name when there is none. */
   name: string;
+  /** The printed name, when it differs from the title (shown as a grey second line). */
+  printed: string | null;
   href: string;
   csv: string;
   unit: string;
@@ -51,7 +55,8 @@ export function GET() {
     const f = facetValuesOf(s) as Record<string, string | null>;
     return {
       id: s.series_id,
-      name: s.name,
+      name: seriesTitle(s),
+      printed: printedLine(s),
       href: seriesHref(s.series_id),
       csv: seriesCsvHref(s.series_id),
       unit: unitLabel(s.unit, s.scale_factor),
@@ -70,11 +75,11 @@ export function GET() {
           }
         : null,
       tags,
-      parent: parents[0]?.name ?? null,
+      parent: parents[0] ? seriesTitle(parents[0]) : null,
       root: !s.parent_id || !ids.has(s.parent_id),
       order,
       f: Object.fromEntries(Object.entries(f).filter(([, v]) => v)) as Record<string, string>,
-      search: [s.name, s.series_id, ...(s.synonyms ?? []), datasetName(s.dataset), ...parents.map((p) => p.name)].join(" ").toLowerCase(),
+      search: [seriesTitle(s), s.name, s.series_id, ...(s.synonyms ?? []), datasetName(s.dataset), ...parents.flatMap((p) => [seriesTitle(p), p.name])].join(" ").toLowerCase(),
     };
   });
   return Response.json({ release: d.release.version, rows });

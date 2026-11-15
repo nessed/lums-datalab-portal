@@ -143,6 +143,7 @@ export function CatalogueResults({ groups, total, indexUrl }: { groups: FacetGro
           <li key={r.id} className="cat-row">
             <div className="cat-name">
               <Link href={r.href}>{r.name}</Link>
+              {r.printed ? <span className="cat-path">{r.printed}</span> : null}
               {r.tags.map((t) => (
                 <span key={t} className={`tag${t === "19th ICLS" ? " tag-warn" : ""}`}>
                   {t}

@@ -96,3 +96,24 @@ export type Evidence =
 /* ---------- the adapter ---------- */
 
 export type AdapterName = "datalab" | "golden";
+
+/* ---------- plain titles (DESIGN.md 6.4, round 2) ---------- */
+
+/**
+ * Where a series' reader title comes from:
+ *   "approved"  editorial/titles.json, approved by a person;
+ *   "draft"     editorial/titles.json, drafted and not yet approved (everything today);
+ *   "printed"   no entry: the title is the printed name, unchanged (the golden adapter
+ *               for every series, the datalab adapter for a series the file does not cover).
+ * The printed name itself always stays on the series as `name`.
+ */
+export type TitleStatus = "approved" | "draft" | "printed";
+
+/** What the adapter adds to every series: a short plain title, a one-sentence summary and where they come from. */
+export type SeriesTitleFields = {
+  /** Short plain title ("Inflation", "Federal health spending (current)"); the printed name when there is no entry. */
+  title: string;
+  /** One sentence, no digits; null when there is no entry (pages then show the definition). */
+  summary: string | null;
+  titleStatus: TitleStatus;
+};

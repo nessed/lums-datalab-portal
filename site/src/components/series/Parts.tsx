@@ -16,6 +16,7 @@ import { latestPublished, ancestors } from "@/lib/stats";
 import { KIND, READER_STATUS } from "@/lib/words";
 import type { ReaderStatusKey } from "@/lib/adapter/contract";
 import { decodeId, documentsOf, kindLong, markerOf, printedLabels, type Answer } from "./model";
+import { seriesTitle, titleIsDraft } from "@/lib/titles";
 
 /** A derived figure: data-op names the operation, data-in its inputs (the figure itself first). */
 export function D({ op, inputs, children }: { op: string; inputs: string[]; children: ReactNode }) {
@@ -234,10 +235,10 @@ export function KindTable({ series }: { series: Series }) {
       <p className="kt-intro small">
         {unit[0].toUpperCase() + unit.slice(1)}, exactly as printed, newest first. <strong>All figures checked unless marked.</strong> Tap a figure to see where it is printed.
       </p>
-      <div className="table-wrap kt-wrap" role="region" aria-label={`${series.name}: every figure by kind`} tabIndex={0}>
+      <div className="table-wrap kt-wrap" role="region" aria-label={`${seriesTitle(series)}: every figure by kind`} tabIndex={0}>
         <table className="kt">
           <caption className="sr-only">
-            {series.name}, {unit}: every figure in this release by period and kind of figure, newest first. Figures are checked unless marked.
+            {seriesTitle(series)}, {unit}: every figure in this release by period and kind of figure, newest first. Figures are checked unless marked.
           </caption>
           <thead>
             <tr>
@@ -298,6 +299,15 @@ export function About({ series, csv }: { series: Series; csv: string }) {
     <section className="about" aria-labelledby="h-about" id="about">
       <h2 id="h-about">About this series</h2>
       <dl className="facts about-facts">
+        <dt>Printed name</dt>
+        <dd>
+          <span>{series.name}</span>
+          {series.titleStatus === "printed" ? (
+            <span className="draft-mark"> The site has no plain title for this series yet, so it uses the printed name.</span>
+          ) : titleIsDraft(series) ? (
+            <span className="draft-mark"> The title above is a plain-words draft, not yet reviewed by a person.</span>
+          ) : null}
+        </dd>
         {series.definition ? (
           <>
             <dt>Definition</dt>
@@ -433,7 +443,7 @@ function LevelValue({ s, o, ref0, series }: { s: Series; o: Observation | undefi
         <StatusMark k={visualKey(o.reader)} /> {o.reader.word}
       </span>
     );
-  return <V o={o} short sheet label={`${s.name}: ${kind} ${periodWords(ref0.period, series.frequency)}`} />;
+  return <V o={o} short sheet label={`${seriesTitle(s)}: ${kind} ${periodWords(ref0.period, series.frequency)}`} />;
 }
 
 export function WhereItSits({ series }: { series: Series }) {
@@ -456,11 +466,11 @@ export function WhereItSits({ series }: { series: Series }) {
       <ol className="trail-list">
         {up.map((s) => (
           <li key={s.series_id}>
-            <Link href={seriesHref(s.series_id)}>{s.name}</Link> {ref0 ? <LevelValue s={s} o={at(s)} ref0={ref0} series={series} /> : null}
+            <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link> {ref0 ? <LevelValue s={s} o={at(s)} ref0={ref0} series={series} /> : null}
           </li>
         ))}
         <li aria-current="page">
-          <strong>{series.name}</strong> {ref0 ? <LevelValue s={series} o={ref0} ref0={ref0} series={series} /> : null}
+          <strong>{seriesTitle(series)}</strong> {ref0 ? <LevelValue s={series} o={ref0} ref0={ref0} series={series} /> : null}
         </li>
       </ol>
       {children.length ? <Others label="Made up of" items={children} at={at} ref0={ref0} series={series} /> : null}
@@ -476,13 +486,13 @@ function Others({ label, items, at, ref0, series, more }: { label: string; items
       <ul className="trail-others">
         {items.map((s) => (
           <li key={s.series_id}>
-            <Link href={seriesHref(s.series_id)}>{s.name}</Link> {ref0 ? <LevelValue s={s} o={at(s)} ref0={ref0} series={series} /> : null}
+            <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link> {ref0 ? <LevelValue s={s} o={at(s)} ref0={ref0} series={series} /> : null}
           </li>
         ))}
       </ul>
       {more ? (
         <p className="small">
-          <Link href={seriesHref(more.series_id)}>Every line under {more.name}</Link>
+          <Link href={seriesHref(more.series_id)}>Every line under {seriesTitle(more)}</Link>
         </p>
       ) : null}
     </>

@@ -146,7 +146,7 @@ export default function Compare({
     const pts = ptsOf(sd);
     if (show === "index") return base ? indexTo(pts, base, sd.f, sd.br) : asPrinted([]);
     if (show === "change") return pctChange(pts, sd.f, sd.br);
-    if (show === "share") return total ? shareOf(pts, pointsOf(total, kinds.get(sd.id) ?? "be"), total.n, sd.f) : [];
+    if (show === "share") return total ? shareOf(pts, pointsOf(total, kinds.get(sd.id) ?? "be"), (total.t ?? total.n), sd.f) : [];
     return asPrinted(pts);
   };
   const shown = new Map(charted.map((sd) => [sd.id, shownOf(sd)]));
@@ -167,7 +167,7 @@ export default function Compare({
   })();
   const lineOf = (sd: SeriesData): ChartLine => ({
     id: sd.id,
-    name: sd.n,
+    name: (sd.t ?? sd.n),
     style: styleOf(sd.id),
     step: STEP[sd.f] ?? null,
     pts: (shown.get(sd.id) ?? [])
@@ -226,7 +226,7 @@ export default function Compare({
     unit: list[0].u,
     scale: list[0].sf,
     height: groups.length > 1 ? 200 : 260,
-    label: `Chart of ${list.map((s) => s.n).join("; ")}, ${SHOW_AS.find((x) => x.key === show)?.label.toLowerCase()}. Every figure is in the table below.`,
+    label: `Chart of ${list.map((s) => s.t ?? s.n).join("; ")}, ${SHOW_AS.find((x) => x.key === show)?.label.toLowerCase()}. Every figure is in the table below.`,
   });
 
   /* ---------- words above the chart ---------- */
@@ -239,10 +239,10 @@ export default function Compare({
         const p = periodLabel(b.p, sd.f);
         const kind = b.k.replaceAll("_", " ");
         const hit = breakNotes.find((n) => n.p === p && n.kind === kind);
-        if (hit) hit.names.push(sd.n);
-        else breakNotes.push({ key: `${p}|${kind}`, names: [sd.n], p, kind });
+        if (hit) hit.names.push((sd.t ?? sd.n));
+        else breakNotes.push({ key: `${p}|${kind}`, names: [(sd.t ?? sd.n)], p, kind });
       }
-  const exclNotes = ready ? loaded.filter((sd) => why.get(sd.id)).map((sd) => ({ id: sd.id, name: sd.n, why: why.get(sd.id)! })) : [];
+  const exclNotes = ready ? loaded.filter((sd) => why.get(sd.id)).map((sd) => ({ id: sd.id, name: (sd.t ?? sd.n), why: why.get(sd.id)! })) : [];
   const hasStages = loaded.some((sd) => sd.pts.some((x) => x.k === "be") && sd.pts.some((x) => x.k === "re"));
 
   /* ---------- the view as a link, a citation and a file ---------- */
@@ -260,7 +260,7 @@ export default function Compare({
   const origin = release.siteUrl ? release.siteUrl.replace(/\/$/, "") : "{{ORIGIN}}";
   const showWords =
     show === "index" ? `shown as an index, ${base ? periodLabel(base, loaded[0]?.f ?? "") : ""} = 100` : show === "change" ? "shown as % change from a year earlier" : show === "share" ? `shown as a share of ${total?.n ?? "a total"}` : "as printed";
-  const viewTitle = `Compare: ${loaded.map((s) => s.n).join("; ")}, ${showWords}`;
+  const viewTitle = `Compare: ${loaded.map((s) => s.t ?? s.n).join("; ")}, ${showWords}`;
   const cited = {
     kind: "view" as const,
     title: viewTitle,
@@ -373,9 +373,9 @@ export default function Compare({
             return (
               <li key={id}>
                 <Swatch style={styleOf(id)} />
-                {isSD(f) ? <a href={`/series/${slug(id)}`}>{f.n}</a> : <span>{f === "error" ? `${id} (not in this release)` : id}</span>}
+                {isSD(f) ? <a href={`/series/${slug(id)}`}>{f.t ?? f.n}</a> : <span>{f === "error" ? `${id} (not in this release)` : id}</span>}
                 <button type="button" className="btn btn-tiny" onClick={() => setIds(ids.filter((x) => x !== id))}>
-                  Remove<span className="sr-only"> {isSD(f) ? f.n : id}</span>
+                  Remove<span className="sr-only"> {isSD(f) ? (f.t ?? f.n) : id}</span>
                 </button>
               </li>
             );
@@ -467,7 +467,7 @@ export default function Compare({
               {amountIds.length ? null : <option value="">no amount series to take a share of</option>}
               {amountIds.map((id) => (
                 <option key={id} value={id}>
-                  {isSD(data[id]) ? (data[id] as SeriesData).n : id}
+                  {isSD(data[id]) ? ((data[id] as SeriesData).t ?? (data[id] as SeriesData).n) : id}
                 </option>
               ))}
             </select>
@@ -528,7 +528,7 @@ export default function Compare({
                   <ul className="cmp-key">
                     {g.list.map((sd) => (
                       <li key={sd.id}>
-                        <Swatch style={styleOf(sd.id)} /> <span>{sd.n}</span>
+                        <Swatch style={styleOf(sd.id)} /> <span>{(sd.t ?? sd.n)}</span>
                       </li>
                     ))}
                   </ul>
@@ -576,7 +576,7 @@ export default function Compare({
         <ul className="dl-list dl-list--compact">
           {loaded.map((sd) => (
             <li key={sd.id}>
-              <span className="dl-what">{sd.n}</span>
+              <span className="dl-what">{(sd.t ?? sd.n)}</span>
               <span className="take-row">
                 <a href={`${dataBase}/series/${slug(sd.id)}.xlsx`} download>
                   Excel (.xlsx)
@@ -606,7 +606,7 @@ export default function Compare({
                   <th scope="col">Period</th>
                   {loaded.map((sd) => (
                     <th key={sd.id} scope="col" className="num">
-                      {sd.n}
+                      {(sd.t ?? sd.n)}
                       <span className="cell-sub">
                         {why.get(sd.id) || show === "printed" ? sd.uw : show === "index" ? "index" : "per cent"}
                         {kinds.get(sd.id) !== "as_printed" ? `, ${kindWords(kinds.get(sd.id) as KindKey)}` : ""}

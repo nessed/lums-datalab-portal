@@ -2,6 +2,7 @@
 // apply to all of it, its quality as three separate numbers against their
 // frozen thresholds, its gaps and disputes, and its tables as printed.
 import type { Metadata } from "next";
+import { seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import { KindAndPeriod } from "@/components/Figure";
@@ -150,7 +151,7 @@ export default async function DatasetPage({ params }: Props) {
               return (
                 <li key={s.series_id}>
                   <Link href={seriesHref(s.series_id)} className="ds-s-name">
-                    {s.name}
+                    {seriesTitle(s)}
                   </Link>
                   <span className="ds-s-v">
                     {o ? (
@@ -163,7 +164,7 @@ export default async function DatasetPage({ params }: Props) {
                     ) : null}
                   </span>
                   <Spark series={s} width={84} height={26} />
-                  <a href={seriesCsvHref(s.series_id)} download className="ds-s-dl" aria-label={`Download ${s.name} as CSV`}>
+                  <a href={seriesCsvHref(s.series_id)} download className="ds-s-dl" aria-label={`Download ${seriesTitle(s)} as CSV`}>
                     CSV
                   </a>
                 </li>
@@ -278,7 +279,7 @@ export default async function DatasetPage({ params }: Props) {
                   return (
                     <li key={o.obs_id}>
                       <Link href={obsHref(o.obs_id)}>
-                        {s.name}, <KindAndPeriod o={o} series={s} />
+                        {seriesTitle(s)}, <KindAndPeriod o={o} series={s} />
                       </Link>
                     </li>
                   );

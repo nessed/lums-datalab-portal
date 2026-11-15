@@ -25,7 +25,10 @@ export type Pt = {
 export type SeriesData = {
   release: string;
   id: string;
+  /** Printed name (the CSV keeps it). */
   n: string;
+  /** Plain title (editorial/titles.json), for the legend and picker; older files have none. */
+  t?: string;
   ds: string;
   dk: string;
   u: string;

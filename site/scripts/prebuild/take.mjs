@@ -551,6 +551,8 @@ export default async function take(ctx) {
         release: version,
         id: s.series_id,
         n: s.name,
+        // Plain title for the legend and picker (editorial/titles.json); n stays the printed name, used in the CSV.
+        t: s.title,
         ds: d.release.dataset_status?.[s.dataset]?.name ?? s.dataset,
         dk: s.dataset,
         u: s.unit,
@@ -572,7 +574,7 @@ export default async function take(ctx) {
     JSON.stringify(
       seriesList.map((s) => {
         const pub = (d.obsBySeries.get(s.series_id) ?? []).filter((o) => o.reader.showsValue).map((o) => o.period).sort();
-        return { id: s.series_id, n: s.name, d: d.release.dataset_status?.[s.dataset]?.name ?? s.dataset, u: unitLabel(s.unit, s.scale_factor), y: (s.synonyms ?? []).join(" "), c: pub.length, p: pub.length ? `${pub[0]} to ${pub.at(-1)}` : "" };
+        return { id: s.series_id, n: s.title, d: d.release.dataset_status?.[s.dataset]?.name ?? s.dataset, u: unitLabel(s.unit, s.scale_factor), y: [s.name, ...(s.synonyms ?? [])].join(" "), c: pub.length, p: pub.length ? `${pub[0]} to ${pub.at(-1)}` : "" };
       }),
     ),
   );

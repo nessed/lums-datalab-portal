@@ -5,7 +5,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import config from "../../release.config.json";
-import type { AdapterName, BatchGap, KindKey, ReaderStatus, ReleaseInfo, SignOff } from "./adapter/contract";
+import type { AdapterName, BatchGap, KindKey, ReaderStatus, ReleaseInfo, SignOff, TitleStatus } from "./adapter/contract";
 import { loadDatalab } from "./adapter/datalab";
 
 export const RELEASE_VERSION: string = config.version;
@@ -90,6 +90,13 @@ export type Series = {
   notes?: string | null;
   geo?: string | null;
   source_doc_types?: string[];
+  /* ----- contract fields, set by the adapter from editorial/titles.json (DESIGN.md 6.4); never read from the release ----- */
+  /** Short plain title for readers; the printed name when the editorial file has no entry. `name` stays the printed label. */
+  title: string;
+  /** One-sentence plain summary, no digits; null when there is none (the definition is shown instead). */
+  summary: string | null;
+  /** "approved" / "draft" (from the editorial file) or "printed" (no entry: the title is the printed name). */
+  titleStatus: TitleStatus;
 };
 
 export type Observation = {

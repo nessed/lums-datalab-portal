@@ -3,6 +3,7 @@
 // Derived figures come only from src/lib/series-derive.ts, which uses only
 // figures whose reader status says usableInDerived.
 import { db, obsHref, slugify, type Observation, type Series } from "@/lib/data";
+import { seriesTitle } from "@/lib/titles";
 import { bestModelFrom, chartModelFrom, type ChartModel } from "@/lib/chart-model";
 import { changeView, indexView, revisionView, shareView, KIND_RANK, type DInput, type DMeta, type DPoint, type DView } from "@/lib/series-derive";
 import { visualKey } from "@/lib/status";
@@ -81,7 +82,7 @@ export function derivedViews(series: Series): DView[] {
     for (const b of bases) out.push(indexView(meta, recs, b));
   }
   const parent = parentForShare(series);
-  if (parent) out.push(shareView(meta, recs, (d.obsBySeries.get(parent.series_id) ?? []).map(dinput), parent.name));
+  if (parent) out.push(shareView(meta, recs, (d.obsBySeries.get(parent.series_id) ?? []).map(dinput), seriesTitle(parent)));
   if (hasBudgetPair(series)) out.push(revisionView(meta, recs));
   return out;
 }

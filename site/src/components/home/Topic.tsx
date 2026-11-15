@@ -2,6 +2,7 @@
 // sparkline and latest value per row, the documents that feed the topic, and
 // for budget topics how much budget estimates change (8.2).
 import type { ReactNode } from "react";
+import { seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
 import Spark from "@/components/Spark";
 import { Num } from "@/components/ui/Num";
@@ -26,8 +27,8 @@ export function seriesRow(s: Series, words: PageWords): ReactNode {
   return (
     <li key={s.series_id} className="st-row">
       <span className="st-name">
-        <Link href={seriesHref(s.series_id)}>{s.name}</Link>
-        {parent ? <span className="st-parent small muted"> part of {parent.name}</span> : null}
+        <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
+        {parent ? <span className="st-parent small muted"> part of {seriesTitle(parent)}</span> : null}
       </span>
       <span className="st-spark" aria-hidden="true">
         <Spark series={s} width={88} height={26} link={false} />
@@ -133,13 +134,13 @@ export function revisionTable(series: Series[], words: PageWords, notes: Derived
           <tbody>
             {rows.map(({ s, st }) => {
               // One note per line: the average change, its formula and every pair it used; the other two columns come from the same pairs.
-              const a = notes.add(st.mean, `${s.name}: average change from budget to revised estimate (the average absolute change and the number of years in the same row use the same pairs)`);
+              const a = notes.add(st.mean, `${seriesTitle(s)}: average change from budget to revised estimate (the average absolute change and the number of years in the same row use the same pairs)`);
               const b = a;
               const c = a;
               return (
                 <tr key={s.series_id}>
                   <th scope="row">
-                    <Link href={seriesHref(s.series_id)}>{s.name}</Link>
+                    <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
                   </th>
                   <td className="num">
                     <DerivedInline d={st.n} id={a} />

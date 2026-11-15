@@ -54,9 +54,10 @@ export type AnswerValue = {
 };
 
 export type Answer = {
-  /** Headline series id, name (as the release names it), unit in words, frequency. */
+  /** Headline series id, plain title, printed name (as the release names it), unit in words, frequency. */
   s: string;
   n: string;
+  pn?: string;
   u: string;
   f: string;
   /** Every checked, signed-off value of the series, oldest first. */
@@ -91,8 +92,10 @@ export type SearchEntry = {
   /** Synonyms and search words (series), space separated. */
   y?: string;
   x?: number;
-  /** Printed label, when it differs from the name. */
+  /** Printed row label, when it differs from the title and the printed name. */
   l?: string;
+  /** Series: the printed name, when it differs from the plain title in n. */
+  pn?: string;
   /** Geography code ("pk", "pk-pb"). */
   g?: string;
   /** In the headline layer (signed off, chosen). */
@@ -281,6 +284,8 @@ export type Engine = {
 const W_NAME = 10;
 const W_SYN = 8;
 const W_LABEL = 6;
+/** The printed name of a series, when its plain title differs: below the title, level with synonyms. */
+const W_PRINTED = 8;
 const W_DOC = 1.5;
 
 export function buildEngine(index: SearchEntry[]): Engine {
@@ -341,6 +346,7 @@ export function buildEngine(index: SearchEntry[]): Engine {
         prep(e, [
           [W_NAME, e.n],
           [W_SYN, e.y],
+          [W_PRINTED, e.pn],
           [W_LABEL, e.l],
           [W_DOC, `${e.d ?? ""} ${e.u ?? ""} ${e.id.replace(/[._]/g, " ")}`],
         ]),
@@ -398,9 +404,11 @@ function expand(eng: Engine, word: string, typing: boolean): Expansion {
   // Typos: only for a word we do not know. One edit from four letters, two from eight.
   if (!known && word.length >= 4 && !/\d/.test(word)) {
     const max = word.length >= 8 ? 2 : 1;
-    for (const v of eng.vocab.keys()) {
-      if (Math.abs(v.length - s.length) > max) continue;
-      const d = editDistance(s, v, max);
+    for (const [v, surface] of eng.vocab) {
+      // Against the stem, and against the word as written ("spendng" is one edit from "spending", two from "spend").
+      const ds = Math.abs(v.length - s.length) > max ? max + 1 : editDistance(s, v, max);
+      const dw = Math.abs(surface.length - word.length) > max ? max + 1 : editDistance(word, surface, max);
+      const d = Math.min(ds, dw);
       if (d <= max) {
         put(v, d === 1 ? 0.7 : 0.5);
         for (const o of eng.equiv.get(v) ?? []) put(o, d === 1 ? 0.6 : 0.42);

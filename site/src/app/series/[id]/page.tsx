@@ -1,5 +1,6 @@
 // A series (DESIGN.md 9.5), one skeleton for every series. Phone order:
-//   1 title (reader name), the printed label, a one-line definition
+//   1 title (the plain title, editorial/titles.json), the printed name as a grey
+//     second line, a one-sentence summary (the definition and the printed row labels are in About)
 //   2 the answer line: latest checked value, kind, period, the change against
 //     the comparable figure, the source marker
 //   3 the chart, with the view switch, Units and range chips above it and the
@@ -18,11 +19,12 @@ import { ActionBar, CiteButton, CompareButton, DownloadButton, ShareButton } fro
 import { Breadcrumbs, Callout } from "@/components/ui/Basics";
 import SeriesView from "@/components/series/SeriesView";
 import { About, AnswerLine, KindTable, SourceLines, WhereItSits } from "@/components/series/Parts";
-import { answerOf, kindWordsOf, parentForShare, printedLabels, printedModels, unitOptions } from "@/components/series/model";
+import { answerOf, kindWordsOf, parentForShare, printedModels, unitOptions } from "@/components/series/model";
 import { datasetName, db, seriesCsvHref, seriesHref, slugify, visibleSeries } from "@/lib/data";
 import { COMING, feature, isOn, type FeatureKey } from "@/lib/features";
 import { periodWords, unitLabel } from "@/lib/format";
 import { ancestors } from "@/lib/stats";
+import { printedLine, seriesSummary, seriesTitle } from "@/lib/titles";
 
 export const dynamicParams = false;
 
@@ -40,7 +42,7 @@ function find(id: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const s = find((await params).id);
   if (!s) return { title: "Series" };
-  return { title: s.name, description: `${s.definition ?? s.name}. Every figure links to the page of the government document it was read from.` };
+  return { title: seriesTitle(s), description: `${seriesSummary(s) ?? s.definition ?? s.name} Every figure links to the page of the government document it was read from.` };
 }
 
 export default async function SeriesPage({ params }: Props) {
@@ -50,10 +52,10 @@ export default async function SeriesPage({ params }: Props) {
   const d = db();
   const path = seriesHref(series.series_id);
   const parents = ancestors(series);
-  const labels = printedLabels(series);
   const answer = answerOf(series);
   const printed = printedModels(series);
-  const defn = series.definition;
+  const printedName = printedLine(series);
+  const summary = seriesSummary(series);
   const all = d.obsBySeries.get(series.series_id) ?? [];
   const periods = [...new Set(all.map((o) => o.period))].sort();
   const inside = series.breaks.find((b) => periods.some((p) => p < b.at_period) && periods.some((p) => p >= b.at_period));
@@ -68,42 +70,32 @@ export default async function SeriesPage({ params }: Props) {
         items={[
           { href: "/browse", label: "Data" },
           { href: `/datasets/${series.dataset}`, label: datasetName(series.dataset) },
-          ...[...parents].reverse().slice(-1).map((p) => ({ href: seriesHref(p.series_id), label: p.name })),
-          { label: series.name },
+          ...[...parents].reverse().slice(-1).map((p) => ({ href: seriesHref(p.series_id), label: seriesTitle(p) })),
+          { label: seriesTitle(series) },
         ]}
       />
       <header className="sp-head">
-        <h1>{series.name}</h1>
-        {labels.length ? (
+        <h1>{seriesTitle(series)}</h1>
+        {printedName ? (
           <p className="sp-printed">
-            Printed as{" "}
-            <q>
-              <span>{labels[0]}</span>
-            </q>
-            {labels.length > 1 ? <span className="muted"> and other labels (see About)</span> : null}
+            <span className="sr-only">Printed name: </span>
+            <span>{printedName}</span>
           </p>
         ) : null}
-        {defn ? (
-          <details className="sp-def">
-            <summary>
-              <span className="sp-def-text">{defn}</span>
-            </summary>
-            {series.definition_status && series.definition_status !== "reviewed" ? <p className="draft-mark">Draft definition, not yet reviewed by a person.</p> : null}
-          </details>
-        ) : null}
+        {summary ? <p className="sp-def sp-summary">{summary}</p> : null}
       </header>
 
       <div className="sp-top">
           <AnswerLine series={series} answer={answer} />
           <SeriesView
             slug={slugify(series.series_id)}
-            series={{ series_id: series.series_id, name: series.name, frequency: series.frequency, unit: series.unit, scale_factor: series.scale_factor, breaks: series.breaks }}
+            series={{ series_id: series.series_id, name: seriesTitle(series), frequency: series.frequency, unit: series.unit, scale_factor: series.scale_factor, breaks: series.breaks }}
             printed={printed}
             units={unitOptions(series)}
             coming={coming}
             kindWords={kindWordsOf(series)}
             unitWords={unitLabel(series.unit, series.scale_factor)}
-            parentName={parent?.name ?? null}
+            parentName={parent ? seriesTitle(parent) : null}
             breakFrom={inside ? { at: inside.at_period, label: periodWords(inside.at_period, series.frequency) } : null}
             frame={<SourceLines series={series} path={path} />}
           />
@@ -135,7 +127,7 @@ export default async function SeriesPage({ params }: Props) {
                 {series.derivation.inputs.map((i, n) => (
                   <span key={i}>
                     {n > 0 ? ", " : ""}
-                    {d.seriesById.has(i) ? <Link href={seriesHref(i)}>{d.seriesById.get(i)!.name}</Link> : <code data-num="id">{i}</code>}
+                    {d.seriesById.has(i) ? <Link href={seriesHref(i)}>{seriesTitle(d.seriesById.get(i)!)}</Link> : <code data-num="id">{i}</code>}
                   </span>
                 ))}
                 .

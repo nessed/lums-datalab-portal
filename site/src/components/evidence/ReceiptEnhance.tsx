@@ -3,14 +3,25 @@
 // without JavaScript) gets a short page and can open any section. With
 // JavaScript, on a wide screen, the sections marked data-open-wide open. A link
 // to a section (#checks, #cite ...) opens the section that holds its target.
-// The whole-page image sits in a closed section with loading="lazy", so it is
-// not fetched until that section is opened (DESIGN.md 7.1, 14.2).
+// Images in a closed section keep their address in data-src and are fetched
+// only when the section opens (DESIGN.md 7.1, 14.2); without JavaScript they
+// are not fetched at all, and the section links to the page image instead.
 import { useEffect } from "react";
 
 export default function ReceiptEnhance() {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>("[data-receipt]");
     if (!root) return;
+    // Images in a section wait in data-src until the section is opened.
+    const load = (d: Element) => d.querySelectorAll<HTMLImageElement>("img[data-src]").forEach((img) => {
+      img.src = img.dataset.src!;
+      img.removeAttribute("data-src");
+    });
+    const onToggle = (e: Event) => {
+      if (e.target instanceof HTMLDetailsElement && e.target.open) load(e.target);
+    };
+    root.addEventListener("toggle", onToggle, true);
+    root.querySelectorAll("details[open]").forEach(load);
     if (window.matchMedia("(min-width: 1024px)").matches) {
       root.querySelectorAll<HTMLDetailsElement>("details[data-open-wide]").forEach((d) => (d.open = true));
     }
@@ -28,7 +39,10 @@ export default function ReceiptEnhance() {
     };
     openTarget();
     window.addEventListener("hashchange", openTarget);
-    return () => window.removeEventListener("hashchange", openTarget);
+    return () => {
+      window.removeEventListener("hashchange", openTarget);
+      root.removeEventListener("toggle", onToggle, true);
+    };
   }, []);
   return null;
 }

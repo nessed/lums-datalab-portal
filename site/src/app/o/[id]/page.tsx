@@ -222,6 +222,21 @@ function checkPlain(check: Check, obs: Observation): string {
   return "The result of this check is recorded below.";
 }
 
+/** A sentence that may name documents: each document title (a release label, digits and all) is marked as one. */
+function withTitles(text: string): ReactNode {
+  const titles = [...new Set(db().sources.map((s) => s.title).filter(Boolean))].sort((a, b) => b.length - a.length);
+  const hit = titles.find((t) => text.includes(t));
+  if (!hit) return text;
+  const at = text.indexOf(hit);
+  return (
+    <>
+      {text.slice(0, at)}
+      <Num kind="text">{hit}</Num>
+      {withTitles(text.slice(at + hit.length))}
+    </>
+  );
+}
+
 function CheckItem({ check, obs }: { check: Check; obs: Observation }) {
   const d = db();
   const showText = descriptionVisible(check, obs);
@@ -240,7 +255,7 @@ function CheckItem({ check, obs }: { check: Check; obs: Observation }) {
         {check.official === false ? <span className="small muted">comparison only; does not affect the status</span> : null}
         {check.credits_members === false && check.official !== false ? <span className="small muted">does not count towards this figure&rsquo;s status</span> : null}
       </div>
-      <p className="ev-check-plain">{checkPlain(check, obs)}</p>
+      <p className="ev-check-plain">{withTitles(checkPlain(check, obs))}</p>
       {where && !isEdition ? (
         <p className="check-where">
           {srcShort(whereSrc, where.source_id)}, <Num kind="page">{pageShort(where)}</Num>
@@ -365,7 +380,7 @@ function planFor(cell: Cell | undefined): CropPlan | null {
 
 const CROP_BASE = `${DATA_BASE}/evidence/crops/`;
 
-/** A printing of the figure in another place: caption + pre-cut crop (lazy: it is below the first screen). */
+/** A printing of the figure in another place: caption + pre-cut crop (fetched only when its section opens, unless `lazy` is false). */
 function Printing({ cell, label, lazy = true }: { cell: Cell; label: ReactNode; lazy?: boolean }) {
   const d = db();
   const src = d.sourceById.get(cell.source_id);
@@ -637,7 +652,7 @@ export default async function ReceiptPage({ params }: Props) {
               <Printing
                 key={c.cell_id}
                 cell={c}
-                lazy={i >= 2}
+                lazy={false}
                 label={
                   <strong>
                     Printing <Num kind="ui">{i + 1}</Num>.

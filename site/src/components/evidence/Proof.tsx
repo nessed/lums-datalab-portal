@@ -24,7 +24,9 @@ function boxStyle(b: number[], pad: number) {
  * The pre-cut crop: one or two windows (row labels; the figure), each with the
  * column headings above when they are further up the page. Every window is a
  * small WebP with set dimensions; the box and the row and column shading are
- * drawn over it. `lazy` for crops below the first screen.
+ * drawn over it. `lazy` for crops inside a collapsed section: the image address
+ * is kept in data-src and set by ReceiptEnhance only when the section opens, so
+ * nothing is fetched before (loading="lazy" alone is ignored without JavaScript).
  */
 export function CropView({ plan, base, alt, lazy, caption }: { plan: CropPlan; base: string; alt: string; lazy?: boolean; caption?: ReactNode }) {
   const segs = [...new Set(plan.windows.map((w) => w.seg))].sort();
@@ -48,11 +50,10 @@ export function CropView({ plan, base, alt, lazy, caption }: { plan: CropPlan; b
                   <div className="ev-crop-img" style={{ aspectRatio: `${w.px[2]} / ${w.px[3]}` }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`${base}${w.file}`}
+                      {...(lazy ? { "data-src": `${base}${w.file}` } : { src: `${base}${w.file}` })}
                       width={w.px[2]}
                       height={w.px[3]}
                       alt={w.part === "rows" && seg === segs[0] ? alt : ""}
-                      loading={lazy ? "lazy" : "eager"}
                       decoding="async"
                       fetchPriority={lazy ? undefined : "high"}
                     />
@@ -81,7 +82,8 @@ export function CropView({ plan, base, alt, lazy, caption }: { plan: CropPlan; b
   );
 }
 
-/** The whole page, untouched, with the box (solid or dashed) and the table outline drawn over it. Lazy unless `eager`. */
+/** The whole page, untouched, with the box (solid or dashed) and the table outline drawn over it. Unless `eager`, the image
+ * address waits in data-src until the section holding it is opened (ReceiptEnhance). */
 export function WholePage({ image, cell, alt, state, eager }: { image: PageImage; cell: Cell; alt: string; state: BoxState; eager?: boolean }) {
   const b = cell.cell_bbox_norm;
   const t = cell.table_bbox_norm;
@@ -89,7 +91,7 @@ export function WholePage({ image, cell, alt, state, eager }: { image: PageImage
   return (
     <div className="ev-page">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={image.src} alt={alt} width={image.width} height={image.height} loading={eager ? "eager" : "lazy"} decoding="async" />
+      <img {...(eager ? { src: image.src } : { "data-src": image.src })} alt={alt} width={image.width} height={image.height} decoding="async" />
       {state === "exact" && ok(t) ? <span className="ev-table" style={boxStyle(t, 0.004)} /> : null}
       {state === "exact" && ok(b) ? <span className="ev-box" data-cell-box={cell.cell_id} style={boxStyle(b, 0.004)} /> : null}
       {state === "tentative" && ok(b) ? <span className="ev-box ev-box--tentative" style={boxStyle(b, 0.004)} /> : null}

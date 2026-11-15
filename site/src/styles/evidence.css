@@ -506,3 +506,8 @@ html.ev-sheet-open {
 .ev-versions.is-compact .ev-vs-step {
   font-size: var(--step--1);
 }
+
+/* An image waiting for its section to open (ReceiptEnhance) keeps its box but shows nothing. */
+img[data-src]:not([src]) {
+  visibility: hidden;
+}

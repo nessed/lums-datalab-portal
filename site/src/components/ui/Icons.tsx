@@ -35,3 +35,9 @@ export const IconPrint = () => (
     <path d="M4.5 6V2.5h7V6M4.5 11.5h-2v-5h11v5h-2M4.5 9.5h7v4h-7z" />
   </svg>
 );
+/** A printed page with lines: "the page it was printed on" (PrintedPagePill). */
+export const IconPage = () => (
+  <svg {...base}>
+    <path d="M4 1.5h5.5l3 3v10H4z M9.5 1.5v3h3 M6 7.5h4.5 M6 10h4.5 M6 12.5h2.5" />
+  </svg>
+);

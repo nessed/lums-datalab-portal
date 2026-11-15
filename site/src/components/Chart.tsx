@@ -65,7 +65,7 @@ function tickText(v: number, unitCode: string, scale: number): string {
 
 function Marker({ style, cx, cy, r = 4.5 }: { style: LineStyle; cx: number; cy: number; r?: number }) {
   // Estimates hollow, actuals solid (DESIGN.md 11): a not-final figure looks not final.
-  const common = style.hollow ? { fill: "#fff", stroke: style.color, strokeWidth: 2 } : { fill: style.color, stroke: "#fff", strokeWidth: 1.5 };
+  const common = style.hollow ? { fill: "var(--chart-ground)", stroke: style.color, strokeWidth: 2 } : { fill: style.color, stroke: "var(--chart-ground)", strokeWidth: 1.5 };
   if (style.marker === "square") return <rect x={cx - r} y={cy - r} width={r * 2} height={r * 2} {...common} />;
   if (style.marker === "diamond") return <rect x={cx - r} y={cy - r} width={r * 2} height={r * 2} transform={`rotate(45 ${cx} ${cy})`} {...common} />;
   return <circle cx={cx} cy={cy} r={r} {...common} />;
@@ -75,9 +75,9 @@ function Marker({ style, cx, cy, r = 4.5 }: { style: LineStyle; cx: number; cy: 
 function GapMark({ status, cx, cy }: { status: StatusKey; cx: number; cy: number }) {
   const s = 4.5;
   const col = status === "disputed" ? "var(--st-disputed)" : status === "withheld" ? "var(--st-withheld)" : "var(--st-gap)";
-  if (status === "disputed") return <circle cx={cx} cy={cy} r={s - 0.6} fill="var(--paper)" stroke={col} strokeWidth={1.8} />;
+  if (status === "disputed") return <circle cx={cx} cy={cy} r={s - 0.6} fill="var(--chart-ground)" stroke={col} strokeWidth={1.8} />;
   return (
-    <g stroke={col} strokeWidth={1.1} fill="var(--paper)">
+    <g stroke={col} strokeWidth={1.1} fill="var(--chart-ground)">
       <rect x={cx - s} y={cy - s} width={s * 2} height={s * 2} strokeDasharray={status === "gap-pending" ? "1.3 1.5" : undefined} />
       {status === "gap-source" ? <path d={`M${cx - s} ${cy + s - 3} L${cx - s + 3} ${cy + s} M${cx - s} ${cy} L${cx} ${cy + s} M${cx - s} ${cy - s + 1} L${cx + s - 1} ${cy + s} M${cx - s + 3} ${cy - s} L${cx + s} ${cy + s - 3} M${cx} ${cy - s} L${cx + s} ${cy}`} /> : null}
       {status === "withheld" ? <path d={`M${cx - 2.6} ${cy - 2.6} L${cx + 2.6} ${cy + 2.6} M${cx + 2.6} ${cy - 2.6} L${cx - 2.6} ${cy + 2.6}`} /> : null}
@@ -322,7 +322,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           {labelled &&
             !keyAbove &&
             ends.map((e) => (
-              <text key={e.key} x={e.x + 9} y={e.y + 4} className="c-label" fill={e.style.color} style={{ fill: e.style.color }}>
+              <text key={e.key} x={e.x + 9} y={e.y + 4} className="c-label" fill="var(--chart-label)">
                 {e.label}
               </text>
             ))}

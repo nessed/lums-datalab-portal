@@ -51,8 +51,9 @@
   border-left: 0;
 }
 .cmp2 .seg button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--chip-active-bg);
+  color: var(--chip-active-ink);
+  box-shadow: inset 0 -3px 0 var(--chip-active-edge);
   font-weight: 600;
 }
 .seg-wrap {
@@ -202,7 +203,7 @@
   width: 8px;
   height: 8px;
   transform: translate(-50%, -50%);
-  border: 1.5px solid #fff;
+  border: 1.5px solid var(--chart-ground);
   box-sizing: content-box;
   border-radius: 50%;
 }
@@ -227,7 +228,7 @@
 }
 .cmp-d summary {
   cursor: pointer;
-  color: var(--accent);
+  color: var(--link);
   text-decoration: underline dotted;
   list-style: none;
   font-variant-numeric: tabular-nums;
@@ -250,7 +251,7 @@
   background: none;
   border: 0;
   padding: 0;
-  color: var(--accent);
+  color: var(--link);
   cursor: pointer;
   text-align: left;
 }

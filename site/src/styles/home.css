@@ -20,7 +20,7 @@
   font-size: var(--step-0);
   padding: 0 var(--s-3);
   min-height: 46px;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--select-rule);
   border-radius: var(--r-2);
   background: var(--card);
 }
@@ -167,7 +167,7 @@
   margin: 0 0 var(--s-2);
 }
 .drv-list li:target {
-  background: var(--accent-wash);
+  background: var(--select-wash);
 }
 
 /* ---------- home: below the first screen ---------- */

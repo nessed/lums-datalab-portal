@@ -8,8 +8,19 @@
 import Link from "@/components/ui/Link";
 import type { ReactNode } from "react";
 import { obsHref, slugify, type Observation } from "@/lib/data";
-import { count, formatDecimalString, pct } from "@/lib/format";
-import { shortScale } from "@/lib/words";
+import { count, formatDecimalString, pct, periodWords, unitLabel } from "@/lib/format";
+import { KIND, shortScale } from "@/lib/words";
+
+const MONTHLY = ["index", "change_yoy", "change_mom", "weight"];
+
+/** Accessible name of a value link (DESIGN.md 14.3): value, unit, kind, period and "see where it is printed". */
+function valueName(text: string, o: Partial<Pick<Observation, "unit" | "scale_factor" | "kind" | "period">>, short: boolean | undefined): string {
+  const unit = !short && o.unit ? ` ${unitLabel(o.unit, o.scale_factor)}` : "";
+  const k = o.kind && o.kind !== "as_printed" ? KIND[o.kind]?.long : null;
+  const when = o.period ? periodWords(o.period, o.kind && MONTHLY.includes(o.kind) ? "month" : undefined) : "";
+  const what = [k, when].filter(Boolean).join(" ");
+  return `${text}${unit}${what ? `, ${what}` : ""}, see where it is printed`;
+}
 
 /**
  * A shown value, linked to its receipt. Never call it for a figure whose status
@@ -26,7 +37,7 @@ export function V({
   short,
   sheet,
 }: {
-  o: Pick<Observation, "obs_id" | "value" | "published"> & Partial<Pick<Observation, "reader" | "unit" | "scale_factor">>;
+  o: Pick<Observation, "obs_id" | "value" | "published"> & Partial<Pick<Observation, "reader" | "unit" | "scale_factor" | "kind" | "period">>;
   className?: string;
   label?: string;
   cell?: { cell_id: string; value_raw: string | null };
@@ -49,7 +60,7 @@ export function V({
       {...(short && !cell ? { "data-v-fmt": "short" } : {})}
       {...(candidate ? { "data-candidate": "" } : {})}
       {...(sheet ? { "data-sheet": slugify(o.obs_id) } : {})}
-      aria-label={label ?? (candidate ? `${text}, not signed off` : undefined)}
+      aria-label={label ?? `${valueName(text, o, short && !cell)}${candidate ? ", not signed off" : ""}`}
     >
       {text}
     </Link>

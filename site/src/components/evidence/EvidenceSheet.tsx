@@ -126,7 +126,6 @@ function SheetVersions({ d }: { d: SheetData }) {
 
 export default function EvidenceSheet() {
   const [st, setSt] = useState<State | null>(null);
-  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
   const anchor = useRef<HTMLAnchorElement | null>(null);
   const pushed = useRef(false);
   const panel = useRef<HTMLDivElement | null>(null);
@@ -151,7 +150,6 @@ export default function EvidenceSheet() {
 
   const shut = useCallback(() => {
     setSt(null);
-    setPos(null);
     document.documentElement.classList.remove("ev-sheet-open");
     const a = anchor.current;
     anchor.current = null;
@@ -211,40 +209,42 @@ export default function EvidenceSheet() {
     };
   }, [load, shut]);
 
-  // Popover position on wide screens: under the link, or above it when there is no room below.
+  // Popover position on wide screens: under the link, or above it when there
+  // is no room below. Placed straight on the element (no re-render), then focus
+  // moves in: the popover is hidden until placed, and a hidden button cannot
+  // take focus.
   useLayoutEffect(() => {
-    if (!st || !panel.current) return;
+    const el = panel.current;
+    if (!st || !el) return;
     const wide = window.matchMedia("(min-width: 720px)").matches;
     document.documentElement.classList.toggle("ev-sheet-open", !wide);
-    if (!wide) {
-      setPos(null);
-      return;
+    if (wide) {
+      const p = el.getBoundingClientRect();
+      let top: number;
+      let left: number;
+      if (!anchor.current) {
+        // Opened from a link with ?fig=: centred near the top of the screen.
+        top = window.scrollY + 72;
+        left = Math.max(16, (window.innerWidth - p.width) / 2) + window.scrollX;
+      } else {
+        const r = anchor.current.getBoundingClientRect();
+        left = Math.min(Math.max(16, r.left), window.innerWidth - p.width - 16) + window.scrollX;
+        const below = r.bottom + 8;
+        const fitsBelow = below + p.height <= window.innerHeight - 8;
+        const fitsAbove = r.top - 8 - p.height >= 8;
+        // Neither fits: as low as the screen allows, so the whole popover is visible.
+        top = (fitsBelow ? below : fitsAbove ? r.top - 8 - p.height : Math.max(8, window.innerHeight - p.height - 8)) + window.scrollY;
+      }
+      el.style.top = `${top}px`;
+      el.style.left = `${left}px`;
+      el.classList.add("is-popover");
+    } else {
+      el.style.top = "";
+      el.style.left = "";
+      el.classList.remove("is-popover");
     }
-    const p = panel.current.getBoundingClientRect();
-    if (!anchor.current) {
-      // Opened from a link with ?fig=: centred near the top of the screen.
-      const top = window.scrollY + 72;
-      const left = Math.max(16, (window.innerWidth - p.width) / 2) + window.scrollX;
-      setPos((cur) => (cur && Math.abs(cur.top - top) < 1 && Math.abs(cur.left - left) < 1 ? cur : { top, left }));
-      return;
-    }
-    const r = anchor.current.getBoundingClientRect();
-    const left = Math.min(Math.max(16, r.left), window.innerWidth - p.width - 16) + window.scrollX;
-    const below = r.bottom + 8;
-    const fitsBelow = below + p.height <= window.innerHeight - 8;
-    const fitsAbove = r.top - 8 - p.height >= 8;
-    // Neither fits: as low as the screen allows, so the whole popover is visible.
-    const top = (fitsBelow ? below : fitsAbove ? r.top - 8 - p.height : Math.max(8, window.innerHeight - p.height - 8)) + window.scrollY;
-    setPos((cur) => (cur && Math.abs(cur.top - top) < 1 && Math.abs(cur.left - left) < 1 ? cur : { top, left }));
+    if (!el.contains(document.activeElement)) el.querySelector<HTMLElement>(".ev-sheet-close")?.focus({ preventScroll: true });
   }, [st]);
-
-  // Focus moves into the sheet when it opens.
-  const openSlug = st?.slug ?? null;
-  // On a wide screen the popover is hidden until placed, so this runs again once it is.
-  useEffect(() => {
-    if (!openSlug || !panel.current || panel.current.contains(document.activeElement)) return;
-    panel.current.querySelector<HTMLElement>(".ev-sheet-close")?.focus({ preventScroll: true });
-  }, [openSlug, pos]);
 
   if (!st) return null;
   const d = st.data;
@@ -275,12 +275,11 @@ export default function EvidenceSheet() {
       <div className="ev-sheet-backdrop" onClick={close} aria-hidden="true" />
       <div
         ref={panel}
-        className={`ev-sheet${pos ? " is-popover" : ""}`}
+        className="ev-sheet"
         role="dialog"
         aria-modal="true"
         aria-labelledby="ev-sheet-h"
         onKeyDown={onKeyDown}
-        style={pos ? { top: pos.top, left: pos.left } : undefined}
       >
         <div className="ev-sheet-bar">
           <h2 id="ev-sheet-h" className="ev-sheet-h">

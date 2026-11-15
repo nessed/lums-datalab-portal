@@ -117,7 +117,7 @@ export default function SearchPage({ indexUrl }: { indexUrl: string }) {
                   Show more results
                 </button>
               ) : null}
-              <a href={`/browse?q=${encodeURIComponent(q.trim())}`}>The matching series in the catalogue, with filters</a>
+              {res.series.length ? <a href={`/browse?q=${encodeURIComponent(q.trim())}`}>The matching series in the catalogue, with filters</a> : null}
             </div>
           }
         />

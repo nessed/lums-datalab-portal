@@ -47,14 +47,15 @@ import { CiteFormats, PrototypeNote, ShareLinks } from "@/components/actions/Cit
 export type CompareRelease = { id: string; year: string; doi: string | null; isPrototype: boolean; siteUrl: string; generated: string; licence: string };
 
 export const MAX = 6;
-// The categorical palette (tokens --cat-1..6), each with its own dash and marker cap.
+// The categorical palette (tokens --cat-a..f in src/design/tokens.css, checked by
+// scripts/contrast.mjs), each with its own dash and marker cap.
 const STYLES: LineStyle[] = [
-  { color: "#2a78d6", dash: null, cap: "round" },
-  { color: "#d4561f", dash: "6 4", cap: "square" },
-  { color: "#16936a", dash: "2 3", cap: "round" },
-  { color: "#b07800", dash: "8 3 2 3", cap: "square" },
-  { color: "#cc4f86", dash: "10 4", cap: "round" },
-  { color: "#2f7d1a", dash: "3 3", cap: "square" },
+  { color: "var(--cat-a)", dash: null, cap: "round" },
+  { color: "var(--cat-b)", dash: "6 4", cap: "square" },
+  { color: "var(--cat-c)", dash: "2 3", cap: "round" },
+  { color: "var(--cat-d)", dash: "8 3 2 3", cap: "square" },
+  { color: "var(--cat-e)", dash: "10 4", cap: "round" },
+  { color: "var(--cat-f)", dash: "3 3", cap: "square" },
 ];
 const slug = (id: string) => id.replaceAll(":", "~").replace(/[^A-Za-z0-9._~-]/g, "_");
 const isSD = (x: SeriesData | "error" | undefined): x is SeriesData => !!x && x !== "error";

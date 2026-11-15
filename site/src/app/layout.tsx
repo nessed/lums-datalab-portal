@@ -18,18 +18,22 @@ import "@/styles/home.css";
 import "@/styles/downloads.css";
 import "@/styles/compare.css";
 
-// Self-hosted (OFL) so the build needs no network and there is no layout shift.
-// Only the interface face is downloaded (29 KB). The serif for receipt figures and
-// long prose is the reader's system serif (Georgia, Noto Serif): Source Serif 4 was
-// 122 KB, over the 40 KB font budget of DESIGN.md 14.1, and could not be subset in
-// this run. --font-source-serif is defined in src/styles/base.css.
+// Self-hosted (OFL, licences beside the files in src/fonts) so the build needs no
+// network. Subset to Latin by scripts/subset-fonts.py: Noto Sans as one variable
+// font (wght 400-700, 19 KB) for body, labels and metadata; Noto Sans Display Bold
+// (11 KB) for titles and headline figures. No serif anywhere. The CSS variables
+// are used by --font-sans and --font-display in src/design/tokens.css.
 const sans = localFont({
-  src: [
-    { path: "../fonts/source-sans-3-latin-wght-normal.woff2", style: "normal", weight: "200 900" },
-  ],
-  variable: "--font-source-sans",
+  src: [{ path: "../fonts/noto-sans-latin-wght-400-700.woff2", style: "normal", weight: "400 700" }],
+  variable: "--font-noto-sans",
   display: "swap",
-  fallback: ["Segoe UI", "system-ui", "sans-serif"],
+  fallback: ["Segoe UI", "system-ui", "Arial", "sans-serif"],
+});
+const display = localFont({
+  src: [{ path: "../fonts/noto-sans-display-latin-700.woff2", style: "normal", weight: "700" }],
+  variable: "--font-noto-display",
+  display: "swap",
+  fallback: ["Segoe UI", "system-ui", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -53,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   // Runs before paint: hides the notice if this visitor dismissed it for this release.
   const noticeScript = `document.documentElement.classList.add("js");try{if(localStorage.getItem("proto-notice-dismissed")===${JSON.stringify(v)})document.documentElement.dataset.protoDismissed="true"}catch(e){}`;
   return (
-    <html lang="en" className={sans.variable} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${display.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noticeScript }} />
       </head>

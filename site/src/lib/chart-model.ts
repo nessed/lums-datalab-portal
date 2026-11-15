@@ -65,15 +65,16 @@ export function periodOrdinal(period: string, frequency: string): number | null 
 
 // Fixed style per estimate type. Colour, dash and marker all differ, so the
 // distinction never rests on colour alone. Unknown types get a neutral style.
+// Colours are the chart tokens of src/design/tokens.css (inline SVG resolves them).
 export const VINTAGE_STYLE: Record<string, LineStyle> = {
-  be: { color: "#0b5c78", dash: null, marker: "circle", hollow: true },
-  na: { color: "#0b5c78", dash: null, marker: "circle" },
-  re: { color: "#a2470e", dash: "6 4", marker: "square", hollow: true },
-  actual: { color: "#2f6b4f", dash: "2 3", marker: "diamond" },
-  ac: { color: "#2f6b4f", dash: "2 3", marker: "diamond" },
-  provisional: { color: "#5d5146", dash: "2 3", marker: "diamond", hollow: true },
+  be: { color: "var(--chart-be)", dash: null, marker: "circle", hollow: true },
+  na: { color: "var(--chart-be)", dash: null, marker: "circle" },
+  re: { color: "var(--chart-re)", dash: "6 4", marker: "square", hollow: true },
+  actual: { color: "var(--chart-actual)", dash: "2 3", marker: "diamond" },
+  ac: { color: "var(--chart-actual)", dash: "2 3", marker: "diamond" },
+  provisional: { color: "var(--chart-prov)", dash: "2 3", marker: "diamond", hollow: true },
 };
-const OTHER_STYLE: LineStyle = { color: "#4b5563", dash: "2 3", marker: "diamond" };
+const OTHER_STYLE: LineStyle = { color: "var(--chart-other)", dash: "2 3", marker: "diamond" };
 
 /** Minimal shapes, so this runs in the browser too (compare page). */
 export type ChartSeries = { series_id: string; name: string; frequency: string; unit: string; scale_factor: number | null; breaks: { at_period: string; kind: string; note: string }[] };
@@ -183,7 +184,7 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
 /* ---------- series page views (DESIGN.md 8.2, 11) ---------- */
 
 const RANK: Record<string, number> = { actual: 5, ac: 5, final: 4, re: 3, provisional: 2, be: 1 };
-const NEUTRAL: LineStyle = { color: "#6b7178", dash: null, marker: "circle" };
+const NEUTRAL: LineStyle = { color: "var(--chart-neutral)", dash: null, marker: "circle" };
 
 /**
  * "Best available figure per year": per period, the most final kind of figure
@@ -261,7 +262,7 @@ export function derivedModelFrom(series: ChartSeries, base: ChartModel, view: De
     .map((k) => ({
       key: k,
       label: bars ? "Budget to revised" : k === "na" ? series.name : (kindWords[k] ?? vintageWords(k)),
-      style: bars ? { color: "#0b5c78", dash: null, marker: "square" as const } : (VINTAGE_STYLE[k] ?? OTHER_STYLE),
+      style: bars ? { color: "var(--chart-be)", dash: null, marker: "square" as const } : (VINTAGE_STYLE[k] ?? OTHER_STYLE),
       points: view.points
         .filter((p) => p.k === k && p.v !== null && ord.has(p.p))
         .map((p) => {

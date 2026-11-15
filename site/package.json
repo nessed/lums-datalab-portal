@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test:contract": "node --no-warnings scripts/contract-test.mjs",
     "test:search": "node --no-warnings scripts/search-test.mjs",
+    "test:contrast": "node scripts/contrast.mjs",
     "check": "node scripts/check-build.mjs",
     "prebuild": "node scripts/prebuild.mjs",
     "predev": "node scripts/prebuild.mjs"

@@ -192,10 +192,10 @@ dialog.search-dialog[open] {
   font-size: var(--step--1);
   font-weight: 600;
   padding-left: var(--s-3);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--select-rule);
   border-radius: 999px;
-  background: var(--accent-wash);
-  color: var(--accent-ink);
+  background: var(--select-wash);
+  color: var(--link-hover);
 }
 .sr-chip-x {
   min-width: 44px;
@@ -210,7 +210,7 @@ dialog.search-dialog[open] {
   border-radius: 999px;
 }
 .sr-chip-x:hover {
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  background: var(--select-tint);
 }
 .sr-every {
   min-height: 44px;
@@ -228,7 +228,7 @@ dialog.search-dialog[open] {
 /* The answer card (10.2): reader name, value, kind and period, source, links. */
 .sr-card {
   border: var(--hair-strong);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--select-rule);
   border-radius: var(--r-2);
   background: var(--card);
   padding: var(--s-3) var(--s-4);
@@ -236,7 +236,7 @@ dialog.search-dialog[open] {
 }
 .sr-card--miss {
   border-left-color: var(--st-gap);
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 .sr-kicker {
   margin: 0;
@@ -348,8 +348,8 @@ dialog.search-dialog[open] {
 }
 .sr-opt[aria-selected="true"] a,
 .sr-opt a:hover {
-  background: var(--accent-wash);
-  border-left-color: var(--accent);
+  background: var(--select-wash);
+  border-left-color: var(--select-rule);
 }
 .sr .r-title {
   display: block;
@@ -403,8 +403,8 @@ dialog.search-dialog[open] {
   text-decoration: none;
 }
 .sr-topic:hover {
-  border-color: var(--accent);
-  color: var(--accent-ink);
+  border-color: var(--select-rule);
+  color: var(--link-hover);
 }
 .sr-zero {
   padding: var(--s-2) 0;
@@ -464,7 +464,7 @@ dialog.search-dialog[open] {
 .sp-nojs {
   padding: var(--s-3);
   border: var(--hair-strong);
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 .sr--page .sr-group-h {
   padding: var(--s-2) 0 var(--s-1);
@@ -485,7 +485,7 @@ dialog.search-dialog[open] {
   text-decoration: none;
 }
 .sr-row-a:hover .r-title {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: underline;
 }
 .sr-row-ans {

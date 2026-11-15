@@ -26,7 +26,7 @@ for (const [name, url] of qaRoutes(siteDir)) {
     const page = await context.newPage();
     await page.goto(base + url, { waitUntil: "load" });
     // A page without its stylesheet (a stale server after a rebuild) makes every result meaningless: stop.
-    if (!(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()))) {
+    if (!(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--link").trim()))) {
       console.error(`${url}: the stylesheet did not load; is the server serving the current build?`);
       process.exit(2);
     }

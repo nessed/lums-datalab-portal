@@ -58,7 +58,7 @@ export default function AboutPage() {
               Code: MIT, in the <a href={REPO_URL}>project repository</a>.
             </li>
             <li>The original documents remain the work of their government publishers. This site links to them and does not host them.</li>
-            <li>Typefaces: Source Serif 4 and Source Sans 3, SIL Open Font License.</li>
+            <li>Typefaces: Noto Sans and Noto Sans Display, SIL Open Font License.</li>
           </ul>
         </section>
 

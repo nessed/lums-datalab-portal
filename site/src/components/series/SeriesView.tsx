@@ -274,7 +274,7 @@ export default function SeriesView(p: SeriesViewProps) {
 }
 
 function LegendMarker({ style }: { style: { color: string; marker: string; hollow?: boolean } }) {
-  const c = style.hollow ? { fill: "#fff", stroke: style.color, strokeWidth: 2 } : { fill: style.color };
+  const c = style.hollow ? { fill: "var(--chart-ground)", stroke: style.color, strokeWidth: 2 } : { fill: style.color };
   if (style.marker === "square") return <rect x="3" y="3" width="8" height="8" {...c} />;
   if (style.marker === "diamond") return <rect x="3" y="3" width="8" height="8" transform="rotate(45 7 7)" {...c} />;
   return <circle cx="7" cy="7" r="4.5" {...c} />;

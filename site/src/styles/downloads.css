@@ -150,7 +150,7 @@ html:has(.sheet:target) {
 }
 .dl-more summary {
   cursor: pointer;
-  color: var(--accent);
+  color: var(--link);
   min-height: 2.25rem;
   display: flex;
   align-items: center;
@@ -159,7 +159,7 @@ html:has(.sheet:target) {
   display: block;
   overflow-wrap: anywhere;
   font-size: var(--step--1);
-  background: var(--paper-2);
+  background: var(--surface-2);
   padding: 4px 8px;
   border-radius: var(--r-1);
 }
@@ -168,7 +168,7 @@ html:has(.sheet:target) {
 .cite-proto {
   margin: 0 0 var(--s-3);
   padding: var(--s-2) var(--s-3);
-  background: var(--paper-2);
+  background: var(--surface-2);
   border-left: 3px solid var(--st-disputed);
   font-size: var(--step--1);
 }
@@ -182,7 +182,7 @@ html:has(.sheet:target) {
   padding: var(--s-3);
   border: 1px solid var(--rule);
   border-radius: var(--r-2);
-  background: var(--paper);
+  background: var(--card);
   font-size: var(--step--1);
   line-height: 1.5;
   overflow-wrap: anywhere;
@@ -240,8 +240,8 @@ html:has(.sheet:target) {
   display: none;
   margin: var(--s-2) 0;
   padding: var(--s-2) var(--s-3);
-  border-left: 3px solid var(--accent);
-  background: var(--accent-wash);
+  border-left: 3px solid var(--select-rule);
+  background: var(--select-wash);
   font-size: var(--step--1);
 }
 /* Only the first one on a page (set by its script). */

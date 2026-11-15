@@ -39,7 +39,7 @@
 }
 .sp-def > summary::after {
   content: "more";
-  color: var(--accent);
+  color: var(--link);
   text-decoration: underline;
   text-underline-offset: 2px;
   font-weight: 600;
@@ -119,8 +119,8 @@
   white-space: nowrap;
 }
 .answer-src:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--select-rule);
+  color: var(--link);
 }
 .answer-exact,
 .answer-newer {
@@ -267,7 +267,7 @@ html.js .sv-controls {
   border-top: var(--hair);
   margin: var(--s-1) calc(-1 * var(--s-2)) 0;
   padding: var(--s-2) var(--s-3);
-  background: var(--paper);
+  background: var(--card);
   font-size: var(--step--2);
   color: var(--ink-3);
   line-height: 1.4;
@@ -362,7 +362,7 @@ table.kt {
   position: sticky;
   top: 0;
   z-index: 2;
-  background: var(--paper-2);
+  background: var(--surface-2);
   font-weight: 650;
   font-size: var(--step--2);
   text-align: left;
@@ -374,7 +374,7 @@ table.kt {
   position: sticky;
   left: 0;
   z-index: 1;
-  background: var(--paper);
+  background: var(--card);
   font-weight: 600;
   text-align: left;
 }
@@ -430,7 +430,7 @@ table.kt {
 .kt-break td {
   font-size: var(--step--2);
   color: var(--ink-2);
-  background: var(--paper-2);
+  background: var(--surface-2);
   white-space: normal;
   border-top: 2px solid var(--rule-strong);
 }
@@ -509,7 +509,7 @@ dl.facts.about-facts dt {
   background: var(--rule-strong);
 }
 .trail-list li[aria-current] {
-  border-left-color: var(--accent);
+  border-left-color: var(--select-rule);
 }
 .trail-list .v-link,
 .trail-others .v-link {

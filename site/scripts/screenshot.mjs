@@ -34,7 +34,7 @@ for (const [name, url] of routes) {
     const page = await browser.newPage({ viewport: { width: w, height: w < 600 ? 844 : 900 }, deviceScaleFactor: 1 });
     const res = await page.goto(base + url, { waitUntil: "load" });
     // A page without its stylesheet (a stale server after a rebuild) makes every result meaningless: stop.
-    if (!(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()))) {
+    if (!(await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--link").trim()))) {
       console.error(`${url}: the stylesheet did not load; is the server serving the current build?`);
       process.exit(2);
     }

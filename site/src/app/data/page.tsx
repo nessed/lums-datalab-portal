@@ -204,8 +204,11 @@ s |> select(period, kind, value, unit, status, printed_in, page)`;
             <dl className="facts">
               {LONG_COLUMNS.map(([k, v]) => (
                 <div key={k} style={{ display: "contents" }}>
-                  <dt className="mono">{k}</dt>
-                  <dd>{v}</dd>
+                  <dt className="mono">
+                    <Num kind="id">{k}</Num>
+                  </dt>
+                  {/* Typed explanations with example digits (a period format, a scale), not figures. */}
+                  <dd>{/\d/.test(v) ? <Num kind="ui">{v}</Num> : v}</dd>
                 </div>
               ))}
             </dl>

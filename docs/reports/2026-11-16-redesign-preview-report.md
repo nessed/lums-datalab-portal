@@ -11,7 +11,7 @@ The work is on branch `proto/redesign-2026-11`, in draft PR #13. Nothing is merg
   - Ahmad's golden-release adapter is built and tested against tag `golden-2026.11.11`, but it is not switched on.
 - **Checks:**
   - Lint, 40 contract tests, 20 search tests and 11 derive tests pass.
-  - `check-build` passed on the integrated build except for 2 wording problems, which are now fixed; see "Final check" below for the last run.
+  - `check-build` passes on the final build.
   - Nine new check plug-ins recompute every derived number, every file value and every search answer against the release.
 - **No unchecked figure shows a number.** The four reader testers looked for leaks. They crawled every receipt of an unpublished figure (828), every series page, and every xlsx and CSV file. They found none.
 - **Fixed from the testers:** 8 problems. The worst three:
@@ -141,7 +141,25 @@ All editorial files (`site/editorial/*.json`: topics, headline cards, questions,
 
 ## Final check
 
-pending (written when the last build's check-build finishes)
+On the final build (all fixes in):
+
+- `npm run lint`: clean.
+- Tests:
+  - `npm run test:contract`: 40 passed.
+  - `npm run test:search`: 20 passed.
+  - series-derive: 11 passed.
+  - take-transforms: 12 unit tests passed.
+- `npm run build`: 8,381 pages.
+- `check-build`: **OK**.
+  - 7,454 pages scanned.
+  - 172,089 value links, each traced to its receipt.
+  - 2,996 derived figures recomputed.
+  - 71,735 file values equal to the release.
+  - 828 search answer values checked.
+
+The first final run found 36 problems: the evidence check still expected a per-cent change on share series after the receipt stopped showing one. I fixed the check's own rule; nothing was loosened. The re-run was clean.
+
+Not re-run on the final build: perf, axe and the keyboard script. Their numbers in this report come from the integrated build an hour earlier.
 
 ## Where things are
 

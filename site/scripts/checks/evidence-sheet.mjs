@@ -169,7 +169,8 @@ export default function check({ siteDir, appDir, cfg, release, series, allObs, o
       const a = obsById.get(st.from);
       const b = obsById.get(st.to);
       if (st.from !== items[i]?.obsId || st.to !== items[i + 1]?.obsId) problem("evidence-versions", where, `change ${i} is not between neighbouring printings`);
-      const ok = usable(a) && usable(b) && a.unit === b.unit && a.scale_factor === b.scale_factor;
+      // A rate in per cent is never given a per-cent change of itself.
+      const ok = usable(a) && usable(b) && a.unit === b.unit && a.scale_factor === b.scale_factor && a.unit !== "percent";
       const want = ok ? pctIndep(a.value, b.value) : null;
       if (st.pct !== want) problem("evidence-versions", where, `change ${st.from} -> ${st.to} is ${st.pct}; recomputed ${want ?? "none (not both checked)"}`);
       if (!st.pct && !st.reason) problem("evidence-versions", where, `change ${st.from} -> ${st.to} is not shown and gives no reason`);
@@ -218,7 +219,7 @@ export default function check({ siteDir, appDir, cfg, release, series, allObs, o
           problem("evidence-derived", where, `change "${m[2]}" computed from a figure that is not a checked, signed-off value`);
           continue;
         }
-        const want = a.unit === b.unit && a.scale_factor === b.scale_factor ? pctIndep(a.value, b.value) : null;
+        const want = a.unit === b.unit && a.scale_factor === b.scale_factor && a.unit !== "percent" ? pctIndep(a.value, b.value) : null;
         if (m[2].trim() !== want) problem("evidence-derived", where, `change "${m[2]}" from ${a.obs_id} to ${b.obs_id}; recomputed ${want}`);
         onPages++;
       }

@@ -85,5 +85,5 @@ export default function check({ siteDir, appDir, release, seriesList, series, sl
       pages++;
     }
   }
-  return `${Object.keys(entries).length} entries (${drafts} draft), ${visible.length} visible series titled, ${byTitle.size} unique titles, ${over40} over forty characters; ${pages} series pages carry their title and printed name`;
+  return `${Object.keys(entries).length} entries (${drafts} draft), ${visible.filter((s) => entries[s.series_id]).length} of ${visible.length} visible series titled, ${byTitle.size} unique titles, ${over40} over forty characters; ${pages} series pages carry their title and printed name`;
 }

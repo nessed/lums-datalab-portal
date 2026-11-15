@@ -579,7 +579,13 @@ html.present main {
   padding-top: var(--s-3);
 }
 html.present .sv-frame .chart-svg text {
-  font-size: 15px;
+  font-size: 18px;
+}
+/* Present mode keeps only the exit button of the controls, so the chart and its
+   source lines fit on one screen (tester finding: the source fell below the fold). */
+html.present .sv-controls > :not(:has(.sv-present)),
+html.present .sv-controls :has(> .sv-present) > :not(.sv-present) {
+  display: none !important;
 }
 html.present .sv-src,
 html.present .sv-sub {

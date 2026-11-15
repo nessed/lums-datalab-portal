@@ -9,7 +9,7 @@ import { Num } from "@/components/ui/Num";
 import { db, seriesHref, type Observation, type Series } from "@/lib/data";
 import { periodWords } from "@/lib/format";
 import { DerivedInline, DerivedNotes, kindPeriod, PageWords, ShortValue, SourceMarker } from "./Bits";
-import { compare, latestShown, type Comparison } from "./derive";
+import { compare, latestShown, showable, type Comparison } from "./derive";
 
 /** "the 2025-26 BE", "June 2025", "the 2020-21 round": the comparable figure in words. */
 export function baseWords(base: Observation, series: Series, words: PageWords): ReactNode {
@@ -47,6 +47,12 @@ export function headlineCard(c: { series: Series; kind: string; name: string }, 
   const cmp = compare(c.series, latest, all);
   const kp = kindPeriod(latest, c.series, words, true);
   const chg = changeLine(cmp, c.series, words, notes, `${c.name}: change on the comparable figure`);
+  // A budget estimate compared with last year's budget estimate can hide that last
+  // year was later revised a long way (tester finding): say the revised figure too.
+  const revisedLater =
+    cmp.kind === "change" && cmp.base.kind === "be"
+      ? all.find((o) => o.period === cmp.base.period && o.kind === "re" && showable(o) && o.reader.key !== "candidate")
+      : undefined;
   return (
     <li className="hc" key={c.series.series_id}>
       <h3 className="hc-name">
@@ -59,6 +65,12 @@ export function headlineCard(c: { series: Series; kind: string; name: string }, 
         <ShortValue o={latest} series={c.series} />
       </p>
       {chg ? <p className="hc-chg">{chg}</p> : null}
+      {revisedLater ? (
+        <p className="hc-rev">
+          The <Num kind="period">{periodWords(revisedLater.period, c.series.frequency)}</Num> figure was later revised:{" "}
+          <ShortValue o={revisedLater} series={c.series} /> ({words.kind("re")})
+        </p>
+      ) : null}
       <p className="hc-src">
         <SourceMarker o={latest} />
       </p>

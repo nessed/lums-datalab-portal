@@ -28,7 +28,8 @@ for (const width of [360, 320]) {
   const ctx = await browser.newContext({ viewport: { width, height: 740 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   const p = await ctx.newPage();
   await p.goto(`${base}/`, { waitUntil: "networkidle" });
-  await p.locator(".search-trigger").first().click();
+  // The header now holds a real field (DESIGN.md 9.1); tapping it opens the dialog.
+  await p.locator(".hs-input").first().click();
   const input = p.locator("dialog.search-dialog input[type=search]");
   await input.waitFor({ state: "visible" });
   const w = await input.evaluate((el) => el.getBoundingClientRect().width);

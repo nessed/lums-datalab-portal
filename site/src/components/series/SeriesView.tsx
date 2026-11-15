@@ -112,7 +112,7 @@ export default function SeriesView(p: SeriesViewProps) {
     ...(p.breakFrom && periods.filter((x) => x.p >= p.breakFrom!.at).length >= 2 ? [{ id: "break", label: `From ${p.breakFrom.label}`, aria: `From the break onward, ${p.breakFrom.label}`, from: p.breakFrom.at }] : []),
   ];
   const r = ranges.find((x) => x.id === range) ?? ranges.find((x) => x.id === "all")!;
-  const height = present && typeof window !== "undefined" ? Math.max(320, Math.min(720, window.innerHeight - 280)) : undefined;
+  const height = present && typeof window !== "undefined" ? Math.max(200, Math.min(760, window.innerHeight - 420)) : undefined;
 
   const statuses = model ? ([...new Set(model.marks.map((m) => m.status))] as StatusKey[]) : [];
   const kindYears = useMemo(() => {

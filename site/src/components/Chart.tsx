@@ -283,6 +283,9 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
               {model.bars ? null : l.points.slice(1).map((p, i) => {
                 const a = l.points[i];
                 if (!canConnect(a, p, model)) return null;
+                // Never join two kinds of figure (a revised estimate to the next budget
+                // estimate reads as a fall that did not happen): the line stops.
+                if (a.kindLabel && p.kindLabel && a.kindLabel !== p.kindLabel) return null;
                 return (
                   <line
                     key={p.period}

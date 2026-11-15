@@ -443,3 +443,10 @@
   white-space: normal;
   min-width: 6rem;
 }
+
+/* The later revision of the year a card compares with (tester finding). */
+.hc-rev {
+  margin: 0.25rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}

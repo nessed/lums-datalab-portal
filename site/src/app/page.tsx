@@ -1,161 +1,138 @@
-// Home: find, see, take, check on the first screen. One line on what this is,
-// a search box, one tile per data type and the latest checked figure of a few
-// headline series (chosen by people in editorial.config.json; every value is
-// read from the release and links to its receipt). Text goes below the fold.
+// Home (DESIGN.md 9.2). First phone screen, in order: one line on what the
+// site is, the search field with three example searches, and four to six
+// headline cards chosen by people (editorial/headline.json), each answer first
+// with values read from the release. Below: topic tiles, the newest documents
+// in the release, a line on how we check, and the release itself. The quality
+// table and method summary live on Methods and Releases now.
+import type { Metadata } from "next";
 import Link from "@/components/ui/Link";
 import editorial from "../../editorial.config.json";
-import { FigureLine, KindAndPeriod } from "@/components/Figure";
-import Spark from "@/components/Spark";
-import DataTypeTile from "@/components/DataTypeTile";
-import { Count, Num } from "@/components/ui/Num";
-import { StatusLegend } from "@/components/ui/Status";
-import { datasetName, db, isDatasetPublished, seriesHref } from "@/lib/data";
-import { COMING } from "@/lib/features";
+import { Num } from "@/components/ui/Num";
+import { DerivedList, DerivedNotes, PageWords } from "@/components/home/Bits";
+import { headlineCard } from "@/components/home/Cards";
+import { headlineCards, topicHref, topics } from "@/components/home/editorial";
+import { db, isDatasetPublished, releaseMarkdown, sourceHref, type Source } from "@/lib/data";
 import { dateOnly } from "@/lib/format";
-import { latestPublished, publishedDatasets, totalVisible } from "@/lib/stats";
 
-function Headline({ id }: { id: string }) {
+export const metadata: Metadata = {
+  title: { absolute: "LUMS DataLab: Pakistan's official economic numbers, each linked to its printed page (prototype)" },
+};
+
+/** The newest document of each visible data type that this release reads from. */
+function newestDocuments(): Source[] {
   const d = db();
-  const s = d.seriesById.get(id);
-  if (!s || !isDatasetPublished(s.dataset)) return null;
-  const o = latestPublished(id);
-  if (!o) return null;
-  return (
-    <li className="hl">
-      <div className="hl-text">
-        <Link href={seriesHref(id)} className="hl-name">
-          {s.name}
-        </Link>
-        <FigureLine o={o} series={s} />
-        <span className="hl-kind">
-          <KindAndPeriod o={o} series={s} />
-        </span>
-      </div>
-      <Spark series={s} width={104} height={38} />
-    </li>
-  );
+  const best = new Map<string, Source>();
+  for (const o of d.observations) {
+    if (!o.published || !o.primary_cell_id) continue;
+    const s = d.seriesById.get(o.series_id);
+    if (!s || !isDatasetPublished(s.dataset)) continue;
+    const src = d.sourceById.get(d.cellById.get(o.primary_cell_id)?.source_id ?? "");
+    if (!src) continue;
+    const cur = best.get(s.dataset);
+    if (!cur || src.period > cur.period) best.set(s.dataset, src);
+  }
+  return [...best.values()];
 }
 
 export default function Home() {
   const r = db().release;
-  const keys = publishedDatasets();
-  const total = totalVisible();
-  const headline = editorial.headline.filter((id) => {
-    const s = db().seriesById.get(id);
-    return s && isDatasetPublished(s.dataset) && latestPublished(id);
-  });
+  const words = new PageWords();
+  const notes = new DerivedNotes("home-drv");
+  const cards = headlineCards().map((c) => headlineCard(c, words, notes));
+  const tps = topics();
+  const docs = newestDocuments();
+  const errata = releaseMarkdown("ERRATA.md");
+  const noErrata = !errata || /\bNo errata\b/i.test(errata);
 
   return (
-    <div className="home">
-      <section className="home-find" aria-labelledby="home-h">
-        <h1 id="home-h">Pakistan&rsquo;s economic and fiscal statistics, every figure linked to the government page it was printed on.</h1>
-        <form action="/browse" method="get" role="search" className="home-search" aria-label="Search the catalogue">
+    <div className="home2">
+      <section className="h2-find" aria-labelledby="home-h">
+        <h1 id="home-h">Pakistan&rsquo;s official economic numbers, each linked to the government page it was printed on.</h1>
+        <form action="/search" method="get" role="search" className="h2-search" aria-label="Search the figures">
           <label htmlFor="home-q" className="sr-only">
-            Search series
+            Search for a figure
           </label>
-          <input id="home-q" name="q" type="search" placeholder="Search series, e.g. health spending" autoComplete="off" />
+          <input id="home-q" name="q" type="search" placeholder="Try inflation, health spending…" autoComplete="off" enterKeyHint="search" />
           <button type="submit" className="btn btn-primary">
             Search
           </button>
         </form>
-        <p className="home-try">
+        <p className="h2-try">
           Try:{" "}
-          {editorial.exampleSearches.map((q, i) => (
+          {editorial.exampleSearches.slice(0, 3).map((q, i) => (
             <span key={q}>
               {i > 0 ? " · " : ""}
-              <Link href={`/browse?q=${encodeURIComponent(q)}`}>{q}</Link>
+              <Link href={`/search?q=${encodeURIComponent(q)}`}>{q}</Link>
             </span>
-          ))}{" "}
-          · or <Link href="/browse">browse all <Count k="series" n={total.series} /> series</Link>
+          ))}
         </p>
       </section>
 
-      <section className="home-latest" aria-labelledby="latest-h">
-        <h2 id="latest-h" className="eyebrow">
-          Latest checked figures
+      <section className="h2-cards" aria-labelledby="cards-h">
+        <h2 id="cards-h" className="sr-only">
+          Headline figures
         </h2>
-        <ul className="hl-grid">
-          {headline.map((id) => (
-            <Headline key={id} id={id} />
-          ))}
-        </ul>
+        <ul className="hc-grid">{cards}</ul>
+        <p className="h2-cards-note small muted">
+          Each figure is checked against the page it was printed on. Tap a figure to see that page; tap a card for the whole series.
+        </p>
       </section>
 
-      <section className="home-types" aria-labelledby="types-h">
-        <h2 id="types-h" className="eyebrow">
-          Data types
-        </h2>
-        <ul className="dt-grid">
-          {keys.map((k) => (
-            <DataTypeTile key={k} k={k} />
+      <section className="h2-topics" aria-labelledby="topics-h">
+        <h2 id="topics-h">Topics</h2>
+        <ul className="tp-grid">
+          {tps.map((t) => (
+            <li key={t.slug} className="tp-tile">
+              <Link href={topicHref(t.slug)} className="tp-link">
+                {t.name}
+              </Link>
+              <p>{t.short}</p>
+            </li>
           ))}
         </ul>
+        <p className="small">
+          Looking for a particular publication? <Link href="/sources">Browse by source document</Link>.
+        </p>
       </section>
 
-      <p className="home-release">
-        Release <Link href="/releases"><Num kind="version">{r.version}</Num></Link>, built <Num kind="date">{dateOnly(r.created_at)}</Num> ·{" "}
-        <Link href="/data">Download the release</Link> · <Link href="/methods#statuses">What the marks mean</Link>
-      </p>
-      <StatusLegend label="Status marks used on this site" />
+      <div className="h2-foot">
+        <section aria-labelledby="recent-h">
+          <h2 id="recent-h">Recently added</h2>
+          <p className="small muted">The newest document of each kind that this release reads figures from.</p>
+          <ul className="h2-recent">
+            {docs.map((s) => (
+              <li key={s.source_id}>
+                <Link href={sourceHref(s.source_id)}>
+                  <Num kind="text">{s.title}</Num>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="small">Next expected: not stated in this release.</p>
+        </section>
 
-      <div className="home-more">
         <section aria-labelledby="how-h">
-          <h2 id="how-h">How a figure gets on this site</h2>
-          <ol>
-            <li>Read from the official PDF by a table-extraction tool. No language model writes a number or decides whether it passes.</li>
-            <li>Checked by fixed rules: sums, accounting identities, the same figure printed in another edition.</li>
-            <li>Published only if it passes. Otherwise the site shows a labelled gap that says why.</li>
-          </ol>
+          <h2 id="how-h">How we check</h2>
           <p>
-            Every number is a link to its <strong>receipt</strong>: the printed page with the figure boxed, the checks it passed, and the official PDF.{" "}
-            <Link href="/methods">Methods</Link> · <Link href="/demo/health-and-jobs">A worked example</Link>
+            Every figure is read from the official document by a table-extraction tool, never by a language model, and published only if it passes fixed
+            checks: sums, accounting identities, the same figure printed in another edition. Where a figure fails, you see a labelled gap that says why.{" "}
+            <Link href="/methods">How we check, in full</Link>
           </p>
         </section>
-        <section aria-labelledby="quality-h">
-          <h2 id="quality-h">Quality of this release</h2>
-          <div className="table-wrap" role="region" aria-label="Quality of this release" tabIndex={0}>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Data type</th>
-                  <th scope="col" className="num">
-                    Coverage
-                  </th>
-                  <th scope="col" className="num">
-                    Checks passed
-                  </th>
-                  <th scope="col" className="num">
-                    Measured error rate
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {keys.map((k) => (
-                  <tr key={k}>
-                    <th scope="row">
-                      <Link href={`/datasets/${k}#quality`}>{datasetName(k)}</Link>
-                    </th>
-                    <td className="num">
-                      <Count k={`release:dataset_status.${k}.coverage.coverage`} n={r.dataset_status[k]?.coverage?.coverage} rate />
-                    </td>
-                    <td className="num">
-                      <Count k={`release:dataset_status.${k}.check_pass_rate.pass_rate`} n={r.dataset_status[k]?.check_pass_rate?.pass_rate} rate />
-                    </td>
-                    <td className="num">Pending</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="small muted">
-            Coverage: how much of each printed table was captured. Checks passed: evidence that what was captured is right. They answer different
-            questions and are never combined. The error rate needs the hand-labelled gold set.
+
+        <section aria-labelledby="rel-h">
+          <h2 id="rel-h">This release</h2>
+          <p>
+            <Link href="/releases">
+              Release <Num kind="version">{r.version}</Num>
+            </Link>
+            , built <Num kind="date">{dateOnly(r.created_at)}</Num>. {noErrata ? "No corrections have been made to it." : <Link href="/releases#errata">See its corrections</Link>}{" "}
+            <Link href="/data">Download the release</Link>
           </p>
         </section>
       </div>
-      <p className="coming home-coming">
-        More data types: {COMING}. <Link href="/releases#planned">What is planned</Link>
-      </p>
+
+      <DerivedList notes={notes} title="How the changes on the cards are computed" />
     </div>
   );
 }

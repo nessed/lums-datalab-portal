@@ -40,9 +40,9 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  { href: "/browse", label: "Data", also: ["/series", "/o", "/datasets", "/tables"] },
+  { href: "/topics", label: "Topics", also: ["/answers"] },
   { href: "/compare", label: "Compare" },
-  { href: "/sources", label: "Sources" },
+  { href: "/sources", label: "Sources", also: ["/datasets", "/tables"] },
   { href: "/methods", label: "Methods" },
   { href: "/about", label: "About" },
 ];

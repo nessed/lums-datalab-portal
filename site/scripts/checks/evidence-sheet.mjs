@@ -74,7 +74,7 @@ function webpSize(buf) {
   return null;
 }
 
-export default function check({ siteDir, appDir, cfg, release, series, allObs, observations, cells, sourceById, isPub, slugify, problem }) {
+export default function check({ siteDir, appDir, cfg, release, series, allObs, observations, cells, sourceById, isPub, slugify, problem, derived }) {
   const base = path.join(siteDir, "public", "data", cfg.version, "evidence");
   const sheetDir = path.join(base, "sheet");
   const cropDir = path.join(base, "crops");
@@ -223,5 +223,7 @@ export default function check({ siteDir, appDir, cfg, release, series, allObs, o
         onPages++;
       }
     }
+  // Changes on receipts are recomputed by the scan above; claim them in the shared list.
+  for (const d of derived ?? []) if (d.page.startsWith("/o/") && d.attrs["data-derived"] === "pct-change") d.claimed = true;
   return `${sheets} sheets (${changes} changes recomputed), ${byCell.size} crops (largest ${(largest / 1024).toFixed(1)} KB), ${onPages} changes on receipts recomputed`;
 }

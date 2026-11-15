@@ -14,6 +14,13 @@ import { GAP_WORDS, pct, periodWords } from "@/lib/format";
 import { datasetStats, latestPublished, publishedDatasets } from "@/lib/stats";
 import { tablesOfSource } from "@/lib/tables";
 
+/** Gap kinds in the reader status words of DESIGN.md 6.1. */
+const READER_GAP: Record<string, string> = {
+  failed_checks: "Held back: did not pass its checks",
+  not_yet_verified: "Not checked yet",
+  not_in_source: "Not printed: the document prints a dash or a blank",
+};
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -82,7 +89,7 @@ export default async function DatasetPage({ params }: Props) {
 
   return (
     <article className="dataset-page">
-      <Breadcrumbs items={[{ href: "/browse", label: "Data" }, { href: "/datasets", label: "Data types" }, { label: datasetName(id) }]} />
+      <Breadcrumbs items={[{ href: "/sources", label: "Sources" }, { href: "/datasets", label: "Data types" }, { label: datasetName(id) }]} />
       <header className="ds-head">
         <div>
           <h1>{datasetName(id)}</h1>
@@ -253,7 +260,7 @@ export default async function DatasetPage({ params }: Props) {
               <tbody>
                 {GAP_ORDER.filter((k) => st.gaps[k]).map((k) => (
                   <tr key={k}>
-                    <th scope="row">{k === "disputed" ? "Disputed: official printings disagree" : (GAP_WORDS[k] ?? k)}</th>
+                    <th scope="row">{k === "disputed" ? "Disputed: official printings disagree" : (READER_GAP[k] ?? GAP_WORDS[k] ?? k)}</th>
                     <td className="num">
                       <Count k={`gaps:${id}:${k}`} n={st.gaps[k]} />
                     </td>

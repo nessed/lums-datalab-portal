@@ -137,6 +137,8 @@ export default function check({ appDir, release, series, allObs, isPub, problem,
   /* 1. derived values in the HTML */
   let html = 0;
   for (const el of derived ?? []) {
+    if (!el.attrs["data-op"]) continue; // another area's derived figure (data-derived)
+    el.claimed = true;
     html++;
     const op = el.attrs["data-op"];
     const ids = (el.attrs["data-in"] ?? "").split(",").filter(Boolean);

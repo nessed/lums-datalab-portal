@@ -161,6 +161,12 @@ function countFor(key) {
       return pubIn((o) => dsOf(o) === b);
     case "obs":
       if (b === "series") return (obsBySeries.get(c) ?? []).length;
+      if (b === "source") {
+        // Per-document quality table (DESIGN.md 9.8): figures whose main printing is in this document, by reader status.
+        const inSrc = observations.filter((o) => primarySrc(o) === c);
+        const bucket = { all: () => true, checked: isPub, disputed: (o) => o.status === "disputed", held: (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "failed_checks", "not-printed": (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "not_in_source", "not-checked": (o) => !isPub(o) && o.status !== "disputed" && o.gap_kind === "not_yet_verified" }[d ?? "all"];
+        return bucket ? inSrc.filter(bucket).length : undefined;
+      }
       break;
     case "docs": {
       const pred = b === "series" ? (o) => o.series_id === c : (o) => dsOf(o) === b;
@@ -385,9 +391,10 @@ function parseAttrs(s) {
 }
 
 const mdCache = new Map();
-// Derived figures (data-num="derived": a change, a share, an index) are collected
-// here and recomputed from the release by the plug-in scripts/checks/series-derived.mjs.
-const derivedSeen = [];
+// Derived figures (data-num="derived": a change, a share, an index, an average) are
+// collected here. Each must be claimed and recomputed from the release by the plug-in
+// of its area (series-derived, home-derived, evidence-sheet); an unclaimed one fails.
+const derived = [];
 const counters = { pages: 0, values: 0, counts: 0, labels: 0, nums: {} };
 const linkTargets = { o: new Set(), series: new Set(), tables: new Set(), datasets: new Set(), sources: new Set() };
 
@@ -508,17 +515,15 @@ function validateAnnotated(el, text, page) {
       break;
     }
     case "derived":
-      derivedSeen.push({ page, attrs: a, text: t });
+      // A derived figure: it must say what it is (data-derived or data-op), and a
+      // plug-in in scripts/checks/ must claim and recompute it (section 4).
+      if (!a["data-derived"] && !a["data-op"]) problem("derived", page, `derived value "${t}" does not say what it is (data-derived or data-op)`);
+      derived.push({ page, text: t, attrs: a, claimed: false });
       break;
     case "id":
     case "ui":
     case "axis":
     case "cite":
-      break;
-    case "derived":
-      // A value computed at build time (a change, a share). It must say what it is;
-      // the plug-in of its area recomputes it (pct-change: checks/evidence-sheet.mjs).
-      if (!a["data-derived"]) problem("derived", page, `derived value "${t}" does not say what it is (data-derived)`);
       break;
     default:
       problem("annotation", page, `unknown data-num kind "${kind}"`);
@@ -618,7 +623,7 @@ for (const id of linkTargets.sources) if (!exists("sources", id)) problem("link"
 // Each file exports a default function that receives the release and a
 // problem() reporter. Data the browser draws (JSON files) is checked here.
 const pluginDir = path.join(siteDir, "scripts", "checks");
-const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem, derived: derivedSeen };
+const pluginCtx = { siteDir, appDir, cfg, rel, read, slugify, isPub, release, seriesList, series, allObs, observations, cells, checks, sources, sourceById, problem, derived };
 if (fs.existsSync(pluginDir)) {
   for (const name of fs.readdirSync(pluginDir).filter((n) => n.endsWith(".mjs")).sort()) {
     const mod = await import(pathToFileURL(path.join(pluginDir, name)).href);
@@ -626,6 +631,8 @@ if (fs.existsSync(pluginDir)) {
     console.log(`check-build: plug-in ${name}: ${out ?? "ran"}`);
   }
 }
+
+for (const d of derived) if (!d.claimed) problem("derived", d.page, `derived figure "${d.text}" (${d.attrs["data-derived"] ?? "no formula"}) was not recomputed by any plug-in`);
 
 /* ------------------------------------------------------------------ */
 console.log(`check-build: ${values} value receipts, ${gaps} gap receipts, ${disputed} disputed receipts checked`);

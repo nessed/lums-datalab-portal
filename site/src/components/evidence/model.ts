@@ -516,6 +516,8 @@ export function versionsOf(db: Db, o: Observation): Versions {
     if (!a.value || !b.value) reason = `the ${(!a.value ? a : b).kindWord.toLowerCase()} is ${(!a.value ? a : b).word ?? "not shown"}, so no change is computed`;
     else if (!a.usable || !b.usable) reason = `the ${(!a.usable ? a : b).kindWord.toLowerCase()} is ${(!a.usable ? a : b).word || "not usable"}, so no change is computed`;
     else if (oa.unit !== ob.unit || oa.scale_factor !== ob.scale_factor) reason = "the two are in different units, so no change is computed";
+    // A rate (a share, a per cent) is never given a per cent change of itself (tester finding: +131% on a share).
+    else if (oa.unit === "percent") reason = "both are rates in per cent, so no percentage change is computed; the difference is in percentage points";
     else {
       pct = pctChange(a.value, b.value);
       if (!pct) reason = "the earlier figure is zero, so no percentage change exists";

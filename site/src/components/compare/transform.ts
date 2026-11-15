@@ -170,11 +170,25 @@ function heldBy(x: Pt, input: Pt, role: string, frequency: string): Shown {
   };
 }
 
-/** Index, chosen period = 100: value / base value × 100. Only checked inputs. */
-export function indexTo(pts: Pt[], basePeriod: string, frequency: string): Shown[] {
+/** A series break between two periods (the break starts at at_period): a derived value never spans one. */
+function breakBetween(a: string, b: string, breaks: { p: string; note: string }[]): { p: string; note: string } | undefined {
+  const [lo, hi] = a < b ? [a, b] : [b, a];
+  return breaks.find((br) => lo < br.p && br.p <= hi);
+}
+const acrossBreak = (x: Pt, br: { p: string; note: string }, frequency: string): Shown => ({
+  ...gapOf(x),
+  text: "across a break",
+  held: `not computed across the series break at ${periodLabel(br.p, frequency)}${br.note ? ` (${br.note})` : ""}`,
+  status: "held",
+});
+
+/** Index, chosen period = 100: value / base value × 100. Only checked inputs, never across a break. */
+export function indexTo(pts: Pt[], basePeriod: string, frequency: string, breaks: { p: string; note: string }[] = []): Shown[] {
   const base = pts.find((x) => x.p === basePeriod);
   return pts.map((x) => {
     if (!base) return { ...gapOf(x), text: "no base", held: `no figure for ${periodLabel(basePeriod, frequency)}, the base period, in this series`, status: "held" };
+    const brI = breakBetween(x.p, basePeriod, breaks);
+    if (brI) return acrossBreak(x, brI, frequency);
     if (x.d !== 1 || x.v === null) return heldBy(x, x, "this figure", frequency);
     if (base.d !== 1 || base.v === null) return heldBy(x, base, "the base figure", frequency);
     const b = Number(base.v);
@@ -197,14 +211,16 @@ export function indexTo(pts: Pt[], basePeriod: string, frequency: string): Shown
   });
 }
 
-/** % change from a year earlier: (value / value a year earlier − 1) × 100. Only checked inputs. */
-export function pctChange(pts: Pt[], frequency: string): Shown[] {
+/** % change from a year earlier: (value / value a year earlier − 1) × 100. Only checked inputs, never across a break. */
+export function pctChange(pts: Pt[], frequency: string, breaks: { p: string; note: string }[] = []): Shown[] {
   const byP = new Map(pts.map((x) => [x.p, x]));
   return pts.map((x) => {
     const pe = yearEarlier(x.p, frequency);
     const prev = pe ? byP.get(pe) : undefined;
     if (x.d !== 1 || x.v === null) return heldBy(x, x, "this figure", frequency);
     if (!prev) return { ...gapOf(x), text: "no earlier figure", held: `no figure a year earlier${pe ? ` (${periodLabel(pe, frequency)})` : ""} in this series`, status: "none" };
+    const brC = breakBetween(prev.p, x.p, breaks);
+    if (brC) return acrossBreak(x, brC, frequency);
     if (prev.d !== 1 || prev.v === null) return heldBy(x, prev, "the figure a year earlier", frequency);
     const b = Number(prev.v);
     if (!(b > 0)) return { ...gapOf(x), text: "no change", held: "the figure a year earlier is zero or negative, so a percentage change cannot be formed", status: "held" };

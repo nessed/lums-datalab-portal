@@ -83,6 +83,16 @@ export default async function check({ siteDir, cfg, problem }) {
     assert.equal(m[1].y, -25);
     assert.equal(m[1].text, "−25.0%");
   });
+  test("never across a series break (tester finding: health 2011-12 devolution)", () => {
+    const br = [{ p: "2011-12", note: "devolution" }];
+    const c = T.pctChange([pt("2010-11", "7283"), pt("2011-12", "2646"), pt("2012-13", "3000")], "fiscal_year", br);
+    assert.equal(c[1].y, null, "2010-11 to 2011-12 spans the break");
+    assert.match(c[1].held, /break/);
+    assert.notEqual(c[2].y, null, "2011-12 to 2012-13 is after the break");
+    const i = T.indexTo([pt("2010-11", "7283"), pt("2011-12", "2646"), pt("2012-13", "3000")], "2011-12", "fiscal_year", br);
+    assert.equal(i[0].y, null, "an index on a base after the break holds the years before it");
+    assert.equal(i[1].y, 100);
+  });
   test("share of a total", () => {
     const tot = [pt("2020-21", "1000"), pt("2021-22", null, 0, "disputed")];
     const s = T.shareOf([pt("2020-21", "250"), pt("2021-22", "300")], tot, "Total", "fiscal_year");
@@ -134,7 +144,7 @@ export default async function check({ siteDir, cfg, problem }) {
         const pts = T.pointsOf(sd, kind);
         const byO = new Map(pts.map((x) => [x.o, x]));
         const base = pts.find((x) => x.d === 1)?.p;
-        const runs = [...(base ? [["index", T.indexTo(pts, base, sd.f)]] : []), ["change", T.pctChange(pts, sd.f)]];
+        const runs = [...(base ? [["index", T.indexTo(pts, base, sd.f, sd.br)]] : []), ["change", T.pctChange(pts, sd.f, sd.br)]];
         for (const [what, list] of runs) {
           for (const s of list) {
             if (s.y === null) {
@@ -144,6 +154,9 @@ export default async function check({ siteDir, cfg, problem }) {
             derived++;
             const ins = s.inputs.map((i) => byO.get(i.o));
             if (ins.some((i) => !i || i.d !== 1 || i.v === null)) problem("take-transforms", `${name} ${what} ${s.p}`, "a derived value uses a figure that is not checked");
+            // Independently of the transform code: no derived value spans a series break.
+            const ps = [s.p, ...s.inputs.map((i) => i.p)].sort();
+            if ((sd.br ?? []).some((b) => ps[0] < b.p && b.p <= ps[ps.length - 1])) problem("take-transforms", `${name} ${what} ${s.p}`, `a derived value spans the series break at ${(sd.br ?? []).find((b) => ps[0] < b.p && b.p <= ps[ps.length - 1]).p}`);
             const x = byO.get(s.o);
             const want =
               what === "index" ? (Number(x.v) / Number(pts.find((q) => q.p === base).v)) * 100 : (Number(x.v) / Number(byO.get(s.inputs[1].o).v) - 1) * 100;

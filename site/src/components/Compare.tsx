@@ -143,8 +143,8 @@ export default function Compare({
   const base = show === "index" ? (baseAsked && basePeriods.includes(baseAsked) ? baseAsked : defaultBase(charted.map((sd) => ({ sd, pts: ptsOf(sd) })))) : null;
   const shownOf = (sd: SeriesData): Shown[] => {
     const pts = ptsOf(sd);
-    if (show === "index") return base ? indexTo(pts, base, sd.f) : asPrinted([]);
-    if (show === "change") return pctChange(pts, sd.f);
+    if (show === "index") return base ? indexTo(pts, base, sd.f, sd.br) : asPrinted([]);
+    if (show === "change") return pctChange(pts, sd.f, sd.br);
     if (show === "share") return total ? shareOf(pts, pointsOf(total, kinds.get(sd.id) ?? "be"), total.n, sd.f) : [];
     return asPrinted(pts);
   };

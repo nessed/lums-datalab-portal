@@ -598,7 +598,7 @@
       "id": "tax-revenue",
       "name": "Federal tax revenue",
       "topic": "Government revenue",
-      "synonyms": ["tax revenue", "taxes", "tax collection", "tax receipts", "tax income", "how much tax"],
+      "synonyms": ["tax revenue", "taxes", "tax collection", "tax receipts", "how much tax"],
       "series": ["fed.rev.tax", "fed.rev.tax.fbr", "fed.rev.tax.direct", "fed.rev.tax.indirect"]
     },
     {

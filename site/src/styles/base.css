@@ -33,3 +33,10 @@ html.js .js-only {
 :root {
   --font-source-serif: Georgia, "Noto Serif", "Droid Serif", "Times New Roman", serif;
 }
+
+/* Long ids and addresses (pinned links, series ids) break instead of widening
+   the page: at 360 px they pushed 330 series pages wider than the screen and the
+   action bar off it (tester finding). Text that fits is not affected. */
+main {
+  overflow-wrap: anywhere;
+}

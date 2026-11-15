@@ -105,9 +105,10 @@ export function fmtDecimal(v: string): string {
 }
 
 /** A derived number to one decimal place, with a true minus sign. */
-export function fmtDerived(y: number): string {
-  const r = Math.round(y * 10) / 10;
-  const s = Math.abs(r).toFixed(1);
+export function fmtDerived(y: number, digits = 1): string {
+  const f = 10 ** digits;
+  const r = Math.round(y * f) / f;
+  const s = Math.abs(r).toFixed(digits);
   return `${r < 0 ? "−" : ""}${s.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 }
 
@@ -240,7 +241,7 @@ export function shareOf(pts: Pt[], total: Pt[], totalName: string, frequency: st
       p: x.p,
       k: x.k,
       y,
-      text: `${fmtDerived(y)}%`,
+      text: `${fmtDerived(y, 2)}%`, // shares are often under 1%: two decimals
       o: x.o,
       formula: `${fmtDecimal(x.v)} ÷ ${fmtDecimal(t.v)} × 100`,
       inputs: [

@@ -87,7 +87,8 @@ export default async function check({ siteDir, cfg, problem }) {
     const tot = [pt("2020-21", "1000"), pt("2021-22", null, 0, "disputed")];
     const s = T.shareOf([pt("2020-21", "250"), pt("2021-22", "300")], tot, "Total", "fiscal_year");
     assert.equal(s[0].y, 25);
-    assert.equal(s[0].text, "25.0%");
+    assert.equal(s[0].text, "25.00%");
+    assert.equal(T.fmtDerived(0.236, 2), "0.24");
     assert.equal(s[1].y, null);
     assert.match(s[1].held, /the total, Total, .*disputed/);
   });

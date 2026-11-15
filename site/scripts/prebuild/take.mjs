@@ -220,7 +220,7 @@ export default async function take(ctx) {
   const imp = (rel) => import(pathToFileURL(path.join(siteDir, rel)).href);
   const { loadDatalab } = await imp("src/lib/adapter/datalab.ts");
   const { formatCitation, citationCff, longDate, CITE_BOTH, PORTAL_AUTHOR } = await imp("src/lib/cite-format.ts");
-  const { unitLabel, periodWords } = await imp("src/lib/format.ts");
+  const { unitLabel, periodWords, DOC_TYPE_WORDS } = await imp("src/lib/format.ts");
   const { KIND, STAGE_KINDS } = await imp("src/lib/words.ts");
   const { LONG_COLUMNS, VERSION_FILES } = await imp("src/lib/take-columns.ts");
   const cfg = JSON.parse(fs.readFileSync(path.join(siteDir, "release.config.json"), "utf8"));
@@ -467,7 +467,15 @@ export default async function take(ctx) {
     if (!byDataset.has(s.dataset)) byDataset.set(s.dataset, []);
     byDataset.get(s.dataset).push(...rows);
     const slug = slugify(s.series_id);
-    const seriesCite = formatCitation({ release: relInfo, url: pinned(`/series/${slug}`), accessed, accessedIso: generated, bracket: s.series_id, doc: null, title: s.name });
+    // Publisher first, as on the series page (src/lib/take.ts citationFor): "Annual Budget Statement, editions 2010-11 to 2026-27".
+    const srcs = [...new Set(obs.map((o) => (o.primary_cell_id ? d.cellById.get(o.primary_cell_id)?.source_id : null)).filter(Boolean))]
+      .map((id) => d.sourceById.get(id))
+      .filter(Boolean)
+      .sort((a, b) => a.period.localeCompare(b.period));
+    const seriesDoc = srcs.length
+      ? { publisher: srcs[0].publisher, title: `${DOC_TYPE_WORDS[srcs[0].doc_type] ?? srcs[0].doc_type}, ${srcs.length > 1 ? `editions ${srcs[0].period} to ${srcs.at(-1).period}` : `edition ${srcs[0].period}`}`, label: null, url: null }
+      : null;
+    const seriesCite = formatCitation({ release: relInfo, url: pinned(`/series/${slug}`), accessed, accessedIso: generated, bracket: `${s.series_id}, ${s.name}`, doc: seriesDoc, title: s.name });
     bundle(`series/${slug}`, {
       title: `${s.name} (${s.series_id})`,
       scope: "This series, all periods and every kind of figure, as published in this release.",

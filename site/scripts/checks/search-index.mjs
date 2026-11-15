@@ -62,7 +62,7 @@ const monthWords = (p) => {
 };
 const DOC_SHORT = { abs: "ABS", cpi_monthly_review: "Monthly Review", lfs_annual_report: "LFS", pes_chapter: "Economic Survey", sbp_easydata: "SBP EasyData" };
 
-export default function check({ siteDir, appDir, cfg, release, seriesList, series, allObs, cells, sourceById, isPub, slugify, problem }) {
+export default function check({ siteDir, appDir, cfg, release, seriesList, series, allObs, cells, sourceById, isPub, problem }) {
   const where = "/search.json";
   const file = path.join(siteDir, "public", "data", cfg.version, "search.json");
   if (!fs.existsSync(file)) {

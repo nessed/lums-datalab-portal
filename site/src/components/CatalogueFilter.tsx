@@ -8,10 +8,14 @@
 // the URL (?q=&dataset=abs,cpi&topic=...&values=1&sort=name&all=1), so a link
 // reproduces the view. Without JavaScript the top-level series are listed and
 // every other series is reached from its parent's page.
+// A text query (?q=) uses the site search's index and ranking (src/lib/search.ts,
+// DESIGN.md 10.8): typos, synonyms and concepts are forgiven the same way, and
+// rows are sorted by relevance unless another order is chosen. The catalogue
+// infers no filter from the words (its filters are the facets on the left).
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import Link from "@/components/ui/Link";
 import { setQuery, useQuery } from "@/lib/url-state";
-import { tokens } from "@/lib/search";
+import { loadEngine, runSearch, tokens } from "@/lib/search";
 import type { CatalogueRow } from "@/app/catalogue.json/route";
 
 export type FacetGroup = {
@@ -35,13 +39,34 @@ function loadRows(): Promise<CatalogueRow[]> {
   return rowsPromise;
 }
 
-type Filter = { ts: string[]; onlyValues: boolean; selected: Record<string, Set<string>>; groups: FacetGroup[] };
+type Filter = { ts: string[]; rank: Map<string, number> | null; onlyValues: boolean; selected: Record<string, Set<string>>; groups: FacetGroup[] };
 const passes = (r: CatalogueRow, x: Filter, except?: string) =>
   (!x.onlyValues || r.n > 0) &&
-  x.ts.every((t) => r.search.includes(t)) &&
+  (x.rank ? x.rank.has(r.id) : x.ts.every((t) => r.search.includes(t))) &&
   x.groups.every((g) => g.key === except || x.selected[g.key].size === 0 || x.selected[g.key].has(r.f[g.key] ?? ""));
 
-function useCatalogue(groups: FacetGroup[]) {
+/** Series ids in search order for a query, from the site search; null until loaded or if it fails (plain word match then). */
+function useRank(text: string, indexUrl: string): Map<string, number> | null {
+  const [got, setGot] = useState<{ text: string; rank: Map<string, number> } | null>(null);
+  useEffect(() => {
+    if (!text.trim()) return;
+    let live = true;
+    loadEngine(indexUrl).then(
+      (eng) => {
+        if (!live) return;
+        const r = runSearch(eng, text, { infer: false });
+        setGot({ text, rank: new Map(r.series.map((h, i) => [h.e.id, i])) });
+      },
+      () => {},
+    );
+    return () => {
+      live = false;
+    };
+  }, [text, indexUrl]);
+  return text.trim() && got?.text === text ? got.rank : null;
+}
+
+function useCatalogue(groups: FacetGroup[], indexUrl: string) {
   const q = useQuery();
   const text = q.get("q") ?? "";
   const onlyValues = q.get("values") === "1";
@@ -55,19 +80,20 @@ function useCatalogue(groups: FacetGroup[]) {
     return m;
   }, [qs, groups]);
   const ts = useMemo(() => tokens(text), [text]);
+  const rank = useRank(text, indexUrl);
   const filtering = ts.length > 0 || onlyValues || groups.some((g) => selected[g.key].size > 0);
   const [rows, setRows] = useState<CatalogueRow[] | null>(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     if ((filtering || wantAll) && !rows) loadRows().then(setRows, () => setFailed(true));
   }, [filtering, wantAll, rows]);
-  const filter = useMemo<Filter>(() => ({ ts, onlyValues, selected, groups }), [ts, onlyValues, selected, groups]);
+  const filter = useMemo<Filter>(() => ({ ts, rank, onlyValues, selected, groups }), [ts, rank, onlyValues, selected, groups]);
   return { text, onlyValues, sort, wantAll, selected, ts, filtering, rows, failed, filter };
 }
 
 /** Rows that match, drawn in the browser. Shows nothing (the server list stays) while nothing is filtered. */
-export function CatalogueResults({ groups, total }: { groups: FacetGroup[]; total: number }) {
-  const c = useCatalogue(groups);
+export function CatalogueResults({ groups, total, indexUrl }: { groups: FacetGroup[]; total: number; indexUrl: string }) {
+  const c = useCatalogue(groups, indexUrl);
   const [limit, setLimit] = useState(50);
   const active = c.filtering || c.wantAll;
   const resetKey = `${c.text}|${c.filtering}|${c.wantAll}`;
@@ -80,8 +106,11 @@ export function CatalogueResults({ groups, total }: { groups: FacetGroup[]; tota
     if (!c.rows) return [];
     const m = c.rows.filter((r) => passes(r, c.filter));
     const s = c.sort;
+    const rank = c.filter.rank;
     m.sort((a, b) =>
-      s === "name"
+      rank && s === "order"
+        ? (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0)
+        : s === "name"
         ? a.name.localeCompare(b.name)
         : s === "latest"
           ? (b.latest?.latestPeriod ?? "").localeCompare(a.latest?.latestPeriod ?? "") || a.order - b.order
@@ -169,8 +198,8 @@ export function CatalogueResults({ groups, total }: { groups: FacetGroup[]; tota
   );
 }
 
-export default function CatalogueFilter({ groups }: { groups: FacetGroup[] }) {
-  const c = useCatalogue(groups);
+export default function CatalogueFilter({ groups, indexUrl }: { groups: FacetGroup[]; indexUrl: string }) {
+  const c = useCatalogue(groups, indexUrl);
   const { text, onlyValues, selected, ts, filtering, rows } = c;
   const [drawer, setDrawer] = useState(false);
   const [showAll, setShowAll] = useState<Record<string, boolean>>({});

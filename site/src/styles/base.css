@@ -55,6 +55,20 @@ table,
   font-variant-numeric: tabular-nums lining-nums;
 }
 
+/* ---- the navy footer reaches the bottom of the window on short pages ---- */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body > main {
+  flex: 1 0 auto;
+}
+/* A figure and its unit never split across lines in a bar label (methods tables). */
+.bar > span:last-child {
+  white-space: nowrap;
+}
+
 /* ---- white panels on the grey ground: tables and charts read as objects ---- */
 .table-wrap,
 table {
@@ -350,7 +364,7 @@ a[data-v]::after {
   content: "";
   position: absolute;
   left: calc(100% + 2px);
-  top: -0.1em;
+  top: 0.2em;
   width: 9px;
   height: 11px;
   background: currentColor;
@@ -418,4 +432,15 @@ a[data-v]:hover {
 .site-header .hs-hint kbd {
   background: var(--surface-2);
   color: var(--ink-3);
+}
+
+/* ---- the specimen page only (app/demo/look) ---- */
+.look-specimen .look-h {
+  margin-top: 0;
+}
+.look-cards {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  margin: 0 0 var(--s-4);
 }

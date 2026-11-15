@@ -94,7 +94,10 @@ export default function SeriesView(p: SeriesViewProps) {
   }, [present]);
 
   const bases = useMemo(() => [...new Set((data ?? []).filter((v) => v.op === "idx").map((v) => v.base!))], [data]);
-  const base = units === "idx" ? (q.get("base") && bases.includes(q.get("base")!) ? q.get("base")! : (bases[0] ?? null)) : null;
+  // Default base: the first period at or after the latest break, so the default index view is not empty (tester finding).
+  const lastBreak = [...p.series.breaks.map((b) => b.at_period)].sort().at(-1);
+  const defaultBase = (lastBreak ? bases.find((b) => b >= lastBreak) : undefined) ?? bases[0] ?? null;
+  const base = units === "idx" ? (q.get("base") && bases.includes(q.get("base")!) ? q.get("base")! : defaultBase) : null;
 
   const derived: DerivedViewJson | null = !needData || !data ? null : view === "rev" ? (data.find((v) => v.op === "rev") ?? null) : units === "idx" ? (data.find((v) => v.id === `idx:${base}`) ?? null) : (data.find((v) => v.op === units) ?? null);
   const model: ChartModel | null = derived ? derivedModelFrom(p.series, p.printed.kind, derived, p.kindWords) : needData ? null : view === "best" && p.printed.best ? p.printed.best : p.printed.kind;

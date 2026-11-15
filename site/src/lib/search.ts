@@ -100,6 +100,10 @@ export type SearchEntry = {
   g?: string;
   /** In the headline layer (signed off, chosen). */
   hl?: number;
+  /** On an earlier base than the current one of its data type (CPI 2007-08 base). */
+  ob?: number;
+  /** Has figures after its latest checked one that are withheld (not checked), so it has not ended. */
+  lw?: number;
   /** Not signed off (decision 17.1): never in the headline layer or an answer card. */
   cand?: number;
   /** Latest checked value: short form, kind in words, period and vintage as stored. */
@@ -278,6 +282,8 @@ export type Engine = {
   vocab: Map<string, string>;
   /** Stem -> equivalent stems. */
   equiv: Map<string, Set<string>>;
+  /** Data type name (d) -> the latest period with a checked value in any of its series. */
+  latestOf: Map<string, string>;
 };
 
 // Field weights: the ranking tiers below the concept and headline layers.
@@ -316,6 +322,7 @@ export function buildEngine(index: SearchEntry[]): Engine {
     seriesById: new Map(),
     vocab,
     equiv: new Map(),
+    latestOf: new Map(),
   };
   for (const e of index) {
     // Links and words the file leaves out, rebuilt here.
@@ -342,6 +349,7 @@ export function buildEngine(index: SearchEntry[]): Engine {
       }
     } else if (e.k === "s") {
       eng.seriesById.set(e.id, e);
+      if (e.d && e.to && e.to > (eng.latestOf.get(e.d) ?? "")) eng.latestOf.set(e.d, e.to);
       eng.series.push(
         prep(e, [
           [W_NAME, e.n],
@@ -420,7 +428,8 @@ function expand(eng: Engine, word: string, typing: boolean): Expansion {
 
 export type Chip = { kind: "province" | "year"; label: string; said: string };
 
-export type Hit = { e: SearchEntry; score: number };
+/** t: 1 when the series is dated (earlier base, or figures that stopped years ago) and ranks below current ones. */
+export type Hit = { e: SearchEntry; score: number; t?: number };
 
 export type SearchResult = {
   q: string;
@@ -627,11 +636,16 @@ export function runSearch(eng: Engine, raw: string, opt: SearchOptions = {}): Se
         if (activeYears.length && periodMatches(e.p, activeYears)) score += 30;
       }
       score -= p.lenPenalty;
-      if (cov === 1 || b > 0) full.push({ e, score });
-      else if (cov >= 0.5) part.push({ e, score });
+      // Current series first: one on an earlier base, or whose checked figures stopped years before its data
+      // type's latest, ranks below every current one (DESIGN.md 10.7; round 2 item 14). The concept's own
+      // headline series is the exception: it is the answer the card shows.
+      const t = kind === "s" && b < 1000 && datedOf(eng, e) ? 1 : 0;
+      if (cov === 1 || b > 0) full.push({ e, score, t });
+      else if (cov >= 0.5) part.push({ e, score, t });
     }
-    full.sort((a, b) => b.score - a.score);
-    part.sort((a, b) => b.score - a.score);
+    const order = (a: Hit, b: Hit) => (a.t ?? 0) - (b.t ?? 0) || b.score - a.score;
+    full.sort(order);
+    part.sort(order);
     return { full, part };
   };
   const rs = rank(eng.series, "s");
@@ -654,6 +668,198 @@ export function runSearch(eng: Engine, raw: string, opt: SearchOptions = {}): Se
     suggestion,
     ms: now() - t0,
   };
+}
+
+/* ---------- current or dated ---------- */
+
+const yearOf = (p: string | undefined) => (p ? Number(p.slice(0, 4)) : NaN);
+
+export type Dated = {
+  /** The last period with a checked value, in words, when it is two years or more before its data type's latest. */
+  ended: string | null;
+  /** True when later figures exist but are withheld: "checked to", not "ends". */
+  withheld: boolean;
+  /** On an earlier base than the current one. */
+  earlier: boolean;
+};
+
+/** Null for a current series; otherwise why it is not current. */
+export function datedOf(eng: Engine, e: SearchEntry): Dated | null {
+  if (e.k !== "s") return null;
+  const latest = e.d ? eng.latestOf.get(e.d) : undefined;
+  const ended = e.to && latest && yearOf(latest) - yearOf(e.to) >= 2 ? periodText(e.to, e.f) : null;
+  const earlier = e.ob === 1;
+  return ended || earlier ? { ended, withheld: e.lw === 1, earlier } : null;
+}
+
+/* ---------- filters (facets) and families ---------- */
+
+/**
+ * The filters a series can be narrowed by, read from its id. Series ids are
+ * built from the release's dimensions (cpi.<area>.<measure>.<group>,
+ * lfs.<measure>.[<province>.]<sex>.<area>, fed.<side>...); scripts/search-test.mjs
+ * checks, for every series, that what is read here equals the release's own
+ * dims, unit and geography, so the two cannot drift apart.
+ *   topic    data type: "cpi" prices, "lfs" labour force, "abs" federal budget
+ *   area     "all" (national, or urban and rural together), "urban", "rural", "none" (no area printed)
+ *   measure  CPI: "yoy", "mom", "index", "weight"; labour force: "rate", "count"
+ *   sex      labour force: "total", "female", "male"
+ *   prov     geography: "pk" or a province code
+ */
+export type Facets = { topic: string; area: string | null; measure: string | null; sex: string | null; prov: string };
+
+export function facetsOf(e: SearchEntry): Facets {
+  const p = e.id.split(".");
+  const prov = e.g ?? "pk";
+  if (p[0] === "cpi") {
+    const area = ["national", "urban", "rural"].includes(p[1]) ? (p[1] === "national" ? "all" : p[1]) : "none";
+    const measure = p.includes("yoy") ? "yoy" : p.includes("mom") ? "mom" : p.includes("weight") ? "weight" : "index";
+    return { topic: "cpi", area, measure, sex: null, prov };
+  }
+  if (p[0] === "lfs") {
+    const i = p.findIndex((x, j) => j > 1 && (x === "total" || x === "male" || x === "female"));
+    const sex = i > 0 ? p[i] : null;
+    const a = i > 0 ? p[i + 1] : undefined;
+    const area = a === "urban" || a === "rural" ? a : a === "total" ? "all" : null;
+    const measure = /rate|lfpr|share/.test(p[1] ?? "") ? "rate" : "count";
+    return { topic: "lfs", area, measure, sex, prov };
+  }
+  return { topic: p[0] === "fed" ? "abs" : p[0], area: null, measure: null, sex: null, prov };
+}
+
+export const FACET_KEYS = ["topic", "area", "measure", "sex", "prov"] as const;
+export type FacetKey = (typeof FACET_KEYS)[number];
+
+export const FACET_LABEL: Record<FacetKey, string> = { topic: "Topic", area: "Area", measure: "Kind of figure", sex: "Women and men", prov: "Province" };
+
+const FACET_WORDS: Record<FacetKey, Record<string, string>> = {
+  topic: { cpi: "Prices", lfs: "Jobs and labour", abs: "Federal budget" },
+  area: { all: "All Pakistan", urban: "Urban", rural: "Rural", none: "No area printed" },
+  measure: { yoy: "Change over a year", mom: "Change over a month", index: "Index level", weight: "Basket weight", rate: "Rate", count: "Number of people" },
+  sex: { total: "Women and men", female: "Women", male: "Men" },
+  prov: { pk: "Pakistan", ...Object.fromEntries(PROVINCES.map((x) => [x.code, x.label])) },
+};
+
+export const facetWords = (k: FacetKey, v: string) => FACET_WORDS[k][v] ?? v;
+
+export type FacetPick = Partial<Record<FacetKey, string>>;
+
+/** Hits that pass every chosen filter (except `skip`, for counting that filter's own choices). */
+export function applyFacets(hits: Hit[], pick: FacetPick, skip?: FacetKey): Hit[] {
+  const keys = FACET_KEYS.filter((k) => k !== skip && pick[k]);
+  if (!keys.length) return hits;
+  return hits.filter((h) => {
+    const f = facetsOf(h.e);
+    return keys.every((k) => f[k] === pick[k]);
+  });
+}
+
+/** Each filter's choices among the hits (given the other chosen filters), with counts. Only filters with two or more choices, or a chosen one. */
+export function facetChoices(hits: Hit[], pick: FacetPick): { key: FacetKey; values: { v: string; n: number }[] }[] {
+  const out: { key: FacetKey; values: { v: string; n: number }[] }[] = [];
+  for (const k of FACET_KEYS) {
+    const m = new Map<string, number>();
+    for (const h of applyFacets(hits, pick, k)) {
+      const v = facetsOf(h.e)[k];
+      if (v) m.set(v, (m.get(v) ?? 0) + 1);
+    }
+    const order = Object.keys(FACET_WORDS[k]);
+    const rank = (v: string) => (order.includes(v) ? order.indexOf(v) : 99);
+    const values = [...m.entries()].map(([v, n]) => ({ v, n })).sort((a, b) => rank(a.v) - rank(b.v));
+    if (values.length >= 2 || pick[k]) out.push({ key: k, values });
+  }
+  return out;
+}
+
+/** The family a series result is grouped under on the results page: plain words, no numbers. */
+const DATED_FAMILY = { key: "z-dated", label: "Earlier base or older figures" };
+
+export function familyOf(e: SearchEntry): { key: string; label: string } {
+  const f = facetsOf(e);
+  const p = e.id.split(".");
+  if (f.topic === "cpi") {
+    if (f.measure === "weight") return { key: "cpi-weight", label: "Weights in the price basket" };
+    if (p.includes("general")) return f.area === "all" ? { key: "cpi-all", label: "Prices, all of Pakistan" } : { key: "cpi-ur", label: "Prices, urban and rural" };
+    return { key: "cpi-group", label: "Prices by group of goods" };
+  }
+  if (f.topic === "lfs") {
+    if (p.includes("icls19")) return { key: "lfs-icls19", label: "Labour force, new definition" };
+    if (f.prov !== "pk") return { key: "lfs-prov", label: "Labour force by province" };
+    if (f.area === "urban" || f.area === "rural") return { key: "lfs-ur", label: "Labour force, urban and rural" };
+    return { key: "lfs-all", label: "Labour force, all of Pakistan" };
+  }
+  if (f.topic === "abs") {
+    if (p[1] === "rev") return { key: "abs-rev", label: "Budget: money coming in" };
+    const fn = p.indexOf("function");
+    if (fn < 0) return { key: "abs-tot", label: "Budget: spending totals" };
+    return p.length - fn > 2 ? { key: "abs-sub", label: "Budget: spending in detail" } : { key: "abs-fn", label: "Budget: spending by purpose" };
+  }
+  return { key: f.topic, label: e.d ?? "Other series" };
+}
+
+export type Family = { key: string; label: string; hits: Hit[] };
+
+/** Series hits in families, each family in the order of its best hit; the dated family last. */
+export function families(hits: Hit[]): Family[] {
+  const by = new Map<string, Family>();
+  for (const h of hits) {
+    const f = h.t ? DATED_FAMILY : familyOf(h.e);
+    let g = by.get(f.key);
+    if (!g) {
+      g = { key: f.key, label: f.label, hits: [] };
+      by.set(f.key, g);
+    }
+    g.hits.push(h);
+  }
+  const dated = (g: Family) => (g.key === "z-dated" ? 1 : 0);
+  return [...by.values()].sort((a, b) => dated(a) - dated(b));
+}
+
+/* ---------- sparklines (spark.json, fetched after the results show) ---------- */
+
+/** [span, step, ...segments]; a segment is [x, value, value, ...] (values as stored, checked figures only). */
+export type SparkRow = (number | (number | string)[])[];
+export type Sparks = { r: string; s: Record<string, SparkRow> };
+
+let sparkLoading: Promise<Sparks> | null = null;
+let sparkLoaded: Sparks | null = null;
+export function loadSparks(url: string): Promise<Sparks> {
+  sparkLoading ??= fetch(url)
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`sparklines: ${r.status}`))))
+    .then((j: Sparks) => (sparkLoaded = j))
+    .catch((e) => {
+      sparkLoading = null;
+      throw e;
+    });
+  return sparkLoading;
+}
+export const sparksIfLoaded = () => sparkLoaded;
+
+/** SVG geometry of one sparkline: path data (segments never joined across a gap or break) and lone points. */
+export function sparkPath(row: SparkRow, w: number, h: number): { d: string; dots: [number, number][]; last: [number, number] | null } {
+  const span = Number(row[0]) || 1;
+  const step = Number(row[1]) || 1;
+  const segs = row.slice(2) as (number | string)[][];
+  const ys = segs.flatMap((s) => s.slice(1).map(Number));
+  if (!ys.length) return { d: "", dots: [], last: null };
+  const lo = Math.min(...ys);
+  const hi = Math.max(...ys);
+  const px = (x: number) => 2 + (x / span) * (w - 6);
+  const py = (y: number) => h - 3 - ((y - lo) / (hi - lo || 1)) * (h - 6);
+  let d = "";
+  const dots: [number, number][] = [];
+  let last: [number, number] | null = null;
+  for (const s of segs) {
+    const x0 = Number(s[0]);
+    const vals = s.slice(1).map(Number);
+    vals.forEach((v, i) => {
+      const pt: [number, number] = [px(x0 + i * step), py(v)];
+      d += `${i ? "L" : "M"}${pt[0].toFixed(1)} ${pt[1].toFixed(1)}`;
+      last = pt;
+    });
+    if (vals.length === 1) dots.push([px(x0), py(vals[0])]);
+  }
+  return { d, dots, last };
 }
 
 const valueOf = (a: Answer, t: AnswerTuple): AnswerValue => ({ p: t[0], pw: periodText(t[0], a.f), vt: t[1], v: t[2], m: t[3], k: t[4], o: receiptHref(a.s, t[0], t[1]) });

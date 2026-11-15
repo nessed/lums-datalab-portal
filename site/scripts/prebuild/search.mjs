@@ -14,6 +14,12 @@
 //   c  every concept of editorial/concepts.json, with its answer: the checked,
 //      signed-off values of its headline series, each with its source marker;
 //   m  the release id and the word equivalences.
+//
+// A second file, spark.json, holds the sparkline of every visible series (its
+// checked values of its main kind of figure, in segments that break at gaps and
+// series breaks, as the full chart does). It is fetched only after the results
+// show, so it never counts against the index budget. Its numbers are the stored
+// values of checked figures; scripts/checks/search-index.mjs recomputes it all.
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
@@ -83,6 +89,13 @@ export default async function searchIndex(ctx) {
   index.push({ k: "m", id: "meta", n: "meta", r: d.release.version, w: concepts.words });
 
   const visibleSeries = d.series.filter((s) => visible(s.dataset));
+  // The latest base year of each data type (CPI: 2015-16). A series on an earlier base is marked (ob), so search
+  // can rank it below the current ones and say "earlier base" on its card.
+  const latestBase = new Map();
+  for (const s of visibleSeries) {
+    const b = s.dims?.base_year;
+    if (b && (!latestBase.has(s.dataset) || b > latestBase.get(s.dataset))) latestBase.set(s.dataset, b);
+  }
   for (const s of visibleSeries) {
     const all = d.obsBySeries.get(s.series_id) ?? [];
     const pub = all.filter(shows);
@@ -116,12 +129,15 @@ export default async function searchIndex(ctx) {
     if (s.geo && s.geo !== "pk") e.g = s.geo;
     if (headline.has(s.series_id) && !cand) e.hl = 1;
     if (cand) e.cand = 1;
+    if (s.dims?.base_year && s.dims.base_year < latestBase.get(s.dataset)) e.ob = 1;
     if (latest) {
       // The link to its receipt (/o/<series>~<period>~<vintage>) and the period in words are rebuilt by the engine.
       e.lv = shortScale(latest.value, s.unit, s.scale_factor);
       e.lk = kindWord(latest);
       e.lpr = latest.period;
       e.lvt = latest.vintage;
+      // Later figures exist but none is checked: the card says "checked to", never "ends".
+      if (all.some((o) => o.period > latest.period)) e.lw = 1;
     }
     index.push(e);
   }
@@ -188,7 +204,68 @@ export default async function searchIndex(ctx) {
 
   const json = JSON.stringify(index);
   fs.writeFileSync(path.join(dest, "search.json"), json);
+
+  // Sparklines: { r: release, s: { id: [span, step, [x, "value", "value", ...], ...] } }.
+  // One line per series: its main kind of figure (budget estimate if it has one, else the kind it has most of), as
+  // the sparkline and chart on the series page draw it. x is the period's position on the time axis (years for
+  // fiscal years and survey rounds, months for months) less that of the series' first period; span is the last
+  // period's position; step the normal distance between periods. Neighbouring checked values sit in one segment
+  // only when they are exactly one step apart and no series break lies between them; gaps and breaks start a new
+  // segment. Values are the release's stored strings, of checked figures only.
+  const ordinal = (p, f) => {
+    const m = /^(\d{4})-(\d{2})$/.exec(p);
+    if (f === "month" && m) return Number(m[1]) * 12 + (Number(m[2]) - 1);
+    const y = /^(\d{4})/.exec(p);
+    return y ? Number(y[1]) : null;
+  };
+  const spark = {};
+  for (const s of visibleSeries) {
+    const all = d.obsBySeries.get(s.series_id) ?? [];
+    const pub = all.filter(shows);
+    if (!pub.length) continue;
+    let v = "na";
+    if (pub.some((o) => o.vintage === "be")) v = "be";
+    else {
+      const n = new Map();
+      for (const o of pub) n.set(o.vintage, (n.get(o.vintage) ?? 0) + 1);
+      v = [...n.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    }
+    const periods = [...new Set(all.filter((o) => o.vintage === v).map((o) => o.period))].sort();
+    const ord = new Map(periods.map((p) => [p, ordinal(p, s.frequency)]));
+    let computable = [...ord.values()].every((x) => x !== null) && new Set(ord.values()).size === periods.length;
+    if (!computable) periods.forEach((p, i) => ord.set(p, i));
+    let step = Infinity;
+    for (let i = 1; i < periods.length; i++) step = Math.min(step, ord.get(periods[i]) - ord.get(periods[i - 1]));
+    if (!Number.isFinite(step) || step <= 0) step = 1;
+    const x0 = ord.get(periods[0]);
+    const breaks = [];
+    for (const b of s.breaks ?? []) {
+      let at = computable ? ordinal(b.at_period, s.frequency) : null;
+      if (at === null) {
+        const next = periods.find((p) => p >= b.at_period);
+        at = next !== undefined ? ord.get(next) : null;
+      }
+      if (at !== null) breaks.push(at - step / 2);
+    }
+    const pts = pub.filter((o) => o.vintage === v).map((o) => ({ x: ord.get(o.period), v: o.value })).sort((a, b) => a.x - b.x);
+    const segs = [];
+    let cur = null;
+    let prev = null;
+    for (const p of pts) {
+      const join = prev && Math.abs(p.x - prev.x - step) < 1e-9 && !breaks.some((bx) => bx > prev.x && bx < p.x);
+      if (!join) {
+        cur = [p.x - x0];
+        segs.push(cur);
+      }
+      cur.push(p.v);
+      prev = p;
+    }
+    spark[s.series_id] = [ord.get(periods[periods.length - 1]) - x0, step, ...segs];
+  }
+  const sparkJson = JSON.stringify({ r: d.release.version, s: spark });
+  fs.writeFileSync(path.join(dest, "spark.json"), sparkJson);
+  const sgz = zlib.gzipSync(sparkJson, { level: 9 }).length;
   const gz = zlib.gzipSync(json, { level: 9 }).length;
   const br = zlib.brotliCompressSync(json).length;
-  return `search.json: ${index.length} entries, ${(json.length / 1024).toFixed(1)} KB, ${(gz / 1024).toFixed(1)} KB gzip, ${(br / 1024).toFixed(1)} KB brotli`;
+  return `search.json: ${index.length} entries, ${(json.length / 1024).toFixed(1)} KB, ${(gz / 1024).toFixed(1)} KB gzip, ${(br / 1024).toFixed(1)} KB brotli; spark.json: ${Object.keys(spark).length} series, ${(sparkJson.length / 1024).toFixed(1)} KB, ${(sgz / 1024).toFixed(1)} KB gzip`;
 }

@@ -26,28 +26,42 @@ function same(a, b) {
   const s = Math.max(a.s, b.s);
   return [a.n * 10n ** BigInt(s - a.s), b.n * 10n ** BigInt(s - b.s), s];
 }
-// Nearest integer, halves away from zero.
-function rnd(num, den) {
-  if (den < 0n) [num, den] = [-num, -den];
-  const q = (abs(num) * 2n + den) / (2n * den);
-  return num < 0n ? -q : q;
+// The rounding rule for derived figures (DECISIONS.md, round 2), written again
+// here rather than imported from the site: the exact quotient num/den (in per
+// cent or percentage points) to one decimal; to two when its magnitude is below
+// 1; a figure that is not zero but would read 0.00 to its first significant
+// digit; halves away from zero. Returns an unsigned string ("17.1", "0.42").
+function rule(num, den) {
+  num = abs(num);
+  den = abs(den);
+  if (num === 0n) return "0.00";
+  const at = (k) => {
+    const q = num * 10n ** BigInt(k);
+    const r = q / den;
+    return (q % den) * 2n >= den ? r + 1n : r;
+  };
+  const put = (n, k) => {
+    const t = n.toString().padStart(k + 1, "0");
+    return `${t.slice(0, t.length - k).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.${t.slice(t.length - k)}`;
+  };
+  const h = at(2);
+  if (h >= 100n) return put(at(1), 1);
+  if (h > 0n) return put(h, 2);
+  let k = 3;
+  while (num * 10n ** BigInt(k) < den) k++;
+  const d = at(k);
+  return d === 10n ? put(1n, k - 1) : put(d, k);
 }
-// Percentage of num/den: one decimal below 10%, whole at or above.
+// Percentage of num/den under the rule.
 function pct(num, den) {
-  const t = rnd(num * 1000n, den);
-  const mag = abs(t) >= 100n ? `${abs(rnd(num * 100n, den))}%` : `${abs(t) / 10n}.${abs(t) % 10n}%`;
+  const mag = `${rule(num * 100n, den)}%`;
   const sign = num === 0n ? 0 : num < 0n !== den < 0n ? -1 : 1;
   return { mag, sign };
 }
 function withSign(mag, sign, fmt, unit = "") {
   if (fmt === "plain") return mag + unit;
-  if (fmt === "signed") return sign === 0 ? `0${mag.endsWith("%") ? "%" : ""}${unit}` : `${sign < 0 ? "−" : "+"}${mag}${unit}`;
+  if (fmt === "signed") return sign === 0 ? `${mag}${unit}` : `${sign < 0 ? "−" : "+"}${mag}${unit}`;
   return sign === 0 ? "unchanged" : `${sign < 0 ? "down" : "up"} ${mag}${unit}`;
-}
-function decStr(n, s) {
-  const a = abs(n).toString().padStart(s + 1, "0");
-  const i = a.slice(0, a.length - s).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return s ? `${i}.${a.slice(a.length - s)}` : i;
 }
 
 export default function check({ appDir, release, series, allObs, isPub, problem, derived }) {
@@ -84,7 +98,7 @@ export default function check({ appDir, release, series, allObs, isPub, problem,
         if (series.get(a.series_id)?.unit !== "percent") problem("home-derived", d.page, `"${d.text}": percentage points of a series that is not a rate`);
         const diff = y - x;
         const sign = diff === 0n ? 0 : diff < 0n ? -1 : 1;
-        want = sign === 0 && fmt === "words" ? "unchanged" : withSign(decStr(diff, s), sign, fmt, " percentage points");
+        want = sign === 0 && fmt === "words" ? "unchanged" : withSign(rule(diff, 10n ** BigInt(s)), sign, fmt, " percentage points");
       } else {
         if (x <= 0n) {
           problem("home-derived", d.page, `"${d.text}": a percentage change from a base at or below zero`);

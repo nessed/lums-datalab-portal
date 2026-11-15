@@ -1,6 +1,7 @@
 // Derived views of one series (DESIGN.md 6.1 "Gaps travel", 6.3, 8.2, 11
-// "Units first"). Pure functions with no imports, so the build, the browser
-// and scripts/series-derive-test.mjs all run the same code.
+// "Units first"). Pure functions whose only import is the site's rounding rule
+// (lib/format.ts, itself import-free), so the build, the browser and
+// scripts/series-derive-test.mjs all run the same code.
 //
 // Rules, each enforced here and re-checked independently by
 // scripts/checks/series-derived.mjs:
@@ -9,8 +10,12 @@
 //   - like with like: a change compares the same kind of figure (a budget
 //     estimate with the previous budget estimate, never with a revised one);
 //   - never across a series break;
-//   - exact decimal arithmetic on the stored strings (BigInt), one fixed
-//     rounding rule: half away from zero.
+//   - exact decimal arithmetic on the stored strings (BigInt), rounded by the
+//     site's one rule for derived figures (roundDerived in lib/format.ts: one
+//     decimal, two below 1, half away from zero). A change in the series' own
+//     unit is exact, except a change of a rate, which is in percentage points
+//     and follows the rule.
+import { decimalFraction, roundDerived } from "./format.ts";
 
 /* ---------- exact decimals ---------- */
 
@@ -26,7 +31,6 @@ function parseDec(v: string): Dec | null {
 
 const TEN = BigInt(10);
 const ZERO = BigInt(0);
-const TWO = BigInt(2);
 const HUNDRED = BigInt(100);
 
 function align(a: Dec, b: Dec): [bigint, bigint, number] {
@@ -53,41 +57,25 @@ export function decSub(a: string, b: string): string | null {
   return fmtScaled(p - q, s);
 }
 
-/** num / den * 100, rounded half away from zero to `dp` decimals. Null when den is zero. */
-export function decPercent(num: string, den: string, dp: number): string | null {
-  const x = parseDec(num);
-  const y = parseDec(den);
-  if (!x || !y) return null;
-  const [p, q] = align(x, y);
-  if (q === ZERO) return null;
-  let top = p * HUNDRED * TEN ** BigInt(dp);
-  let bot = q;
-  if (bot < ZERO) {
-    top = -top;
-    bot = -bot;
-  }
-  const neg = top < ZERO;
-  const t = neg ? -top : top;
-  let r = t / bot;
-  if (TWO * (t % bot) >= bot) r += BigInt(1);
-  return fmtScaled(neg ? -r : r, dp);
+/** num / den * 100 under the rounding rule. Null when den is zero or either is not a decimal. */
+export function decPercent(num: string, den: string): string | null {
+  const x = decimalFraction(num);
+  const y = decimalFraction(den);
+  if (!x || !y || y[0] === ZERO) return null;
+  return roundDerived(x[0] * y[1] * HUNDRED, x[1] * y[0]);
 }
 
-/** (a - b) / b * 100, rounded half away from zero to `dp` decimals. */
-export function decPctChange(a: string, b: string, dp: number): string | null {
+/** (a - b) / b * 100 under the rounding rule. */
+export function decPctChange(a: string, b: string): string | null {
   const d = decSub(a, b);
   if (d === null) return null;
-  return decPercent(d, b, dp);
+  return decPercent(d, b);
 }
 
-/** "+17.1", "−3.2", "0.0": a signed figure for a change, with a true minus sign. */
-export function signed(v: string): string {
-  const neg = v.startsWith("-");
-  const abs = neg ? v.slice(1) : v.replace(/^\+/, "");
-  const [i, f] = abs.split(".");
-  const body = `${i.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${f !== undefined ? `.${f}` : ""}`;
-  if (/^0*(\.0*)?$/.test(abs)) return body;
-  return `${neg ? "−" : "+"}${body}`;
+/** An exact decimal (a change in percentage points) under the rounding rule. */
+export function decRule(v: string): string | null {
+  const x = decimalFraction(v);
+  return x ? roundDerived(x[0], x[1]) : null;
 }
 
 /* ---------- periods ---------- */
@@ -166,7 +154,6 @@ export type DOp = "pct" | "chg" | "idx" | "share" | "rev";
 export type DView = {
   id: string;
   op: DOp;
-  dp: number;
   base?: string;
   points: DPoint[];
 };
@@ -178,12 +165,14 @@ export type DMeta = {
   kindWords: Record<string, string>;
 };
 
-const DP: Record<DOp, number> = { pct: 1, chg: -1, idx: 1, share: 2, rev: 1 };
-
-function compute(op: DOp, a: string, b: string): string | null {
-  if (op === "chg") return decSub(a, b);
-  if (op === "pct" || op === "rev") return decPctChange(a, b, DP[op]);
-  return decPercent(a, b, DP[op]);
+/** A derived value: per cent (pct, rev, share, idx) and changes of a rate (percentage points) under the rounding rule; other changes exact. */
+function compute(op: DOp, a: string, b: string, unit: string): string | null {
+  if (op === "chg") {
+    const d = decSub(a, b);
+    return d !== null && unit === "percent" ? decRule(d) : d;
+  }
+  if (op === "pct" || op === "rev") return decPctChange(a, b);
+  return decPercent(a, b);
 }
 
 function kw(meta: DMeta, k: string): string {
@@ -201,7 +190,7 @@ export function derivePoint(op: DOp, meta: DMeta, a: DInput, b: DInput | undefin
   }
   if (!b) return { ...base, gap: "none", why: missing };
   if (breakAt) return { ...base, gap: "break", why: `Not compared across the series break (${breakAt.kind.replaceAll("_", " ")}) at ${periodLabel(breakAt.at_period, meta.frequency)}.` };
-  const v = compute(op, a.value!, b.value!);
+  const v = compute(op, a.value!, b.value!, meta.unit);
   if (v === null) return { ...base, gap: "zero", why: "The figure it is compared with is zero, so no percentage can be computed." };
   const out: DPoint = { ...base, v, iv: [a.value!, b.value!] };
   if (op === "rev") out.diff = decSub(a.value!, b.value!) ?? undefined;
@@ -226,7 +215,7 @@ export function changeView(op: "pct" | "chg", meta: DMeta, recs: DInput[]): DVie
       : "This is the first figure of the series.";
     points.push(derivePoint(op, meta, a, b, missing, br));
   }
-  return { id: op, op, dp: DP[op], points };
+  return { id: op, op, points };
 }
 
 /** Index, chosen period = 100, per kind of figure (each kind against its own figure in the base period). */
@@ -238,7 +227,7 @@ export function indexView(meta: DMeta, recs: DInput[], basePeriod: string): DVie
     const br = b ? breakBetween(basePeriod, a.period, meta.breaks) : null;
     points.push(derivePoint("idx", meta, a, b, `No ${kw(meta, a.kind)} for the base period ${periodLabel(basePeriod, meta.frequency)}.`, br));
   }
-  return { id: `idx:${basePeriod}`, op: "idx", dp: DP.idx, base: basePeriod, points };
+  return { id: `idx:${basePeriod}`, op: "idx", base: basePeriod, points };
 }
 
 /** Share of the parent total: same period, same kind. */
@@ -247,7 +236,7 @@ export function shareView(meta: DMeta, recs: DInput[], parent: DInput[], parentN
   const points = byPeriod(recs).map((a) =>
     derivePoint("share", meta, a, at.get(`${a.period}|${a.kind}`), `No ${kw(meta, a.kind)} of ${parentName} for ${periodLabel(a.period, meta.frequency)} in this release.`),
   );
-  return { id: "share", op: "share", dp: DP.share, points };
+  return { id: "share", op: "share", points };
 }
 
 /** Change from budget estimate to revised estimate, per year, as a percentage of the budget estimate. */
@@ -265,7 +254,7 @@ export function revisionView(meta: DMeta, recs: DInput[]): DView {
       points.push({ ...pt, k: "rev", in: [b.id] });
     }
   }
-  return { id: "rev", op: "rev", dp: DP.rev, points };
+  return { id: "rev", op: "rev", points };
 }
 
 /* ---------- best available figure per year (DESIGN.md 5.3, 8.2) ---------- */

@@ -7,7 +7,7 @@
 // imports from data.ts and the contract (erased by Node), no JSX, no fs.
 import type { Cell, Check, Db, Observation, Series, Source } from "../../lib/data";
 import type { Evidence } from "../../lib/adapter/contract";
-import { formatDecimalString, periodWords, unitLabel } from "../../lib/format.ts";
+import { derivedDisplay, formatDecimalString, periodWords, roundDerived, unitLabel } from "../../lib/format.ts";
 import { slugify } from "../../lib/ids.ts";
 import { KIND } from "../../lib/words.ts";
 
@@ -418,14 +418,6 @@ export function kindWord(o: Pick<Observation, "kind" | "vintage">): string {
   return w.charAt(0).toUpperCase() + w.slice(1);
 }
 
-/** Round half away from zero of a / b for BigInt a, b (b > 0). */
-function divRound(a: bigint, b: bigint): bigint {
-  const neg = a < BigInt(0);
-  const x = neg ? -a : a;
-  const q = (x * BigInt(2) + b) / (b * BigInt(2));
-  return neg ? -q : q;
-}
-
 function toScaled(v: string, dec: number): bigint | null {
   const m = /^([+-]?)(\d+)(?:\.(\d+))?$/.exec(v.trim());
   if (!m) return null;
@@ -437,9 +429,10 @@ function toScaled(v: string, dec: number): bigint | null {
 
 /**
  * Percentage change from a to b, from the stored decimal strings, no floating
- * point: whole per cent when the change is 10% or more either way, one decimal
- * below that; half away from zero. "+88%", "−4.2%", "0%". Null if a is zero or
- * either is not a plain decimal. scripts/checks/evidence-sheet.mjs recomputes it.
+ * point, under the site's rounding rule (roundDerived in lib/format.ts: one
+ * decimal, two below 1, half away from zero): "+88.4%", "−4.2%", "+0.42%",
+ * "0.00%". Null if a is zero or either is not a plain decimal.
+ * scripts/checks/evidence-sheet.mjs recomputes it.
  */
 export function pctChange(a: string, b: string): string | null {
   const da = (a.split(".")[1] ?? "").length;
@@ -448,23 +441,10 @@ export function pctChange(a: string, b: string): string | null {
   const A = toScaled(a, dec);
   const B = toScaled(b, dec);
   if (A === null || B === null || A === BigInt(0)) return null;
-  const diff = B - A;
   const absA = A < BigInt(0) ? -A : A;
-  const absD = diff < BigInt(0) ? -diff : diff;
   // Sign follows the direction of change relative to the size of a.
-  const num = A < BigInt(0) ? -diff : diff;
-  let text: string;
-  if (absD * BigInt(10) >= absA) {
-    const p = divRound(num * BigInt(100), absA);
-    text = `${p < BigInt(0) ? -p : p}`;
-    text = p > BigInt(0) ? `+${text}%` : p < BigInt(0) ? `−${text}%` : "0%";
-  } else {
-    const p = divRound(num * BigInt(1000), absA);
-    const ap = p < BigInt(0) ? -p : p;
-    const s = `${ap / BigInt(10)}.${ap % BigInt(10)}`;
-    text = p > BigInt(0) ? `+${s}%` : p < BigInt(0) ? `−${s}%` : "0%";
-  }
-  return text;
+  const num = (A < BigInt(0) ? A - B : B - A) * BigInt(100);
+  return `${derivedDisplay(roundDerived(num, absA), true)}%`;
 }
 
 /**

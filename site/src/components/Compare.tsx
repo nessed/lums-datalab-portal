@@ -24,7 +24,6 @@ import {
   asPrinted,
   defaultBase,
   excluded,
-  fmtDerived,
   indexTo,
   kindFor,
   notComparable,
@@ -678,5 +677,4 @@ export default function Compare({
   );
 }
 
-export { fmtDerived };
 export type { ShowAs };

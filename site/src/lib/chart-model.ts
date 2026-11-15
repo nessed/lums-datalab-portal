@@ -1,6 +1,6 @@
 // Chart model types and pure helpers. No server imports: the client chart
 // uses this module, so it must never pull in the data layer (node:fs).
-import { formatDecimalString, periodShort, periodWords, unitLabel, vintageWords } from "./format";
+import { derivedDisplay, formatDecimalString, periodShort, periodWords, unitLabel, vintageWords } from "./format";
 import { statusOf, type StatusKey } from "./status";
 import { seriesTitle } from "./titles";
 
@@ -227,15 +227,10 @@ export function bestModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel 
 
 /** A derived view as the series page's views.json carries it (src/lib/series-derive.ts). */
 export type DerivedPointJson = { p: string; k: string; v: string | null; in: string[]; iv?: string[]; gap?: string; why?: string; st?: string; bad?: string; diff?: string };
-export type DerivedViewJson = { id: string; op: "pct" | "chg" | "idx" | "share" | "rev"; dp: number; base?: string; points: DerivedPointJson[] };
+export type DerivedViewJson = { id: string; op: "pct" | "chg" | "idx" | "share" | "rev"; base?: string; points: DerivedPointJson[] };
 
 const periodOfId = (id: string) => id.split(":")[1] ?? "";
-const signedText = (v: string) => {
-  const neg = v.startsWith("-");
-  const abs = neg ? v.slice(1) : v;
-  const body = formatDecimalString(abs);
-  return /^0*(\.0*)?$/.test(abs) ? body : `${neg ? "−" : "+"}${body}`;
-};
+const signedText = (v: string) => derivedDisplay(v, true);
 
 /** Unit words of a derived view. */
 export function derivedUnit(op: DerivedViewJson["op"], series: Pick<ChartSeries, "unit" | "scale_factor" | "frequency">, base?: string): string {
@@ -245,12 +240,12 @@ export function derivedUnit(op: DerivedViewJson["op"], series: Pick<ChartSeries,
   return series.unit === "percent" ? "percentage points" : unitLabel(series.unit, series.scale_factor);
 }
 
-/** The text of one derived value as shown: "+17.1%", "−7.84", "416.1", "0.21%". */
+/** The text of one derived value as shown: "+17.1%", "−7.8", "+5,463", "416.1", "0.21%". v is already rounded by the rule (lib/series-derive.ts). */
 export function derivedText(op: DerivedViewJson["op"], v: string): string {
-  if (op === "pct" || op === "rev") return `${signedText(v)}%`;
-  if (op === "chg") return signedText(v);
-  if (op === "share") return `${formatDecimalString(v)}%`;
-  return formatDecimalString(v);
+  if (op === "pct" || op === "rev") return `${derivedDisplay(v, true)}%`;
+  if (op === "chg") return derivedDisplay(v, true);
+  if (op === "share") return `${derivedDisplay(v, false)}%`;
+  return derivedDisplay(v, false);
 }
 
 /** Chart model of a derived view: one line per kind of figure (bars for the revision view); travelled gaps under the axis. */

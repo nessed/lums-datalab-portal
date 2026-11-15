@@ -43,30 +43,53 @@ function minus(a, b) {
   const [p, q, s] = same(x, y);
   return str(p - q, s);
 }
-function hundredTimes(num, den, dp) {
-  const x = dec(num);
-  const y = dec(den);
-  if (!x || !y) return null;
-  let [p, q] = same(x, y);
-  if (q === 0n) return null;
+// The rounding rule for derived figures (DECISIONS.md, round 2), written again
+// here: the exact quotient p/q to one decimal; to two when its magnitude is
+// below 1; a figure that is not zero but would read 0.00 to its first
+// significant digit; halves away from zero. A signed decimal string.
+function rule(p, q) {
   if (q < 0n) {
     p = -p;
     q = -q;
   }
-  const top = p * 100n * T ** BigInt(dp);
-  const abs = top < 0n ? -top : top;
-  let r = abs / q;
-  if ((abs % q) * 2n >= q) r += 1n;
-  return str(top < 0n ? -r : r, dp);
+  if (p === 0n) return "0.00";
+  const neg = p < 0n;
+  const a = neg ? -p : p;
+  const at = (k) => {
+    const x = a * T ** BigInt(k);
+    return x / q + ((x % q) * 2n >= q ? 1n : 0n);
+  };
+  const put = (n, k) => str(neg ? -n : n, k);
+  const h = at(2);
+  if (h >= 100n) return put(at(1), 1);
+  if (h > 0n) return put(h, 2);
+  let k = 3;
+  while (a * T ** BigInt(k) < q) k++;
+  const d = at(k);
+  return d === 10n ? put(1n, k - 1) : put(d, k);
 }
-const DP = { pct: 1, rev: 1, idx: 1, share: 2 };
-function compute(op, a, b) {
-  if (op === "chg") return minus(a, b);
+// num / den × 100 under the rule.
+function hundredTimes(num, den) {
+  const x = dec(num);
+  const y = dec(den);
+  if (!x || !y) return null;
+  const [p, q] = same(x, y);
+  if (q === 0n) return null;
+  return rule(p * 100n, q);
+}
+// The view's derived value: per cent under the rule; a change of a rate in percentage points under the rule; any other change exact.
+function compute(op, a, b, unit) {
+  if (op === "chg") {
+    const d = minus(a, b);
+    if (d === null || unit !== "percent") return d;
+    const x = dec(d);
+    return rule(x.n, T ** BigInt(x.s));
+  }
   if (op === "pct" || op === "rev") {
     const d = minus(a, b);
-    return d === null ? null : hundredTimes(d, b, DP[op]);
+    return d === null ? null : hundredTimes(d, b);
   }
-  return hundredTimes(a, b, DP[op]);
+  return hundredTimes(a, b);
 }
 const commas = (s) => s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 function plain(v) {
@@ -148,7 +171,7 @@ export default function check({ appDir, release, series, allObs, isPub, problem,
       problem("derived", el.page, `derived "${el.text}" (${op} of ${ids.join(", ")}): ${why}`);
       continue;
     }
-    const v = compute(op, a.value, b.value);
+    const v = compute(op, a.value, b.value, series.get(a.series_id)?.unit);
     if (v === null || text(op, v) !== el.text) problem("derived", el.page, `derived "${el.text}" (${op} of ${ids.join(", ")}): recomputed "${v === null ? "none" : text(op, v)}"`);
   }
 
@@ -188,7 +211,7 @@ export default function check({ appDir, release, series, allObs, isPub, problem,
             problem("derived-json", where, `${view.id} ${p.p}: ${why}`);
             continue;
           }
-          const v = compute(op, a.value, ins[1].value);
+          const v = compute(op, a.value, ins[1].value, s.unit);
           if (v !== p.v) problem("derived-json", where, `${view.id} ${p.p}: ${p.v}, recomputed ${v}`);
           if (!p.iv || p.iv[0] !== a.value || p.iv[1] !== ins[1].value) problem("derived-json", where, `${view.id} ${p.p}: input values differ from the release`);
           if (op === "rev" && p.diff !== minus(a.value, ins[1].value)) problem("derived-json", where, `${view.id} ${p.p}: difference ${p.diff}`);
@@ -202,7 +225,7 @@ export default function check({ appDir, release, series, allObs, isPub, problem,
         } else if (p.gap === "break") {
           if (!ins[1] || !crossesBreak(a, ins[1].period)) problem("derived-json", where, `${view.id} ${p.p}: no break between the inputs`);
         } else if (p.gap === "zero") {
-          if (!ins[1] || compute(op, a.value ?? "0", ins[1].value ?? "0") !== null) problem("derived-json", where, `${view.id} ${p.p}: base is not zero`);
+          if (!ins[1] || compute(op, a.value ?? "0", ins[1].value ?? "0", s.unit) !== null) problem("derived-json", where, `${view.id} ${p.p}: base is not zero`);
         } else if (p.gap === "none") {
           if (ins.length !== 1) problem("derived-json", where, `${view.id} ${p.p}: "nothing to compare with" but names ${ins.length} inputs`);
           else if (op === "pct" || op === "chg") {

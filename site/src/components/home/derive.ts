@@ -1,12 +1,14 @@
 // Derived values for the home, topic and answer pages (DESIGN.md 6.1 "Gaps
 // travel", 6.3, 8.2): changes against a comparable figure and the average
 // revision from budget to revised estimate. Computed at build time, exactly
-// (decimal strings and BigInt, never floating point), and only from figures
+// (decimal strings and BigInt, never floating point), rounded by the site's one
+// rule for derived figures (roundDerived in lib/format.ts), and only from figures
 // whose reader status says usableInDerived. Every result names its formula and
 // its inputs; scripts/checks/home-derived.mjs recomputes each one from the
 // release files, independently of this code, and fails the build if a page
 // shows a different text or used an input that is not checked.
 import type { Observation, Series } from "@/lib/data";
+import { derivedDisplay, roundDerived } from "@/lib/format";
 import type { KindKey } from "@/lib/adapter/contract";
 
 export type DerivedFormula = "pct" | "pp" | "mean-rev" | "mean-abs-rev" | "n-pairs";
@@ -29,7 +31,7 @@ export function showable(o: Observation | undefined | null): o is Observation & 
 
 const TEN = BigInt(10);
 const ZERO = BigInt(0);
-const TWO = BigInt(2);
+const HUNDRED = BigInt(100);
 
 type Dec = { n: bigint; s: number };
 
@@ -55,35 +57,21 @@ function align(a: Dec, b: Dec): [bigint, bigint, number] {
 
 const abs = (x: bigint) => (x < ZERO ? -x : x);
 
-/** num / den rounded to the nearest integer, halves away from zero. */
-function roundDiv(num: bigint, den: bigint): bigint {
-  if (den < ZERO) {
-    num = -num;
-    den = -den;
-  }
-  const q = (abs(num) * TWO + den) / (TWO * den);
-  return num < ZERO ? -q : q;
-}
-
-/** A ratio num/den as a percentage: one decimal under 10%, whole above. */
+/** A ratio num/den as a percentage, under the site's rounding rule (roundDerived): "17.1%", "0.42%". */
 function pctText(num: bigint, den: bigint): { mag: string; sign: number } {
-  const tenths = roundDiv(num * pow10(3), den);
-  let mag: string;
-  if (abs(tenths) >= BigInt(100)) mag = `${abs(roundDiv(num * BigInt(100), den))}%`;
-  else mag = `${abs(tenths) / TEN}.${abs(tenths) % TEN}%`;
+  const mag = `${derivedDisplay(roundDerived(abs(num) * HUNDRED, abs(den)), false)}%`;
   const sign = num === ZERO ? 0 : (num < ZERO) !== (den < ZERO) ? -1 : 1;
   return { mag, sign };
 }
 
-function decText(n: bigint, s: number): string {
-  const a = abs(n).toString().padStart(s + 1, "0");
-  const int = a.slice(0, a.length - s).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return s ? `${int}.${a.slice(a.length - s)}` : int;
+/** An exact difference n / 10^s in percentage points, under the rounding rule, unsigned: "7.8", "0.42". */
+function ppText(n: bigint, s: number): string {
+  return derivedDisplay(roundDerived(abs(n), pow10(s)), false);
 }
 
 function signed(mag: string, sign: number, fmt: DerivedFmt, unitWords = ""): string {
   if (fmt === "plain") return `${mag}${unitWords}`;
-  if (fmt === "signed") return sign === 0 ? `0${mag.endsWith("%") ? "%" : ""}${unitWords}` : `${sign < 0 ? "−" : "+"}${mag}${unitWords}`;
+  if (fmt === "signed") return sign === 0 ? `${mag}${unitWords}` : `${sign < 0 ? "−" : "+"}${mag}${unitWords}`;
   return sign === 0 ? "unchanged" : `${sign < 0 ? "down" : "up"} ${mag}${unitWords}`;
 }
 
@@ -96,7 +84,7 @@ export function change(from: Observation | undefined, to: Observation | undefine
     const [a, b, s] = align(dec(from.value!), dec(to.value!));
     const d = b - a;
     const sign = d === ZERO ? 0 : d < ZERO ? -1 : 1;
-    const text = signed(decText(d, s), sign, fmt, " percentage points");
+    const text = signed(ppText(d, s), sign, fmt, " percentage points");
     return { formula: "pp", fmt, text: sign === 0 && fmt === "words" ? "unchanged" : text, inputs: [from, to] };
   }
   const [a, b] = align(dec(from.value!), dec(to.value!));

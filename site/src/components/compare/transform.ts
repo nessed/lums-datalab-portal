@@ -1,6 +1,10 @@
-// The compare page's numbers (DESIGN.md 9.6): pure functions, no imports, so
-// they run on the server, in the browser and in the unit tests
-// (scripts/checks/take-transforms.mjs, run by check-build).
+// The compare page's numbers (DESIGN.md 9.6): pure functions whose only import
+// is the site's rounding rule (lib/format.ts, itself import-free), so they run
+// on the server, in the browser and in the unit tests
+// (scripts/checks/take-transforms.mjs, run by check-build). The text of every
+// derived value is computed exactly from the stored decimal strings and rounded
+// by that rule; y (the position on the chart and the value in the CSV file) is
+// the unrounded quotient.
 //
 // Inputs are the release's own values as written to public/data/<release>/
 // compare/<id>.json (checked against the release by scripts/checks/take-files.mjs):
@@ -8,6 +12,7 @@
 // when the figure may feed a derived value (checked). A transform uses only
 // d = 1 inputs; anything computed from another figure is itself held back, with
 // that figure's reason (DESIGN.md 6.1 "Gaps travel").
+import { decimalFraction, derivedDisplay, roundDerived } from "../../lib/format.ts";
 
 export type Pt = {
   p: string; // period
@@ -107,12 +112,17 @@ export function fmtDecimal(v: string): string {
   return `${m[1] === "-" ? "−" : ""}${m[2].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${m[3] ?? ""}`;
 }
 
-/** A derived number to one decimal place, with a true minus sign. */
-export function fmtDerived(y: number, digits = 1): string {
-  const f = 10 ** digits;
-  const r = Math.round(y * f) / f;
-  const s = Math.abs(r).toFixed(digits);
-  return `${r < 0 ? "−" : ""}${s.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+/**
+ * x ÷ b × 100 (or, with `change`, (x ÷ b − 1) × 100) of two stored decimal
+ * strings, exactly, under the site's rounding rule: "125.0", "-25.0", "0.24".
+ * Null if either is not a plain decimal or b is zero.
+ */
+export function ruledPercent(x: string, b: string, change = false): string | null {
+  const X = decimalFraction(x);
+  const B = decimalFraction(b);
+  if (!X || !B || B[0] === BigInt(0)) return null;
+  const top = X[0] * B[1] - (change ? B[0] * X[1] : BigInt(0));
+  return roundDerived(top * BigInt(100), X[1] * B[0]);
 }
 
 /** The kind of figure drawn for a series: the one asked for if it has checked figures of it, else budget estimate, else its most common. */
@@ -201,7 +211,7 @@ export function indexTo(pts: Pt[], basePeriod: string, frequency: string, breaks
       p: x.p,
       k: x.k,
       y,
-      text: fmtDerived(y),
+      text: derivedDisplay(ruledPercent(x.v, base.v)!, false),
       o: x.o,
       formula: `${fmtDecimal(x.v)} ÷ ${fmtDecimal(base.v)} × 100`,
       inputs: [
@@ -232,7 +242,7 @@ export function pctChange(pts: Pt[], frequency: string, breaks: { p: string; not
       p: x.p,
       k: x.k,
       y,
-      text: `${y > 0 ? "+" : ""}${fmtDerived(y)}%`,
+      text: `${derivedDisplay(ruledPercent(x.v, prev.v, true)!, true)}%`,
       o: x.o,
       formula: `(${fmtDecimal(x.v)} ÷ ${fmtDecimal(prev.v)} − 1) × 100`,
       inputs: [
@@ -260,7 +270,7 @@ export function shareOf(pts: Pt[], total: Pt[], totalName: string, frequency: st
       p: x.p,
       k: x.k,
       y,
-      text: `${fmtDerived(y, 2)}%`, // shares are often under 1%: two decimals
+      text: `${derivedDisplay(ruledPercent(x.v, t.v)!, false)}%`,
       o: x.o,
       formula: `${fmtDecimal(x.v)} ÷ ${fmtDecimal(t.v)} × 100`,
       inputs: [

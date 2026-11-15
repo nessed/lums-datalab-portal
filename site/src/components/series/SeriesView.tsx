@@ -337,7 +337,8 @@ function DerivedTable({ view, p }: { view: DerivedViewJson; p: SeriesViewProps }
       </div>
       <p className="small muted">
         Derived by the build from checked figures only. A gap in an input stays a gap here, with the same reason; hover or focus a gap for it. Change and %
-        change compare the same kind of figure with {p.series.frequency === "survey_round" ? "the previous round" : "a year earlier"}, never across a series break.
+        change compare the same kind of figure with {p.series.frequency === "survey_round" ? "the previous round" : "a year earlier"}, never across a series break. Percentages and percentage points are rounded to one decimal place; below one, to two places (or to
+        the first digit that is not zero); halves away from zero.
       </p>
     </details>
   );

@@ -7,6 +7,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const siteDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const D = await import(pathToFileURL(path.join(siteDir, "src/lib/series-derive.ts")).href);
+const F = await import(pathToFileURL(path.join(siteDir, "src/lib/format.ts")).href);
 
 let passed = 0;
 const failures = [];
@@ -28,25 +29,61 @@ test("exact subtraction", () => {
   assert.equal(D.decSub("6.9", "6.30"), "0.60");
   assert.equal(D.decSub("1", "1"), "0");
 });
-test("percent change rounds half away from zero", () => {
-  assert.equal(D.decPctChange("37438", "31975", 1), "17.1");
-  assert.equal(D.decPctChange("60245", "31975", 1), "88.4");
-  assert.equal(D.decPctChange("100", "200", 1), "-50.0");
-  assert.equal(D.decPctChange("1.0005", "1", 2), "0.05"); // 0.05 exactly
-  assert.equal(D.decPctChange("100.05", "100", 1), "0.1"); // 0.05 -> 0.1
-  assert.equal(D.decPctChange("99.95", "100", 1), "-0.1"); // -0.05 -> -0.1 (away from zero)
-  assert.equal(D.decPctChange("5", "0", 1), null);
+test("percent change under the rounding rule: one decimal, two below 1, halves away from zero", () => {
+  assert.equal(D.decPctChange("37438", "31975"), "17.1");
+  assert.equal(D.decPctChange("60245", "31975"), "88.4");
+  assert.equal(D.decPctChange("100", "200"), "-50.0");
+  assert.equal(D.decPctChange("1.0005", "1"), "0.05"); // 0.05 exactly, below 1: two decimals
+  assert.equal(D.decPctChange("100.05", "100"), "0.05"); // below 1: two decimals, not 0.1
+  assert.equal(D.decPctChange("101.05", "100"), "1.1"); // 1.05 exactly: a half, away from zero
+  assert.equal(D.decPctChange("98.95", "100"), "-1.1"); // -1.05 exactly: away from zero
+  assert.equal(D.decPctChange("100.125", "100"), "0.13"); // a half at the second decimal
+  assert.equal(D.decPctChange("99.875", "100"), "-0.13");
+  assert.equal(D.decPctChange("5", "0"), null);
+});
+test("magnitude just below and just above 1", () => {
+  assert.equal(D.decPctChange("100.994", "100"), "0.99");
+  assert.equal(D.decPctChange("100.995", "100"), "1.0"); // rounds to 1.00, so one decimal
+  assert.equal(D.decPctChange("101", "100"), "1.0");
+  assert.equal(D.decPctChange("101.04", "100"), "1.0");
+  assert.equal(D.decPctChange("99.006", "100"), "-0.99");
+  assert.equal(D.decPctChange("99.005", "100"), "-1.0");
+});
+test("zero and figures that would read as zero", () => {
+  assert.equal(D.decPctChange("250", "250"), "0.00"); // a change of exactly zero
+  assert.equal(D.decPercent("0", "17500000"), "0.00"); // a share of exactly zero
+  assert.equal(D.decPercent("1", "68557"), "0.001"); // a share below 0.005%: first significant digit
+  assert.equal(D.decPercent("3", "100000"), "0.003");
+  assert.equal(D.decPercent("96", "10000000"), "0.001"); // 0.00096 -> 0.0010 -> 0.001
+  assert.equal(D.decPctChange("99.999", "100"), "-0.001");
 });
 test("ratio", () => {
-  assert.equal(D.decPercent("37438", "17500000", 2), "0.21");
-  assert.equal(D.decPercent("2", "3", 1), "66.7");
-  assert.equal(D.decPercent("1", "3", 1), "33.3");
+  assert.equal(D.decPercent("37438", "17500000"), "0.21");
+  assert.equal(D.decPercent("2", "3"), "66.7");
+  assert.equal(D.decPercent("1", "3"), "33.3");
+  assert.equal(D.decPercent("-1", "3"), "-33.3");
 });
-test("signed", () => {
-  assert.equal(D.signed("17.1"), "+17.1");
-  assert.equal(D.signed("-7.84"), "−7.84");
-  assert.equal(D.signed("0.0"), "0.0");
-  assert.equal(D.signed("5463"), "+5,463");
+test("a change in percentage points follows the rule; a printed rate does not change", () => {
+  assert.equal(D.decRule("-7.84"), "-7.8");
+  assert.equal(D.decRule("0.60"), "0.60");
+  assert.equal(D.decRule("-0.05"), "-0.05");
+  assert.equal(D.decRule("2.25"), "2.3");
+  assert.equal(D.decRule("-2.25"), "-2.3");
+  assert.equal(D.decRule("0"), "0.00");
+  const rate = { ...meta, unit: "percent", frequency: "month" };
+  const v = D.changeView("chg", rate, [rec("2025-06", "na", "11.07"), rec("2026-06", "na", "3.23")]);
+  assert.equal(v.points[1].v, "-7.8");
+  assert.deepEqual(v.points[1].iv, ["3.23", "11.07"]); // the inputs stay as printed
+  const rs = D.changeView("chg", meta, [rec("2024-25", "be", "31975"), rec("2025-26", "be", "37438.5")]);
+  assert.equal(rs.points[1].v, "5463.5"); // a change in rupees is exact
+});
+test("shown form", () => {
+  assert.equal(F.derivedDisplay("17.1", true), "+17.1");
+  assert.equal(F.derivedDisplay("-7.8", true), "−7.8");
+  assert.equal(F.derivedDisplay("0.00", true), "0.00");
+  assert.equal(F.derivedDisplay("5463", true), "+5,463");
+  assert.equal(F.derivedDisplay("1234.5", false), "1,234.5");
+  assert.equal(F.derivedDisplay("0.21", false), "0.21");
 });
 test("previous period", () => {
   assert.equal(D.previousPeriod("2025-26", "fiscal_year", []), "2024-25");

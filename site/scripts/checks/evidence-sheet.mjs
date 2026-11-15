@@ -32,9 +32,12 @@ const unitOf = (u, s) => {
 };
 
 /**
- * Percentage change from a to b, from decimal strings: whole per cent when
- * |b - a| is at least a tenth of |a|, else one decimal; half away from zero;
- * "+" / "−" (U+2212) / "0%". Null when a is zero.
+ * Percentage change from a to b, from decimal strings, under the rounding rule
+ * for derived figures (DECISIONS.md, round 2), written again here: one decimal;
+ * two when the magnitude is below 1; a change that is not zero but would read
+ * 0.00 to its first significant digit; halves away from zero on the exact
+ * quotient; "+" / "−" (U+2212); "0.00%" for no change. The direction is
+ * relative to the size of a. Null when a is zero.
  */
 function pctIndep(a, b) {
   const parse = (s) => {
@@ -50,15 +53,27 @@ function pctIndep(a, b) {
   const B = big(pb);
   if (A === 0n) return null;
   const den = A < 0n ? -A : A;
-  const num = (B - A) * (A < 0n ? -1n : 1n);
-  const whole = (num < 0n ? -num : num) * 10n >= den;
-  const mul = whole ? 100n : 1000n;
-  const q = num * mul;
-  const aq = q < 0n ? -q : q;
-  const r = (aq * 2n + den) / (den * 2n);
-  if (r === 0n) return "0%";
-  const body = whole ? `${r}` : `${r / 10n}.${r % 10n}`;
-  return `${q < 0n ? "−" : "+"}${body}%`;
+  const num = (B - A) * (A < 0n ? -1n : 1n) * 100n;
+  if (num === 0n) return "0.00%";
+  const mag = num < 0n ? -num : num;
+  // mag / den rounded to dp decimals, halves away from zero, as a string.
+  const at = (dp) => {
+    const x = mag * 10n ** BigInt(dp);
+    const r = (x * 2n + den) / (den * 2n);
+    const t = r.toString().padStart(dp + 1, "0");
+    return { r, text: `${t.slice(0, t.length - dp).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.${t.slice(t.length - dp)}` };
+  };
+  let body;
+  const two = at(2);
+  if (two.r >= 100n) body = at(1).text;
+  else if (two.r > 0n) body = two.text;
+  else {
+    let dp = 3;
+    while (mag * 10n ** BigInt(dp) < den) dp++;
+    const d = at(dp);
+    body = d.r === 10n ? at(dp - 1).text : d.text;
+  }
+  return `${num < 0n ? "−" : "+"}${body}%`;
 }
 
 /** Width and height of a WebP file, from its header. */

@@ -8,7 +8,7 @@ import CatalogueFilter, { CatalogueResults, type FacetGroup } from "@/components
 import { KindAndPeriod } from "@/components/Figure";
 import { Breadcrumbs } from "@/components/ui/Basics";
 import { Count, Num, V } from "@/components/ui/Num";
-import { datasetName, db, seriesCsvHref, seriesHref, visibleSeries, type Series } from "@/lib/data";
+import { DATA_BASE, datasetName, db, seriesCsvHref, seriesHref, visibleSeries, type Series } from "@/lib/data";
 import { FACETS, facetCounts, topicLabels, valueWords } from "@/lib/facets.mjs";
 import { COMING } from "@/lib/features";
 import { periodWords, unitLabel } from "@/lib/format";
@@ -124,7 +124,7 @@ export default function BrowsePage() {
       </nav>
 
       <div className="cat-layout" id="series">
-        <CatalogueFilter groups={groups} />
+        <CatalogueFilter groups={groups} indexUrl={`${DATA_BASE}/search.json`} />
         <section className="cat-results" aria-labelledby="cat-results-h">
           <h2 id="cat-results-h" className="sr-only">
             Series
@@ -137,7 +137,7 @@ export default function BrowsePage() {
             <label className="cat-sort">
               Sort{" "}
               <select id="cat-sort" className="input" defaultValue="order">
-                <option value="order">Document order</option>
+                <option value="order">Document order (relevance when searching)</option>
                 <option value="name">Name</option>
                 <option value="latest">Latest period</option>
                 <option value="n">Most checked values</option>
@@ -164,7 +164,7 @@ export default function BrowsePage() {
               Show every series
             </a>
           </p>
-          <CatalogueResults groups={groups} total={total.series} />
+          <CatalogueResults groups={groups} total={total.series} indexUrl={`${DATA_BASE}/search.json`} />
           <p className="small muted cat-foot">
             Checked: checked values out of all figures of the series; the rest are labelled gaps that say why. Latest: the most recent checked value,
             linked to its receipt; <abbr title="budget estimate">BE</abbr> budget estimate, <abbr title="revised estimate">RE</abbr> revised estimate.

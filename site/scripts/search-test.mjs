@@ -17,7 +17,7 @@ if (!fs.existsSync(file)) {
   console.error(`search-test: ${file} not found; run node scripts/prebuild.mjs first`);
   process.exit(1);
 }
-const { buildEngine, runSearch, answerValues, readYears } = await import(pathToFileURL(path.join(siteDir, "src/lib/search.ts")).href);
+const { buildEngine, runSearch, answerValues, readYears, datedOf, facetsOf, applyFacets, facetChoices, families } = await import(pathToFileURL(path.join(siteDir, "src/lib/search.ts")).href);
 const raw = fs.readFileSync(file, "utf8");
 const eng = buildEngine(JSON.parse(raw));
 
@@ -182,6 +182,79 @@ test("candidates (not signed off) never enter the headline layer or an answer ca
     if (e.k === "s" && e.cand) assert.ok(!e.hl, `${e.id} is a candidate in the headline layer`);
     if (e.k === "c" && e.a) assert.ok(!index.find((s) => s.k === "s" && s.id === e.a.s)?.cand, `${e.id} answers from a candidate`);
   }
+});
+
+/* ---------- round 2: current first, filters, families ---------- */
+
+const pos = (r, id) => r.series.findIndex((h) => h.e.id === id);
+
+test('"inflation": CPI Urban 2026 ranks above the 2007-08 base series that ends in 2019', () => {
+  const r = runSearch(eng, "inflation");
+  const urban = pos(r, "cpi.urban.yoy.general");
+  const old = pos(r, "cpi.yoy.general.b2007_08");
+  assert.ok(urban >= 0 && old >= 0, "both found");
+  assert.ok(urban < old, `urban at ${urban}, 2007-08 base at ${old}`);
+  const d = datedOf(eng, r.series[old].e);
+  assert.ok(d && d.earlier, "the 2007-08 base series is marked as on an earlier base");
+  assert.equal(datedOf(eng, r.series[urban].e), null, "CPI Urban is current");
+});
+
+test('"inflation": every current series ranks above every dated one, and the dated family comes last', () => {
+  const r = runSearch(eng, "inflation");
+  const tiers = r.series.map((h) => h.t ?? 0);
+  assert.ok(tiers.every((t, i) => i === 0 || t >= tiers[i - 1]), "no current series below a dated one");
+  const fams = families(r.series);
+  assert.equal(fams[fams.length - 1].key, "z-dated");
+  assert.ok(fams[fams.length - 1].hits.some((h) => h.e.id === "cpi.yoy.general.b2007_08"));
+  assert.equal(fams[0].hits[0].e.id, "cpi.national.yoy.general", "the first family starts with the answer");
+});
+
+test("a concept's own headline series stays first even when its checked figures stop early (PSDP)", () => {
+  const r = runSearch(eng, "PSDP");
+  assert.equal(r.series[0].e.id, "fed.exp.development.psdp_total");
+  assert.ok(datedOf(eng, r.series[0].e)?.ended, "still says when its figures end");
+});
+
+test("filters read from series ids equal the release's own dims, unit and geography, for every series", () => {
+  const rel = path.resolve(siteDir, "..", "releases", cfg.version);
+  const list = JSON.parse(fs.readFileSync(path.join(rel, "series.json"), "utf8"));
+  const byId = new Map(list.map((s) => [s.series_id, s]));
+  const DS = { cpi: "cpi", lfs: "lfs", abs: "abs" };
+  let n = 0;
+  for (const e of eng.series.map((p) => p.e)) {
+    const s = byId.get(e.id);
+    assert.ok(s, `${e.id} not in the release`);
+    const f = facetsOf(e);
+    const d = s.dims ?? {};
+    assert.equal(f.topic, DS[s.dataset] ?? s.dataset, `${e.id} topic`);
+    assert.equal(f.prov, s.geo ?? "pk", `${e.id} province`);
+    if (s.dataset === "cpi") {
+      const area = d.area === "national" ? "all" : d.area ?? (d.area_as_printed === "none stated" ? "none" : null);
+      assert.equal(f.area, area, `${e.id} area`);
+      assert.equal(f.measure, d.measure ?? (s.unit === "index" ? "index" : null), `${e.id} measure`);
+      assert.equal(f.sex, null);
+    } else if (s.dataset === "lfs") {
+      assert.equal(f.sex, d.sex, `${e.id} sex`);
+      assert.equal(f.area, d.area === "total" ? "all" : d.area, `${e.id} area`);
+      assert.equal(f.measure, s.unit === "percent" ? "rate" : "count", `${e.id} measure`);
+    } else {
+      assert.equal(f.area, null);
+      assert.equal(f.sex, null);
+      assert.equal(f.measure, null);
+    }
+    n++;
+  }
+  assert.ok(n > 900, `${n} series checked`);
+});
+
+test('filters: "unemployment" offers women and men, and choosing women leaves only women\'s series', () => {
+  const r = runSearch(eng, "unemployment");
+  const ch = facetChoices(r.series, {});
+  const sex = ch.find((c) => c.key === "sex");
+  assert.ok(sex && sex.values.some((v) => v.v === "female") && sex.values.some((v) => v.v === "male"), "sex filter offered");
+  const women = applyFacets(r.series, { sex: "female" });
+  assert.equal(women.length, sex.values.find((v) => v.v === "female").n, "count equals the filtered list");
+  assert.ok(women.length > 0 && women.every((h) => facetsOf(h.e).sex === "female"));
 });
 
 test("budget: index at most 40 KB compressed", () => {

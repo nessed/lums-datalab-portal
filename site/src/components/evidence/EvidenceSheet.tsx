@@ -13,9 +13,40 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import config from "../../../release.config.json";
 import { formatDecimalString } from "@/lib/format";
+import { slugify } from "@/lib/ids";
 import type { SheetData } from "./model";
 
 const BASE = `/data/${config.version}/evidence/sheet/`;
+
+/** Document pages (/sources/<slug>) whose file the site serves, read once from the Library file step's index. */
+let servedDocs: Promise<Set<string>> | null = null;
+function loadServedDocs(): Promise<Set<string>> {
+  servedDocs ??= fetch(`/data/${config.version}/sources/index.json`)
+    .then((r) => (r.ok ? r.json() : { files: [] }))
+    .then((j: { files?: { source_id: string; file: string }[] }) => new Set((j.files ?? []).filter((f) => /\.pdf$/i.test(f.file)).map((f) => `/sources/${slugify(f.source_id)}`)))
+    .catch(() => new Set<string>());
+  return servedDocs;
+}
+
+/** "Open the full document at this page": the document page's viewer (same form as docPageHref in lib/data.ts). */
+function FullDocumentLink({ href, page }: { href: string; page: number }) {
+  const [served, setServed] = useState<boolean | null>(null);
+  useEffect(() => {
+    let live = true;
+    loadServedDocs().then((s) => {
+      if (live) setServed(s.has(href));
+    });
+    return () => {
+      live = false;
+    };
+  }, [href]);
+  if (!served) return null;
+  return (
+    <a className="btn" href={`${href}?page=${page}#viewer`}>
+      Open the full document at this page
+    </a>
+  );
+}
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 type State = { slug: string; data: SheetData | null; label: string };
@@ -345,6 +376,7 @@ export default function EvidenceSheet() {
               <a className="btn" href={d.cite}>
                 Cite
               </a>
+              {d.doc && d.page ? <FullDocumentLink href={d.doc.href} page={d.page.pdf} /> : null}
               {d.doc?.pdf && d.page ? (
                 <a className="btn" href={d.doc.pdf} rel="noopener" aria-label={`Official PDF at page ${d.page.pdf}`}>
                   Official PDF, p. {d.page.pdf}

@@ -108,7 +108,6 @@ export function SeriesFacts({ series, latest }: { series: Series; latest: Observ
     },
     { key: "pub", label: "Published", value: pub.how },
     { key: "latest", label: "Latest figure", value: latest ? <KindPeriodWords o={latest} series={series} /> : "none checked yet" },
-    { key: "next", label: "Next expected", value: "not stated in this release" },
     {
       key: "src",
       label: "Source",

@@ -111,7 +111,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/releases" className="ft-tag" title="The data release this site shows">
                 Release <Num kind="version">{v}</Num>
               </Link>
-              , built <Num kind="date">{dateOnly(release.created_at)}</Num>. Prototype, not yet for citation{release.doi ? <>; DOI <Num kind="id">{release.doi}</Num></> : null}. Where
+              , built <Num kind="date">{dateOnly(release.created_at)}</Num>. Prototype{release.doi ? <>; DOI <Num kind="id">{release.doi}</Num></> : null}. Where
               this site and the printed document differ, the document prevails. Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
             </p>
             <nav className="ft-links" aria-label="Footer">

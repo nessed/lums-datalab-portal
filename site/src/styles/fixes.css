@@ -1,1 +1,362 @@
 /* Defect fixes, Indicators and Stories restyle, /demo/type (data hub run, stage 3). */
+
+/* Gap periods listed under a chart (Chart.tsx, Compare.tsx): the band on the chart is never rotated and
+   carries words only when wide enough, so the periods are always written here. */
+.chart-gapnote {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.chart-gapswatch {
+  display: inline-block;
+  width: 12px;
+  height: 10px;
+  vertical-align: -1px;
+  background: var(--st-gap-wash);
+  border: 1px solid var(--rule-strong);
+}
+
+/* Compare picker: "Searching…" while the index loads, "No series match" when nothing does. */
+.cmp-status {
+  margin: var(--s-1) 0 0;
+  min-height: 1.4em;
+}
+.cmp-status:empty {
+  min-height: 0;
+}
+.cmp-chips .cmp-id {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+/* The prototype disclaimer once per page: the notice at the top carries it; the copy in a Cite sheet or
+   block shows only after the reader has hidden that notice (layout.tsx sets data-proto-dismissed). */
+html:not([data-proto-dismissed="true"]) .cite-proto {
+  display: none;
+}
+
+/* Search filters: a count shared by every choice is said once beside the heading. */
+.sp-facet-h .sp-facet-each {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+/* ======== Indicators (/topics) and Stories (/answers): data hub plan, section 8 ========
+   LUMS colours from tokens.css; navy only for the page title; numbers in ink. Two weights (400, 700) and
+   three sizes: the page title, the figures (step-2), everything else (step-0 / step--1). No images,
+   gradients or radii above --r-3. */
+.ix,
+.sx {
+  max-width: 72rem;
+}
+.ix-head {
+  margin: 0 0 var(--s-6);
+  max-width: var(--measure);
+}
+.ix-head h1 {
+  color: var(--navy);
+  font-weight: 700;
+  font-size: var(--step-3);
+  margin: 0 0 var(--s-2);
+}
+.ix-lede {
+  font-size: var(--step-1);
+  color: var(--ink);
+  margin: 0 0 var(--s-2);
+}
+.ix-meta {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0;
+}
+.ix-list {
+  display: grid;
+  gap: var(--s-4);
+}
+.ix-theme {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 900px) {
+  .ix-theme {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 17rem);
+    align-items: start;
+  }
+}
+.ix-themehead h2 {
+  font-size: var(--step-1);
+  font-weight: 700;
+  margin: 0 0 var(--s-1);
+}
+.ix-themehead h2 a,
+.sx-theme h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.ix-themehead h2 a:hover,
+.sx-theme h2 a:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+.ix-short {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0;
+}
+.ix-figs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 600px) {
+  .ix-figs {
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+}
+.ix-fig {
+  display: grid;
+  gap: var(--s-1);
+  align-content: start;
+}
+.ix-name {
+  font-size: var(--step--1);
+  font-weight: 400;
+}
+.ix-value,
+.sx-value {
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.ix-value .v-link,
+.sx-value .v-link {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ix-value .v-unit,
+.sx-value .v-unit {
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.ix-basis,
+.sx-basis {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ix-spark,
+.sx-spark {
+  display: block;
+  margin-top: var(--s-1);
+}
+.ix-foot {
+  font-size: var(--step--1);
+}
+.ix-stories h3 {
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 0 0 var(--s-1);
+}
+.ix-stories ul {
+  list-style: none;
+  margin: 0 0 var(--s-3);
+  padding: 0;
+  display: grid;
+  gap: var(--s-1);
+}
+.ix-all {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Stories */
+.sx-theme {
+  margin: 0 0 var(--s-6);
+}
+.sx-theme h2 {
+  font-size: var(--step-1);
+  font-weight: 700;
+  margin: 0 0 var(--s-3);
+  padding-bottom: var(--s-1);
+  border-bottom: var(--hair);
+}
+.sx-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+@media (min-width: 640px) {
+  .sx-grid {
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  }
+}
+.sx-card {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+}
+.sx-q {
+  font-size: var(--step-0);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.35;
+}
+.sx-fig {
+  margin: 0;
+  display: grid;
+  gap: var(--s-1);
+}
+
+/* A story page: navy title, the answer sentence the one loud thing, the rest in ink at body size. */
+.sx-story .ans-head h1 {
+  color: var(--navy);
+  font-weight: 700;
+}
+.sx-story .ans-title {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+.sx-story .ans-v .v-link {
+  font-weight: 700;
+  color: var(--ink);
+}
+.sx-story .ans-part h2,
+.sx-story .ans-covers h2,
+.sx-story .ans-links h2 {
+  font-size: var(--step-1);
+  font-weight: 700;
+}
+.sx-story .ans-cover h3,
+.sx-story .ans-links h3 {
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+
+/* ======== /demo/type: one first screen in three faces behind one token (--demo-face) ======== */
+.ty {
+  max-width: 96rem;
+}
+.ty-grid {
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 1100px) {
+  .ty-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.ty-panel {
+  --font-sans: var(--demo-face);
+  --font-display: var(--demo-face);
+  font-family: var(--demo-face);
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  min-width: 0;
+}
+.ty-panel * {
+  font-family: inherit;
+}
+.ty-face {
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 0 0 var(--s-4);
+  padding-bottom: var(--s-2);
+  border-bottom: var(--hair);
+}
+.ty-face span {
+  font-weight: 400;
+}
+.ty-kicker {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0 0 var(--s-1);
+}
+.ty-h {
+  font-size: var(--step-3);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  margin: 0 0 var(--s-5);
+}
+.ty-figs {
+  list-style: none;
+  margin: 0 0 var(--s-5);
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.ty-figs li {
+  display: grid;
+  gap: var(--s-1);
+}
+.ty-name {
+  font-size: var(--step--1);
+}
+.ty-value {
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ty-value .v-link {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ty-basis {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ty-ticker {
+  list-style: none;
+  margin: 0 0 var(--s-5);
+  padding: var(--s-2) 0;
+  border-top: var(--hair);
+  border-bottom: var(--hair);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+.ty-tname {
+  color: var(--ink-2);
+}
+.ty-lead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  align-items: end;
+}
+.ty-col {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.ty-col th,
+.ty-col td {
+  padding: var(--s-1) var(--s-3) var(--s-1) 0;
+  border-bottom: var(--hair);
+  text-align: right;
+  font-weight: 400;
+}
+.ty-col th {
+  text-align: left;
+  color: var(--ink-2);
+}

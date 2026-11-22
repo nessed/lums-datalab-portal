@@ -44,9 +44,9 @@ export default async function TopicPage({ params }: Props) {
 
   return (
     <article className="topic">
-      <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/topics", label: "Topics" }, { label: t.name }]} />
+      <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/topics", label: "Indicators" }, { label: t.name }]} />
       <header className="page-head tp-head">
-        <p className="kicker">Topic</p>
+        <p className="kicker">Indicators</p>
         <h1>{t.name}</h1>
         <p className="lede measure">{t.definition}</p>
         <p className="tp-asof">
@@ -76,7 +76,7 @@ export default async function TopicPage({ params }: Props) {
 
         {qs.length ? (
           <section aria-labelledby="t-q" className="panel tp-qs">
-            <h2 id="t-q">Questions people ask</h2>
+            <h2 id="t-q">Stories</h2>
             <ul className="tp-questions">
               {qs.map((q) => (
                 <li key={q!.slug}>

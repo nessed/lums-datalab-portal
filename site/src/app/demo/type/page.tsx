@@ -1,9 +1,9 @@
 // Typeface trial (data hub plan, section 8): one representative first screen set
-// three times behind one token (--demo-face): Noto Sans (the site default),
-// IBM Plex Sans and Source Sans 3. Ali picks the face by eye; the site default
+// once per candidate face behind one token (--demo-face, and --demo-head for
+// headings): Noto Sans (the site default) and the candidates in FACES. Ali picks the face by eye; the site default
 // stays Noto Sans until he does. Not linked from the navigation, not indexed.
 //
-// The two trial faces are loaded on this page only, from Google Fonts at view
+// The trial faces are loaded on this page only, from Google Fonts at view
 // time (a <link> React hoists into the head), not with next/font/google: that
 // would download them at build time, and the site's build needs no network
 // (layout.tsx self-hosts Noto for that reason). Every figure is read from the
@@ -23,14 +23,31 @@ import { seriesTitle } from "@/lib/titles";
 
 export const metadata: Metadata = {
   title: "Type trial",
-  description: "The first screen of the portal in three typefaces, for choosing the site's face.",
+  description: "The first screen of the portal in each candidate typeface, for choosing the site's face.",
   robots: { index: false, follow: false },
 };
 
-const FACES = [
+// Ali (2026-11-23) asked for faces with more character than a generic
+// interface sans. Each candidate below has a lineage in print or public
+// information; the serif pairing departs from DESIGN.md's "no serif" and is
+// marked so. Every face here sets aligned (tabular) figures, measured in the
+// browser; Libre Franklin was tried and dropped because it has none. `head` sets the heading and headline figures, `stack` the rest.
+type Face = { key: string; name: string; note: string; stack: string; head?: string };
+const FACES: Face[] = [
   { key: "noto", name: "Noto Sans", note: "the site default now", stack: "var(--font-noto-sans), \"Noto Sans\", system-ui, sans-serif" },
-  { key: "plex", name: "IBM Plex Sans", note: "loaded on this page only", stack: "\"IBM Plex Sans\", system-ui, sans-serif" },
-  { key: "source", name: "Source Sans 3", note: "loaded on this page only", stack: "\"Source Sans 3\", system-ui, sans-serif" },
+  { key: "public", name: "Public Sans", note: "the US government’s cut of Franklin Gothic", stack: "\"Public Sans\", system-ui, sans-serif" },
+  { key: "plex", name: "IBM Plex Sans", note: "engineered, firm figures", stack: "\"IBM Plex Sans\", system-ui, sans-serif" },
+  { key: "fira", name: "Fira Sans", note: "humanist, very clear figures", stack: "\"Fira Sans\", system-ui, sans-serif" },
+  { key: "schibsted", name: "Schibsted Grotesk", note: "made for a news publisher", stack: "\"Schibsted Grotesk\", system-ui, sans-serif" },
+  { key: "archivo", name: "Archivo", note: "grotesque built for print and data", stack: "\"Archivo\", system-ui, sans-serif" },
+  { key: "source", name: "Source Sans 3", note: "quiet, Adobe’s first open face", stack: "\"Source Sans 3\", system-ui, sans-serif" },
+  {
+    key: "newsreader",
+    name: "Newsreader with Public Sans",
+    note: "serif headings: breaks the “no serif” rule",
+    stack: "\"Public Sans\", system-ui, sans-serif",
+    head: "\"Newsreader\", Georgia, serif",
+  },
 ];
 
 const latestOf = (s: Series) => latestShown(db().obsBySeries.get(s.series_id) ?? [], mainKind(s)).latest;
@@ -105,12 +122,12 @@ export default function TypeTrialPage() {
       {/* eslint-disable-next-line @next/next/no-page-custom-font -- loading on this one page only is the point (see the comment at the top) */}
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Source+Sans+3:wght@400;700&family=Public+Sans:wght@400;700&family=Fira+Sans:wght@400;700&family=Schibsted+Grotesk:wght@400;700&family=Archivo:wght@400;700&family=Newsreader:opsz,wght@6..72,400;6..72,700&display=swap"
         precedence="default"
       />
       <header className="ix-head">
         <h1>Type trial</h1>
-        <p className="ix-lede">The same first screen in three typefaces. Ali picks the face; until then the site stays in Noto Sans.</p>
+        <p className="ix-lede">The same first screen in each candidate typeface. Ali picks the face; until then the site stays in Noto Sans.</p>
         <p className="ix-meta">
           Check the column of figures (they should line up digit under digit), the rupee written both as Rs and as the rupee sign, and the two weights. A sign that
           looks unlike the letters around it is one the face lacks and the browser borrowed.
@@ -118,7 +135,7 @@ export default function TypeTrialPage() {
       </header>
       <div className="ty-grid">
         {FACES.map((f) => (
-          <section key={f.key} className="ty-panel" style={{ ["--demo-face" as string]: f.stack }} aria-labelledby={`ty-${f.key}`}>
+          <section key={f.key} className="ty-panel" style={{ ["--demo-face" as string]: f.stack, ["--demo-head" as string]: f.head ?? f.stack }} aria-labelledby={`ty-${f.key}`}>
             <h2 id={`ty-${f.key}`} className="ty-face">
               {f.name} <span>{f.note}</span>
             </h2>

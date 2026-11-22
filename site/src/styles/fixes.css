@@ -248,7 +248,7 @@ html:not([data-proto-dismissed="true"]) .cite-proto {
   font-weight: 700;
 }
 
-/* ======== /demo/type: one first screen in three faces behind one token (--demo-face) ======== */
+/* ======== /demo/type: one first screen per candidate face behind one token (--demo-face; --demo-head for headings) ======== */
 .ty {
   max-width: 96rem;
 }
@@ -258,8 +258,12 @@ html:not([data-proto-dismissed="true"]) .cite-proto {
 }
 @media (min-width: 1100px) {
   .ty-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   }
+}
+.ty-panel .ty-h,
+.ty-panel .ty-value {
+  font-family: var(--demo-head);
 }
 .ty-panel {
   --font-sans: var(--demo-face);

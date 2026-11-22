@@ -123,11 +123,19 @@ export function SourceMarker({ o, className = "src-marker" }: { o: Observation; 
 /** Collects the derived figures of one page, numbered in order, for the "how these were computed" list. */
 export class DerivedNotes {
   readonly items: { id: string; d: Derived; what: string }[] = [];
-  constructor(private prefix = "drv") {}
+  /** `page`: where the list is printed when it is not on this page (the home page's list lives on /methods). */
+  constructor(
+    private prefix = "drv",
+    readonly page = "",
+  ) {}
   add(d: Derived, what: string): string {
     const id = `${this.prefix}-${this.items.length + 1}`;
     this.items.push({ id, d, what });
     return id;
+  }
+  /** The address of a note: "#drv-1" on the same page, "/methods#home-drv-1" elsewhere. */
+  href(id: string): string {
+    return `${this.page}#${id}`;
   }
 }
 
@@ -141,11 +149,11 @@ export function DerivedValue({ d }: { d: Derived }) {
 }
 
 /** A derived figure with its "how" link (one tap to the formula and inputs). */
-export function DerivedInline({ d, id }: { d: Derived; id: string }) {
+export function DerivedInline({ d, id, href }: { d: Derived; id: string; href?: string }) {
   return (
     <span className="drv">
       <DerivedValue d={d} />
-      <a className="drv-how" href={`#${id}`} aria-label="How this was computed">
+      <a className="drv-how" href={href ?? `#${id}`} aria-label="How this was computed">
         <span aria-hidden="true">how</span>
       </a>
     </span>
@@ -179,14 +187,25 @@ function InputList({ inputs }: { inputs: Observation[] }) {
 }
 
 /** The foot-of-page list: what each derived figure is, its formula and its inputs (each linked to its receipt). */
-export function DerivedList({ notes, title = "How the changes on this page are computed" }: { notes: DerivedNotes; title?: string }) {
+export function DerivedList({
+  notes,
+  title = "How the changes on this page are computed",
+  headingId = "drv-h",
+  intro,
+}: {
+  notes: DerivedNotes;
+  title?: string;
+  headingId?: string;
+  intro?: ReactNode;
+}) {
   if (notes.items.length === 0) return null;
   return (
-    <section className="drv-list" aria-labelledby="drv-h">
-      <h2 id="drv-h">{title}</h2>
+    <section className="drv-list" id={headingId.replace(/-h$/, "")} aria-labelledby={headingId}>
+      <h2 id={headingId}>{title}</h2>
+      {intro}
       <p className="small muted">
-        Computed when the site is built, only from figures that passed their checks; a change from a figure that did not is not computed. Percentages are
-        rounded to one decimal place below ten per cent and to whole per cent above.
+        Computed when the site is built, only from figures that passed their checks; a change from a figure that did not is not computed. Percentages and
+        percentage points are shown to one decimal place, or to two when the figure is smaller than one (a very small one to its first significant digit); halves round away from zero.
       </p>
       <ol>
         {notes.items.map(({ id, d, what }) => (

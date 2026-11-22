@@ -1,131 +1,124 @@
-// Every source document, how we know each file is genuine, and what this
-// release reads from it.
+// The Library (data hub plan, section 7.1): every document our figures are read
+// from, in plain words, grouped by kind, newest first. Each opens in the viewer
+// on its own page, downloads (only a copy whose fingerprint matches the
+// registered file) and links to the government page that publishes it. The
+// datasets are one click away (/library/datasets). Internal names, roles,
+// verification records and coverage are on each document's page, folded away.
 import type { Metadata } from "next";
 import Link from "@/components/ui/Link";
-import { Bar, Breadcrumbs, TableWrap } from "@/components/ui/Basics";
-import { db, sourceHref } from "@/lib/data";
-import { DOC_TYPE_WORDS, ROLE_WORDS } from "@/lib/format";
+import { Breadcrumbs } from "@/components/ui/Basics";
 import { Count } from "@/components/ui/Num";
-import { VerifBadge } from "@/components/ui/Verif";
-import { ROLE_SHORT, sourceCoverage, valuesFromSource, verifLong, VERIF_SHORT } from "@/lib/sources";
+import LibraryFilter from "@/components/library/LibraryFilter";
+import { DocActions, DocMeta, DocName } from "@/components/library/Bits";
+import { library, sourceHref } from "@/lib/data";
+import type { LibraryDocument } from "@/lib/adapter/contract";
+import { chapterOf, docPeriodKind, yearOfDoc } from "@/lib/library-format";
+import { periodWords } from "@/lib/format";
+import libraryNames from "../../../editorial/library.json";
 
 export const metadata: Metadata = {
-  title: "Source documents",
-  description: "The government documents behind every figure: where each file came from, how it was verified, which pages were read and how much of each table was captured.",
+  title: "Library",
+  description: "Every government document behind the figures on this site: read it here, download it, or open the official page that publishes it.",
 };
 
-/** The data type each kind of document feeds, where there is one. */
-const DATASET_OF_TYPE: Record<string, string> = { abs: "abs", cpi_monthly_review: "cpi", lfs_annual_report: "lfs" };
+const KIND_LINES = libraryNames.kinds as Record<string, { name: string; line: string; order: number }>;
 
-export default function SourcesPage() {
-  const d = db();
-  const types = [...new Set(d.sources.map((s) => s.doc_type))];
-  const used = new Set(d.sources.map((s) => s.verification_status));
-  const keyed = Object.keys(VERIF_SHORT).filter((k) => used.has(k));
+/** Lower-case words a reader may filter on: the plain name, the printed title, the period, the publisher. */
+function searchText(d: LibraryDocument): string {
+  const when = docPeriodKind(d.kind) === "month" ? periodWords(d.period, "month") : d.period;
+  return [d.kindName, when, chapterOf(d.kind, d.printedTitle), d.printedTitle, d.publisher].filter(Boolean).join(" ").toLowerCase();
+}
+
+export default function LibraryPage() {
+  const lib = library();
+  const docs = lib.documents;
+  const kinds = [...new Set(docs.map((d) => d.kind))];
+  const publishers = [...new Set(docs.map((d) => d.publisher))].sort();
+  const years = [...new Set(docs.map((d) => yearOfDoc(d.period, d.kind)))].sort((a, b) => b.localeCompare(a));
   return (
-    <div className="is-prose">
-      <Breadcrumbs items={[{ label: "Sources" }]} />
-      <header className="page-head">
-        <h1>Source documents</h1>
-        <p className="lede">
-          Every figure on this site is read from one of these <Count k="sources:all" n={d.sources.length} /> government files. For each one we record where it was downloaded,
-          its SHA-256 fingerprint, and how we confirmed it is the genuine document. Files are never edited. Grouped by kind of document; each document&rsquo;s
-          page says what we read from it and what became of each figure (checked, held back, disputed, not printed).
-        </p>
-        <p className="small">
-          Looking for a subject rather than a publication? Start from the <Link href="/topics">topics</Link>. Each kind of document also has a{" "}
-          <Link href="/library/datasets">data type page</Link> with its series and quality numbers, and its tables as the government printed them.
+    <div className="lib">
+      <Breadcrumbs items={[{ label: "Library" }]} />
+      <header className="page-head lib-head">
+        <h1>Library</h1>
+        <p className="lede">The government documents our figures come from. Read any of them here, download it, or open the page that publishes it.</p>
+        <p className="lib-head-links">
+          <Link href="/library/datasets" className="lib-go">
+            Datasets: preview and download the figures
+          </Link>
         </p>
       </header>
 
-      <section aria-labelledby="key-h" className="verif-key">
-        <h2 id="key-h">How each file was obtained and checked</h2>
-        <dl>
-          {keyed.map((k) => (
-            <div key={k}>
-              <dt>
-                <VerifBadge status={k} />
-              </dt>
-              <dd>{verifLong(k)}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="small muted measure">
-          {Object.entries(ROLE_WORDS)
-            .map(([k, v]) => `${ROLE_SHORT[k] ?? k}: ${v.split(": ")[1] ?? v}`)
-            .join(" ")}{" "}
-          Coverage is how much of the printed tables we captured; it says nothing about whether the captured numbers are right, which is what the
-          checks are for.
+      <LibraryFilter
+        target="lib-docs"
+        rows={docs.map((d) => ({ id: d.id, kind: d.kind, publisher: d.publisher, year: yearOfDoc(d.period, d.kind), text: searchText(d) }))}
+        kinds={kinds.map((k) => ({ value: k, label: docs.find((d) => d.kind === k)!.kindName }))}
+        publishers={publishers.map((p) => ({ value: p, label: p }))}
+        years={years.map((y) => ({ value: y, label: y }))}
+      />
+
+      <div id="lib-docs">
+        {kinds.map((k) => {
+          // Newest first (the Library's order); within one period a rejected file comes after the one used.
+          const inKind = docs.filter((d) => d.kind === k);
+          const firstOfPeriod = (d: LibraryDocument) => inKind.findIndex((x) => x.period === d.period);
+          const list = inKind
+            .map((d, i) => ({ d, i }))
+            .sort((a, b) => firstOfPeriod(a.d) - firstOfPeriod(b.d) || Number(a.d.state === "rejected") - Number(b.d.state === "rejected") || a.i - b.i)
+            .map((x) => x.d);
+          const name = list[0].kindName;
+          return (
+            <section key={k} id={`t-${k}`} className="lib-group" aria-labelledby={`h-${k}`} data-lib-group="">
+              <div className="lib-group-head">
+                <h2 id={`h-${k}`}>{name}</h2>
+                <p className="lib-group-line">
+                  {KIND_LINES[k]?.line ?? null}{" "}
+                  <span className="lib-group-n">
+                    <Count k={`sources:type:${k}`} n={list.length} /> {list.length === 1 ? "document" : "documents"}
+                  </span>
+                </p>
+              </div>
+              <ul className="lib-list">
+                {list.map((d) => (
+                  <li
+                    key={d.id}
+                    className={`lib-row${d.state === "rejected" ? " is-rejected" : ""}`}
+                    data-lib-row={d.id}
+                    data-kind={d.kind}
+                    data-publisher={d.publisher}
+                    data-year={yearOfDoc(d.period, d.kind)}
+                    data-text={searchText(d)}
+                  >
+                    <div className="lib-row-main">
+                      <h3 className="lib-name">
+                        <Link href={sourceHref(d.id)}>
+                          <DocName doc={d} />
+                        </Link>
+                      </h3>
+                      <p className="lib-printed">{d.printedTitle}</p>
+                      {d.state === "rejected" ? (
+                        <p className="lib-rejected">
+                          <strong>Not used.</strong> {d.rejectedReason}
+                        </p>
+                      ) : null}
+                    </div>
+                    <p className="lib-meta">
+                      <DocMeta doc={d} />
+                    </p>
+                    <DocActions doc={d} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+      </div>
+
+      <section className="lib-next" aria-labelledby="ds-h">
+        <h2 id="ds-h">The figures, ready to use</h2>
+        <p>
+          Every figure we read from these documents, by dataset, to preview and download as CSV or Excel. <Link href="/library/datasets">Go to the datasets</Link>
         </p>
       </section>
-
-      {types.map((t) => {
-        const list = d.sources.filter((s) => s.doc_type === t);
-        return (
-          <section key={t} aria-labelledby={`t-${t}`}>
-            <h2 id={`t-${t}`}>{DOC_TYPE_WORDS[t] ?? t.replaceAll("_", " ")}</h2>
-            <p className="small muted">
-              {list[0]?.publisher}. <Count k={`sources:type:${t}`} n={list.length} /> {list.length === 1 ? "file" : "files"}.{" "}
-              {d.series.some((x) => x.dataset === DATASET_OF_TYPE[t]) ? <Link href={`/datasets/${DATASET_OF_TYPE[t]}`}>Data type page</Link> : null}
-            </p>
-            <TableWrap label={`${DOC_TYPE_WORDS[t] ?? t} files`} sticky>
-              <table className="src-table">
-                <thead>
-                  <tr>
-                    <th scope="col">Document</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">File</th>
-                    <th scope="col" className="num">
-                      Pages read
-                    </th>
-                    <th scope="col">Coverage of tables read</th>
-                    <th scope="col" className="num">
-                      Checked figures
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {list.map((s) => {
-                    const cov = sourceCoverage(s);
-                    const pages = (s.pages_used ?? []).length;
-                    return (
-                      <tr key={s.source_id} className={s.verification_status === "failed" ? "is-rejected" : undefined}>
-                        <th scope="row">
-                          <Link href={sourceHref(s.source_id)}>{s.title}</Link>
-                          <span className="cell-sub">{s.period}</span>
-                        </th>
-                        <td className="small">{ROLE_SHORT[s.role] ?? s.role}</td>
-                        <td>
-                          <VerifBadge status={s.verification_status} />
-                        </td>
-                        <td className="num">{pages ? <Count k={`pages:source:${s.source_id}`} n={pages} /> : <span className="muted">none</span>}</td>
-                        <td className="small">
-                          {cov.ratio !== null ? (
-                            <Bar
-                              ratio={cov.ratio}
-                              label={
-                                <>
-                                  <Count k={`coverage:source:${s.source_id}`} n={cov.ratio} rate /> (<Count k={`coverage:source:${s.source_id}:matched`} n={cov.matched} /> of{" "}
-                                  <Count k={`coverage:source:${s.source_id}:printed`} n={cov.printed} />)
-                                </>
-                              }
-                            />
-                          ) : (
-                            <span className="muted">not measured</span>
-                          )}
-                        </td>
-                        <td className="num">
-                          <Count k={`values:source:${s.source_id}`} n={valuesFromSource(s.source_id)} />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </TableWrap>
-          </section>
-        );
-      })}
     </div>
   );
 }

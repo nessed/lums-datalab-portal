@@ -57,6 +57,8 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
 into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
 
+**Next.js 16.4.1 (2026-11-15, branch `proto/redesign-next-upgrade`, separate draft PR).** Security fix for three advisories against Next 16.0.0 to 16.4.0 (GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr, GHSA-p3m5-59mp-jv5r). Only `next` and `eslint-config-next` changed; all checks as before; report `docs/reports/qa/next-upgrade/REPORT.md`.
+
 **Redesign preview build, 2026-11-15 (unattended; the brief is still a draft).** Branch `proto/redesign-2026-11`, draft
 PR #13, not merged. DESIGN.md stages 0-9 built; the site reads release `v0.0.1-prototype` through `site/src/lib/adapter/`
 (datalab adapter on; golden adapter tested against `golden-2026.11.11`, off). Report:

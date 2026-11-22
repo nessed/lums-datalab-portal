@@ -2,6 +2,7 @@
 // status, and where it is printed. Gaps are rows too, with their reason.
 // Values are plain when checked (the legend says so); anything else carries
 // its status shape and a patterned cell, so the table reads in greyscale.
+import { breakWords } from "@/lib/words";
 import Link from "@/components/ui/Link";
 import { seriesTitle } from "@/lib/titles";
 import { TableWrap } from "@/components/ui/Basics";
@@ -57,7 +58,7 @@ export default function SeriesTable({ series, id = "data" }: { series: Series; i
                 <tr key={o.obs_id} className={br ? "row-break" : undefined}>
                   <th scope="row">
                     <Num kind="period">{periodWords(o.period, series.frequency)}</Num>
-                    {br ? <span className="break-tag">Series break: {br.kind.replaceAll("_", " ")}</span> : null}
+                    {br ? <span className="break-tag">Series break: {breakWords(br.kind, series.series_id).toLowerCase()}</span> : null}
                   </th>
                   {multiVintage ? (
                     <td>

@@ -1,0 +1,112 @@
+{
+  "$comment": "Stories, the ticker and the 'what moved' panels of the home page (data hub plan, sections 5 and 6). Each story names its series, the kind of figure and one of four sentence patterns; every figure and every change in it is read from the release and computed at build time by src/components/hub/stories.tsx, and recomputed by scripts/checks/home-stories.mjs and home-derived.mjs. A story whose figures are not all checked does not render. Like with like: a budget estimate is compared only with a budget estimate, and where that earlier budget estimate was later revised the sentence says so. Names below are plain labels only. No numbers in this file. DRAFT (unattended run, 2026-11-23): drafted by the agent; Ali and Ahmad confirm or replace.",
+  "provisional": true,
+  "stories": [
+    {
+      "slug": "tax-revenue-budget",
+      "pattern": "latest-vs-previous",
+      "series": "fed.rev.tax",
+      "kind": "be",
+      "subject": "Federal tax revenue",
+      "answer": "federal-tax-revenue",
+      "featured": true
+    },
+    {
+      "slug": "prices-fastest-group",
+      "pattern": "rank-in-group",
+      "kind": "change_yoy",
+      "group": "prices",
+      "answer": "inflation-now"
+    },
+    {
+      "slug": "federal-spending-since-devolution",
+      "pattern": "change-over-years",
+      "series": "fed.exp.total",
+      "kind": "be",
+      "subject": "Total federal spending",
+      "answer": "federal-total-spending"
+    },
+    {
+      "slug": "defence-share",
+      "pattern": "share-of-total",
+      "series": "fed.exp.current.function.defence_affairs_and_services",
+      "total": "fed.exp.current.revenue_account",
+      "kind": "be",
+      "subject": "Defence",
+      "whole": "the federal current spending that the budget splits by function",
+      "answer": "federal-defence-spending"
+    },
+    {
+      "slug": "inflation-now",
+      "pattern": "latest-vs-previous",
+      "series": "cpi.national.yoy.general",
+      "kind": "change_yoy",
+      "subject": "Inflation",
+      "answer": "inflation-now"
+    }
+  ],
+  "ticker": [
+    { "series": "cpi.national.yoy.general", "kind": "change_yoy", "name": "Inflation" },
+    { "series": "cpi.national.yoy.group.food", "kind": "change_yoy", "name": "Food prices" },
+    { "series": "cpi.urban.yoy.general", "kind": "change_yoy", "name": "Inflation, towns" },
+    { "series": "cpi.rural.yoy.general", "kind": "change_yoy", "name": "Inflation, villages" },
+    { "series": "fed.exp.total", "kind": "be", "name": "Federal spending budget" },
+    { "series": "fed.rev.tax", "kind": "be", "name": "Federal tax budget" },
+    { "series": "fed.exp.current.function.defence_affairs_and_services", "kind": "be", "name": "Defence budget" },
+    { "series": "fed.exp.current.function.health", "kind": "be", "name": "Health budget" },
+    { "series": "fed.rev.provincial_share", "kind": "be", "name": "Provinces' share of taxes" },
+    { "series": "lfs.unemployment_rate.total.total", "kind": "survey_round", "name": "Unemployment" },
+    { "series": "lfs.labour_force.total.total", "kind": "survey_round", "name": "Labour force" }
+  ],
+  "groups": {
+    "prices": {
+      "heading": "Prices by group, change over a year",
+      "total": "cpi.national.yoy.general",
+      "totalName": "all prices",
+      "noun": "prices",
+      "members": [
+        { "series": "cpi.national.yoy.group.food", "name": "Food" },
+        { "series": "cpi.national.yoy.group.alcohol_tobacco", "name": "Tobacco and alcohol" },
+        { "series": "cpi.national.yoy.group.clothing_footwear", "name": "Clothing and shoes" },
+        { "series": "cpi.national.yoy.group.housing_utilities", "name": "Housing, electricity, gas and water" },
+        { "series": "cpi.national.yoy.group.furnishing_household", "name": "Furniture and household goods" },
+        { "series": "cpi.national.yoy.group.health", "name": "Health" },
+        { "series": "cpi.national.yoy.group.transport", "name": "Transport" },
+        { "series": "cpi.national.yoy.group.communication", "name": "Communication" },
+        { "series": "cpi.national.yoy.group.recreation_culture", "name": "Recreation and culture" },
+        { "series": "cpi.national.yoy.group.education", "name": "Education" },
+        { "series": "cpi.national.yoy.group.restaurants_hotels", "name": "Restaurants and hotels" },
+        { "series": "cpi.national.yoy.group.miscellaneous", "name": "Other goods and services" }
+      ]
+    },
+    "functions": {
+      "heading": "Where federal current spending goes, budget",
+      "kind": "be",
+      "total": "fed.exp.current.revenue_account",
+      "note": "Federal current spending on the revenue account, which is the part the budget statement splits by function. Development spending and spending by the provinces are not included.",
+      "members": [
+        { "series": "fed.exp.current.function.general_public_services", "name": "General public services, including interest" },
+        { "series": "fed.exp.current.function.defence_affairs_and_services", "name": "Defence" },
+        { "series": "fed.exp.current.function.social_protection", "name": "Social protection" },
+        { "series": "fed.exp.current.function.public_order_and_safety_affairs", "name": "Public order and safety" },
+        { "series": "fed.exp.current.function.economic_affairs", "name": "Economic affairs" },
+        { "series": "fed.exp.current.function.education_affairs_and_services", "name": "Education" },
+        { "series": "fed.exp.current.function.health", "name": "Health" },
+        { "series": "fed.exp.current.function.recreation_culture_and_religion", "name": "Recreation, culture and religion" },
+        { "series": "fed.exp.current.function.housing_and_community_amenities", "name": "Housing and community" },
+        { "series": "fed.exp.current.function.environment_protection", "name": "Environment" }
+      ]
+    },
+    "provinces": {
+      "heading": "Labour force by province",
+      "kind": "survey_round",
+      "total": "lfs.labour_force.total.total",
+      "members": [
+        { "series": "lfs.labour_force.pb.total.total", "name": "Punjab" },
+        { "series": "lfs.labour_force.sd.total.total", "name": "Sindh" },
+        { "series": "lfs.labour_force.kp.total.total", "name": "Khyber Pakhtunkhwa" },
+        { "series": "lfs.labour_force.ba.total.total", "name": "Balochistan" }
+      ]
+    }
+  }
+}

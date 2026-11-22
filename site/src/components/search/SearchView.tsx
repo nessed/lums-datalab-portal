@@ -479,10 +479,15 @@ function PageResults({
           Filters{picked.length ? ` · ${picked.length}` : ""}
         </button>
         <div className="sp-fbody">
-          {choices.map((ch) => (
+          {choices.map((ch) => {
+            // The release is a regular grid (each area holds the same groups and measures), so every choice of a
+            // filter often has the same count. Then the count is said once, beside the heading, not on each chip.
+            const each = ch.values.length > 1 && ch.values.every((x) => x.n === ch.values[0].n) ? ch.values[0].n : null;
+            return (
             <div key={ch.key} className="sp-facet" role="group" aria-labelledby={`sp-f-${ch.key}`}>
               <h3 className="sp-facet-h" id={`sp-f-${ch.key}`}>
                 {FACET_LABEL[ch.key]}
+                {each !== null ? <span className="sp-facet-each"> · {each} each</span> : null}
               </h3>
               <ul className="sp-facet-list">
                 {ch.values.map(({ v, n }) => {
@@ -499,14 +504,15 @@ function PageResults({
                         }}
                       >
                         {facetWords(ch.key, v)}
-                        <span className="chip-n">{n}</span>
+                        {each === null ? <span className="chip-n">{n}</span> : null}
                       </a>
                     </li>
                   );
                 })}
               </ul>
             </div>
-          ))}
+            );
+          })}
           {picked.length ? (
             <button type="button" className="btn btn-text sp-fclear" onClick={clearAll}>
               Clear filters

@@ -90,7 +90,7 @@ export default async function DatasetPage({ params }: Props) {
 
   return (
     <article className="dataset-page">
-      <Breadcrumbs items={[{ href: "/sources", label: "Sources" }, { href: "/datasets", label: "Data types" }, { label: datasetName(id) }]} />
+      <Breadcrumbs items={[{ href: "/library", label: "Library" }, { href: "/library/datasets", label: "Datasets" }, { label: datasetName(id) }]} />
       <header className="ds-head">
         <div>
           <h1>{datasetName(id)}</h1>

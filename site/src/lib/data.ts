@@ -7,6 +7,9 @@ import path from "node:path";
 import config from "../../release.config.json";
 import type { AdapterName, BatchGap, KindKey, ReaderStatus, ReleaseInfo, SignOff, TitleStatus } from "./adapter/contract";
 import { loadDatalab } from "./adapter/datalab";
+import type { Library, LibraryDocument } from "./adapter/contract";
+import { buildLibrary, datasetFiles, readServedFiles, type LibraryNames } from "./adapter/library";
+import libraryNames from "../../editorial/library.json";
 
 export const RELEASE_VERSION: string = config.version;
 export const REPO_URL: string = config.repoUrl;
@@ -521,3 +524,29 @@ export function releaseFileExists(name: string): boolean {
 export function buildDate(): string {
   return new Date().toISOString().slice(0, 10);
 }
+
+/* ---------- the Library (data hub run, 2026-11-23) ---------- */
+
+/** Where the served PDFs live: one setting, so the files can move to object storage without code changes (plan 7.3, L2). */
+export const LIBRARY_FILES_BASE: string = (process.env.LIBRARY_FILES_BASE ?? "").replace(/\/+$/, "") || `${DATA_BASE}/sources`;
+const PUBLIC_RELEASE_DIR = path.resolve(process.cwd(), "public", "data", RELEASE_VERSION);
+
+let libraryCache: Library | null = null;
+
+/** Every document and dataset, in plain words (contract `Library`). */
+export function library(): Library {
+  if (libraryCache) return libraryCache;
+  libraryCache = buildLibrary(db(), libraryNames as LibraryNames, readServedFiles(path.join(PUBLIC_RELEASE_DIR, "sources", "index.json")), {
+    filesBase: LIBRARY_FILES_BASE,
+    datasetFiles: (key) => datasetFiles(path.join(PUBLIC_RELEASE_DIR, "datasets"), key, DATA_BASE),
+    visible: isDatasetPublished,
+  });
+  return libraryCache;
+}
+
+export function libraryDoc(id: string): LibraryDocument | undefined {
+  return library().documents.find((x) => x.id === id);
+}
+
+/** The document viewer, opened at a page: /sources/<id>?page=N#viewer (the viewer also reads #page=N). */
+export const docPageHref = (sourceId: string, page?: number | null) => `${sourceHref(sourceId)}${page ? `?page=${page}` : ""}#viewer`;

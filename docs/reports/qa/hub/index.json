@@ -1,0 +1,91 @@
+{
+  "base": "http://localhost:3100",
+  "pages": [
+    {
+      "name": "home",
+      "url": "/",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "library",
+      "url": "/library",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "datasets",
+      "url": "/library/datasets",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "document",
+      "url": "/sources/lfs-pbs-2020-21?page=150",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "indicators",
+      "url": "/topics",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "topic",
+      "url": "/topics/prices",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "stories",
+      "url": "/answers",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "story",
+      "url": "/answers/federal-tax-revenue",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "chart-builder",
+      "url": "/compare",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "series",
+      "url": "/series/fed.rev.tax",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "search",
+      "url": "/search?q=inflation",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "about",
+      "url": "/about",
+      "status": 200,
+      "overflow360": 0
+    },
+    {
+      "name": "type-trial",
+      "url": "/demo/type",
+      "status": 200,
+      "overflow360": 0
+    }
+  ],
+  "firstScreen": {
+    "words": 118,
+    "tokens": 173,
+    "charts": 1,
+    "keyNumbers": 6,
+    "ticker": true
+  },
+  "failures": []
+}

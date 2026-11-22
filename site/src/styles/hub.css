@@ -1,0 +1,486 @@
+/* The data hub home page (docs/plans/2026-11-23-data-hub.md, section 5).
+   Class names from src/components/hub/Hub.tsx and stories.tsx. Only this track
+   edits this file. */
+
+.hub {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--s-4) var(--gutter) var(--s-8);
+}
+.hub-title {
+  font-size: var(--step-2);
+  margin: 0 0 var(--s-3);
+  color: var(--ink);
+}
+.hub-h {
+  font-size: var(--step-1);
+  margin: 0 0 var(--s-3);
+  color: var(--ink);
+}
+.hub-sec {
+  margin-top: var(--s-7);
+}
+.hub-sechead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+}
+.hub-sechead > a {
+  font-size: var(--step--1);
+}
+
+/* Data links: no underline until hover or focus. */
+.hub .v-link,
+.hub .kn-name,
+.hub .mv-name,
+.hub .th-tile,
+.hub .kn-drv {
+  text-decoration: none;
+}
+.hub .v-link:hover,
+.hub .v-link:focus-visible,
+.hub .kn-name:hover,
+.hub .kn-name:focus-visible,
+.hub .mv-name:hover,
+.hub .mv-name:focus-visible,
+.hub .kn-drv:hover,
+.hub .kn-drv:focus-visible {
+  text-decoration: underline;
+}
+
+/* ---------- ticker ---------- */
+
+.tk {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--s-2) 0;
+  margin-bottom: var(--s-5);
+  font-size: var(--step--1);
+}
+.tk-pause {
+  flex: none;
+  cursor: pointer;
+  border: 1px solid var(--btn2-border);
+  background: var(--btn2-bg);
+  color: var(--btn2-ink);
+  border-radius: var(--r-2);
+  padding: 2px var(--s-2);
+  font-size: var(--step--2);
+  line-height: 1.6;
+}
+.tk-toggle:focus-visible + .tk-pause {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.tk-pause-off {
+  display: none;
+}
+.tk-toggle:checked + .tk-pause .tk-pause-on {
+  display: none;
+}
+.tk-toggle:checked + .tk-pause .tk-pause-off {
+  display: inline;
+}
+.tk-window {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.tk-track {
+  display: flex;
+  width: max-content;
+}
+.tk-run {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-6);
+  padding-right: var(--s-6);
+}
+.tk-item {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-1);
+}
+.tk-name {
+  color: var(--ink-2);
+}
+.tk-v {
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.tk-chg {
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Without motion (or without CSS) the ticker is one wrapping row; the copy
+   stays hidden. With motion allowed, the two copies scroll as one loop. */
+.tk-track {
+  max-width: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tk-track {
+    max-width: none;
+    animation: tk-move 80s linear infinite;
+  }
+  .tk-run {
+    flex-wrap: nowrap;
+  }
+  .tk-run[hidden] {
+    display: flex;
+  }
+  .tk:hover .tk-track,
+  .tk:focus-within .tk-track,
+  .tk-toggle:checked ~ .tk-window .tk-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tk-pause {
+    display: none;
+  }
+}
+@keyframes tk-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- featured chart and key numbers ---------- */
+
+.hub-main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--s-6);
+  align-items: start;
+}
+.ft-sentence {
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 var(--s-3);
+  color: var(--ink);
+}
+.ft-chart {
+  min-width: 0;
+}
+.ft-src {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+.kn {
+  border-left: 1px solid var(--rule);
+  padding-left: var(--s-5);
+}
+.kn-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.kn-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.kn-row:last-child {
+  border-bottom: 0;
+}
+.kn-name {
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink);
+}
+.kn-v {
+  grid-row: span 2;
+  text-align: right;
+  font-size: var(--step-1);
+  font-weight: 700;
+  color: var(--num);
+  font-variant-numeric: tabular-nums;
+}
+.kn-when,
+.kn-chg,
+.kn-rev {
+  grid-column: 1;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.kn-chg {
+  grid-column: 1 / -1;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.kn-rev {
+  grid-column: 1 / -1;
+}
+.kn-basis {
+  color: var(--ink-3);
+}
+
+/* ---------- what moved ---------- */
+
+.mv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-5);
+}
+.mv {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-3);
+  padding: var(--s-4);
+}
+.mv-h {
+  font-size: var(--step-0);
+  margin: 0;
+}
+.mv-when {
+  margin: 0 0 var(--s-3);
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.mv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mv-row {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 3px 0;
+  font-size: var(--step--1);
+}
+.mv-name {
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mv-bar {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: var(--r-1);
+  overflow: hidden;
+}
+.mv-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--lums-blue);
+}
+.mv-v {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.mv-note {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.mv-more {
+  margin-top: var(--s-2);
+  font-size: var(--step--2);
+  color: var(--ink-2);
+}
+.mv-more summary {
+  cursor: pointer;
+}
+.mv-more p {
+  margin: var(--s-1) 0 0;
+}
+
+/* ---------- stories ---------- */
+
+.st-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--s-4);
+}
+.st-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-3);
+  padding: var(--s-4);
+}
+.st-sentence {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.st-spark {
+  display: block;
+}
+.st-more {
+  margin-top: auto;
+  font-size: var(--step--1);
+}
+
+/* ---------- library strip ---------- */
+
+.ls-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-6);
+}
+.ls-h {
+  font-size: var(--step-0);
+  margin: 0 0 var(--s-2);
+}
+.ls-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--step--1);
+}
+.ls-list li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ls-kind {
+  font-weight: 600;
+  color: var(--ink);
+}
+.ls-open {
+  margin-left: auto;
+}
+
+/* ---------- themes ---------- */
+
+.th-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: var(--s-3);
+}
+.th-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  height: 100%;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-3);
+  padding: var(--s-3) var(--s-4);
+  color: var(--ink);
+}
+.th-tile:hover,
+.th-tile:focus-visible {
+  border-color: var(--lums-blue);
+}
+.th-name {
+  font-weight: 600;
+  color: var(--link);
+}
+.th-short {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+/* ---------- computation notes ---------- */
+
+.hub-drv {
+  margin-top: var(--s-7);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.hub-drv > summary {
+  cursor: pointer;
+}
+
+/* ---------- narrow screens ---------- */
+
+@media (max-width: 1023px) {
+  .hub-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kn {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s-3);
+  }
+  .mv-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 719px) {
+  .ls-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mv-row {
+    grid-template-columns: minmax(0, 7rem) minmax(0, 1fr) auto;
+  }
+}
+
+/* The featured chart's caption repeats the sentence above it; kept for screen
+   readers only, to hold the first screen to its word limit. */
+.ft-chart .chart-notes {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- daily prices (placeholder: names only, no figures) ---------- */
+
+.dp-note {
+  margin: 0 0 var(--s-3);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.dp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--s-3);
+}
+.dp-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--r-3);
+  padding: var(--s-3) var(--s-4);
+}
+.dp-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.dp-state {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}

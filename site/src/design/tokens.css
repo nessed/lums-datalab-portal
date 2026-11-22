@@ -9,14 +9,15 @@
 
 :root {
   /* ================================ type ================================ */
-  /* Noto Sans (variable, wght 400-700) for everything; Noto Sans Display Bold
+  /* Atkinson Hyperlegible Next for everything since 2026-11-23 (Ali); the notes below are from Noto Sans.
+   * Noto Sans (variable, wght 400-700) for everything; Noto Sans Display Bold
    * for titles and the big headline figures. No serif anywhere. The --font-noto-*
    * variables come from next/font/local in app/layout.tsx. Noto Sans Display has
    * no minus sign (U+2212): the browser takes it from Noto Sans, next in the stack.
    * Noto Sans figures are tabular by default; body text switches to proportional
    * figures and number places (.tnum, tables, charts, headline blocks) switch back. */
-  --font-sans: var(--font-noto-sans), "Noto Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-  --font-display: var(--font-noto-display), var(--font-noto-sans), "Noto Sans", "Segoe UI", system-ui, Arial, sans-serif;
+  --font-sans: var(--font-atkinson), "Atkinson Hyperlegible Next", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-display: var(--font-atkinson), "Atkinson Hyperlegible Next", "Segoe UI", system-ui, Arial, sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 
   /* Scale in rem so user zoom works. Body 16, metadata 13. */
@@ -53,8 +54,9 @@
   --header-h: 3.5rem; /* 56 px desktop bar */
 
   /* ====================== brand primitives (do not use in components) ==== */
-  --navy: #002581;
-  --lums-blue: #2e3192;
+  /* Deepened 2026-11-23 at Ali's request (the round-2 navy #002581 and LUMS blue #2e3192 read too light): a formal dark navy. */
+  --navy: #0b1d4a;
+  --lums-blue: #1f2c6e;
   --gold: #fdb913;
   --amber: #b07c00;
 
@@ -76,7 +78,7 @@
   /* Links and actions on light ground */
   --link: var(--lums-blue);
   --link-hover: var(--navy);
-  --link-underline: rgb(46 49 146 / 0.4);
+  --link-underline: rgb(31 44 110 / 0.4);
   --focus: var(--lums-blue); /* focus ring on light ground */
   --focus-on-dark: var(--gold); /* focus ring on navy (header, footer, active chips) */
 
@@ -118,13 +120,13 @@
   /* Selection, hover rows, the current item in a list */
   --select-wash: #eaebf7;
   --select-rule: var(--lums-blue);
-  --select-tint: rgb(46 49 146 / 0.12);
+  --select-tint: rgb(31 44 110 / 0.12);
 
   /* Evidence: the box drawn around the printed cell on a page image */
   --evidence-box: var(--lums-blue);
-  --evidence-tint: rgb(46 49 146 / 0.1);
-  --evidence-rule-soft: rgb(46 49 146 / 0.45);
-  --evidence-band: rgb(46 49 146 / 0.06); /* the row and column bands that lead the eye to the cell */
+  --evidence-tint: rgb(31 44 110 / 0.1);
+  --evidence-rule-soft: rgb(31 44 110 / 0.45);
+  --evidence-band: rgb(31 44 110 / 0.06); /* the row and column bands that lead the eye to the cell */
 
   /* Header and footer: navy bar, white text, thin gold rule under the header */
   --header-bg: var(--navy);

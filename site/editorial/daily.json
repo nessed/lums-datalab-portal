@@ -1,0 +1,13 @@
+{
+  "$comment": "Placeholder for prices to be collected once a day from official notices (Ali, 2026-11-23: front end only for now; the collection will be built later). This file lists names only. No numbers, no sources wired, nothing fetched. The home page shows these as 'not yet collected'. DRAFT (unattended run, 2026-11-23): names drafted by the agent; Ali and Ahmad confirm or replace.",
+  "provisional": true,
+  "heading": "Daily prices",
+  "note": "Coming soon: prices from official notices, collected once a day. None are collected yet.",
+  "items": [
+    { "id": "petrol", "name": "Petrol" },
+    { "id": "diesel", "name": "High-speed diesel" },
+    { "id": "kerosene", "name": "Kerosene" },
+    { "id": "lpg", "name": "Cooking gas (LPG)" },
+    { "id": "pkr-usd", "name": "Rupee to US dollar" }
+  ]
+}

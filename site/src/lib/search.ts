@@ -333,7 +333,9 @@ export function buildEngine(index: SearchEntry[]): Engine {
     if (e.k === "s") {
       e.h = seriesHrefOf(e.id);
       if (typeof (e.d as unknown) === "number") e.d = dsNames[e.d as unknown as number];
-      e.p = e.fr && e.to ? `${periodText(e.fr, e.f)} to ${periodText(e.to, e.f)}` : "";
+      // The header index carries first and last period; the compare index carries the words already (p).
+      if (e.fr && e.to) e.p = `${periodText(e.fr, e.f)} to ${periodText(e.to, e.f)}`;
+      else e.p ??= "";
       if (e.lpr && e.lvt) {
         e.lp = periodText(e.lpr, e.f);
         e.lo = receiptHref(e.id, e.lpr, e.lvt);
@@ -523,16 +525,31 @@ export function runSearch(eng: Engine, raw: string, opt: SearchOptions = {}): Se
   const qx = words.map((w, i) => ({ w, soft: SOFT.has(w), x: exp(w, typing && i === words.length - 1) }));
   const cx = conceptWords.map((w, i) => ({ w, soft: SOFT.has(w), x: exp(w, typing && i === conceptWords.length - 1) }));
 
-  // Spelling: a word that matches nothing gets the nearest known word.
+  // Spelling: a word that matches nothing gets the nearest known word, within one edit per three letters
+  // (at most three), measured against the stem and against the word as written; a known word the typed one
+  // merely extends ("year" in "yearly") is a different word, not a typo, and ties go to the longer shared
+  // start. It used to allow three edits against the stem at any length, so "zakat" was offered "abatement"
+  // (two edits from its stem "abat"), "yearly" was offered "year" and "unemploymnt" "employment".
   let suggestion: string | null = null;
+  const lead = (a: string, b: string) => {
+    let i = 0;
+    while (i < a.length && a[i] === b[i]) i++;
+    return i;
+  };
   const fixes = conceptWords.map((w) => {
     if (w.length < 4 || /\d/.test(w) || eng.vocab.has(stem(w)) || exp(w, false).size > 1) return w;
+    const max = Math.min(3, Math.max(1, Math.floor(w.length / 3)));
+    const sw = stem(w);
     let best: string | null = null;
-    let bd = 4;
+    let bd = max + 1;
+    let bl = -1;
     for (const [v, surface] of eng.vocab) {
-      const d = editDistance(stem(w), v, 3);
-      if (d < bd) {
+      if (w.startsWith(surface)) continue;
+      const d = Math.min(editDistance(sw, v, max), editDistance(w, surface, max));
+      const l = lead(w, surface);
+      if (d < bd || (d === bd && d <= max && l > bl)) {
         bd = d;
+        bl = l;
         best = surface;
       }
     }
@@ -739,7 +756,7 @@ export const FACET_LABEL: Record<FacetKey, string> = { topic: "Topic", area: "Ar
 
 const FACET_WORDS: Record<FacetKey, Record<string, string>> = {
   topic: { cpi: "Prices", lfs: "Jobs and labour", abs: "Federal budget" },
-  area: { all: "All Pakistan", urban: "Urban", rural: "Rural", none: "No area printed" },
+  area: { all: "All Pakistan", urban: "Urban", rural: "Rural", none: "Area not given" },
   measure: { yoy: "Change over a year", mom: "Change over a month", index: "Index level", weight: "Basket weight", rate: "Rate", count: "Number of people" },
   sex: { total: "Women and men", female: "Women", male: "Men" },
   prov: { pk: "Pakistan", ...Object.fromEntries(PROVINCES.map((x) => [x.code, x.label])) },
@@ -840,31 +857,30 @@ export function loadSparks(url: string): Promise<Sparks> {
 }
 export const sparksIfLoaded = () => sparkLoaded;
 
-/** SVG geometry of one sparkline: path data (segments never joined across a gap or break) and lone points. */
+/**
+ * SVG geometry of one sparkline: the latest segment of two or more values (segments are never joined across a
+ * gap or a break), scaled to the full width, so a figure cut off by a gap is never drawn as a stray dot beside the
+ * line (the same rule as components/Spark.tsx). The series page's chart shows every figure. `dots` stays for
+ * callers and is always empty.
+ */
 export function sparkPath(row: SparkRow, w: number, h: number): { d: string; dots: [number, number][]; last: [number, number] | null } {
-  const span = Number(row[0]) || 1;
   const step = Number(row[1]) || 1;
-  const segs = row.slice(2) as (number | string)[][];
-  const ys = segs.flatMap((s) => s.slice(1).map(Number));
-  if (!ys.length) return { d: "", dots: [], last: null };
-  const lo = Math.min(...ys);
-  const hi = Math.max(...ys);
-  const px = (x: number) => 2 + (x / span) * (w - 6);
+  const segs = (row.slice(2) as (number | string)[][]).filter((s) => s.length > 2);
+  const seg = segs[segs.length - 1];
+  if (!seg) return { d: "", dots: [], last: null };
+  const vals = seg.slice(1).map(Number);
+  const lo = Math.min(...vals);
+  const hi = Math.max(...vals);
+  const span = (vals.length - 1) * step || 1;
+  const px = (i: number) => 2 + ((i * step) / span) * (w - 6);
   const py = (y: number) => h - 3 - ((y - lo) / (hi - lo || 1)) * (h - 6);
   let d = "";
-  const dots: [number, number][] = [];
   let last: [number, number] | null = null;
-  for (const s of segs) {
-    const x0 = Number(s[0]);
-    const vals = s.slice(1).map(Number);
-    vals.forEach((v, i) => {
-      const pt: [number, number] = [px(x0 + i * step), py(v)];
-      d += `${i ? "L" : "M"}${pt[0].toFixed(1)} ${pt[1].toFixed(1)}`;
-      last = pt;
-    });
-    if (vals.length === 1) dots.push([px(x0), py(vals[0])]);
-  }
-  return { d, dots, last };
+  vals.forEach((v, i) => {
+    last = [px(i), py(v)];
+    d += `${i ? "L" : "M"}${last[0].toFixed(1)} ${last[1].toFixed(1)}`;
+  });
+  return { d, dots: [], last };
 }
 
 const valueOf = (a: Answer, t: AnswerTuple): AnswerValue => ({ p: t[0], pw: periodText(t[0], a.f), vt: t[1], v: t[2], m: t[3], k: t[4], o: receiptHref(a.s, t[0], t[1]) });

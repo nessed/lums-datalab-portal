@@ -1,5 +1,6 @@
 // Chart model types and pure helpers. No server imports: the client chart
 // uses this module, so it must never pull in the data layer (node:fs).
+import { breakWords } from "./words";
 import { derivedDisplay, formatDecimalString, periodShort, periodWords, unitLabel, vintageWords } from "./format";
 import { statusOf, type StatusKey } from "./status";
 import { seriesTitle } from "./titles";
@@ -32,7 +33,8 @@ export type ChartMark = { x: number; period: string; periodLabel: string; vintag
 export type ChartBreak = { x: number; label: string; note: string; atPeriod: string; atLabel: string; inView: boolean };
 
 /** A run of periods inside the series' span that this release does not hold at all (no figure of any kind):
- * drawn on the chart as a labelled band ("2012-13 to 2014-15: not in this release"), never joined over. */
+ * drawn on the chart as a pale band labelled "not yet collected" (its title: "2012-13 to 2014-15: no edition
+ * of this period has been read yet"), never joined over. */
 export type ChartGap = { from: number; to: number; fromPeriod: string; toPeriod: string; fromLabel: string; toLabel: string };
 
 export type ChartModel = {
@@ -58,6 +60,20 @@ export type ChartModel = {
 export function canConnect(a: { x: number }, b: { x: number }, model: Pick<ChartModel, "step" | "breaks">): boolean {
   if (Math.abs(b.x - a.x - model.step) > 1e-9) return false;
   return !model.breaks.some((br) => br.x > a.x && br.x < b.x);
+}
+
+/**
+ * The latest unbroken run of points (sorted by x): the last point and every
+ * point before it that canConnect joins, stopping at the first missing period
+ * or break. Sparklines draw only this run, scaled to their full width, so an
+ * earlier figure cut off by a gap is never drawn as a stray dot beside the
+ * line; the full chart still shows every figure.
+ */
+export function latestRun<T extends { x: number }>(pts: T[], model: Pick<ChartModel, "step" | "breaks">): T[] {
+  if (!pts.length) return [];
+  let i = pts.length - 1;
+  while (i > 0 && canConnect(pts[i - 1], pts[i], model)) i--;
+  return pts.slice(i);
 }
 
 /** Position of a period on the time axis. Fiscal years and survey rounds use
@@ -167,7 +183,7 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
     const x = at - step / 2;
     breaks.push({
       x,
-      label: b.kind.replaceAll("_", " "),
+      label: breakWords(b.kind, series.series_id),
       note: b.note,
       atPeriod: b.at_period,
       atLabel: periodWords(b.at_period, series.frequency),

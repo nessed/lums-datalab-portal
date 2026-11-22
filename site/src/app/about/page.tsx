@@ -96,7 +96,7 @@ export default function AboutPage() {
               <Link href="/methods">Methods</Link>: how a figure gets from a PDF to a receipt, and the quality numbers of this release.
             </li>
             <li>
-              <Link href="/sources">Sources</Link>: every document, and how each file was verified.
+              <Link href="/library">Library</Link>: every document, and how each file was verified.
             </li>
             <li>
               <Link href="/topics">Topics</Link>: the figures by subject, and short answers to the questions people ask.

@@ -47,19 +47,10 @@ function logTicks(min: number, max: number): number[] {
   return out;
 }
 
-/** Axis label: amounts in words ("Rs 150 bn"), other units as plain numbers. */
-function tickText(v: number, unitCode: string, scale: number): string {
-  if (unitCode === "PKR") {
-    const full = v * scale;
-    const a = Math.abs(full);
-    const s = full < 0 ? "−" : "";
-    const f = (n: number) => String(Number(n.toPrecision(3)));
-    if (a >= 1e12) return `${s}Rs ${f(a / 1e12)} tn`;
-    if (a >= 1e9) return `${s}Rs ${f(a / 1e9)} bn`;
-    if (a >= 1e6) return `${s}Rs ${f(a / 1e6)} m`;
-    if (a === 0) return "0";
-    return `${s}Rs ${a.toLocaleString("en-US")}`;
-  }
+/** Axis label: a plain number in the unit written above the axis (model.unit, e.g. "Rs million"), the
+ *  unit the figures are printed in and the table shows. Rupee amounts were once converted to "Rs 50 bn"
+ *  here while the label said Rs million; the axis and its label now always agree. */
+function tickText(v: number): string {
   return v.toLocaleString("en-US", { maximumFractionDigits: 2 }).replace("-", "−");
 }
 
@@ -146,8 +137,8 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   // Small multiples share one period axis: the caller passes the common domain.
   const xMin = (options.xDomain ? options.xDomain[0] : Math.min(...xs)) - model.step * 0.6;
   const xMax = (options.xDomain ? options.xDomain[1] : Math.max(...xs)) + model.step * 0.6;
-  const slots = (xMax - xMin) / (model.step || 1);
-  const W = sparse && !options.xDomain ? Math.min(Wfull, Math.max(300, Math.round(M.left + M.right + slots * (narrow ? 64 : 104)))) : Wfull;
+  // The chart always fills its box (a short series gets wider slots, not a narrow chart with empty space beside it).
+  const W = Wfull;
   const ys = points.map((p) => p.y);
   const tf = (v: number) => (log ? Math.log10(v) : v);
   let yTicks: number[];
@@ -240,7 +231,6 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           width={W}
           height={H}
           className="chart-svg"
-          style={{ maxWidth: `${W}px` }}
           role="group"
           aria-labelledby={titleId}
           aria-describedby={descId}
@@ -252,53 +242,30 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
             {`Line chart of ${view.lines.length === 1 ? "one line" : `${view.lines.length} lines (${view.lines.map((l) => l.label).join(", ")})`}. Each point is a link to its receipt. The table below the chart lists every value.`}
           </desc>
           <text x={4} y={14} textAnchor="start" className="c-unit">
-            {model.unitCode === "PKR" ? "Rupees" : model.unit}
+            {model.unit}
             {log ? " (log scale)" : ""}
           </text>
           {yTicks.map((t) => (
             <g key={t}>
               <line x1={M.left} x2={W - M.right} y1={sy(t)} y2={sy(t)} className={t === 0 && !log ? "c-zero" : "c-grid"} />
               <text x={M.left - 8} y={sy(t) + 4} textAnchor="end" className="c-tick" data-num="axis">
-                {tickText(t, model.unitCode, model.scale)}
+                {tickText(t)}
               </text>
             </g>
           ))}
           {gapBands.map(({ g, x1, x2, w }) => {
             const one = g.fromPeriod === g.toPeriod;
-            const what = (
-              <>
-                <tspan data-num="axis">{g.fromLabel}</tspan>
-                {one ? null : (
-                  <>
-                    {" "}to <tspan data-num="axis">{g.toLabel}</tspan>
-                  </>
-                )}
-              </>
-            );
             const cx = (x1 + x2) / 2;
+            // Never rotated: a wide band carries its words, a narrow one only its title; every band is listed in words under the chart.
             return (
               <g key={`gap-${g.fromPeriod}`} className="c-gap">
-                <title>{`${one ? g.fromLabel : `${g.fromLabel} to ${g.toLabel}`}: not in this release`}</title>
+                <title>{`${one ? g.fromLabel : `${g.fromLabel} to ${g.toLabel}`}: no edition of this period has been read yet`}</title>
                 <rect x={x1} y={M.top} width={w} height={baseY - M.top} className="c-gapband" />
-                {w >= 104 ? (
+                {w >= 96 ? (
                   <text x={cx} y={M.top + 14} textAnchor="middle" className="c-gaptext">
-                    {what}
-                    <tspan x={cx} dy={13}>
-                      not in this release
-                    </tspan>
+                    not yet collected
                   </text>
-                ) : w >= 24 ? (
-                  <text transform={`translate(${cx - 11} ${M.top + 6}) rotate(90)`} className="c-gaptext">
-                    {what}
-                    <tspan x={0} dy={-12}>
-                      not in this release
-                    </tspan>
-                  </text>
-                ) : (
-                  <text transform={`translate(${cx - 4} ${M.top + 6}) rotate(90)`} className="c-gaptext">
-                    {what}: none
-                  </text>
-                )}
+                ) : null}
               </g>
             );
           })}
@@ -430,6 +397,23 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           </div>
         ) : null}
       </div>
+      {gapBands.length ? (
+        <p className="chart-gapnote">
+          <span className="chart-gapswatch" aria-hidden="true" /> Not yet collected (no edition of these periods has been read yet):{" "}
+          {gapBands.map(({ g }, i) => (
+            <span key={g.fromPeriod}>
+              {i ? ", " : ""}
+              <span data-num="axis">{g.fromLabel}</span>
+              {g.fromPeriod === g.toPeriod ? null : (
+                <>
+                  {" "}to <span data-num="axis">{g.toLabel}</span>
+                </>
+              )}
+            </span>
+          ))}
+          .
+        </p>
+      ) : null}
       {caption ? <figcaption className="chart-notes">{caption}</figcaption> : null}
     </figure>
   );

@@ -14,7 +14,7 @@ export default function NotFound() {
           <Link href="/browse">Browse the catalogue</Link>, or press <kbd>/</kbd> to search
         </li>
         <li>
-          <Link href="/sources">The source documents</Link>
+          <Link href="/library">The Library of source documents</Link>
         </li>
         <li>
           <Link href="/releases">Releases and errata</Link>: a figure that changed is listed there

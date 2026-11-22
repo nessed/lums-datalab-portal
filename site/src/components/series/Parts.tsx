@@ -5,14 +5,14 @@
 // scripts/checks/series-derived.mjs).
 import type { ReactNode } from "react";
 import Link from "@/components/ui/Link";
-import CopyButton from "@/components/ui/CopyButton";
 import { StatusMark } from "@/components/ui/Status";
 import { Num, V } from "@/components/ui/Num";
+import { OriginText } from "@/components/actions/OriginText";
 import { db, obsAt, RELEASE_VERSION, seriesHref, SITE_URL, slugify, sourceHref, DATA_BASE, type Observation, type Series } from "@/lib/data";
 import { periodWords, unitLabel } from "@/lib/format";
 import { statusOf, visualKey, type StatusKey } from "@/lib/status";
 import { latestPublished, ancestors } from "@/lib/stats";
-import { KIND, READER_STATUS } from "@/lib/words";
+import { KIND, READER_STATUS, breakWords } from "@/lib/words";
 import type { ReaderStatusKey } from "@/lib/adapter/contract";
 import { decodeId, documentsOf, kindLong, printedLabels } from "./model";
 import { seriesTitle, titleIsDraft } from "@/lib/titles";
@@ -49,7 +49,9 @@ export function SourceLines({ series, path }: { series: Series; path: string }) 
   const all = db().obsBySeries.get(series.series_id) ?? [];
   const periods = [...new Set(all.map((o) => o.period))].sort();
   const breaks = series.breaks.filter((b) => periods.some((p) => p < b.at_period) && periods.some((p) => p >= b.at_period));
-  const site = SITE_URL ? SITE_URL.replace(/\/$/, "") : "LUMS DataLab Portal";
+  // The credit carries the full address: the configured site address, or (when none is configured) the
+  // address the browser was served from, filled in by OriginText; without JavaScript, the site path.
+  const site = SITE_URL ? SITE_URL.replace(/\/$/, "") : "{{ORIGIN}}";
   return (
     <div className="sv-src">
       <p>
@@ -74,14 +76,17 @@ export function SourceLines({ series, path }: { series: Series; path: string }) 
           {breaks.map((b) => (
             <span key={b.at_period + b.kind}>
               {" "}
-              Break: {b.kind.replaceAll("_", " ")}, <Num kind="period">{periodWords(b.at_period, series.frequency)}</Num>; the lines stop there.
+              Break: {breakWords(b.kind, series.series_id)}, <Num kind="period">{periodWords(b.at_period, series.frequency)}</Num>; the lines stop there.
             </span>
           ))}
         </p>
       ) : null}
       <p className="sv-src-rel">
-        LUMS DataLab, release <Num kind="version">{RELEASE_VERSION}</Num> · {site}
-        <Num kind="id">{path}</Num> · CC BY 4.0
+        LUMS DataLab, release <Num kind="version">{RELEASE_VERSION}</Num> ·{" "}
+        <Num kind="id">
+          <OriginText text={`${site}${path}`} />
+        </Num>{" "}
+        · CC BY 4.0
       </p>
     </div>
   );
@@ -174,7 +179,7 @@ export function KindTable({ series }: { series: Series }) {
                 br ? (
                   <tr key={`${p}-break`} className="kt-break">
                     <td colSpan={kinds.length + 1}>
-                      Series break ({br.kind.replaceAll("_", " ")}) from <Num kind="period">{periodWords(br.at_period, series.frequency)}</Num>: figures above and below are not
+                      Series break ({breakWords(br.kind, series.series_id).toLowerCase()}) from <Num kind="period">{periodWords(br.at_period, series.frequency)}</Num>: figures above and below are not
                       comparable.
                     </td>
                   </tr>
@@ -188,7 +193,16 @@ export function KindTable({ series }: { series: Series }) {
         <ul className="kt-legend" aria-label="Marks in this table">
           {[...used.entries()].map(([key, u]) => (
             <li key={key}>
-              {key === "note" ? <span className="kt-mark">note</span> : <StatusMark k={u.k} />} <strong>{u.word}</strong>: {u.reason}
+              {key === "note" ? (
+                <>
+                  <span className="kt-mark">note</span>:
+                </>
+              ) : (
+                <>
+                  <StatusMark k={u.k} /> <strong>{u.word}</strong>:
+                </>
+              )}{" "}
+              {u.reason}
             </li>
           ))}
         </ul>
@@ -277,7 +291,7 @@ export function About({ series, csv }: { series: Series; csv: string }) {
                 {series.breaks.map((b) => (
                   <li key={b.at_period + b.kind}>
                     <strong>
-                      From <Num kind="period">{periodWords(b.at_period, series.frequency)}</Num> ({b.kind.replaceAll("_", " ")}).
+                      From <Num kind="period">{periodWords(b.at_period, series.frequency)}</Num> ({breakWords(b.kind, series.series_id).toLowerCase()}).
                     </strong>{" "}
                     <span>{b.note}</span>
                   </li>
@@ -306,8 +320,7 @@ export function About({ series, csv }: { series: Series; csv: string }) {
         <dd>
           <code className="mono">
             <Num kind="id">{series.series_id}</Num>
-          </code>{" "}
-          <CopyButton text={series.series_id} label="Copy id" className="btn btn-tiny" />
+          </code>
           <ul className="about-id" aria-label="The id, part by part">
             {decodeId(series.series_id).map((s, i) => (
               <li key={`${s.part}-${i}`}>

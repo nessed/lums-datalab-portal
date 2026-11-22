@@ -101,7 +101,7 @@ export default function SearchPage({ indexUrl }: { indexUrl: string }) {
       <noscript>
         <p className="sp-nojs">
           Search runs in your browser and needs JavaScript. Without it, <Link href="/browse">the catalogue</Link> lists every top-level series with its latest
-          checked value, and <Link href="/sources">Sources</Link> lists every document.
+          checked value, and the <Link href="/library">Library</Link> lists every document.
         </p>
       </noscript>
       <p className={`sp-status${res && res.series.length + res.docs.length + res.tables.length ? " sr-only" : ""}`} aria-live="polite">

@@ -1,6 +1,6 @@
 # STATUS
 
-Last updated: 2026-11-15, by Claude Code at Ali's request: new design brief (`docs/DESIGN.md`, DRAFT for approval) and design research (`docs/DESIGN_REFERENCE.md`) on branch `docs/design-research-2026-11`; no code changed. Before that, 2026-10-12: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
+Last updated: 2026-11-23, by Claude Code in the authorised unattended data hub run (`docs/plans/2026-11-23-data-hub.md`, branch `proto/hub-2026-11`, draft PR #15, not merged): hub home page, Library with an on-site PDF viewer, dataset pages, plain navigation, the 23 November defect list. Report: `docs/reports/2026-11-23-data-hub-report.md`. Before that, 2026-11-15, by Claude Code at Ali's request: new design brief (`docs/DESIGN.md`, DRAFT for approval) and design research (`docs/DESIGN_REFERENCE.md`) on branch `docs/design-research-2026-11`; no code changed. Before that, 2026-10-12: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
 
 ## State in one paragraph
 The pipeline works end to end for three data types and the release `releases/v0.0.1-prototype/`
@@ -23,6 +23,8 @@ site) stopped early; their work is merged into `main`. What they left unfinished
 | Site plan and report | `docs/plans/2026-10-12-ui.md`, `docs/reports/2026-10-12-ui-report.md`, `docs/DESIGN.md` | the UI agent's |
 | Site mockups (S16) | `docs/mockups/project/`, `docs/mockups/REVIEW.md` | Design canvas boards and the self-review the build follows |
 | Design brief and research (2026-11-15) | `docs/DESIGN.md`, `docs/DESIGN_REFERENCE.md`, `docs/design-reference/img/` | DRAFT brief replacing the S16 draft; needs approval in `DECISIONS.md` and answers to its section 17 before any site code changes. The research covers about forty peer sites, with screenshots and speed measurements |
+| Data hub run (2026-11-23) | `docs/plans/2026-11-23-data-hub.md`, `docs/reports/2026-11-23-data-hub-report.md`, `docs/reports/qa/hub/` | front end only; branch `proto/hub-2026-11`, draft PR #15; screenshots at 1440 and 360 px |
+| Site editorial files | `site/editorial/library.json`, `stories.json`, `daily.json` | plain names, story choices, daily-price names; DRAFT, no digits; Ali and Ahmad confirm |
 | Site config | `site/features.config.json`, `site/editorial.config.json` | planned-feature flags (all off); human-chosen headline series |
 | First run | `docs/plans/2026-10-11-overnight-prototype.md`, `docs/reports/2026-10-11-overnight-report.md` | |
 | Review notes | `docs/reports/review_cpi.md`, `review_lfs.md`, `fix_lfs.md` | adversarial reviews with failing tests |
@@ -56,6 +58,24 @@ what was captured is right. Measured error rate: pending gold-set labelling.
 ## Site
 Owned by the UI agent. The overnight work (branch `proto/v0-ui`, plan `docs/plans/2026-10-12-ui.md`) is merged
 into `main` (PR #1, `bebff67`). Open site work: `docs/OPEN_WORK.md`, section "Site (S)".
+
+**Data hub, 2026-11-23 (unattended, authorised by Ali; branch `proto/hub-2026-11`, draft PR #15, not merged).** The site
+becomes the place to see, read and download the data:
+- **Home page:** a hub with a ticker, a featured chart, six key numbers, "What moved", a "Daily prices" placeholder
+  (names only), stories, a Library strip and theme tiles.
+- **Navigation:** Indicators, Library, Chart builder, Stories, About.
+- **Library:** `/library` lists every document in plain names. Each of the 25 verified files is served from the
+  site and opens in an on-site pdf.js viewer at any page. The rejected AJK file is listed and not served.
+- **Datasets:** `/library/datasets`, with previews and downloads.
+- **Evidence sheet:** a link that opens the full document at the figure's page.
+- **Also:** the 23 November defects are fixed, the blue is darker, and `/demo/type` shows sixteen candidate faces
+  (the site stays Noto Sans until Ali picks).
+
+Five plug-ins under `site/scripts/checks/` recompute every new derived figure: `home-derived`, `home-stories`,
+`library-counts`, `routes-alive` and `editorial-plain-words`. Results are in the report.
+
+**For the files to be served,** the build needs `SOURCES_DIR` set to the folder holding the registered files. The
+Vercel preview has none, so it serves no PDFs (decisions L1 and L2 below).
 
 **Next.js 16.4.1 (2026-11-15, branch `proto/redesign-next-upgrade`, separate draft PR).** Security fix for three advisories against Next 16.0.0 to 16.4.0 (GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr, GHSA-p3m5-59mp-jv5r). Only `next` and `eslint-config-next` changed; all checks as before; report `docs/reports/qa/next-upgrade/REPORT.md`.
 
@@ -212,6 +232,30 @@ Tests only (no Docling, no PDFs): install `pipeline\requirements-ci.lock`, then 
 - SBP EasyData: reuse terms unconfirmed; a repeatable pull needs an API key from a human.
 - Still open from the first run: cover-less ABS editions; the 2017-18 text-layer deviation; the scanned-page
   definition; DOI; hosting PDFs; repo organisation; branch protection; LUMS name and logo sign-off.
+
+- **Data hub run (2026-11-23):** confirm or overturn every decision dated 2026-11-23 in `DECISIONS.md` marked
+  "provisional (unattended, 2026-11-23)". Also:
+  - **L1:** may the site serve whole government PDFs from its own address? The preview does, with the publisher,
+    the official link and the fingerprint beside each file.
+  - **L2:** the whole corpus. The shared Drive folder was not read. Above a few hundred MB the files need object
+    storage, which goes with Ahmad's bridge (one setting, `LIBRARY_FILES_BASE`).
+  - **L3:** list documents with no extracted data? The shape exists; none are listed.
+  - **The font:** pick one from `/demo/type`. Overpass alone, or Besley headings over Overpass, are the suggestions.
+    Once picked, the face is self-hosted and switched in one change.
+  - **Draft names** in `site/editorial/library.json`, `stories.json` and `daily.json`.
+  - **Daily prices** (fuel and similar, collected once a day): only a placeholder exists; Ali builds the collection.
+  - **Chart axes** stay in the printed unit, so large series show ticks like 20,000,000. Keep, or rescale with the
+    label changed to match?
+  - **Pipeline or methods, not front end:**
+    - monthly inflation holds June figures only;
+    - June 2022 CPI is missing;
+    - the default series view mixes budget and revised figures.
+  - **Front end, left:**
+    - `spark.json` does not mark series breaks;
+    - the Library's network fetch routes (official address and archive copy) are untested;
+    - viewer search loads the whole file.
+  - **A human should read the advisory** behind the Next.js 16.4.1 dev server's "security upgrade" notice. It was
+    not acted on.
 
 ## Unfinished work from the overnight runs
 Listed item by item, with what exists and how to finish it, in `docs/OPEN_WORK.md` (each agent keeps its own

@@ -260,7 +260,7 @@
   cursor: default;
 }
 
-/* Periods none of the chosen series has in this release: a pale band with words, like the break label. */
+/* Periods none of the chosen series has yet: a pale band, "not yet collected" when it is wide enough, never rotated. */
 .cc-gap {
   position: absolute;
   top: 0;
@@ -278,10 +278,6 @@
   color: var(--ink-2);
   text-align: center;
   padding: 0 2px;
-}
-.cc-gap--narrow .cc-gaptext {
-  writing-mode: vertical-rl;
-  white-space: nowrap;
 }
 /* The status of a point that shows no value, in words at the foot of the chart. */
 .cc-gapw {
@@ -309,9 +305,9 @@
   box-shadow: inset 3px 0 0 var(--select-rule);
 }
 @media (max-width: 479px) {
+  /* Too narrow for the words on a phone: the band stays, the periods are listed under the chart. */
   .cc-gap .cc-gaptext {
-    writing-mode: vertical-rl;
-    white-space: nowrap;
+    display: none;
   }
 }
 

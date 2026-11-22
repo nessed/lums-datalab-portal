@@ -121,8 +121,8 @@ export default function BrowsePage() {
         <a href="#series" aria-current="page">
           Series
         </a>
-        <Link href="/sources">By document</Link>
-        <Link href="/datasets">By data type</Link>
+        <Link href="/library">By document</Link>
+        <Link href="/library/datasets">By dataset</Link>
       </nav>
 
       <div className="cat-layout" id="series">

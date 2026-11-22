@@ -90,18 +90,11 @@ export default function CompareChart({ spec }: { spec: ChartSpec }) {
         {(spec.gaps ?? []).map((g) => (
           <div
             key={`gap${g.from}`}
-            className={`cc-gap${g.years <= 2 ? " cc-gap--narrow" : ""}`}
+            className="cc-gap"
             style={{ left: pct(sx(g.from - 0.5), W), width: pct(sx(g.to + 0.5) - sx(g.from - 0.5), W) }}
           >
-            <span className="cc-gaptext">
-              <span data-num="axis">{g.fromLabel}</span>
-              {g.from === g.to ? null : (
-                <>
-                  {" "}to <span data-num="axis">{g.toLabel}</span>
-                </>
-              )}
-              : not in this release
-            </span>
+            {/* Never rotated: a band too narrow for the words carries none; the periods are listed under the chart. */}
+            {g.years >= 3 ? <span className="cc-gaptext">not yet collected</span> : null}
           </div>
         ))}
         <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="cc-svg" aria-hidden="true" focusable="false">

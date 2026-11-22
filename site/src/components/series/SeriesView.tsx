@@ -256,7 +256,7 @@ export default function SeriesView(p: SeriesViewProps) {
           ) : null}
           {model && model.gaps && model.gaps.length ? (
             <p className="sv-gapkey sv-gaplist">
-              <span className="sv-gapswatch" aria-hidden="true" /> Not in this release:{" "}
+              <span className="sv-gapswatch" aria-hidden="true" /> Not yet collected (no edition of these periods has been read yet):{" "}
               {model.gaps.map((g, i) => (
                 <span key={g.fromPeriod}>
                   {i ? "; " : ""}

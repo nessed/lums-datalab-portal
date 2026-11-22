@@ -325,21 +325,13 @@ export function defaultBase(list: { sd: SeriesData; pts: Pt[] }[]): string | nul
   return list[0].pts.find((x) => x.d === 1)?.p ?? null;
 }
 
-/** "Rs 150 bn", "12.5%", "112": axis labels only, never a figure. */
+/** "150,000", "12.5%", "112": axis labels only, never a figure. Amounts are in the unit the subtitle
+ *  above the chart names ("Rs million, as printed"), so the axis and its label agree. */
 export function tickText(v: number, show: ShowAs, unit: string, scale: number): string {
   if (show === "change") return `${v > 0 ? "+" : v < 0 ? "−" : ""}${String(Math.abs(Number(v.toPrecision(6))))}%`;
   if (show === "share") return `${String(Number(v.toPrecision(6)))}%`;
   if (show === "index") return String(Number(v.toPrecision(6)));
-  if (unit === "PKR") {
-    const full = v * scale;
-    const a = Math.abs(full);
-    const s = full < 0 ? "−" : "";
-    const f = (n: number) => String(Number(n.toPrecision(3)));
-    if (a >= 1e12) return `${s}Rs ${f(a / 1e12)} tn`;
-    if (a >= 1e9) return `${s}Rs ${f(a / 1e9)} bn`;
-    if (a >= 1e6) return `${s}Rs ${f(a / 1e6)} m`;
-    return a === 0 ? "0" : `${s}Rs ${a.toLocaleString("en-US")}`;
-  }
+  if (unit === "PKR") return `${v < 0 ? "−" : ""}${Math.abs(Number(v.toPrecision(6))).toLocaleString("en-US")}`;
   if (unit === "persons" && scale >= 1e6) return `${String(Number((v * scale / 1e6).toPrecision(4)))} m`;
   if (unit === "percent") return `${String(Number(v.toPrecision(6)))}%`;
   return String(Number(v.toPrecision(6)));

@@ -144,3 +144,21 @@ export function shortScale(value: string, unit: string | null | undefined, scale
   const plain = m ? `${m[1] === "-" ? "−" : ""}${m[2].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${m[3] ?? ""}` : value;
   return unit === "percent" ? `${plain}%` : plain;
 }
+
+/**
+ * A series break in plain words, read by every chart and sentence that names one (Chart via chart-model,
+ * the series page, the series table, Compare). The release stores the break as a code ("nfc_award",
+ * "rebase") with a printed note ("7th NFC Award: from 2010-11 ..."); the note stays in the tooltip and the
+ * text beside the chart, these words are the label. A rebase is named by what was rebased, read from the
+ * series id; a kind not listed here falls back to its code in words.
+ */
+const BREAK_WORDS: Record<string, string> = {
+  nfc_award: "New tax-sharing award",
+  devolution: "Functions moved to the provinces",
+  check_comparability: "New survey sample",
+};
+export function breakWords(kind: string, seriesId: string): string {
+  if (kind === "rebase") return /^(gdp|nad|na)\./.test(seriesId) ? "New GDP base" : seriesId.startsWith("cpi.") ? "New price base" : "New base year";
+  const w = BREAK_WORDS[kind] ?? kind.replaceAll("_", " ");
+  return w.charAt(0).toUpperCase() + w.slice(1);
+}

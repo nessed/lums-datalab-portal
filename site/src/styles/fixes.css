@@ -265,6 +265,13 @@ html:not([data-proto-dismissed="true"]) .cite-proto {
 .ty-panel .ty-value {
   font-family: var(--demo-head);
 }
+.ty-group {
+  margin-top: var(--s-7);
+}
+.ty-gtitle {
+  font-size: var(--step-1);
+  margin: 0 0 var(--s-3);
+}
 .ty-panel {
   --font-sans: var(--demo-face);
   --font-display: var(--demo-face);

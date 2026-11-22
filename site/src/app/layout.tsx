@@ -16,6 +16,9 @@ import "@/styles/search.css";
 import "@/styles/home.css";
 import "@/styles/downloads.css";
 import "@/styles/compare.css";
+import "@/styles/hub.css";
+import "@/styles/library.css";
+import "@/styles/fixes.css";
 
 // Self-hosted (OFL, licences beside the files in src/fonts) so the build needs no
 // network. Subset to Latin by scripts/subset-fonts.py: Noto Sans as one variable

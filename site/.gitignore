@@ -42,3 +42,6 @@ next-env.d.ts
 
 # release files copied in by scripts/prebuild.mjs
 /public/data/
+
+# data hub run: PDFs fetched by scripts/prebuild/library.mjs (never committed)
+/.cache/

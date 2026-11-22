@@ -11,7 +11,7 @@ import type { Observation, Series } from "@/lib/data";
 import { derivedDisplay, roundDerived } from "@/lib/format";
 import type { KindKey } from "@/lib/adapter/contract";
 
-export type DerivedFormula = "pct" | "pp" | "mean-rev" | "mean-abs-rev" | "n-pairs";
+export type DerivedFormula = "pct" | "pp" | "mean-rev" | "mean-abs-rev" | "n-pairs" | "share";
 export type DerivedFmt = "words" | "signed" | "plain";
 
 /** A derived figure ready to print: its text, how it was made, and from what. */
@@ -129,6 +129,15 @@ export function revisionStats(pairs: RevisionPair[]): { mean: Derived; meanAbs: 
     meanAbs: { formula: "mean-abs-rev", fmt: "plain", text: ma.mag, inputs },
     n: { formula: "n-pairs", fmt: "plain", text: String(pairs.length), inputs },
   };
+}
+
+/** A part as a share of its total (data hub stories): part / total in per cent, unsigned. Only where a check that the parts add up to the total passed; the caller names that check, and scripts/checks/home-stories.mjs recomputes it. */
+export function share(part: Observation | undefined, total: Observation | undefined): Derived | null {
+  if (!usable(part) || !usable(total)) return null;
+  if (part.series_id === total.series_id || part.period !== total.period || part.vintage !== total.vintage) return null;
+  const [a, b] = align(dec(part.value!), dec(total.value!));
+  if (a < ZERO || b <= ZERO) return null;
+  return { formula: "share", fmt: "plain", text: pctText(a, b).mag, inputs: [part, total] };
 }
 
 /* ---------- comparable figures ---------- */

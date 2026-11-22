@@ -166,6 +166,7 @@ const FORMULA_WORDS: Record<string, string> = {
   "mean-rev": "average over the years of (revised estimate − budget estimate) ÷ budget estimate",
   "mean-abs-rev": "average over the years of the size of (revised estimate − budget estimate) ÷ budget estimate, ignoring its sign",
   "n-pairs": "years with both a checked budget estimate and a checked revised estimate",
+  share: "part ÷ total, where a check that the parts add up to the printed total passed",
 };
 
 function InputList({ inputs }: { inputs: Observation[] }) {

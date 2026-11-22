@@ -1,1 +1,44 @@
 /* Defect fixes, Indicators and Stories restyle, /demo/type (data hub run, stage 3). */
+
+/* Gap periods listed under a chart (Chart.tsx, Compare.tsx): the band on the chart is never rotated and
+   carries words only when wide enough, so the periods are always written here. */
+.chart-gapnote {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.chart-gapswatch {
+  display: inline-block;
+  width: 12px;
+  height: 10px;
+  vertical-align: -1px;
+  background: var(--st-gap-wash);
+  border: 1px solid var(--rule-strong);
+}
+
+/* Compare picker: "Searching…" while the index loads, "No series match" when nothing does. */
+.cmp-status {
+  margin: var(--s-1) 0 0;
+  min-height: 1.4em;
+}
+.cmp-status:empty {
+  min-height: 0;
+}
+.cmp-chips .cmp-id {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+/* The prototype disclaimer once per page: the notice at the top carries it; the copy in a Cite sheet or
+   block shows only after the reader has hidden that notice (layout.tsx sets data-proto-dismissed). */
+html:not([data-proto-dismissed="true"]) .cite-proto {
+  display: none;
+}
+
+/* Search filters: a count shared by every choice is said once beside the heading. */
+.sp-facet-h .sp-facet-each {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--ink-2);
+}

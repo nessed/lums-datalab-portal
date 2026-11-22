@@ -1,0 +1,381 @@
+/* Home v2 (2026-11-23, Ali): the base look for the whole site and the new home
+ * page. Loaded last, so it wins over the round-2 rules it replaces. Every
+ * colour, size and space is a token from src/design/tokens.css.
+ * Sections: 1 base   2 utility bar   3 masthead   4 search row   5 feedback
+ * strip and footer   6 shared home patterns   7 home sections   8 phones */
+
+/* ================================ 1 base ================================ */
+body {
+  background: var(--page);
+  font-size: var(--step-0);
+}
+.wrap {
+  max-width: var(--page-max);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: var(--site-pad);
+  }
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-stretch: var(--wdth-head);
+}
+.tnum,
+.num,
+table,
+[data-v],
+[data-count],
+[data-num] {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+[data-num="page"],
+.pref {
+  font-family: var(--font-ref);
+}
+main {
+  padding-top: 0;
+}
+
+/* ============================ 2 utility bar ============================= */
+.ub {
+  background: var(--util-bg);
+  color: var(--util-ink);
+  font-size: var(--t-util);
+  line-height: 1.35;
+}
+.ub-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-5);
+  min-height: var(--util-h);
+  padding-top: var(--s-1);
+  padding-bottom: var(--s-1);
+}
+.ub-note {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-4);
+}
+.ub strong {
+  color: var(--util-ink-strong);
+  font-weight: 700;
+}
+.ub a {
+  color: var(--util-ink-strong);
+  text-decoration-color: var(--footer-underline);
+  text-underline-offset: 3px;
+}
+.ub a:hover {
+  text-decoration-color: currentColor;
+}
+.ub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-4);
+}
+.ub :focus-visible {
+  outline: 2px solid var(--focus-on-dark);
+  outline-offset: 2px;
+}
+
+/* ============================== 3 masthead ============================== */
+.mast {
+  background: var(--page);
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.mast-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  padding-top: var(--s-4);
+  padding-bottom: 0;
+  flex-wrap: wrap;
+}
+.wm {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+  color: var(--wordmark-ink);
+  padding-bottom: var(--s-3);
+  margin-right: auto;
+}
+.wm-block {
+  display: inline-block;
+  width: var(--wordmark-block-w);
+  height: var(--wordmark-block-h);
+  background: var(--wordmark-block);
+  flex: none;
+}
+.wm-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.wm-name {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-stretch: var(--wdth-wordmark);
+  font-size: var(--t-wordmark);
+  letter-spacing: -0.01em;
+}
+.wm-tag {
+  font-size: var(--step--1);
+  color: var(--tagline-ink);
+  margin-top: 2px;
+}
+.mast-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-self: flex-end;
+}
+.mast-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  color: var(--nav-ink);
+  font-size: var(--t-nav);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: inset 0 calc(-1 * var(--nav-rule)) 0 transparent;
+}
+.mast-nav a:hover {
+  background: var(--hover-wash);
+  color: var(--ink);
+}
+.mast-nav a[aria-current="page"] {
+  color: var(--nav-ink-active);
+  box-shadow: inset 0 calc(-1 * var(--nav-rule)) 0 var(--nav-active-rule);
+}
+.mast .nav-menu summary {
+  color: var(--nav-ink-active);
+  border: var(--rule-w) solid var(--rule-strong);
+  border-radius: 0;
+}
+.mast .nav-menu[open] summary {
+  background: var(--seg-active-bg);
+  color: var(--seg-active-ink);
+  border-color: var(--seg-active-bg);
+}
+.mast .nav-menu nav {
+  border-radius: 0;
+}
+
+/* ============================= 4 search row ============================= */
+.srow {
+  padding: var(--s-5) 0 var(--s-4);
+}
+.hs.hs-big {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  height: var(--search-h);
+  border: var(--rule-heavy) solid var(--search-border);
+  border-radius: 0;
+  background: var(--page);
+}
+.hs.hs-big:focus-within {
+  outline: 3px solid var(--search-ring);
+  outline-offset: 0;
+}
+.hs.hs-big svg {
+  align-self: center;
+  margin-left: var(--s-4);
+  flex: none;
+}
+.hs.hs-big .hs-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: var(--t-search);
+  padding: 0 var(--s-3);
+  color: var(--ink);
+  outline: none;
+  box-shadow: none;
+}
+.hs.hs-big .hs-hint {
+  align-self: center;
+  margin-right: var(--s-3);
+}
+.hs-go {
+  flex: none;
+  padding: 0 var(--s-6);
+  background: var(--search-btn-bg);
+  color: var(--search-btn-ink);
+  font-weight: 700;
+  font-size: var(--step-0b);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+.hs-go:hover {
+  background: var(--lums-blue);
+}
+.hs-go:focus-visible {
+  outline: 3px solid var(--search-ring);
+  outline-offset: -3px;
+}
+.srow-trend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.srow-trend-h {
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.srow-trend a {
+  color: var(--link);
+}
+
+/* ===================== 5 feedback strip and footer ===================== */
+.fb {
+  background: var(--fb-bg);
+  color: var(--fb-ink);
+  border-top: var(--rule-w) solid var(--rule);
+  margin-top: var(--s-8);
+}
+.fb-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-5);
+  padding: var(--s-4) 0;
+}
+.fb-q,
+.fb-thanks {
+  margin: 0;
+  font-weight: 700;
+}
+.fb-thanks {
+  font-weight: 400;
+}
+.fb-btns {
+  display: flex;
+  gap: var(--s-2);
+}
+.fb-btns button {
+  min-height: 36px;
+  min-width: 64px;
+  padding: 0 var(--s-4);
+  border: var(--rule-w) solid var(--rule-strong);
+  border-radius: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+.fb-btns button:hover {
+  background: var(--hover-wash);
+}
+.fb-report {
+  margin-left: auto;
+  font-size: var(--step--1);
+}
+.ft2 {
+  padding: var(--s-7) 0 var(--s-6);
+}
+.ft2-grid {
+  display: grid;
+  gap: var(--s-6);
+  grid-template-columns: 1fr;
+  margin-bottom: var(--s-6);
+}
+@media (min-width: 820px) {
+  .ft2-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+.ft2-wm {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-stretch: var(--wdth-wordmark);
+  font-size: var(--step-1);
+  color: var(--footer-ink);
+}
+.ft2-wm .wm-block {
+  width: calc(var(--wordmark-block-w) * 0.7);
+  height: calc(var(--wordmark-block-h) * 0.7);
+}
+.ft2 .ft-rel {
+  border-top: var(--rule-w) solid var(--evband-rule);
+  padding-top: var(--s-4);
+  max-width: none;
+}
+
+/* ===================== 6 shared patterns (whole site) ==================== */
+/* Square corners, no shadows: the round-2 cards become ruled blocks. */
+.card,
+.panel {
+  border-radius: 0;
+  box-shadow: none;
+}
+.sec-h {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--t-sec);
+  color: var(--ink);
+  margin: 0;
+}
+.sec-h::before {
+  content: "";
+  width: var(--mark-sq);
+  height: var(--mark-sq);
+  background: var(--sec-mark);
+  flex: none;
+}
+
+/* ================================ 8 phones ============================== */
+@media (max-width: 719px) {
+  .mast-nav {
+    display: none;
+  }
+  .mast-row {
+    flex-wrap: nowrap;
+    padding-bottom: var(--s-3);
+  }
+  .wm {
+    padding-bottom: 0;
+  }
+  .wm-name {
+    font-size: var(--step-1);
+  }
+  .wm-tag {
+    display: none;
+  }
+  .ub-proto .long,
+  .hs.hs-big .hs-hint {
+    display: none;
+  }
+  .hs-go {
+    padding: 0 var(--s-4);
+  }
+  .fb-report {
+    margin-left: 0;
+  }
+}

@@ -16,7 +16,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { setQuery, useQuery } from "@/lib/url-state";
 import { search, type SearchEntry } from "@/lib/search";
-import { KIND } from "@/lib/words";
+import { KIND, breakWords } from "@/lib/words";
 import type { KindKey } from "@/lib/adapter/contract";
 import { formatCitation, longDate } from "@/lib/cite-format";
 import CompareChart, { type ChartLine, type ChartSpec, type LineStyle } from "@/components/compare/CompareChart";
@@ -131,9 +131,14 @@ export default function Compare({
     input.current?.focus();
   };
 
-  const styleOf = (id: string) => STYLES[Math.max(0, ids.indexOf(id)) % STYLES.length];
+  // An id the release does not have is left out (with a note), never a reason to blank the chart.
   const failed = ids.filter((id) => data[id] === "error");
-  const ready = loaded.length === ids.length && ids.length > 0;
+  const known = ids.filter((id) => data[id] !== "error");
+  const styleOf = (id: string) => STYLES[Math.max(0, known.indexOf(id)) % STYLES.length];
+  const ready = loaded.length === known.length && known.length > 0;
+  // Two series with the same title are told apart by their id, the release's own field; no label is made up.
+  const sameTitle = (title: string, rows: { n: string }[]) => rows.filter((r) => r.n === title).length > 1;
+  const loadedTitles = loaded.map((sd) => ({ n: sd.t ?? sd.n }));
 
   /* ---------- the numbers ---------- */
   const kinds = new Map(loaded.map((sd) => [sd.id, kindFor(sd, askedKind)]));
@@ -264,7 +269,7 @@ export default function Compare({
     for (const sd of loaded)
       for (const b of sd.br) {
         const p = periodLabel(b.p, sd.f);
-        const kind = b.k.replaceAll("_", " ");
+        const kind = breakWords(b.k, sd.id).toLowerCase();
         const hit = breakNotes.find((n) => n.p === p && n.kind === kind);
         if (hit) hit.names.push((sd.t ?? sd.n));
         else breakNotes.push({ key: `${p}|${kind}`, names: [(sd.t ?? sd.n)], p, kind });
@@ -275,7 +280,7 @@ export default function Compare({
   /* ---------- the view as a link, a citation and a file ---------- */
   const viewQuery = (() => {
     const p = new URLSearchParams();
-    p.set("s", ids.join(","));
+    p.set("s", known.join(","));
     if (show !== "printed") p.set("show", show);
     if (base) p.set("base", base);
     if (totalId) p.set("total", totalId);
@@ -399,8 +404,15 @@ export default function Compare({
             const f = data[id];
             return (
               <li key={id}>
-                <Swatch style={styleOf(id)} />
-                {isSD(f) ? <a href={`/series/${slug(id)}`}>{f.t ?? f.n}</a> : <span>{f === "error" ? `${id} (not in this release)` : id}</span>}
+                {f === "error" ? null : <Swatch style={styleOf(id)} />}
+                {isSD(f) ? (
+                  <a href={`/series/${slug(id)}`}>
+                    {f.t ?? f.n}
+                    {sameTitle(f.t ?? f.n, loadedTitles) ? <span className="cmp-id"> ({id})</span> : null}
+                  </a>
+                ) : (
+                  <span>{f === "error" ? `${id} (not found, left out)` : id}</span>
+                )}
                 <button type="button" className="btn btn-tiny" onClick={() => setIds(ids.filter((x) => x !== id))}>
                   Remove<span className="sr-only"> {isSD(f) ? (f.t ?? f.n) : id}</span>
                 </button>
@@ -462,12 +474,14 @@ export default function Compare({
                 >
                   <span className="r-title">{r.n}</span>
                   <span className="r-meta">
-                    {r.d} · {r.u}
-                    {r.c ? ` · ${r.p}` : " · no checked values"}
+                    {[sameTitle(r.n, index ?? []) ? r.id : "", r.d, r.u, r.c ? r.p : "no checked values"].filter(Boolean).join(" · ")}
                   </span>
                 </li>
               ))}
             </ul>
+            <p className="cmp-status small muted" role="status" aria-live="polite">
+              {text.trim() ? (index === null ? "Searching…" : results.length ? "" : "No series match these words.") : ""}
+            </p>
             <noscript>
               <p className="small">Adding series needs JavaScript. Without it, open a series page and use its Compare button.</p>
             </noscript>
@@ -535,9 +549,13 @@ export default function Compare({
       </div>
 
       <div className="cmp-stage">
-        {failed.length ? <p className="small">Not in this release: {failed.join(", ")}.</p> : null}
+        {failed.length ? (
+          <p className="small">
+            Not found in this release, so left out of the chart: {failed.join(", ")}.
+          </p>
+        ) : null}
         {ids.length === 0 ? <p className="measure">Choose up to six series to chart them together, with every figure linked to where it is printed.</p> : null}
-        {ids.length > 0 && !ready && failed.length === 0 ? <p className="small muted">Loading the series files…</p> : null}
+        {known.length > 0 && !ready ? <p className="small muted">Loading the series files…</p> : null}
 
         {ready && (clauses.length || breakNotes.length || exclNotes.length) ? (
           <div className="cmp-care" role="note">
@@ -568,7 +586,9 @@ export default function Compare({
 
         {ready && groups.length === 0 && loaded.length > 0 ? <p className="measure">None of the chosen series can be shown this way; choose As printed.</p> : null}
         {ready
-          ? groups.map((g) => (
+          ? groups.map((g) => {
+              const spec = specOf(g.list);
+              return (
               <figure key={g.key} className="cmp-fig">
                 <figcaption>
                   <ul className="cmp-key">
@@ -580,12 +600,30 @@ export default function Compare({
                   </ul>
                   <p className="cmp-sub">{subtitle(g.list)}</p>
                 </figcaption>
-                <CompareChart spec={specOf(g.list)} />
+                <CompareChart spec={spec} />
+                {spec.gaps && spec.gaps.length ? (
+                  <p className="chart-gapnote">
+                    <span className="chart-gapswatch" aria-hidden="true" /> Not yet collected (no edition of these periods has been read yet):{" "}
+                    {spec.gaps.map((gp, i) => (
+                      <span key={gp.from}>
+                        {i ? ", " : ""}
+                        <span data-num="axis">{gp.fromLabel}</span>
+                        {gp.from === gp.to ? null : (
+                          <>
+                            {" "}to <span data-num="axis">{gp.toLabel}</span>
+                          </>
+                        )}
+                      </span>
+                    ))}
+                    .
+                  </p>
+                ) : null}
                 <p className="cmp-src small muted">
                   Source: {[...new Set(g.list.map((s) => s.ds))].join(", ")}; release <span data-num="version">{release.id}</span>. Tap a point for where it is printed.
                 </p>
               </figure>
-            ))
+              );
+            })
           : null}
       </div>
 

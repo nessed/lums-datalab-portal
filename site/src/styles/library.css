@@ -1,1 +1,477 @@
-/* Library index, document page and PDF viewer (data hub run, stage 2). */
+/* Library index, datasets, document page and PDF viewer (data hub run, stage 2).
+   LUMS tokens only (src/design/tokens.css); no gradients, radii at most --r-3,
+   two weights (400 and 600). */
+
+/* ---------- Library index ---------- */
+.lib-head .lede {
+  max-width: var(--measure);
+}
+.lib-head-links {
+  margin-top: var(--s-3);
+}
+.lib-go {
+  font-weight: 600;
+}
+
+.lib-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s-3) var(--s-4);
+  margin: var(--s-5) 0 var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+}
+.lib-filter[hidden] {
+  display: none;
+}
+.lib-f {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 10rem;
+}
+.lib-f-q {
+  flex: 1 1 16rem;
+}
+.lib-f-label {
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.lib-f input,
+.lib-f select {
+  font: inherit;
+  font-size: var(--step--1);
+  padding: 6px 8px;
+  border: var(--hair-strong);
+  border-radius: var(--r-2);
+  background: var(--card);
+  color: var(--ink);
+}
+.lib-f input:focus-visible,
+.lib-f select:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+.lib-f-clear {
+  align-self: flex-end;
+}
+.lib-f-count {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--ink-3);
+}
+.lib-f-count:empty {
+  display: none;
+}
+
+.lib-group {
+  margin-top: var(--s-7);
+  scroll-margin-top: calc(var(--header-h) + var(--s-2));
+}
+.lib-group[hidden] {
+  display: none;
+}
+.lib-group-head {
+  border-bottom: var(--hair-strong);
+  padding-bottom: var(--s-2);
+}
+.lib-group-head h2 {
+  margin: 0;
+}
+.lib-group-line {
+  margin: var(--s-1) 0 0;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.lib-group-n {
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.lib-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.lib-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "main actions"
+    "meta actions";
+  gap: var(--s-1) var(--s-5);
+  align-items: start;
+  padding: var(--s-4) 0;
+  border-bottom: var(--hair);
+}
+.lib-row[hidden] {
+  display: none;
+}
+.lib-row-main {
+  grid-area: main;
+  min-width: 0;
+}
+.lib-row .lib-meta {
+  grid-area: meta;
+}
+.lib-row > .lib-actions {
+  grid-area: actions;
+  justify-content: flex-end;
+}
+.lib-name {
+  font-size: var(--step-1);
+  font-weight: 600;
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+.lib-printed {
+  margin: var(--s-1) 0 0;
+  color: var(--ink-3);
+  font-size: var(--step--1);
+}
+.lib-rejected {
+  margin: var(--s-2) 0 0;
+  padding-left: var(--s-3);
+  border-left: 3px solid var(--amber);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.lib-row.is-rejected .lib-name a {
+  color: var(--ink-2);
+}
+.lib-meta {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+.lib-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+}
+.lib-size {
+  font-weight: 400;
+}
+.lib-next {
+  margin-top: var(--s-7);
+  padding: var(--s-4) var(--s-5);
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+}
+.lib-next h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 47.99rem) {
+  .lib-row {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "main"
+      "meta"
+      "actions";
+  }
+  .lib-row > .lib-actions {
+    justify-content: flex-start;
+    margin-top: var(--s-2);
+  }
+}
+
+/* ---------- Datasets ---------- */
+.lib-all {
+  margin-top: var(--s-5);
+  padding: var(--s-4) var(--s-5);
+  background: var(--card);
+  border: var(--card-border);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--r-3);
+}
+.lib-all-label {
+  margin: 0 0 var(--s-2);
+  font-weight: 600;
+}
+.lib-all .small {
+  margin: var(--s-3) 0 0;
+}
+.lib-cards {
+  list-style: none;
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.lib-card {
+  padding: var(--s-4) var(--s-5);
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-card);
+}
+.lib-card-name {
+  margin: 0;
+  font-size: var(--step-2);
+}
+.lib-card-line {
+  margin: var(--s-1) 0 var(--s-3);
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.lib-card-facts {
+  margin: 0 0 var(--s-3);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+.lib-card .lib-actions {
+  margin-bottom: var(--s-3);
+}
+.lib-card-links {
+  margin: var(--s-3) 0 0;
+}
+.lib-preview {
+  margin-top: var(--s-2);
+  border-top: var(--hair);
+  padding-top: var(--s-2);
+}
+.lib-preview > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--link);
+}
+.lib-preview > summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.lib-preview-table {
+  width: 100%;
+  font-size: var(--step--1);
+}
+.lib-preview-table th[scope="row"] {
+  font-weight: 400;
+}
+
+/* ---------- Document page ---------- */
+.lib-doc .doc-head .lib-printed {
+  font-size: var(--step-0);
+  max-width: var(--measure);
+}
+.lib-doc .doc-meta {
+  margin: var(--s-2) 0 0;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+.lib-doc .doc-actions {
+  margin: var(--s-3) 0 0;
+}
+.lib-doc .doc-body {
+  margin-top: var(--s-6);
+}
+.lib-doc .doc-body section + section {
+  margin-top: var(--s-7);
+}
+.doc-series {
+  columns: 2 18rem;
+  column-gap: var(--s-6);
+  padding-left: var(--s-5);
+  margin: var(--s-2) 0 var(--s-3);
+}
+.doc-series li {
+  break-inside: avoid;
+  margin-bottom: var(--s-1);
+}
+.doc-thumbs .t-sub {
+  display: block;
+  margin-top: var(--s-1);
+}
+
+/* ---------- PDF viewer ---------- */
+.pv {
+  margin: var(--s-5) 0 0;
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  background: var(--doc-ground);
+  scroll-margin-top: calc(var(--header-h) + var(--s-4));
+}
+/* Full screen, or filling the window where the browser refuses full screen. */
+.pv.is-full:not(:fullscreen) {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+.pv.is-full,
+.pv:fullscreen {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.pv-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+  padding: var(--s-2) var(--s-3);
+  background: var(--card);
+  border-bottom: var(--card-border);
+  border-radius: var(--r-3) var(--r-3) 0 0;
+  font-size: var(--step--1);
+}
+.pv-bar[hidden] {
+  display: none;
+}
+.pv-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+.pv-end {
+  margin-left: auto;
+}
+.pv-btn {
+  font: inherit;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--s-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--hair-strong);
+  border-radius: var(--r-2);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pv-btn:hover:not(:disabled) {
+  border-color: var(--ink-2);
+  background: var(--select-wash);
+}
+.pv-btn:disabled {
+  color: var(--ink-3);
+  cursor: default;
+  opacity: 0.6;
+}
+.pv-btn:focus-visible,
+.pv-input:focus-visible,
+.pv-q:focus-visible,
+.pv-container:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+.pv-btn-text {
+  font-weight: 600;
+  color: var(--link);
+}
+.pv-page,
+.pv-find {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin: 0;
+}
+.pv-label {
+  color: var(--ink-2);
+}
+.pv-input {
+  font: inherit;
+  width: 3.5rem;
+  height: 2rem;
+  padding: 0 var(--s-1);
+  text-align: right;
+  border: var(--hair-strong);
+  border-radius: var(--r-2);
+  background: var(--card);
+  color: var(--ink);
+}
+.pv-of,
+.pv-zoom {
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.pv-zoom {
+  min-width: 3.25rem;
+  text-align: center;
+}
+.pv-q {
+  font: inherit;
+  width: 12rem;
+  max-width: 40vw;
+  height: 2rem;
+  padding: 0 var(--s-2);
+  border: var(--hair-strong);
+  border-radius: var(--r-2);
+  background: var(--card);
+  color: var(--ink);
+}
+.pv-found {
+  color: var(--ink-3);
+  min-width: 6rem;
+}
+/* Without scripts the stage is only the "Open the PDF" link, not a tall empty box. */
+.pv-stage {
+  position: relative;
+}
+.pv.is-js .pv-stage {
+  height: min(80vh, 60rem);
+}
+.pv.is-js.is-full .pv-stage,
+.pv.is-js:fullscreen .pv-stage {
+  flex: 1 1 auto;
+  height: auto;
+}
+/* pdf.js requires an absolutely positioned scrolling container. */
+.pv-container {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  background: var(--doc-ground);
+}
+.pv:not(.is-js) .pv-container {
+  display: none;
+}
+.pv-container .pdfViewer {
+  padding: var(--s-3) 0;
+}
+.pv-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: var(--s-5) var(--s-4);
+  text-align: center;
+  color: var(--ink-2);
+}
+.pv.is-js .pv-fallback {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pv.is-js .pv-fallback a {
+  pointer-events: auto;
+}
+
+@media (max-width: 47.99rem) {
+  .pv-end {
+    margin-left: 0;
+  }
+  .pv-q {
+    width: 9rem;
+  }
+  .pv.is-js .pv-stage {
+    height: 75vh;
+  }
+}
+
+@media print {
+  .pv-bar {
+    display: none;
+  }
+}

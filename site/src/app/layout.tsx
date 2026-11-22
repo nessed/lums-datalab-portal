@@ -4,7 +4,6 @@ import Link from "@/components/ui/Link";
 import localFont from "next/font/local";
 import { NavLinks, DismissNotice, ReportLink, MobileMenu } from "@/components/chrome/Chrome";
 import { Num } from "@/components/ui/Num";
-import { COMING } from "@/lib/features";
 import SearchDialog from "@/components/chrome/SearchDialog";
 import EvidenceSheet from "@/components/evidence/EvidenceSheet";
 import { DATA_BASE, db, ISSUES_URL, REPO_URL, SITE_URL } from "@/lib/data";
@@ -43,12 +42,14 @@ export const metadata: Metadata = {
   ...(SITE_URL ? { metadataBase: new URL(SITE_URL) } : {}),
 };
 
+// Data hub run (2026-11-23, Ali's override of DESIGN.md 9.1): five plain labels;
+// the addresses did not change.
 const NAV = [
-  { href: "/topics", label: "Topics", also: ["/answers"] },
-  { href: "/compare", label: "Compare" },
-  { href: "/sources", label: "Sources", also: ["/datasets", "/tables"] },
-  { href: "/methods", label: "Methods" },
-  { href: "/about", label: "About" },
+  { href: "/topics", label: "Indicators", also: ["/browse", "/series", "/search"] },
+  { href: "/library", label: "Library", also: ["/sources", "/datasets", "/tables", "/data"] },
+  { href: "/compare", label: "Chart builder" },
+  { href: "/answers", label: "Stories" },
+  { href: "/about", label: "About", also: ["/methods", "/releases", "/api"] },
 ];
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -89,9 +90,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <SearchDialog indexUrl={`${DATA_BASE}/search.json`} />
             </div>
             <NavLinks items={NAV} />
-            <Link href="/releases" className="release-tag" title="The data release this site shows">
-              Release <Num kind="version">{v}</Num>
-            </Link>
             <MobileMenu items={NAV} />
           </div>
         </header>
@@ -99,62 +97,33 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="wrap">{children}</div>
         </main>
         <EvidenceSheet />
-        <footer className="site-footer">
-          <div className="wrap footer-grid">
-            <section aria-labelledby="ft-what">
-              <h2 id="ft-what">LUMS DataLab Portal</h2>
-              <p>
-                <strong>
-                  Prototype release <Num kind="version">{v}</Num>
-                </strong>
-                , built <Num kind="date">{dateOnly(release.created_at)}</Num>. {release.doi ? <>DOI <Num kind="id">{release.doi}</Num>.</> : "No DOI yet."} Not yet for
-                citation in publications. An unofficial research project of the LUMS Department of Economics DataLab. Figures are compiled from official
-                publications; where this site and the printed document differ, the document prevails.
-              </p>
-              <p>
-                Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT. No language model writes a published number or
-                decides whether it passes a check.
-              </p>
-            </section>
-            <section aria-labelledby="ft-use">
-              <h2 id="ft-use">Use the data</h2>
-              <ul>
-                <li>
-                  <Link href="/browse">The catalogue</Link>
-                </li>
-                <li>
-                  <Link href="/data">Download and file formats</Link>
-                </li>
-                <li>
-                  <Link href="/api">API</Link> <span className="coming-inline">{COMING}</span>
-                </li>
-                <li>
-                  <Link href="/releases">Releases, changelog and errata</Link>
-                </li>
-                <li>
-                  <Link href="/demo/health-and-jobs">Worked example</Link>
-                </li>
-              </ul>
-            </section>
-            <section aria-labelledby="ft-help">
-              <h2 id="ft-help">Check and correct</h2>
-              <ul>
-                <li>
-                  <ReportLink issuesUrl={ISSUES_URL} version={v}>
-                    Report an error on this page
-                  </ReportLink>
-                </li>
-                <li>
-                  <Link href="/methods">Methods and quality numbers</Link>
-                </li>
-                <li>
-                  <a href={REPO_URL}>Source code and pipeline</a>
-                </li>
-                <li>
-                  <Link href="/about">About the project</Link>
-                </li>
-              </ul>
-            </section>
+        {/* Data hub run (2026-11-23): one line on how we check, the release (moved here from the header), the links. */}
+        <footer className="site-footer site-footer-slim">
+          <div className="wrap">
+            <p className="ft-how">
+              Every figure links to the government page it was printed on and is published only after fixed arithmetic checks.{" "}
+              <Link href="/methods">How we check</Link>
+            </p>
+            <p className="ft-rel">
+              <Link href="/releases" className="ft-tag" title="The data release this site shows">
+                Release <Num kind="version">{v}</Num>
+              </Link>
+              , built <Num kind="date">{dateOnly(release.created_at)}</Num>. Prototype, not yet for citation{release.doi ? <>; DOI <Num kind="id">{release.doi}</Num></> : null}. Where
+              this site and the printed document differ, the document prevails. Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
+            </p>
+            <nav className="ft-links" aria-label="Footer">
+              <Link href="/library">Library</Link>
+              <Link href="/data">Downloads and file formats</Link>
+              <Link href="/browse">All indicators</Link>
+              <Link href="/releases">Releases and corrections</Link>
+              <Link href="/methods">Methods</Link>
+              <Link href="/api">API</Link>
+              <ReportLink issuesUrl={ISSUES_URL} version={v}>
+                Report an error on this page
+              </ReportLink>
+              <a href={REPO_URL}>Source code</a>
+              <Link href="/about">About</Link>
+            </nav>
           </div>
         </footer>
       </body>

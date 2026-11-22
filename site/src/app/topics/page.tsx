@@ -19,7 +19,7 @@ export default function TopicsPage() {
         <p className="lede measure">
           Each topic gathers the figures on one subject and the questions people ask about it. A topic appears only when this release holds checked figures
           for it; planned data is on the <Link href="/releases#coming">Releases page</Link>. To browse by publication instead, see{" "}
-          <Link href="/sources">Sources</Link>.
+          <Link href="/library">Library</Link>.
         </p>
       </header>
       <ul className="ti-list">

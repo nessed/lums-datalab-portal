@@ -117,3 +117,88 @@ export type SeriesTitleFields = {
   summary: string | null;
   titleStatus: TitleStatus;
 };
+
+/* ---------- the Library (data hub run, 2026-11-23; plan section 7) ---------- */
+// Every source document and every dataset, named in plain words. Built by
+// src/lib/adapter/library.ts from contract records (sources, series,
+// observations) plus two inputs any adapter can supply: the editorial names
+// (site/editorial/library.json) and the list of verified files the build can
+// serve (written by scripts/prebuild/library.mjs). A bridge that has its own
+// documents fills the same shapes.
+
+/** A copy of a document this site serves, byte for byte the registered file. */
+export type LibraryFile = {
+  /** Address of the PDF: LIBRARY_FILES_BASE (default /data/<release>/sources) + file name. */
+  href: string;
+  bytes: number;
+  /** Equals the registered fingerprint; a file that does not match is never listed. */
+  sha256: string;
+  /** Where the build found it: the local sources folder, the build cache, the official address or the Internet Archive. */
+  via: "local" | "cache" | "official" | "archive";
+};
+
+/** "read": figures were read from it; "rejected": the file failed verification and is not used; "document-only": listed, nothing read (plan 7.3 L3). */
+export type LibraryDocState = "read" | "rejected" | "document-only";
+
+export type LibraryDocument = {
+  id: string;
+  /** Plain name of the kind of document ("Federal Budget"). */
+  kindName: string;
+  /** The internal kind (abs, cpi_monthly_review ...); never shown on a first layer. */
+  kind: string;
+  /** The title as the document prints it ("Annual Budget Statement 2025-26"): a grey second line. */
+  printedTitle: string;
+  /** Fiscal year, month or survey round, as the release records it. */
+  period: string;
+  /** Plain publisher name ("Finance Division"); the full name stays in `publisherFull`. */
+  publisher: string;
+  publisherFull: string;
+  pages: number | null;
+  bytes: number | null;
+  /** "pdf" or "csv". */
+  format: string;
+  /** The file on the government site, and the page that links to it. */
+  officialUrl: string | null;
+  officialPage: string | null;
+  /** The Internet Archive copy, if one is recorded. */
+  archiveUrl: string | null;
+  sha256: string | null;
+  /** Our verified copy, or null: the document then shows its official link only and no viewer. */
+  file: LibraryFile | null;
+  state: LibraryDocState;
+  /** Why a rejected file is not used, in one sentence. */
+  rejectedReason: string | null;
+  /** Pages read in this release (PDF page numbers). */
+  pagesRead: number[];
+  /** Series with at least one figure printed in this document. */
+  seriesIds: string[];
+  /** The datasets those series belong to. */
+  datasets: string[];
+};
+
+export type LibraryDataset = {
+  key: string;
+  /** Plain name ("Federal budget"). */
+  name: string;
+  /** One line on what it measures, no digits. */
+  line: string;
+  /** First and last period with a checked figure. */
+  firstPeriod: string | null;
+  lastPeriod: string | null;
+  seriesCount: number;
+  /** Whether its figures are on the site (published or candidate), or still to come. */
+  visible: boolean;
+  /** Download addresses under /data/<release>/datasets/, or null where the build has no such file. */
+  files: { csv: string | null; xlsx: string | null; zip: string | null };
+  /** Documents it is read from. */
+  documentIds: string[];
+  /** A few series to preview and to open in the chart builder, in catalogue order. */
+  previewSeries: string[];
+};
+
+export type Library = {
+  documents: LibraryDocument[];
+  datasets: LibraryDataset[];
+  /** Whether the names come from an approved editorial file or a draft (everything today). */
+  namesStatus: "approved" | "draft";
+};

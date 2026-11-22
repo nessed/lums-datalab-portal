@@ -1,0 +1,51 @@
+{
+  "$comment": "Plain names for the Library (data hub plan, section 4): every kind of document and publisher gets a name a first-year economics student would use, and one line on what is inside. The printed title of each document stays as a grey second line and on its page. No numbers in this file (scripts/checks/editorial-plain-words.mjs). DRAFT (unattended run, 2026-11-23): drafted by the agent; Ali and Ahmad confirm or replace.",
+  "provisional": true,
+  "kinds": {
+    "abs": {
+      "name": "Federal Budget",
+      "line": "The federal government's budget as presented to the National Assembly: what it plans to spend and collect, and last year's revised figures.",
+      "order": 1
+    },
+    "cpi_monthly_review": {
+      "name": "Monthly Price Review",
+      "line": "The Pakistan Bureau of Statistics' monthly report on consumer prices: the price index and inflation, for the country, towns and villages.",
+      "order": 2
+    },
+    "lfs_annual_report": {
+      "name": "Labour Force Survey",
+      "line": "The national survey of work: how many people are in the labour force, employed or unemployed, by sex, area and province.",
+      "order": 3
+    },
+    "pes_chapter": {
+      "name": "Pakistan Economic Survey",
+      "line": "The Finance Division's yearly review of the economy, one chapter per subject. We use it to cross-check figures printed elsewhere.",
+      "order": 4
+    },
+    "sbp_easydata": {
+      "name": "State Bank of Pakistan data",
+      "line": "A data file downloaded from the State Bank's EasyData service. We use it to cross-check inflation figures.",
+      "order": 5
+    }
+  },
+  "publishers": {
+    "Finance Division, Government of Pakistan": "Finance Division",
+    "Pakistan Bureau of Statistics": "Pakistan Bureau of Statistics",
+    "State Bank of Pakistan": "State Bank of Pakistan"
+  },
+  "datasets": {
+    "abs": {
+      "name": "Federal budget",
+      "line": "Federal spending by function and federal receipts, each year's budget and revised estimates."
+    },
+    "cpi": {
+      "name": "Consumer prices and inflation",
+      "line": "The consumer price index and inflation, national, urban and rural, by group of goods."
+    },
+    "lfs": {
+      "name": "Jobs and the labour force",
+      "line": "Labour force, employment, unemployment and participation, by sex, area and province."
+    }
+  },
+  "rejected": "This file was downloaded under this name but turned out to be a different edition. It is kept on record and not used for any figure."
+}

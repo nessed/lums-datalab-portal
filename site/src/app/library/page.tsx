@@ -34,7 +34,7 @@ export default function SourcesPage() {
         </p>
         <p className="small">
           Looking for a subject rather than a publication? Start from the <Link href="/topics">topics</Link>. Each kind of document also has a{" "}
-          <Link href="/datasets">data type page</Link> with its series and quality numbers, and its tables as the government printed them.
+          <Link href="/library/datasets">data type page</Link> with its series and quality numbers, and its tables as the government printed them.
         </p>
       </header>
 

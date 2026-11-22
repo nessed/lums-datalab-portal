@@ -42,6 +42,17 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Data hub run (2026-11-23): Sources and Data types became the Library. The old
+  // index addresses keep answering by redirect; /sources/<id> and /datasets/<id>
+  // stay the permanent addresses of a document and a data type.
+  async redirects() {
+    return [
+      { source: "/sources", destination: "/library", permanent: true },
+      { source: "/datasets", destination: "/library/datasets", permanent: true },
+      { source: `/${v}/sources`, destination: `/${v}/library`, permanent: true },
+      { source: `/${v}/datasets`, destination: `/${v}/library/datasets`, permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       { source: `/${v}`, destination: "/" },

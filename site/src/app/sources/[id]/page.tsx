@@ -118,7 +118,7 @@ export default async function SourcePage({ params }: Props) {
 
   return (
     <article className="is-prose">
-      <Breadcrumbs items={[{ href: "/sources", label: "Sources" }, { href: `/sources#t-${source.doc_type}`, label: DOC_TYPE_WORDS[source.doc_type] ?? source.doc_type }, { label: source.title }]} />
+      <Breadcrumbs items={[{ href: "/library", label: "Library" }, { href: `/library#t-${source.doc_type}`, label: DOC_TYPE_WORDS[source.doc_type] ?? source.doc_type }, { label: source.title }]} />
       <header className="page-head">
         <p className="kicker">{DOC_TYPE_WORDS[source.doc_type] ?? source.doc_type} · source document</p>
         <h1>{source.title}</h1>

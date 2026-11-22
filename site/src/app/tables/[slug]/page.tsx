@@ -115,7 +115,7 @@ export default async function TablePage({ params }: Props) {
     <article className="table-page">
       <Breadcrumbs
         items={[
-          { href: "/sources", label: "Sources" },
+          { href: "/library", label: "Library" },
           { href: sourceHref(t.sourceId), label: src?.title ?? t.sourceId },
           { href: `/datasets/${dataset}#tables`, label: `${datasetName(dataset)}: tables as printed` },
           { label: t.title },

@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Data types", description: "The data 
 export default function DatasetsPage() {
   return (
     <>
-      <Breadcrumbs items={[{ href: "/sources", label: "Sources" }, { label: "Data types" }]} />
+      <Breadcrumbs items={[{ href: "/library", label: "Library" }, { label: "Datasets" }]} />
       <h1>Data types</h1>
       <ul className="dt-grid">
         {publishedDatasets().map((k) => (

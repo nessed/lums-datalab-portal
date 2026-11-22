@@ -86,7 +86,7 @@ export default function Home() {
         <div className="h2-sechead">
           <h2 id="topics-h">Topics</h2>
           <p className="h2-asof">
-            <Link href="/topics">All topics</Link> · <Link href="/sources">Browse by source document</Link>
+            <Link href="/topics">All topics</Link> · <Link href="/library">Browse by source document</Link>
           </p>
         </div>
         <ul className="tc-grid">{tps}</ul>

@@ -46,11 +46,10 @@ const GROUPS: { key: string; title: string }[] = [
 ];
 const FACES: Face[] = [
   // Today's face, for comparison.
-  { key: "noto", group: "now", name: "Noto Sans", note: "the site default now", stack: "var(--font-noto-sans), \"Noto Sans\", system-ui, sans-serif" },
+  { key: "atkinson", group: "now", name: "Atkinson Hyperlegible Next", note: "the site face (Ali, 2026-11-23); by the Braille Institute", stack: "var(--font-atkinson), system-ui, sans-serif" },
   { key: "overpass", group: "signs", name: "Overpass", note: "after Highway Gothic, the American road-sign letters; draws its own rupee sign", stack: "\"Overpass\", system-ui, sans-serif" },
   { key: "barlow", group: "signs", name: "Barlow", note: "after Californian road and licence-plate lettering; tight, made for figures", stack: "\"Barlow\", system-ui, sans-serif" },
   { key: "radiocanada", group: "signs", name: "Radio Canada Big", note: "the Canadian public broadcaster’s face", stack: "\"Radio Canada Big\", system-ui, sans-serif" },
-  { key: "atkinson", group: "signs", name: "Atkinson Hyperlegible Next", note: "by the Braille Institute: every letter shaped to be told apart", stack: "\"Atkinson Hyperlegible Next\", system-ui, sans-serif" },
   { key: "familjen", group: "grotesk", name: "Familjen Grotesk", note: "a Swedish grotesque with ink traps and a sharp edge", stack: "\"Familjen Grotesk\", system-ui, sans-serif" },
   { key: "karla", group: "grotesk", name: "Karla", note: "a quirky grotesque; draws its own rupee sign", stack: "\"Karla\", system-ui, sans-serif" },
   { key: "epilogue", group: "grotesk", name: "Epilogue", note: "an editorial grotesque with wide, firm capitals", stack: "\"Epilogue\", system-ui, sans-serif" },

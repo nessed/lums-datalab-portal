@@ -21,19 +21,15 @@ import "@/styles/library.css";
 import "@/styles/fixes.css";
 
 // Self-hosted (OFL, licences beside the files in src/fonts) so the build needs no
-// network. Subset to Latin by scripts/subset-fonts.py: Noto Sans as one variable
-// font (wght 400-700, 19 KB) for body, labels and metadata; Noto Sans Display Bold
-// (11 KB) for titles and headline figures. No serif anywhere. The CSS variables
-// are used by --font-sans and --font-display in src/design/tokens.css.
+// network. Atkinson Hyperlegible Next (Braille Institute), Ali's pick from
+// /demo/type on 2026-11-23: one variable font (wght 400-700, 19 KB, subset to
+// Latin plus the rupee signs by scripts/subset-fonts.py's make()) for text, titles
+// and headline figures. Its figures are proportional by default; number places
+// (.tnum, tables, charts, headline blocks) set tabular figures, which it has.
+// The CSS variable is used by --font-sans and --font-display in src/design/tokens.css.
 const sans = localFont({
-  src: [{ path: "../fonts/noto-sans-latin-wght-400-700.woff2", style: "normal", weight: "400 700" }],
-  variable: "--font-noto-sans",
-  display: "swap",
-  fallback: ["Segoe UI", "system-ui", "Arial", "sans-serif"],
-});
-const display = localFont({
-  src: [{ path: "../fonts/noto-sans-display-latin-700.woff2", style: "normal", weight: "700" }],
-  variable: "--font-noto-display",
+  src: [{ path: "../fonts/atkinson-hyperlegible-next-latin-wght-400-700.woff2", style: "normal", weight: "400 700" }],
+  variable: "--font-atkinson",
   display: "swap",
   fallback: ["Segoe UI", "system-ui", "Arial", "sans-serif"],
 });
@@ -61,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   // Runs before paint: hides the notice if this visitor dismissed it for this release.
   const noticeScript = `document.documentElement.classList.add("js");try{if(localStorage.getItem("proto-notice-dismissed")===${JSON.stringify(v)})document.documentElement.dataset.protoDismissed="true"}catch(e){}`;
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`} suppressHydrationWarning>
+    <html lang="en" className={sans.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noticeScript }} />
       </head>

@@ -90,7 +90,10 @@ export default async function searchIndex(ctx) {
   // the name back. Keeps room in the 40 KB budget for the answer card's sentence.
   const dsNames = [];
   const dsCode = (name) => (dsNames.includes(name) ? dsNames.indexOf(name) : dsNames.push(name) - 1);
-  const meta = { k: "m", id: "meta", n: "meta", r: d.release.version, w: concepts.words, ds: dsNames };
+  // Word groups: editorial/concepts.json first, then the English and Roman Urdu synonyms of editorial/synonyms.json (Home v2).
+  const synonymsFile = path.join(siteDir, "editorial", "synonyms.json");
+  const synonymGroups = fs.existsSync(synonymsFile) ? JSON.parse(fs.readFileSync(synonymsFile, "utf8")).groups ?? [] : [];
+  const meta = { k: "m", id: "meta", n: "meta", r: d.release.version, w: [...concepts.words, ...synonymGroups], ds: dsNames };
   index.push(meta);
 
   const visibleSeries = d.series.filter((s) => visible(s.dataset));

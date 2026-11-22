@@ -1,0 +1,32 @@
+{
+  "$comment": "Search synonyms in English and Roman Urdu (Home v2, 2026-11-23). Each group is a set of single words the search engine treats as the same word (scripts/prebuild/search.mjs adds them to the index's word groups, after editorial/concepts.json's). Words only: no numbers, no figures. PROVISIONAL (unattended run, 2026-11-23): drafted by an agent; Ali and Ahmad confirm or replace them.",
+  "provisional": true,
+  "groups": [
+    ["inflation", "mehngai", "mehangai", "mehngaai", "mehnghai"],
+    ["prices", "qeemat", "qeematein", "qimat", "daam"],
+    ["unemployment", "berozgari", "berozgaari", "bekari"],
+    ["jobs", "naukri", "naukriyan", "nokri", "rozgar", "rozgaar"],
+    ["workers", "mazdoor", "mazdoori", "labourers", "kaamgar"],
+    ["salaries", "tankhwah", "tankhwa", "tankha"],
+    ["spending", "kharch", "kharcha", "akhrajat", "ikhrajat"],
+    ["budget", "bajat"],
+    ["revenue", "aamdani", "amdani", "mohasil"],
+    ["taxes", "mehsool", "mahsool", "mehsoolat"],
+    ["education", "taleem", "taaleem", "parhai"],
+    ["health", "sehat", "sehet", "sihat"],
+    ["hospitals", "haspatal", "aspataal", "shifakhana"],
+    ["provinces", "soobay", "subay", "sooba", "suba"],
+    ["electricity", "bijli", "bijlee"],
+    ["petrol", "tel", "pitrol"],
+    ["flour", "aata", "atta"],
+    ["food", "khana", "khurak", "khoraak", "ghiza"],
+    ["rent", "kiraya", "kiraaya"],
+    ["debt", "qarz", "qarza", "qarzay"],
+    ["defence", "difa", "difaa"],
+    ["women", "khawateen", "aurtein", "auratain"],
+    ["men", "mard", "mardon"],
+    ["villages", "dehaat", "dehat", "gaon", "rural"],
+    ["cities", "shehar", "shehron", "urban"],
+    ["government", "hukoomat", "hukumat", "sarkar", "sarkari"]
+  ]
+}

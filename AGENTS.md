@@ -171,6 +171,11 @@ Spreadsheets and API data skip profile/extract/structure/second-reader but go th
 - **`OriginText` / `OriginCopy` fill in the site address only in the browser**: server HTML (and any check on it) sees the path only.
 - **Git Bash rewrites `/series/...` arguments into `C:/Program Files/Git/series/...`**: prefix `MSYS_NO_PATHCONV=1` when passing site paths to node scripts.
 - **A series published one month a year (CPI June issues) never joins at step one in a sparkline**: filter to the reading month, step twelve.
+- **fonttools: instancing a variable font and then subsetting it can raise `KeyError: '.notdef'`.** Save the instanced font to a `BytesIO`, reload it as a new `TTFont`, then subset (`site/scripts/subset-fonts-v2.py`).
+- **Home v2 keeps the ticker because `home-stories.mjs` (section 4) fails the build with "no ticker" when it is missing.** Removing it means editing a check, which only Ali can approve; it is restyled slim instead.
+- **Home v2 switchers (`components/hub/Switch.tsx`) only toggle `hidden` on panels the server rendered**, so every figure in every tab, tile and cost choice is in the HTML and checked. Never fetch or compute a figure on the client. A remembered choice is read with `useSyncExternalStore`, not `setState` in an effect (the lint rule `react-hooks/set-state-in-effect` fails it).
+- **Every new derived formula needs a plug-in that claims it**, or check-build fails "not recomputed by any plug-in": `cost-now`/`cost-more` (`home-costs.mjs`), `per100`/`per100-rest` (`home-per100.mjs`). Dates from `editorial/calendar.json` are checked by `home-calendar.mjs`.
+- **Git Bash heredocs holding an apostrophe inside a quoted Python or CSS block can fail with "unexpected EOF"**: write the script or the content with the Write tool and run it with `python -I`.
 - **The page's text goes through one typeface token**: a face for the site must set tabular figures in its text cut (measured in the browser; Libre Franklin, Fraunces, Instrument Serif, Lexend and the Fontshare faces as served do not), or columns of figures stop lining up.
 
 ## 8. Working conventions

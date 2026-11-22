@@ -42,6 +42,7 @@ const PLANNED: Record<FeatureKey, string> = {
   moreDataTypes: "further publications, starting with tables from the Pakistan Economic Survey.",
   monthlyData: "every monthly CPI issue, not only June.",
   errataBadges: "a note on each corrected figure, linking to its errata entry.",
+  dailyRates: "fuel prices and the dollar rate read once a day from official notices, on the home page.",
 };
 
 /** A release Markdown file without its own first heading (the page gives one). */

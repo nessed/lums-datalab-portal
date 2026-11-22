@@ -1,0 +1,30 @@
+{
+  "$comment": "When the next editions of the publications this release reads are expected (Home v2 'Coming up', 2026-11-23). Not data: nothing here is a figure, and nothing here is shown as a fact. Every entry is 'expected' unless the agency announced the date, in which case 'status' is 'announced' and 'announcedAt' is the agency's own page that says so. 'when' is a month (YYYY-MM) for an expected entry, a day (YYYY-MM-DD) only for an announced one. 'basis' says why it is expected then, in words. scripts/checks/home-calendar.mjs checks every entry and every date the home page shows from this file. PROVISIONAL (unattended run, 2026-11-23): drafted by an agent from each publication's usual timing; Ali and Ahmad confirm or replace them.",
+  "provisional": true,
+  "entries": [
+    {
+      "id": "cpi-2026-11",
+      "name": "Monthly Review of Price Indices for November",
+      "agency": "Pakistan Bureau of Statistics",
+      "when": "2026-12",
+      "status": "expected",
+      "basis": "The bureau publishes each month's price review in the first days of the next month."
+    },
+    {
+      "id": "cpi-2026-12",
+      "name": "Monthly Review of Price Indices for December",
+      "agency": "Pakistan Bureau of Statistics",
+      "when": "2027-01",
+      "status": "expected",
+      "basis": "The bureau publishes each month's price review in the first days of the next month."
+    },
+    {
+      "id": "budget-2027-28",
+      "name": "Federal Budget for the next fiscal year",
+      "agency": "Finance Division",
+      "when": "2027-06",
+      "status": "expected",
+      "basis": "The federal budget is presented to the National Assembly in June, before the fiscal year starts in July."
+    }
+  ]
+}

@@ -87,7 +87,7 @@ export default function check({ siteDir, appDir, problem }) {
     }
   }
   let files = 0;
-  for (const name of ["library.json", "stories.json", "daily.json"]) {
+  for (const name of ["library.json", "stories.json", "daily.json", "synonyms.json"]) {
     const p = path.join(siteDir, "editorial", name);
     if (!fs.existsSync(p)) {
       if (name === "library.json") problem("plain-words", `editorial/${name}`, "missing");

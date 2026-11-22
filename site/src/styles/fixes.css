@@ -247,3 +247,116 @@ html:not([data-proto-dismissed="true"]) .cite-proto {
   font-size: var(--step-0);
   font-weight: 700;
 }
+
+/* ======== /demo/type: one first screen in three faces behind one token (--demo-face) ======== */
+.ty {
+  max-width: 96rem;
+}
+.ty-grid {
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 1100px) {
+  .ty-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.ty-panel {
+  --font-sans: var(--demo-face);
+  --font-display: var(--demo-face);
+  font-family: var(--demo-face);
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  min-width: 0;
+}
+.ty-panel * {
+  font-family: inherit;
+}
+.ty-face {
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 0 0 var(--s-4);
+  padding-bottom: var(--s-2);
+  border-bottom: var(--hair);
+}
+.ty-face span {
+  font-weight: 400;
+}
+.ty-kicker {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0 0 var(--s-1);
+}
+.ty-h {
+  font-size: var(--step-3);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  margin: 0 0 var(--s-5);
+}
+.ty-figs {
+  list-style: none;
+  margin: 0 0 var(--s-5);
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+.ty-figs li {
+  display: grid;
+  gap: var(--s-1);
+}
+.ty-name {
+  font-size: var(--step--1);
+}
+.ty-value {
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ty-value .v-link {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ty-basis {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ty-ticker {
+  list-style: none;
+  margin: 0 0 var(--s-5);
+  padding: var(--s-2) 0;
+  border-top: var(--hair);
+  border-bottom: var(--hair);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+.ty-tname {
+  color: var(--ink-2);
+}
+.ty-lead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  align-items: end;
+}
+.ty-col {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.ty-col th,
+.ty-col td {
+  padding: var(--s-1) var(--s-3) var(--s-1) 0;
+  border-bottom: var(--hair);
+  text-align: right;
+  font-weight: 400;
+}
+.ty-col th {
+  text-align: left;
+  color: var(--ink-2);
+}

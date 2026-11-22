@@ -42,7 +42,7 @@ export default function LookPage() {
       <p className="kicker">For page builders</p>
       <h1>Base components</h1>
       <p className="lede">
-        What the round-2 look gives every page. Source and usage notes are at the top of each file in <code>src/components/ui</code>.
+        What the second-round look gives every page. Source and usage notes are at the top of each file in <code>src/components/ui</code>.
       </p>
 
       {lead && o ? (

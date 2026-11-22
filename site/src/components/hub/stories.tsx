@@ -255,7 +255,11 @@ export function tickerItems(): TickerItem[] {
     const { latest } = latestShown(all, t.kind);
     if (!latest) continue;
     const cmp = compare(s, latest, all, "signed");
-    out.push({ key: `${t.series}:${t.kind}`, name: t.name, series: s, o: latest, change: cmp.kind === "change" ? cmp.derived : null, base: cmp.kind === "change" ? cmp.base : null });
+    // Like with like: a change on a budget estimate that was later revised needs the revised figure beside it,
+    // which a ticker has no room for, so such an item shows its value only (the key numbers show both).
+    const revised = cmp.kind === "change" && cmp.base.kind === "be" && all.some((o) => o.period === cmp.base.period && o.kind === "re");
+    const ok = cmp.kind === "change" && !revised;
+    out.push({ key: `${t.series}:${t.kind}`, name: t.name, series: s, o: latest, change: ok ? cmp.derived : null, base: ok ? cmp.base : null });
   }
   return out;
 }

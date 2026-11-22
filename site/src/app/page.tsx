@@ -8,7 +8,7 @@
 import type { Metadata } from "next";
 import { DerivedList, DerivedNotes } from "@/components/home/Bits";
 import { HOME_NOTES } from "@/components/home/Moved";
-import { Featured, KeyNumbers, LibraryStrip, StoryCards, Themes, Ticker, WhatMoved } from "@/components/hub/Hub";
+import { DailyPrices, Featured, KeyNumbers, LibraryStrip, StoryCards, Themes, Ticker, WhatMoved } from "@/components/hub/Hub";
 import { stories } from "@/components/hub/stories";
 
 export const metadata: Metadata = {
@@ -33,6 +33,7 @@ export default function Home() {
         {keyNumbers}
       </div>
       <WhatMoved />
+      <DailyPrices />
       <StoryCards list={rest} />
       <LibraryStrip />
       <Themes />

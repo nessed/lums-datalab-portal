@@ -73,7 +73,6 @@ export function ThisRelease() {
           </li>
         ))}
       </ul>
-      <p className="small">Next expected: not stated in this release.</p>
     </section>
   );
 }

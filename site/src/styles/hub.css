@@ -452,3 +452,35 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* ---------- daily prices (placeholder: names only, no figures) ---------- */
+
+.dp-note {
+  margin: 0 0 var(--s-3);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.dp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--s-3);
+}
+.dp-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--r-3);
+  padding: var(--s-3) var(--s-4);
+}
+.dp-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.dp-state {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}

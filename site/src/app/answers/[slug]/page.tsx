@@ -15,6 +15,8 @@ import { DerivedList, DerivedNotes, PageWords } from "@/components/home/Bits";
 import { answerPart } from "@/components/home/Answer";
 import { answerHref, questionBySlug, questions, topicBySlug, topicHref } from "@/components/home/editorial";
 import { seriesHref, type Series } from "@/lib/data";
+import { periodWords } from "@/lib/format";
+import { breakWords } from "@/lib/words";
 
 export const dynamicParams = false;
 
@@ -81,7 +83,7 @@ export default async function AnswerPage({ params }: Props) {
             ) : null}
             {s.breaks.map((b) => (
               <p key={b.at_period} className="ans-break">
-                <strong>Series break</strong> at <Num kind="period">{b.at_period}</Num>: <Num kind="text">{b.note}</Num>
+                <strong>{breakWords(b.kind, s.series_id)}</strong>, from <Num kind="period">{periodWords(b.at_period, s.frequency)}</Num>: <Num kind="text">{b.note}</Num>
               </p>
             ))}
           </div>

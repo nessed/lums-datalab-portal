@@ -17,6 +17,7 @@ import { dirOf } from "@/components/home/Cards";
 import { compare, latestShown, usable } from "@/components/home/derive";
 import { headlineCards, topicHref, topics } from "@/components/home/editorial";
 import { groupFigures, TickerEntry, tickerItems, type Story } from "./stories";
+import daily from "../../../editorial/daily.json";
 
 const P = (p: string, s: Pick<Series, "frequency">) => <Num kind="period">{periodWords(p, s.frequency)}</Num>;
 
@@ -201,6 +202,33 @@ export function WhatMoved() {
         <Panel k="functions" />
         <Panel k="provinces" />
       </div>
+    </section>
+  );
+}
+
+/* ---------- daily prices (placeholder) ---------- */
+
+/**
+ * A placeholder for prices to be collected once a day (Ali, 2026-11-23). Names
+ * only, from editorial/daily.json: no figure, no source, nothing fetched. When
+ * the collection exists, each item becomes an ordinary <V> from the release.
+ */
+export function DailyPrices() {
+  if (!daily.items.length) return null;
+  return (
+    <section className="hub-sec dp" aria-labelledby="dp-h">
+      <h2 id="dp-h" className="hub-h">
+        {daily.heading}
+      </h2>
+      <p className="dp-note">{daily.note}</p>
+      <ul className="dp-list">
+        {daily.items.map((it) => (
+          <li key={it.id} className="dp-item">
+            <span className="dp-name">{it.name}</span>
+            <span className="dp-state">Not yet collected</span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

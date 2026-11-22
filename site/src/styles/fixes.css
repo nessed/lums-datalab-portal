@@ -42,3 +42,208 @@ html:not([data-proto-dismissed="true"]) .cite-proto {
   font-weight: 400;
   color: var(--ink-2);
 }
+
+/* ======== Indicators (/topics) and Stories (/answers): data hub plan, section 8 ========
+   LUMS colours from tokens.css; navy only for the page title; numbers in ink. Two weights (400, 700) and
+   three sizes: the page title, the figures (step-2), everything else (step-0 / step--1). No images,
+   gradients or radii above --r-3. */
+.ix,
+.sx {
+  max-width: 72rem;
+}
+.ix-head {
+  margin: 0 0 var(--s-6);
+  max-width: var(--measure);
+}
+.ix-head h1 {
+  color: var(--navy);
+  font-weight: 700;
+  font-size: var(--step-3);
+  margin: 0 0 var(--s-2);
+}
+.ix-lede {
+  font-size: var(--step-1);
+  color: var(--ink);
+  margin: 0 0 var(--s-2);
+}
+.ix-meta {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0;
+}
+.ix-list {
+  display: grid;
+  gap: var(--s-4);
+}
+.ix-theme {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 900px) {
+  .ix-theme {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 17rem);
+    align-items: start;
+  }
+}
+.ix-themehead h2 {
+  font-size: var(--step-1);
+  font-weight: 700;
+  margin: 0 0 var(--s-1);
+}
+.ix-themehead h2 a,
+.sx-theme h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.ix-themehead h2 a:hover,
+.sx-theme h2 a:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+.ix-short {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0;
+}
+.ix-figs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+@media (min-width: 600px) {
+  .ix-figs {
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+}
+.ix-fig {
+  display: grid;
+  gap: var(--s-1);
+  align-content: start;
+}
+.ix-name {
+  font-size: var(--step--1);
+  font-weight: 400;
+}
+.ix-value,
+.sx-value {
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.ix-value .v-link,
+.sx-value .v-link {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ix-value .v-unit,
+.sx-value .v-unit {
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.ix-basis,
+.sx-basis {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ix-spark,
+.sx-spark {
+  display: block;
+  margin-top: var(--s-1);
+}
+.ix-foot {
+  font-size: var(--step--1);
+}
+.ix-stories h3 {
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 0 0 var(--s-1);
+}
+.ix-stories ul {
+  list-style: none;
+  margin: 0 0 var(--s-3);
+  padding: 0;
+  display: grid;
+  gap: var(--s-1);
+}
+.ix-all {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Stories */
+.sx-theme {
+  margin: 0 0 var(--s-6);
+}
+.sx-theme h2 {
+  font-size: var(--step-1);
+  font-weight: 700;
+  margin: 0 0 var(--s-3);
+  padding-bottom: var(--s-1);
+  border-bottom: var(--hair);
+}
+.sx-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+@media (min-width: 640px) {
+  .sx-grid {
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  }
+}
+.sx-card {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+}
+.sx-q {
+  font-size: var(--step-0);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.35;
+}
+.sx-fig {
+  margin: 0;
+  display: grid;
+  gap: var(--s-1);
+}
+
+/* A story page: navy title, the answer sentence the one loud thing, the rest in ink at body size. */
+.sx-story .ans-head h1 {
+  color: var(--navy);
+  font-weight: 700;
+}
+.sx-story .ans-title {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+.sx-story .ans-v .v-link {
+  font-weight: 700;
+  color: var(--ink);
+}
+.sx-story .ans-part h2,
+.sx-story .ans-covers h2,
+.sx-story .ans-links h2 {
+  font-size: var(--step-1);
+  font-weight: 700;
+}
+.sx-story .ans-cover h3,
+.sx-story .ans-links h3 {
+  font-size: var(--step-0);
+  font-weight: 700;
+}

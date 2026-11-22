@@ -42,8 +42,8 @@ export default async function AnswerPage({ params }: Props) {
   const others = topic ? topic.questions.filter((x) => x !== q.slug).map(questionBySlug).filter((x) => !!x) : [];
 
   return (
-    <article className="answer">
-      <Breadcrumbs items={[{ href: "/", label: "Home" }, ...(topic ? [{ href: topicHref(topic.slug), label: topic.name }] : []), { label: "Answer" }]} />
+    <article className="answer sx-story">
+      <Breadcrumbs items={[{ href: "/", label: "Home" }, { href: "/answers", label: "Stories" }, ...(topic ? [{ href: topicHref(topic.slug), label: topic.name }] : []), { label: "Story" }]} />
       <header className="page-head ans-head">
         <h1>{q.question}</h1>
         <p className="kicker ans-title">{q.title}</p>

@@ -9,13 +9,12 @@ import CopyButton from "@/components/ui/CopyButton";
 import { StatusMark } from "@/components/ui/Status";
 import { Num, V } from "@/components/ui/Num";
 import { db, obsAt, RELEASE_VERSION, seriesHref, SITE_URL, slugify, sourceHref, DATA_BASE, type Observation, type Series } from "@/lib/data";
-import { derivedText } from "@/lib/chart-model";
 import { periodWords, unitLabel } from "@/lib/format";
 import { statusOf, visualKey, type StatusKey } from "@/lib/status";
 import { latestPublished, ancestors } from "@/lib/stats";
 import { KIND, READER_STATUS } from "@/lib/words";
 import type { ReaderStatusKey } from "@/lib/adapter/contract";
-import { decodeId, documentsOf, kindLong, markerOf, printedLabels, type Answer } from "./model";
+import { decodeId, documentsOf, kindLong, printedLabels } from "./model";
 import { seriesTitle, titleIsDraft } from "@/lib/titles";
 
 /** A derived figure: data-op names the operation, data-in its inputs (the figure itself first). */
@@ -28,96 +27,6 @@ export function D({ op, inputs, children }: { op: string; inputs: string[]; chil
 }
 
 const FREQ: Record<string, string> = { fiscal_year: "fiscal year, July to June", month: "month", survey_round: "survey round", year: "calendar year", quarter: "quarter" };
-
-function KindPeriod({ o, series }: { o: Observation; series: Series }) {
-  const k = kindLong(o);
-  return (
-    <>
-      {k ? `${k} ` : series.frequency === "survey_round" ? "survey round " : ""}
-      <Num kind="period">{periodWords(o.period, series.frequency)}</Num>
-    </>
-  );
-}
-
-/* ---------- 2. the answer line ---------- */
-
-export function AnswerLine({ series, answer }: { series: Series; answer: Answer }) {
-  const { latest, newer, change, noChange } = answer;
-  const unit = unitLabel(series.unit, series.scale_factor);
-  if (!latest) {
-    return (
-      <div className="answer answer-none">
-        <p className="answer-line">
-          <strong>No checked figure in this release.</strong>{" "}
-          {newer ? (
-            <>
-              The newest, the <KindPeriod o={newer} series={series} />, is {newer.reader.word || "not shown"}: {newer.reader.reason} Every figure is listed in the table
-              below with its reason.
-            </>
-          ) : (
-            "Every figure is listed in the table below with its reason."
-          )}
-        </p>
-      </div>
-    );
-  }
-  const m = markerOf(latest);
-  const sinceWord = (o: Observation) => {
-    const k = kindLong(o);
-    const stage = KIND[o.kind] && ["be", "re", "actual", "ac", "provisional"].includes(o.vintage);
-    return stage ? (
-      <>
-        the <Num kind="period">{periodWords(o.period, series.frequency)}</Num> {k}
-      </>
-    ) : series.frequency === "survey_round" ? (
-      <>
-        the <Num kind="period">{o.period}</Num> round
-      </>
-    ) : (
-      <Num kind="period">{periodWords(o.period, series.frequency)}</Num>
-    );
-  };
-  return (
-    <div className="answer">
-      <p className="answer-line">
-        <span className="answer-v">
-          <V o={latest} short sheet />
-        </span>
-        <span className="answer-k">
-          <KindPeriod o={latest} series={series} />
-        </span>
-        {change ? (
-          <span className="answer-c">
-            <D op={change.op} inputs={change.point.in}>
-              {derivedText(change.op, change.point.v!)}
-            </D>
-            {change.op === "chg" ? (series.unit === "percent" ? " percentage points" : ` ${unit}`) : ""} on {sinceWord(change.against)}
-          </span>
-        ) : null}
-        {m ? (
-          <a className="answer-src" href={m.href} data-sheet={m.slug} aria-label={`Printed in ${m.doc} ${periodWords(m.period, m.frequency)}, ${m.page}: see where`}>
-            {m.doc} <Num kind="period">{periodWords(m.period, m.frequency)}</Num>, <Num kind="page">{m.page}</Num>
-          </a>
-        ) : null}
-      </p>
-      <p className="answer-exact">
-        <V o={latest} sheet /> {unit}, exactly as printed{latest.reader.key === "checked-note" ? "; the document attaches a note" : ""}.
-        {!change && noChange ? (
-          <>
-            {" "}
-            No change shown: <PeriodsIn text={noChange} />
-          </>
-        ) : null}
-      </p>
-      {newer ? (
-        <p className="answer-newer">
-          <StatusMark k={visualKey(newer.reader)} /> The <KindPeriod o={newer} series={series} /> is {newer.reader.word || "not shown"}, so the line above gives the
-          latest checked figure. {newer.reader.reason}
-        </p>
-      ) : null}
-    </div>
-  );
-}
 
 /* ---------- source lines inside the chart frame (11, "The source travels") ---------- */
 
@@ -447,13 +356,9 @@ function LevelValue({ s, o, ref0, series }: { s: Series; o: Observation | undefi
 }
 
 export function WhereItSits({ series }: { series: Series }) {
-  const d = db();
   const ref0 = latestPublished(series.series_id);
   const up = ancestors(series).reverse();
-  const children = (d.childrenOf.get(series.series_id) ?? []).filter((c) => !c.derived);
-  const parent = up[up.length - 1];
-  const siblings = parent ? (d.childrenOf.get(parent.series_id) ?? []).filter((c) => !c.derived && c.series_id !== series.series_id) : [];
-  if (!up.length && !children.length) return null;
+  if (!up.length) return null;
   const at = (s: Series) => (ref0 ? obsAt(s.series_id, ref0.period, ref0.vintage) : undefined);
   return (
     <section className="trail" aria-labelledby="h-trail" id="where">
@@ -473,34 +378,13 @@ export function WhereItSits({ series }: { series: Series }) {
           <strong>{seriesTitle(series)}</strong> {ref0 ? <LevelValue s={series} o={ref0} ref0={ref0} series={series} /> : null}
         </li>
       </ol>
-      {children.length ? <Others label="Made up of" items={children} at={at} ref0={ref0} series={series} /> : null}
-      {siblings.length ? <Others label="Alongside it" items={siblings.slice(0, 12)} at={at} ref0={ref0} series={series} more={siblings.length > 12 && parent ? parent : null} /> : null}
+      <p className="small muted">The lines it is made up of and the lines beside it are under Related series.</p>
     </section>
   );
 }
 
-function Others({ label, items, at, ref0, series, more }: { label: string; items: Series[]; at: (s: Series) => Observation | undefined; ref0: Observation | undefined; series: Series; more?: Series | null }) {
-  return (
-    <>
-      <h3>{label}</h3>
-      <ul className="trail-others">
-        {items.map((s) => (
-          <li key={s.series_id}>
-            <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link> {ref0 ? <LevelValue s={s} o={at(s)} ref0={ref0} series={series} /> : null}
-          </li>
-        ))}
-      </ul>
-      {more ? (
-        <p className="small">
-          <Link href={seriesHref(more.series_id)}>Every line under {seriesTitle(more)}</Link>
-        </p>
-      ) : null}
-    </>
-  );
-}
-
 /** A sentence with the periods in it marked (each "2019-20", "June 2025" is a period of the release; the words around it are not). */
-function PeriodsIn({ text }: { text: string }) {
+export function PeriodsIn({ text }: { text: string }) {
   const parts = text.split(/((?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4}|\d{4}-\d{2}|\d{4})/);
   return <>{parts.map((x, i) => (i % 2 === 1 ? <Num key={i} kind="period">{x}</Num> : x))}</>;
 }

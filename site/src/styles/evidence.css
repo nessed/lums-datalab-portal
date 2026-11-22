@@ -513,3 +513,141 @@ html.ev-sheet-open {
 img[data-src]:not([src]) {
   visibility: hidden;
 }
+
+/* ============================ round 2: the receipt in the new look ============================
+   White panels on the grey page. The first screen is one panel: the figure in
+   Display Bold navy, the verdict sentence on a green-edged band, the versions
+   strip and the actions on the left; the crop of the printed page, large, on
+   the right. The collapsed sections sit in a second panel; the rail in a third. */
+.rc-top {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-card);
+  padding: var(--s-4);
+  border-bottom: var(--card-border);
+  margin-top: var(--s-2);
+}
+@media (min-width: 900px) {
+  .rc-top {
+    padding: var(--s-5);
+  }
+  .rc-top.has-proof {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+}
+.rc-title {
+  font-family: var(--font-display);
+  color: var(--h1);
+  line-height: var(--leading-tight);
+}
+.rc-printed {
+  margin: 2px 0 0;
+}
+.rc .figure-kind {
+  margin: var(--s-4) 0 0;
+  font-size: var(--step--1);
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.rc .figure {
+  margin: var(--s-1) 0 var(--s-3);
+}
+.rc-verdict {
+  padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--st-checked);
+  background: var(--st-checked-wash);
+  border-radius: 0 var(--r-1) var(--r-1) 0;
+}
+.rc:not([data-status="checked"]) .rc-verdict {
+  border-left-color: var(--st-gap);
+  background: var(--st-gap-wash);
+}
+.rc-proof {
+  background: var(--doc-ground);
+  border: 1px solid var(--doc-rule);
+  border-radius: var(--r-2);
+}
+.rc-proof .ev-proof-label,
+.ev-sheet .ev-proof-label {
+  font-size: var(--step-0);
+  font-weight: 700;
+  color: var(--num);
+}
+.rc-more {
+  border-top: var(--hair);
+  padding-top: var(--s-3);
+}
+.rc-body {
+  margin-top: var(--s-4);
+  align-items: start;
+}
+.rc-folds {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-card);
+  padding: 0 var(--s-4);
+}
+.rc-folds > .ev-fold:last-child {
+  border-bottom: 0;
+}
+.rc-body > .rail {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-3) var(--s-4);
+}
+@media (max-width: 719px) {
+  .rc-top {
+    padding: var(--s-3);
+    margin-left: calc(-1 * var(--s-1));
+    margin-right: calc(-1 * var(--s-1));
+  }
+  .rc-folds {
+    padding: 0 var(--s-3);
+  }
+}
+
+/* ---- the one-tap sheet in the same look ---- */
+.ev-sheet-h {
+  font-family: var(--font-display);
+  color: var(--h1);
+  font-size: var(--step-1);
+}
+.ev-sheet-kind {
+  font-size: var(--step--1);
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.ev-sheet-v {
+  font-size: var(--step-3);
+  line-height: 1.05;
+}
+.ev-sheet .ev-crop-fig {
+  background: var(--doc-ground);
+  border: 1px solid var(--doc-rule);
+  border-radius: var(--r-2);
+  padding: var(--s-2);
+  margin: var(--s-3) 0 0;
+}
+.ev-sheet-verdict {
+  padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--st-checked);
+  background: var(--st-checked-wash);
+  border-radius: 0 var(--r-1) var(--r-1) 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+.ev-sheet-facts {
+  border-top: var(--hair);
+  padding-top: var(--s-2);
+}
+.ev-sheet-verdict.is-gap {
+  border-left-color: var(--st-gap);
+  background: var(--st-gap-wash);
+}

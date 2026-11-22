@@ -259,3 +259,87 @@
   color: var(--ink-3);
   cursor: default;
 }
+
+/* Periods none of the chosen series has in this release: a pale band with words, like the break label. */
+.cc-gap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--st-gap-wash);
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.cc-gaptext {
+  font-size: var(--step--2);
+  line-height: 1.25;
+  color: var(--ink-2);
+  text-align: center;
+  padding: 0 2px;
+}
+.cc-gap--narrow .cc-gaptext {
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+}
+/* The status of a point that shows no value, in words at the foot of the chart. */
+.cc-gapw {
+  position: absolute;
+  bottom: 2px;
+  transform: translateX(-50%);
+  font-size: var(--step--2);
+  color: var(--ink-2);
+  background: var(--card);
+  padding: 0 2px;
+  white-space: nowrap;
+}
+
+/* The picker is a combobox: options are list items (no nested buttons). */
+.cmp-results[hidden] {
+  display: none;
+}
+.cmp-results li[role="option"] {
+  padding: var(--s-2) var(--s-3);
+  cursor: pointer;
+}
+.cmp-results li[role="option"]:hover,
+.cmp-results li.is-active {
+  background: var(--select-wash);
+  box-shadow: inset 3px 0 0 var(--select-rule);
+}
+@media (max-width: 479px) {
+  .cc-gap .cc-gaptext {
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+  }
+}
+
+/* The table: never wider than the screen; it scrolls inside its own box, with the period column fixed and readable. */
+.cmp-table {
+  max-width: 100%;
+  min-width: 0;
+}
+.cmp-table .table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.cmp-table th[scope="row"] {
+  white-space: nowrap;
+}
+.cmp-table thead th {
+  min-width: 8.5rem;
+  white-space: normal;
+}
+.cmp-table thead th:first-child {
+  min-width: 0;
+}
+@media (max-width: 719px) {
+  .cmp-table table {
+    font-size: var(--step--1);
+  }
+  .cmp-table th,
+  .cmp-table td {
+    padding: 4px 8px;
+  }
+}

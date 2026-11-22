@@ -98,7 +98,7 @@ type Tip = { x: number; px: number; period: string; rows: { label: string; value
 
 export default function Chart({ model, options = {}, idBase = "chart", caption }: { model: ChartModel; options?: ChartOptions; idBase?: string; caption?: string }) {
   const wrap = useRef<HTMLDivElement>(null);
-  const [W, setW] = useState(760);
+  const [Wfull, setW] = useState(760);
   const [tip, setTip] = useState<Tip | null>(null);
 
   useEffect(() => {
@@ -109,8 +109,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
     return () => ro.disconnect();
   }, []);
 
-  const narrow = W < 520;
-  const H = options.height ?? (narrow ? 260 : DEFAULT_H);
+  const narrow = Wfull < 520;
   const view = useMemo(() => {
     const inRange = (p: string) => (!options.from || p >= options.from) && (!options.to || p <= options.to);
     const periods = model.periods.filter((p) => inRange(p.p));
@@ -119,6 +118,9 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
     return { periods, lines, marks };
   }, [model, options.from, options.to]);
 
+  // A short series (up to 8 periods) gets a compact chart: no wide empty axis, every period labelled.
+  const sparse = view.periods.length <= 8;
+  const H = options.height ?? (sparse ? (narrow ? 240 : 280) : narrow ? 260 : DEFAULT_H);
   const points = view.lines.flatMap((l) => l.points);
   if (points.length === 0) {
     return (
@@ -139,11 +141,13 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
   const keyAbove = labelled && (narrow || Math.max(...view.lines.map((l) => l.label.length)) > 24);
   const showKey = keyAbove && !options.noKey;
   const longest = labelled ? Math.max(...view.lines.map((l) => l.label.length)) : 0;
-  const M = { top: 30, right: keyAbove || !labelled ? 16 : Math.min(150, 14 + longest * 6.6), bottom: view.marks.length ? 62 : 40, left: model.unitCode === "PKR" ? (narrow ? 62 : 74) : narrow ? 44 : 54 };
+  const M = { top: 30, right: keyAbove || !labelled ? 16 : Math.min(150, 14 + longest * 6.6), bottom: view.marks.length ? 76 : 40, left: model.unitCode === "PKR" ? (narrow ? 62 : 74) : narrow ? 44 : 54 };
   const xs = [...view.periods.map((p) => p.x)];
   // Small multiples share one period axis: the caller passes the common domain.
   const xMin = (options.xDomain ? options.xDomain[0] : Math.min(...xs)) - model.step * 0.6;
   const xMax = (options.xDomain ? options.xDomain[1] : Math.max(...xs)) + model.step * 0.6;
+  const slots = (xMax - xMin) / (model.step || 1);
+  const W = sparse && !options.xDomain ? Math.min(Wfull, Math.max(300, Math.round(M.left + M.right + slots * (narrow ? 64 : 104)))) : Wfull;
   const ys = points.map((p) => p.y);
   const tf = (v: number) => (log ? Math.log10(v) : v);
   let yTicks: number[];
@@ -158,7 +162,9 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
 
   // x labels: years for monthly series, otherwise every period that fits.
   const xl: { px: number; label: string }[] = [];
-  if (model.frequency === "month") {
+  if (model.frequency === "month" && sparse) {
+    for (const p of view.periods) xl.push({ px: sx(p.x), label: p.label });
+  } else if (model.frequency === "month") {
     const seen = new Set<string>();
     for (const p of view.periods) {
       const yr = p.p.slice(0, 4);
@@ -167,7 +173,17 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
       xl.push({ px: sx(p.x), label: yr });
     }
   } else for (const p of view.periods) xl.push({ px: sx(p.x), label: p.label });
-  const minGap = narrow ? 52 : 58;
+  const minGap = sparse ? (narrow ? 40 : 52) : narrow ? 52 : 58;
+  // Periods the release does not hold, drawn as labelled bands (never a line across them).
+  const gapBands = (model.gaps ?? [])
+    .filter((g) => (!options.from || g.fromPeriod >= options.from) && (!options.to || g.toPeriod <= options.to))
+    .map((g) => {
+      const half = Math.min(model.step, model.frequency === "month" ? 12 : 1) / 2;
+      const x1 = Math.max(M.left, sx(g.from - half));
+      const x2 = Math.min(W - M.right, sx(g.to + half));
+      return { g, x1, x2, w: x2 - x1 };
+    })
+    .filter((b) => b.w > 2);
   const shown = xl.reduce<typeof xl>((acc, t) => (acc.length === 0 || t.px - acc[acc.length - 1].px >= minGap ? [...acc, t] : acc), []);
 
   // Direct labels at line ends, nudged apart so they never overlap.
@@ -181,6 +197,9 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
 
   const breaks = model.breaks.filter((b) => b.inView && b.x > xMin && b.x < xMax);
   const markRow = baseY + 34;
+  // The status of a period with no value, in words under its mark, where there is room.
+  const markXs = [...new Set(view.marks.map((m) => Math.round(sx(m.x))))].sort((a, b) => a - b);
+  const wordRoom = markXs.length > 0 && markXs.every((x, i) => i === 0 || x - markXs[i - 1] >= 84) && view.marks.every((m) => m.statusLabel.length <= 24 && !/\d/.test(m.statusLabel));
   const multi = view.lines.length > 1;
 
   const onMove = (e: React.PointerEvent<SVGSVGElement>) => {
@@ -221,6 +240,7 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
           width={W}
           height={H}
           className="chart-svg"
+          style={{ maxWidth: `${W}px` }}
           role="group"
           aria-labelledby={titleId}
           aria-describedby={descId}
@@ -243,6 +263,45 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
               </text>
             </g>
           ))}
+          {gapBands.map(({ g, x1, x2, w }) => {
+            const one = g.fromPeriod === g.toPeriod;
+            const what = (
+              <>
+                <tspan data-num="axis">{g.fromLabel}</tspan>
+                {one ? null : (
+                  <>
+                    {" "}to <tspan data-num="axis">{g.toLabel}</tspan>
+                  </>
+                )}
+              </>
+            );
+            const cx = (x1 + x2) / 2;
+            return (
+              <g key={`gap-${g.fromPeriod}`} className="c-gap">
+                <title>{`${one ? g.fromLabel : `${g.fromLabel} to ${g.toLabel}`}: not in this release`}</title>
+                <rect x={x1} y={M.top} width={w} height={baseY - M.top} className="c-gapband" />
+                {w >= 104 ? (
+                  <text x={cx} y={M.top + 14} textAnchor="middle" className="c-gaptext">
+                    {what}
+                    <tspan x={cx} dy={13}>
+                      not in this release
+                    </tspan>
+                  </text>
+                ) : w >= 24 ? (
+                  <text transform={`translate(${cx - 11} ${M.top + 6}) rotate(90)`} className="c-gaptext">
+                    {what}
+                    <tspan x={0} dy={-12}>
+                      not in this release
+                    </tspan>
+                  </text>
+                ) : (
+                  <text transform={`translate(${cx - 4} ${M.top + 6}) rotate(90)`} className="c-gaptext">
+                    {what}: none
+                  </text>
+                )}
+              </g>
+            );
+          })}
           <line x1={M.left} x2={W - M.right} y1={baseY} y2={baseY} className="c-axis" />
           {shown.map((t) => (
             <g key={`${t.label}-${t.px}`}>
@@ -335,13 +394,18 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
                 <a key={`${m.period}-${m.vintage}`} href={m.href} className="c-pt" {...(m.sheet ? { "data-sheet": m.sheet } : {})} aria-label={`${m.periodLabel}, ${m.vintageLabel}: ${m.statusLabel}. Open the receipt.`}>
                   <circle cx={sx(m.x)} cy={markRow} r={9} className="c-hit" fill="transparent" />
                   <GapMark status={m.status} cx={sx(m.x) + (multi ? (m.vintage === "re" ? 5 : m.vintage === "be" ? -5 : 0) : 0)} cy={markRow} />
+                  {wordRoom ? (
+                    <text x={sx(m.x)} y={markRow + 18} textAnchor="middle" className="c-markword">
+                      {m.statusLabel.toLowerCase()}
+                    </text>
+                  ) : null}
                 </a>
               ))}
             </g>
           ) : null}
         </svg>
         {tip ? (
-          <div className="chart-tip" style={{ left: `${(tip.px / W) * 100}%`, top: M.top }} role="status">
+          <div className="chart-tip" style={{ left: `${tip.px}px`, top: M.top }} role="status">
             <div className="tip-m">{tip.period}</div>
             {tip.rows.map((r) => (
               <div key={r.label}>
@@ -360,7 +424,9 @@ export default function Chart({ model, options = {}, idBase = "chart", caption }
                 {m.statusLabel}
               </div>
             ))}
-            <div className="tip-m">Tap or click a point for where it is printed</div>
+            <div className="tip-m tip-r">
+              <span className="tip-glyph" aria-hidden="true" /> Tap the point to see it on the printed page
+            </div>
           </div>
         ) : null}
       </div>

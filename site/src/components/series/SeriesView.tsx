@@ -109,8 +109,8 @@ export default function SeriesView(p: SeriesViewProps) {
   const yu = PERIOD_UNIT(p.series.frequency);
   const fromYears = (n: number) => periods.find((x) => x.x >= maxX - (n - 1) * yu)?.p ?? null;
   const ranges = [
-    ...(span >= 5 * yu ? [{ id: "5y", label: "5Y", aria: "Last 5 years", from: fromYears(5) }] : []),
-    ...(span >= 10 * yu ? [{ id: "10y", label: "10Y", aria: "Last 10 years", from: fromYears(10) }] : []),
+    ...(span >= 5 * yu ? [{ id: "5y", label: "Last 5", aria: "Last 5 years", from: fromYears(5) }] : []),
+    ...(span >= 10 * yu ? [{ id: "10y", label: "Last 10", aria: "Last 10 years", from: fromYears(10) }] : []),
     { id: "all", label: "All", aria: "All periods", from: null as string | null },
     ...(p.breakFrom && periods.filter((x) => x.p >= p.breakFrom!.at).length >= 2 ? [{ id: "break", label: `From ${p.breakFrom.label}`, aria: `From the break onward, ${p.breakFrom.label}`, from: p.breakFrom.at }] : []),
   ];
@@ -137,33 +137,27 @@ export default function SeriesView(p: SeriesViewProps) {
         {budget ? (
           <div className="sv-row">
             <span className="sv-label" id="sv-show">
-              Show
+              Figures
             </span>
             <span className="seg sv-seg" role="group" aria-labelledby="sv-show">
               <button type="button" aria-pressed={view === "best"} onClick={() => setQuery({ view: null })}>
-                <span className="w-wide">Best figure per year</span>
-                <span className="w-narrow">
-                  Best per year
-                </span>
+                <span className="w-wide">Latest figure for each year</span>
+                <span className="w-narrow">Latest each year</span>
               </button>
               <button type="button" aria-pressed={view === "kind"} onClick={() => setQuery({ view: "kind" })}>
-                <span className="w-wide">By kind of figure</span>
-                <span className="w-narrow">
-                  By kind
-                </span>
+                <span className="w-wide">Budget and revised, side by side</span>
+                <span className="w-narrow">BE and RE</span>
               </button>
               <button type="button" aria-pressed={view === "rev"} onClick={() => setQuery({ view: "rev", units: null, base: null })}>
-                <span className="w-wide">Change from budget to revised</span>
-                <span className="w-narrow">
-                  BE to RE
-                </span>
+                <span className="w-wide">How much the budget was revised</span>
+                <span className="w-narrow">BE to RE</span>
               </button>
             </span>
           </div>
         ) : null}
         <div className="sv-row">
           <label className="sv-label" htmlFor="sv-units">
-            Units
+            Show as
           </label>
           <select id="sv-units" className="input sv-select" value={units} disabled={view === "rev"} onChange={(e) => setQuery({ units: e.target.value === "printed" ? null : e.target.value, base: null })}>
             {p.units.map((u) => (
@@ -173,7 +167,7 @@ export default function SeriesView(p: SeriesViewProps) {
             ))}
             {p.coming.map((c) => (
               <option key={c} value={`coming-${c}`} disabled>
-                {`${c} (Coming: not in this release)`}
+                {`${c} (not in this release yet)`}
               </option>
             ))}
           </select>
@@ -197,7 +191,7 @@ export default function SeriesView(p: SeriesViewProps) {
         </div>
         <div className="sv-row">
           <span className="sv-label" id="sv-range">
-            Range
+            Years
           </span>
           <span className="seg sv-seg" role="group" aria-labelledby="sv-range">
             {ranges.map((x) => (
@@ -213,6 +207,12 @@ export default function SeriesView(p: SeriesViewProps) {
             ))}
           </span>
         </div>
+        {budget ? (
+          <p className="sv-note">
+            <abbr title="budget estimate">BE</abbr> is the budget estimate, the amount planned when the budget is presented; <abbr title="revised estimate">RE</abbr> is the revised
+            estimate, the updated figure printed in the next year&rsquo;s budget.
+          </p>
+        ) : null}
         {view !== "rev" && units !== "printed" && budget ? <p className="sv-note">A derived view compares like with like, so it is drawn by kind of figure.</p> : null}
       </div>
       )}
@@ -253,6 +253,23 @@ export default function SeriesView(p: SeriesViewProps) {
                 </li>
               ))}
             </ul>
+          ) : null}
+          {model && model.gaps && model.gaps.length ? (
+            <p className="sv-gapkey sv-gaplist">
+              <span className="sv-gapswatch" aria-hidden="true" /> Not in this release:{" "}
+              {model.gaps.map((g, i) => (
+                <span key={g.fromPeriod}>
+                  {i ? "; " : ""}
+                  <span data-num="axis">{g.fromLabel}</span>
+                  {g.fromPeriod === g.toPeriod ? null : (
+                    <>
+                      {" "}to <span data-num="axis">{g.toLabel}</span>
+                    </>
+                  )}
+                </span>
+              ))}
+              . The line does not cross them.
+            </p>
           ) : null}
           {statuses.length ? (
             <p className="sv-gapkey">

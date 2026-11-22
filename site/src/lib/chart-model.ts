@@ -31,6 +31,10 @@ export type ChartMark = { x: number; period: string; periodLabel: string; vintag
 
 export type ChartBreak = { x: number; label: string; note: string; atPeriod: string; atLabel: string; inView: boolean };
 
+/** A run of periods inside the series' span that this release does not hold at all (no figure of any kind):
+ * drawn on the chart as a labelled band ("2012-13 to 2014-15: not in this release"), never joined over. */
+export type ChartGap = { from: number; to: number; fromPeriod: string; toPeriod: string; fromLabel: string; toLabel: string };
+
 export type ChartModel = {
   title: string;
   unit: string; // in words, e.g. "Rs million"
@@ -43,6 +47,8 @@ export type ChartModel = {
   lines: ChartLine[];
   marks: ChartMark[];
   breaks: ChartBreak[];
+  /** Periods the release does not hold, between the first and last period of the series. */
+  gaps?: ChartGap[];
   /** Draw bars from zero instead of lines (a change, where zero means something). */
   bars?: boolean;
 };
@@ -84,6 +90,48 @@ export type ChartObs = { obs_id: string; period: string; vintage: string; value:
 // Must match slugify() in data.ts.
 export const obsSlug = (id: string) => id.replaceAll(":", "~").replace(/[^A-Za-z0-9._~-]/g, "_");
 const obsHref = (id: string) => `/o/${obsSlug(id)}`;
+
+/** The period string of an axis position (inverse of periodOrdinal). */
+export function periodOfOrdinal(x: number, frequency: string): string {
+  if (frequency === "month") return `${Math.floor(x / 12)}-${String((x % 12) + 1).padStart(2, "0")}`;
+  if (frequency === "year") return String(x);
+  return `${x}-${String((x + 1) % 100).padStart(2, "0")}`;
+}
+
+/**
+ * Periods inside the span of a series that the release does not hold at all.
+ * Yearly series (fiscal years, survey rounds, calendar years): every year
+ * between the first and the last. Monthly series: the months of the year the
+ * series is read in (a June-only series misses June 2022, not every month).
+ */
+export function missingRuns(periods: string[], frequency: string): ChartGap[] {
+  const xs = periods.map((p) => periodOrdinal(p, frequency)).filter((x): x is number => x !== null);
+  if (xs.length !== periods.length || xs.length < 2) return [];
+  const have = new Set(xs);
+  const lo = Math.min(...xs);
+  const hi = Math.max(...xs);
+  const want: number[] = [];
+  if (frequency === "month") {
+    const months = new Set(xs.map((x) => x % 12));
+    for (let x = lo; x <= hi; x++) if (months.has(x % 12)) want.push(x);
+  } else for (let x = lo; x <= hi; x++) want.push(x);
+  const runs: ChartGap[] = [];
+  let run: number[] = [];
+  const label = (x: number) => periodWords(periodOfOrdinal(x, frequency), frequency);
+  const flush = () => {
+    if (!run.length) return;
+    const a = run[0];
+    const b = run[run.length - 1];
+    runs.push({ from: a, to: b, fromPeriod: periodOfOrdinal(a, frequency), toPeriod: periodOfOrdinal(b, frequency), fromLabel: label(a), toLabel: label(b) });
+    run = [];
+  };
+  for (const x of want) {
+    if (have.has(x)) flush();
+    else run.push(x);
+  }
+  flush();
+  return runs;
+}
 
 /** The chart model of one series from its observations. Pure: no data access. */
 export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel {
@@ -179,6 +227,7 @@ export function chartModelFrom(series: ChartSeries, all: ChartObs[]): ChartModel
     lines,
     marks,
     breaks,
+    gaps: computable ? missingRuns(periods, series.frequency) : [],
   };
 }
 

@@ -2,141 +2,209 @@
    Phone first (360 px). One column on phones; two on wide screens, with About
    and Where it sits in the side column. Present mode hides the site chrome. */
 
-/* ---------- 1. title, printed label, definition ---------- */
+/* ---------- 1. title, series id, summary, fact pills ---------- */
 .sp .crumbs {
   margin-bottom: var(--s-2);
 }
-.sp-head h1 {
-  font-size: var(--step-2);
-  margin: 0;
-}
-.sp-printed {
-  margin: 2px 0 0;
-  font-size: var(--step--1);
-  color: var(--ink-3);
-}
-.sp-printed q {
-  quotes: "\201C" "\201D";
-}
-.sp-def {
-  margin: var(--s-1) 0 0;
-  font-size: var(--step--1);
-  color: var(--ink-2);
-  max-width: 72ch;
-}
-.sp-def > summary {
-  list-style: none;
-  cursor: pointer;
-}
-.sp-def > summary::-webkit-details-marker {
-  display: none;
-}
-.sp-def:not([open]) .sp-def-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.sp-def > summary::after {
-  content: "more";
-  color: var(--link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  font-weight: 600;
-}
-.sp-def[open] > summary::after {
-  content: " less";
-}
-.sp-def > summary:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
-.sp-def .draft-mark {
-  margin: var(--s-1) 0 0;
-}
-
-/* ---------- layout ---------- */
-.sp-top {
-  margin-top: var(--s-3);
-}
-.sp-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0 var(--s-5);
-}
-@media (min-width: 1020px) {
-  .sp-grid {
-    grid-template-columns: minmax(0, 1fr) 21rem;
-    gap: var(--s-7);
-  }
-  .sp-side {
-    border-left: var(--hair);
-    padding-left: var(--s-5);
-  }
-  .sp-side h2:first-child {
-    margin-top: 0;
-  }
-}
-
-/* ---------- 2. the answer line ---------- */
-.answer {
-  margin: 0 0 var(--s-3);
-}
-.answer-line {
+.sp-titlerow {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 2px var(--s-3);
+  gap: var(--s-1) var(--s-3);
+}
+.sp-head h1 {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: var(--leading-tight);
+  color: var(--h1);
   margin: 0;
-  font-size: var(--step--1);
+}
+.sp-summary {
+  margin: var(--s-1) 0 var(--s-3);
+  font-size: var(--step-0);
   color: var(--ink-2);
+  max-width: 80ch;
 }
-.answer-v {
-  font-size: var(--step-2);
+.sp-facts {
+  margin-bottom: var(--s-3);
+}
+.sp-facts .fact-pill {
+  padding: 2px 9px;
+}
+
+/* ---------- layout: headline, chart, rail; then table and About ----------
+   Phones: headline, chart, rail. Wide: the chart is the big left column, the
+   headline and the related rail stack beside it; below, the table and Where
+   it sits on the left, About on the right. */
+.sp-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "num" "chart" "rail";
+  gap: var(--s-3);
+  align-items: start;
+}
+.sp-numcol {
+  grid-area: num;
+}
+.sp-chart {
+  grid-area: chart;
+  margin: 0;
+}
+.sp-railcol {
+  grid-area: rail;
+}
+@media (min-width: 1020px) {
+  .sp-top {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    grid-template-areas: "chart num" "chart rail";
+    grid-template-rows: auto 1fr;
+    gap: var(--s-3) var(--s-4);
+  }
+}
+.sp-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 var(--s-5);
+  align-items: start;
+}
+@media (min-width: 1020px) {
+  .sp-lower {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+}
+.sp-lower h2 {
+  font-size: var(--step-1);
+  margin: var(--s-4) 0 var(--s-2);
+}
+
+/* ---------- 2. the headline block (NumberBlock in a white card) ---------- */
+.sp-num {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-card);
+  padding: var(--s-3) var(--s-4);
+  margin: 0;
+}
+.sp-num .numblock-value {
+  margin-bottom: var(--s-1);
+}
+.sp-num .numblock-value a[data-v] {
+  text-decoration-color: var(--rule);
+}
+.sp-num .numblock-answer {
+  line-height: 1.5;
+}
+.sp-num .numblock-change {
+  font-size: var(--step-0);
+  color: var(--ink);
+}
+.sp-num .numblock-change .d-val {
   font-weight: 700;
-  line-height: 1.15;
-  font-variant-numeric: tabular-nums lining-nums;
 }
-.answer-v .v-link {
-  color: var(--ink);
-  text-decoration-color: var(--rule-strong);
+.sp-proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-1) var(--s-3);
+  margin: var(--s-2) 0 var(--s-1);
 }
-.answer-k {
-  font-weight: 600;
-  color: var(--ink);
-}
-.answer-c .d-val {
-  font-weight: 700;
-  color: var(--ink);
-}
-.answer-src {
+.sp-marker {
   font-size: var(--step--2);
   color: var(--ink-3);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-1);
-  padding: 0 6px;
-  text-decoration: none;
-  white-space: nowrap;
 }
-.answer-src:hover {
-  border-color: var(--select-rule);
-  color: var(--link);
-}
-.answer-exact,
-.answer-newer {
-  margin: 2px 0 0;
+.sp-num .sp-exact,
+.sp-num .sp-newer {
+  margin: var(--s-1) 0 0;
   font-size: var(--step--2);
   color: var(--ink-3);
 }
-.answer-newer .st-mark {
+.sp-newer .st-mark {
   width: 10px;
   height: 10px;
   vertical-align: -1px;
   color: var(--st-withheld);
 }
-.answer-none .answer-line {
-  display: block;
+.sp-none {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  color: var(--num);
+  margin: var(--s-1) 0;
+}
+.sp-release-note {
+  margin: var(--s-2) 0 0;
+  color: var(--ink-3);
+}
+
+/* ---------- related series with sparklines (World Bank style rail) ---------- */
+.srail {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-card);
+  padding: var(--s-3) var(--s-3) var(--s-2);
+}
+.srail-h {
+  font-size: var(--step-0);
+  margin: 0 0 2px;
+}
+.srail-note {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  margin: 0 0 var(--s-2);
+}
+.srail-gh {
+  font-size: var(--step--2);
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: var(--s-2) 0 var(--s-1);
+}
+.srail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.srail-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "title spark" "fig spark";
+  gap: 0 var(--s-2);
+  align-items: center;
+  padding: 6px 0;
+  border-top: var(--hair);
+}
+.srail-title {
+  grid-area: title;
   font-size: var(--step--1);
+  line-height: 1.3;
+}
+.srail-fig {
+  grid-area: fig;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--s-2);
+}
+.srail-v {
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+.srail-v a[data-v] {
+  color: var(--num);
+}
+.srail-when {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+}
+.srail-spark {
+  grid-area: spark;
+}
+.srail-more {
+  font-size: var(--step--2);
+  margin: var(--s-1) 0 0;
 }
 
 /* ---------- 3. chart block ---------- */
@@ -223,10 +291,8 @@ html.js .sv-controls {
 }
 .sv-frame {
   margin: 0;
-  border: var(--hair);
-  border-radius: var(--r-2);
   background: var(--card);
-  padding: var(--s-2) var(--s-2) 0;
+  padding: 0;
 }
 .sv-sub {
   font-size: var(--step--2);
@@ -265,8 +331,8 @@ html.js .sv-controls {
 }
 .sv-src {
   border-top: var(--hair);
-  margin: var(--s-1) calc(-1 * var(--s-2)) 0;
-  padding: var(--s-2) var(--s-3);
+  margin: var(--s-1) 0 0;
+  padding: var(--s-2) 0 0;
   background: var(--card);
   font-size: var(--step--2);
   color: var(--ink-3);
@@ -296,10 +362,44 @@ html.js .sv-controls {
   font-weight: 600;
   margin-bottom: var(--s-2);
 }
-.sp-coming {
-  margin: var(--s-2) 0 0;
-  font-size: var(--step--2);
+/* Periods the release does not hold: a pale band with words on it. */
+.chart-svg .c-gapband {
+  fill: var(--st-gap-wash);
+  stroke: none;
 }
+.chart-svg .c-gaptext {
+  font-size: 11px;
+  fill: var(--ink-2);
+}
+.chart-svg .c-markword {
+  font-size: 11px;
+  fill: var(--ink-2);
+}
+.sv-gapswatch {
+  display: inline-block;
+  width: 12px;
+  height: 10px;
+  vertical-align: -1px;
+  background: var(--st-gap-wash);
+  border: 1px solid var(--rule-strong);
+}
+.chart-tip .tip-r {
+  margin-top: 2px;
+}
+.chart-tip .tip-glyph {
+  display: inline-block;
+  width: 9px;
+  height: 11px;
+  vertical-align: -1px;
+  background: currentColor;
+  -webkit-mask: var(--receipt-glyph) center / contain no-repeat;
+  mask: var(--receipt-glyph) center / contain no-repeat;
+}
+.sv-note abbr {
+  text-decoration: none;
+  font-weight: 650;
+}
+
 
 /* ---------- 4. action bar: a fixed bottom bar on phones ---------- */
 .sp .action-bar {
@@ -337,7 +437,7 @@ html.js .sv-controls {
 
 /* ---------- 5. the table by kind of figure (DESIGN.md 12) ---------- */
 .kt-section h2 {
-  margin-top: var(--s-5);
+  margin-top: var(--s-2);
 }
 .kt-intro {
   margin: 0 0 var(--s-2);
@@ -542,9 +642,45 @@ dl.facts.about-facts dt {
   font-size: var(--step--1);
   margin: var(--s-4) 0 var(--s-1);
 }
-.sp-cite h2 {
-  margin-top: var(--s-6);
+.sp-cite {
+  margin: var(--s-4) 0;
+  border-top: var(--hair);
 }
+.sp-cite > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.sp-cite > summary::-webkit-details-marker {
+  display: none;
+}
+.sp-cite > summary::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--ink-2);
+  border-bottom: 2px solid var(--ink-2);
+  transform: rotate(-45deg);
+}
+.sp-cite[open] > summary::before {
+  transform: rotate(45deg);
+}
+.sp-cite > summary h2 {
+  margin: var(--s-3) 0;
+}
+.sp-side .about {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--r-3);
+  padding: var(--s-1) var(--s-4) var(--s-3);
+  margin-top: var(--s-4);
+}
+.trail {
+  margin-top: var(--s-2);
+}
+
 
 /* ---------- present mode (DESIGN.md 11): for projectors ---------- */
 html.present {
@@ -555,14 +691,16 @@ html.present .site-header,
 html.present .site-footer,
 html.present .skip-link,
 html.present .sp .crumbs,
-html.present .sp-def,
-html.present .sp-printed,
-html.present .answer-exact,
+html.present .sp-summary,
+html.present .sp-facts,
+html.present .sp-numcol,
+html.present .sp-railcol,
+html.present .sp-release-note,
+html.present .sp-id,
 html.present .sp .action-bar,
 html.present .kt-section,
 html.present .sp-cite,
-html.present .sp-side,
-html.present .sp-coming,
+html.present .sp-lower,
 html.present .sp .callout,
 html.present .sv-note,
 html.present .sv-dtable {
@@ -571,8 +709,9 @@ html.present .sv-dtable {
 html.present .sp {
   padding-bottom: 0;
 }
-html.present .sp-grid {
+html.present .sp-top {
   grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "chart";
   margin-top: var(--s-2);
 }
 html.present main {
@@ -596,5 +735,48 @@ html.present .sv-sub {
   .sv-controls,
   .sp .action-bar {
     display: none !important;
+  }
+}
+
+/* ---------- round 2 fit and finish ---------- */
+.sp-facts-wrap {
+  margin: 0 0 var(--s-3);
+}
+.sp-facts-wrap .fact-pills {
+  margin: 0;
+}
+.sp-facts .fact-pill dt {
+  white-space: nowrap;
+}
+@media (max-width: 719px) {
+  /* Phones: the pills are one row that scrolls sideways, so the headline figure stays on the first screen. */
+  .sp-facts-wrap {
+    overflow-x: auto;
+    margin: 0 calc(-1 * var(--gutter)) var(--s-3);
+    padding: 0 var(--gutter) 4px;
+    scrollbar-width: thin;
+  }
+  .sp-facts-wrap .fact-pills {
+    flex-wrap: nowrap;
+    width: max-content;
+  }
+  .sp-facts .fact-pill {
+    white-space: nowrap;
+  }
+  .sp-summary {
+    font-size: var(--step--1);
+    margin-bottom: var(--s-2);
+  }
+  .sp-head h1 {
+    font-size: var(--step-2);
+  }
+}
+@media (min-width: 1020px) {
+  .sp-top {
+    grid-template-columns: minmax(0, 1fr) 23rem;
+  }
+  .sp-num .numblock-value {
+    font-size: clamp(2.5rem, 1.6rem + 1.5vw, 3.25rem);
+    white-space: nowrap;
   }
 }

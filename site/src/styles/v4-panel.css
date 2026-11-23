@@ -1,0 +1,215 @@
+/* v4-panel: the evidence sheet as the Source Panel (Home v3 pages set,
+ * 2026-11-24): a right-hand drawer, 480 px, navy edge, gold top rule, scrim.
+ * Overrides the round-2 bottom sheet / popover rules in evidence.css. */
+
+.ev-sheet-backdrop,
+html .ev-sheet-backdrop {
+  z-index: 1000;
+  background: var(--scrim);
+}
+.ev-sheet.ev-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--panel-w), 100%);
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  visibility: visible;
+  background: var(--card);
+  border: 0;
+  border-left: var(--rule-w) solid var(--panel-edge);
+  border-radius: 0;
+  box-shadow: none;
+}
+.ev-panel .ev-sheet-bar {
+  position: static;
+  padding: var(--s-3) var(--s-5);
+  border-top: 3px solid var(--panel-top);
+  border-bottom: var(--hair);
+}
+.ev-panel .ev-sheet-h {
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+.ev-sheet-close {
+  min-height: 32px;
+  padding: var(--s-1) var(--s-3);
+  border: var(--rule-w) solid var(--rule-strong);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 700;
+  cursor: pointer;
+}
+.ev-sheet-close:hover {
+  background: var(--select-wash);
+}
+.ev-panel .ev-sheet-body {
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px var(--s-5) var(--s-6);
+}
+.ev-panel .ev-sheet-body > * + * {
+  margin-top: 0;
+}
+.ev-panel .ev-sheet-loading {
+  margin: var(--s-4) var(--s-5);
+}
+.ev-panel-fig p {
+  margin: 0;
+}
+.ev-panel-title {
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.ev-panel-kind {
+  color: var(--ink-3);
+}
+.ev-panel-v {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: var(--wdth-num);
+  font-size: 2.75rem;
+  line-height: 1.1;
+  color: var(--num);
+}
+.ev-panel-u {
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.ev-panel-printed {
+  margin-top: 2px !important;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.ev-panel-printed strong {
+  color: var(--ink);
+}
+.ev-panel-crop {
+  margin: 0;
+}
+.ev-panel-tray {
+  padding: var(--s-3);
+  background: var(--doc-ground);
+}
+.ev-panel-tray .ev-crop-fig {
+  margin: 0;
+}
+.ev-panel-tray .ev-proof-label {
+  display: none;
+}
+.ev-panel-nocrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  margin: 0;
+  padding: 0 var(--s-6);
+  background: var(--card);
+  border: var(--rule-w) solid var(--doc-rule);
+  text-align: center;
+  font-family: var(--font-ref);
+  font-size: var(--t-util);
+  color: var(--ink-3);
+}
+.ev-panel-cap {
+  margin-top: var(--s-2);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ev-panel-cap strong {
+  color: var(--ink);
+}
+.ev-panel-checks h3 {
+  margin: 0 0 var(--s-1);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.ev-panel-checks ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  border-top: var(--hair);
+}
+.ev-panel-checks li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: var(--hair);
+}
+.ev-panel-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--checked-ink);
+}
+.ev-panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ev-panel-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+}
+.ev-panel-primary:hover {
+  background: var(--lums-blue);
+  color: var(--white);
+}
+.ev-panel-primary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.ev-panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 0.875rem;
+}
+.ev-panel-linkbtn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+}
+.ev-panel .ev-versions {
+  font-size: var(--step--1);
+}
+
+/* the thin line under charts and tables: "click any value to see where it was printed" */
+.src-hint {
+  margin: var(--s-2) 0 0;
+  padding-top: var(--s-2);
+  border-top: 2px solid var(--hover-wash);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}

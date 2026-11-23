@@ -56,6 +56,12 @@ const PLANNED: Record<FeatureKey, string> = {
   monthlyData: "every monthly CPI issue, not only June.",
   errataBadges: "a note on each corrected figure, linking to its errata entry.",
   dailyRates: "fuel prices and the dollar rate read once a day from official notices, on the home page.",
+  insights: "short findings written from the latest figures, each sentence linked to the figures it uses and reviewed by a person before it is shown.",
+  perPerson: "rupee series per person, once a checked population series is in the release.",
+  actualSpending: "what the federal government actually spent, from the federal accounts.",
+  provincialMap: "a map of the provinces shaded by the selected figure.",
+  releaseAlerts: "an email when a publication you follow is added.",
+  urdu: "the site in Urdu.",
 };
 
 type CalEntry = { id: string; name: string; agency: string; when: string; status: string };

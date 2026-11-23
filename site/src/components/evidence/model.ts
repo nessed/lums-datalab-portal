@@ -543,7 +543,24 @@ export type SheetData = {
   printed: string | null;
   crop: (CropPlan & { base: string }) | null;
   versions: Versions;
+  /** The checks this figure passed, one plain line each, no figure in them (digits only inside a document title). Empty for a gap. */
+  checks: string[];
 };
+
+/** One line per passing check of a shown figure (Source Panel, Home v3 pages set). */
+export function passedChecks(db: Db, o: Observation): string[] {
+  if (!(o.reader.showsValue && o.published && o.value !== null)) return [];
+  const out: string[] = [];
+  for (const id of o.check_ids) {
+    const c = db.checkById.get(id);
+    if (!c || !isPass(c) || c.check_type === "reference_value") continue;
+    let k = passClause(db, c, o);
+    if (c.result === "pass_within_rounding") k += " (allowing for rounding)";
+    k = k.charAt(0).toUpperCase() + k.slice(1);
+    if (!out.includes(k)) out.push(k);
+  }
+  return out;
+}
 
 export function officialWorks(src: Source | undefined): boolean {
   return !!src && !(src.verification_status ?? "").startsWith("wayback") && src.verification_status !== "archive_copy_content_inspected";
@@ -586,5 +603,6 @@ export function sheetData(db: Db, o: Observation, opts: { dataBase: string; crop
     printed: shows && cell ? cell.value_raw : null,
     crop: ev && ev.boxState === "exact" && opts.crop ? { ...opts.crop, base: `${opts.dataBase}/evidence/crops/` } : null,
     versions: versionsOf(db, o),
+    checks: passedChecks(db, o),
   };
 }

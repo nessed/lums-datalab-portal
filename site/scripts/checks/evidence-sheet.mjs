@@ -169,6 +169,13 @@ export default function check({ siteDir, appDir, cfg, release, series, allObs, o
     let v = String(j.verdict ?? "");
     for (const t of titles) v = v.split(t).join("");
     if (/\d/.test(v)) problem("evidence-sheet", where, `verdict has a digit outside a document title: "${j.verdict}"`);
+    // The checks list (Source Panel): same rule, one line at a time; a gap lists none.
+    for (const line of j.checks ?? []) {
+      let x = String(line);
+      for (const t of titles) x = x.split(t).join("");
+      if (/\d/.test(x)) problem("evidence-sheet", where, `check line has a digit outside a document title: "${line}"`);
+    }
+    if (!j.value && (j.checks ?? []).length) problem("evidence-sheet", where, "a gap lists passed checks");
 
     // The versions strip.
     const same = allObs.filter((x) => x.series_id === o.series_id && x.period === o.period);

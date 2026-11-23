@@ -1,0 +1,277 @@
+/* v4-receipt: the figure page /o/[id] (Home v3 pages set, 2026-11-24): the
+ * whole printed page with zoom on the left, the figure, its checks, where it is
+ * and how to cite it on the right. The sections below keep their round-2 look. */
+
+.rc4-head {
+  padding: 18px 0 var(--s-5);
+  border-bottom: var(--hair);
+}
+.rc4-kick {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.rc4-head .rc-title {
+  margin: 2px 0 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.875rem;
+  line-height: 1.15;
+}
+.rc4-head .receipt-when,
+.rc4-head .figure-kind,
+.rc4-head .rc-printed {
+  margin: var(--s-1) 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.rc4-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 48px;
+  align-items: start;
+  padding-top: var(--s-5);
+}
+.rc4-page {
+  min-width: 0;
+}
+.rc4-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: 10px;
+  font-size: 0.875rem;
+}
+.rc4-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+.rc4-zoom {
+  display: inline-flex;
+  gap: var(--s-2);
+}
+.rc4-zoom button {
+  width: 34px;
+  height: 34px;
+  border: var(--rule-w) solid var(--rule-strong);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+.rc4-zoom button:disabled {
+  color: var(--ink-3);
+  cursor: default;
+}
+.rc4-open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 var(--s-3);
+  border: var(--rule-w) solid var(--lums-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+.rc4-open:hover {
+  background: var(--select-wash);
+}
+.rc4-tray {
+  max-height: 760px;
+  overflow: auto;
+  padding: var(--s-5);
+  background: var(--doc-ground);
+}
+.rc4-sheet {
+  width: 100%;
+  margin: 0 auto;
+}
+.rc4-sheet .ev-page {
+  position: relative;
+  background: var(--white);
+  border: var(--rule-w) solid var(--doc-rule);
+  line-height: 0;
+}
+.rc4-sheet .ev-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ev-band4 {
+  position: absolute;
+  background: var(--evidence-band);
+  pointer-events: none;
+}
+.rc4-cap {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.rc4-none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  margin: 0;
+  padding: 0 var(--s-6);
+  background: var(--doc-ground);
+  text-align: center;
+  font-family: var(--font-ref);
+  font-size: var(--t-util);
+  color: var(--ink-3);
+}
+
+/* the right column */
+.rc4-side {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+.rc4-fig {
+  padding-top: var(--s-3);
+  border-top: var(--rule-heavy) solid var(--ink);
+}
+.rc4-on {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.rc4-fig .figure {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+.rc4-fig .figure-v {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: var(--wdth-num);
+  font-size: 3.25rem;
+  line-height: 1.1;
+  color: var(--num);
+}
+.rc4-fig .figure-u {
+  margin-left: var(--s-2);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.rc4-fig .figure-human,
+.rc4-printed {
+  margin: var(--s-1) 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.rc4-printed strong {
+  color: var(--ink);
+}
+.rc4-fig .rc-verdict {
+  margin: var(--s-3) 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.rc4-box h2,
+.rc4-cite h2 {
+  margin: 0 0 6px;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+.rc4-checks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--hair);
+  font-size: 0.875rem;
+}
+.rc4-checks li {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: var(--hair);
+}
+.rc4-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--checked-ink);
+}
+.rc4-small {
+  display: inline-block;
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+}
+.rc4-facts {
+  margin: 0;
+  font-size: 0.875rem;
+}
+.rc4-facts > div {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: var(--hair);
+}
+.rc4-facts dt {
+  color: var(--ink-3);
+}
+.rc4-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.rc4-cite {
+  padding: 14px var(--s-4);
+  background: var(--band);
+  border: var(--hair);
+}
+.rc4-cite p {
+  margin: 0 0 10px;
+  font-size: var(--step--1);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.rc4-cite-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+  font-size: var(--step--1);
+}
+.rc4-side .rc-more {
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+  .rc4-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-5);
+  }
+  .rc4-tray {
+    max-height: 70vh;
+    padding: var(--s-2);
+  }
+}
+
+/* search.css styles a series card as .rc (a grid); the receipt article shares the class name */
+article.receipt.rc {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}

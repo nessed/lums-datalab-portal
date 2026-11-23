@@ -88,7 +88,7 @@ export function SeriesAnswer({ e, link }: { e: SearchEntry; link?: boolean }) {
   return (
     <span className="sr-ans">
       {link && e.lo ? (
-        <a href={e.lo} className="v-link sr-v" data-v="" aria-label={label}>
+        <a href={e.lo} className="v-link sr-v" data-v="" data-sheet={slugOf(e.lo)} aria-label={label}>
           {e.lv}
         </a>
       ) : (

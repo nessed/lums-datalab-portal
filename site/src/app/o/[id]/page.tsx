@@ -20,7 +20,11 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import Cite from "@/components/Cite";
 import { ActionBar, CiteButton, ShareButton } from "@/components/actions/Actions";
-import { Breadcrumbs, Callout, DownloadLink, ExternalLink, TableWrap } from "@/components/ui/Basics";
+import { Callout, DownloadLink, ExternalLink, TableWrap } from "@/components/ui/Basics";
+import Crumbs from "@/components/chrome/Crumbs";
+import PageZoom from "@/components/evidence/PageZoom";
+import { cite } from "@/lib/cite";
+import "@/styles/v4-receipt.css";
 import CopyButton from "@/components/ui/CopyButton";
 import { ReportLink } from "@/components/chrome/Chrome";
 import { StatusBadge, StatusMark } from "@/components/ui/Status";
@@ -45,6 +49,8 @@ import {
   pageImage,
   pageShort,
   pageWords,
+  docPageHref,
+  library,
   receiptCsvHref,
   receiptJsonHref,
   RELEASE_VERSION,
@@ -446,6 +452,17 @@ export default async function ReceiptPage({ params }: Props) {
   const versions = versionsOf(d, obs);
   const works = officialWorks(source);
   const pdf = showPage ? pdfAtPage(source, cell?.page) : null;
+  // The checks this figure passed, one plain line each (the same lines as the Source Panel's, model.ts passedChecks).
+  const passed: string[] = [];
+  if (isValue)
+    for (const c of checks) {
+      if (!(c.result === "pass" || c.result === "pass_within_rounding") || c.check_type === "reference_value") continue;
+      let k = passClause(d, c, obs) + (c.result === "pass_within_rounding" ? " (allowing for rounding)" : "");
+      k = k.charAt(0).toUpperCase() + k.slice(1);
+      if (!passed.includes(k)) passed.push(k);
+    }
+  const servedDoc = cell ? !!library().documents.find((x) => x.id === cell.source_id && x.file && x.format === "pdf" && x.state !== "rejected") : false;
+  const citeLine = cite({ release: d.release, path, what: `Observation ${obs.obs_id}`, source: isValue ? source : null, page: apaPage, pageLabel: isValue ? cell?.page_label : null }).sentence;
   const tableTitle = cell ? d.coverage.find((c) => c.source_id === cell.source_id && c.page === cell.page)?.table : undefined;
   const breakBetween = (a: string, b: string) => series.breaks.some((br) => a < br.at_period && br.at_period <= b);
   const between = (a: string, b: string) => series.breaks.find((br) => a < br.at_period && br.at_period <= b);
@@ -517,7 +534,7 @@ export default async function ReceiptPage({ params }: Props) {
   return (
     <article className="receipt rc" data-status={info.key} data-receipt>
       <ReceiptEnhance />
-      <Breadcrumbs
+      <Crumbs
         items={[
           { href: "/browse", label: "Data" },
           { href: `/datasets/${series.dataset}`, label: datasetName(series.dataset) },
@@ -538,9 +555,8 @@ export default async function ReceiptPage({ params }: Props) {
       </p>
       <CorrectionBar corrections={[]} />
 
-      <div className={`rc-top${ev || readings.length ? " has-proof" : ""}`}>
-        {/* ---------------- the figure, its kind and period, the verdict ---------------- */}
-        <header className="rc-id">
+      <header className="rc4-head">
+        <p className="rc4-kick">One figure, with its source</p>
           <h1 className="receipt-title rc-title">{seriesTitle(series)}</h1>
           {printedLine(series) ? (
             <p className="small muted rc-printed">
@@ -552,6 +568,92 @@ export default async function ReceiptPage({ params }: Props) {
             {datasetName(series.dataset)} · <Link href={seriesHref(series.series_id)}>the whole series</Link>
           </p>
           <p className="figure-kind">{kindLine}</p>
+      </header>
+
+      <div className={`rc4-grid${ev || readings.length ? " has-proof" : ""}`}>
+        {/* ---------------- the printed page, whole, with zoom ---------------- */}
+        <section className="rc4-page" id="page" aria-label="The printed page">
+          {cell && showPage && image && ev && ev.boxState !== "no-image" ? (
+            <>
+              <div className="rc4-bar">
+                <span>
+                  <strong>{srcShort(source, cell.source_id)}</strong> · <Num kind="page">{pageWords(cell, source?.page_count)}</Num>
+                </span>
+                <span className="rc4-tools">
+                  <PageZoom target="rc4-sheet" />
+                  {servedDoc ? (
+                    <Link className="rc4-open" href={docPageHref(cell.source_id, cell.page)}>
+                      Open the full document at this page
+                    </Link>
+                  ) : pdf ? (
+                    <a className="rc4-open" href={pdf} rel="noopener">
+                      Official PDF at this page
+                    </a>
+                  ) : null}
+                </span>
+              </div>
+              <div className="rc4-tray">
+                <div className="rc4-sheet" id="rc4-sheet">
+                  <WholePage
+                    eager
+                    bands
+                    image={image}
+                    cell={cell}
+                    state={ev.boxState}
+                    alt={`Page ${cell.page} of ${srcShort(source, cell.source_id)}${isValue ? `, with the figure ${cell.value_raw} boxed` : ", with the empty cell boxed"} in the row "${cell.row_label_raw}" and the column "${cell.col_label_raw}".`}
+                  />
+                </div>
+              </div>
+              <p className="rc4-cap">
+                {isValue ? "The box marks the figure." : "The box marks the cell, which prints no figure."}
+                {ev.boxState === "exact" ? " The shaded row and column lead to it from the line name and the column heading; the dashed outline marks the table it was read from." : ""}{" "}
+                <a href={image.src}>Open the page image</a>
+              </p>
+            </>
+          ) : (ev && cell) || (isDisputed && readings.length > 0) ? (
+            <>
+        {/* ---------------- the proof ---------------- */}
+        {ev && cell ? (
+          <div className="rc-proof">
+            <ProofView
+              ev={ev}
+              plan={plan}
+              image={image}
+              cell={cell}
+              base={CROP_BASE}
+              alt={`Close-up of page ${cell.page} of ${srcShort(source, cell.source_id)}: the row "${cell.row_label_raw}" with ${isValue ? `the figure ${cell.value_raw}` : "the cell that prints no figure"} boxed.`}
+              caption={proofCaption}
+            />
+          </div>
+        ) : null}
+        {isDisputed && readings.length > 0 ? (
+          <div className="rc-proof">
+            <p className="ev-proof-label">Printed here, differently</p>
+            {readings.map((c, i) => (
+              <Printing
+                key={c.cell_id}
+                cell={c}
+                lazy={false}
+                label={
+                  <strong>
+                    Printing <Num kind="ui">{i + 1}</Num>.
+                  </strong>
+                }
+              />
+            ))}
+          </div>
+        ) : null}
+
+            </>
+          ) : (
+            <p className="rc4-none">{cell && showPage ? "Page close-up not available for this figure." : "No printed page is shown for this figure: it has no checked value."}</p>
+          )}
+        </section>
+
+        {/* ---------------- the figure, its checks, where it is, how to cite it ---------------- */}
+        <aside className="rc4-side">
+          <section className="rc4-fig">
+            <p className="rc4-on">On this site</p>
           {isValue ? (
             <div className="figure" data-receipt-value>
               <p className="figure-v tnum">
@@ -636,86 +738,129 @@ export default async function ReceiptPage({ params }: Props) {
               ({breakNear.kind.replaceAll("_", " ")}): figures before and after it are not comparable. <a href="#caveats">Why</a>
             </p>
           ) : null}
-        </header>
-
-        {/* ---------------- the proof ---------------- */}
-        {ev && cell ? (
-          <div className="rc-proof">
-            <ProofView
-              ev={ev}
-              plan={plan}
-              image={image}
-              cell={cell}
-              base={CROP_BASE}
-              alt={`Close-up of page ${cell.page} of ${srcShort(source, cell.source_id)}: the row "${cell.row_label_raw}" with ${isValue ? `the figure ${cell.value_raw}` : "the cell that prints no figure"} boxed.`}
-              caption={proofCaption}
-            />
-          </div>
-        ) : null}
-        {isDisputed && readings.length > 0 ? (
-          <div className="rc-proof">
-            <p className="ev-proof-label">Printed here, differently</p>
-            {readings.map((c, i) => (
-              <Printing
-                key={c.cell_id}
-                cell={c}
-                lazy={false}
-                label={
-                  <strong>
-                    Printing <Num kind="ui">{i + 1}</Num>.
-                  </strong>
-                }
-              />
-            ))}
-          </div>
-        ) : null}
-
+            {isValue && cell ? (
+              <p className="rc4-printed">
+                As printed:{" "}
+                <strong className="mono" data-num="printed" data-cell={cell.cell_id}>
+                  {cell.value_raw}
+                </strong>{" "}
+                ({unit})
+              </p>
+            ) : null}
+          </section>
+          {passed.length ? (
+            <section className="rc4-box">
+              <h2>Checks this figure passed</h2>
+              <ul className="rc4-checks">
+                {passed.map((c) => (
+                  <li key={c}>
+                    <span className="rc4-dot" aria-hidden="true" />
+                    <WithTitles text={c} />
+                  </li>
+                ))}
+              </ul>
+              <a href="#checks" className="rc4-small">
+                Every check, in full
+              </a>
+            </section>
+          ) : null}
+          {cell && showPage && source ? (
+            <section className="rc4-box">
+              <h2>Where it is</h2>
+              <dl className="rc4-facts">
+                <div>
+                  <dt>Document</dt>
+                  <dd>
+                    <Link href={sourceHref(source.source_id)}>{srcShort(source, cell.source_id)}</Link>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Publisher</dt>
+                  <dd>{source.publisher}</dd>
+                </div>
+                <div>
+                  <dt>Page</dt>
+                  <dd>
+                    <Num kind="page">{pageWords(cell, source.page_count)}</Num>
+                  </dd>
+                </div>
+                {tableTitle ? (
+                  <div>
+                    <dt>Table</dt>
+                    <dd>
+                      <Num kind="id">{tableTitle}</Num>
+                    </dd>
+                  </div>
+                ) : null}
+                <div>
+                  <dt>Row</dt>
+                  <dd>{cell.row_label_raw ?? "not recorded"}</dd>
+                </div>
+                <div>
+                  <dt>Column</dt>
+                  <dd>{cell.col_label_raw ?? "not recorded"}</dd>
+                </div>
+                <div>
+                  <dt>Kind</dt>
+                  <dd>{kindLine}</dd>
+                </div>
+                {source.sha256 ? (
+                  <div>
+                    <dt>File fingerprint</dt>
+                    <dd>
+                      <Num kind="id" className="mono">{`${source.sha256.slice(0, 16)}…`}</Num>
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            </section>
+          ) : null}
+          <section className="rc4-cite">
+            <h2>Cite this figure</h2>
+            <p>
+              <Num kind="cite">{citeLine}</Num>
+            </p>
+            <div className="rc4-cite-acts">
+              <CopyButton text={citeLine} label="Copy citation" />
+              <ReportLink issuesUrl={ISSUES_URL} version={RELEASE_VERSION}>
+                Report a problem with this figure
+              </ReportLink>
+            </div>
+          </section>
+          <p className="rc4-small">
+            <Link href={seriesHref(series.series_id)} className="strong">
+              See every year of this series
+            </Link>
+          </p>
         <div className="rc-more">
-          <VersionsStrip versions={versions} />
-          {/* ---------------- action row: a sticky bar on phones ---------------- */}
-          <div className="rc-actions no-print">
-            <ActionBar label="Actions for this figure">
-              <CiteButton path={path} primary />
-              {pdf && cell ? (
-                <a className="btn" href={pdf} rel="noopener" aria-label={`Official PDF at page ${cell.page}`}>
-                  PDF <Num kind="page">p. {cell.page}</Num>
-                </a>
-              ) : null}
-              {source && showPage && source.wayback_url ? (
-                <a className="btn" href={source.wayback_url} rel="noopener" aria-label={works ? "Internet Archive copy of the document" : "Internet Archive copy of the document (the file used)"}>
-                  Archive
-                </a>
-              ) : null}
-              <ShareButton path={path} />
-            </ActionBar>
+            <VersionsStrip versions={versions} />
+            {/* ---------------- action row: a sticky bar on phones ---------------- */}
+            <div className="rc-actions no-print">
+              <ActionBar label="Actions for this figure">
+                <CiteButton path={path} primary />
+                {pdf && cell ? (
+                  <a className="btn" href={pdf} rel="noopener" aria-label={`Official PDF at page ${cell.page}`}>
+                    PDF <Num kind="page">p. {cell.page}</Num>
+                  </a>
+                ) : null}
+                {source && showPage && source.wayback_url ? (
+                  <a className="btn" href={source.wayback_url} rel="noopener" aria-label={works ? "Internet Archive copy of the document" : "Internet Archive copy of the document (the file used)"}>
+                    Archive
+                  </a>
+                ) : null}
+                <ShareButton path={path} />
+              </ActionBar>
+            </div>
           </div>
-        </div>
+        </aside>
       </div>
 
       <div className="with-rail rc-body">
         <div className="receipt-body rc-folds">
           {/* ---------------- where it is printed: the whole page, fetched only when opened ---------------- */}
           {cell && showPage ? (
-            <Fold id="page" title="Where it is printed" meta={<Num kind="page">{pageShort(cell)}</Num>}>
-              {image && ev && ev.boxState !== "no-image" ? (
-                <figure className="ev-whole">
-                  <WholePage
-                    image={image}
-                    cell={cell}
-                    state={ev.boxState}
-                    alt={`Page ${cell.page} of ${srcShort(source, cell.source_id)}${isValue ? `, with the figure ${cell.value_raw} boxed` : ", with the empty cell boxed"} in the row "${cell.row_label_raw}" and the column "${cell.col_label_raw}". The dashed outline marks the table it was read from.`}
-                  />
-                  <figcaption className="doc-caption">
-                    <span>
-                      What you are looking at: a picture of <Num kind="page">{pageWords(cell, source?.page_count)}</Num>, made from the copy whose fingerprint is in the technical record. The solid box marks{" "}
-                      {isValue ? "the figure" : "the cell, which prints no figure"}; the dashed outline the table it was read from.
-                    </span>
-                    <span>
-                      <a href={image.src}>Open the page image</a>
-                    </span>
-                  </figcaption>
-                </figure>
-              ) : (
+            <Fold id="document" title="The document" meta={<Num kind="page">{pageShort(cell)}</Num>}>
+              {image && ev && ev.boxState !== "no-image" ? null : (
                 <p className="measure">The page image could not be checked against the official file, so it is not shown.</p>
               )}
               {source ? (
@@ -1090,5 +1235,40 @@ function NbItem({ o, s, label, name }: { o: Observation; s: Series; label?: stri
         )}
       </span>
     </li>
+  );
+}
+
+/** A check line: document titles (which carry years) become their own text nodes, so check-build reads each as a release label. */
+function WithTitles({ text }: { text: string }) {
+  const titles = db()
+    .sources.map((x) => x.title)
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  const parts: string[] = [];
+  let rest = text;
+  while (rest) {
+    let at = -1;
+    let hit = "";
+    for (const t of titles) {
+      const i = rest.indexOf(t);
+      if (i >= 0 && (at < 0 || i < at)) {
+        at = i;
+        hit = t;
+      }
+    }
+    if (at < 0) {
+      parts.push(rest);
+      break;
+    }
+    if (at > 0) parts.push(rest.slice(0, at));
+    parts.push(hit);
+    rest = rest.slice(at + hit.length);
+  }
+  return (
+    <>
+      {parts.map((x, i) => (
+        <span key={i}>{x}</span>
+      ))}
+    </>
   );
 }

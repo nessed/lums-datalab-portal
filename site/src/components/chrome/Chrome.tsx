@@ -29,9 +29,10 @@ export function NavLinks({ items, className = "site-nav", children }: { items: N
 
 const pathOf = (href: string) => href.split("#")[0];
 
-/** Home v3: "About" opens a short list (a <details>, so it works without
- * JavaScript). It closes after a navigation, on Escape and on a click outside. */
-export function AboutMenu({ items }: { items: NavItem[] }) {
+/** A header menu ("Tools", "About"): a <details>, so it works without
+ * JavaScript. It closes after a navigation, on Escape and on a click outside.
+ * `on` lists the addresses under which the menu shows as the current section. */
+export function NavMenu({ label, items, on = [] }: { label: string; items: NavItem[]; on?: string[] }) {
   const path = usePathname() ?? "/";
   const ref = useRef<HTMLDetailsElement>(null);
   useEffect(() => {
@@ -50,10 +51,10 @@ export function AboutMenu({ items }: { items: NavItem[] }) {
       document.removeEventListener("keydown", shut);
     };
   }, []);
-  const on = ["/about", "/methods"].some((h) => path === h || path.startsWith(`${h}/`));
+  const current = on.some((h) => path === h || path.startsWith(`${h}/`));
   return (
     <details className="about-menu" ref={ref}>
-      <summary data-current={on ? "page" : undefined}>About</summary>
+      <summary data-current={current ? "page" : undefined}>{label}</summary>
       <ul>
         {items.map((n) => (
           <li key={n.href}>
@@ -67,13 +68,18 @@ export function AboutMenu({ items }: { items: NavItem[] }) {
   );
 }
 
+/** Kept for callers of the Home v3 name. */
+export function AboutMenu({ items }: { items: NavItem[] }) {
+  return <NavMenu label="About" items={items} on={["/about", "/methods"]} />;
+}
+
 /** The search field in the header, on every page but the home page. */
 export function HeaderSearch({ indexUrl }: { indexUrl: string }) {
   const path = usePathname() ?? "/";
   if (path === "/") return null;
   return (
     <div className="mast-search">
-      <SearchDialog indexUrl={indexUrl} />
+      <SearchDialog indexUrl={indexUrl} variant="head" />
     </div>
   );
 }

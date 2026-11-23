@@ -1,0 +1,283 @@
+/* v4-chrome: Home v3 pages set (design handoff, 2026-11-24). Utility strip, LUMS
+ * lockup, six-item navigation with Tools and About menus, the 320 px header
+ * search, breadcrumb, footer. Values from src/design/tokens.css only. Loaded
+ * after v3-chrome.css, so it wins over it. */
+
+/* ============================ utility strip ============================ */
+.util3 {
+  background: var(--util-bg);
+  color: var(--util-ink);
+  font-size: var(--t-util);
+  line-height: 1.35;
+}
+.util3-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-4);
+  min-height: var(--util-h4);
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.util3-unit {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.util3-links {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  gap: 0 var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+.util3 a {
+  color: var(--util-ink-strong);
+  text-decoration-color: var(--footer-underline);
+  text-underline-offset: 3px;
+}
+.util3 a:hover {
+  text-decoration-color: currentColor;
+}
+.util3 :focus-visible {
+  outline: 3px solid var(--focus-on-dark);
+  outline-offset: 2px;
+}
+
+/* ============================== masthead =============================== */
+.mast4 {
+  border-top: 0;
+}
+.mast4 .mast-row {
+  min-height: var(--mast-h4);
+  gap: 0 var(--s-7);
+  padding-top: 0;
+  flex-wrap: nowrap;
+}
+.wm4 {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--s-4);
+  color: var(--ink);
+  text-decoration: none;
+}
+.wm4-logo {
+  display: block;
+  height: var(--logo-h);
+  width: auto;
+}
+.wm4-rule {
+  width: 1px;
+  height: 38px;
+  background: var(--lockup-rule);
+}
+.wm4-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.wm4-dept {
+  font-size: var(--t-util);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.wm4-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: var(--wdth-wordmark);
+  font-size: var(--t-wordmark);
+  letter-spacing: -0.01em;
+  color: var(--wordmark-ink);
+}
+.wm4:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+.mast4 .mast-nav {
+  gap: 0 var(--s-6);
+  flex-wrap: nowrap;
+}
+.mast4 .mast-nav > a,
+.mast4 .about-menu > summary {
+  min-height: var(--mast-h4);
+  font-size: var(--t-nav);
+  white-space: nowrap;
+}
+.mast4 .mast-search {
+  width: var(--head-search-w);
+  flex: 0 1 var(--head-search-w);
+  min-width: 12rem;
+}
+
+/* header search: 40 px field, 2 px navy border, a navy Search button */
+.hs.hs-head {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
+  height: var(--head-search-h);
+  padding: 0;
+  border: var(--rule-heavy) solid var(--search-border);
+  border-radius: 0;
+  background: var(--page);
+}
+.hs.hs-head > svg,
+.hs.hs-head .hs-hint {
+  display: none;
+}
+.hs.hs-head .hs-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 var(--s-3);
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--step-0);
+  color: var(--ink);
+}
+.hs.hs-head .hs-input:focus {
+  outline: none;
+}
+.hs.hs-head:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 1px;
+}
+.hs.hs-head .hs-go {
+  padding: 0 var(--s-4);
+  font-size: var(--step-0);
+}
+
+/* ============================== breadcrumb ============================= */
+.crumbs {
+  padding-top: 14px;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.crumbs li {
+  display: flex;
+  gap: var(--s-2);
+}
+.crumbs li + li::before {
+  content: "\203A";
+  color: var(--rule-strong);
+}
+
+/* ================================ footer =============================== */
+.ft4 {
+  margin-top: 0;
+}
+.ft4-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--s-6) var(--s-7);
+  margin-bottom: var(--s-6);
+}
+.ft4-brand {
+  grid-column: span 2;
+  min-width: 0;
+}
+.ft4-wm {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: var(--wdth-wordmark);
+  font-size: 1.25rem;
+  color: var(--footer-ink);
+}
+.ft4-addr {
+  color: var(--footer-ink-2);
+}
+.ft4 .ft3-note {
+  font-size: 0.875rem;
+  color: var(--footer-ink-2);
+}
+.ft4 nav h2 {
+  margin: 0 0 var(--s-1);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--footer-ink-2);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.ft4 nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+.ft4-rel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-5);
+  margin: 0;
+  padding-top: var(--s-4);
+  border-top: var(--rule-w) solid rgb(255 255 255 / 0.25);
+  font-size: var(--step--1);
+  color: var(--footer-ink-2);
+}
+
+/* ================================ phones =============================== */
+@media (max-width: 1100px) {
+  .mast4 .mast-row {
+    flex-wrap: wrap;
+    column-gap: var(--s-5);
+  }
+  .mast4 .mast-nav {
+    order: 9;
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+  }
+  .mast4 .mast-nav > a,
+  .mast4 .about-menu > summary {
+    min-height: 44px;
+  }
+  .mast4 .mast-search {
+    margin-left: auto;
+  }
+}
+@media (max-width: 719px) {
+  .util3-unit {
+    display: none;
+  }
+  .util3-row {
+    justify-content: flex-end;
+  }
+  .mast4 .mast-row {
+    min-height: 0;
+    padding-top: var(--s-3);
+    padding-bottom: var(--s-3);
+  }
+  .mast4 .mast-nav {
+    display: none;
+  }
+  .wm4 {
+    margin-right: auto;
+  }
+  .mast4 .mast-search {
+    order: 10;
+    flex: 1 0 100%;
+    width: auto;
+    margin: var(--s-2) 0 0;
+    padding: 0;
+  }
+  .ft4-brand {
+    grid-column: auto;
+  }
+}

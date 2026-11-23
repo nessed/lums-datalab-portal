@@ -1,27 +1,27 @@
-// The Library (data hub plan, section 7.1): every document our figures are read
-// from, in plain words, grouped by kind, newest first. Each opens in the viewer
-// on its own page, downloads (only a copy whose fingerprint matches the
-// registered file) and links to the government page that publishes it. The
-// datasets are one click away (/library/datasets). Internal names, roles,
-// verification records and coverage are on each document's page, folded away.
+// The Library (data hub plan, section 7.1; Home v3 pages set, 2026-11-24):
+// every document our figures are read from, in plain words, newest first, with
+// filters on the left (title words, publisher, kind, year). Each row: a cover,
+// the plain name, the publisher and period, pages, file size and how many
+// checked figures were read from it, and Read (the viewer), Download (only a
+// copy whose fingerprint matches the registered file) and Official page.
+// Internal names, roles, verification records and coverage are on each
+// document's page. The datasets are the second tab (/library/datasets).
 import type { Metadata } from "next";
-import Link from "@/components/ui/Link";
-import { Breadcrumbs } from "@/components/ui/Basics";
+import Crumbs from "@/components/chrome/Crumbs";
 import { Count } from "@/components/ui/Num";
+import Link from "@/components/ui/Link";
 import LibraryFilter from "@/components/library/LibraryFilter";
-import { DocActions, DocMeta, DocName } from "@/components/library/Bits";
-import { library, sourceHref } from "@/lib/data";
+import { DocActions, DocMeta, DocName, DocPeriod, LibraryTabs } from "@/components/library/Bits";
+import { db, library, sourceHref } from "@/lib/data";
 import type { LibraryDocument } from "@/lib/adapter/contract";
 import { chapterOf, docPeriodKind, yearOfDoc } from "@/lib/library-format";
 import { periodWords } from "@/lib/format";
-import libraryNames from "../../../editorial/library.json";
+import "@/styles/v4-library.css";
 
 export const metadata: Metadata = {
   title: "Library",
   description: "Every government document behind the figures on this site: read it here, download it, or open the official page that publishes it.",
 };
-
-const KIND_LINES = libraryNames.kinds as Record<string, { name: string; line: string; order: number }>;
 
 /** Lower-case words a reader may filter on: the plain name, the printed title, the period, the publisher. */
 function searchText(d: LibraryDocument): string {
@@ -29,96 +29,102 @@ function searchText(d: LibraryDocument): string {
   return [d.kindName, when, chapterOf(d.kind, d.printedTitle), d.printedTitle, d.publisher].filter(Boolean).join(" ").toLowerCase();
 }
 
+/** Checked figures whose main printing is in each document (the count key values:source:<id>). */
+function figuresBySource(): Map<string, number> {
+  const d = db();
+  const m = new Map<string, number>();
+  for (const o of d.observations) {
+    if (!(o.published && o.value !== null) || !o.primary_cell_id) continue;
+    const src = d.cellById.get(o.primary_cell_id)?.source_id;
+    if (src) m.set(src, (m.get(src) ?? 0) + 1);
+  }
+  return m;
+}
+
 export default function LibraryPage() {
   const lib = library();
   const docs = lib.documents;
+  const figs = figuresBySource();
   const kinds = [...new Set(docs.map((d) => d.kind))];
   const publishers = [...new Set(docs.map((d) => d.publisher))].sort();
   const years = [...new Set(docs.map((d) => yearOfDoc(d.period, d.kind)))].sort((a, b) => b.localeCompare(a));
+  // Newest first; within one period a rejected file comes after the one used.
+  const list = docs
+    .map((d, i) => ({ d, i }))
+    .sort(
+      (a, b) =>
+        yearOfDoc(b.d.period, b.d.kind).localeCompare(yearOfDoc(a.d.period, a.d.kind)) ||
+        b.d.period.localeCompare(a.d.period) ||
+        Number(a.d.state === "rejected") - Number(b.d.state === "rejected") ||
+        a.i - b.i,
+    )
+    .map((x) => x.d);
   return (
-    <div className="lib">
-      <Breadcrumbs items={[{ label: "Library" }]} />
-      <header className="page-head lib-head">
+    <div className="lib lib4">
+      <Crumbs items={[{ label: "Library" }]} />
+      <header className="lib4-head">
         <h1>Library</h1>
-        <p className="lede">The government documents our figures come from. Read any of them here, download it, or open the page that publishes it.</p>
-        <p className="lib-head-links">
-          <Link href="/library/datasets" className="lib-go">
-            Datasets: preview and download the figures
-          </Link>
-        </p>
+        <p className="lib4-lede">Every government document we read, to open on this site or download, and every dataset we built from them.</p>
       </header>
+      <LibraryTabs current="docs" />
 
-      <LibraryFilter
-        target="lib-docs"
-        rows={docs.map((d) => ({ id: d.id, kind: d.kind, publisher: d.publisher, year: yearOfDoc(d.period, d.kind), text: searchText(d) }))}
-        kinds={kinds.map((k) => ({ value: k, label: docs.find((d) => d.kind === k)!.kindName }))}
-        publishers={publishers.map((p) => ({ value: p, label: p }))}
-        years={years.map((y) => ({ value: y, label: y }))}
-      />
-
-      <div id="lib-docs">
-        {kinds.map((k) => {
-          // Newest first (the Library's order); within one period a rejected file comes after the one used.
-          const inKind = docs.filter((d) => d.kind === k);
-          const firstOfPeriod = (d: LibraryDocument) => inKind.findIndex((x) => x.period === d.period);
-          const list = inKind
-            .map((d, i) => ({ d, i }))
-            .sort((a, b) => firstOfPeriod(a.d) - firstOfPeriod(b.d) || Number(a.d.state === "rejected") - Number(b.d.state === "rejected") || a.i - b.i)
-            .map((x) => x.d);
-          const name = list[0].kindName;
-          return (
-            <section key={k} id={`t-${k}`} className="lib-group" aria-labelledby={`h-${k}`} data-lib-group="">
-              <div className="lib-group-head">
-                <h2 id={`h-${k}`}>{name}</h2>
-                <p className="lib-group-line">
-                  {KIND_LINES[k]?.line ?? null}{" "}
-                  <span className="lib-group-n">
-                    <Count k={`sources:type:${k}`} n={list.length} /> {list.length === 1 ? "document" : "documents"}
-                  </span>
-                </p>
-              </div>
-              <ul className="lib-list">
-                {list.map((d) => (
-                  <li
-                    key={d.id}
-                    className={`lib-row${d.state === "rejected" ? " is-rejected" : ""}`}
-                    data-lib-row={d.id}
-                    data-kind={d.kind}
-                    data-publisher={d.publisher}
-                    data-year={yearOfDoc(d.period, d.kind)}
-                    data-text={searchText(d)}
-                  >
-                    <div className="lib-row-main">
-                      <h3 className="lib-name">
-                        <Link href={sourceHref(d.id)}>
-                          <DocName doc={d} />
-                        </Link>
-                      </h3>
-                      <p className="lib-printed">{d.printedTitle}</p>
-                      {d.state === "rejected" ? (
-                        <p className="lib-rejected">
-                          <strong>Not used.</strong> {d.rejectedReason}
-                        </p>
-                      ) : null}
-                    </div>
-                    <p className="lib-meta">
-                      <DocMeta doc={d} />
+      <div className="lib4-grid">
+        <aside className="lib4-side" aria-label="Filters">
+          <LibraryFilter
+            target="lib-docs"
+            rows={docs.map((d) => ({ id: d.id, kind: d.kind, publisher: d.publisher, year: yearOfDoc(d.period, d.kind), text: searchText(d) }))}
+            kinds={kinds.map((k) => ({ value: k, label: docs.find((d) => d.kind === k)!.kindName }))}
+            publishers={publishers.map((p) => ({ value: p, label: p }))}
+            years={years.map((y) => ({ value: y, label: y }))}
+          />
+        </aside>
+        <div className="lib4-main">
+          <p className="lib4-count" id="lib-docs-n">
+            <Count k="sources:all" n={docs.length} /> documents · newest first
+          </p>
+          <ul className="lib4-list" id="lib-docs">
+            {list.map((d) => (
+              <li
+                key={d.id}
+                className={`lib4-row${d.state === "rejected" ? " is-rejected" : ""}`}
+                data-lib-row={d.id}
+                data-kind={d.kind}
+                data-publisher={d.publisher}
+                data-year={yearOfDoc(d.period, d.kind)}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/cover-blank.png" alt="" width={72} height={98} className="lib4-cover" loading="lazy" />
+                <div className="lib4-body">
+                  <h2 className="lib4-name">
+                    <Link href={sourceHref(d.id)}>
+                      <DocName doc={d} />
+                    </Link>
+                  </h2>
+                  <p className="lib4-by">
+                    {d.publisher} · <DocPeriod doc={d} />
+                    <span className="lib4-printed"> · {d.printedTitle}</span>
+                  </p>
+                  <p className="lib4-meta">
+                    <DocMeta doc={d} publisher={false} />
+                    {figs.get(d.id) ? (
+                      <>
+                        <span aria-hidden="true"> · </span>
+                        <Count k={`values:source:${d.id}`} n={figs.get(d.id)} /> figures read
+                      </>
+                    ) : null}
+                  </p>
+                  {d.state === "rejected" ? (
+                    <p className="lib4-rejected">
+                      <strong>Not used.</strong> {d.rejectedReason}
                     </p>
-                    <DocActions doc={d} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          );
-        })}
+                  ) : null}
+                </div>
+                <DocActions doc={d} primary />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-
-      <section className="lib-next" aria-labelledby="ds-h">
-        <h2 id="ds-h">The figures, ready to use</h2>
-        <p>
-          Every figure we read from these documents, by dataset, to preview and download as CSV or Excel. <Link href="/library/datasets">Go to the datasets</Link>
-        </p>
-      </section>
     </div>
   );
 }

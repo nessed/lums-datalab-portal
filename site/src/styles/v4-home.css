@@ -1,0 +1,784 @@
+/* v4-home: home page of the Home v3 pages set (design handoff, 2026-11-24).
+ * 1240 px content, 32 px gutters, square corners, 1px rules, no shadows. */
+
+:root {
+  /* province map: five steps of the LUMS blue, light to dark (map fill only) */
+  --q1: #dfe3f3;
+  --q2: #b4bde3;
+  --q3: #8190cc;
+  --q4: #4a5aa6;
+  --q5: #1f2c6e;
+}
+
+/* full-bleed bands inside the layout's .wrap */
+.home4 .sb4,
+.home4 .tk4,
+.home4 .tb4 {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+.home4 .wrap {
+  margin: 0 auto;
+}
+
+/* shared section head */
+.h4-sec {
+  border-top: var(--rule-w) solid var(--rule);
+  padding: var(--s-7) 0 44px;
+}
+.h4-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  margin-bottom: var(--s-4);
+}
+.h4-head-l {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--s-4);
+}
+.h4-head h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+.h4-note,
+.h4-more {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.muted {
+  color: var(--ink-2);
+}
+.nowrap {
+  white-space: nowrap;
+}
+.strong {
+  font-weight: 700;
+}
+
+/* tables */
+.tbl4 {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.tbl4 th,
+.tbl4 td {
+  padding: 8px var(--s-4) 8px 0;
+  border-bottom: var(--hair);
+  text-align: left;
+  vertical-align: top;
+}
+.tbl4 thead th {
+  font-size: var(--step--1);
+  border-bottom: var(--rule-heavy) solid var(--ink);
+  background: var(--card);
+}
+.tbl4 tbody th {
+  font-weight: 400;
+}
+.tbl4 .num {
+  text-align: right;
+}
+.tbl4 th:last-child,
+.tbl4 td:last-child {
+  padding-right: 0;
+}
+.tbl4-scroll {
+  overflow-x: auto;
+}
+
+/* ============================== 1 search band ============================== */
+.sb4 {
+  background: var(--band);
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.sb4-in {
+  padding-top: 28px;
+  padding-bottom: var(--s-5);
+}
+.sb4-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+  margin-bottom: 14px;
+}
+.sb4 h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.sb4-meta {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.sb4 .hs.hs-big {
+  max-width: 55rem;
+  height: 52px;
+}
+.sb4-often {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) 18px;
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+}
+.sb4-often-h {
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+/* ================================ 2 ticker ================================ */
+.tk4 {
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.tk4-in {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: 40px;
+  font-size: var(--step--1);
+}
+.tk4-h {
+  flex: none;
+  font-weight: 700;
+}
+.tk4 .tk {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+
+/* =============================== 3 dashboard =============================== */
+.dash {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  padding: var(--s-7) 0 44px;
+}
+.dash-main,
+.dash-side {
+  min-width: 0;
+  border-top: var(--rule-heavy) solid var(--ink);
+  padding-top: var(--s-4);
+}
+.dash-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4) var(--s-5);
+}
+.dash-head {
+  min-width: 0;
+}
+.dash-title,
+.dash-side-h h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+.dash-fig {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--s-4);
+  margin: 2px 0 0;
+}
+.dash-big a,
+.dash-big .v-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: var(--wdth-num);
+  font-size: 3.75rem;
+  line-height: 1.05;
+  color: var(--num);
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--link-underline);
+  text-underline-offset: 6px;
+}
+.dash-when {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+.dash-views {
+  display: flex;
+  border: var(--rule-w) solid var(--rule-strong);
+}
+.dash-views button,
+.dash-status button {
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 700;
+  background: var(--card);
+  color: var(--ink);
+  border: 0;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.dash-views button + button {
+  border-left: var(--rule-w) solid var(--rule-strong);
+}
+.dash-views button[aria-selected="true"] {
+  background: var(--navy);
+  color: var(--white);
+}
+.dash-chart,
+.dash-table {
+  margin-top: var(--s-5);
+}
+.dash-tbl-wrap {
+  max-height: 308px;
+  overflow: auto;
+  border-bottom: var(--hair);
+}
+.dash-tbl-wrap thead th {
+  position: sticky;
+  top: 0;
+}
+.dash-src {
+  margin: var(--s-4) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.dash-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 6px 0 0;
+  font-size: var(--step--1);
+}
+.dash-side-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--s-1);
+  font-size: var(--step--1);
+}
+.dash-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin: 0 0 var(--s-2);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.dash-status button {
+  flex: none;
+  border: var(--rule-w) solid var(--rule-strong);
+  font-size: var(--t-util);
+  padding: 3px 10px;
+}
+.dash-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--hair);
+}
+.dash-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px minmax(96px, auto);
+  grid-template-areas: "name spark v" "when spark v";
+  align-items: center;
+  gap: 0 var(--s-4);
+  padding: 9px 10px 9px 12px;
+  border-bottom: var(--hair);
+  cursor: pointer;
+}
+.dash-row:hover {
+  background: var(--hover-wash);
+}
+.dash-row[data-active="true"] {
+  background: var(--select-wash);
+  box-shadow: inset 4px 0 0 var(--gold);
+}
+.dash-pick {
+  grid-area: name;
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.dash-pick:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.dash-row-when {
+  grid-area: when;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.dash-row-spark {
+  grid-area: spark;
+}
+.dash-row-spark .spark {
+  display: block;
+}
+.dash-row-v {
+  grid-area: v;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.dash-row-v > a,
+.dash-row-v .v-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 82%;
+  font-size: 1.375rem;
+  line-height: 1.15;
+  color: var(--num);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.dash-row-v > a:hover {
+  text-decoration: underline;
+}
+.dash-row-chg {
+  font-size: var(--t-util);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.dash-bar {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--progress);
+}
+
+/* ============================= 4 today's rates ============================= */
+.rt4 {
+  margin-bottom: 48px;
+  border: var(--hair);
+}
+.rt4-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px var(--s-4);
+  padding: var(--s-3) var(--s-5);
+  border-bottom: var(--hair);
+  background: var(--band);
+}
+.rt4-head h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+.rt4-note {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.rt4-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rt4-grid li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px var(--s-5) var(--s-4);
+}
+.rt4-grid li + li {
+  border-left: var(--hair);
+}
+.rt4-name {
+  font-weight: 700;
+}
+.rt4-none {
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+
+/* ============================ 5 coming soon block ============================ */
+.soon4 {
+  max-width: 80ch;
+  padding: var(--s-4) var(--s-5);
+  border: 1px dashed var(--rule-strong);
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+.soon4 p {
+  margin: 0;
+}
+.soon4-tag {
+  margin-bottom: var(--s-1) !important;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ============================ 6 at a glance ============================ */
+.gl-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--s-6) var(--s-7);
+}
+.gl-table {
+  flex: 1 1 640px;
+  min-width: 0;
+  overflow-x: auto;
+}
+.gl-tbl {
+  min-width: 640px;
+}
+.gl-tbl tbody tr[data-row] {
+  cursor: pointer;
+}
+.gl-tbl tbody tr[data-row]:hover {
+  background: var(--hover-wash);
+}
+.gl-tbl th:first-child,
+.gl-tbl td:first-child {
+  padding-left: 10px;
+}
+.gl-pk {
+  background: var(--select-wash);
+  font-weight: 700;
+}
+.gl-tbl th.gl-pk {
+  background: var(--select-wash);
+}
+.gl-name {
+  font-weight: 700;
+}
+.gl-src {
+  display: block;
+  font-size: var(--t-util);
+  color: var(--ink-3);
+}
+.gl-none {
+  color: var(--ink-3);
+  font-size: var(--step--1);
+}
+.gl-soon th .gl-name {
+  color: var(--ink-2);
+}
+.gl-hint {
+  margin: 10px 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.gl-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+}
+.gl-pickers button {
+  font: inherit;
+  font-size: var(--t-util);
+  padding: 3px 10px;
+  border: var(--rule-w) solid var(--rule-strong);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+.gl-pickers button[aria-pressed="true"] {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.gl-map {
+  flex: 0 1 340px;
+  min-width: 0;
+  margin: 0;
+}
+.gl-map figcaption {
+  margin-bottom: 6px;
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+.gl-svg {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+.gl-prov {
+  fill: url(#gl-hatch);
+  stroke: var(--white);
+  stroke-width: 1;
+}
+.gl-credit {
+  margin: 6px 0 0;
+  font-size: var(--t-util);
+  color: var(--ink-3);
+}
+
+/* ============================== 7 topics ============================== */
+.tp4-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tp4-grid > li {
+  border-top: var(--hair);
+  padding: 14px 0 var(--s-5);
+}
+.tp4-name {
+  font-weight: 700;
+  font-size: var(--step-0b);
+}
+.tp4-items {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 6px 0 var(--s-2);
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+.tp4-items a {
+  color: var(--ink-2);
+}
+.tp4-meta {
+  display: block;
+  font-size: var(--t-util);
+  color: var(--ink-3);
+}
+.tp4-soon .tp4-name {
+  display: block;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+
+/* ======================= 8 latest releases, coming up ======================= */
+.rl4 {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+}
+.rl4-main,
+.rl4-side {
+  min-width: 0;
+}
+.rl4-tbl td {
+  vertical-align: middle;
+}
+.rl4-pub {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.rl4-cover {
+  flex: none;
+  width: 44px;
+  height: 60px;
+  border: var(--rule-w) solid var(--doc-rule);
+}
+.cu4-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--rule-heavy) solid var(--ink);
+  font-size: 0.875rem;
+}
+.cu4-list li {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 0 14px;
+  align-items: start;
+  padding: 10px 0;
+  border-bottom: var(--hair);
+}
+.cu4-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  border: var(--rule-w) solid var(--doc-rule);
+  line-height: 1.1;
+}
+.cu4-mon {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+.cu4-day {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+}
+.cu4-when {
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.al4 {
+  margin-top: var(--s-5);
+  padding: var(--s-4);
+  background: var(--band);
+  border: var(--hair);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.al4 p {
+  margin: 0;
+}
+.al4-h {
+  margin-bottom: 2px !important;
+  font-size: var(--step-0);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* =========================== 9 calculator and tools =========================== */
+.tb4 {
+  background: var(--band);
+  border-top: var(--hair);
+  border-bottom: var(--hair);
+}
+.tb4-in {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+  padding-top: 36px;
+  padding-bottom: 44px;
+}
+.tb4 h2 {
+  margin: 0 0 6px;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+.tb4-lead {
+  margin: 0 0 18px;
+  max-width: 60ch;
+  color: var(--ink-2);
+}
+.tb4-note {
+  margin: var(--s-4) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.tb4-more ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--rule-w) solid var(--doc-rule);
+}
+.tb4-more li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: var(--rule-w) solid var(--doc-rule);
+}
+.tb4-more li a {
+  font-weight: 700;
+}
+.tb4-more li span {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+/* ========================== 10 where the figures come from ========================== */
+.pb4 {
+  border-top: 0;
+}
+.pb4-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+.pb4-grid li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 9px 0;
+  border-bottom: var(--hair);
+}
+
+/* ================================ phones ================================ */
+@media (max-width: 960px) {
+  .dash,
+  .rl4,
+  .tb4-in {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-6);
+  }
+  .tp4-grid,
+  .pb4-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rt4-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rt4-grid li + li {
+    border-left: 0;
+  }
+  .rt4-grid li {
+    border-top: var(--hair);
+  }
+}
+@media (max-width: 600px) {
+  .tp4-grid,
+  .pb4-grid,
+  .rt4-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dash-big a,
+  .dash-big .v-link {
+    font-size: 2.75rem;
+  }
+  .sb4 h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* the big search in the band: no keyboard hint (it sat over the button) */
+.sb4 .hs.hs-big .hs-hint {
+  display: none;
+}
+.sb4 .hs.hs-big .hs-go {
+  padding: 0 28px;
+}

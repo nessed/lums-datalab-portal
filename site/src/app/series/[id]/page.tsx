@@ -20,7 +20,10 @@ import { notFound } from "next/navigation";
 import Link from "@/components/ui/Link";
 import Tabs, { type TabDef } from "@/components/Tabs";
 import { ActionBar, CompareButton, ShareButton } from "@/components/actions/Actions";
-import { Breadcrumbs, Callout } from "@/components/ui/Basics";
+import { Callout } from "@/components/ui/Basics";
+import Crumbs from "@/components/chrome/Crumbs";
+import { AlsoShow, CiteBox, GroupsTable, IndicatorActions, PlannedActual, SeriesNotes, ShowAs } from "@/components/series/Indicator";
+import "@/styles/v4-series.css";
 import SeriesView from "@/components/series/SeriesView";
 import { About, SourceLines, WhereItSits } from "@/components/series/Parts";
 import { publishedSentence } from "@/components/series/Head";
@@ -90,15 +93,24 @@ export default async function SeriesPage({ params }: Props) {
   ];
 
   return (
-    <article className="sp ds">
-      <Breadcrumbs items={[{ href: "/browse", label: "Find data" }, crumbOf(series), { label: seriesTitle(series) }]} />
+    <article className="sp ds ix">
+      <Crumbs items={[crumbOf(series), { label: seriesTitle(series) }]} />
 
-      <header className="ds-top">
-        <TitleSentence series={series} latest={answer.latest} />
-        {summary ? <p className="ds-summary">{summary}</p> : null}
+      <header className="ix-top">
+        <div className="ix-top-l">
+          <TitleSentence series={series} latest={answer.latest} />
+          {summary ? <p className="ds-summary">{summary}</p> : null}
+        </div>
+        <IndicatorActions series={series} path={path} />
       </header>
 
-      <HeadlineBlock series={series} answer={answer} />
+      <div className="ix-grid">
+      <div className="ix-main">
+      <div className="ix-headrow">
+        <HeadlineBlock series={series} answer={answer} part="num" />
+        {budget ? <ShowAs series={series} /> : null}
+      </div>
+      <AlsoShow series={series} />
 
       <div className="ds-tabs">
         <Tabs tabs={tabs} label="Views of this series">
@@ -135,9 +147,18 @@ export default async function SeriesPage({ params }: Props) {
         </Tabs>
       </div>
 
-      <div className="ds-after">
+      <p className="src-hint">Click the headline figure, any point on the chart or any value in the tables to see where it was printed.</p>
+      {budget ? <PlannedActual series={series} /> : null}
+      <GroupsTable series={series} />
+      <SeriesNotes series={series} />
+      </div>
+
+      <aside className="ix-side" aria-label="About this indicator">
+        <HeadlineBlock series={series} answer={answer} part="facts" />
+        <CiteBox series={series} path={path} />
         <Related series={series} />
         <ReadFirst series={series} />
+      </aside>
       </div>
 
       <ActionBar label="Take this series">

@@ -1,6 +1,7 @@
 "use client";
-// The one-tap evidence sheet (DESIGN.md section 7, "One tap"): a bottom sheet on
-// phones, a popover on desktop, opened from any value link marked data-sheet.
+// The one-tap evidence sheet (DESIGN.md section 7, "One tap"), styled as the
+// Source Panel of the Home v3 pages set (2026-11-24): a right-hand drawer, 480 px
+// on desktop and full width on phones, opened from any value link marked data-sheet.
 // Contract:
 //   - mounted once in the layout;
 //   - intercepts clicks on a[data-sheet] (the attribute holds the figure's slug);
@@ -14,9 +15,11 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import config from "../../../release.config.json";
 import { formatDecimalString } from "@/lib/format";
 import { slugify } from "@/lib/ids";
+import { PORTAL, PORTAL_AUTHOR } from "@/lib/cite-format";
 import type { SheetData } from "./model";
 
 const BASE = `/data/${config.version}/evidence/sheet/`;
+const ISSUES_URL = `${config.repoUrl}/issues`;
 
 /** Document pages (/sources/<slug>) whose file the site serves, read once from the Library file step's index. */
 let servedDocs: Promise<Set<string>> | null = null;
@@ -42,9 +45,7 @@ function FullDocumentLink({ href, page }: { href: string; page: number }) {
   }, [href]);
   if (!served) return null;
   return (
-    <a className="btn" href={`${href}?page=${page}#viewer`}>
-      Open the full document at this page
-    </a>
+    <a href={`${href}?page=${page}#viewer`}>Read the full document at this page</a>
   );
 }
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -240,40 +241,11 @@ export default function EvidenceSheet() {
     };
   }, [load, shut]);
 
-  // Popover position on wide screens: under the link, or above it when there
-  // is no room below. Placed straight on the element (no re-render), then focus
-  // moves in: the popover is hidden until placed, and a hidden button cannot
-  // take focus.
+  // A drawer on every screen: the page behind stops scrolling and focus moves in.
   useLayoutEffect(() => {
     const el = panel.current;
     if (!st || !el) return;
-    const wide = window.matchMedia("(min-width: 720px)").matches;
-    document.documentElement.classList.toggle("ev-sheet-open", !wide);
-    if (wide) {
-      const p = el.getBoundingClientRect();
-      let top: number;
-      let left: number;
-      if (!anchor.current) {
-        // Opened from a link with ?fig=: centred near the top of the screen.
-        top = window.scrollY + 72;
-        left = Math.max(16, (window.innerWidth - p.width) / 2) + window.scrollX;
-      } else {
-        const r = anchor.current.getBoundingClientRect();
-        left = Math.min(Math.max(16, r.left), window.innerWidth - p.width - 16) + window.scrollX;
-        const below = r.bottom + 8;
-        const fitsBelow = below + p.height <= window.innerHeight - 8;
-        const fitsAbove = r.top - 8 - p.height >= 8;
-        // Neither fits: as low as the screen allows, so the whole popover is visible.
-        top = (fitsBelow ? below : fitsAbove ? r.top - 8 - p.height : Math.max(8, window.innerHeight - p.height - 8)) + window.scrollY;
-      }
-      el.style.top = `${top}px`;
-      el.style.left = `${left}px`;
-      el.classList.add("is-popover");
-    } else {
-      el.style.top = "";
-      el.style.left = "";
-      el.classList.remove("is-popover");
-    }
+    document.documentElement.classList.add("ev-sheet-open");
     if (!el.contains(document.activeElement)) el.querySelector<HTMLElement>(".ev-sheet-close")?.focus({ preventScroll: true });
   }, [st]);
 
@@ -304,19 +276,12 @@ export default function EvidenceSheet() {
   return (
     <>
       <div className="ev-sheet-backdrop" onClick={close} aria-hidden="true" />
-      <div
-        ref={panel}
-        className="ev-sheet"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="ev-sheet-h"
-        onKeyDown={onKeyDown}
-      >
+      <aside ref={panel} className="ev-sheet ev-panel" role="dialog" aria-modal="true" aria-labelledby="ev-sheet-h" onKeyDown={onKeyDown}>
         <div className="ev-sheet-bar">
           <h2 id="ev-sheet-h" className="ev-sheet-h">
-            {d ? d.title : "Where this figure is printed"}
+            Where this figure comes from
           </h2>
-          <button type="button" className="btn ev-sheet-close" onClick={close}>
+          <button type="button" className="ev-sheet-close" onClick={close}>
             Close
           </button>
         </div>
@@ -326,66 +291,108 @@ export default function EvidenceSheet() {
           </p>
         ) : (
           <div className="ev-sheet-body">
-            <p className="ev-sheet-fig">
-              <span className="ev-sheet-kind">{d.kind === "As printed" ? d.period : `${d.kind}, ${d.period}`}</span>
+            <div className="ev-panel-fig">
+              <p className="ev-panel-title">
+                {d.title}
+                <span className="ev-panel-kind"> · {d.kind === "As printed" ? d.period : `${d.kind}, ${d.period}`}</span>
+              </p>
               {d.value ? (
-                <span className="ev-sheet-v tnum">
-                  {d.value} <span className="ev-sheet-u">{d.unit}</span>
-                </span>
+                <p className="ev-panel-v tnum">
+                  {d.value} <span className="ev-panel-u">{d.unit}</span>
+                </p>
               ) : null}
-            </p>
-            {d.crop ? <SheetCrop d={d} /> : d.proofWords ? <p className="ev-proof-words">{d.proofWords}</p> : null}
-            {d.doc ? (
-              <dl className="ev-sheet-facts">
-                <dt>Document</dt>
-                <dd>
-                  <a href={d.doc.href}>{d.doc.title}</a>
-                </dd>
-                {d.page ? (
-                  <>
-                    <dt>Page</dt>
-                    <dd>{d.page.printed ? `printed page ${d.page.printed} (page ${d.page.pdf} of the PDF file)` : `page ${d.page.pdf} of the PDF file`}</dd>
-                  </>
-                ) : null}
-                {d.row ? (
-                  <>
-                    <dt>Row as printed</dt>
-                    <dd>{d.row}</dd>
-                  </>
-                ) : null}
-                {d.col ? (
-                  <>
-                    <dt>Column as printed</dt>
-                    <dd>{d.col}</dd>
-                  </>
-                ) : null}
-                {d.printed ? (
-                  <>
-                    <dt>Printed as</dt>
-                    <dd className="mono">{d.printed}</dd>
-                  </>
-                ) : null}
-              </dl>
-            ) : null}
-            <p className={`ev-sheet-verdict${d.value ? "" : " is-gap"}`}>{d.verdict}</p>
+              {d.printed ? (
+                <p className="ev-panel-printed">
+                  Printed as <strong className="mono">{d.printed}</strong>
+                </p>
+              ) : null}
+            </div>
+            <figure className="ev-panel-crop">
+              <div className="ev-panel-tray">
+                {d.crop ? (
+                  <SheetCrop d={d} />
+                ) : (
+                  <p className="ev-panel-nocrop">{d.page ? "Page close-up not available for this figure." : "No printed page is shown for this figure."}</p>
+                )}
+              </div>
+              {d.doc ? (
+                <figcaption className="ev-panel-cap">
+                  <strong>{d.doc.title}</strong>
+                  {d.page ? (d.page.printed ? `, printed page ${d.page.printed} (page ${d.page.pdf} of the file).` : `, page ${d.page.pdf} of the file.`) : "."}
+                  {d.crop ? " The box marks the figure." : ""}
+                  {d.row ? (
+                    <span className="ev-panel-rc">
+                      {" "}
+                      Row: {d.row}
+                      {d.col ? `; column: ${d.col}` : ""}.
+                    </span>
+                  ) : null}
+                </figcaption>
+              ) : null}
+            </figure>
+            {d.checks.length ? (
+              <div className="ev-panel-checks">
+                <h3>Checked before it was published here</h3>
+                <ul>
+                  {d.checks.map((c) => (
+                    <li key={c}>
+                      <span className="ev-panel-dot" aria-hidden="true" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className={`ev-sheet-verdict${d.value ? "" : " is-gap"}`}>{d.verdict}</p>
+            )}
             <SheetVersions d={d} />
-            <div className="ev-sheet-actions">
-              <a className="btn btn-primary" href={d.href}>
-                Full receipt
+            <div className="ev-panel-actions">
+              <a className="ev-panel-primary" href={d.href}>
+                Open the whole page
               </a>
-              <a className="btn" href={d.cite}>
-                Cite
-              </a>
-              {d.doc && d.page ? <FullDocumentLink href={d.doc.href} page={d.page.pdf} /> : null}
-              {d.doc?.pdf && d.page ? (
-                <a className="btn" href={d.doc.pdf} rel="noopener" aria-label={`Official PDF at page ${d.page.pdf}`}>
-                  Official PDF, p. {d.page.pdf}
+              <div className="ev-panel-links">
+                {d.doc && d.page ? <FullDocumentLink href={d.doc.href} page={d.page.pdf} /> : null}
+                <CopyCitation d={d} />
+                <a href={`${ISSUES_URL}/new?title=${encodeURIComponent(`Error report: figure ${d.obs}`)}&body=${encodeURIComponent(`Figure: ${d.href}
+Release: ${d.release}
+
+What looks wrong:
+`)}`}>
+                  Report a problem
                 </a>
-              ) : null}
+                {d.doc?.pdf && d.page ? (
+                  <a href={d.doc.pdf} rel="noopener" aria-label={`Official PDF at page ${d.page.pdf}`}>
+                    Official PDF
+                  </a>
+                ) : null}
+              </div>
             </div>
           </div>
         )}
-      </div>
+      </aside>
     </>
+  );
+}
+
+/** Copies a one-line citation of the figure: the portal, the series, the document and page, the address. */
+function CopyCitation({ d }: { d: SheetData }) {
+  const [done, setDone] = useState(false);
+  const text = () =>
+    `${PORTAL_AUTHOR}. "${d.title}", ${d.kind === "As printed" ? d.period : `${d.kind}, ${d.period}`}. ${PORTAL}, release ${d.release}.` +
+    (d.doc ? ` Source: ${d.doc.title}${d.page ? `, p. ${d.page.printed ?? d.page.pdf}` : ""}.` : "") +
+    ` ${window.location.origin}${d.href}`;
+  return (
+    <button
+      type="button"
+      className="ev-panel-linkbtn"
+      onClick={() => {
+        navigator.clipboard?.writeText(text()).then(
+          () => setDone(true),
+          () => setDone(false),
+        );
+      }}
+    >
+      {done ? "Citation copied" : "Copy citation"}
+    </button>
   );
 }

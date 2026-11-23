@@ -84,7 +84,7 @@ export function CropView({ plan, base, alt, lazy, caption }: { plan: CropPlan; b
 
 /** The whole page, untouched, with the box (solid or dashed) and the table outline drawn over it. Unless `eager`, the image
  * address waits in data-src until the section holding it is opened (ReceiptEnhance). */
-export function WholePage({ image, cell, alt, state, eager }: { image: PageImage; cell: Cell; alt: string; state: BoxState; eager?: boolean }) {
+export function WholePage({ image, cell, alt, state, eager, bands }: { image: PageImage; cell: Cell; alt: string; state: BoxState; eager?: boolean; bands?: boolean }) {
   const b = cell.cell_bbox_norm;
   const t = cell.table_bbox_norm;
   const ok = (x: number[] | null | undefined): x is number[] => Array.isArray(x) && x.length === 4 && x[2] > x[0] && x[3] > x[1];
@@ -92,6 +92,13 @@ export function WholePage({ image, cell, alt, state, eager }: { image: PageImage
     <div className="ev-page">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img {...(eager ? { src: image.src } : { "data-src": image.src })} alt={alt} width={image.width} height={image.height} decoding="async" />
+      {bands && state === "exact" && ok(t) && ok(b) ? (
+        <>
+          {/* the row and the column that lead the eye from the line name and the column heading to the figure (Home v3 pages set) */}
+          <span className="ev-band4" aria-hidden="true" style={boxStyle([t[0], b[1], t[2], b[3]], 0.002)} />
+          <span className="ev-band4" aria-hidden="true" style={boxStyle([b[0], t[1], b[2], t[3]], 0.002)} />
+        </>
+      ) : null}
       {state === "exact" && ok(t) ? <span className="ev-table" style={boxStyle(t, 0.004)} /> : null}
       {state === "exact" && ok(b) ? <span className="ev-box" data-cell-box={cell.cell_id} style={boxStyle(b, 0.004)} /> : null}
       {state === "tentative" && ok(b) ? <span className="ev-box ev-box--tentative" style={boxStyle(b, 0.004)} /> : null}

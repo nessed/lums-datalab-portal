@@ -15,18 +15,20 @@ import type { ReactNode } from "react";
 import Link from "@/components/ui/Link";
 import Cite from "@/components/Cite";
 import Markdown from "@/components/Markdown";
-import WhatsNewTabs, { type WnTab } from "@/components/find/WhatsNewTabs";
-import { Breadcrumbs, Callout, Disclosure, TableWrap, Toc } from "@/components/ui/Basics";
-import { ISSUES_URL, datasetKeys, db, isDatasetPublished, obsHref, releaseMarkdown, sourceHref } from "@/lib/data";
+import WhatsNewTabs, { type RlTab } from "@/components/find/WhatsNewTabs";
+import Upcoming from "@/components/find/Upcoming";
+import Crumbs from "@/components/chrome/Crumbs";
+import "@/styles/v4-releases.css";
+import { Callout, Disclosure, TableWrap, Toc } from "@/components/ui/Basics";
+import { ISSUES_URL, datasetKeys, db, isDatasetPublished, library, obsHref, releaseMarkdown, sourceHref } from "@/lib/data";
 import { dateOnly, periodWords } from "@/lib/format";
 import { Count, Num } from "@/components/ui/Num";
 import { datasetStateWords } from "@/lib/status";
 import { COMING, feature, type FeatureKey } from "@/lib/features";
 import { seriesTitle } from "@/lib/titles";
-import calendar from "../../../editorial/calendar.json";
 
 export const metadata: Metadata = {
-  title: "What’s new: updates, corrections and releases",
+  title: "Releases: upcoming, added recently and corrections",
   description: "What the latest release added, every correction to a published figure, the official release dates expected next, and how versions and citations work.",
 };
 
@@ -56,9 +58,13 @@ const PLANNED: Record<FeatureKey, string> = {
   monthlyData: "every monthly CPI issue, not only June.",
   errataBadges: "a note on each corrected figure, linking to its errata entry.",
   dailyRates: "fuel prices and the dollar rate read once a day from official notices, on the home page.",
+  insights: "short findings written from the latest figures, each sentence linked to the figures it uses and reviewed by a person before it is shown.",
+  perPerson: "rupee series per person, once a checked population series is in the release.",
+  actualSpending: "what the federal government actually spent, from the federal accounts.",
+  provincialMap: "a map of the provinces shaded by the selected figure.",
+  releaseAlerts: "an email when a publication you follow is added.",
+  urdu: "the site in Urdu.",
 };
-
-type CalEntry = { id: string; name: string; agency: string; when: string; status: string };
 
 /** A release Markdown file without its own first heading (the page gives one). */
 function body(md: string | null): string | null {
@@ -66,7 +72,7 @@ function body(md: string | null): string | null {
 }
 
 /** A count of entries on this page: recomputed by scripts/checks/whatsnew-entries.mjs. */
-function TabCount({ tab, n }: { tab: WnTab; n: number }) {
+function TabCount({ tab, n }: { tab: "all" | "added" | "editions" | "corrections"; n: number }) {
   return (
     <span data-num="derived" data-derived="whatsnew-tab" data-tab={tab}>
       {n}
@@ -74,22 +80,40 @@ function TabCount({ tab, n }: { tab: WnTab; n: number }) {
   );
 }
 
-type Entry = { key: string; kind: "added" | "editions" | "held" | "corrections"; label: string; title: ReactNode; line: ReactNode; link: { href: string; text: string } };
+type Entry = {
+  key: string;
+  kind: "added" | "editions" | "held" | "corrections";
+  label: string;
+  title: ReactNode;
+  who?: ReactNode;
+  line: ReactNode;
+  link: { href: string; text: string };
+  file?: { href: string; label: string } | null;
+};
 
+/** One row: added, publication, published by, what changed, get it. Matched by whatsnew-entries.mjs (li.wn-entry, data-wn-kind, data-wn-key, the date). */
 function EntryRow({ e, date }: { e: Entry; date: string }) {
   return (
     <li className="wn-entry" data-wn-kind={e.kind} data-wn-key={e.key}>
       <span className="wn-date">
         <Num kind="date">{date}</Num>
       </span>
-      <div className="wn-body">
-        <p className={`wn-kind wn-kind-${e.kind}`}>{e.label}</p>
-        <h3 className="wn-title">{e.title}</h3>
-        <p className="wn-line">{e.line}</p>
-        <Link href={e.link.href} className="wn-link">
-          {e.link.text}
+      <span className="wn-pub">
+        <span className={`wn-kind wn-kind-${e.kind}`}>{e.label}</span>
+        <Link href={e.link.href} className="wn-title">
+          {e.title}
         </Link>
-      </div>
+      </span>
+      <span className="wn-who">{e.who ?? null}</span>
+      <span className="wn-line">{e.line}</span>
+      <span className="wn-get">
+        {e.file ? (
+          <a href={e.file.href} download>
+            {e.file.label}
+          </a>
+        ) : null}
+        <Link href={e.link.href}>{e.link.text}</Link>
+      </span>
     </li>
   );
 }
@@ -160,9 +184,14 @@ export default function ReleasesPage() {
       kind: "editions",
       label: "New edition",
       title: s.title,
+      who: <span>{s.publisher}</span>,
+      file: (() => {
+        const f = library().documents.find((x) => x.id === s.source_id)?.file;
+        return f ? { href: f.href, label: "PDF" } : null;
+      })(),
       line: (
         <>
-          <span>{s.publisher}</span>. <Count k={`values:source:${s.source_id}`} n={valuesBySource.get(s.source_id)} /> checked figures from{" "}
+          <Count k={`values:source:${s.source_id}`} n={valuesBySource.get(s.source_id)} /> checked figures from{" "}
           <Count k={`pages:source:${s.source_id}`} n={(s.pages_used ?? []).length} /> pages read.
         </>
       ),
@@ -218,58 +247,78 @@ export default function ReleasesPage() {
   });
 
   const list = [...added, ...editions, ...held];
-  const tabs: { key: WnTab; label: string; n: ReactNode }[] = [
-    { key: "all", label: "All", n: <TabCount tab="all" n={list.length + corrections.length} /> },
-    { key: "added", label: "Added", n: <TabCount tab="added" n={added.length} /> },
-    { key: "editions", label: "New editions", n: <TabCount tab="editions" n={editions.length} /> },
-    { key: "corrections", label: "Corrections", n: <TabCount tab="corrections" n={corrections.length} /> },
+  const tabs: { key: RlTab; label: string }[] = [
+    { key: "upcoming", label: "Upcoming" },
+    { key: "added", label: "Added recently" },
+    { key: "corrections", label: "Corrections" },
   ];
-  const cal = (calendar.entries as CalEntry[]).slice().sort((a, b) => a.when.localeCompare(b.when) || a.name.localeCompare(b.name));
 
   return (
-    <div className="is-prose whatsnew">
-      <Breadcrumbs items={[{ label: "What’s new" }]} />
-      <header className="wn-head">
-        <h1 className="wn-h1">
-          The latest update, on <Num kind="date">{date}</Num>, added <TabCount tab="added" n={added.length} /> data types and{" "}
-          <TabCount tab="editions" n={editions.length} /> government documents.{" "}
-          {corrections.length ? (
-            <>
-              <TabCount tab="corrections" n={corrections.length} /> published figures have been corrected since they were first published.
-            </>
-          ) : (
-            <>No published figure has been corrected.</>
-          )}
-        </h1>
-        <p className="series-meta wn-meta">
-          <span>
-            Release <Num kind="version">{r.version}</Num>
+    <div className="rl4p">
+      <Crumbs items={[{ label: "Releases" }]} />
+      <header className="rl4p-head">
+        <div>
+          <h1>Releases</h1>
+          <p className="rl4p-lede">What the government is due to publish, what we have added, and every correction we have made.</p>
+          <p className="rl4p-sum">
+            The latest update, on <Num kind="date">{date}</Num>, added <TabCount tab="added" n={added.length} /> data types and{" "}
+            <TabCount tab="editions" n={editions.length} /> government documents (<TabCount tab="all" n={list.length + corrections.length} /> entries in all).{" "}
+            {corrections.length ? (
+              <>
+                <TabCount tab="corrections" n={corrections.length} /> published figures have been corrected since they were first published.
+              </>
+            ) : (
+              <>No published figure has been corrected.</>
+            )}
+          </p>
+        </div>
+        <div className="rl4p-acts">
+          <span className="rl4p-soon">
+            Add calendar to Outlook or Google <em>Coming soon</em>
           </span>
-          <span>{r.label}</span>
-          <span>{r.doi ? <Num kind="id">{`DOI ${r.doi}`}</Num> : "No DOI yet"}</span>
-          <span>
-            Code commit <Num kind="id" className="mono">{r.git_commit.slice(0, 10)}</Num>
+          <span className="rl4p-soon">
+            Get release alerts <em>Coming soon</em>
           </span>
-        </p>
+        </div>
       </header>
 
-      <div className="wn-layout" id="whats-new">
-        <section className="wn-main" aria-labelledby="wn-h">
+      <div id="whats-new">
+        <WhatsNewTabs tabs={tabs} />
+        <section id="rl-panel-upcoming" className="rl-panel" aria-label="Upcoming">
+          <span id="upcoming" />
+          <Upcoming />
+        </section>
+        <section id="rl-panel-added" className="rl-panel" aria-labelledby="wn-h">
+          <span id="added" />
           <h2 id="wn-h" className="sr-only">
-            What this release added
+            Added recently
           </h2>
-          <WhatsNewTabs tabs={tabs} />
-          <ol className="wn-list" id="wn-list">
-            {list.map((e) => (
-              <EntryRow key={e.key} e={e} date={date} />
-            ))}
-          </ol>
+          <div className="wn-tbl">
+            <p className="wn-thead" aria-hidden="true">
+              <span>Added</span>
+              <span>Publication</span>
+              <span>Published by</span>
+              <span>What changed</span>
+              <span>Get it</span>
+            </p>
+            <ol className="wn-list" id="wn-list">
+              {list.map((e) => (
+                <EntryRow key={e.key} e={e} date={date} />
+              ))}
+            </ol>
+          </div>
+        </section>
+        <section id="rl-panel-corrections" className="rl-panel" aria-label="Corrections">
           <section id="corrections" className="wn-corr" aria-labelledby="corrections-h" data-wn-has={corrections.length ? "1" : "0"}>
-            <h3 id="corrections-h" className="wn-corr-h">
+            <h2 id="corrections-h" className="sr-only">
               Corrections
-            </h3>
+            </h2>
+            <p className="wn-corr-lede">
+              When a figure on this site is found to be wrong, we correct it in a new version, keep the old one, and list it here. Links and citations to the
+              old version keep working.
+            </p>
             {corrections.length ? (
-              <ol className="wn-list">
+              <ol className="wn-list wn-list-corr">
                 {corrections.map((e) => (
                   <EntryRow key={e.key} e={e} date={date} />
                 ))}
@@ -278,8 +327,7 @@ export default function ReleasesPage() {
               <div className="wn-empty" data-wn-empty="corrections">
                 <p className="wn-empty-h">No corrections so far.</p>
                 <p className="wn-empty-p">
-                  When a published figure is corrected, it is listed here with the old value, the new value, the page, and the release that fixed it. Old
-                  releases stay online, so earlier citations keep working.
+                  When a published figure is corrected, it is listed here with the old value, the new value, the page, and the release that fixed it.
                 </p>
                 <a href={ISSUES_URL} className="wn-link">
                   Report an error
@@ -288,37 +336,9 @@ export default function ReleasesPage() {
             )}
           </section>
         </section>
-        <aside className="wn-cal" aria-labelledby="wn-cal-h">
-          <h2 id="wn-cal-h" className="wn-cal-h">
-            Official release dates
-          </h2>
-          <p className="wn-cal-note">
-            When the next editions of the publications this site reads are expected, from each one&rsquo;s usual timing. Expected unless the agency has
-            announced the date{calendar.provisional ? "; not yet confirmed by the team" : ""}.
-          </p>
-          {cal.length ? (
-            <ul className="wn-cal-list">
-              {cal.map((e) => (
-                <li key={e.id} className="wn-cal-row" data-cal-entry={e.id}>
-                  <span className="wn-cal-what">
-                    <strong>{e.name}</strong>
-                    <span className="wn-cal-who">{e.agency}</span>
-                  </span>
-                  <span className="wn-cal-when">
-                    {e.status === "announced" ? "Announced for " : "Expected "}
-                    <span data-num={e.status === "announced" ? "date" : "ui"} data-cal={e.id}>
-                      {e.status === "announced" ? e.when : periodWords(e.when, "month")}
-                    </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="wn-cal-note">No dates are expected yet.</p>
-          )}
-        </aside>
       </div>
 
+      <h2 className="rl4p-about">About this release</h2>
       <Callout kind="caveat" title="A prototype">
         <p>
           This release is a prototype: it has no DOI, the series definitions are drafts, and the error rate has not been measured. Do not cite it in

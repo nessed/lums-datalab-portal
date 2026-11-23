@@ -75,7 +75,7 @@
   --s-7: 2.5rem; /* 40 */
   --s-8: 3rem; /* 48 */
   --gutter: 1rem;
-  --page-max: 82.5rem; /* 1320 px (Home v2) */
+  --page-max: 77.5rem; /* 1240 px (Home v3 pages set, 2026-11-24; was 1320) */
   --site-pad: 2rem; /* 32 px side padding at desktop */
   --util-h: 2rem; /* 32 */
   --search-h: 3.5rem; /* 56 */
@@ -208,6 +208,23 @@
   --menu-bg: var(--page);
   --menu-border: var(--ink);
   --menu-hover: var(--select-wash);
+  /* Home v3 pages set (2026-11-24, design handoff): utility strip, LUMS lockup,
+   * source panel, chart series. Extends, does not replace, the tokens above. */
+  --util-h4: 2rem; /* 32 */
+  --logo-h: 30px;
+  --lockup-rule: var(--doc-rule);
+  --mast-h4: 4.75rem; /* 76 */
+  --head-search-w: 20rem; /* 320 */
+  --head-search-h: 2.5rem; /* 40 */
+  --scrim: rgb(17 19 24 / 0.32);
+  --panel-w: 30rem; /* 480 */
+  --panel-edge: var(--navy);
+  --panel-top: var(--gold);
+  --checked-ink: #1f6a4a;
+  --chart-line-w: 2.25px;
+  --chart-sky: #1a7fc4;
+  --chart-green: #0e7c5a;
+  --progress: var(--gold);
   /* Home v3 sizes (D-HV3-2) */
   --hero-measure: 34ch;
   --home-search-max: 48rem;

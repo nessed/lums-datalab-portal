@@ -1,25 +1,32 @@
-// Release calendar (Home v2, 2026-11-23): a stub. The home page's "Coming up"
-// tab reads editorial/calendar.json; this page will list it in full once the
-// calendar is confirmed by people. Until then it says it is coming.
+// Release calendar (Home v3 pages set, 2026-11-24): the official publications
+// this site reads, with the month each next edition is expected (or the day the
+// agency announced), from editorial/calendar.json. The same list is the
+// "Upcoming" tab of /releases. Dates are checked by home-calendar.mjs.
 import type { Metadata } from "next";
 import Link from "@/components/ui/Link";
-import { Breadcrumbs } from "@/components/ui/Basics";
+import Crumbs from "@/components/chrome/Crumbs";
+import Upcoming from "@/components/find/Upcoming";
+import "@/styles/v4-releases.css";
 
 export const metadata: Metadata = {
-  title: "Calendar",
-  description: "A calendar of when Pakistan's official statistics are expected. Coming: not in this release.",
+  title: "Release calendar",
+  description: "When the next editions of the official publications this site reads are expected, or announced.",
 };
 
 export default function CalendarPage() {
   return (
-    <article className="is-prose prose">
-      <Breadcrumbs items={[{ label: "Calendar" }]} />
-      <h1>Calendar</h1>
-      <p className="coming-block">Coming: a calendar of when each official publication is expected.</p>
-      <p>
-        Until it is ready, see what this release holds on the <Link href="/library">Library</Link> page, and what changed between releases on{" "}
-        <Link href="/releases">Releases and corrections</Link>.
-      </p>
-    </article>
+    <div className="rl4p">
+      <Crumbs items={[{ href: "/releases", label: "Releases" }, { label: "Release calendar" }]} />
+      <header className="rl4p-head">
+        <div>
+          <h1>Release calendar</h1>
+          <p className="rl4p-lede">
+            What the government is due to publish next, for the publications this site reads. What has already been added is under{" "}
+            <Link href="/releases?tab=added#added">Releases</Link>.
+          </p>
+        </div>
+      </header>
+      <Upcoming />
+    </div>
   );
 }

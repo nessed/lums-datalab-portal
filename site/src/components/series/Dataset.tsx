@@ -168,12 +168,14 @@ function andList(xs: string[]): string {
   return xs.length <= 1 ? (xs[0] ?? "") : `${xs.slice(0, -1).join("; ")}; and ${xs[xs.length - 1]}`;
 }
 
-export function HeadlineBlock({ series, answer }: { series: Series; answer: Answer }) {
+/** `part` (Home v3 pages set, 2026-11-24): "num" the figure only (main column), "facts" the facts only (side panel, "About this indicator"), "both" as before. */
+export function HeadlineBlock({ series, answer, part = "both" }: { series: Series; answer: Answer; part?: "num" | "facts" | "both" }) {
   const d = db();
   const { latest, newer } = answer;
   const unit = unitLabel(series.unit, series.scale_factor);
   const title = seriesTitle(series);
   if (!latest) {
+    if (part === "facts") return null;
     return (
       <section className="ds-head" aria-label="Latest figure">
         <div className="ds-num">
@@ -197,8 +199,7 @@ export function HeadlineBlock({ series, answer }: { series: Series; answer: Answ
   const checked = latest.reader.key === "checked" || latest.reader.key === "checked-note";
   const asOf = (d.release.created_at ?? "").slice(0, 10);
   const kindLine = kindLong(latest);
-  return (
-    <section className="ds-head" aria-label="Latest figure">
+  const num = (
       <div className="ds-num">
         <p className="ds-num-l">
           {title}, <KindPeriodWords o={latest} series={series} />
@@ -243,6 +244,8 @@ export function HeadlineBlock({ series, answer }: { series: Series; answer: Answ
           </p>
         ) : null}
       </div>
+  );
+  const facts = (
       <dl className="ds-facts">
         {KIND[latest.kind] && latest.kind !== "as_printed" ? (
           <>
@@ -307,6 +310,26 @@ export function HeadlineBlock({ series, answer }: { series: Series; answer: Answ
           .{d.info.isPrototype ? " A prototype: not yet for citation in publications." : ""}
         </dd>
       </dl>
+  );
+  if (part === "num")
+    return (
+      <section className="ds-head ds-head-num" aria-label="Latest figure">
+        {num}
+      </section>
+    );
+  if (part === "facts")
+    return (
+      <section className="ix-about" aria-labelledby="ix-about-h">
+        <h2 id="ix-about-h" className="ix-side-h">
+          About this indicator
+        </h2>
+        {facts}
+      </section>
+    );
+  return (
+    <section className="ds-head" aria-label="Latest figure">
+      {num}
+      {facts}
     </section>
   );
 }
@@ -752,7 +775,7 @@ export function Related({ series }: { series: Series }) {
   return (
     <section className="ds-rel" aria-labelledby="h-rel">
       <h2 id="h-rel" className="ds-h2 ds-ruled">
-        Related datasets
+        Related indicators
       </h2>
       <ul className="ds-rel-list">
         {items.map((s) => {

@@ -46,7 +46,7 @@ const GROUPS: { key: string; title: string }[] = [
 ];
 const FACES: Face[] = [
   // Today's face, for comparison.
-  { key: "atkinson", group: "now", name: "Atkinson Hyperlegible Next", note: "the site face (Ali, 2026-11-23); by the Braille Institute", stack: "var(--font-atkinson), system-ui, sans-serif" },
+  { key: "atkinson", group: "now", name: "Atkinson Hyperlegible Next", note: "the site face, picked by Ali; by the Braille Institute", stack: "var(--font-atkinson), system-ui, sans-serif" },
   { key: "overpass", group: "signs", name: "Overpass", note: "after Highway Gothic, the American road-sign letters; draws its own rupee sign", stack: "\"Overpass\", system-ui, sans-serif" },
   { key: "barlow", group: "signs", name: "Barlow", note: "after Californian road and licence-plate lettering; tight, made for figures", stack: "\"Barlow\", system-ui, sans-serif" },
   { key: "radiocanada", group: "signs", name: "Radio Canada Big", note: "the Canadian public broadcaster’s face", stack: "\"Radio Canada Big\", system-ui, sans-serif" },

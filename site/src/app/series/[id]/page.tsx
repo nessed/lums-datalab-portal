@@ -1,29 +1,33 @@
-// A series (DESIGN.md 9.5, round 2), one skeleton for every series. Phone order:
-//   1 title (the plain title, editorial/titles.json) with the series id beside it,
-//     a one-sentence summary, the fact pills (period covered, how often it is
-//     published, latest figure, next expected, source, checked, release)
-//   2 the headline block: the latest checked figure big, a plain sentence, the
-//     change in words with an arrow, "See it on the printed page"
-//   3 the chart, with its controls and the source lines inside its frame
-//   4 related series with sparklines (a rail beside the chart on wide screens)
-//   5 the action bar, the table by kind of figure, where it sits, citation
-//   6 About this series (the printed name, definition, labels as printed, id)
-// Every value links to its receipt; derived figures are recomputed by
-// scripts/checks/series-derived.mjs (data-op) and home-derived.mjs (the change
-// in words). The number, chart, table and CSV link work without JavaScript.
+// A series: the "Dataset" screen of the v3 design set (2026-11-23), one skeleton
+// for every series (abs budget, cpi monthly, lfs survey). Order:
+//   1 breadcrumb: Find data / topic (or dataset) / series
+//   2 the heading as a sentence: the plain title (editorial/titles.json, which
+//     scripts/checks/titles.mjs requires first) and the latest figure, with its
+//     document and page
+//   3 the headline block: the figure big, "Printed as", the change in words;
+//     beside it the facts (figure type, period, unit, source, checked, release)
+//   4 tabs over server-rendered panels (components/Tabs.tsx, ?tab=; ?view= is
+//     the chart's own): Chart, Table, Editions, Download, Cite. Without
+//     JavaScript every panel is shown in order.
+//   5 related datasets and the guide to read first (budget series only)
+//   6 compare and share, the computed-series note, where it sits, About (the
+//     printed name, definition, labels as printed, id)
+// Every value links to its receipt. Derived figures are recomputed by
+// scripts/checks/home-derived.mjs (the change in words, budget to revised) and
+// series-derived.mjs (the chart's own computed views).
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/ui/Link";
-import Cite from "@/components/Cite";
-import { ActionBar, CiteButton, CompareButton, DownloadButton, ShareButton } from "@/components/actions/Actions";
+import Tabs, { type TabDef } from "@/components/Tabs";
+import { ActionBar, CompareButton, ShareButton } from "@/components/actions/Actions";
 import { Breadcrumbs, Callout } from "@/components/ui/Basics";
-import { Panel } from "@/components/ui/Card";
-import SeriesId from "@/components/ui/SeriesId";
 import SeriesView from "@/components/series/SeriesView";
-import { About, KindTable, SourceLines, WhereItSits } from "@/components/series/Parts";
-import { Headline, publishedSentence, RelatedRail, SeriesFacts } from "@/components/series/Head";
-import { answerOf, kindWordsOf, parentForShare, printedModels, unitOptions } from "@/components/series/model";
-import { datasetName, db, seriesCsvHref, seriesHref, slugify, visibleSeries } from "@/lib/data";
+import { About, SourceLines, WhereItSits } from "@/components/series/Parts";
+import { publishedSentence } from "@/components/series/Head";
+import { CitePanel, Downloads, Editions, editionPeriods, HeadlineBlock, ReadFirst, Related, TitleSentence, YearTable } from "@/components/series/Dataset";
+import { answerOf, hasBudgetPair, kindWordsOf, parentForShare, printedModels, unitOptions } from "@/components/series/model";
+import { topicHref, topics } from "@/components/home/editorial";
+import { datasetName, db, seriesCsvHref, seriesHref, slugify, visibleSeries, type Series } from "@/lib/data";
 import { feature, isOn, type FeatureKey } from "@/lib/features";
 import { periodWords, unitLabel } from "@/lib/format";
 import { ancestors } from "@/lib/stats";
@@ -48,81 +52,101 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: seriesTitle(s), description: `${seriesSummary(s) ?? s.definition ?? s.name} Every figure links to the page of the government document it was read from.` };
 }
 
+/** The first topic that lists this series or one of its parents; else its dataset. */
+function crumbOf(series: Series): { href: string; label: string } {
+  const ids = [series.series_id, ...ancestors(series).map((p) => p.series_id)];
+  for (const id of ids) {
+    const t = topics().find((t) => t.groups.some((g) => g.series.some((s) => s.series_id === id)) || t.headline.some((s) => s.series_id === id));
+    if (t) return { href: topicHref(t.slug), label: t.name };
+  }
+  return { href: `/datasets/${series.dataset}`, label: datasetName(series.dataset) };
+}
+
 export default async function SeriesPage({ params }: Props) {
   const { id } = await params;
   const series = find(id);
   if (!series) notFound();
   const d = db();
   const path = seriesHref(series.series_id);
-  const parents = ancestors(series);
   const answer = answerOf(series);
   const printed = printedModels(series);
   const summary = seriesSummary(series);
   const all = d.obsBySeries.get(series.series_id) ?? [];
   const periods = [...new Set(all.map((o) => o.period))].sort();
   const inside = series.breaks.find((b) => periods.some((p) => p < b.at_period) && periods.some((p) => p >= b.at_period));
-  // Real terms and % of GDP come from their feature flags. "Per person" has no flag yet (adding one touches the
-  // Releases page, outside this lane); it stays "coming" until a checked population series exists.
+  // Real terms and % of GDP come from their feature flags. "Per person" has no flag yet; it stays "coming"
+  // until a checked population series exists.
   const coming = series.unit === "PKR" ? [...(["realTerms", "percentOfGdp"] as FeatureKey[]).filter((k) => !isOn(k)).map((k) => feature(k).label), "Per person"] : [];
   const parent = parentForShare(series);
+  const budget = hasBudgetPair(series);
+  const noActual = budget && !all.some((o) => o.vintage === "actual" || o.vintage === "ac");
+  const eds = editionPeriods(series);
+  const tabs: TabDef[] = [
+    { id: "chart", label: "Chart" },
+    { id: "table", label: "Table" },
+    ...(eds.length ? [{ id: "editions", label: "Editions" }] : []),
+    { id: "download", label: "Download" },
+    { id: "cite", label: "Cite" },
+  ];
 
   return (
-    <article className="sp">
-      <Breadcrumbs
-        items={[
-          { href: "/browse", label: "Data" },
-          { href: `/datasets/${series.dataset}`, label: datasetName(series.dataset) },
-          ...[...parents].reverse().slice(-1).map((p) => ({ href: seriesHref(p.series_id), label: seriesTitle(p) })),
-          { label: seriesTitle(series) },
-        ]}
-      />
-      <header className="sp-head">
-        <div className="sp-titlerow">
-          <h1>{seriesTitle(series)}</h1>
-          <SeriesId id={series.series_id} className="sp-id" />
-        </div>
-        {summary ? <p className="sp-summary">{summary}</p> : null}
-        <SeriesFacts series={series} latest={answer.latest} />
+    <article className="sp ds">
+      <Breadcrumbs items={[{ href: "/browse", label: "Find data" }, crumbOf(series), { label: seriesTitle(series) }]} />
+
+      <header className="ds-top">
+        <TitleSentence series={series} latest={answer.latest} />
+        {summary ? <p className="ds-summary">{summary}</p> : null}
       </header>
 
-      <div className="sp-top">
-        <div className="sp-numcol">
-          <Headline series={series} answer={answer} />
-        </div>
-        <Panel className="sp-chart" label="Chart">
-          <SeriesView
-            slug={slugify(series.series_id)}
-            series={{ series_id: series.series_id, name: seriesTitle(series), frequency: series.frequency, unit: series.unit, scale_factor: series.scale_factor, breaks: series.breaks }}
-            printed={printed}
-            units={unitOptions(series)}
-            coming={coming}
-            kindWords={kindWordsOf(series)}
-            unitWords={unitLabel(series.unit, series.scale_factor)}
-            parentName={parent ? seriesTitle(parent) : null}
-            breakFrom={inside ? { at: inside.at_period, label: periodWords(inside.at_period, series.frequency) } : null}
-            frame={<SourceLines series={series} path={path} />}
-          />
-          <p className="sp-release-note small">
-            {publishedSentence(series)}
-            {coming.length ? ` Not in this release yet: ${coming.join(", ").toLowerCase().replace("% of gdp", "% of GDP")}.` : ""}
-          </p>
-        </Panel>
-        <aside className="sp-railcol" aria-label="Related series">
-          <RelatedRail series={series} />
-        </aside>
+      <HeadlineBlock series={series} answer={answer} />
+
+      <div className="ds-tabs">
+        <Tabs tabs={tabs} label="Views of this series">
+          <section className="ds-sec" aria-labelledby="h-chart">
+            <div className="ds-sec-head">
+              <h2 id="h-chart" className="ds-h2">
+                {budget ? (noActual ? "Budget and revised estimates, by year" : "Budget, revised and actual, by year") : "Over time"}
+              </h2>
+              <p className="ds-sub">{budget ? "Each kind of figure is its own line: a budget estimate and its revised estimate are never joined into one." : "Each point is a printed figure; a gap in the line is a period with no figure in this release."}</p>
+            </div>
+            <SeriesView
+              slug={slugify(series.series_id)}
+              series={{ series_id: series.series_id, name: seriesTitle(series), frequency: series.frequency, unit: series.unit, scale_factor: series.scale_factor, breaks: series.breaks }}
+              printed={printed}
+              units={unitOptions(series)}
+              coming={coming}
+              kindWords={kindWordsOf(series)}
+              unitWords={unitLabel(series.unit, series.scale_factor)}
+              parentName={parent ? seriesTitle(parent) : null}
+              breakFrom={inside ? { at: inside.at_period, label: periodWords(inside.at_period, series.frequency) } : null}
+              frame={<SourceLines series={series} path={path} />}
+              defaultView={budget ? "kind" : "best"}
+            />
+            <p className="ds-note">
+              {noActual ? "Actual figures: not in this release. " : ""}
+              {publishedSentence(series)}
+              {coming.length ? ` Not in this release yet: ${coming.join(", ").toLowerCase().replace("% of gdp", "% of GDP")}.` : ""}
+            </p>
+          </section>
+          <YearTable series={series} model={printed.kind} />
+          {eds.length ? <Editions series={series} periods={eds} /> : null}
+          <Downloads series={series} />
+          <CitePanel series={series} latest={answer.latest} path={path} />
+        </Tabs>
+      </div>
+
+      <div className="ds-after">
+        <Related series={series} />
+        <ReadFirst series={series} />
       </div>
 
       <ActionBar label="Take this series">
-        <DownloadButton seriesId={series.series_id} />
-        <CiteButton path={path} />
         <CompareButton seriesId={series.series_id} />
         <ShareButton path={path} />
       </ActionBar>
 
-      <div className="sp-lower">
-        <div className="sp-main">
-          <KindTable series={series} />
-
+      <div className="ds-lower">
+        <div className="ds-lower-main">
           {series.derived && series.derivation ? (
             <Callout kind="note" title="A computed series">
               <p>
@@ -138,18 +162,9 @@ export default async function SeriesPage({ params }: Props) {
               </p>
             </Callout>
           ) : null}
-
           <WhereItSits series={series} />
-
-          <details className="sp-cite" id="cite">
-            <summary>
-              <h2 id="h-cite">Cite this series</h2>
-            </summary>
-            <Cite path={path} what={`Series ${series.series_id}, ${series.name}`} heading={false} />
-          </details>
         </div>
-
-        <div className="sp-side">
+        <div className="ds-lower-side">
           <About series={series} csv={seriesCsvHref(series.series_id)} />
         </div>
       </div>

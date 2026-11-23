@@ -1,0 +1,481 @@
+/* v3-pages: Home v3 design set (2026-11-23). Values come from src/design/tokens.css only. */
+/* Guides (/guides, /guides/revised-estimate), the inflation calculator
+ * (/inflation-calculator) and compare provinces (/compare/[category]).
+ * House style of v2.css section 7: Archivo headings, tabular figures, square
+ * corners, 1px rules, no shadows, cards or pills. Sections: 1 shared  2 guides
+ * 3 inflation calculator  4 compare provinces  5 wider screens */
+
+/* ================================ 1 shared ============================== */
+.pg {
+  padding: var(--s-4) 0 var(--s-7);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.pg-kicker {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+  font-weight: var(--wght-num);
+  color: var(--ink-3);
+}
+.pg-h1 {
+  margin: var(--s-3) 0 0;
+  font-family: var(--font-display);
+  font-weight: var(--wght-num);
+  font-size: var(--step-3);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  max-width: var(--measure);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.pg-kicker + .pg-h1 {
+  margin-top: var(--s-1);
+}
+.pg-lede {
+  margin: var(--s-3) 0 0;
+  max-width: var(--measure);
+  font-family: var(--font-display);
+  font-weight: var(--wght-num);
+  font-size: var(--step-1);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.pg-h2 {
+  margin: var(--s-6) 0 0;
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--step-2);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+.pg-p {
+  margin: var(--s-2) 0 0;
+  max-width: var(--measure);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+.pg-sec {
+  margin-top: var(--s-6);
+}
+/* "Annual Budget Statement 2026-27, p. 1": the page in the mono face, on the highlighter */
+.pg-pl {
+  font-family: var(--font-ref);
+  font-size: var(--step--2);
+  font-weight: normal;
+  color: var(--ink);
+  background: var(--ref-mark);
+  border-bottom: var(--rule-heavy) solid var(--answer-edge);
+  padding: 0 var(--s-1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pg-pl:hover {
+  background: var(--hover-wash);
+  color: var(--link-hover);
+}
+
+/* ================================ 2 guides ============================== */
+.gd-list {
+  list-style: none;
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  max-width: var(--measure);
+  border-top: var(--rule-heavy) solid var(--ink);
+}
+.gd-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-3) 0;
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.gd-section {
+  font-size: var(--step--1);
+  font-weight: var(--wght-num);
+  color: var(--ink-3);
+}
+.gd-title {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--step-1);
+}
+.gd-sum,
+.gd-title-off {
+  color: var(--ink-2);
+}
+
+.gd-grid {
+  display: grid;
+  gap: var(--s-6) var(--s-8);
+  align-items: start;
+}
+.gd-main,
+.gd-aside {
+  min-width: 0;
+}
+.gd-lede-src {
+  color: var(--ink-2);
+  font-weight: normal;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+}
+.gd-defs {
+  margin: var(--s-3) 0 0;
+  border-top: var(--rule-heavy) solid var(--ink);
+}
+.gd-defs > div {
+  display: grid;
+  gap: var(--s-1) var(--s-5);
+  padding: var(--s-3) 0;
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.gd-defs dt {
+  font-weight: var(--wght-num);
+}
+.gd-defs dd {
+  margin: 0;
+  min-width: 0;
+}
+.gd-three {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--tile-min)), 1fr));
+  gap: var(--rule-w);
+  background: var(--rule);
+  border: var(--rule-w) solid var(--rule);
+  margin-top: var(--s-3);
+}
+.gd-fig {
+  background: var(--page);
+  padding: var(--s-3) var(--s-4);
+  min-width: 0;
+}
+.gd-fig > p {
+  margin: var(--s-1) 0 0;
+}
+.gd-fig > .gd-fig-k {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.gd-fig-v {
+  font-family: var(--font-display);
+  font-stretch: var(--wdth-num);
+  font-weight: var(--wght-head);
+  font-size: var(--num-l);
+  line-height: var(--leading-tight);
+  color: var(--num);
+  overflow-wrap: anywhere;
+}
+.gd-fig-v .v-link {
+  color: inherit;
+}
+.gd-fig-m {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.gd-fig-gap {
+  background: var(--fill-hatched), var(--page);
+}
+.gd-fig-none {
+  font-weight: var(--wght-num);
+  color: var(--st-gap);
+}
+.gd-how,
+.gd-none {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  max-width: var(--measure);
+}
+.gd-aside-sec + .gd-aside-sec {
+  margin-top: var(--s-6);
+}
+.gd-aside-h {
+  margin: 0;
+  padding-top: var(--s-2);
+  border-top: var(--rule-heavy) solid var(--ink);
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--step-1);
+  line-height: var(--leading-tight);
+}
+.gd-explains,
+.gd-coming-list {
+  list-style: none;
+  margin: var(--s-2) 0 0;
+  padding: 0;
+}
+.gd-explains li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.gd-ex-name {
+  font-weight: var(--wght-num);
+  min-width: 0;
+}
+.gd-ex-v {
+  font-weight: var(--wght-num);
+  white-space: nowrap;
+}
+.gd-ex-when {
+  font-weight: normal;
+  color: var(--ink-3);
+}
+.gd-coming-list li {
+  padding: var(--s-2) 0;
+  border-bottom: var(--rule-w) solid var(--rule);
+  color: var(--ink-2);
+}
+.gd-aside-note {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+
+/* ========================== 3 inflation calculator ====================== */
+.ic-h1,
+.cp-h1 {
+  max-width: var(--prose-max);
+}
+.ic-h1 .v-link {
+  color: inherit;
+}
+.ic-h1-src {
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  font-weight: normal;
+  font-size: var(--step-0);
+}
+.ic-grid {
+  display: grid;
+  gap: var(--s-6) var(--s-8);
+  align-items: start;
+  margin-top: var(--s-5);
+}
+.ic-main,
+.ic-aside {
+  min-width: 0;
+  border-top: var(--rule-heavy) solid var(--ink);
+  padding-top: var(--s-3);
+}
+.ic-h2 {
+  margin-top: 0;
+}
+.ic-table .ic-h2 {
+  padding-top: var(--s-2);
+  border-top: var(--rule-heavy) solid var(--ink);
+}
+.ic-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--tile-min)), 1fr));
+  gap: var(--s-3) var(--s-4);
+  margin-top: var(--s-4);
+}
+.ic-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+}
+.ic-l {
+  font-size: var(--step--1);
+  font-weight: var(--wght-num);
+  color: var(--ink-2);
+}
+.ic-in {
+  font: inherit;
+  font-size: var(--step-0b);
+  font-weight: var(--wght-num);
+  font-variant-numeric: tabular-nums lining-nums;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: var(--s-2) var(--s-3);
+  border: var(--rule-w) solid var(--rule-strong);
+  border-radius: var(--r-1);
+  background: var(--page);
+  color: var(--ink);
+}
+.ic-in:focus-visible {
+  outline: var(--rule-heavy) solid var(--focus);
+  outline-offset: var(--rule-w);
+}
+.ic-in[aria-invalid="true"] {
+  border-color: var(--st-disputed);
+}
+.ic-out {
+  margin-top: var(--s-5);
+  padding: var(--s-4) var(--s-4) var(--s-5);
+  background: var(--band);
+  border-left: var(--nav-rule) solid var(--num);
+}
+.ic-out > p {
+  margin: 0;
+}
+.ic-line {
+  color: var(--ink-2);
+  font-size: var(--step-0b);
+}
+.ic-out > .ic-big {
+  margin-top: var(--s-1);
+  font-family: var(--font-display);
+  font-stretch: var(--wdth-num);
+  font-weight: var(--wght-head);
+  font-size: var(--num-xl);
+  line-height: var(--leading-tight);
+  color: var(--num);
+  overflow-wrap: anywhere;
+}
+.ic-out > .ic-inputs {
+  margin-top: var(--s-3);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ic-bad {
+  color: var(--st-disputed);
+}
+.ic-note {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  max-width: var(--measure);
+}
+.ic-dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: var(--s-4);
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+  line-height: var(--leading-body);
+}
+.ic-dl dt,
+.ic-dl dd {
+  padding: var(--s-2) 0;
+  border-bottom: var(--rule-w) solid var(--rule);
+}
+.ic-dl dt {
+  color: var(--ink-3);
+}
+.ic-dl dd {
+  margin: 0;
+  min-width: 0;
+}
+.ic-more {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+  font-weight: var(--wght-num);
+}
+.ic-table {
+  max-width: var(--prose-max);
+}
+.ic-tbl-wrap {
+  overflow-x: auto;
+  margin-top: var(--s-3);
+}
+.ic-tbl {
+  max-width: none;
+}
+.ic-tbl .ic-num {
+  text-align: right;
+  padding-right: var(--s-5);
+}
+.ic-tbl td .v-link {
+  font-weight: var(--wght-num);
+}
+
+/* ============================ 4 compare provinces ======================= */
+.cp-tabs {
+  margin-top: var(--s-5);
+  border-bottom: var(--rule-w) solid var(--rule-strong);
+}
+.cp-tabs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cp-tab {
+  display: block;
+  padding: var(--s-2) 0;
+  margin-bottom: calc(-1 * var(--rule-w));
+  border-bottom: var(--nav-rule) solid transparent;
+  font-weight: var(--wght-num);
+  color: var(--nav-ink);
+  text-decoration: none;
+}
+.cp-tab:hover {
+  background: var(--hover-wash);
+}
+.cp-tab[aria-current="page"] {
+  color: var(--nav-ink-active);
+  border-bottom-color: var(--nav-active-rule);
+}
+.cp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--story-min)), 1fr));
+  gap: var(--rule-w);
+  background: var(--rule);
+  border: var(--rule-w) solid var(--rule);
+  list-style: none;
+  margin: var(--s-5) 0 0;
+  padding: 0;
+}
+.cp-prov {
+  background: var(--page);
+  padding: var(--s-4);
+  min-width: 0;
+}
+.cp-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--step-0b);
+}
+.cp-gap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0;
+  font-weight: var(--wght-num);
+  color: var(--st-gap);
+}
+.cp-gap-mark {
+  display: block;
+  height: var(--s-2);
+  background: var(--fill-hatched), var(--st-gap-wash);
+}
+.cp-from {
+  margin: var(--s-2) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.cp-note {
+  margin-top: var(--s-5);
+  max-width: var(--measure);
+  color: var(--ink-2);
+}
+.cp-note p {
+  margin: 0 0 var(--s-2);
+}
+
+/* ============================== 5 wider screens ========================= */
+@media (min-width: 40rem) {
+  .gd-defs > div {
+    grid-template-columns: var(--tile-min) minmax(0, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .gd-grid {
+    grid-template-columns: minmax(0, var(--measure)) minmax(var(--story-min), 1fr);
+  }
+  .ic-grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+}

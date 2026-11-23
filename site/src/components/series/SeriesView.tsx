@@ -34,6 +34,8 @@ export type SeriesViewProps = {
   breakFrom: { at: string; label: string } | null;
   /** Source lines inside the chart frame, rendered on the server. */
   frame: ReactNode;
+  /** The view a budget series opens on (no ?view=): "kind" draws budget, revised and actual as separate lines (Dataset v3). */
+  defaultView?: "best" | "kind";
 };
 
 const PERIOD_UNIT = (f: string) => (f === "month" ? 12 : 1);
@@ -61,7 +63,10 @@ function treatment(units: UnitKey, view: ViewKey, p: SeriesViewProps, base: stri
 export default function SeriesView(p: SeriesViewProps) {
   const q = useQuery();
   const budget = !!p.printed.best;
-  const view: ViewKey = budget && (q.get("view") === "kind" || q.get("view") === "rev") ? (q.get("view") as ViewKey) : budget ? "best" : "kind";
+  const def: ViewKey = p.defaultView ?? "best";
+  const asked = q.get("view");
+  const view: ViewKey = budget && (asked === "best" || asked === "kind" || asked === "rev") ? (asked as ViewKey) : budget ? def : "kind";
+  const viewParam = (v: ViewKey) => (v === def ? null : v);
   const unitsAsked = q.get("units") as UnitKey | null;
   const units: UnitKey = view !== "rev" && unitsAsked && p.units.some((u) => u.id === unitsAsked && u.available) ? unitsAsked : "printed";
   const range = q.get("range") ?? "all";
@@ -140,14 +145,22 @@ export default function SeriesView(p: SeriesViewProps) {
               Figures
             </span>
             <span className="seg sv-seg" role="group" aria-labelledby="sv-show">
-              <button type="button" aria-pressed={view === "best"} onClick={() => setQuery({ view: null })}>
+              {def === "kind" ? (
+                <button type="button" aria-pressed={view === "kind"} onClick={() => setQuery({ view: viewParam("kind") })}>
+                  <span className="w-wide">Budget and revised, side by side</span>
+                  <span className="w-narrow">BE and RE</span>
+                </button>
+              ) : null}
+              <button type="button" aria-pressed={view === "best"} onClick={() => setQuery({ view: viewParam("best") })}>
                 <span className="w-wide">Latest figure for each year</span>
                 <span className="w-narrow">Latest each year</span>
               </button>
-              <button type="button" aria-pressed={view === "kind"} onClick={() => setQuery({ view: "kind" })}>
-                <span className="w-wide">Budget and revised, side by side</span>
-                <span className="w-narrow">BE and RE</span>
-              </button>
+              {def === "kind" ? null : (
+                <button type="button" aria-pressed={view === "kind"} onClick={() => setQuery({ view: viewParam("kind") })}>
+                  <span className="w-wide">Budget and revised, side by side</span>
+                  <span className="w-narrow">BE and RE</span>
+                </button>
+              )}
               <button type="button" aria-pressed={view === "rev"} onClick={() => setQuery({ view: "rev", units: null, base: null })}>
                 <span className="w-wide">How much the budget was revised</span>
                 <span className="w-narrow">BE to RE</span>

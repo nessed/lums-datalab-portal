@@ -34,6 +34,12 @@ const routes = [
   ["search", "/search?q=inflation"],
   ["about", "/about"],
   ["type-trial", "/demo/type"],
+  ["find-data", "/browse"],
+  ["whats-new", "/releases"],
+  ["guides", "/guides"],
+  ["guide", "/guides/revised-estimate"],
+  ["inflation-calculator", "/inflation-calculator"],
+  ["compare-provinces", "/compare/education"],
 ];
 
 fs.mkdirSync(out, { recursive: true });

@@ -5,7 +5,11 @@
  * pair the site uses is listed and checked in scripts/contrast.mjs
  * (npm run test:contrast); add a pair there when you introduce one.
  * Round 2 (2026-11-15): LUMS skin (navy, LUMS blue, gold) around a dense data
- * tool. See docs/DESIGN.md 15 and docs/plans/2026-11-15-redesign-round2.md. */
+ * tool. See docs/DESIGN.md 15 and docs/plans/2026-11-15-redesign-round2.md.
+ * Home v2 (2026-11-23, Ali; DECISIONS.md D-HV2-*): white ground, square corners,
+ * 1px rules, no shadows, no cards, no pills; Archivo for headings and large
+ * numerals, Atkinson Hyperlegible Mono for page references. Gold marks evidence
+ * and the active state only. */
 
 :root {
   /* ================================ type ================================ */
@@ -17,13 +21,24 @@
    * Noto Sans figures are tabular by default; body text switches to proportional
    * figures and number places (.tnum, tables, charts, headline blocks) switch back. */
   --font-sans: var(--font-atkinson), "Atkinson Hyperlegible Next", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-  --font-display: var(--font-atkinson), "Atkinson Hyperlegible Next", "Segoe UI", system-ui, Arial, sans-serif;
+  /* Home v2: Archivo (variable: width 75-110 %, weight 700-800) for headings and large numerals. */
+  --font-display: var(--font-archivo), "Archivo", "Arial Narrow", "Segoe UI", system-ui, Arial, sans-serif;
+  /* Page references ("p. 12"): Atkinson Hyperlegible Mono. */
+  --font-ref: var(--font-ahmono), "Atkinson Hyperlegible Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  /* Archivo widths and weights (font-stretch / font-weight) */
+  --wdth-wordmark: 108%;
+  --wdth-num: 78%; /* key-number tiles */
+  --wdth-rate: 76%; /* rates board */
+  --wdth-head: 100%;
+  --wght-head: 800;
+  --wght-num: 700;
 
   /* Scale in rem so user zoom works. Body 16, metadata 13. */
   --step--2: 0.75rem; /* 12  fine print, axis ticks */
   --step--1: 0.8125rem; /* 13  metadata, table secondary, labels */
-  --step-0: 1rem; /* 16  body */
+  --step-0: 0.9375rem; /* 15  body (Home v2) */
+  --step-0b: 1rem; /* 16  lede, field text */
   --step-1: 1.125rem; /* 18  h3, lede */
   --step-2: 1.375rem; /* 22  h2 */
   --step-3: clamp(1.625rem, 1.4rem + 0.9vw, 2rem); /* h1: 26 on a phone, 32 on desktop */
@@ -33,6 +48,17 @@
   --num-xl: clamp(2.75rem, 2.2rem + 2.4vw, 3.5rem);
   /* A figure on a card or in a list of headline figures. */
   --num-l: clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem);
+
+  /* Home v2 sizes */
+  --t-util: 0.75rem; /* 12  utility bar */
+  --t-nav: 0.9375rem; /* 15  main nav */
+  --t-wordmark: 1.5625rem; /* 25 */
+  --t-sec: 1.1875rem; /* 19  section headings */
+  --t-story: 1.25rem; /* 20  story headlines */
+  --t-tile: 2.5rem; /* 40  key-number tiles */
+  --t-rate: 3rem; /* 48  rates board */
+  --t-cost: 2rem; /* 32  what it costs you */
+  --t-search: 1.125rem; /* 18  big search field */
 
   --leading-tight: 1.15;
   --leading-body: 1.5;
@@ -49,7 +75,23 @@
   --s-7: 2.5rem; /* 40 */
   --s-8: 3rem; /* 48 */
   --gutter: 1rem;
-  --page-max: 90rem; /* data pages: charts and tables want width */
+  --page-max: 82.5rem; /* 1320 px (Home v2) */
+  --site-pad: 2rem; /* 32 px side padding at desktop */
+  --util-h: 2rem; /* 32 */
+  --search-h: 3.5rem; /* 56 */
+  --wordmark-block-w: 0.8125rem; /* 13 */
+  --wordmark-block-h: 2.125rem; /* 34 */
+  --nav-rule: 3px;
+  --active-bar: 4px; /* gold bar on the active tile */
+  --seg-rule: 3px; /* gold edge under the active segment */
+  --rule-w: 1px;
+  --rule-heavy: 2px;
+  --mark-sq: 0.625rem; /* 10 px gold square before a section heading */
+  --tile-min: 11.625rem; /* 186 px */
+  --rate-min: 11.125rem; /* 178 px */
+  --story-min: 14.375rem; /* 230 px */
+  --spark-w: 72px;
+  --spark-h: 20px;
   --prose-max: 76rem;
   --header-h: 3.5rem; /* 56 px desktop bar */
 
@@ -61,16 +103,18 @@
   --amber: #b07c00;
 
   /* =============================== neutrals ============================= */
-  --page: #f4f5f9; /* page ground (cool grey); never the old off-white */
+  --page: #ffffff; /* page ground: white since Home v2 (2026-11-23, Ali) */
+  --band: #f4f5f9; /* grey band behind a full-width section (costs, province, feedback) */
   --card: #ffffff; /* cards, panels, tables, charts: white on the grey ground */
   --surface-2: #eceef4; /* recessed: table header, code, callouts */
   --surface-3: #dfe2ea; /* bar tracks, crop gaps */
   --doc-ground: #e9ebf1; /* the tray around page images; the page itself stays white */
   --doc-rule: #c9cdd8;
-  --ink: #14161c; /* near-black text */
+  --ink: #111318; /* near-black text */
   --ink-2: #3b4050; /* secondary text */
   --ink-3: #5f6577; /* metadata (numbers in scripts/contrast.mjs) */
-  --rule: #dadde6; /* hairlines between rows and around cards */
+  --rule: #dadde6; /* hairlines between rows */
+  --rule-soft: #e6e7e9; /* faint row rules inside a panel */
   --rule-strong: #80869a; /* control borders: 3:1 on white and on the page ground */
   --white: #ffffff;
 
@@ -148,6 +192,65 @@
   --tip-ink: var(--white);
   --tip-ink-2: #c3c8d6;
 
+  /* ============================ Home v2 chrome ========================== */
+  --util-bg: var(--navy);
+  --util-ink: #c8d0ec;
+  --util-ink-strong: var(--white);
+  --wordmark-ink: var(--navy);
+  --wordmark-block: var(--gold);
+  --tagline-ink: var(--ink-3);
+  --nav-ink: var(--ink-2);
+  --nav-ink-active: var(--navy);
+  --nav-active-rule: var(--gold);
+  /* Home v3 (2026-11-23): a navy rule over the header; the About menu */
+  --mast-top-rule: var(--navy);
+  --mast-top-w: 3px;
+  --menu-bg: var(--page);
+  --menu-border: var(--ink);
+  --menu-hover: var(--select-wash);
+  /* Home v3 sizes (D-HV3-2) */
+  --hero-measure: 34ch;
+  --home-search-max: 48rem;
+  --cost-row-min: 18rem;
+  --cost-bar-w: 5rem;
+  --cost-bar-w-sm: 3rem;
+  --hover-wash: #fff2cc; /* hover on a row or tile; text on it stays --ink */
+  --tile-active-bg: #fff7df;
+  --tile-active-bar: var(--gold);
+  --ref-mark: #ffe7a1; /* highlighter under a page reference */
+  --search-border: var(--navy);
+  --search-ring: var(--gold);
+  --search-btn-bg: var(--navy);
+  --search-btn-ink: var(--white);
+  --seg-active-bg: var(--navy);
+  --seg-active-ink: var(--white);
+  --seg-active-edge: var(--gold);
+  --sec-mark: var(--gold);
+  --band-ink: var(--ink);
+  /* Today's rates board (three themes; gold is the default) */
+  --rates-bg: var(--gold);
+  --rates-ink: var(--navy);
+  --rates-rule: var(--navy);
+  --rates-ink-2: #2a2f45;
+  /* Check it yourself: navy band */
+  --evband-bg: var(--navy);
+  --evband-ink: var(--white);
+  --evband-ink-2: #c8d0ec;
+  --evband-rule: rgb(200 208 236 / 0.3);
+  --evband-btn-bg: var(--gold);
+  --evband-btn-ink: var(--navy);
+  /* Where Rs 100 goes: bar segments in order */
+  --p100-1: var(--navy);
+  --p100-2: var(--lums-blue);
+  --p100-3: #1a7fc4;
+  --p100-4: var(--amber);
+  --p100-5: #80869a;
+  --p100-ink-on-dark: var(--white);
+  --p100-ink-on-light: var(--ink);
+  /* Footer feedback strip */
+  --fb-bg: var(--band);
+  --fb-ink: var(--ink);
+
   /* ======================= status system (shapes in Status.tsx) ========== */
   /* One meaning, one colour, one shape, everywhere. Retuned in round 2 to sit
    * with navy; each is 4.5:1 on white and on its own wash. */
@@ -192,13 +295,14 @@
   --cat-f: #d14d8a;
 
   /* ================================ shape =============================== */
-  --r-1: 2px;
-  --r-2: 4px;
-  --r-3: 6px; /* the largest radius on the site: cards and panels */
+  --r-1: 0; /* square corners everywhere since Home v2 (2026-11-23) */
+  --r-2: 0;
+  --r-3: 0;
   --hair: 1px solid var(--rule);
   --hair-strong: 1px solid var(--rule-strong);
   --card-border: 1px solid var(--rule);
-  --shadow-card: 0 1px 2px rgb(20 22 28 / 0.05); /* a hint of lift, no heavy shadows */
-  --shadow-page: 0 1px 0 rgb(0 0 0 / 0.04), 0 2px 10px rgb(20 22 40 / 0.1);
-  --shadow-pop: 0 8px 28px rgb(20 22 40 / 0.18); /* menus, dialogs, the evidence sheet */
+  /* No shadows since Home v2: menus, dialogs and the evidence sheet get a 1px strong rule instead. */
+  --shadow-card: none;
+  --shadow-page: none;
+  --shadow-pop: 0 0 0 1px var(--rule-strong);
 }

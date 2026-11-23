@@ -33,10 +33,10 @@ function cap(s: string): string {
   return s ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-const isStage = (o: Observation) => STAGE_KINDS.includes(o.kind) && o.vintage !== "na";
+export const isStage = (o: Observation) => STAGE_KINDS.includes(o.kind) && o.vintage !== "na";
 
 /** "budget estimate 2026-27", "June 2026", "the 2024-25 round". */
-function KindPeriodWords({ o, series, lead }: { o: Observation; series: Series; lead?: boolean }) {
+export function KindPeriodWords({ o, series, lead }: { o: Observation; series: Series; lead?: boolean }) {
   const k = kindLong(o);
   if (isStage(o))
     return (
@@ -209,7 +209,7 @@ function sentence(series: Series, o: Observation): ReactNode {
 
 /* ---------- the change, in words with an arrow ---------- */
 
-function Change({ series, answer }: { series: Series; answer: Answer }) {
+export function Change({ series, answer }: { series: Series; answer: Answer }) {
   const { latest, change } = answer;
   if (!latest || !change) return null;
   const v = change.point.v!;

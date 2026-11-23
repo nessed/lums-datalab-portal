@@ -8,5 +8,6 @@
   "provincialBudgets": { "enabled": false, "label": "Provincial budgets" },
   "moreDataTypes": { "enabled": false, "label": "More data types" },
   "monthlyData": { "enabled": false, "label": "Every month of CPI" },
-  "errataBadges": { "enabled": false, "label": "Correction notes on figures" }
+  "errataBadges": { "enabled": false, "label": "Correction notes on figures" },
+  "dailyRates": { "enabled": false, "label": "Today's rates" }
 }

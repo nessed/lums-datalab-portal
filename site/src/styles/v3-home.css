@@ -1,0 +1,218 @@
+/* v3-home: Home v3 design set (2026-11-23). Values come from src/design/tokens.css only. */
+
+/* lead sentence and search */
+.hero3 {
+  padding: var(--s-6) 0 var(--s-5);
+}
+.hero3-lead {
+  font-family: var(--font-display);
+  font-stretch: var(--wdth-head);
+  font-weight: var(--wght-head);
+  font-size: var(--step-3);
+  line-height: var(--leading-tight);
+  max-width: var(--hero-measure);
+  margin: 0 0 var(--s-5);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.hero3 .hero3-search {
+  max-width: var(--home-search-max);
+}
+
+/* the big field: icon, field, hint and button side by side (search.css places the
+   header field's icon and hint absolutely; the big field lays them out in a row) */
+.hero3-search .hs.hs-big > svg,
+.hero3-search .hs.hs-big .hs-hint {
+  position: static;
+}
+
+/* key numbers: tiles */
+.kt3-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--tile-min)), 1fr));
+  border-top: var(--rule-w) solid var(--rule);
+  border-left: var(--rule-w) solid var(--rule);
+}
+.kt3 {
+  border-right: var(--rule-w) solid var(--rule);
+  border-bottom: var(--rule-w) solid var(--rule);
+  padding: var(--s-3) var(--s-3) var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+}
+.kt3-name {
+  font-weight: 700;
+  font-size: var(--step--1);
+  color: var(--ink);
+}
+.kt3-v {
+  font-family: var(--font-display);
+  font-stretch: var(--wdth-num);
+  font-weight: var(--wght-num);
+  font-size: var(--t-tile);
+  line-height: var(--leading-tight);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.kt3-when,
+.kt3-rev {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.kt3-chg {
+  font-size: var(--step--1);
+  color: var(--ink);
+}
+.kt3-chg .kt-basis {
+  color: var(--ink-2);
+}
+
+/* the federal budget, with coming up and the rupee value beside it */
+.fb3 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 var(--s-6);
+  border-top: var(--rule-w) solid var(--rule);
+  padding: var(--s-6) 0;
+}
+@media (min-width: 1024px) {
+  .fb3 {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+  .fb3-side {
+    border-left: var(--rule-w) solid var(--rule);
+    padding-left: var(--s-5);
+  }
+}
+.fb3-main,
+.fb3-side {
+  min-width: 0;
+}
+.fb3-lead {
+  font-size: var(--step-1);
+  max-width: var(--measure);
+  margin: 0 0 var(--s-2);
+  font-variant-numeric: tabular-nums;
+}
+.fb3-sub {
+  color: var(--ink-2);
+  max-width: var(--measure);
+  margin: 0 0 var(--s-4);
+}
+.fb3-src {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: var(--s-3) 0 0;
+}
+.fb3-none {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+.fb3 .kp-table {
+  overflow-x: auto;
+}
+.fb3 .tbl2 {
+  font-variant-numeric: tabular-nums;
+}
+.cu3,
+.rv3 {
+  padding-bottom: var(--s-5);
+}
+.rv3 {
+  border-top: var(--rule-w) solid var(--rule);
+  padding-top: var(--s-5);
+}
+.cu3-note,
+.rv3 p {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  margin: 0 0 var(--s-3);
+}
+.fb3-side .ac-row {
+  grid-template-columns: minmax(0, 1fr);
+}
+.rv3-go {
+  font-weight: 700;
+}
+
+/* just updated */
+.ju3 .ac-row {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+/* what it costs you: groups as rows with the printed rate and a bar */
+.cost-more {
+  margin: var(--s-1) 0 var(--s-3);
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.cost-ctl-g {
+  margin-bottom: var(--s-4);
+}
+.cost-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cost-row-min)), 1fr));
+  border-top: var(--rule-w) solid var(--rule);
+  margin-top: var(--s-2);
+}
+.cost-g {
+  font: inherit;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--cost-bar-w) auto;
+  align-items: center;
+  gap: var(--s-3);
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: var(--rule-w) solid var(--rule);
+  padding: var(--s-2);
+  color: var(--ink);
+  cursor: pointer;
+  min-width: 0;
+}
+.cost-g:hover {
+  background: var(--hover-wash);
+}
+.cost-g[aria-checked="true"] {
+  background: var(--select-wash);
+  box-shadow: inset var(--active-bar) 0 0 var(--select-rule);
+}
+.cost-g:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+.cost-g-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.cost-g-bar {
+  display: block;
+  height: var(--s-2);
+  background: var(--surface-2);
+}
+.cost-g-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--navy);
+}
+.cost-g-rate {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--step--1);
+}
+
+@media (max-width: 719px) {
+  .hero3 {
+    padding-top: var(--s-4);
+  }
+  .hero3-lead {
+    font-size: var(--step-1);
+  }
+  .cost-g {
+    grid-template-columns: minmax(0, 1fr) var(--cost-bar-w-sm) auto;
+  }
+}

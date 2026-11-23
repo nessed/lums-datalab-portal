@@ -202,6 +202,18 @@
   --nav-ink: var(--ink-2);
   --nav-ink-active: var(--navy);
   --nav-active-rule: var(--gold);
+  /* Home v3 (2026-11-23): a navy rule over the header; the About menu */
+  --mast-top-rule: var(--navy);
+  --mast-top-w: 3px;
+  --menu-bg: var(--page);
+  --menu-border: var(--ink);
+  --menu-hover: var(--select-wash);
+  /* Home v3 sizes (D-HV3-2) */
+  --hero-measure: 34ch;
+  --home-search-max: 48rem;
+  --cost-row-min: 18rem;
+  --cost-bar-w: 5rem;
+  --cost-bar-w-sm: 3rem;
   --hover-wash: #fff2cc; /* hover on a row or tile; text on it stays --ink */
   --tile-active-bg: #fff7df;
   --tile-active-bar: var(--gold);

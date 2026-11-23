@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "@/components/ui/Link";
 import localFont from "next/font/local";
-import { NavLinks, MobileMenu, UsefulPrompt } from "@/components/chrome/Chrome";
-import editorial from "../../editorial.config.json";
+import { AboutMenu, HeaderSearch, NavLinks, MobileMenu, UsefulPrompt } from "@/components/chrome/Chrome";
 import { Num } from "@/components/ui/Num";
-import SearchDialog from "@/components/chrome/SearchDialog";
 import EvidenceSheet from "@/components/evidence/EvidenceSheet";
 import { DATA_BASE, db, ISSUES_URL, REPO_URL, SITE_URL } from "@/lib/data";
 import { dateOnly } from "@/lib/format";
@@ -21,6 +19,11 @@ import "@/styles/hub.css";
 import "@/styles/library.css";
 import "@/styles/fixes.css";
 import "@/styles/v2.css";
+import "@/styles/v3-chrome.css";
+import "@/styles/v3-home.css";
+import "@/styles/v3-series.css";
+import "@/styles/v3-find.css";
+import "@/styles/v3-pages.css";
 
 // Self-hosted (OFL, licences beside the files in src/fonts) so the build needs no
 // network. Atkinson Hyperlegible Next (Braille Institute), Ali's pick from
@@ -58,17 +61,25 @@ export const metadata: Metadata = {
   ...(SITE_URL ? { metadataBase: new URL(SITE_URL) } : {}),
 };
 
-// Home v2 (2026-11-23, Ali's override of DESIGN.md 9.1; DECISIONS.md D-HV2-1):
-// new labels; every address that worked before still works (routes-alive).
+// Home v3 (2026-11-23, Ali's override of DESIGN.md 9.1; DECISIONS.md D-HV3-1):
+// three main links and an About menu; the search field sits in the header on
+// every page but the home page, which has the large one. Every address that
+// worked before still works (routes-alive).
 const NAV = [
-  { href: "/", label: "Today" },
-  { href: "/topics/prices", label: "Prices" },
-  { href: "/topics/spending", label: "Budget", also: ["/topics/revenue"] },
-  { href: "/topics/jobs", label: "Jobs" },
-  { href: "/topics/provinces", label: "Provinces" },
-  { href: "/browse", label: "Explore data", also: ["/series", "/search", "/compare", "/answers"] },
-  { href: "/library", label: "Library", also: ["/sources", "/datasets", "/tables", "/data"] },
-  { href: "/calendar", label: "Calendar" },
+  {
+    href: "/browse",
+    label: "Find data",
+    also: ["/series", "/search", "/compare", "/answers", "/topics", "/library", "/sources", "/datasets", "/tables", "/data", "/o", "/inflation-calculator"],
+  },
+  { href: "/releases", label: "What’s new", also: ["/calendar"] },
+  { href: "/guides", label: "Guides" },
+];
+const ABOUT = [
+  { href: "/about", label: "About the DataLab" },
+  { href: "/methods", label: "How we check" },
+  { href: "/releases#corrections", label: "Corrections" },
+  { href: "/releases", label: "Releases and versions" },
+  { href: "/about#contact-h", label: "Contact and errors" },
 ];
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -84,26 +95,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <div className="ub" role="note" aria-label="Release and prototype notice">
-          <div className="wrap ub-row">
-            <p className="ub-note">
-              <span className="ub-date">
-                Release <Num kind="version">{v}</Num>, built <Num kind="date">{built}</Num>
-              </span>
-              <span className="ub-proto">
-                <strong>Prototype.</strong> Not yet for citation<span className="long">; the printed document prevails</span>.{" "}
-                <Link href="/about#disclaimer">Disclaimer</Link>
-              </span>
-            </p>
-            <nav className="ub-links" aria-label="About this site">
-              <Link href="/about">About</Link>
-              <Link href="/methods">How we check</Link>
-              <Link href="/releases">Corrections</Link>
-              <Link href="/api">Data API</Link>
-            </nav>
-          </div>
-        </div>
-        <header className="mast">
+        <header className="mast mast3">
           <div className="wrap mast-row">
             <Link href="/" className="wm" aria-label="LUMS DataLab, prototype: home">
               <span className="wm-block" aria-hidden="true" />
@@ -112,25 +104,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <span className="wm-tag">Pakistan&rsquo;s economy in official numbers</span>
               </span>
             </Link>
-            <NavLinks items={NAV} className="mast-nav" />
-            <MobileMenu items={NAV} />
+            <NavLinks items={NAV} className="mast-nav">
+              <AboutMenu items={ABOUT} />
+            </NavLinks>
+            <HeaderSearch indexUrl={`${DATA_BASE}/search.json`} />
+            <MobileMenu items={[...NAV, ...ABOUT.filter((a) => a.href !== "/releases")]} />
           </div>
         </header>
-        <div className="srow">
-          <div className="wrap">
-            <SearchDialog indexUrl={`${DATA_BASE}/search.json`} variant="big" />
-            {editorial.exampleSearches?.length ? (
-              <p className="srow-trend">
-                <span className="srow-trend-h">People look for</span>
-                {editorial.exampleSearches.map((t) => (
-                  <Link key={t} href={`/search?q=${encodeURIComponent(t)}`}>
-                    {t}
-                  </Link>
-                ))}
-              </p>
-            ) : null}
-          </div>
-        </div>
         <main id="main" tabIndex={-1}>
           <div className="wrap">{children}</div>
         </main>
@@ -140,45 +120,48 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <UsefulPrompt issuesUrl={ISSUES_URL} version={v} />
           </div>
         </aside>
-        <footer className="site-footer ft2">
+        <footer className="site-footer ft2 ft3">
           <div className="wrap">
             <div className="ft2-grid">
               <div className="ft2-brand">
                 <p className="ft2-wm">
                   <span className="wm-block" aria-hidden="true" /> LUMS DataLab
                 </p>
-                <p>
-                  Every figure links to the government page it was printed on and is published only after fixed arithmetic checks.{" "}
-                  <Link href="/methods">How we check</Link>
+                <p className="ft3-dept">Department of Economics, Lahore University of Management Sciences</p>
+                <p className="ft3-note">
+                  Compiled from official government publications. This is not an official statistical release; where this site and the printed
+                  document differ, the document prevails. <Link href="/about#disclaimer">Disclaimer</Link>
                 </p>
               </div>
-              <nav aria-label="Topics">
-                <h2>Topics</h2>
+              <nav aria-label="Find data">
+                <h2>Find data</h2>
                 <ul>
                   <li><Link href="/topics/prices">Prices</Link></li>
-                  <li><Link href="/topics/spending">Budget</Link></li>
-                  <li><Link href="/topics/revenue">Revenue</Link></li>
+                  <li><Link href="/topics/spending">Federal budget</Link></li>
                   <li><Link href="/topics/jobs">Jobs</Link></li>
                   <li><Link href="/topics/provinces">Provinces</Link></li>
+                  <li><Link href="/compare/education">Compare provinces</Link></li>
+                  <li><Link href="/inflation-calculator">Inflation calculator</Link></li>
                 </ul>
               </nav>
               <nav aria-label="Use the data">
                 <h2>Use the data</h2>
                 <ul>
-                  <li><Link href="/browse">Explore data</Link></li>
+                  <li><Link href="/data">Downloads</Link></li>
+                  <li><Link href="/methods#cite">How to cite</Link></li>
+                  <li><Link href="/api">Data API</Link></li>
+                  <li><Link href="/guides">Guides</Link></li>
                   <li><Link href="/library">Library</Link></li>
                   <li><Link href="/compare">Chart builder</Link></li>
-                  <li><Link href="/answers">Stories</Link></li>
-                  <li><Link href="/data">Downloads and file formats</Link></li>
-                  <li><Link href="/api">Data API</Link></li>
                 </ul>
               </nav>
-              <nav aria-label="Trust">
-                <h2>Trust</h2>
+              <nav aria-label="About">
+                <h2>About</h2>
                 <ul>
+                  <li><Link href="/about">About the DataLab</Link></li>
                   <li><Link href="/methods">How we check</Link></li>
-                  <li><Link href="/releases">Releases and corrections</Link></li>
-                  <li><Link href="/about">About</Link></li>
+                  <li><Link href="/releases#corrections">Corrections</Link></li>
+                  <li><a href={`${ISSUES_URL}/new`}>Report an error</a></li>
                   <li><a href={REPO_URL}>Source code</a></li>
                 </ul>
               </nav>
@@ -187,8 +170,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/releases" className="ft-tag" title="The data release this site shows">
                 Release <Num kind="version">{v}</Num>
               </Link>
-              , built <Num kind="date">{built}</Num>. Prototype{release.doi ? <>; DOI <Num kind="id">{release.doi}</Num></> : null}. Where
-              this site and the printed document differ, the document prevails. Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
+              , built <Num kind="date">{built}</Num>. Prototype, not yet for citation{release.doi ? <>; DOI <Num kind="id">{release.doi}</Num></> : null}. Data{" "}
+              <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT.
             </p>
           </div>
         </footer>

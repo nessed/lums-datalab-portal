@@ -1,20 +1,33 @@
-// Releases: what this release is, what is in it, how versions and citations
-// work, the changelog and errata; the dataset card and the reproduction steps
-// on request.
+// What's new (design set 2026-11-23, "Whats New") and the release itself.
+// Top: a sentence on the latest update and on corrections, then a dated list
+// of what the release added (data types, document editions, figures held
+// back) with tabs All / Added / New editions / Corrections, and the official
+// release dates expected next (editorial/calendar.json). Every entry comes from
+// the release (release.json, sources, observations, ERRATA); the tabs only
+// toggle `hidden` on what the server rendered (components/find/WhatsNewTabs).
+// Below: what this release is, what is in it, how versions and citations work,
+// the changelog, what is coming, the errata; the dataset card and the
+// reproduction steps on request.
+// Checked by scripts/checks/whatsnew-entries.mjs (entries and tab counts) and
+// whatsnew-calendar.mjs (the dates from editorial/calendar.json).
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "@/components/ui/Link";
 import Cite from "@/components/Cite";
 import Markdown from "@/components/Markdown";
+import WhatsNewTabs, { type WnTab } from "@/components/find/WhatsNewTabs";
 import { Breadcrumbs, Callout, Disclosure, TableWrap, Toc } from "@/components/ui/Basics";
-import { datasetKeys, db, releaseMarkdown } from "@/lib/data";
-import { dateOnly } from "@/lib/format";
+import { ISSUES_URL, datasetKeys, db, isDatasetPublished, obsHref, releaseMarkdown, sourceHref } from "@/lib/data";
+import { dateOnly, periodWords } from "@/lib/format";
 import { Count, Num } from "@/components/ui/Num";
 import { datasetStateWords } from "@/lib/status";
 import { COMING, feature, type FeatureKey } from "@/lib/features";
+import { seriesTitle } from "@/lib/titles";
+import calendar from "../../../editorial/calendar.json";
 
 export const metadata: Metadata = {
-  title: "Releases, changelog and errata",
-  description: "The current data release: scope, counts, changelog, errata, and how versions and citations work.",
+  title: "What’s new: updates, corrections and releases",
+  description: "What the latest release added, every correction to a published figure, the official release dates expected next, and how versions and citations work.",
 };
 
 const GAP_LABEL: Record<string, string> = {
@@ -45,9 +58,40 @@ const PLANNED: Record<FeatureKey, string> = {
   dailyRates: "fuel prices and the dollar rate read once a day from official notices, on the home page.",
 };
 
+type CalEntry = { id: string; name: string; agency: string; when: string; status: string };
+
 /** A release Markdown file without its own first heading (the page gives one). */
 function body(md: string | null): string | null {
   return md ? md.replace(/^# .*\r?\n/, "") : null;
+}
+
+/** A count of entries on this page: recomputed by scripts/checks/whatsnew-entries.mjs. */
+function TabCount({ tab, n }: { tab: WnTab; n: number }) {
+  return (
+    <span data-num="derived" data-derived="whatsnew-tab" data-tab={tab}>
+      {n}
+    </span>
+  );
+}
+
+type Entry = { key: string; kind: "added" | "editions" | "held" | "corrections"; label: string; title: ReactNode; line: ReactNode; link: { href: string; text: string } };
+
+function EntryRow({ e, date }: { e: Entry; date: string }) {
+  return (
+    <li className="wn-entry" data-wn-kind={e.kind} data-wn-key={e.key}>
+      <span className="wn-date">
+        <Num kind="date">{date}</Num>
+      </span>
+      <div className="wn-body">
+        <p className={`wn-kind wn-kind-${e.kind}`}>{e.label}</p>
+        <h3 className="wn-title">{e.title}</h3>
+        <p className="wn-line">{e.line}</p>
+        <Link href={e.link.href} className="wn-link">
+          {e.link.text}
+        </Link>
+      </div>
+    </li>
+  );
 }
 
 export default function ReleasesPage() {
@@ -61,18 +105,145 @@ export default function ReleasesPage() {
   const card = body(releaseMarkdown("dataset_card.md"));
   const repro = body(releaseMarkdown("HOW_TO_REPRODUCE.md"));
   const sourcesRead = d.sources.filter((s) => (s.pages_used ?? []).length > 0).length;
+  const date = dateOnly(r.created_at);
+
+  /* ------------------------- what's new: entries ------------------------- */
+  const visible = keys.filter(isDatasetPublished);
+  const isPub = (o: { published: boolean; value: string | null }) => o.published && o.value !== null;
+  const dsOfObs = (seriesId: string) => d.seriesById.get(seriesId)?.dataset ?? "";
+  // Checked figures whose main printing is in each document (all of them, as the count key counts),
+  // and the documents that hold one of a visible data type (the "New edition" entries).
+  const valuesBySource = new Map<string, number>();
+  const visibleSources = new Set<string>();
+  for (const o of d.observations) {
+    if (!isPub(o) || !o.primary_cell_id) continue;
+    const src = d.cellById.get(o.primary_cell_id)?.source_id;
+    if (!src) continue;
+    valuesBySource.set(src, (valuesBySource.get(src) ?? 0) + 1);
+    if (isDatasetPublished(dsOfObs(o.series_id))) visibleSources.add(src);
+  }
+  const gapCount = (ds: string, kind: string) =>
+    d.observations.filter((o) => dsOfObs(o.series_id) === ds && !isPub(o) && (kind === "disputed" ? o.status === "disputed" : o.status !== "disputed" && o.gap_kind === kind)).length;
+
+  const added: Entry[] = visible.map((k) => {
+    const p = r.scope?.periods?.[k] ?? [];
+    const name = r.dataset_status[k]?.name ?? k;
+    const freq = k === "cpi" ? "month" : undefined;
+    return {
+      key: `added:${k}`,
+      kind: "added",
+      label: "Added",
+      title: name,
+      line: (
+        <>
+          <Count k={`values:${k}`} n={d.observations.filter((o) => isPub(o) && dsOfObs(o.series_id) === k).length} /> checked figures in{" "}
+          <Count k={`series:${k}`} n={d.series.filter((s) => s.dataset === k).length} /> series, read from{" "}
+          <Count k={`docs:${k}`} n={new Set(d.observations.filter((o) => isPub(o) && dsOfObs(o.series_id) === k && o.primary_cell_id).map((o) => d.cellById.get(o.primary_cell_id!)?.source_id).filter(Boolean)).size} />{" "}
+          documents
+          {p.length ? (
+            <>
+              , <Num kind="period">{periodWords(p[0], freq)}</Num> to <Num kind="period">{periodWords(p[p.length - 1], freq)}</Num>
+            </>
+          ) : null}
+          .
+        </>
+      ),
+      link: { href: `/browse?dataset=${encodeURIComponent(k)}`, text: "Find the series" },
+    };
+  });
+
+  const editions: Entry[] = d.sources
+    .filter((s) => visibleSources.has(s.source_id))
+    .sort((a, b) => b.period.localeCompare(a.period) || a.title.localeCompare(b.title))
+    .map((s) => ({
+      key: `edition:${s.source_id}`,
+      kind: "editions",
+      label: "New edition",
+      title: s.title,
+      line: (
+        <>
+          <span>{s.publisher}</span>. <Count k={`values:source:${s.source_id}`} n={valuesBySource.get(s.source_id)} /> checked figures from{" "}
+          <Count k={`pages:source:${s.source_id}`} n={(s.pages_used ?? []).length} /> pages read.
+        </>
+      ),
+      link: { href: sourceHref(s.source_id), text: "Open the document" },
+    }));
+
+  const held: Entry[] = visible
+    .filter((k) => gapCount(k, "failed_checks") > 0)
+    .map((k) => {
+      const dis = gapCount(k, "disputed");
+      return {
+        key: `held:${k}`,
+        kind: "held",
+        label: "Held back",
+        title: <>Figures held back from the {r.dataset_status[k]?.name ?? k}</>,
+        line: (
+          <>
+            <Count k={`gaps:${k}:failed_checks`} n={gapCount(k, "failed_checks")} /> figures failed their checks, so they are not published
+            {dis ? (
+              <>
+                , and <Count k={`gaps:${k}:disputed`} n={dis} /> are disputed because official printings disagree
+              </>
+            ) : null}
+            . Each shows as a labelled gap that says why.
+          </>
+        ),
+        link: { href: "/methods", text: "How we check" },
+      };
+    });
+
+  // A correction: a published figure whose value changed in a later release than the one that first published it.
+  const corrected = d.observations.filter(
+    (o) => isPub(o) && isDatasetPublished(dsOfObs(o.series_id)) && !!o.last_changed_release && !!o.first_published_release && o.last_changed_release !== o.first_published_release,
+  );
+  const corrections: Entry[] = corrected.map((o) => {
+    const s = d.seriesById.get(o.series_id);
+    return {
+      key: `correction:${o.obs_id}`,
+      kind: "corrections",
+      label: "Correction",
+      title: (
+        <>
+          {s ? seriesTitle(s) : o.series_id}, <Num kind="period">{periodWords(o.period, s?.frequency)}</Num>
+        </>
+      ),
+      line: (
+        <>
+          Corrected in release <Num kind="version">{o.last_changed_release}</Num>; the errata give the old value, the new value and the reason.
+        </>
+      ),
+      link: { href: obsHref(o.obs_id), text: "See the figure and its page" },
+    };
+  });
+
+  const list = [...added, ...editions, ...held];
+  const tabs: { key: WnTab; label: string; n: ReactNode }[] = [
+    { key: "all", label: "All", n: <TabCount tab="all" n={list.length + corrections.length} /> },
+    { key: "added", label: "Added", n: <TabCount tab="added" n={added.length} /> },
+    { key: "editions", label: "New editions", n: <TabCount tab="editions" n={editions.length} /> },
+    { key: "corrections", label: "Corrections", n: <TabCount tab="corrections" n={corrections.length} /> },
+  ];
+  const cal = (calendar.entries as CalEntry[]).slice().sort((a, b) => a.when.localeCompare(b.when) || a.name.localeCompare(b.name));
 
   return (
-    <div className="is-prose">
-      <Breadcrumbs items={[{ label: "Releases" }]} />
-      <header className="page-head">
-        <p className="kicker">Current release</p>
-        <h1 className="mono-title">
-          <Num kind="version">{r.version}</Num>
+    <div className="is-prose whatsnew">
+      <Breadcrumbs items={[{ label: "What’s new" }]} />
+      <header className="wn-head">
+        <h1 className="wn-h1">
+          The latest update, on <Num kind="date">{date}</Num>, added <TabCount tab="added" n={added.length} /> data types and{" "}
+          <TabCount tab="editions" n={editions.length} /> government documents.{" "}
+          {corrections.length ? (
+            <>
+              <TabCount tab="corrections" n={corrections.length} /> published figures have been corrected since they were first published.
+            </>
+          ) : (
+            <>No published figure has been corrected.</>
+          )}
         </h1>
-        <p className="series-meta">
+        <p className="series-meta wn-meta">
           <span>
-            Built <Num kind="date">{dateOnly(r.created_at)}</Num>
+            Release <Num kind="version">{r.version}</Num>
           </span>
           <span>{r.label}</span>
           <span>{r.doi ? <Num kind="id">{`DOI ${r.doi}`}</Num> : "No DOI yet"}</span>
@@ -80,19 +251,73 @@ export default function ReleasesPage() {
             Code commit <Num kind="id" className="mono">{r.git_commit.slice(0, 10)}</Num>
           </span>
         </p>
-        <p className="lede">
-          Data is published as frozen, versioned releases. A published figure is never changed silently: a correction makes a new release and an entry
-          in the errata, and the old release stays available, so a citation never breaks.
-        </p>
-        <div className="action-row">
-          <Link href="/data" className="btn btn-primary">
-            Download this release
-          </Link>
-          <a href="#cite" className="btn btn-text">
-            Cite the release
-          </a>
-        </div>
       </header>
+
+      <div className="wn-layout" id="whats-new">
+        <section className="wn-main" aria-labelledby="wn-h">
+          <h2 id="wn-h" className="sr-only">
+            What this release added
+          </h2>
+          <WhatsNewTabs tabs={tabs} />
+          <ol className="wn-list" id="wn-list">
+            {list.map((e) => (
+              <EntryRow key={e.key} e={e} date={date} />
+            ))}
+          </ol>
+          <section id="corrections" className="wn-corr" aria-labelledby="corrections-h" data-wn-has={corrections.length ? "1" : "0"}>
+            <h3 id="corrections-h" className="wn-corr-h">
+              Corrections
+            </h3>
+            {corrections.length ? (
+              <ol className="wn-list">
+                {corrections.map((e) => (
+                  <EntryRow key={e.key} e={e} date={date} />
+                ))}
+              </ol>
+            ) : (
+              <div className="wn-empty" data-wn-empty="corrections">
+                <p className="wn-empty-h">No corrections so far.</p>
+                <p className="wn-empty-p">
+                  When a published figure is corrected, it is listed here with the old value, the new value, the page, and the release that fixed it. Old
+                  releases stay online, so earlier citations keep working.
+                </p>
+                <a href={ISSUES_URL} className="wn-link">
+                  Report an error
+                </a>
+              </div>
+            )}
+          </section>
+        </section>
+        <aside className="wn-cal" aria-labelledby="wn-cal-h">
+          <h2 id="wn-cal-h" className="wn-cal-h">
+            Official release dates
+          </h2>
+          <p className="wn-cal-note">
+            When the next editions of the publications this site reads are expected, from each one&rsquo;s usual timing. Expected unless the agency has
+            announced the date{calendar.provisional ? "; not yet confirmed by the team" : ""}.
+          </p>
+          {cal.length ? (
+            <ul className="wn-cal-list">
+              {cal.map((e) => (
+                <li key={e.id} className="wn-cal-row" data-cal-entry={e.id}>
+                  <span className="wn-cal-what">
+                    <strong>{e.name}</strong>
+                    <span className="wn-cal-who">{e.agency}</span>
+                  </span>
+                  <span className="wn-cal-when">
+                    {e.status === "announced" ? "Announced for " : "Expected "}
+                    <span data-num={e.status === "announced" ? "date" : "ui"} data-cal={e.id}>
+                      {e.status === "announced" ? e.when : periodWords(e.when, "month")}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="wn-cal-note">No dates are expected yet.</p>
+          )}
+        </aside>
+      </div>
 
       <Callout kind="caveat" title="A prototype">
         <p>
@@ -100,6 +325,18 @@ export default function ReleasesPage() {
           publications yet. Until the first public release, this version is rebuilt in place; from then on every change is a new version.
         </p>
       </Callout>
+      <p className="lede">
+        Data is published as frozen, versioned releases. A published figure is never changed silently: a correction makes a new release and an entry in
+        the errata, and the old release stays available, so a citation never breaks.
+      </p>
+      <div className="action-row">
+        <Link href="/data" className="btn btn-primary">
+          Download this release
+        </Link>
+        <a href="#cite" className="btn btn-text">
+          Cite the release
+        </a>
+      </div>
 
       <div className="with-rail">
         <div className="measure-wide">
@@ -166,7 +403,13 @@ export default function ReleasesPage() {
 
           <section id="changelog" aria-labelledby="changelog-h">
             <h2 id="changelog-h">Changelog</h2>
-            {changelog ? <div className="prose md-small" data-num="md" data-file="CHANGELOG.md"><Markdown source={changelog} headingOffset={1} /></div> : <p className="muted">This release has no changelog file.</p>}
+            {changelog ? (
+              <div className="prose md-small" data-num="md" data-file="CHANGELOG.md">
+                <Markdown source={changelog} headingOffset={1} />
+              </div>
+            ) : (
+              <p className="muted">This release has no changelog file.</p>
+            )}
           </section>
 
           <section id="coming" aria-labelledby="coming-h">
@@ -191,10 +434,14 @@ export default function ReleasesPage() {
 
           <section id="errata" aria-labelledby="errata-h">
             <h2 id="errata-h">Errata</h2>
-            {errata ? <div className="prose md-small" data-num="md" data-file="ERRATA.md"><Markdown source={errata} headingOffset={1} /></div> : <p className="muted">This release has no errata file.</p>}
-            <p className="small">
-              Found a figure that differs from the printed page? Use &ldquo;Report a problem with this figure&rdquo; on its receipt.
-            </p>
+            {errata ? (
+              <div className="prose md-small" data-num="md" data-file="ERRATA.md">
+                <Markdown source={errata} headingOffset={1} />
+              </div>
+            ) : (
+              <p className="muted">This release has no errata file.</p>
+            )}
+            <p className="small">Found a figure that differs from the printed page? Use &ldquo;Report a problem with this figure&rdquo; on its receipt.</p>
           </section>
 
           <section id="versions" aria-labelledby="versions-h">
@@ -212,11 +459,23 @@ export default function ReleasesPage() {
             <h2 id="reference-h">Reference documents</h2>
             <Disclosure summary="Dataset card" meta="scope, status mix, limitations">
               <span id="dataset-card" />
-              {card ? <div className="prose md-small" data-num="md" data-file="dataset_card.md"><Markdown source={card} headingOffset={2} /></div> : <p className="muted">Not included in this release.</p>}
+              {card ? (
+                <div className="prose md-small" data-num="md" data-file="dataset_card.md">
+                  <Markdown source={card} headingOffset={2} />
+                </div>
+              ) : (
+                <p className="muted">Not included in this release.</p>
+              )}
             </Disclosure>
             <Disclosure summary="How to reproduce this release" meta="commands and expected fingerprints">
               <span id="reproduce" />
-              {repro ? <div className="prose md-small" data-num="md" data-file="HOW_TO_REPRODUCE.md"><Markdown source={repro} headingOffset={2} /></div> : <p className="muted">Not included in this release.</p>}
+              {repro ? (
+                <div className="prose md-small" data-num="md" data-file="HOW_TO_REPRODUCE.md">
+                  <Markdown source={repro} headingOffset={2} />
+                </div>
+              ) : (
+                <p className="muted">Not included in this release.</p>
+              )}
             </Disclosure>
           </section>
 
@@ -228,6 +487,8 @@ export default function ReleasesPage() {
         <aside className="rail">
           <Toc
             items={[
+              { id: "whats-new", label: "What’s new" },
+              { id: "corrections", label: "Corrections" },
               { id: "contents", label: "What is in it" },
               { id: "changelog", label: "Changelog" },
               { id: "coming", label: "Coming" },

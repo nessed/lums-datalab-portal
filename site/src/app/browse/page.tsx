@@ -1,50 +1,68 @@
-// The catalogue ("Data"): every series of every published data type, with
-// filters in a left column (a drawer on phones). Rows are rendered on the
-// server, so the whole list works without JavaScript; the filter narrows and
-// sorts them in place and keeps its state in the URL.
+// Find data (design set 2026-11-23, "Find Data"). The list is every top-level
+// series of every published data type (the series that sit under no other),
+// A to Z, each with its years and its latest checked figure, the period and
+// the page it is printed on. Rows are rendered on the server, so the list
+// works without JavaScript; the search field and the facets narrow it in
+// place (the full list of every series, /catalogue.json, is loaded then) and
+// keep their state in the URL (?q=&topic=&dataset=&geo=&from=&to=).
+// scripts/checks/find-list.mjs checks the list against the release.
 import type { Metadata } from "next";
-import { printedLine, seriesTitle } from "@/lib/titles";
+import { seriesTitle } from "@/lib/titles";
 import Link from "@/components/ui/Link";
-import CatalogueFilter, { CatalogueResults, type FacetGroup } from "@/components/CatalogueFilter";
+import CatalogueFilter, { CatalogueResults, CatalogueSearch, type FacetGroup } from "@/components/CatalogueFilter";
 import { KindAndPeriod } from "@/components/Figure";
 import { Breadcrumbs } from "@/components/ui/Basics";
 import { Count, Num, V } from "@/components/ui/Num";
-import { DATA_BASE, datasetName, db, seriesCsvHref, seriesHref, visibleSeries, type Series } from "@/lib/data";
-import { FACETS, facetCounts, topicLabels, valueWords } from "@/lib/facets.mjs";
-import { COMING } from "@/lib/features";
+import { DATA_BASE, datasetName, db, docPageHref, pageShort, seriesHref, visibleSeries, type Series } from "@/lib/data";
+import { FACETS, facetCounts, topicLabels, valueWords, type FacetKey } from "@/lib/facets.mjs";
+import { COMING, feature, type FeatureKey } from "@/lib/features";
 import { periodWords, unitLabel } from "@/lib/format";
 import { ancestors, baseYearOf, latestPublished, publishedDatasets, totalVisible } from "@/lib/stats";
 
 export const metadata: Metadata = {
-  title: "Data: the catalogue",
-  description: "Every series in the current release, with filters by data type, topic, geography and definition, the latest checked figure and a download for each.",
+  title: "Find data: every series in the release",
+  description: "Every series in the current release, A to Z, with its years, its latest checked figure and the page it is printed on. Filter by topic, publication, province and years.",
 };
+
+/** Facets in the order of the design: topic, publication, province first; the rest closed below. */
+const FIRST: FacetKey[] = ["topic", "dataset", "geo"];
+const LABEL: Partial<Record<FacetKey, string>> = { dataset: "Publication", geo: "Province" };
+/** Planned data named in the "Not here yet" line (features.config.json labels). */
+const NOT_YET: FeatureKey[] = ["provincialBudgets", "districts", "monthlyData", "moreDataTypes"];
 
 function Row({ s, order }: { s: Series; order: number }) {
   const d = db();
   const all = d.obsBySeries.get(s.series_id) ?? [];
-  const pub = all.filter((o) => o.published && o.value !== null);
   const periods = [...new Set(all.map((o) => o.period))].sort();
   const latest = latestPublished(s.series_id);
+  const cell = latest?.primary_cell_id ? d.cellById.get(latest.primary_cell_id) : undefined;
   const parents = ancestors(s);
   const base = s.dataset === "cpi" ? baseYearOf(s) : null;
   return (
-    <li className="cat-row" data-cat-row="" data-order={order}>
-      <div className="cat-name">
+    <li className="cat-row fd-row" data-cat-row="" data-order={order} data-series={s.series_id}>
+      <div className="fd-name">
         <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
-        {s.dims?.definition ? <span className={`tag${s.dims.definition === "19th ICLS" ? " tag-warn" : ""}`}><Num kind="ui">{s.dims.definition}</Num></span> : null}
-        {base ? (
-          <span className="tag">
-            base <Num kind="period">{base}</Num>
+        <span className="fd-sub">
+          {datasetName(s.dataset)} · {unitLabel(s.unit, s.scale_factor)}
+          {parents.length ? <> · in {seriesTitle(parents[0])}</> : null}
+        </span>
+        {s.dims?.definition || base || s.derived ? (
+          <span className="fd-tags">
+            {s.dims?.definition ? (
+              <span className={`fd-tag${s.dims.definition === "19th ICLS" ? " fd-tag-warn" : ""}`}>
+                <Num kind="ui">{s.dims.definition}</Num>
+              </span>
+            ) : null}
+            {base ? (
+              <span className="fd-tag">
+                base <Num kind="period">{base}</Num>
+              </span>
+            ) : null}
+            {s.derived ? <span className="fd-tag">computed</span> : null}
           </span>
         ) : null}
-        {s.dims?.area_as_printed === "none stated" ? <span className="tag">no area stated</span> : null}
-        {s.derived ? <span className="tag">computed</span> : null}
-        {printedLine(s) ? <span className="cat-path">{s.name}</span> : null}
-        {parents.length ? <span className="cat-path">in {seriesTitle(parents[0])}</span> : null}
       </div>
-      <div className="cat-unit">{unitLabel(s.unit, s.scale_factor)}</div>
-      <div className="cat-periods">
+      <div className="fd-years">
         {periods.length ? (
           <>
             <Num kind="period">{periodWords(periods[0], s.frequency)}</Num> to <Num kind="period">{periodWords(periods[periods.length - 1], s.frequency)}</Num>
@@ -53,27 +71,25 @@ function Row({ s, order }: { s: Series; order: number }) {
           "no periods"
         )}
       </div>
-      <div className="cat-count num">
-        <Count k={`values:series:${s.series_id}`} n={pub.length} /> <span className="muted">of</span> <Count k={`obs:series:${s.series_id}`} n={all.length} />
-        <span className="cat-count-w"> checked</span>
-      </div>
-      <div className="cat-latest num">
+      <div className="fd-latest" data-latest={latest?.obs_id}>
         {latest ? (
           <>
-            <V o={latest} />
-            <span className="cat-kind">
-              <KindAndPeriod o={latest} series={s} short />
+            <V o={latest} short className="v-link fd-v" />
+            <span className="fd-when">
+              <KindAndPeriod o={latest} series={s} />
+              {cell ? (
+                <>
+                  {" · "}
+                  <Link href={docPageHref(cell.source_id, cell.page)} className="fd-pref" aria-label={`Open the document at ${pageShort(cell)}`}>
+                    <Num kind="page">{pageShort(cell)}</Num>
+                  </Link>
+                </>
+              ) : null}
             </span>
           </>
         ) : (
-          <span className="muted">no checked value</span>
+          <span className="fd-none">no checked figure yet</span>
         )}
-      </div>
-      <div className="cat-spark" />
-      <div className="cat-dl">
-        <a href={seriesCsvHref(s.series_id)} download aria-label={`Download ${seriesTitle(s)} as CSV`}>
-          CSV
-        </a>
       </div>
     </li>
   );
@@ -87,93 +103,96 @@ export default function BrowsePage() {
   const topics = topicLabels(series);
   const counts = facetCounts(series);
   const total = totalVisible();
-  const groups: FacetGroup[] = FACETS.map((f) => {
-    const entries = [...counts[f.key].entries()];
-    if (f.key === "topic") entries.sort((a, b) => b[1] - a[1]);
-    return {
-      key: f.key,
-      label: f.label,
-      open: f.open,
-      more: f.more,
-      values: entries.map(([v, n]) => ({ value: v, label: valueWords(f.key, v, topics, datasets), count: n })),
-      note: f.key === "geo" ? `Districts: ${COMING}` : undefined,
-    };
-  }).filter((g) => g.values.length > 0);
+  const order = [...FIRST, ...FACETS.map((f) => f.key).filter((k) => !FIRST.includes(k))];
+  const groups: FacetGroup[] = order
+    .map((key) => {
+      const f = FACETS.find((x) => x.key === key)!;
+      const entries = [...counts[f.key].entries()];
+      if (f.key === "topic") entries.sort((a, b) => b[1] - a[1]);
+      return {
+        key: f.key,
+        label: LABEL[f.key] ?? f.label,
+        open: FIRST.includes(f.key),
+        more: f.more,
+        values: entries.map(([v, n]) => ({ value: v, label: valueWords(f.key, v, topics, datasets), count: n })),
+        note: f.key === "geo" ? `Districts: ${COMING}` : undefined,
+      };
+    })
+    .filter((g) => g.values.length > 0);
+  // Years for the range: the first year of every period a visible series has.
+  const years = [
+    ...new Set(series.flatMap((s) => (d.obsBySeries.get(s.series_id) ?? []).map((o) => /^(\d{4})/.exec(o.period)?.[1]).filter((y): y is string => !!y))),
+  ].sort();
   // Only the top-level series are in the HTML; everything else is one tap away
   // (its parent's page) or loaded as JSON when the reader filters (DESIGN.md 14.1).
   const ids = new Set(d.series.map((x) => x.series_id));
-  const roots = series.filter((s) => !s.parent_id || !ids.has(s.parent_id));
+  const roots = series
+    .filter((s) => !s.parent_id || !ids.has(s.parent_id))
+    .sort((a, b) => seriesTitle(a).localeCompare(seriesTitle(b)) || a.series_id.localeCompare(b.series_id));
+  const names = keys.map((k) => datasetName(k));
+  const notYet = NOT_YET.map((k) => feature(k).label).map((l) => l.charAt(0).toLowerCase() + l.slice(1));
 
   return (
-    <div className="catalogue">
-      <Breadcrumbs items={[{ label: "Data" }]} />
-      <header className="cat-head">
-        <h1>Data</h1>
-        <p className="cat-sum">
-          <Count k="series" n={total.series} /> series · <Count k="values" n={total.values} /> checked values · release{" "}
-          <Num kind="version">{d.release.version}</Num>
-        </p>
-        <Link href="/data" className="cat-all">
-          Download everything
-        </Link>
-      </header>
-      <nav className="tabs" aria-label="Ways to browse">
-        <a href="#series" aria-current="page">
-          Series
-        </a>
-        <Link href="/library">By document</Link>
-        <Link href="/library/datasets">By dataset</Link>
-      </nav>
+    <div className="catalogue find">
+      <Breadcrumbs items={[{ label: "Find data" }]} />
+      <h1 className="fd-h1">
+        <Count k="series" n={total.series} /> series from the{" "}
+        {names.map((n, i) => (
+          <span key={n}>
+            {i ? (i === names.length - 1 ? " and the " : ", the ") : null}
+            {n}
+          </span>
+        ))}
+        : <Count k="values" n={total.values} /> checked figures, each linked to the page it is printed on.
+      </h1>
+      <CatalogueSearch groups={groups} indexUrl={`${DATA_BASE}/search.json`} />
 
-      <div className="cat-layout" id="series">
-        <CatalogueFilter groups={groups} indexUrl={`${DATA_BASE}/search.json`} />
-        <section className="cat-results" aria-labelledby="cat-results-h">
+      <div className="cat-layout fd-layout" id="series">
+        <CatalogueFilter groups={groups} indexUrl={`${DATA_BASE}/search.json`} years={years} />
+        <section className="cat-results fd-results" aria-labelledby="cat-results-h">
           <h2 id="cat-results-h" className="sr-only">
             Series
           </h2>
-          <div className="cat-tools">
-            <p className="cat-status" id="cat-status" aria-live="polite">
-              <Count k="series:roots" n={roots.length} /> top-level series of <Count k="series" n={total.series} />
+          <div className="fd-tools">
+            <p className="cat-status fd-status" id="cat-status" aria-live="polite">
+              <Count k="series:roots" n={roots.length} /> main series of <Count k="series" n={total.series} />
             </p>
-            <div className="cat-active" id="cat-active" />
-            <label className="cat-sort">
+            <label className="fd-sort">
               Sort{" "}
-              <select id="cat-sort" className="input" defaultValue="order">
-                <option value="order">Document order (relevance when searching)</option>
-                <option value="name">Name</option>
+              <select id="cat-sort" className="fd-select" defaultValue="name">
+                <option value="name">A to Z</option>
+                <option value="order">Document order (best match when filtering by words)</option>
                 <option value="latest">Latest period</option>
-                <option value="n">Most checked values</option>
+                <option value="n">Most checked figures</option>
               </select>
             </label>
           </div>
-          <div className="cat-cols" aria-hidden="true">
+          <div className="fd-cols" aria-hidden="true">
             <span>Series</span>
-            <span>Unit</span>
-            <span>Periods</span>
-            <span className="num">Checked</span>
-            <span className="num">Latest</span>
-            <span>Trend</span>
-            <span />
+            <span>Years</span>
+            <span className="fd-col-latest">Latest</span>
           </div>
-          <ul className="cat-list" id="cat-list">
+          <ul className="cat-list fd-list" id="cat-list">
             {roots.map((s, i) => (
               <Row key={s.series_id} s={s} order={i} />
             ))}
           </ul>
-          <p className="small cat-roots" id="cat-roots-note">
+          <p className="fd-note" id="cat-roots-note">
             The other series sit under these: open one to see its parts, or filter the list.{" "}
             <a href="/browse?all=1" className="js-only">
               Show every series
             </a>
           </p>
           <CatalogueResults groups={groups} total={total.series} indexUrl={`${DATA_BASE}/search.json`} />
-          <p className="small muted cat-foot">
-            Checked: checked values out of all figures of the series; the rest are labelled gaps that say why. Latest: the most recent checked value,
-            linked to its receipt; <abbr title="budget estimate">BE</abbr> budget estimate, <abbr title="revised estimate">RE</abbr> revised estimate.
+          <p className="fd-note">Latest: the most recent checked figure, linked to its receipt; the page reference opens the document at that page.</p>
+          <p className="fd-note fd-notyet">
+            Not here yet: {notYet.join(", ")}. What is planned is listed on <Link href="/releases#coming">What&rsquo;s new</Link>.
+          </p>
+          <p className="fd-note fd-more-ways">
+            Also: <Link href="/library">by document</Link> · <Link href="/library/datasets">by dataset</Link> · <Link href="/data">download everything</Link>
           </p>
         </section>
       </div>
-
     </div>
   );
 }

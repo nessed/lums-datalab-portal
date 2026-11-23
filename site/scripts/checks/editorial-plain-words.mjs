@@ -3,7 +3,8 @@
 // candidate, "revenue account", "survey round", "series break", "not in
 // release", any snake_case or dotted id, any verification status code) may not
 // appear in the visible text of the first-layer pages: the header, the home page,
-// the Library index, the datasets index and the Indicators index. They may appear
+// the Library index, the datasets index, the Indicators index, the guides index,
+// the inflation calculator and Compare provinces. They may appear
 // one click down: inside a closed <details>, or in an element marked
 // data-layer="2". The editorial files of the run (library.json, stories.json)
 // must be marked provisional and hold no digits.
@@ -15,6 +16,9 @@ const PAGES = [
   ["/library", "library.html"],
   ["/library/datasets", path.join("library", "datasets.html")],
   ["/topics", "topics.html"],
+  ["/guides", "guides.html"],
+  ["/inflation-calculator", "inflation-calculator.html"],
+  ["/compare/education", path.join("compare", "education.html")],
 ];
 
 const BANNED = [

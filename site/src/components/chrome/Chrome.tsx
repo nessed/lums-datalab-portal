@@ -1,16 +1,19 @@
 "use client";
-// Small client pieces of the page chrome: the active nav item, the dismissible
-// prototype notice, and the "Report an error" link that names the current page.
+// Small client pieces of the page chrome: the active nav item, the About menu,
+// the header search (not on the home page, which has the large one), the
+// dismissible prototype notice, and the "Report an error" link that names the
+// current page.
 import Link from "@/components/ui/Link";
+import SearchDialog from "@/components/chrome/SearchDialog";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type NavItem = { href: string; label: string; also?: string[] };
 
 const isActive = (path: string, n: NavItem) =>
   [n.href, ...(n.also ?? [])].some((h) => path === h || path.startsWith(`${h}/`));
 
-export function NavLinks({ items, className = "site-nav" }: { items: NavItem[]; className?: string }) {
+export function NavLinks({ items, className = "site-nav", children }: { items: NavItem[]; className?: string; children?: ReactNode }) {
   const path = usePathname() ?? "/";
   return (
     <nav className={className} aria-label="Main">
@@ -19,7 +22,59 @@ export function NavLinks({ items, className = "site-nav" }: { items: NavItem[]; 
           {n.label}
         </Link>
       ))}
+      {children}
     </nav>
+  );
+}
+
+const pathOf = (href: string) => href.split("#")[0];
+
+/** Home v3: "About" opens a short list (a <details>, so it works without
+ * JavaScript). It closes after a navigation, on Escape and on a click outside. */
+export function AboutMenu({ items }: { items: NavItem[] }) {
+  const path = usePathname() ?? "/";
+  const ref = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    if (ref.current) ref.current.open = false;
+  }, [path]);
+  useEffect(() => {
+    const shut = (e: Event) => {
+      const d = ref.current;
+      if (!d?.open) return;
+      if (e instanceof KeyboardEvent ? e.key === "Escape" : !d.contains(e.target as Node)) d.open = false;
+    };
+    document.addEventListener("click", shut);
+    document.addEventListener("keydown", shut);
+    return () => {
+      document.removeEventListener("click", shut);
+      document.removeEventListener("keydown", shut);
+    };
+  }, []);
+  const on = ["/about", "/methods"].some((h) => path === h || path.startsWith(`${h}/`));
+  return (
+    <details className="about-menu" ref={ref}>
+      <summary data-current={on ? "page" : undefined}>About</summary>
+      <ul>
+        {items.map((n) => (
+          <li key={n.href}>
+            <Link href={n.href} aria-current={n.href.includes("#") ? undefined : path === pathOf(n.href) ? "page" : undefined}>
+              {n.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+/** The search field in the header, on every page but the home page. */
+export function HeaderSearch({ indexUrl }: { indexUrl: string }) {
+  const path = usePathname() ?? "/";
+  if (path === "/") return null;
+  return (
+    <div className="mast-search">
+      <SearchDialog indexUrl={indexUrl} />
+    </div>
   );
 }
 
@@ -40,9 +95,6 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
             {n.label}
           </Link>
         ))}
-        <Link href="/releases" aria-current={path.startsWith("/releases") ? "page" : undefined}>
-          Releases and errata
-        </Link>
         <Link href="/data" aria-current={path.startsWith("/data") ? "page" : undefined}>
           Download and file formats
         </Link>

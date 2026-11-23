@@ -213,10 +213,12 @@ export function CostSwitch({
   amounts,
   groups,
   panels,
+  amountLabel = "Amount",
 }: {
   amounts: { key: string; label: ReactNode }[];
-  groups: { key: string; label: string }[];
+  groups: { key: string; label: string; rate?: ReactNode; w?: string }[];
   panels: Record<string, ReactNode>;
+  amountLabel?: string;
 }) {
   const base = useId();
   const [a, setA] = useState(0);
@@ -228,7 +230,7 @@ export function CostSwitch({
       <div className="cost-ctl">
         <div className="cost-ctl-a">
           <span className="selsw-l" id={`${base}-al`}>
-            Amount
+            {amountLabel}
           </span>
           <div className="seg" role="radiogroup" aria-labelledby={`${base}-al`}>
             {amounts.map((o, i) => (
@@ -247,17 +249,33 @@ export function CostSwitch({
             ))}
           </div>
         </div>
-        <div className="cost-ctl-g">
-          <label htmlFor={`${base}-g`} className="selsw-l">
-            Spent on
-          </label>
-          <select id={`${base}-g`} className="selsw-s" value={groups[g]?.key} onChange={(e) => setG(Math.max(0, groups.findIndex((x) => x.key === e.target.value)))}>
-            {groups.map((o) => (
-              <option key={o.key} value={o.key}>
-                {o.label}
-              </option>
-            ))}
-          </select>
+      </div>
+      <div className="cost-ctl-g">
+        <span className="selsw-l" id={`${base}-gl`}>
+          Pick what you buy
+        </span>
+        <div className="cost-groups" role="radiogroup" aria-labelledby={`${base}-gl`}>
+          {groups.map((o, i) => (
+            <button
+              key={o.key}
+              id={`${base}-g${i}`}
+              type="button"
+              role="radio"
+              aria-checked={i === g}
+              tabIndex={i === g ? 0 : -1}
+              className="cost-g"
+              onClick={() => setG(i)}
+              onKeyDown={(e) => onArrows(e, i, groups.length, setG, groups.map((_, j) => `${base}-g${j}`))}
+            >
+              <span className="cost-g-name">{o.label}</span>
+              {o.w ? (
+                <span className="cost-g-bar" aria-hidden="true">
+                  <span style={{ width: o.w }} />
+                </span>
+              ) : null}
+              {o.rate ? <span className="cost-g-rate">{o.rate}</span> : null}
+            </button>
+          ))}
         </div>
       </div>
       <div aria-live="polite">

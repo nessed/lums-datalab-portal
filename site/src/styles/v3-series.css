@@ -1,0 +1,443 @@
+/* v3-series: Home v3 design set (2026-11-23). Values come from src/design/tokens.css only. */
+/* The series page as the "Dataset" screen: src/app/series/[id]/page.tsx and
+   src/components/series/Dataset.tsx. Square corners, 1px rules, no shadows,
+   cards or pills. Everything is scoped under .ds. */
+
+.ds {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  min-width: 0;
+}
+
+/* ---------- 1. heading sentence ---------- */
+.ds .ds-top {
+  margin: var(--s-4) 0 var(--s-5);
+  max-width: var(--prose-max);
+}
+.ds .ds-h1 {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-stretch: var(--wdth-head);
+  font-size: var(--step-4);
+  line-height: var(--leading-tight);
+  color: var(--navy);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.ds .ds-h1 .v-link {
+  color: inherit;
+}
+.ds .ds-h1-src {
+  font-family: var(--font-sans);
+  font-weight: normal;
+  font-stretch: normal;
+  font-size: var(--step-0);
+  color: var(--ink-2);
+}
+.ds .ds-summary {
+  margin: var(--s-3) 0 0;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+
+/* ---------- page reference chip ---------- */
+.ds .ds-ref {
+  font-family: var(--font-ref);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--ref-mark);
+  border-bottom: var(--rule-heavy) solid var(--gold);
+  padding: 0 var(--s-1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ds .ds-ref:hover {
+  color: var(--navy);
+  text-decoration: underline;
+}
+
+/* ---------- 2. headline block and facts ---------- */
+.ds .ds-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-5);
+  border-top: var(--rule-heavy) solid var(--navy);
+  border-bottom: var(--hair);
+  padding: var(--s-5) 0;
+  margin-bottom: var(--s-6);
+}
+@media (min-width: 64rem) {
+  .ds .ds-head {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--s-7);
+  }
+}
+.ds .ds-num {
+  min-width: 0;
+}
+.ds .ds-num > p {
+  margin: 0 0 var(--s-2);
+}
+.ds .ds-num-l {
+  font-size: var(--step--1);
+  font-weight: bold;
+  color: var(--ink-2);
+}
+.ds .ds-num-v {
+  line-height: var(--leading-tight);
+}
+.ds .ds-big {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--s-2);
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: var(--rule-w) solid transparent;
+}
+.ds .ds-big:hover {
+  border-bottom-color: var(--navy);
+}
+.ds .ds-big-n {
+  font-family: var(--font-display);
+  font-weight: var(--wght-num);
+  font-stretch: var(--wdth-num);
+  font-size: var(--num-xl);
+  line-height: var(--leading-tight);
+}
+.ds .ds-big-u {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--step-2);
+  color: var(--ink-2);
+}
+.ds .ds-printed,
+.ds .ds-change {
+  font-size: var(--step-0);
+  color: var(--ink-2);
+}
+.ds .ds-change .d-val {
+  font-weight: bold;
+  color: var(--ink);
+}
+.ds .ds-newer,
+.ds .ds-none {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ds .ds-small {
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+
+.ds .ds-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  border-top: var(--hair);
+  min-width: 0;
+}
+.ds .ds-facts dt {
+  font-size: var(--step--2);
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: var(--s-3);
+}
+.ds .ds-facts dd {
+  margin: 0;
+  padding: var(--s-1) 0 var(--s-3);
+  border-bottom: var(--hair);
+  font-size: var(--step--1);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 40rem) {
+  .ds .ds-facts {
+    grid-template-columns: max-content minmax(0, 1fr);
+  }
+  .ds .ds-facts dt,
+  .ds .ds-facts dd {
+    padding: var(--s-3) var(--s-4) var(--s-3) 0;
+    border-bottom: var(--hair);
+  }
+}
+.ds .ds-checked {
+  display: flex;
+  gap: var(--s-2);
+  align-items: baseline;
+}
+
+/* ---------- 3. tabs ---------- */
+.ds .ds-tabs {
+  margin-bottom: var(--s-7);
+  min-width: 0;
+}
+.ds .ds-tabs .tablist {
+  border-bottom: var(--hair-strong);
+  margin-bottom: var(--s-5);
+}
+.ds .ds-tabs .tablist [role="tab"] {
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  color: var(--ink-2);
+  border-bottom: var(--active-bar) solid transparent;
+  border-radius: 0;
+}
+.ds .ds-tabs .tablist [role="tab"][aria-selected="true"] {
+  color: var(--navy);
+  border-bottom-color: var(--tab-active-rule);
+}
+.ds .ds-tabs .tablist [role="tab"]:hover {
+  background: var(--hover-wash);
+}
+.ds .ds-tabs .tablist [role="tab"]:focus-visible {
+  outline: var(--rule-heavy) solid var(--focus);
+  outline-offset: calc(-1 * var(--rule-heavy));
+}
+/* Without JavaScript every panel shows: separate them with a rule. */
+.ds .tabset:not([data-ready]) .tabpanel + .tabpanel {
+  margin-top: var(--s-6);
+  border-top: var(--hair);
+  padding-top: var(--s-5);
+}
+
+/* ---------- section heads inside panels ---------- */
+.ds .ds-sec {
+  min-width: 0;
+}
+.ds .ds-sec-head {
+  margin-bottom: var(--s-4);
+  max-width: var(--measure);
+}
+.ds .ds-h2 {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-stretch: var(--wdth-head);
+  font-size: var(--t-sec);
+  line-height: var(--leading-tight);
+  color: var(--navy);
+  margin: 0 0 var(--s-2);
+}
+.ds .ds-h3 {
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  font-size: var(--step-0);
+  color: var(--navy);
+  margin: var(--s-6) 0 var(--s-2);
+}
+.ds .ds-ruled {
+  border-top: var(--rule-heavy) solid var(--navy);
+  padding-top: var(--s-3);
+}
+.ds .ds-sub {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ds .ds-note {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  max-width: var(--measure);
+}
+.ds .ds-narrow {
+  max-width: var(--prose-max);
+}
+
+/* ---------- 4. tables: every year, every edition ---------- */
+.ds .ds-yt-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  border-top: var(--rule-heavy) solid var(--navy);
+}
+.ds .ds-yt {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+.ds .ds-yt th,
+.ds .ds-yt td {
+  padding: var(--s-2) var(--s-3);
+  border-bottom: var(--hair);
+  text-align: left;
+  vertical-align: baseline;
+}
+.ds .ds-yt thead th {
+  font-size: var(--step--2);
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: var(--hair-strong);
+  white-space: nowrap;
+}
+.ds .ds-yt tbody th {
+  font-weight: bold;
+  white-space: nowrap;
+}
+.ds .ds-yt .num {
+  text-align: right;
+  white-space: nowrap;
+}
+.ds .ds-yt .num .ds-ref {
+  margin-left: var(--s-1);
+}
+.ds .ds-yt tbody tr:hover {
+  background: var(--hover-wash);
+}
+.ds .ds-yt-none {
+  color: var(--ink-3);
+  font-style: italic;
+}
+.ds .ds-yt-gap th,
+.ds .ds-yt-gap td {
+  background: var(--fill-hatched);
+  color: var(--ink-3);
+}
+.ds .ds-yt-gap td {
+  font-style: italic;
+}
+.ds .ds-ed-none th,
+.ds .ds-ed-none td {
+  color: var(--ink-3);
+  font-style: italic;
+}
+.ds .selsw {
+  margin-top: var(--s-2);
+}
+.ds .selsw-s {
+  border-radius: 0;
+}
+
+/* ---------- 5. downloads ---------- */
+.ds .ds-dl {
+  list-style: none;
+  margin: var(--s-4) 0;
+  padding: 0;
+  border-top: var(--rule-heavy) solid var(--navy);
+}
+.ds .ds-dl li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  padding: var(--s-3) 0;
+  border-bottom: var(--hair);
+}
+.ds .ds-dl-what {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 var(--measure);
+  max-width: var(--measure);
+}
+.ds .ds-dl-what span {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ds .ds-btn {
+  display: inline-flex;
+  gap: var(--s-2);
+  align-items: center;
+  padding: var(--s-3) var(--s-4);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  border-radius: 0;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.ds .ds-btn:hover {
+  background: var(--btn-bg-hover);
+}
+.ds .ds-dl-none {
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--ink-3);
+}
+.ds .ds-code {
+  font-family: var(--font-ref);
+  font-size: var(--step--1);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 6. related and read first ---------- */
+.ds .ds-after {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+  margin-bottom: var(--s-7);
+}
+@media (min-width: 64rem) {
+  .ds .ds-after {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+.ds .ds-rel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ds .ds-rel-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-4);
+  padding: var(--s-3) 0;
+  border-bottom: var(--hair);
+}
+.ds .ds-rel-name {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.ds .ds-rel-k {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+.ds .ds-rel-v {
+  white-space: nowrap;
+  font-weight: bold;
+}
+.ds .ds-read-link {
+  display: block;
+  padding: var(--s-3) 0 var(--s-3) var(--s-4);
+  border-left: var(--active-bar) solid var(--gold);
+  text-decoration: none;
+  color: var(--ink);
+}
+.ds .ds-read-link:hover {
+  background: var(--hover-wash);
+}
+.ds .ds-read-t {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--wght-head);
+  color: var(--navy);
+  text-decoration: underline;
+}
+.ds .ds-read-d {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+/* ---------- 7. lower: where it sits, about ---------- */
+.ds .ds-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+  margin-top: var(--s-6);
+}
+@media (min-width: 64rem) {
+  .ds .ds-lower {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+.ds .ds-lower-main,
+.ds .ds-lower-side {
+  min-width: 0;
+}

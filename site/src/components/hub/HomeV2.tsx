@@ -1,5 +1,5 @@
-// Home v2 (2026-11-23, Ali; DECISIONS.md D-HV2-2). The sections of the new home
-// page, server components. The design was a picture, not a data source: every
+// Home v2 and v3 (2026-11-23, Ali; DECISIONS.md D-HV2-2, D-HV3-2). The sections
+// of the home page, server components. The design was a picture, not a data source: every
 // figure here is a <V> read from the release through db(), every count a
 // <Count>, every other digit a <Num>; every change, share, cost or sum is a
 // derived figure (data-num="derived") that a plug-in under scripts/checks/
@@ -10,10 +10,11 @@ import type { ReactNode } from "react";
 import Link from "@/components/ui/Link";
 import Arrow from "@/components/ui/Arrow";
 import Chart, { LineKey } from "@/components/Chart";
-import Spark from "@/components/Spark";
 import { Num, V } from "@/components/ui/Num";
-import { buildChart, type ChartModel } from "@/lib/chart";
-import { db, library, seriesHref, sourceHref, type Observation, type Series } from "@/lib/data";
+import { buildChart } from "@/lib/chart";
+import { DATA_BASE, db, library, seriesHref, sourceHref, type Observation, type Series } from "@/lib/data";
+import SearchDialog from "@/components/chrome/SearchDialog";
+import editorialConfig from "../../../editorial.config.json";
 import { periodWords } from "@/lib/format";
 import { seriesTitle } from "@/lib/titles";
 import { feature, isOn, type FeatureKey } from "@/lib/features";
@@ -23,7 +24,7 @@ import { compare, latestShown, ofKind, showable, usable } from "@/components/hom
 import { evidenceExample, headlineCards } from "@/components/home/editorial";
 import EvidenceExample from "@/components/home/Evidence";
 import { addUpCheck, groupFigures, type Story } from "./stories";
-import { CostSwitch, SelectSwitch, Switch, TileSwitch } from "./Switch";
+import { CostSwitch, SelectSwitch, Switch } from "./Switch";
 import daily from "../../../editorial/daily.json";
 import calendar from "../../../editorial/calendar.json";
 
@@ -147,243 +148,309 @@ export function TodaysRates() {
 /* ================================== key numbers ================================== */
 
 function basis(base: Observation, s: Series): ReactNode {
-  if (base.kind === "be") return <>on {P(base.period, s)} budget</>;
-  if (base.kind === "re") return <>on {P(base.period, s)} revised</>;
-  if (base.kind === "survey_round") return <>on {P(base.period, s)} survey</>;
+  if (base.kind === "be") return <>on the {P(base.period, s)} budget estimate</>;
+  if (base.kind === "re") return <>on the {P(base.period, s)} revised estimate</>;
+  if (base.kind === "survey_round") return <>on the {P(base.period, s)} survey</>;
   return <>on {P(base.period, s)}</>;
 }
 
-const KIND_LINE: Record<string, string> = { be: "Budget estimate", re: "Revised estimate", change_yoy: "Change over a year", survey_round: "Survey figure" };
+const KIND_WORDS: Record<string, string> = { be: "Budget estimate", re: "Revised estimate", actual: "Actual", change_yoy: "Change over a year", survey_round: "Survey" };
 
-/** One kind of figure per line; for a budget estimate the revised estimate of the compared year is one separate marker. */
-function panelModel(series: Series, key: string, reOf: Observation | null): ChartModel {
-  const full = buildChart(series);
-  const lines = full.lines.filter((l) => l.key === key);
-  if (reOf) {
-    const re = full.lines.find((l) => l.key === "re");
-    const pt = re?.points.find((p) => p.period === reOf.period);
-    if (re && pt) lines.push({ ...re, key: "re-mark", label: `${re.label} (one year)`, points: [pt] });
-  }
-  return { ...full, lines, marks: full.marks.filter((m) => m.vintage === key) };
-}
+type Tile = { c: ReturnType<typeof headlineCards>[number]; latest: Observation; all: Observation[]; chg: ReactNode; derived: ReactNode | null; reOf: Observation | null };
 
-/** The table behind a panel's chart: every shown figure of the line, and the revised marker. */
-function PanelTable({ series, kind, reOf, caption }: { series: Series; kind: string; reOf: Observation | null; caption: string }) {
-  const rows = ofKind(db().obsBySeries.get(series.series_id) ?? [], kind).filter(showable);
+/** The home page's lead sentence: the first change over a year and the first budget estimate of the headline figures, in words. */
+export function HomeHero() {
+  const cards = headlineCards();
+  const pick = (kind: string) => {
+    for (const c of cards.filter((x) => x.kind === kind)) {
+      const { latest } = latestShown(db().obsBySeries.get(c.series.series_id) ?? [], c.kind);
+      if (latest) return { c, latest };
+    }
+    return null;
+  };
+  const rate = pick("change_yoy");
+  const be = pick("be");
+  const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
   return (
-    <div className="kp-table">
-      <table className="tbl2">
-        <caption className="sr-only">{caption}</caption>
-        <thead>
-          <tr>
-            <th scope="col">Year</th>
-            <th scope="col">{KIND_LINE[kind] ?? "Figure"}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows
-            .slice()
-            .reverse()
-            .map((o) => (
-              <tr key={o.obs_id}>
-                <th scope="row">{P(o.period, series)}</th>
-                <td>
-                  <V o={o} sheet className="v-link" />
-                  {reOf && o.period === reOf.period ? (
-                    <span className="kp-re">
-                      {" "}
-                      revised to <V o={reOf} sheet className="v-link" />
-                    </span>
-                  ) : null}
-                </td>
-              </tr>
+    <section className="hero3" aria-label="Search">
+      {rate || be ? (
+        <p className="hero3-lead">
+          {rate ? (
+            <>
+              {rate.c.name} was <ShortValue o={rate.latest} series={rate.c.series} /> in {P(rate.latest.period, rate.c.series)}
+            </>
+          ) : null}
+          {rate && be ? ", and " : null}
+          {be ? (
+            <>
+              {rate ? lower(be.c.name) : be.c.name} is budgeted at <ShortValue o={be.latest} series={be.c.series} /> for {P(be.latest.period, be.c.series)}
+            </>
+          ) : null}
+          . Every figure here links to the government page it was printed on.
+        </p>
+      ) : null}
+      <div className="hero3-search">
+        <SearchDialog indexUrl={`${DATA_BASE}/search.json`} variant="big" />
+        {editorialConfig.exampleSearches?.length ? (
+          <p className="srow-trend">
+            <span className="srow-trend-h">People look for</span>
+            {editorialConfig.exampleSearches.map((t) => (
+              <Link key={t} href={`/search?q=${encodeURIComponent(t)}`}>
+                {t}
+              </Link>
             ))}
-        </tbody>
-      </table>
-    </div>
+          </p>
+        ) : null}
+      </div>
+    </section>
   );
 }
 
 /**
- * The six headline figures as tiles; selecting one swaps the chart, sentence and
- * source below. The changes are added to `notes` in the same order as
- * HomeFormulas lists them on /methods (Moved.tsx), which they link to.
+ * Home v3: the six headline figures as tiles, then the federal budget feature
+ * (the first headline budget estimate: every budget, revised and actual figure
+ * of its series as separate lines and a table) beside Coming up and the rupee
+ * value. The changes are added to `notes` in the same order as HomeFormulas
+ * lists them on /methods (Moved.tsx), which they link to.
  */
 export function KeyTiles({ notes }: { notes: DerivedNotes }) {
-  const tiles: { key: string; name: ReactNode; body: ReactNode }[] = [];
-  const panels: ReactNode[] = [];
+  const tiles: Tile[] = [];
   for (const c of headlineCards()) {
     const all = db().obsBySeries.get(c.series.series_id) ?? [];
     const { latest } = latestShown(all, c.kind);
     if (!latest) continue;
     const cmp = compare(c.series, latest, all);
     let chg: ReactNode = null;
-    let rev: ReactNode = null;
+    let derived: ReactNode | null = null;
     let reOf: Observation | null = null;
     if (cmp.kind === "change") {
       const id = notes.add(cmp.derived, `${c.name}: change on the comparable figure`);
+      derived = (
+        <a href={notes.href(id)} className="kt-drv">
+          <DerivedValue d={cmp.derived} />
+        </a>
+      );
       chg = (
         <>
           <Arrow dir={dirOf(cmp.derived)} label={false} />
-          <a href={notes.href(id)} className="kt-drv">
-            <DerivedValue d={cmp.derived} />
-          </a>{" "}
-          <span className="kt-basis">{basis(cmp.base, c.series)}</span>
+          {derived} <span className="kt-basis">{basis(cmp.base, c.series)}</span>
         </>
       );
       if (cmp.base.kind === "be") {
         const re = all.find((o) => o.period === cmp.base.period && o.kind === "re");
-        if (re && usable(re)) {
-          reOf = re;
-          rev = (
-            <>
-              {P(re.period, c.series)} revised to <ShortValue o={re} series={c.series} />
-            </>
-          );
-        }
+        if (re && usable(re)) reOf = re;
       }
-    } else if (cmp.kind === "break") chg = <span className="kt-basis">No comparable earlier figure</span>;
+    } else if (cmp.kind === "break") chg = <span className="kt-basis">Not compared with earlier rounds: the survey changed</span>;
     else if (cmp.kind === "not-usable") chg = <span className="kt-basis">Earlier figure not checked</span>;
-    const when = latest.kind === "be" ? <>{P(latest.period, c.series)} budget</> : P(latest.period, c.series);
-    const key = c.series.series_id;
-    tiles.push({
-      key,
-      name: c.name,
-      body: (
-        <>
-          <span className="kt-v">
-            <ShortValue o={latest} series={c.series} />
-          </span>
-          <span className="kt-when">{when}</span>
-          {chg ? <span className="kt-chg">{chg}</span> : null}
-          {rev ? <span className="kt-rev">{rev}</span> : null}
-          <span className="kt-spark" aria-hidden="true">
-            <Spark series={c.series} width={72} height={20} link={false} />
-          </span>
-        </>
-      ),
-    });
-    const model = panelModel(c.series, latest.vintage, reOf);
-    const title = seriesTitle(c.series);
-    panels.push(
-      <>
-        <div className="kp-head">
-          <p className="kp-sentence">
-            {c.name}: <ShortValue o={latest} series={c.series} /> for {latest.kind === "be" ? <>the {P(latest.period, c.series)} budget</> : P(latest.period, c.series)}
-            {rev ? <>; the {P(reOf!.period, c.series)} budget was later revised to <ShortValue o={reOf!} series={c.series} /></> : null}.
-          </p>
-          <p className="kp-src">
-            <SourceMarker o={latest} /> · <Link href={seriesHref(key)}>All figures of this series</Link>
-          </p>
-        </div>
-        <Switch
-          label={`${c.name}: chart or table`}
-          variant="seg"
-          className="kp-sw"
-          options={[
-            { key: "chart", label: "Chart" },
-            { key: "table", label: "Table" },
-          ]}
-          panels={[
-            <div key="c" className="kp-chart">
-              <ul className="kp-key" aria-label="Key">
-                {model.lines.map((l) => (
-                  <li key={l.key}>
-                    <LineKey line={l} /> {l.label}
-                  </li>
-                ))}
-              </ul>
-              <Chart model={model} idBase={`kp-${tiles.length}`} caption={title} options={{ height: 300, noKey: true }} />
-            </div>,
-            <PanelTable key="t" series={c.series} kind={c.kind} reOf={reOf} caption={title} />,
-          ]}
-        />
-      </>,
-    );
+    tiles.push({ c, latest, all, chg, derived, reOf });
   }
   if (!tiles.length) return null;
+  const feat = tiles.find((t) => t.c.kind === "be");
   return (
-    <section className="v2-sec kn2" aria-labelledby="kn2-h">
-      <H id="kn2-h" more={<Link href="/browse">Explore all data</Link>}>
-        Key numbers
+    <>
+      <section className="v2-sec kn3" aria-labelledby="kn3-h">
+        <H id="kn3-h" more={<Link href="/browse">Find data</Link>}>
+          Key numbers
+        </H>
+        <ul className="kt3-grid">
+          {tiles.map((t) => (
+            <li key={t.c.series.series_id} className="kt3">
+              <Link href={seriesHref(t.c.series.series_id)} className="kt3-name">
+                {t.c.name}
+              </Link>
+              <span className="kt3-v">
+                <ShortValue o={t.latest} series={t.c.series} />
+              </span>
+              <span className="kt3-when">
+                {KIND_WORDS[t.latest.kind] ?? "Figure"}, {P(t.latest.period, t.c.series)} · <SourceMarker o={t.latest} />
+              </span>
+              {t.chg ? <span className="kt3-chg">{t.chg}</span> : null}
+              {t.reOf ? (
+                <span className="kt3-rev">
+                  {P(t.reOf.period, t.c.series)} was later revised to <ShortValue o={t.reOf} series={t.c.series} />
+                </span>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+      <div className="fb3">
+        {feat ? <BudgetFeature t={feat} /> : null}
+        <aside className="fb3-side" aria-label="Coming up and the rupee value">
+          <ComingUp />
+          <RupeeValue />
+        </aside>
+      </div>
+    </>
+  );
+}
+
+/** Every kind of figure of one budget series: chart (separate lines, never joined) and table. */
+function BudgetFeature({ t }: { t: Tile }) {
+  const { c, latest, all, derived, reOf } = t;
+  const model = buildChart(c.series);
+  const title = seriesTitle(c.series);
+  const kinds = ["be", "re", "actual"] as const;
+  const byPeriod = new Map<string, Partial<Record<(typeof kinds)[number], Observation>>>();
+  for (const k of kinds)
+    for (const o of ofKind(all, k).filter(showable)) {
+      const row = byPeriod.get(o.period) ?? {};
+      row[k] = o;
+      byPeriod.set(o.period, row);
+    }
+  const years = [...byPeriod.keys()].sort().reverse().slice(0, 6);
+  const hasActual = ofKind(all, "actual").some(showable);
+  return (
+    <section className="fb3-main" aria-labelledby="fb3-h">
+      <H id="fb3-h" more={<Link href={seriesHref(c.series.series_id)}>{title}</Link>}>
+        The federal budget
       </H>
-      <TileSwitch label="Key numbers: pick one to see its chart" tiles={tiles} panels={panels} />
+      <p className="fb3-lead">
+        {c.name} is budgeted at <ShortValue o={latest} series={c.series} /> for {P(latest.period, c.series)}
+        {derived ? <>, {derived} on last year&rsquo;s budget estimate</> : null}.
+      </p>
+      {reOf || !hasActual ? (
+        <p className="fb3-sub">
+          {reOf ? (
+            <>
+              Last year&rsquo;s budget estimate was later revised to <ShortValue o={reOf} series={c.series} />.{" "}
+            </>
+          ) : null}
+          {hasActual ? null : <>Actual figures are not yet collected.</>}
+        </p>
+      ) : null}
+      <Switch
+        label={`${title}: chart or table`}
+        variant="seg"
+        className="kp-sw"
+        options={[
+          { key: "chart", label: "Chart" },
+          { key: "table", label: "Table" },
+        ]}
+        panels={[
+          <div key="c" className="kp-chart">
+            <ul className="kp-key" aria-label="Key">
+              {model.lines.map((l) => (
+                <li key={l.key}>
+                  <LineKey line={l} /> {l.label}
+                </li>
+              ))}
+            </ul>
+            <Chart model={model} idBase="fb3" caption={title} options={{ height: 280, noKey: true }} />
+          </div>,
+          <div key="t" className="kp-table">
+            <table className="tbl2">
+              <caption className="sr-only">{title}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Budget estimate</th>
+                  <th scope="col">Revised estimate</th>
+                  <th scope="col">Actual</th>
+                </tr>
+              </thead>
+              <tbody>
+                {years.map((y) => {
+                  const row = byPeriod.get(y)!;
+                  return (
+                    <tr key={y}>
+                      <th scope="row">{P(y, c.series)}</th>
+                      {kinds.map((k) => {
+                        const o = row[k];
+                        return <td key={k}>{o ? <V o={o} sheet className="v-link" /> : <span className="fb3-none">Not yet collected</span>}</td>;
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>,
+        ]}
+      />
+      <p className="fb3-src">
+        <SourceMarker o={latest} /> ·{" "}
+        <Link href="/guides/revised-estimate">What is a revised estimate?</Link> · <Link href={seriesHref(c.series.series_id)}>Every year, with its page</Link>
+      </p>
     </section>
   );
 }
 
-/* =============================== just added / coming up ============================ */
+/* =============================== coming up / just updated ============================ */
 
 type CalEntry = { id: string; name: string; agency: string; when: string; status: "expected" | "announced"; basis?: string; announcedAt?: string };
 
-export function AddedAndComing() {
+function ComingUp() {
+  const entries = (calendar.entries as CalEntry[]).slice().sort((a, b) => a.when.localeCompare(b.when));
+  return (
+    <section className="cu3" aria-labelledby="cu3-h">
+      <H id="cu3-h" more={<Link href="/calendar">Calendar</Link>}>
+        Coming up
+      </H>
+      <p className="cu3-note">Official releases. Dates are our estimate from when each one usually appears, unless the agency has announced them.</p>
+      {entries.length ? (
+        <ul className="ac-list">
+          {entries.map((e) => (
+            <li key={e.id} className="ac-row" data-cal-entry={e.id}>
+              <span className="ac-what">{e.name}</span>
+              <span className="ac-who">{e.agency}</span>
+              <span className="ac-when">
+                {e.status === "announced" ? "Announced for " : "Expected "}
+                <span data-num={e.status === "announced" ? "date" : "ui"} data-cal={e.id}>
+                  {e.status === "announced" ? e.when : periodWords(e.when, "month")}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="ac-none">No dates are expected yet.</p>
+      )}
+    </section>
+  );
+}
+
+/** A pointer to the inflation calculator (the sum is worked out there, from the index as printed). */
+function RupeeValue() {
+  return (
+    <section className="rv3" aria-labelledby="rv3-h">
+      <H id="rv3-h">Rupee value</H>
+      <p>What is a rupee amount from an earlier year worth today? Work it out from the official consumer price index, with the index values and their pages shown.</p>
+      <Link href="/inflation-calculator" className="rv3-go">
+        Open the inflation calculator
+      </Link>
+    </section>
+  );
+}
+
+export function JustUpdated() {
   const docs = library()
     .documents.filter((d) => d.state === "read")
     .sort((a, b) => b.period.localeCompare(a.period))
     .slice(0, 6);
+  if (!docs.length) return null;
   const freq = (d: { period: string; kind: string }) => ({ frequency: /^\d{4}-(0[1-9]|1[0-2])$/.test(d.period) && d.kind === "cpi_monthly_review" ? "month" : "" });
-  const entries = (calendar.entries as CalEntry[]).slice().sort((a, b) => a.when.localeCompare(b.when));
-  const added = docs.length ? (
-    <ul className="ac-list">
-      {docs.map((d) => (
-        <li key={d.id} className="ac-row">
-          <span className="ac-what">
-            <Link href={sourceHref(d.id)}>{d.kindName}</Link> {P(d.period, freq(d))}
-          </span>
-          <span className="ac-who">{d.publisher}</span>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className="ac-none">Nothing has been added to this release yet.</p>
-  );
-  const coming = entries.length ? (
-    <ul className="ac-list">
-      {entries.map((e) => (
-        <li key={e.id} className="ac-row" data-cal-entry={e.id}>
-          <span className="ac-what">{e.name}</span>
-          <span className="ac-who">{e.agency}</span>
-          <span className="ac-when">
-            {e.status === "announced" ? "Announced for " : "Expected "}
-            <span data-num={e.status === "announced" ? "date" : "ui"} data-cal={e.id}>
-              {e.status === "announced" ? e.when : periodWords(e.when, "month")}
-            </span>
-          </span>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className="ac-none">No dates are expected yet.</p>
-  );
   return (
-    <section className="v2-sec ac" aria-labelledby="ac-h">
-      <H id="ac-h" more={<Link href="/library">Library</Link>}>
-        New and next
+    <section className="v2-sec ju3" aria-labelledby="ju3-h">
+      <H id="ju3-h" more={<Link href="/releases">Everything new</Link>}>
+        Just updated
       </H>
-      <Switch
-        label="Just added or coming up"
-        options={[
-          { key: "added", label: "Just added" },
-          { key: "coming", label: "Coming up" },
-        ]}
-        panels={[
-          added,
-          <>
-            {coming}
-            <p className="ac-foot">
-              &ldquo;Expected&rdquo; dates are our estimate from when each publication usually appears, not a date the agency has announced.{" "}
-              <Link href="/calendar">Calendar</Link>
-            </p>
-          </>,
-        ]}
-      />
+      <ul className="ac-list">
+        {docs.map((d) => (
+          <li key={d.id} className="ac-row">
+            <span className="ac-what">
+              <Link href={sourceHref(d.id)}>{d.kindName}</Link> {P(d.period, freq(d))}
+            </span>
+            <span className="ac-who">{d.publisher}</span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
 
 /* ================================ what it costs you ================================ */
 
-const AMOUNTS = ["1000", "5000", "10000", "50000"];
+const AMOUNTS = ["25000", "50000", "100000", "200000"];
 const rs = (a: string) => a.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 /** amount × (100 + rate) ÷ 100 and amount × rate ÷ 100, whole rupees, halves away from zero. */
@@ -400,8 +467,11 @@ function costFigures(amount: string, rate: string): { now: string; more: string;
 export function WhatItCosts() {
   const g = groupFigures("prices");
   if (!g) return null;
-  const rows = [{ name: "Everything", series: g.total, o: g.totalObs, overall: true }, ...g.rows.map((r) => ({ ...r, overall: false }))].filter((r) => usable(r.o) && r.series.unit === "percent");
+  const rows = [{ name: "All prices", series: g.total, o: g.totalObs, overall: true }, ...g.rows.map((r) => ({ ...r, overall: false }))].filter(
+    (r) => usable(r.o) && r.series.unit === "percent",
+  );
   if (!rows.length) return null;
+  const top = Math.max(...rows.map((r) => Math.abs(Number(r.o.value))), 0.0001);
   const panels: Record<string, ReactNode> = {};
   for (const a of AMOUNTS) {
     for (const r of rows) {
@@ -409,29 +479,31 @@ export function WhatItCosts() {
       const attrs = { "data-num": "derived", "data-amount": a, "data-inputs": r.o.obs_id } as const;
       panels[`${a}|${r.series.series_id}`] = (
         <div className="cost-out">
+          <p className="cost-line">
+            What cost Rs <Num kind="ui">{rs(a)}</Num> {r.overall ? null : <>in {r.name.toLowerCase()} </>}a year earlier cost about this in {P(r.o.period, r.series)}:
+          </p>
           <p className="cost-big">
             Rs{" "}
             <span {...attrs} data-derived="cost-now" data-fmt="rs">
               {f.now}
             </span>
           </p>
-          <p className="cost-line">
-            What cost Rs <Num kind="ui">{rs(a)}</Num> a year earlier cost about this in {P(r.o.period, r.series)}
+          <p className="cost-more">
             {f.dir === "same" ? (
-              <>: the same.</>
+              <>The same.</>
             ) : (
               <>
-                : Rs{" "}
+                Rs{" "}
                 <span {...attrs} data-derived="cost-more" data-fmt="rs" data-dir={f.dir}>
                   {f.more}
                 </span>{" "}
-                {f.dir}.
+                {f.dir}
               </>
             )}
           </p>
           <p className="cost-src">
             {r.overall ? "Prices overall" : <>Prices of {r.name.toLowerCase()}</>} changed by <V o={r.o} sheet className="v-link" /> over the year (<SourceMarker o={r.o} />
-            ).
+            ). The sum is ours; the rate is printed.
           </p>
         </div>
       );
@@ -441,10 +513,19 @@ export function WhatItCosts() {
     <section className="v2-band" aria-labelledby="cost-h">
       <div className="v2-band-in">
         <H id="cost-h">What it costs you</H>
-        <p className="v2-lede">The amount, times the year-on-year change in prices that the statistics bureau printed for that group, rounded to whole rupees. An average for the country, not your own bill.</p>
+        <p className="v2-lede">
+          The amount, times the change in prices over a year that the statistics bureau printed for that group, rounded to whole rupees. An average for the country, not your own
+          bill.
+        </p>
         <CostSwitch
+          amountLabel="Spending a year ago"
           amounts={AMOUNTS.map((a) => ({ key: a, label: <>Rs <Num kind="ui">{rs(a)}</Num></> }))}
-          groups={rows.map((r) => ({ key: r.series.series_id, label: r.name }))}
+          groups={rows.map((r) => ({
+            key: r.series.series_id,
+            label: r.name,
+            rate: <V o={r.o} />,
+            w: `${Math.max(1, (Math.abs(Number(r.o.value)) / top) * 100).toFixed(1)}%`,
+          }))}
           panels={panels}
         />
       </div>

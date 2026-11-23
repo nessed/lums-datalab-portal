@@ -27,6 +27,7 @@ import "@/styles/v3-find.css";
 import "@/styles/v3-pages.css";
 import "@/styles/v4-chrome.css";
 import "@/styles/v4-panel.css";
+import "@/styles/v4-home.css";
 
 // Self-hosted (OFL, licences beside the files in src/fonts) so the build needs no
 // network. Atkinson Hyperlegible Next (Braille Institute), Ali's pick from

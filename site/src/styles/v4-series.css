@@ -1,0 +1,345 @@
+/* v4-series: the series page as the Indicator and Budget line screens of the
+ * Home v3 pages set (design handoff, 2026-11-24). Imported by
+ * app/series/[id]/page.tsx. Two columns (main and a 320 px side panel), square
+ * corners, 1px rules. Values from src/design/tokens.css only. */
+
+.ix .ix-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4) var(--s-6);
+  padding: 18px 0 var(--s-5);
+  border-bottom: var(--hair);
+}
+.ix .ix-top-l {
+  min-width: 0;
+  flex: 1 1 36rem;
+}
+.ix .ix-top h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+.ix .ix-top .ds-summary {
+  margin: 6px 0 0;
+  max-width: 72ch;
+  color: var(--ink-2);
+}
+.ix-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ix-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 40px;
+  padding: 0 var(--s-4);
+  border: var(--rule-w) solid var(--lums-blue);
+  color: var(--lums-blue);
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--card);
+}
+.ix-btn:hover {
+  background: var(--select-wash);
+}
+.ix-btn-primary {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+.ix-btn-primary:hover {
+  background: var(--lums-blue);
+  color: var(--white);
+}
+.ix-btn-off {
+  border-color: var(--rule-strong);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+.ix-soon {
+  font-size: var(--t-util);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.ix-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 48px;
+  align-items: start;
+  padding-top: var(--s-5);
+}
+.ix-main,
+.ix-side {
+  min-width: 0;
+}
+
+/* headline row: the figure, and the Show as switch for a budget line */
+.ix-headrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4) var(--s-6);
+}
+.ix .ds-head-num {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.ix .ds-head-num .ds-num-v a,
+.ix .ds-head-num .ds-num-v .v-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: var(--wdth-num);
+  font-size: 3.75rem;
+  line-height: 1.05;
+  color: var(--num);
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--link-underline);
+  text-underline-offset: 6px;
+}
+.ix-showas-h {
+  margin: 0 0 var(--s-1);
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.ix-seg {
+  display: flex;
+  flex-wrap: wrap;
+  border: var(--rule-w) solid var(--rule-strong);
+}
+.ix-seg button {
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 700;
+  padding: 6px 12px;
+  border: 0;
+  background: var(--card);
+  color: var(--ink);
+}
+.ix-seg button + button {
+  border-left: var(--rule-w) solid var(--rule-strong);
+}
+.ix-seg button[aria-pressed="true"] {
+  background: var(--navy);
+  color: var(--white);
+}
+.ix-seg button:disabled {
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+/* also show */
+.ix-also {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) 10px;
+  margin: 18px 0 0;
+  font-size: var(--step--1);
+}
+.ix-also-h {
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.ix-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: var(--rule-w) solid var(--rule-strong);
+  color: var(--ink);
+  text-decoration: none;
+}
+.ix-chip:hover {
+  background: var(--hover-wash);
+}
+.ix-also-note {
+  color: var(--ink-3);
+}
+
+.ix .ds-tabs {
+  margin-top: var(--s-5);
+}
+
+/* sections under the chart */
+.ix-sec {
+  margin-top: var(--s-7);
+}
+.ix-sec h2,
+.ix-sec-head h2 {
+  margin: 0 0 var(--s-2);
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+.ix-sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  font-size: var(--step--1);
+}
+.ix-lead {
+  margin: 0 0 var(--s-3);
+  max-width: 80ch;
+  color: var(--ink-2);
+}
+.ix-foot {
+  margin: var(--s-3) 0 0;
+  max-width: 90ch;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.ix-pva {
+  min-width: 820px;
+}
+.ix-barcell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  gap: 10px;
+  align-items: center;
+}
+.ix-barcell > :last-child {
+  text-align: right;
+}
+.ix-bar {
+  position: relative;
+  display: block;
+  height: 10px;
+  background: var(--surface-2);
+}
+.ix-bar-mid {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--rule-strong);
+}
+.ix-bar-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--lums-blue);
+}
+.ix-bar-fill.is-neg {
+  background: var(--amber);
+}
+.ix-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  max-width: 76ch;
+  margin: 0;
+  padding-left: var(--s-5);
+  color: var(--ink-2);
+}
+
+/* side panel */
+.ix-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+.ix-side-h,
+.ix-side .ds-h2 {
+  margin: 0 0 6px;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+.ix-about,
+.ix-side .ds-rel,
+.ix-side .ds-read {
+  border-top: var(--rule-heavy) solid var(--ink);
+  padding-top: var(--s-3);
+  margin: 0;
+}
+.ix-about .ds-facts {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.875rem;
+}
+.ix-about .ds-facts dt {
+  color: var(--ink-3);
+  padding-top: var(--s-2);
+}
+.ix-about .ds-facts dd {
+  margin: 0;
+  padding-bottom: var(--s-2);
+  border-bottom: var(--hair);
+}
+.ix-cite {
+  padding: 14px var(--s-4);
+  background: var(--band);
+  border: var(--hair);
+  font-size: var(--step--1);
+  line-height: 1.45;
+}
+.ix-cite p {
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+.ix-copy {
+  font: inherit;
+  font-weight: 700;
+  padding: 4px 12px;
+  border: var(--rule-w) solid var(--lums-blue);
+  background: var(--card);
+  color: var(--lums-blue);
+  cursor: pointer;
+}
+.ix-cite .ix-cite-more {
+  margin: var(--s-2) 0 0;
+}
+.ix-side .ds-rel-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+.ix-side .ds-rel-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: var(--hair);
+}
+.ix-side .ds-rel-v {
+  text-align: right;
+}
+
+@media (max-width: 960px) {
+  .ix-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-6);
+  }
+}
+@media (max-width: 600px) {
+  .ix .ds-head-num .ds-num-v a,
+  .ix .ds-head-num .ds-num-v .v-link {
+    font-size: 2.75rem;
+  }
+  .ix .ix-top h1 {
+    font-size: 1.5rem;
+  }
+}

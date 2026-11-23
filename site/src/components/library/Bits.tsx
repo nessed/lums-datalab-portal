@@ -89,3 +89,17 @@ export function DocActions({ doc, read = true, primary = false }: { doc: Library
     </span>
   );
 }
+
+/** Documents | Datasets: the two tabs of the Library (Home v3 pages set), as links between /library and /library/datasets. */
+export function LibraryTabs({ current }: { current: "docs" | "sets" }) {
+  return (
+    <nav className="lib4-tabs" aria-label="Library">
+      <Link href="/library" className="lib4-tab" aria-current={current === "docs" ? "page" : undefined}>
+        Documents
+      </Link>
+      <Link href="/library/datasets" className="lib4-tab" aria-current={current === "sets" ? "page" : undefined}>
+        Datasets
+      </Link>
+    </nav>
+  );
+}

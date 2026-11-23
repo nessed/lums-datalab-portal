@@ -1,46 +1,48 @@
-// Datasets (data hub plan, section 7.2): one card per dataset, in plain words,
-// with the years it covers, its number of series, a preview of a few of its
-// figures (each a link to its receipt), downloads (CSV, Excel, data package)
-// and a way into the chart builder. The whole release as one file sits at the
-// top. Every file listed is written at build time from the release
+// Datasets (data hub plan, section 7.2; Home v3 pages set, 2026-11-24): the
+// second tab of the Library. On top, "Everything in one download"; then one row
+// per dataset in a table: plain name and what it measures, the years it covers,
+// its number of series, and Preview, CSV, Excel and Chart. The previews (a few of
+// its latest figures, each a link to its receipt) open below the table. Every
+// file listed is written at build time from the release
 // (scripts/prebuild/take.mjs); sizes are recomputed by scripts/checks/library-counts.mjs.
 import type { Metadata } from "next";
+import Crumbs from "@/components/chrome/Crumbs";
 import Link from "@/components/ui/Link";
-import { Breadcrumbs, TableWrap } from "@/components/ui/Basics";
-import { IconDownload } from "@/components/ui/Icons";
+import { TableWrap } from "@/components/ui/Basics";
 import { Count, Num, V } from "@/components/ui/Num";
-import { db, library, seriesHref } from "@/lib/data";
+import { LibraryTabs } from "@/components/library/Bits";
+import { db, library, seriesHref, visibleSeries } from "@/lib/data";
 import type { LibraryDataset } from "@/lib/adapter/contract";
-import { periodWords, unitLabel } from "@/lib/format";
+import { dateOnly, periodWords, unitLabel } from "@/lib/format";
 import { fileSizeText, SIZE_OF_DOWNLOAD } from "@/lib/library-format";
-import { datasetStats, mainVintage } from "@/lib/stats";
+import { mainVintage } from "@/lib/stats";
+import { seriesTitle } from "@/lib/titles";
 import { fileHref, fileSize } from "@/lib/take";
 import { KIND } from "@/lib/words";
+import "@/styles/v4-library.css";
 
 export const metadata: Metadata = {
   title: "Datasets",
   description: "Every dataset on the site: what it measures, the years it covers, a preview of its figures, and downloads as CSV or Excel.",
 };
 
-const FORMATS = [
-  { ext: "xlsx", label: "Excel" },
-  { ext: "csv", label: "CSV" },
-  { ext: "zip", label: "Data package" },
-] as const;
-
 /** A built download with its size; nothing when the build has no such file. */
-function Download({ rel, label, primary }: { rel: string; label: string; primary?: boolean }) {
+function Download({ rel, label, size = true }: { rel: string; label: string; size?: boolean }) {
   const n = fileSize(rel);
   if (n === null) return null;
   return (
-    <a className={`btn${primary ? " btn-primary" : ""} lib-act`} href={fileHref(rel)} download>
-      <IconDownload />
-      <span>
-        {label}{" "}
-        <span className="lib-size" data-num="derived" data-derived={SIZE_OF_DOWNLOAD} data-file={rel}>
-          {fileSizeText(n)}
-        </span>
-      </span>
+    <a href={fileHref(rel)} download>
+      {label}
+      {size ? (
+        <>
+          {" "}
+          (
+          <span className="lib-size" data-num="derived" data-derived={SIZE_OF_DOWNLOAD} data-file={rel}>
+            {fileSizeText(n)}
+          </span>
+          )
+        </>
+      ) : null}
     </a>
   );
 }
@@ -59,10 +61,10 @@ function Preview({ ds }: { ds: LibraryDataset }) {
   });
   if (!rows.length) return null;
   return (
-    <details className="lib-preview">
-      <summary>Preview</summary>
+    <details className="lib4-preview" id={`p-${ds.key}`}>
+      <summary>Preview: {ds.name}</summary>
       <TableWrap label={`A few figures of ${ds.name}`}>
-        <table className="lib-preview-table">
+        <table className="lib4-tbl">
           <thead>
             <tr>
               <th scope="col">Series</th>
@@ -78,14 +80,14 @@ function Preview({ ds }: { ds: LibraryDataset }) {
             {rows.map(({ s, o }) => (
               <tr key={o.obs_id}>
                 <th scope="row">
-                  <Link href={seriesHref(s.series_id)}>{s.title}</Link>
+                  <Link href={seriesHref(s.series_id)}>{seriesTitle(s)}</Link>
                 </th>
                 <td>
                   <Num kind="period">{periodWords(o.period, s.frequency)}</Num>
                 </td>
                 <td>{o.kind === "as_printed" ? "" : (KIND[o.kind]?.long ?? "")}</td>
                 <td className="num tnum">
-                  <V o={o} />
+                  <V o={o} sheet />
                 </td>
                 <td className="small">{unitLabel(o.unit, o.scale_factor)}</td>
               </tr>
@@ -102,76 +104,103 @@ export default function DatasetsPage() {
   const lib = library();
   const d = db();
   return (
-    <div className="lib">
-      <Breadcrumbs items={[{ href: "/library", label: "Library" }, { label: "Datasets" }]} />
-      <header className="page-head lib-head">
-        <h1>Datasets</h1>
-        <p className="lede">The figures we read from the documents in the Library, by subject. Preview them, download them, or put them on a chart.</p>
-        <div className="lib-all">
-          <p className="lib-all-label">Everything in one file</p>
-          <span className="lib-actions">
-            <Download rel="all.xlsx" label="Excel" primary />
-            <Download rel="all.csv" label="CSV" />
-            <Download rel="all.zip" label="Data package" />
-          </span>
-          <p className="small muted">
-            Every figure of every dataset, one row each, with the document and page it is printed on. <Link href="/data">About the files and their columns</Link>
-          </p>
-        </div>
+    <div className="lib lib4">
+      <Crumbs items={[{ href: "/library", label: "Library" }, { label: "Datasets" }]} />
+      <header className="lib4-head">
+        <h1>Library</h1>
+        <p className="lib4-lede">Every government document we read, to open on this site or download, and every dataset we built from them.</p>
       </header>
+      <LibraryTabs current="sets" />
 
-      <ul className="lib-cards">
-        {lib.datasets.map((ds) => {
-          const st = datasetStats(ds.key);
-          const freq = d.series.find((s) => s.dataset === ds.key)?.frequency ?? null;
-          const compare = `/compare?s=${ds.previewSeries
-            .slice(0, 4)
-            .map((id) => encodeURIComponent(id))
-            .join(",")}`;
-          return (
-            <li key={ds.key} className="lib-card" id={`d-${ds.key}`}>
-              <h2 className="lib-card-name">{ds.name}</h2>
-              <p className="lib-card-line">{ds.line}</p>
-              {ds.visible ? (
-                <>
-                  <p className="lib-card-facts">
-                    {ds.firstPeriod && ds.lastPeriod ? (
-                      <span>
-                        <Num kind="period">{periodWords(ds.firstPeriod, freq)}</Num> to <Num kind="period">{periodWords(ds.lastPeriod, freq)}</Num>
+      <div className="lib4-all">
+        <p>
+          <strong>Everything in one download</strong>{" "}
+          <span className="muted">
+            · <Count k="series" n={visibleSeries().length} /> series · release of <Num kind="date">{dateOnly(d.release.created_at)}</Num>
+          </span>
+        </p>
+        <p className="lib4-all-links">
+          <Download rel="all.csv" label="all.csv" />
+          <Download rel="all.xlsx" label="all.xlsx" />
+          <Download rel="all.zip" label="all.zip with the sources list" />
+          <Link href="/data">About the files and their columns</Link>
+        </p>
+      </div>
+
+      <div className="tbl4-scroll">
+        <table className="lib4-tbl lib4-sets">
+          <thead>
+            <tr>
+              <th scope="col">Dataset</th>
+              <th scope="col">Covers</th>
+              <th scope="col" className="num">
+                Series
+              </th>
+              <th scope="col" className="num">
+                Get it
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {lib.datasets.map((ds) => {
+              const freq = d.series.find((s) => s.dataset === ds.key)?.frequency ?? null;
+              const compare = `/compare?s=${ds.previewSeries
+                .slice(0, 4)
+                .map((id) => encodeURIComponent(id))
+                .join(",")}`;
+              return (
+                <tr key={ds.key} id={`d-${ds.key}`}>
+                  <td>
+                    {ds.visible ? (
+                      <Link href={`/browse?dataset=${ds.key}`} className="strong">
+                        {ds.name}
+                      </Link>
+                    ) : (
+                      <strong>{ds.name}</strong>
+                    )}
+                    <span className="lib4-line">{ds.line}</span>
+                    {ds.visible ? (
+                      <span className="lib4-line">
+                        <Link href={`/datasets/${ds.key}#tables`}>Tables as printed</Link> · <Link href={`/datasets/${ds.key}`}>How it is checked</Link>
                       </span>
                     ) : null}
-                    <span aria-hidden="true"> · </span>
-                    <span>
-                      <Count k={`series:${ds.key}`} n={ds.seriesCount} /> series
-                    </span>
-                    <span aria-hidden="true"> · </span>
-                    <span>
-                      from <Count k={`docs:${ds.key}`} n={st.docs.length} /> {st.docs.length === 1 ? "document" : "documents"}
-                    </span>
-                  </p>
-                  <span className="lib-actions">
-                    {FORMATS.map((f) => (
-                      <Download key={f.ext} rel={`datasets/${ds.key}.${f.ext}`} label={f.label} primary={f.ext === "xlsx"} />
-                    ))}
-                    {ds.previewSeries.length ? (
-                      <Link className="btn btn-secondary lib-act" href={compare}>
-                        Open in chart builder
-                      </Link>
-                    ) : null}
-                  </span>
-                  <Preview ds={ds} />
-                  <p className="lib-card-links small">
-                    <Link href={`/browse?dataset=${ds.key}`}>Every series</Link> · <Link href={`/datasets/${ds.key}#tables`}>Tables as the documents print them</Link> ·{" "}
-                    <Link href={`/datasets/${ds.key}`}>How it is checked</Link> · <Link href={`/library?kind=${encodeURIComponent(lib.documents.find((x) => ds.documentIds.includes(x.id))?.kind ?? "")}`}>The documents</Link>
-                  </p>
-                </>
-              ) : (
-                <p className="lib-card-facts">Coming soon: its figures are still being checked.</p>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+                  </td>
+                  <td className="nowrap muted">
+                    {ds.visible && ds.firstPeriod && ds.lastPeriod ? (
+                      <>
+                        <Num kind="period">{periodWords(ds.firstPeriod, freq)}</Num> to <Num kind="period">{periodWords(ds.lastPeriod, freq)}</Num>
+                      </>
+                    ) : (
+                      "Coming soon"
+                    )}
+                  </td>
+                  <td className="num">{ds.visible ? <Count k={`series:${ds.key}`} n={ds.seriesCount} /> : null}</td>
+                  <td className="num">
+                    {ds.visible ? (
+                      <span className="lib4-get">
+                        {ds.previewSeries.length ? <a href={`#p-${ds.key}`}>Preview</a> : null}
+                        <Download rel={`datasets/${ds.key}.csv`} label="CSV" size={false} />
+                        <Download rel={`datasets/${ds.key}.xlsx`} label="Excel" size={false} />
+                        {ds.previewSeries.length ? <Link href={compare}>Chart</Link> : null}
+                      </span>
+                    ) : (
+                      <span className="muted">Its figures are still being checked</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="lib4-previews">
+        {lib.datasets
+          .filter((ds) => ds.visible)
+          .map((ds) => (
+            <Preview key={ds.key} ds={ds} />
+          ))}
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@
 // an empty view or one filled with invented values.
 import config from "../../features.config.json";
 
-export type FeatureKey = "realTerms" | "percentOfGdp" | "api" | "maps" | "districts" | "provincialBudgets" | "moreDataTypes" | "monthlyData" | "errataBadges" | "dailyRates";
+export type FeatureKey = "realTerms" | "percentOfGdp" | "api" | "maps" | "districts" | "provincialBudgets" | "moreDataTypes" | "monthlyData" | "errataBadges" | "dailyRates" | "insights" | "perPerson" | "actualSpending" | "provincialMap" | "releaseAlerts" | "urdu";
 
 type Entry = { enabled: boolean; label: string };
 const FEATURES = config as unknown as Record<FeatureKey, Entry>;

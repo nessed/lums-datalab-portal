@@ -17,8 +17,9 @@ const hrefFor = (q: string, infer: boolean) => `/search?q=${encodeURIComponent(q
 
 /** variant "big" (Home v2): the large field in the search row under the header,
  * with a Search button; typing still opens the same dialog of instant answers. */
-export default function SearchDialog({ indexUrl, variant }: { indexUrl: string; variant?: "big" }) {
+export default function SearchDialog({ indexUrl, variant }: { indexUrl: string; variant?: "big" | "head" }) {
   const big = variant === "big";
+  const head = variant === "head";
   const dialog = useRef<HTMLDialogElement>(null);
   const field = useRef<HTMLInputElement>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -90,7 +91,7 @@ export default function SearchDialog({ indexUrl, variant }: { indexUrl: string; 
 
   return (
     <>
-      <form action="/search" method="get" role="search" className={big ? "hs hs-big" : "hs"} aria-label="Search the site">
+      <form action="/search" method="get" role="search" className={big ? "hs hs-big" : head ? "hs hs-head" : "hs"} aria-label="Search the site">
         <label htmlFor="hs-q" className="sr-only">
           Search series, documents and tables
         </label>
@@ -101,7 +102,7 @@ export default function SearchDialog({ indexUrl, variant }: { indexUrl: string; 
           name="q"
           type="search"
           className="hs-input"
-          placeholder={big ? "Search prices, budgets, jobs, documents" : "Search"}
+          placeholder={big ? "Search prices, budgets, jobs, documents" : head ? "Search the data" : "Search"}
           autoComplete="off"
           spellCheck={false}
           enterKeyHint="search"
@@ -118,7 +119,7 @@ export default function SearchDialog({ indexUrl, variant }: { indexUrl: string; 
         <span className="hs-hint" aria-hidden="true">
           <kbd>{mac ? "⌘" : "Ctrl"}</kbd> <kbd>K</kbd>
         </span>
-        {big ? (
+        {big || head ? (
           <button type="submit" className="hs-go">
             Search
           </button>

@@ -755,7 +755,7 @@ export default async function ReceiptPage({ params }: Props) {
                 {passed.map((c) => (
                   <li key={c}>
                     <span className="rc4-dot" aria-hidden="true" />
-                    {c}
+                    <WithTitles text={c} />
                   </li>
                 ))}
               </ul>
@@ -1235,5 +1235,40 @@ function NbItem({ o, s, label, name }: { o: Observation; s: Series; label?: stri
         )}
       </span>
     </li>
+  );
+}
+
+/** A check line: document titles (which carry years) become their own text nodes, so check-build reads each as a release label. */
+function WithTitles({ text }: { text: string }) {
+  const titles = db()
+    .sources.map((x) => x.title)
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  const parts: string[] = [];
+  let rest = text;
+  while (rest) {
+    let at = -1;
+    let hit = "";
+    for (const t of titles) {
+      const i = rest.indexOf(t);
+      if (i >= 0 && (at < 0 || i < at)) {
+        at = i;
+        hit = t;
+      }
+    }
+    if (at < 0) {
+      parts.push(rest);
+      break;
+    }
+    if (at > 0) parts.push(rest.slice(0, at));
+    parts.push(hit);
+    rest = rest.slice(at + hit.length);
+  }
+  return (
+    <>
+      {parts.map((x, i) => (
+        <span key={i}>{x}</span>
+      ))}
+    </>
   );
 }

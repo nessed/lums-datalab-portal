@@ -27,6 +27,7 @@ import editorialConfig from "../../../editorial.config.json";
 import daily from "../../../editorial/daily.json";
 import calendar from "../../../editorial/calendar.json";
 import geo from "../../geo/pak-adm1.json";
+import { SOON_TOPICS } from "@/components/topic/soon";
 
 const P = (p: string, s: Pick<Series, "frequency">) => <Num kind="period">{periodWords(p, s.frequency)}</Num>;
 
@@ -439,7 +440,6 @@ export function AtAGlance() {
 
 /* ================================ 7 data by topic ================================ */
 
-const SOON_TOPICS = ["National accounts", "Trade", "Money and banking", "Census and population", "Households", "Energy", "Agriculture"];
 
 export function TopicGrid() {
   const list = topics();

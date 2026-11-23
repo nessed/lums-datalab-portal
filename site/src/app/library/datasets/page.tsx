@@ -161,7 +161,7 @@ export default function DatasetsPage() {
                     <span className="lib4-line">{ds.line}</span>
                     {ds.visible ? (
                       <span className="lib4-line">
-                        <Link href={`/datasets/${ds.key}#tables`}>Tables as printed</Link> · <Link href={`/datasets/${ds.key}`}>How it is checked</Link>
+                        <Link href={`/datasets/${ds.key}#tables`}>The printed tables</Link> · <Link href={`/datasets/${ds.key}`}>How it is checked</Link>
                       </span>
                     ) : null}
                   </td>

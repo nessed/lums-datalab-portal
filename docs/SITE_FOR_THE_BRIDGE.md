@@ -7,7 +7,7 @@ writing; where it says "today", check the code again.
 
 Related: `docs/DESIGN.md` (sections 5 and 17 are the contract and the open decisions),
 `docs/reports/2026-11-24-golden-data-backend-fit.md` (what his output carries and what it lacks),
-`DECISIONS.md` D-BE-1.
+`DECISIONS.md` D-BE-1, and `docs/SITE_DATA_INVENTORY.md` (every data slot on the site by kind, with the golden dataset that would fill it).
 
 ---
 

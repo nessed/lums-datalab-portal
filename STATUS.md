@@ -2,6 +2,8 @@
 
 Last updated: 2026-11-24, by Claude Code at Ali's request: Home v3 pages set from the design handoff (branch `proto/home-v3-pages-2026-11`): new header and footer with the LUMS lockup, the evidence sheet as a right-hand Source Panel listing the checks each figure passed, a new home page (featured chart with auto-cycling key indicators, Pakistan at a glance with a province map, topics, releases, calculator, publishers), and restyled indicator, budget line, topic, search, releases, library and receipt pages. What the release cannot supply: `docs/reports/2026-11-24-home-v3-pages-gaps.md`; decisions D-HV4-1 to D-HV4-3. Before that, 2026-11-23: Home v2 and v3 design (branch `proto/home-v2-2026-11`, PR #17): new header and footer, home page, Dataset page, Find data, What's new, Guides, the inflation calculator and Compare provinces (gap state). Front end only; every figure from the release. What the design shows that the release cannot supply: `docs/reports/2026-11-23-home-v3-gaps.md`. Before that, the same day, in the authorised unattended data hub run (`docs/plans/2026-11-23-data-hub.md`, branch `proto/hub-2026-11`, draft PR #15, not merged): hub home page, Library with an on-site PDF viewer, dataset pages, plain navigation, the 23 November defect list. Report: `docs/reports/2026-11-23-data-hub-report.md`. Before that, 2026-11-15, by Claude Code at Ali's request: new design brief (`docs/DESIGN.md`, DRAFT for approval) and design research (`docs/DESIGN_REFERENCE.md`) on branch `docs/design-research-2026-11`; no code changed. Before that, 2026-10-12: S16 site rebuild as a data lab on `claude/epic-mccarthy-ose3yj` (PR open, not merged). Earlier the same day: both overnight runs stopped; `proto/v0` merged into `main`
 
+> **2026-11-24, Ali (D-BE-1):** every figure on the site and in `releases/v0.0.1-prototype/` is a demo value and will be removed. The site's data will come from Ahmad's `ahm3d-karim/pak-econ-golden-data`. The counts below describe the prototype release, not data meant for publication. Open points are in D-BE-1 in `DECISIONS.md`.
+
 ## State in one paragraph
 The pipeline works end to end for three data types and the release `releases/v0.0.1-prototype/`
 publishes all three: the federal Annual Budget Statement (9 editions: Summary of Expenditure,
@@ -208,6 +210,7 @@ cd site; npm ci; npm run build
 Tests only (no Docling, no PDFs): install `pipeline\requirements-ci.lock`, then `python -m pytest` in `pipeline`.
 
 ## Open questions for humans
+- **D-BE-1:** golden only or candidates too; what `pipeline/` becomes; one misprint policy for both repos; can the golden-data output fill `schema/*.json` per figure.
 - Confirm or overturn every provisional decision dated 2026-10-11 and 2026-10-12 in `DECISIONS.md`.
 - **D26 (deviation):** counting restatements separately from failures is what lets LFS publish. Confirm or overturn.
 - **D25:** disputed figures carry no value. 17 so far: 9 ABS (the Rs 1,042 million moved between two functions in

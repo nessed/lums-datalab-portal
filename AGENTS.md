@@ -246,6 +246,8 @@ The previous RAs' work and the source corpus live in the `ra-ship` archive (`RA_
 
 ## 11. Current focus
 
+**2026-11-24 (D-BE-1):** the site's figures are demo values and will be removed. Its data will come from Ahmad's `ahm3d-karim/pak-econ-golden-data`, the back end of this front end. Sections 3 and 4 still apply to anything the site shows. What `pipeline/` becomes is open.
+
 **First prototype (built 2026-10-11, branch `proto/v0`, release `v0.0.1-prototype`).** Read `STATUS.md` for the exact state.
 
 - **ABS:** 9 editions (2010-11, 2011-12, 2016-17, 2017-18, 2021-22, 2022-23, 2024-25, 2025-26, 2026-27), the Summary of Expenditure table, published. The function lines are current expenditure on revenue account.
